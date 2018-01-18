@@ -67,7 +67,6 @@ CREATE INDEX SM_TBLUSER_usergnhom_idx ON SM_TBLUSER (usergnhom);
 CREATE TABLE SM_TBLUSER_PERMISSION
 (
   id int IDENTITY(1,1),
-  permissionid int,
   permissioncode nvarchar(50),
   permissionname nvarchar(255),
   user_id int,

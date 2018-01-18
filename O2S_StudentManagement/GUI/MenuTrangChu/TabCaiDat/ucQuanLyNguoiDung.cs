@@ -238,7 +238,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
             try
             {
                 gridControlBaoCao.DataSource = null;
-                string sqlquerry_per = "SELECT permissioncode, permissionname, permissioncheck FROM SM_TBLUSER_PERMISSION WHERE usercode='" + Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(currentUserCode, true).ToString() + "' and userpermissionnote='BAOCAO';";
+                string sqlquerry_per = "SELECT permissioncode, permissionname, permissioncheck FROM SM_TBLUSER_PERMISSION WHERE usercode='" + Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(currentUserCode, true).ToString() + "' and ghichu='BAOCAO';";
                 DataView dv = new DataView(condb.GetDataTable(sqlquerry_per));
                 //Load dữ liệu list phân quyền + tích quyền của use đang chọn lấy trong DB
                 if (dv != null && dv.Count > 0)
@@ -334,7 +334,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                     string en_permissionname = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(lstPer[i].permissionname.ToString(), true);
                     if (lstPer[i].permissioncheck == true)
                     {
-                        sqlinsert_per = "INSERT INTO SM_TBLUSER_PERMISSION(permissioncode, permissionname, usercode, permissioncheck, userpermissionnote) VALUES ('" + en_permissioncode + "', '" + en_permissionname + "', '" + en_txtUserID + "', 'true', '');";
+                        sqlinsert_per = "INSERT INTO SM_TBLUSER_PERMISSION(permissioncode, permissionname, usercode, permissioncheck, ghichu) VALUES ('" + en_permissioncode + "', '" + en_permissionname + "', '" + en_txtUserID + "', '1', '');";
                         condb.ExecuteNonQuery(sqlinsert_per);
                     }
                 }
@@ -376,7 +376,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                     string en_permissionname = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(lstPerBaoCao[i].permissionname.ToString(), true);
                     if (lstPerBaoCao[i].permissioncheck == true)
                     {
-                        sqlinsert_per = "INSERT INTO SM_TBLUSER_PERMISSION(permissioncode, permissionname, usercode, permissioncheck, userpermissionnote) VALUES ('" + en_permissioncode + "', '" + en_permissionname + "', '" + en_txtUserID + "', 'true', 'BAOCAO');";
+                        sqlinsert_per = "INSERT INTO SM_TBLUSER_PERMISSION(permissioncode, permissionname, usercode, permissioncheck, ghichu) VALUES ('" + en_permissioncode + "', '" + en_permissionname + "', '" + en_txtUserID + "', '1', 'BAOCAO');";
                         condb.ExecuteNonQuery(sqlinsert_per);
                     }
                 }
@@ -431,7 +431,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                         if (lstPer[i].permissioncheck == true)
                         {
                             string en_permissionname = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(lstPer[i].permissionname.ToString(), true);
-                            sqlupdate_per = "INSERT INTO SM_TBLUSER_PERMISSION(permissioncode, permissionname, usercode, permissioncheck, userpermissionnote) VALUES ('" + en_permissioncode + "', '" + en_permissionname + "', '" + en_txtUserID + "', 'true', '');";
+                            sqlupdate_per = "INSERT INTO SM_TBLUSER_PERMISSION(permissioncode, permissionname, usercode, permissioncheck, ghichu) VALUES ('" + en_permissioncode + "', '" + en_permissionname + "', '" + en_txtUserID + "', '1', '');";
                             condb.ExecuteNonQuery(sqlupdate_per);
                         }
                     }
@@ -499,7 +499,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                         if (lstPerBaoCao[i].permissioncheck == true)
                         {
                             string en_permissionname = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(lstPerBaoCao[i].permissionname.ToString(), true);
-                            sqlupdate_per = "INSERT INTO SM_TBLUSER_PERMISSION(permissioncode, permissionname, usercode, permissioncheck, userpermissionnote) VALUES ('" + en_permissioncode + "', '" + en_permissionname + "', '" + en_txtUserID + "', 'true', 'BAOCAO');";
+                            sqlupdate_per = "INSERT INTO SM_TBLUSER_PERMISSION(permissioncode, permissionname, usercode, permissioncheck, ghichu) VALUES ('" + en_permissioncode + "', '" + en_permissionname + "', '" + en_txtUserID + "', '1', 'BAOCAO');";
                             condb.ExecuteNonQuery(sqlupdate_per);
                         }
                     }

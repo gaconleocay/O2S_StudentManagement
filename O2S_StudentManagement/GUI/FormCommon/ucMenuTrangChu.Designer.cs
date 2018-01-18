@@ -317,18 +317,17 @@
             // 
             this.lblDiaChi.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDiaChi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lblDiaChi.Location = new System.Drawing.Point(98, 144);
+            this.lblDiaChi.Location = new System.Drawing.Point(95, 143);
             this.lblDiaChi.Name = "lblDiaChi";
             this.lblDiaChi.Size = new System.Drawing.Size(239, 41);
             this.lblDiaChi.TabIndex = 75;
-            this.lblDiaChi.Text = "Địa chỉ";
             // 
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(12, 144);
+            this.label10.Location = new System.Drawing.Point(9, 143);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(121, 19);
+            this.label10.Size = new System.Drawing.Size(90, 19);
             this.label10.TabIndex = 74;
             this.label10.Text = "Địa chỉ:";
             // 
@@ -340,14 +339,13 @@
             this.lblGiamDocBV.Name = "lblGiamDocBV";
             this.lblGiamDocBV.Size = new System.Drawing.Size(239, 19);
             this.lblGiamDocBV.TabIndex = 73;
-            this.lblGiamDocBV.Text = "Giám đốc bệnh viện";
             // 
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(9, 110);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(121, 19);
+            this.label4.Size = new System.Drawing.Size(90, 19);
             this.label4.TabIndex = 72;
             this.label4.Text = "Giám đốc:";
             // 
@@ -359,16 +357,15 @@
             this.lblMaCSYT.Name = "lblMaCSYT";
             this.lblMaCSYT.Size = new System.Drawing.Size(236, 19);
             this.lblMaCSYT.TabIndex = 69;
-            this.lblMaCSYT.Text = "Mã CSYT";
             // 
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(9, 77);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(121, 19);
+            this.label8.Size = new System.Drawing.Size(90, 19);
             this.label8.TabIndex = 68;
-            this.label8.Text = "Mã CSYT:";
+            this.label8.Text = "Mã CS:";
             // 
             // lblTenCSYT
             // 
@@ -378,7 +375,6 @@
             this.lblTenCSYT.Name = "lblTenCSYT";
             this.lblTenCSYT.Size = new System.Drawing.Size(320, 54);
             this.lblTenCSYT.TabIndex = 67;
-            this.lblTenCSYT.Text = "TÊN CƠ SỞ Y TẾ";
             this.lblTenCSYT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel3
@@ -398,7 +394,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(331, 26);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Copiright 2017, OneOne solution co.";
+            this.label2.Text = "Copiright 2018, OneOne solution co.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // xtraTabCaiDat

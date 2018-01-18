@@ -15,7 +15,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
     public partial class ucCauHinhHeThong : UserControl
     {
         O2S_StudentManagement.DAL.ConnectDatabase condb = new O2S_StudentManagement.DAL.ConnectDatabase();
-        string curentoptionid = "";
+        string curentId = "";
         #region Load
         public ucCauHinhHeThong()
         {
@@ -57,7 +57,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
         {
             try
             {
-                string sqldsnv = "SELECT optionid, optioncode, optionname, optionvalue, optionnote, optionlook FROM SM_OPTION ORDER BY optionid;";
+                string sqldsnv = "SELECT id, optioncode, optionname, optionvalue, optionnote, optionlook FROM SM_OPTION ORDER BY id;";
                 DataView dataOption = new DataView(condb.GetDataTable(sqldsnv));
                 if (dataOption != null && dataOption.Count > 0)
                 {
@@ -120,7 +120,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
             {
                 EnableAndDisableControl(true);
                 var rowHandle = gridViewDSOption.FocusedRowHandle;
-                curentoptionid = gridViewDSOption.GetRowCellValue(rowHandle, "optionid").ToString();
+                curentId = gridViewDSOption.GetRowCellValue(rowHandle, "id").ToString();
                 txtOptionCode.Text = gridViewDSOption.GetRowCellValue(rowHandle, "optioncode").ToString();
                 txtOptionName.Text = gridViewDSOption.GetRowCellValue(rowHandle, "optionname").ToString();
                 txtOptionValue.Text = gridViewDSOption.GetRowCellValue(rowHandle, "optionvalue").ToString();
@@ -150,9 +150,9 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                 {
                     optionlook = "1";
                 }
-                if (curentoptionid != "")
+                if (curentId != "")
                 {
-                    string sqlupdate = "UPDATE SM_OPTION SET optionname='" + txtOptionName.Text.Trim() + "', optionvalue='" + txtOptionValue.Text.Trim() + "', optionnote='" + txtOptionNote.Text.Trim() + "', optionlook='" + optionlook + "', optiondate='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', optioncreateuser='" + SessionLogin.SessionUsername + "' WHERE optionid='" + curentoptionid + "'; ";
+                    string sqlupdate = "UPDATE SM_OPTION SET optionname='" + txtOptionName.Text.Trim() + "', optionvalue='" + txtOptionValue.Text.Trim() + "', optionnote='" + txtOptionNote.Text.Trim() + "', optionlook='" + optionlook + "', optiondate='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', optioncreateuser='" + SessionLogin.SessionUsername + "' WHERE id='" + curentId + "'; ";
                     if (condb.ExecuteNonQuery(sqlupdate))
                     {
                         HienThiThongBao(O2S_StudentManagement.Base.ThongBaoLable.SUA_THANH_CONG);
@@ -183,7 +183,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                 EnableAndDisableControl(true);
                 txtOptionCode.ReadOnly = false;
 
-                curentoptionid = "";
+                curentId = "";
                 txtOptionCode.Text = "";
                 txtOptionName.Text = "";
                 txtOptionValue.Text = "";
