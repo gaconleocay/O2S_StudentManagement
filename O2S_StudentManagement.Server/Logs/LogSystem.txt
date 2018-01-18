@@ -1,0 +1,519 @@
+INFO  2017-11-06 20:51:45,821  2433ms LogSystem              Info               - API services CarParking Start. Time=06/11/2017 20:51:45
+ERROR 2017-11-06 20:51:46,274  2886ms LogSystem              Error              - Loi getDataTable: Npgsql.PostgresException (0x80004005): 42703: column vp.hosobenhanid does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteDbDataReader>d__92.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at O2S_CarParking.Server.Base.ConnectDatabase.GetDataTable_HIS(String sql) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Data\ConnectDatabase.cs:line 67
+ SQL=[SELECT hsba.patientcode, vp.patientid, vp.vienphiid, hsba.hosobenhanid, hsba.patientname, bh.bhytcode, hsba.gioitinhname, (case when hsba.birthday_year<>0 then hsba.birthday_year else to_char(hsba.birthday,'dd/MM/yyyy') end) as namsinh, ((case when hsba.hc_sonha<>'' then hsba.hc_sonha || ', ' else '' end) || (case when hsba.hc_thon<>'' then hsba.hc_thon || ' - ' else '' end) || (case when hsba.hc_xacode<>'00' then hsba.hc_xaname || ' - ' else '' end) || (case when hsba.hc_huyencode<>'00' then hsba.hc_huyenname || ' - ' else '' end) || (case when hsba.hc_tinhcode<>'00' then hsba.hc_tinhname else '' end)) as diachi, vp.vienphistatus, (case when vp.vienphistatus=0 then 'Ðang di?u tr?' else 'Ðã ra vi?n' end) as vienphistatus_name, vp.loaivienphiid, (case vp.loaivienphiid when 0 then 'N?i trú' when 1 then 'Ngo?i trú' when 2 then 'Ði?u tr? ngo?i trú' end) as loaivienphi_name, to_char(vp.vienphidate,'HH24:MI dd/MM/yyyy') as vienphidate, to_char(vp.vienphidate,'yyyyMMddHH24MIss') as vienphidate_long, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'HH24:MI dd/MM/yyyy') end) as vienphidate_ravien, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'yyyyMMddHH24MIss') else '0' end) as vienphidate_ravien_long, (degp.departmentgroupname || ' - ' || de.departmentname) as khoaphong FROM (select vienphiid,vienphicode,patientid,vienphistatus,loaivienphiid,vienphidate,vienphidate_ravien from vienphi where patientid=582881) vp inner join (select hosobenhanid,patientcode,patientname,gioitinhname,hc_sonha,hc_thon,hc_xacode,hc_xaname,hc_huyencode,hc_huyenname,hc_tinhcode,hc_tinhname from hosobenhan where patientid=582881) hsba on hsba.hosobenhanid=vp.hosobenhanid inner join (select bhytid,bhytcode from bhyt where patientid=582881) bh on bh.bhytid=vp.bhytid left join (select departmentgroupid,departmentgroupname from departmentgroup) degp on degp.departmentgroupid=vp.departmentgroupid left join (select departmentid,departmentname from department) de on degp.departmentid=vp.departmentid ORDER BY vp.vienphidate desc;]
+ERROR 2017-11-06 20:54:10,590 147202ms LogSystem              Error              - Loi getDataTable: Npgsql.PostgresException (0x80004005): 42703: column vp.hosobenhanid does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteDbDataReader>d__92.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at O2S_CarParking.Server.Base.ConnectDatabase.GetDataTable_HIS(String sql) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Data\ConnectDatabase.cs:line 67
+ SQL=[SELECT hsba.patientcode, vp.patientid, vp.vienphiid, hsba.hosobenhanid, hsba.patientname, bh.bhytcode, hsba.gioitinhname, (case when hsba.birthday_year<>0 then hsba.birthday_year else to_char(hsba.birthday,'dd/MM/yyyy') end) as namsinh, ((case when hsba.hc_sonha<>'' then hsba.hc_sonha || ', ' else '' end) || (case when hsba.hc_thon<>'' then hsba.hc_thon || ' - ' else '' end) || (case when hsba.hc_xacode<>'00' then hsba.hc_xaname || ' - ' else '' end) || (case when hsba.hc_huyencode<>'00' then hsba.hc_huyenname || ' - ' else '' end) || (case when hsba.hc_tinhcode<>'00' then hsba.hc_tinhname else '' end)) as diachi, vp.vienphistatus, (case when vp.vienphistatus=0 then 'Ðang di?u tr?' else 'Ðã ra vi?n' end) as vienphistatus_name, vp.loaivienphiid, (case vp.loaivienphiid when 0 then 'N?i trú' when 1 then 'Ngo?i trú' when 2 then 'Ði?u tr? ngo?i trú' end) as loaivienphi_name, to_char(vp.vienphidate,'HH24:MI dd/MM/yyyy') as vienphidate, to_char(vp.vienphidate,'yyyyMMddHH24MIss') as vienphidate_long, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'HH24:MI dd/MM/yyyy') end) as vienphidate_ravien, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'yyyyMMddHH24MIss') else '0' end) as vienphidate_ravien_long, (degp.departmentgroupname || ' - ' || de.departmentname) as khoaphong FROM (select vienphiid,vienphicode,patientid,vienphistatus,loaivienphiid,vienphidate,vienphidate_ravien from vienphi where patientid=582881) vp inner join (select hosobenhanid,patientcode,patientname,gioitinhname,hc_sonha,hc_thon,hc_xacode,hc_xaname,hc_huyencode,hc_huyenname,hc_tinhcode,hc_tinhname from hosobenhan where patientid=582881) hsba on hsba.hosobenhanid=vp.hosobenhanid inner join (select bhytid,bhytcode from bhyt where patientid=582881) bh on bh.bhytid=vp.bhytid left join (select departmentgroupid,departmentgroupname from departmentgroup) degp on degp.departmentgroupid=vp.departmentgroupid left join (select departmentid,departmentname from department) de on degp.departmentid=vp.departmentid ORDER BY vp.vienphidate desc;]
+ERROR 2017-11-06 20:54:12,859 149471ms LogSystem              Error              - Loi getDataTable: Npgsql.PostgresException (0x80004005): 42703: column vp.hosobenhanid does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteDbDataReader>d__92.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at O2S_CarParking.Server.Base.ConnectDatabase.GetDataTable_HIS(String sql) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Data\ConnectDatabase.cs:line 67
+ SQL=[SELECT hsba.patientcode, vp.patientid, vp.vienphiid, hsba.hosobenhanid, hsba.patientname, bh.bhytcode, hsba.gioitinhname, (case when hsba.birthday_year<>0 then hsba.birthday_year else to_char(hsba.birthday,'dd/MM/yyyy') end) as namsinh, ((case when hsba.hc_sonha<>'' then hsba.hc_sonha || ', ' else '' end) || (case when hsba.hc_thon<>'' then hsba.hc_thon || ' - ' else '' end) || (case when hsba.hc_xacode<>'00' then hsba.hc_xaname || ' - ' else '' end) || (case when hsba.hc_huyencode<>'00' then hsba.hc_huyenname || ' - ' else '' end) || (case when hsba.hc_tinhcode<>'00' then hsba.hc_tinhname else '' end)) as diachi, vp.vienphistatus, (case when vp.vienphistatus=0 then 'Ðang di?u tr?' else 'Ðã ra vi?n' end) as vienphistatus_name, vp.loaivienphiid, (case vp.loaivienphiid when 0 then 'N?i trú' when 1 then 'Ngo?i trú' when 2 then 'Ði?u tr? ngo?i trú' end) as loaivienphi_name, to_char(vp.vienphidate,'HH24:MI dd/MM/yyyy') as vienphidate, to_char(vp.vienphidate,'yyyyMMddHH24MIss') as vienphidate_long, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'HH24:MI dd/MM/yyyy') end) as vienphidate_ravien, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'yyyyMMddHH24MIss') else '0' end) as vienphidate_ravien_long, (degp.departmentgroupname || ' - ' || de.departmentname) as khoaphong FROM (select vienphiid,vienphicode,patientid,vienphistatus,loaivienphiid,vienphidate,vienphidate_ravien from vienphi where patientid=582881) vp inner join (select hosobenhanid,patientcode,patientname,gioitinhname,hc_sonha,hc_thon,hc_xacode,hc_xaname,hc_huyencode,hc_huyenname,hc_tinhcode,hc_tinhname from hosobenhan where patientid=582881) hsba on hsba.hosobenhanid=vp.hosobenhanid inner join (select bhytid,bhytcode from bhyt where patientid=582881) bh on bh.bhytid=vp.bhytid left join (select departmentgroupid,departmentgroupname from departmentgroup) degp on degp.departmentgroupid=vp.departmentgroupid left join (select departmentid,departmentname from department) de on degp.departmentid=vp.departmentid ORDER BY vp.vienphidate desc;]
+ERROR 2017-11-06 20:54:26,892 163504ms LogSystem              Error              - Loi getDataTable: Npgsql.PostgresException (0x80004005): 42703: column vp.hosobenhanid does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteDbDataReader>d__92.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at O2S_CarParking.Server.Base.ConnectDatabase.GetDataTable_HIS(String sql) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Data\ConnectDatabase.cs:line 67
+ SQL=[SELECT hsba.patientcode, vp.patientid, vp.vienphiid, hsba.hosobenhanid, hsba.patientname, bh.bhytcode, hsba.gioitinhname, (case when hsba.birthday_year<>0 then hsba.birthday_year else to_char(hsba.birthday,'dd/MM/yyyy') end) as namsinh, ((case when hsba.hc_sonha<>'' then hsba.hc_sonha || ', ' else '' end) || (case when hsba.hc_thon<>'' then hsba.hc_thon || ' - ' else '' end) || (case when hsba.hc_xacode<>'00' then hsba.hc_xaname || ' - ' else '' end) || (case when hsba.hc_huyencode<>'00' then hsba.hc_huyenname || ' - ' else '' end) || (case when hsba.hc_tinhcode<>'00' then hsba.hc_tinhname else '' end)) as diachi, vp.vienphistatus, (case when vp.vienphistatus=0 then 'Ðang di?u tr?' else 'Ðã ra vi?n' end) as vienphistatus_name, vp.loaivienphiid, (case vp.loaivienphiid when 0 then 'N?i trú' when 1 then 'Ngo?i trú' when 2 then 'Ði?u tr? ngo?i trú' end) as loaivienphi_name, to_char(vp.vienphidate,'HH24:MI dd/MM/yyyy') as vienphidate, to_char(vp.vienphidate,'yyyyMMddHH24MIss') as vienphidate_long, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'HH24:MI dd/MM/yyyy') end) as vienphidate_ravien, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'yyyyMMddHH24MIss') else '0' end) as vienphidate_ravien_long, (degp.departmentgroupname || ' - ' || de.departmentname) as khoaphong FROM (select vienphiid,vienphicode,patientid,vienphistatus,loaivienphiid,vienphidate,vienphidate_ravien from vienphi where patientid=582881) vp inner join (select hosobenhanid,patientcode,patientname,gioitinhname,hc_sonha,hc_thon,hc_xacode,hc_xaname,hc_huyencode,hc_huyenname,hc_tinhcode,hc_tinhname from hosobenhan where patientid=582881) hsba on hsba.hosobenhanid=vp.hosobenhanid inner join (select bhytid,bhytcode from bhyt where patientid=582881) bh on bh.bhytid=vp.bhytid left join (select departmentgroupid,departmentgroupname from departmentgroup) degp on degp.departmentgroupid=vp.departmentgroupid left join (select departmentid,departmentname from department) de on degp.departmentid=vp.departmentid ORDER BY vp.vienphidate desc;]
+INFO  2017-11-06 21:56:16,994 3873606ms LogSystem              Info               - API services CarParking End. Time=06/11/2017 21:56:16
+INFO  2017-11-06 21:56:44,750   124ms LogSystem              Info               - API services CarParking Start. Time=06/11/2017 21:56:44
+ERROR 2017-11-06 21:56:45,358   733ms LogSystem              Error              - Loi getDataTable: Npgsql.PostgresException (0x80004005): 42703: column vp.hosobenhanid does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteDbDataReader>d__92.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at O2S_CarParking.Server.Base.ConnectDatabase.GetDataTable_HIS(String sql) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Data\ConnectDatabase.cs:line 67
+ SQL=[SELECT hsba.patientcode, vp.patientid, vp.vienphiid, hsba.hosobenhanid, hsba.patientname, bh.bhytcode, hsba.gioitinhname, (case when hsba.birthday_year<>0 then hsba.birthday_year else to_char(hsba.birthday,'dd/MM/yyyy') end) as namsinh, ((case when hsba.hc_sonha<>'' then hsba.hc_sonha || ', ' else '' end) || (case when hsba.hc_thon<>'' then hsba.hc_thon || ' - ' else '' end) || (case when hsba.hc_xacode<>'00' then hsba.hc_xaname || ' - ' else '' end) || (case when hsba.hc_huyencode<>'00' then hsba.hc_huyenname || ' - ' else '' end) || (case when hsba.hc_tinhcode<>'00' then hsba.hc_tinhname else '' end)) as diachi, vp.vienphistatus, (case when vp.vienphistatus=0 then 'Ðang di?u tr?' else 'Ðã ra vi?n' end) as vienphistatus_name, vp.loaivienphiid, (case vp.loaivienphiid when 0 then 'N?i trú' when 1 then 'Ngo?i trú' when 2 then 'Ði?u tr? ngo?i trú' end) as loaivienphi_name, to_char(vp.vienphidate,'HH24:MI dd/MM/yyyy') as vienphidate, to_char(vp.vienphidate,'yyyyMMddHH24MIss') as vienphidate_long, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'HH24:MI dd/MM/yyyy') end) as vienphidate_ravien, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'yyyyMMddHH24MIss') else '0' end) as vienphidate_ravien_long, (degp.departmentgroupname || ' - ' || de.departmentname) as khoaphong FROM (select vienphiid,vienphicode,patientid,vienphistatus,loaivienphiid,vienphidate,vienphidate_ravien from vienphi where patientid=582881) vp inner join (select hosobenhanid,patientcode,patientname,gioitinhname,hc_sonha,hc_thon,hc_xacode,hc_xaname,hc_huyencode,hc_huyenname,hc_tinhcode,hc_tinhname from hosobenhan where patientid=582881) hsba on hsba.hosobenhanid=vp.hosobenhanid inner join (select bhytid,bhytcode from bhyt where patientid=582881) bh on bh.bhytid=vp.bhytid left join (select departmentgroupid,departmentgroupname from departmentgroup) degp on degp.departmentgroupid=vp.departmentgroupid left join (select departmentid,departmentname from department) de on degp.departmentid=vp.departmentid ORDER BY vp.vienphidate desc;]
+ERROR 2017-11-06 21:56:51,926  7300ms LogSystem              Error              - Loi getDataTable: Npgsql.PostgresException (0x80004005): 42703: column vp.hosobenhanid does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteDbDataReader>d__92.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at O2S_CarParking.Server.Base.ConnectDatabase.GetDataTable_HIS(String sql) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Data\ConnectDatabase.cs:line 67
+ SQL=[SELECT hsba.patientcode, vp.patientid, vp.vienphiid, hsba.hosobenhanid, hsba.patientname, bh.bhytcode, hsba.gioitinhname, (case when hsba.birthday_year<>0 then hsba.birthday_year else to_char(hsba.birthday,'dd/MM/yyyy') end) as namsinh, ((case when hsba.hc_sonha<>'' then hsba.hc_sonha || ', ' else '' end) || (case when hsba.hc_thon<>'' then hsba.hc_thon || ' - ' else '' end) || (case when hsba.hc_xacode<>'00' then hsba.hc_xaname || ' - ' else '' end) || (case when hsba.hc_huyencode<>'00' then hsba.hc_huyenname || ' - ' else '' end) || (case when hsba.hc_tinhcode<>'00' then hsba.hc_tinhname else '' end)) as diachi, vp.vienphistatus, (case when vp.vienphistatus=0 then 'Ðang di?u tr?' else 'Ðã ra vi?n' end) as vienphistatus_name, vp.loaivienphiid, (case vp.loaivienphiid when 0 then 'N?i trú' when 1 then 'Ngo?i trú' when 2 then 'Ði?u tr? ngo?i trú' end) as loaivienphi_name, to_char(vp.vienphidate,'HH24:MI dd/MM/yyyy') as vienphidate, to_char(vp.vienphidate,'yyyyMMddHH24MIss') as vienphidate_long, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'HH24:MI dd/MM/yyyy') end) as vienphidate_ravien, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'yyyyMMddHH24MIss') else '0' end) as vienphidate_ravien_long, (degp.departmentgroupname || ' - ' || de.departmentname) as khoaphong FROM (select vienphiid,vienphicode,patientid,vienphistatus,loaivienphiid,vienphidate,vienphidate_ravien from vienphi where patientid=590892) vp inner join (select hosobenhanid,patientcode,patientname,gioitinhname,hc_sonha,hc_thon,hc_xacode,hc_xaname,hc_huyencode,hc_huyenname,hc_tinhcode,hc_tinhname from hosobenhan where patientid=590892) hsba on hsba.hosobenhanid=vp.hosobenhanid inner join (select bhytid,bhytcode from bhyt where patientid=590892) bh on bh.bhytid=vp.bhytid left join (select departmentgroupid,departmentgroupname from departmentgroup) degp on degp.departmentgroupid=vp.departmentgroupid left join (select departmentid,departmentname from department) de on degp.departmentid=vp.departmentid ORDER BY vp.vienphidate desc;]
+ERROR 2017-11-06 21:57:11,154 26528ms LogSystem              Error              - Loi getDataTable: Npgsql.PostgresException (0x80004005): 42703: column vp.hosobenhanid does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteDbDataReader>d__92.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at O2S_CarParking.Server.Base.ConnectDatabase.GetDataTable_HIS(String sql) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Data\ConnectDatabase.cs:line 67
+ SQL=[SELECT hsba.patientcode, vp.patientid, vp.vienphiid, hsba.hosobenhanid, hsba.patientname, bh.bhytcode, hsba.gioitinhname, (case when hsba.birthday_year<>0 then hsba.birthday_year else to_char(hsba.birthday,'dd/MM/yyyy') end) as namsinh, ((case when hsba.hc_sonha<>'' then hsba.hc_sonha || ', ' else '' end) || (case when hsba.hc_thon<>'' then hsba.hc_thon || ' - ' else '' end) || (case when hsba.hc_xacode<>'00' then hsba.hc_xaname || ' - ' else '' end) || (case when hsba.hc_huyencode<>'00' then hsba.hc_huyenname || ' - ' else '' end) || (case when hsba.hc_tinhcode<>'00' then hsba.hc_tinhname else '' end)) as diachi, vp.vienphistatus, (case when vp.vienphistatus=0 then 'Ðang di?u tr?' else 'Ðã ra vi?n' end) as vienphistatus_name, vp.loaivienphiid, (case vp.loaivienphiid when 0 then 'N?i trú' when 1 then 'Ngo?i trú' when 2 then 'Ði?u tr? ngo?i trú' end) as loaivienphi_name, to_char(vp.vienphidate,'HH24:MI dd/MM/yyyy') as vienphidate, to_char(vp.vienphidate,'yyyyMMddHH24MIss') as vienphidate_long, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'HH24:MI dd/MM/yyyy') end) as vienphidate_ravien, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'yyyyMMddHH24MIss') else '0' end) as vienphidate_ravien_long, (degp.departmentgroupname || ' - ' || de.departmentname) as khoaphong FROM (select vienphiid,vienphicode,patientid,vienphistatus,loaivienphiid,vienphidate,vienphidate_ravien from vienphi where patientid=590892) vp inner join (select hosobenhanid,patientcode,patientname,gioitinhname,hc_sonha,hc_thon,hc_xacode,hc_xaname,hc_huyencode,hc_huyenname,hc_tinhcode,hc_tinhname from hosobenhan where patientid=590892) hsba on hsba.hosobenhanid=vp.hosobenhanid inner join (select bhytid,bhytcode from bhyt where patientid=590892) bh on bh.bhytid=vp.bhytid left join (select departmentgroupid,departmentgroupname from departmentgroup) degp on degp.departmentgroupid=vp.departmentgroupid left join (select departmentid,departmentname from department) de on degp.departmentid=vp.departmentid ORDER BY vp.vienphidate desc;]
+INFO  2017-11-06 21:58:55,772 131146ms LogSystem              Info               - API services CarParking End. Time=06/11/2017 21:58:55
+INFO  2017-11-06 21:59:14,451  2867ms LogSystem              Info               - API services CarParking Start. Time=06/11/2017 21:59:14
+ERROR 2017-11-06 21:59:26,497 14913ms LogSystem              Error              - Loi getDataTable: Npgsql.PostgresException (0x80004005): 42703: column vp.hosobenhanid does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteDbDataReader>d__92.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at O2S_CarParking.Server.Base.ConnectDatabase.GetDataTable_HIS(String sql) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Data\ConnectDatabase.cs:line 67
+ SQL=[SELECT hsba.patientcode, vp.patientid, vp.vienphiid, hsba.hosobenhanid, hsba.patientname, bh.bhytcode, hsba.gioitinhname, (case when hsba.birthday_year<>0 then hsba.birthday_year else to_char(hsba.birthday,'dd/MM/yyyy') end) as namsinh, ((case when hsba.hc_sonha<>'' then hsba.hc_sonha || ', ' else '' end) || (case when hsba.hc_thon<>'' then hsba.hc_thon || ' - ' else '' end) || (case when hsba.hc_xacode<>'00' then hsba.hc_xaname || ' - ' else '' end) || (case when hsba.hc_huyencode<>'00' then hsba.hc_huyenname || ' - ' else '' end) || (case when hsba.hc_tinhcode<>'00' then hsba.hc_tinhname else '' end)) as diachi, vp.vienphistatus, (case when vp.vienphistatus=0 then 'Ðang di?u tr?' else 'Ðã ra vi?n' end) as vienphistatus_name, vp.loaivienphiid, (case vp.loaivienphiid when 0 then 'N?i trú' when 1 then 'Ngo?i trú' when 2 then 'Ði?u tr? ngo?i trú' end) as loaivienphi_name, to_char(vp.vienphidate,'HH24:MI dd/MM/yyyy') as vienphidate, to_char(vp.vienphidate,'yyyyMMddHH24MIss') as vienphidate_long, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'HH24:MI dd/MM/yyyy') end) as vienphidate_ravien, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'yyyyMMddHH24MIss') else '0' end) as vienphidate_ravien_long, (degp.departmentgroupname || ' - ' || de.departmentname) as khoaphong FROM (select vienphiid,vienphicode,patientid,vienphistatus,loaivienphiid,vienphidate,vienphidate_ravien from vienphi where patientid=590893) vp inner join (select hosobenhanid,patientcode,patientname,gioitinhname,hc_sonha,hc_thon,hc_xacode,hc_xaname,hc_huyencode,hc_huyenname,hc_tinhcode,hc_tinhname from hosobenhan where patientid=590893) hsba on hsba.hosobenhanid=vp.hosobenhanid inner join (select bhytid,bhytcode from bhyt where patientid=590893) bh on bh.bhytid=vp.bhytid left join (select departmentgroupid,departmentgroupname from departmentgroup) degp on degp.departmentgroupid=vp.departmentgroupid left join (select departmentid,departmentname from department) de on degp.departmentid=vp.departmentid ORDER BY vp.vienphidate desc;]
+ERROR 2017-11-06 21:59:56,744 45160ms LogSystem              Error              - Loi getDataTable: Npgsql.PostgresException (0x80004005): 42703: column vp.hosobenhanid does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteDbDataReader>d__92.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at O2S_CarParking.Server.Base.ConnectDatabase.GetDataTable_HIS(String sql) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Data\ConnectDatabase.cs:line 67
+ SQL=[SELECT hsba.patientcode, vp.patientid, vp.vienphiid, hsba.hosobenhanid, hsba.patientname, bh.bhytcode, hsba.gioitinhname, (case when hsba.birthday_year<>0 then hsba.birthday_year else to_char(hsba.birthday,'dd/MM/yyyy') end) as namsinh, ((case when hsba.hc_sonha<>'' then hsba.hc_sonha || ', ' else '' end) || (case when hsba.hc_thon<>'' then hsba.hc_thon || ' - ' else '' end) || (case when hsba.hc_xacode<>'00' then hsba.hc_xaname || ' - ' else '' end) || (case when hsba.hc_huyencode<>'00' then hsba.hc_huyenname || ' - ' else '' end) || (case when hsba.hc_tinhcode<>'00' then hsba.hc_tinhname else '' end)) as diachi, vp.vienphistatus, (case when vp.vienphistatus=0 then 'Ðang di?u tr?' else 'Ðã ra vi?n' end) as vienphistatus_name, vp.loaivienphiid, (case vp.loaivienphiid when 0 then 'N?i trú' when 1 then 'Ngo?i trú' when 2 then 'Ði?u tr? ngo?i trú' end) as loaivienphi_name, to_char(vp.vienphidate,'HH24:MI dd/MM/yyyy') as vienphidate, to_char(vp.vienphidate,'yyyyMMddHH24MIss') as vienphidate_long, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'HH24:MI dd/MM/yyyy') end) as vienphidate_ravien, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'yyyyMMddHH24MIss') else '0' end) as vienphidate_ravien_long, (degp.departmentgroupname || ' - ' || de.departmentname) as khoaphong FROM (select vienphiid,vienphicode,patientid,vienphistatus,loaivienphiid,vienphidate,vienphidate_ravien from vienphi where patientid=590893) vp inner join (select hosobenhanid,patientcode,patientname,gioitinhname,hc_sonha,hc_thon,hc_xacode,hc_xaname,hc_huyencode,hc_huyenname,hc_tinhcode,hc_tinhname from hosobenhan where patientid=590893) hsba on hsba.hosobenhanid=vp.hosobenhanid inner join (select bhytid,bhytcode from bhyt where patientid=590893) bh on bh.bhytid=vp.bhytid left join (select departmentgroupid,departmentgroupname from departmentgroup) degp on degp.departmentgroupid=vp.departmentgroupid left join (select departmentid,departmentname from department) de on degp.departmentid=vp.departmentid ORDER BY vp.vienphidate desc;]
+ERROR 2017-11-06 22:07:48,871 517287ms LogSystem              Error              - Loi getDataTable: Npgsql.PostgresException (0x80004005): 42703: column degp.departmentid does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteDbDataReader>d__92.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at O2S_CarParking.Server.Base.ConnectDatabase.GetDataTable_HIS(String sql)
+ SQL=[SELECT hsba.patientcode, vp.patientid, vp.vienphiid, hsba.hosobenhanid, hsba.patientname, bh.bhytcode, hsba.gioitinhname, (case when hsba.birthday_year<>0 then cast(hsba.birthday_year as text) else to_char(hsba.birthday,'dd/MM/yyyy') end) as namsinh, ((case when hsba.hc_sonha<>'' then hsba.hc_sonha || ', ' else '' end) || (case when hsba.hc_thon<>'' then hsba.hc_thon || ' - ' else '' end) || (case when hsba.hc_xacode<>'00' then hsba.hc_xaname || ' - ' else '' end) || (case when hsba.hc_huyencode<>'00' then hsba.hc_huyenname || ' - ' else '' end) || (case when hsba.hc_tinhcode<>'00' then hsba.hc_tinhname else '' end)) as diachi, vp.vienphistatus, (case when vp.vienphistatus=0 then 'Ðang di?u tr?' else 'Ðã ra vi?n' end) as vienphistatus_name, vp.loaivienphiid, (case vp.loaivienphiid when 0 then 'N?i trú' when 1 then 'Ngo?i trú' when 2 then 'Ði?u tr? ngo?i trú' end) as loaivienphi_name, to_char(vp.vienphidate,'HH24:MI dd/MM/yyyy') as vienphidate, to_char(vp.vienphidate,'yyyyMMddHH24MIss') as vienphidate_long, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'HH24:MI dd/MM/yyyy') end) as vienphidate_ravien, (case when vp.vienphidate_ravien<>'0001-01-01 00:00:00' then to_char(vp.vienphidate_ravien,'yyyyMMddHH24MIss') else '0' end) as vienphidate_ravien_long, (degp.departmentgroupname || ' - ' || de.departmentname) as khoaphong FROM (select vienphiid,vienphicode,hosobenhanid,patientid,bhytid,vienphistatus,loaivienphiid,vienphidate,vienphidate_ravien,departmentgroupid,departmentid from vienphi where patientid=590893) vp inner join (select hosobenhanid,patientcode,patientname,gioitinhname,birthday,birthday_year,hc_sonha,hc_thon,hc_xacode,hc_xaname,hc_huyencode,hc_huyenname,hc_tinhcode,hc_tinhname from hosobenhan where patientid=590893) hsba on hsba.hosobenhanid=vp.hosobenhanid inner join (select bhytid,bhytcode from bhyt where patientid=590893) bh on bh.bhytid=vp.bhytid left join (select departmentgroupid,departmentgroupname from departmentgroup) degp on degp.departmentgroupid=vp.departmentgroupid left join (select departmentid,departmentname from department) de on degp.departmentid=vp.departmentid ORDER BY vp.vienphidate desc;]
+INFO  2017-11-06 22:16:52,051  2786ms LogSystem              Info               - API services CarParking Start. Time=06/11/2017 22:16:52
+INFO  2017-11-06 22:23:31,495   210ms LogSystem              Info               - API services CarParking Start. Time=06/11/2017 22:23:31
+INFO  2017-11-06 22:28:06,440  2383ms LogSystem              Info               - API services CarParking Start. Time=06/11/2017 22:28:06
+INFO  2017-11-06 22:43:16,534 912477ms LogSystem              Info               - API services CarParking End. Time=06/11/2017 22:43:16
+INFO  2017-11-06 22:44:07,036   729ms LogSystem              Info               - API services CarParking Start. Time=06/11/2017 22:44:07
+INFO  2017-11-07 22:47:06,067  2813ms LogSystem              Info               - API services CarParking Start. Time=07/11/2017 22:47:06
+ERROR 2017-11-07 22:47:40,725 37471ms LogSystem              Error              - 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at O2S_CarParking.Server.Process.KiemTraHuongMienPhi_QLGiuXe.LuuLaiVaoCoSoDuLieu(KTMienPhiFilterDTO _filterKiemTra, KTMienPhiKetQua_PlusDTO result) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Process\KiemTraHuongMienPhi_QLGiuXe.cs:line 90
+ERROR 2017-11-07 23:02:54,532 951278ms LogSystem              Error              - Loi ExecuteNonQuery: Npgsql.PostgresException (0x80004005): 42P01: relation "cp_checkxera" does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteNonQuery>d__84.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlCommand.ExecuteNonQuery()
+   at O2S_CarParking.Server.Base.ConnectDatabase.ExecuteNonQuery_HSBA(String sql)
+ SQL=[INSERT INTO cp_checkxera(patientid, patientcode, vienphiid, hosobenhanid, patientname, checkstatus, checkdate, checknote, checkusercode, checkusername, vienphidate, vienphidate_ravien, bhytid, bhytcode, gioitinhname, namsinh, diachi, vienphistatus, loaivienphiid, departmentgroupid, departmentgroupname, departmentid, departmentname) VALUES ('590872', 'BN000590872', '800516', '794713', 'MAI TH? SINH', '0', '2017-11-07 23:02:27', '', '', '', '2017-01-19 10:24:13', '2017-01-19 23:59:59', '976758', '', 'N?', '1968-01-01 00:00:00', 'Phu?ng Tràng Cát - Q. H?i An - TP H?i Phòng', '1', '1', '46', 'Khoa Khám B?nh Theo Yêu C?u', '209', 'Khám YC 06'); ]
+ERROR 2017-11-07 23:04:06,975 1023721ms LogSystem              Error              - Loi ExecuteNonQuery: Npgsql.PostgresException (0x80004005): 42P01: relation "cp_checkxera" does not exist
+   at Npgsql.NpgsqlConnector.<DoReadMessage>d__147.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadMessage>d__146.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlConnector.<ReadExpecting>d__153`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlDataReader.<NextResult>d__32.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.<Execute>d__71.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult()
+   at Npgsql.NpgsqlCommand.<ExecuteNonQuery>d__84.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Npgsql.NpgsqlCommand.ExecuteNonQuery()
+   at O2S_CarParking.Server.Base.ConnectDatabase.ExecuteNonQuery_HSBA(String sql)
+ SQL=[INSERT INTO cp_checkxera(patientid, patientcode, vienphiid, hosobenhanid, patientname, checkstatus, checkdate, checknote, checkusercode, checkusername, vienphidate, vienphidate_ravien, bhytid, bhytcode, gioitinhname, namsinh, diachi, vienphistatus, loaivienphiid, departmentgroupid, departmentgroupname, departmentid, departmentname) VALUES ('590872', 'BN000590872', '800516', '794713', 'MAI TH? SINH', '0', '2017-11-07 23:03:45', '', '', '', '2017-01-19 10:24:13', '2017-01-19 23:59:59', '976758', '', 'N?', '1968-01-01 00:00:00', 'Phu?ng Tràng Cát - Q. H?i An - TP H?i Phòng', '1', '1', '46', 'Khoa Khám B?nh Theo Yêu C?u', '209', 'Khám YC 06'); ]
+INFO  2017-11-07 23:06:20,492  2939ms LogSystem              Info               - API services CarParking Start. Time=07/11/2017 23:06:20
+INFO  2017-11-07 23:09:08,183  2816ms LogSystem              Info               - API services CarParking Start. Time=07/11/2017 23:09:08
+INFO  2017-11-07 23:50:58,973  2396ms LogSystem              Info               - API services CarParking Start. Time=07/11/2017 23:50:58
+INFO  2017-11-11 22:36:52,578  2933ms LogSystem              Info               - API services CarParking Start. Time=11/11/2017 22:36:52
+INFO  2017-11-11 22:42:48,435  2732ms LogSystem              Info               - API services CarParking Start. Time=11/11/2017 22:42:48
+ERROR 2017-11-11 22:44:28,378 102675ms LogSystem              Error              - Loi khi goi API ThongTinXeRa/KiemTraHuongMienPhiVaThongTinBN System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at O2S_CarParking.Server.Controllers.ThongTinXeRaController.KiemTraHuongMienPhiVaThongTinBN(HttpRequestMessage request, KTMienPhiFilterDTO _filterKiemTra) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Controllers\ThongTinXeRaController.cs:line 60
+INFO  2017-11-11 23:39:00,883  2788ms LogSystem              Info               - API services CarParking Start. Time=11/11/2017 23:39:00
+INFO  2017-11-14 10:14:59,789  2880ms LogSystem              Info               - API services CarParking Start. Time=14/11/2017 10:14:59
+INFO  2017-11-14 10:20:06,621  2747ms LogSystem              Info               - API services CarParking Start. Time=14/11/2017 10:20:06
+INFO  2017-11-14 10:23:15,485  2324ms LogSystem              Info               - API services CarParking Start. Time=14/11/2017 10:23:15
+INFO  2017-11-14 10:30:16,450 423288ms LogSystem              Info               - API services CarParking End. Time=14/11/2017 10:30:16
+INFO  2017-11-14 11:42:57,650  2679ms LogSystem              Info               - API services CarParking Start. Time=14/11/2017 11:42:57
+INFO  2017-11-14 14:41:40,812   244ms LogSystem              Info               - API services CarParking Start. Time=14/11/2017 14:41:40
+INFO  2017-11-14 15:08:23,848  2784ms LogSystem              Info               - API services CarParking Start. Time=14/11/2017 15:08:23
+INFO  2017-11-14 15:15:28,451  2681ms LogSystem              Info               - API services CarParking Start. Time=14/11/2017 15:15:28
+INFO  2017-11-14 15:17:17,840  2358ms LogSystem              Info               - API services CarParking Start. Time=14/11/2017 15:17:17
+INFO  2017-11-14 15:21:13,286 237804ms LogSystem              Info               - API services CarParking End. Time=14/11/2017 15:21:13
+INFO  2017-11-14 15:21:22,091  2773ms LogSystem              Info               - API services CarParking Start. Time=14/11/2017 15:21:22
+INFO  2017-11-14 17:49:05,768  2749ms LogSystem              Info               - API services CarParking Start. Time=14/11/2017 17:49:05
+INFO  2017-11-16 10:43:51,649  2773ms LogSystem              Info               - API services CarParking Start. Time=16/11/2017 10:43:51
+INFO  2017-11-16 10:45:09,153  2753ms LogSystem              Info               - API services CarParking Start. Time=16/11/2017 10:45:09
+INFO  2017-11-16 10:51:01,183   191ms LogSystem              Info               - API services CarParking Start. Time=16/11/2017 10:51:01
+INFO  2017-11-17 00:09:17,921  2408ms LogSystem              Info               - API services CarParking Start. Time=17/11/2017 00:09:17
+INFO  2017-11-17 00:18:18,367 542854ms LogSystem              Info               - API services CarParking End. Time=17/11/2017 00:18:18
+INFO  2017-11-17 11:25:45,273  3164ms LogSystem              Info               - API services CarParking Start. Time=17/11/2017 11:25:45
+INFO  2017-11-17 11:29:20,171 218061ms LogSystem              Info               - API services CarParking End. Time=17/11/2017 11:29:20
+INFO  2017-11-17 16:42:30,692  2355ms LogSystem              Info               - API services CarParking Start. Time=17/11/2017 16:42:30
+INFO  2017-11-17 16:55:15,047 766710ms LogSystem              Info               - API services CarParking End. Time=17/11/2017 16:55:15
+INFO  2017-11-17 16:56:16,650   678ms LogSystem              Info               - API services CarParking Start. Time=17/11/2017 16:56:16
+INFO  2017-11-17 17:00:05,753 229781ms LogSystem              Info               - API services CarParking End. Time=17/11/2017 17:00:05
+INFO  2017-11-21 20:06:58,587  2511ms LogSystem              Info               - API services CarParking Start. Time=21/11/2017 20:06:58
+INFO  2017-11-21 20:26:21,556 1165479ms LogSystem              Info               - API services CarParking End. Time=21/11/2017 20:26:21
+INFO  2017-11-23 18:49:20,854  2266ms LogSystem              Info               - API services CarParking Start. Time=23/11/2017 18:49:20
+INFO  2017-11-23 18:55:38,845 380256ms LogSystem              Info               - API services CarParking End. Time=23/11/2017 18:55:38
+INFO  2017-11-23 19:06:51,729   718ms LogSystem              Info               - API services CarParking Start. Time=23/11/2017 19:06:51
+INFO  2017-11-23 19:12:59,384 368373ms LogSystem              Info               - API services CarParking End. Time=23/11/2017 19:12:59
+INFO  2017-11-23 19:46:50,099   693ms LogSystem              Info               - API services CarParking Start. Time=23/11/2017 19:46:50
+ERROR 2017-11-23 19:46:50,332   926ms LogSystem              Error              - Loi khi goi API ThongTinXeRa/KiemTraHuongMienPhiVaThongTinBN System.MissingMethodException: Method not found: 'Void O2S_CarParking.Model.Models.KTMienPhiFilterDTO.set_thoiGianTagTheRa_Day(Int64)'.
+   at O2S_CarParking.Server.Process.KiemTraHuongMienPhi_QLGiuXe.QuyTacGiamDinhProcess_MienPhi(KTMienPhiFilterDTO _filterKiemTra)
+   at O2S_CarParking.Server.Controllers.ThongTinXeRaController.KiemTraHuongMienPhiVaThongTinBN(HttpRequestMessage request, KTMienPhiFilterDTO _filterKiemTra) in C:\PROJECT\O2S_CarParking\trunk\O2S_CarParking.Server\Controllers\ThongTinXeRaController.cs:line 104
+INFO  2017-11-23 23:20:01,834  2324ms LogSystem              Info               - API services CarParking Start. Time=23/11/2017 23:20:01
+INFO  2017-11-23 23:23:18,146 198635ms LogSystem              Info               - API services CarParking End. Time=23/11/2017 23:23:18
+INFO  2017-11-27 13:01:06,058  2357ms LogSystem              Info               - API services CarParking Start. Time=27/11/2017 13:01:06
+INFO  2017-11-27 13:02:26,953 83251ms LogSystem              Info               - API services CarParking End. Time=27/11/2017 13:02:26
+INFO  2017-11-27 13:03:08,567   699ms LogSystem              Info               - API services CarParking Start. Time=27/11/2017 13:03:08
+INFO  2017-11-27 13:05:40,474 152606ms LogSystem              Info               - API services CarParking End. Time=27/11/2017 13:05:40
+INFO  2017-11-27 13:05:49,154  2665ms LogSystem              Info               - API services CarParking Start. Time=27/11/2017 13:05:49
+INFO  2017-11-27 13:08:47,649  2664ms LogSystem              Info               - API services CarParking Start. Time=27/11/2017 13:08:47
+INFO  2017-11-27 13:17:01,279  2688ms LogSystem              Info               - API services CarParking Start. Time=27/11/2017 13:17:01
+INFO  2017-11-27 13:47:31,265  2652ms LogSystem              Info               - API services CarParking Start. Time=27/11/2017 13:47:31
+INFO  2017-11-27 22:21:02,861  2371ms LogSystem              Info               - API services CarParking Start. Time=27/11/2017 22:21:02
+INFO  2017-11-27 23:42:46,586 4906096ms LogSystem              Info               - API services CarParking End. Time=27/11/2017 23:42:46
+INFO  2017-12-01 09:09:58,858  2831ms LogSystem              Info               - API services CarParking Start. Time=01/12/2017 09:09:58
+INFO  2017-12-01 09:14:22,712  2810ms LogSystem              Info               - API services CarParking Start. Time=01/12/2017 09:14:22
+INFO  2017-12-02 17:35:05,962  2319ms LogSystem              Info               - API services CarParking Start. Time=02/12/2017 17:35:05
+INFO  2017-12-02 17:36:52,634 108990ms LogSystem              Info               - API services CarParking End. Time=02/12/2017 17:36:52
+INFO  2017-12-02 17:37:01,441  2764ms LogSystem              Info               - API services CarParking Start. Time=02/12/2017 17:37:01

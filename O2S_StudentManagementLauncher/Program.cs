@@ -59,7 +59,7 @@ namespace O2S_StudentManagementLauncher
             bool result = false;
             try
             {
-                DataView dataVer = new DataView(condb.GetDataTable("SELECT appversion,app_link from SM_VERSION where app_type=0 LIMIT 1;"));
+                DataView dataVer = new DataView(condb.GetDataTable("SELECT top 1 appversion,app_link from SM_VERSION where app_type=0;"));
                 if (dataVer != null && dataVer.Count > 0)
                 {
                     //versionDatabase = dataVer[0]["appversion"].ToString();

@@ -33,7 +33,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\O2S CarParking\bin\Debug\</OutputPath>
+    <OutputPath>..\O2S_StudentManagement\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>CarParking.ico</ApplicationIcon>
+    <ApplicationIcon>StudentManagement.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -99,6 +99,7 @@
   <ItemGroup>
     <Content Include="CarParking.ico" />
     <Content Include="InsuranceExpertise.ico" />
+    <Content Include="StudentManagement.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
