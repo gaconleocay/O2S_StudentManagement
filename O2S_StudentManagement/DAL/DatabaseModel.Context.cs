@@ -25,8 +25,11 @@ namespace O2S_StudentManagement.DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<DM_BANGCAP> DM_BANGCAP { get; set; }
+        public virtual DbSet<DM_CHUYENNGANH> DM_CHUYENNGANH { get; set; }
         public virtual DbSet<DM_DANTOC> DM_DANTOC { get; set; }
         public virtual DbSet<DM_HUYEN> DM_HUYEN { get; set; }
+        public virtual DbSet<DM_NGHENGHIEP> DM_NGHENGHIEP { get; set; }
         public virtual DbSet<DM_QUOCGIA> DM_QUOCGIA { get; set; }
         public virtual DbSet<DM_TINH> DM_TINH { get; set; }
         public virtual DbSet<DM_XA> DM_XA { get; set; }
@@ -36,13 +39,13 @@ namespace O2S_StudentManagement.DAL
         public virtual DbSet<SM_LOPHOC> SM_LOPHOC { get; set; }
         public virtual DbSet<SM_NGUOITHAN> SM_NGUOITHAN { get; set; }
         public virtual DbSet<SM_OPTION> SM_OPTION { get; set; }
-        public virtual DbSet<SM_OTHERLIST> SM_OTHERLIST { get; set; }
-        public virtual DbSet<SM_OTHERTYPELIST> SM_OTHERTYPELIST { get; set; }
         public virtual DbSet<SM_QTHOCTAP> SM_QTHOCTAP { get; set; }
         public virtual DbSet<SM_STUDENT> SM_STUDENT { get; set; }
         public virtual DbSet<SM_TBLLOG> SM_TBLLOG { get; set; }
         public virtual DbSet<SM_TBLUSER> SM_TBLUSER { get; set; }
         public virtual DbSet<SM_TBLUSER_PERMISSION> SM_TBLUSER_PERMISSION { get; set; }
         public virtual DbSet<SM_VERSION> SM_VERSION { get; set; }
+        public virtual DbSet<DM_OTHERLIST> DM_OTHERLIST { get; set; }
+        public virtual DbSet<DM_OTHERTYPELIST> DM_OTHERTYPELIST { get; set; }
     }
 }

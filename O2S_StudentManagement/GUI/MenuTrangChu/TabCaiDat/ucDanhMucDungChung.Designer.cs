@@ -172,14 +172,14 @@
             // 
             // gridColumn9
             // 
-            this.gridColumn9.Caption = "otherlistid";
-            this.gridColumn9.FieldName = "otherlistid";
+            this.gridColumn9.Caption = "id";
+            this.gridColumn9.FieldName = "id";
             this.gridColumn9.Name = "gridColumn9";
             // 
             // gridColumn10
             // 
-            this.gridColumn10.Caption = "othertypelistid";
-            this.gridColumn10.FieldName = "othertypelistid";
+            this.gridColumn10.Caption = "othertypelist_id";
+            this.gridColumn10.FieldName = "othertypelist_id";
             this.gridColumn10.Name = "gridColumn10";
             // 
             // gridColumn7
@@ -371,7 +371,7 @@
             this.cboDM_LoaiDMTen.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboDM_LoaiDMTen.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("othertypelistid", 35, "ID"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("id", 35, "ID"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("othertypelistname", 100, "Tên")});
             this.cboDM_LoaiDMTen.Properties.NullText = "";
             this.cboDM_LoaiDMTen.Size = new System.Drawing.Size(230, 22);
@@ -469,8 +469,8 @@
             // 
             // gridColumn8
             // 
-            this.gridColumn8.Caption = "othertypelistid";
-            this.gridColumn8.FieldName = "othertypelistid";
+            this.gridColumn8.Caption = "id";
+            this.gridColumn8.FieldName = "id";
             this.gridColumn8.Name = "gridColumn8";
             // 
             // gridColumn2

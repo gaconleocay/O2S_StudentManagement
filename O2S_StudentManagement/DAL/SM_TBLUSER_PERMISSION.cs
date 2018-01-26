@@ -15,7 +15,6 @@ namespace O2S_StudentManagement.DAL
     public partial class SM_TBLUSER_PERMISSION
     {
         public int id { get; set; }
-        public Nullable<int> permissionid { get; set; }
         public string permissioncode { get; set; }
         public string permissionname { get; set; }
         public Nullable<int> user_id { get; set; }

@@ -5,25 +5,28 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ea9e4837890f4b90940a446001c4b909" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_DANTOC" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_HUYEN" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_QUOCGIA" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_TINH" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_XA" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_KTDAUVAO" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_LICENSE" Width="1.5" PointX="6.75" PointY="5.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_LICHHOC" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_LOPHOC" Width="1.5" PointX="8.75" PointY="5.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_NGUOITHAN" Width="1.5" PointX="2.75" PointY="9.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_OPTION" Width="1.5" PointX="4.75" PointY="9.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_OTHERLIST" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_OTHERTYPELIST" Width="1.5" PointX="10.75" PointY="5.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_QTHOCTAP" Width="1.5" PointX="6.75" PointY="10.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_STUDENT" Width="1.5" PointX="8.75" PointY="10.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_TBLLOG" Width="1.5" PointX="10.75" PointY="10.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_TBLUSER" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_TBLUSER_PERMISSION" Width="1.5" PointX="12.75" PointY="5.75" />
-        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_VERSION" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_BANGCAP" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_CHUYENNGANH" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_DANTOC" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_HUYEN" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_NGHENGHIEP" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_QUOCGIA" Width="1.5" PointX="4.75" PointY="5.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_TINH" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_XA" Width="1.5" PointX="6.75" PointY="5.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_KTDAUVAO" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_LICENSE" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_LICHHOC" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_LOPHOC" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_NGUOITHAN" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_OPTION" Width="1.5" PointX="2.75" PointY="10.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_QTHOCTAP" Width="1.5" PointX="10.75" PointY="10.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_STUDENT" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_TBLLOG" Width="1.5" PointX="12.75" PointY="8.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_TBLUSER" Width="1.5" PointX="12.75" PointY="12.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_TBLUSER_PERMISSION" Width="1.5" PointX="6.75" PointY="10.625" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.SM_VERSION" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_OTHERLIST" Width="1.5" PointX="4.875" PointY="10.5" />
+        <EntityTypeShape EntityType="O2S_STUDENTMANAGEMENTModel.DM_OTHERTYPELIST" Width="1.5" PointX="16.875" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

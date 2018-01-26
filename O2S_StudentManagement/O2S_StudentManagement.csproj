@@ -232,10 +232,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DM_BANGCAP.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_CHUYENNGANH.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\DM_DANTOC.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DM_HUYEN.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_NGHENGHIEP.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_OTHERLIST.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_OTHERTYPELIST.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DM_QUOCGIA.cs">
@@ -247,6 +262,7 @@
     <Compile Include="DAL\DM_XA.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\LoadDuLieuNghiepVu.cs" />
     <Compile Include="DAL\SM_KTDAUVAO.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -263,12 +279,6 @@
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SM_OPTION.cs">
-      <DependentUpon>DatabaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\SM_OTHERLIST.cs">
-      <DependentUpon>DatabaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\SM_OTHERTYPELIST.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\SM_QTHOCTAP.cs">
@@ -289,6 +299,8 @@
     <Compile Include="DAL\SM_VERSION.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\LoadDuLieuDanhMuc.cs" />
+    <Compile Include="DTO\SM_STUDENT_Plus.cs" />
     <Compile Include="GUI\FormCommon\ucMenuQLGiaoVien.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -384,12 +396,6 @@
     </Compile>
     <Compile Include="GUI\MenuQLHocVien\ucQLHVNV_TTHocVien.Designer.cs">
       <DependentUpon>ucQLHVNV_TTHocVien.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\MenuQLHocVu\ucLichSuCapNhatNoiTru.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\MenuQLHocVu\ucLichSuCapNhatNoiTru.Designer.cs">
-      <DependentUpon>ucLichSuCapNhatNoiTru.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\MenuQLHocVu\ucQLHV_DanhMuc.cs">
       <SubType>UserControl</SubType>
@@ -599,9 +605,6 @@
     <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHVNV_TTHocVien.resx">
       <DependentUpon>ucQLHVNV_TTHocVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\MenuQLHocVu\ucLichSuCapNhatNoiTru.resx">
-      <DependentUpon>ucLichSuCapNhatNoiTru.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\MenuQLHocVu\ucQLHV_DanhMuc.resx">
       <DependentUpon>ucQLHV_DanhMuc.cs</DependentUpon>
     </EmbeddedResource>
@@ -682,8 +685,6 @@
     <None Include="Resources\copy-16.png" />
     <None Include="Resources\info-16.png" />
     <None Include="Resources\printer-16.png" />
-    <Content Include="CarParking.ico" />
-    <Content Include="InsuranceExpertise.ico" />
     <None Include="Resources\xml_16.png" />
     <None Include="Resources\xml_161.png" />
     <None Include="Resources\side-right-view-161.png" />

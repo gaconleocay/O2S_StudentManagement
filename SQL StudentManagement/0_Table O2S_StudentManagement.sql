@@ -17,7 +17,7 @@ CREATE TABLE SM_LICENSE
 );
 
 
---=================================================== -- Table: SM_VERSION
+--=================================================== -- Table: SM_VERaSION
 CREATE TABLE SM_VERSION
 (
   id int IDENTITY(1,1),
@@ -26,7 +26,7 @@ CREATE TABLE SM_VERSION
   app_type int,
   updateapp varbinary,
   appsize int,
-  sqlversion nvarchar,
+  sqlversion nvarchar(max),
   updatesql varbinary,
   sqlsize int,
   sync_flag int,
@@ -48,10 +48,10 @@ CREATE TABLE SM_TBLUSER
   usergnhom int,
   usernote nvarchar(255),
       isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT sm_tbluser_pkey PRIMARY KEY (id)
@@ -75,10 +75,10 @@ CREATE TABLE SM_TBLUSER_PERMISSION
   ghichu nvarchar(255),
   
       isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT userpermissionid_pkey PRIMARY KEY (id)
@@ -93,7 +93,7 @@ CREATE TABLE SM_TBLLOG
 (
   id int IDENTITY(1,1),
   logusercode nvarchar(50),
-  logvalue nvarchar,
+  logvalue nvarchar(max),
   ipaddress nvarchar(255),
   computername nvarchar(255),
   softversion nvarchar(50),
@@ -105,62 +105,62 @@ CREATE INDEX SM_TBLLOG_logusercode_idx ON SM_TBLLOG (logusercode);
 CREATE INDEX SM_TBLLOG_logtypecode_idx ON SM_TBLLOG (logtypecode);
 CREATE INDEX SM_TBLLOG_logtime_idx ON SM_TBLLOG (logtime);
 
---=================================================== Table: SM_OTHERLIST
-CREATE TABLE SM_OTHERLIST
+--=================================================== Table: DM_OTHERLIST
+CREATE TABLE DM_OTHERLIST
 (
   id int IDENTITY(1,1),
   othertypelist_id int,
   otherlistcode nvarchar(255),
-  otherlistname nvarchar,
-  otherlistvalue nvarchar,
+  otherlistname nvarchar(max),
+  otherlistvalue nvarchar(max),
   otherliststatus int,
-  otherlistnote nvarchar,
+  otherlistnote nvarchar(max),
       isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
-  CONSTRAINT sm_otherlist_pkey PRIMARY KEY (id)
+  CONSTRAINT DM_OTHERLIST_pkey PRIMARY KEY (id)
 );
-CREATE INDEX SM_OTHERLIST_othertypelistid_idx ON SM_OTHERLIST (othertypelist_id);
-CREATE INDEX SM_OTHERLIST_otherlistcode_idx ON SM_OTHERLIST (otherlistcode);
+CREATE INDEX DM_OTHERLIST_othertypelistid_idx ON DM_OTHERLIST (othertypelist_id);
+CREATE INDEX DM_OTHERLIST_otherlistcode_idx ON DM_OTHERLIST (otherlistcode);
 
 
---=================================================== Table: SM_OTHERTYPELIST
-CREATE TABLE SM_OTHERTYPELIST
+--=================================================== Table: DM_OTHERTYPELIST
+CREATE TABLE DM_OTHERTYPELIST
 (
   id int IDENTITY(1,1),
   othertypelistcode nvarchar(255),
-  othertypelistname nvarchar,
+  othertypelistname nvarchar(max),
   othertypeliststatus int,
-  othertypelistnote nvarchar,
+  othertypelistnote nvarchar(max),
       isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
-  CONSTRAINT sm_othertypelist_pkey PRIMARY KEY (id)
+  CONSTRAINT DM_OTHERTYPELIST_pkey PRIMARY KEY (id)
 );
-CREATE INDEX SM_OTHERTYPELIST_othertypelistcode_idx ON SM_OTHERTYPELIST (othertypelistcode);
+CREATE INDEX DM_OTHERTYPELIST_othertypelistcode_idx ON DM_OTHERTYPELIST (othertypelistcode);
 
 --===================================================Table: SM_OPTION
 CREATE TABLE SM_OPTION
 (
   id int IDENTITY(1,1),
   optioncode nvarchar(255),
-  optionname nvarchar,
-  optionvalue nvarchar,
-  optionnote nvarchar,
+  optionname nvarchar(max),
+  optionvalue nvarchar(max),
+  optionnote nvarchar(max),
   optionlook int,
       isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT sm_option_pkey PRIMARY KEY (id)
@@ -189,7 +189,7 @@ CREATE TABLE SM_STUDENT
   tinh_id int,
   huyen_id int,
   xa_id int,
-  thonxom nvarchar,
+  thonxom nvarchar(max),
   cmtnd nvarchar(25),
   cmtnd_ngaycap datetime,
   sodienthoai nvarchar(15),
@@ -200,10 +200,10 @@ CREATE TABLE SM_STUDENT
   bangcap_id int,
   
   isremoveid int,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT sm_student_pkey PRIMARY KEY (id)
@@ -230,14 +230,14 @@ CREATE TABLE SM_NGUOITHAN
   tinh_id int,
   huyen_id int,
   xa_id int,
-  thonxom nvarchar,
-  ghichu nvarchar,
+  thonxom nvarchar(max),
+  ghichu nvarchar(max),
   
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT sm_nguoithan_pkey PRIMARY KEY (id)
@@ -256,22 +256,22 @@ CREATE TABLE SM_QTHOCTAP
   id int IDENTITY(1,1),
   student_id int,
   truonghoc_id int,
-  truonghocten nvarchar,
+  truonghocten nvarchar(max),
   chuyennganh_id int,
-  noidung nvarchar,
-  diachi nvarchar,
+  noidung nvarchar(max),
+  diachi nvarchar(max),
   thoigianhoctu datetime,
   thoigianhocden datetime,
   hocphi decimal(18, 0),
   ketqua_id int, 
   bangcap_id int,
-  ghichu nvarchar,
+  ghichu nvarchar(max),
 
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT sm_qthoctap_pkey PRIMARY KEY (id)
@@ -293,13 +293,13 @@ CREATE TABLE SM_KTDAUVAO
   kynangnghe_id int,
   kynangnoi_id int,
   kynangviet_id int,
-  ghichu nvarchar,
+  ghichu nvarchar(max),
 
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT sm_ktdauvao_pkey PRIMARY KEY (id)
@@ -321,13 +321,13 @@ CREATE TABLE SM_LOPHOC
   ngaydukien datetime,
   ngaybatdau datetime,
   sotiethoc decimal(18,1),
-  ghichu nvarchar,
+  ghichu nvarchar(max),
 
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT sm_lophoc_pkey PRIMARY KEY (id)
@@ -347,13 +347,13 @@ CREATE TABLE SM_LICHHOC
   ngaydukien datetime,
   ngaybatdau datetime,
   sotiethoc decimal(18,1),
-  ghichu nvarchar,
+  ghichu nvarchar(max),
 
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT SM_LICHHOC_pkey PRIMARY KEY (id)
@@ -368,10 +368,10 @@ CREATE TABLE DM_QUOCGIA
 	name_vn nvarchar(255),
 	code nvarchar(255),
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT DM_QUOCGIA_pkey PRIMARY KEY (id)
@@ -388,10 +388,10 @@ CREATE TABLE DM_TINH
 	quocgia_id int,
 	captinh_id int,
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT DM_TINH_pkey PRIMARY KEY (id)
@@ -410,10 +410,10 @@ CREATE TABLE DM_HUYEN
 	tinh_id int,
 	caphuyen_id int,
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT DM_HUYEN_pkey PRIMARY KEY (id)
@@ -433,10 +433,10 @@ CREATE TABLE DM_XA
 	huyen_id int,
 	capxa_id int,
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT DM_XA_pkey PRIMARY KEY (id)
@@ -453,12 +453,12 @@ CREATE TABLE DM_DANTOC
 	name_en nvarchar(255),
 	name_vn nvarchar(255),
 	code nvarchar(255),
-	name_other nvarchar,
+	name_other nvarchar(max),
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT DM_DANTOC_pkey PRIMARY KEY (id)
@@ -473,12 +473,12 @@ CREATE TABLE DM_NGHENGHIEP
 	name_en nvarchar(255),
 	name_vn nvarchar(255),
 	code nvarchar(255),
-	name_other nvarchar,
+	name_other nvarchar(max),
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT DM_NGHENGHIEP_pkey PRIMARY KEY (id)
@@ -493,12 +493,12 @@ CREATE TABLE DM_CHUYENNGANH
 	name_en nvarchar(255),
 	name_vn nvarchar(255),
 	code nvarchar(255),
-	name_other nvarchar,
+	name_other nvarchar(max),
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT DM_CHUYENNGANH_pkey PRIMARY KEY (id)
@@ -513,12 +513,12 @@ CREATE TABLE DM_BANGCAP
 	name_en nvarchar(255),
 	name_vn nvarchar(255),
 	code nvarchar(255),
-	name_other nvarchar,
+	name_other nvarchar(max),
     isremove int default 0,
-	created_date datetime,
+	created_date datetime default sysdatetime() ,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
-	modified_date datetime,
+	modified_date datetime default sysdatetime() ,
 	modified_by nvarchar(255),
 	modified_log nvarchar(255),
   CONSTRAINT DM_BANGCAP_pkey PRIMARY KEY (id)

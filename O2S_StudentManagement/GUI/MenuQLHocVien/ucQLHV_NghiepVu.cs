@@ -64,27 +64,27 @@ namespace O2S_StudentManagement.GUI.MenuQLHocVien
         {
             try
             {
-                if (xtraTabQLHV_DanhMuc.PageVisible)
+                if (xtraTabQLHV_TTHV.PageVisible)
                 {
-                    xtraTabQLHV_DanhMuc.Controls.Clear();
-                    MenuQLHocVien.ucQLHV_DanhMuc uchienthi = new MenuQLHocVien.ucQLHV_DanhMuc();
-                    uchienthi.Dock = System.Windows.Forms.DockStyle.Fill;
-                    xtraTabQLHV_DanhMuc.Controls.Add(uchienthi);
-                }
-                if (xtraTabQLHV_NghiepVu.PageVisible)
-                {
-                    xtraTabQLHV_NghiepVu.Controls.Clear();
+                    xtraTabQLHV_TTHV.Controls.Clear();
                     MenuQLHocVien.ucQLHVNV_TTHocVien uchienthi = new MenuQLHocVien.ucQLHVNV_TTHocVien();
                     uchienthi.Dock = System.Windows.Forms.DockStyle.Fill;
-                    xtraTabQLHV_NghiepVu.Controls.Add(uchienthi);
+                    xtraTabQLHV_TTHV.Controls.Add(uchienthi);
                 }
-                if (xtraTabQLHV_BaoCao.PageVisible)
+                if (xtraTabQLHV_KTDV.PageVisible)
                 {
-                    xtraTabQLHV_BaoCao.Controls.Clear();
+                    xtraTabQLHV_KTDV.Controls.Clear();
                     MenuQLHocVien.ucQLHVNV_KTDauVao uchienthi = new MenuQLHocVien.ucQLHVNV_KTDauVao();
                     uchienthi.Dock = System.Windows.Forms.DockStyle.Fill;
-                    xtraTabQLHV_BaoCao.Controls.Add(uchienthi);
+                    xtraTabQLHV_KTDV.Controls.Add(uchienthi);
                 }
+                //if (xtraTabQLHV_BaoCao.PageVisible)
+                //{
+                //    xtraTabQLHV_BaoCao.Controls.Clear();
+                //    MenuQLHocVien.ucQLHV_BaoCao uchienthi = new MenuQLHocVien.ucQLHV_BaoCao();
+                //    uchienthi.Dock = System.Windows.Forms.DockStyle.Fill;
+                //    xtraTabQLHV_BaoCao.Controls.Add(uchienthi);
+                //}
             }
             catch (Exception ex)
             {

@@ -66,12 +66,12 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
             try
             {
                 loaiDanhMuc = new DataView();
-                string sqlgetdanhsach = "select ROW_NUMBER() OVER (ORDER BY othertypelistid) as stt, othertypelistid, othertypelistcode, othertypelistname, othertypeliststatus from SM_OTHERTYPELIST; ";
+                string sqlgetdanhsach = "select ROW_NUMBER() OVER (ORDER BY id) as stt, id, othertypelistcode, othertypelistname, othertypeliststatus from DM_OTHERTYPELIST; ";
                 DataView dataDanhSach = new DataView(condb.GetDataTable(sqlgetdanhsach));
                 gridControlLoaiDM.DataSource = dataDanhSach;
                 cboDM_LoaiDMTen.Properties.DataSource = dataDanhSach;
                 cboDM_LoaiDMTen.Properties.DisplayMember = "othertypelistname";
-                cboDM_LoaiDMTen.Properties.ValueMember = "othertypelistid";
+                cboDM_LoaiDMTen.Properties.ValueMember = "id";
                 loaiDanhMuc = dataDanhSach;
             }
             catch (Exception ex)
@@ -79,21 +79,21 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                 Common.Logging.LogSystem.Warn(ex);
             }
         }
-        private void LoadDS_DanhMuc(long othertypelistid)
+        private void LoadDS_DanhMuc(long othertypelist_id)
         {
             try
             {
                 string SM_OTHERTYPELISTid = "";
-                if (othertypelistid != 0)
+                if (othertypelist_id != 0)
                 {
-                    SM_OTHERTYPELISTid = " where oty.othertypelistid=" + othertypelistid;
+                    SM_OTHERTYPELISTid = " where oty.id=" + othertypelist_id;
                 }
-                string sqlgetdanhsach = "select ROW_NUMBER() OVER (ORDER BY oty.othertypelistname, o.otherlistname) as stt, oty.othertypelistid, oty.othertypelistcode, oty.othertypelistname, o.otherlistid, o.otherlistcode, o.otherlistname, o.otherliststatus, o.otherlistvalue from SM_OTHERTYPELIST oty inner join SM_OTHERLIST o on o.othertypelistid=oty.othertypelistid " + SM_OTHERTYPELISTid + "; ";
+                string sqlgetdanhsach = "select ROW_NUMBER() OVER (ORDER BY oty.othertypelistname, o.otherlistname) as stt, oty.id as othertypelist_id, oty.othertypelistcode, oty.othertypelistname, o.id, o.otherlistcode, o.otherlistname, o.otherliststatus, o.otherlistvalue from DM_OTHERTYPELIST oty inner join DM_OTHERLIST o on o.othertypelist_id=oty.id " + SM_OTHERTYPELISTid + "; ";
                 DataView dataDanhSach = new DataView(condb.GetDataTable(sqlgetdanhsach));
                 gridControlDM.DataSource = dataDanhSach;
                 cboDM_LoaiDMTen.Properties.DataSource = this.loaiDanhMuc;
                 cboDM_LoaiDMTen.Properties.DisplayMember = "othertypelistname";
-                cboDM_LoaiDMTen.Properties.ValueMember = "othertypelistid";
+                cboDM_LoaiDMTen.Properties.ValueMember = "id";
             }
             catch (Exception ex)
             {
@@ -139,7 +139,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                 {
                     if (this.select_othertypelistid == 0)
                     {
-                        string kiemtratontai = "select othertypelistid from SM_OTHERTYPELIST where othertypelistcode='" + txtLoaiDM_Ma.Text.Trim().ToUpper() + "';";
+                        string kiemtratontai = "select id from DM_OTHERTYPELIST where othertypelistcode='" + txtLoaiDM_Ma.Text.Trim().ToUpper() + "';";
                         DataView dataDanhSach = new DataView(condb.GetDataTable(kiemtratontai));
                         if (dataDanhSach != null && dataDanhSach.Count > 0)
                         {
@@ -148,7 +148,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                         }
                         else //them moi
                         {
-                            string insert = "INSERT INTO SM_OTHERTYPELIST(othertypelistcode, othertypelistname) VALUES ('" + txtLoaiDM_Ma.Text.Trim().ToUpper() + "', '" + txtLoaiDM_Ten.Text.Trim() + "'); ";
+                            string insert = "INSERT INTO DM_OTHERTYPELIST(othertypelistcode, othertypelistname) VALUES (N'" + txtLoaiDM_Ma.Text.Trim().ToUpper() + "', N'" + txtLoaiDM_Ten.Text.Trim() + "'); ";
                             if (condb.ExecuteNonQuery(insert))
                             {
                                 O2S_StudentManagement.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_StudentManagement.Utilities.ThongBao.frmThongBao(O2S_StudentManagement.Base.ThongBaoLable.THEM_MOI_THANH_CONG);
@@ -158,7 +158,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                     }
                     else//cap nhat
                     {
-                        string insert = "UPDATE SM_OTHERTYPELIST SET othertypelistname='" + txtLoaiDM_Ten.Text.Trim() + "' WHERE othertypelistid=" + this.select_othertypelistid + "; ";
+                        string insert = "UPDATE DM_OTHERTYPELIST SET othertypelistname=N'" + txtLoaiDM_Ten.Text.Trim() + "' WHERE id=" + this.select_othertypelistid + "; ";
                         if (condb.ExecuteNonQuery(insert))
                         {
                             O2S_StudentManagement.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_StudentManagement.Utilities.ThongBao.frmThongBao(O2S_StudentManagement.Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
@@ -186,7 +186,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                 {
                     var rowHandle = gridViewLoaiDM.FocusedRowHandle;
 
-                    this.select_othertypelistid = Common.TypeConvert.TypeConvertParse.ToInt64(gridViewLoaiDM.GetRowCellValue(rowHandle, "othertypelistid").ToString());
+                    this.select_othertypelistid = Common.TypeConvert.TypeConvertParse.ToInt64(gridViewLoaiDM.GetRowCellValue(rowHandle, "id").ToString());
                     txtLoaiDM_Ma.Text = gridViewLoaiDM.GetRowCellValue(rowHandle, "othertypelistcode").ToString();
                     txtLoaiDM_Ten.Text = gridViewLoaiDM.GetRowCellValue(rowHandle, "othertypelistname").ToString();
                     btnLoaiDM_Them.Enabled = true;
@@ -252,7 +252,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                 {
                     if (this.select_otherlistid == 0)
                     {
-                        string kiemtratontai = "select otherlistid from SM_OTHERLIST where otherlistcode='" + txtDM_Ma.Text.Trim().ToUpper() + "';";
+                        string kiemtratontai = "select id from DM_OTHERLIST where otherlistcode='" + txtDM_Ma.Text.Trim().ToUpper() + "';";
                         DataView dataDanhSach = new DataView(condb.GetDataTable(kiemtratontai));
                         if (dataDanhSach != null && dataDanhSach.Count > 0)
                         {
@@ -261,7 +261,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                         }
                         else //them moi
                         {
-                            string insert = "INSERT INTO SM_OTHERLIST(otherlistcode, otherlistname, othertypelistid, otherlistvalue) VALUES ('" + txtDM_Ma.Text.Trim().ToUpper() + "', '" + txtDM_Ten.Text.Trim() + "','" + cboDM_LoaiDMTen.EditValue.ToString() + "', '" + txtDM_GiaTri.Text.Trim().ToUpper() + "'); ";
+                            string insert = "INSERT INTO DM_OTHERLIST(otherlistcode, otherlistname, othertypelist_id, otherlistvalue) VALUES (N'" + txtDM_Ma.Text.Trim().ToUpper() + "', N'" + txtDM_Ten.Text.Trim() + "', N'" + cboDM_LoaiDMTen.EditValue.ToString() + "', '" + txtDM_GiaTri.Text.Trim().ToUpper() + "'); ";
                             if (condb.ExecuteNonQuery(insert))
                             {
                                 O2S_StudentManagement.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_StudentManagement.Utilities.ThongBao.frmThongBao(O2S_StudentManagement.Base.ThongBaoLable.THEM_MOI_THANH_CONG);
@@ -271,7 +271,7 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                     }
                     else//cap nhat
                     {
-                        string insert = "UPDATE SM_OTHERLIST SET otherlistname='" + txtDM_Ten.Text.Trim() + "', otherlistvalue='" + txtDM_GiaTri.Text.Trim() + "' WHERE otherlistid=" + this.select_otherlistid + "; ";
+                        string insert = "UPDATE DM_OTHERLIST SET otherlistname=N'" + txtDM_Ten.Text.Trim() + "', otherlistvalue=N'" + txtDM_GiaTri.Text.Trim() + "' WHERE id=" + this.select_otherlistid + "; ";
                         if (condb.ExecuteNonQuery(insert))
                         {
                             O2S_StudentManagement.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_StudentManagement.Utilities.ThongBao.frmThongBao(O2S_StudentManagement.Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
@@ -299,10 +299,10 @@ namespace O2S_StudentManagement.GUI.MenuTrangChu
                 {
                     var rowHandle = gridViewDM.FocusedRowHandle;
 
-                    this.select_otherlistid = Common.TypeConvert.TypeConvertParse.ToInt64(gridViewDM.GetRowCellValue(rowHandle, "otherlistid").ToString());
+                    this.select_otherlistid = Common.TypeConvert.TypeConvertParse.ToInt64(gridViewDM.GetRowCellValue(rowHandle, "id").ToString());
                     txtDM_Ma.Text = gridViewDM.GetRowCellValue(rowHandle, "otherlistcode").ToString();
                     txtDM_Ten.Text = gridViewDM.GetRowCellValue(rowHandle, "otherlistname").ToString();
-                    cboDM_LoaiDMTen.EditValue = gridViewDM.GetRowCellValue(rowHandle, "othertypelistid");
+                    cboDM_LoaiDMTen.EditValue = gridViewDM.GetRowCellValue(rowHandle, "othertypelist_id");
                     txtDM_GiaTri.Text = gridViewDM.GetRowCellValue(rowHandle, "otherlistvalue").ToString();
                     btnDM_Them.Enabled = true;
                     btnDM_Luu.Enabled = true;
