@@ -208,6 +208,7 @@
   <ItemGroup>
     <Compile Include="Base\bienTrongBaoCao.cs" />
     <Compile Include="Base\CheckPermission.cs" />
+    <Compile Include="Base\IDGiaTriTrangThai.cs" />
     <Compile Include="DAL\ConnectDatabase.cs" />
     <Compile Include="Base\listChucNang.cs" />
     <Compile Include="Base\ReadExcelFile.cs" />
@@ -383,6 +384,12 @@
     </Compile>
     <Compile Include="GUI\MenuQLHocVien\ucQLHVNV_TTHocVien.Designer.cs">
       <DependentUpon>ucQLHVNV_TTHocVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVu\ucLichSuCapNhatNoiTru.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVu\ucLichSuCapNhatNoiTru.Designer.cs">
+      <DependentUpon>ucLichSuCapNhatNoiTru.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\MenuQLHocVu\ucQLHV_DanhMuc.cs">
       <SubType>UserControl</SubType>
@@ -591,6 +598,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHVNV_TTHocVien.resx">
       <DependentUpon>ucQLHVNV_TTHocVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVu\ucLichSuCapNhatNoiTru.resx">
+      <DependentUpon>ucLichSuCapNhatNoiTru.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\MenuQLHocVu\ucQLHV_DanhMuc.resx">
       <DependentUpon>ucQLHV_DanhMuc.cs</DependentUpon>

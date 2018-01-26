@@ -454,7 +454,7 @@ CREATE TABLE DM_DANTOC
 	name_vn nvarchar(255),
 	code nvarchar(255),
 	name_other nvarchar,
-    ISREMOVE int default 0,
+    isremove int default 0,
 	created_date datetime,
 	created_by nvarchar(255),
 	created_log nvarchar(255),
@@ -466,12 +466,64 @@ CREATE TABLE DM_DANTOC
 CREATE INDEX DM_DANTOC_code_idx ON DM_DANTOC (code);
 
 
+--===================================================Table: DM_NGHENGHIEP
+CREATE TABLE DM_NGHENGHIEP
+(
+  id int IDENTITY(1,1),
+	name_en nvarchar(255),
+	name_vn nvarchar(255),
+	code nvarchar(255),
+	name_other nvarchar,
+    isremove int default 0,
+	created_date datetime,
+	created_by nvarchar(255),
+	created_log nvarchar(255),
+	modified_date datetime,
+	modified_by nvarchar(255),
+	modified_log nvarchar(255),
+  CONSTRAINT DM_NGHENGHIEP_pkey PRIMARY KEY (id)
+);
+CREATE INDEX DM_NGHENGHIEP_code_idx ON DM_NGHENGHIEP (code);
 
 
+--===================================================Table: DM_CHUYENNGANH
+CREATE TABLE DM_CHUYENNGANH
+(
+  id int IDENTITY(1,1),
+	name_en nvarchar(255),
+	name_vn nvarchar(255),
+	code nvarchar(255),
+	name_other nvarchar,
+    isremove int default 0,
+	created_date datetime,
+	created_by nvarchar(255),
+	created_log nvarchar(255),
+	modified_date datetime,
+	modified_by nvarchar(255),
+	modified_log nvarchar(255),
+  CONSTRAINT DM_CHUYENNGANH_pkey PRIMARY KEY (id)
+);
+CREATE INDEX DM_CHUYENNGANH_code_idx ON DM_CHUYENNGANH (code);
 
 
-
-
+--===================================================Table: DM_BANGCAP
+CREATE TABLE DM_BANGCAP
+(
+  id int IDENTITY(1,1),
+	name_en nvarchar(255),
+	name_vn nvarchar(255),
+	code nvarchar(255),
+	name_other nvarchar,
+    isremove int default 0,
+	created_date datetime,
+	created_by nvarchar(255),
+	created_log nvarchar(255),
+	modified_date datetime,
+	modified_by nvarchar(255),
+	modified_log nvarchar(255),
+  CONSTRAINT DM_BANGCAP_pkey PRIMARY KEY (id)
+);
+CREATE INDEX DM_BANGCAP_code_idx ON DM_BANGCAP (code);
 
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using O2S_StudentManagement.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,7 +32,19 @@ namespace O2S_StudentManagement.GUI.MenuQLHocVien
         {
             try
             {
+                if (this.hocvienId != 0)
+                {
 
+                    using (var db = new DAL.O2S_STUDENTMANAGEMENTEntities())
+                    {
+                        SM_STUDENT _student = db.SM_STUDENT.Where(o => o.id == this.hocvienId).FirstOrDefault();
+                        if (_student == null)
+                        {
+                            txtstudentcode.Text = _student.studentcode;
+
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -39,10 +52,14 @@ namespace O2S_StudentManagement.GUI.MenuQLHocVien
             }
         }
 
+
+
+
         #endregion
 
+        private void labelControl3_Click(object sender, EventArgs e)
+        {
 
-
-
+        }
     }
 }
