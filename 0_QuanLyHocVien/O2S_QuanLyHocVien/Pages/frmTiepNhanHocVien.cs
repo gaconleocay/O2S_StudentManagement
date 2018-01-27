@@ -242,7 +242,9 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
+                frmthongbao.Show();
+                Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -250,9 +252,9 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-            LockPanelControl();
-            hocVien = HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHV"].Value.ToString());
-            LoadPanelControl(hocVien);
+                LockPanelControl();
+                hocVien = HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHV"].Value.ToString());
+                LoadPanelControl(hocVien);
             }
             catch (Exception ex)
             {
@@ -287,7 +289,9 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Có lỗi xảy ra", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
+                frmthongbao.Show();
+                Common.Logging.LogSystem.Error(ex);
             }
         }
 
