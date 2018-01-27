@@ -1,0 +1,1331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="O2S_STUDENTMANAGEMENTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DM_BANGCAP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_vn" Type="nvarchar" MaxLength="255" />
+          <Property Name="code" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_other" Type="nvarchar" MaxLength="1" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DM_CHUYENNGANH">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_vn" Type="nvarchar" MaxLength="255" />
+          <Property Name="code" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_other" Type="nvarchar" MaxLength="1" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DM_DANTOC">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_vn" Type="nvarchar" MaxLength="255" />
+          <Property Name="code" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_other" Type="nvarchar" MaxLength="1" />
+          <Property Name="ISREMOVE" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DM_HUYEN">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_vn" Type="nvarchar" MaxLength="255" />
+          <Property Name="code" Type="nvarchar" MaxLength="255" />
+          <Property Name="tinh_id" Type="int" />
+          <Property Name="caphuyen_id" Type="int" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DM_NGHENGHIEP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_vn" Type="nvarchar" MaxLength="255" />
+          <Property Name="code" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_other" Type="nvarchar" MaxLength="1" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DM_OTHERLIST">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="othertypelist_id" Type="int" />
+          <Property Name="otherlistcode" Type="nvarchar" MaxLength="255" />
+          <Property Name="otherlistname" Type="nvarchar" MaxLength="1" />
+          <Property Name="otherlistvalue" Type="nvarchar" MaxLength="1" />
+          <Property Name="otherliststatus" Type="int" />
+          <Property Name="otherlistnote" Type="nvarchar" MaxLength="1" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DM_OTHERTYPELIST">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="othertypelistcode" Type="nvarchar" MaxLength="255" />
+          <Property Name="othertypelistname" Type="nvarchar" MaxLength="1" />
+          <Property Name="othertypeliststatus" Type="int" />
+          <Property Name="othertypelistnote" Type="nvarchar" MaxLength="1" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DM_QUOCGIA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_vn" Type="nvarchar" MaxLength="255" />
+          <Property Name="code" Type="nvarchar" MaxLength="255" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DM_TINH">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_vn" Type="nvarchar" MaxLength="255" />
+          <Property Name="code" Type="nvarchar" MaxLength="255" />
+          <Property Name="quocgia_id" Type="int" />
+          <Property Name="captinh_id" Type="int" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DM_XA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_en" Type="nvarchar" MaxLength="255" />
+          <Property Name="name_vn" Type="nvarchar" MaxLength="255" />
+          <Property Name="code" Type="nvarchar" MaxLength="255" />
+          <Property Name="huyen_id" Type="int" />
+          <Property Name="capxa_id" Type="int" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SM_KTDAUVAO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="student_id" Type="int" />
+          <Property Name="kynangnghe_id" Type="int" />
+          <Property Name="kynangnoi_id" Type="int" />
+          <Property Name="kynangviet_id" Type="int" />
+          <Property Name="ghichu" Type="nvarchar" MaxLength="1" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SM_LICENSE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="datakey" Type="nvarchar" MaxLength="255" />
+          <Property Name="licensekey" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SM_LICHHOC">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lophoccode" Type="nvarchar" MaxLength="50" />
+          <Property Name="lophocten" Type="nvarchar" MaxLength="255" />
+          <Property Name="soluong" Type="int" />
+          <Property Name="ngaydukien" Type="datetime" />
+          <Property Name="ngaybatdau" Type="datetime" />
+          <Property Name="sotiethoc" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="ghichu" Type="nvarchar" MaxLength="1" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SM_LOPHOC">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lophoccode" Type="nvarchar" MaxLength="50" />
+          <Property Name="lophocten" Type="nvarchar" MaxLength="255" />
+          <Property Name="soluong" Type="int" />
+          <Property Name="ngaydukien" Type="datetime" />
+          <Property Name="ngaybatdau" Type="datetime" />
+          <Property Name="sotiethoc" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="ghichu" Type="nvarchar" MaxLength="1" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SM_NGUOITHAN">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="student_id" Type="int" />
+          <Property Name="quanhe_id" Type="int" />
+          <Property Name="hoten" Type="nvarchar" MaxLength="500" />
+          <Property Name="ngaysinh" Type="datetime" />
+          <Property Name="nghenghiep_id" Type="int" />
+          <Property Name="tinh_id" Type="int" />
+          <Property Name="huyen_id" Type="int" />
+          <Property Name="xa_id" Type="int" />
+          <Property Name="thonxom" Type="nvarchar" MaxLength="1" />
+          <Property Name="ghichu" Type="nvarchar" MaxLength="1" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SM_OPTION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="optioncode" Type="nvarchar" MaxLength="255" />
+          <Property Name="optionname" Type="nvarchar" MaxLength="1" />
+          <Property Name="optionvalue" Type="nvarchar" MaxLength="1" />
+          <Property Name="optionnote" Type="nvarchar" MaxLength="1" />
+          <Property Name="optionlook" Type="int" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SM_QTHOCTAP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="student_id" Type="int" />
+          <Property Name="truonghoc_id" Type="int" />
+          <Property Name="truonghocten" Type="nvarchar" MaxLength="1" />
+          <Property Name="chuyennganh_id" Type="int" />
+          <Property Name="noidung" Type="nvarchar" MaxLength="1" />
+          <Property Name="diachi" Type="nvarchar" MaxLength="1" />
+          <Property Name="thoigianhoctu" Type="datetime" />
+          <Property Name="thoigianhocden" Type="datetime" />
+          <Property Name="hocphi" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ketqua_id" Type="int" />
+          <Property Name="bangcap_id" Type="int" />
+          <Property Name="ghichu" Type="nvarchar" MaxLength="1" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SM_STUDENT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studentcode" Type="nvarchar" MaxLength="255" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="full_name" Type="nvarchar" MaxLength="500" />
+          <Property Name="gioitinh_id" Type="int" />
+          <Property Name="ngaysinh" Type="datetime" />
+          <Property Name="dantoc_id" Type="int" />
+          <Property Name="nghenghiep_id" Type="int" />
+          <Property Name="tinh_id" Type="int" />
+          <Property Name="huyen_id" Type="int" />
+          <Property Name="xa_id" Type="int" />
+          <Property Name="thonxom" Type="nvarchar" MaxLength="1" />
+          <Property Name="cmtnd" Type="nvarchar" MaxLength="25" />
+          <Property Name="cmtnd_ngaycap" Type="datetime" />
+          <Property Name="sodienthoai" Type="nvarchar" MaxLength="15" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="ngayvao" Type="datetime" />
+          <Property Name="trangthai_id" Type="int" />
+          <Property Name="chuyennganh_id" Type="int" />
+          <Property Name="bangcap_id" Type="int" />
+          <Property Name="isremoveid" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SM_TBLLOG">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="logusercode" Type="nvarchar" MaxLength="50" />
+          <Property Name="logvalue" Type="nvarchar" MaxLength="1" />
+          <Property Name="ipaddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="computername" Type="nvarchar" MaxLength="255" />
+          <Property Name="softversion" Type="nvarchar" MaxLength="50" />
+          <Property Name="logtime" Type="datetime" />
+          <Property Name="logtypecode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SM_TBLUSER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usercode" Type="nvarchar" MaxLength="50" />
+          <Property Name="username" Type="nvarchar" MaxLength="255" />
+          <Property Name="userpassword" Type="nvarchar" MaxLength="255" />
+          <Property Name="userstatus" Type="int" />
+          <Property Name="usergnhom" Type="int" />
+          <Property Name="usernote" Type="nvarchar" MaxLength="255" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SM_TBLUSER_PERMISSION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="permissioncode" Type="nvarchar" MaxLength="50" />
+          <Property Name="permissionname" Type="nvarchar" MaxLength="255" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="usercode" Type="nvarchar" MaxLength="50" />
+          <Property Name="permissioncheck" Type="bit" />
+          <Property Name="ghichu" Type="nvarchar" MaxLength="255" />
+          <Property Name="isremove" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="created_log" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_date" Type="datetime" />
+          <Property Name="modified_by" Type="nvarchar" MaxLength="255" />
+          <Property Name="modified_log" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SM_VERSION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appversion" Type="nvarchar" MaxLength="50" />
+          <Property Name="app_link" Type="nvarchar" MaxLength="255" />
+          <Property Name="app_type" Type="int" />
+          <Property Name="updateapp" Type="varbinary" MaxLength="1" />
+          <Property Name="appsize" Type="int" />
+          <Property Name="sqlversion" Type="nvarchar" MaxLength="1" />
+          <Property Name="updatesql" Type="varbinary" MaxLength="1" />
+          <Property Name="sqlsize" Type="int" />
+          <Property Name="sync_flag" Type="int" />
+          <Property Name="update_flag" Type="int" />
+          <Property Name="urlfullserver" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityContainer Name="O2S_STUDENTMANAGEMENTModelStoreContainer">
+          <EntitySet Name="DM_BANGCAP" EntityType="Self.DM_BANGCAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_CHUYENNGANH" EntityType="Self.DM_CHUYENNGANH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_DANTOC" EntityType="Self.DM_DANTOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_HUYEN" EntityType="Self.DM_HUYEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_NGHENGHIEP" EntityType="Self.DM_NGHENGHIEP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_OTHERLIST" EntityType="Self.DM_OTHERLIST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_OTHERTYPELIST" EntityType="Self.DM_OTHERTYPELIST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_QUOCGIA" EntityType="Self.DM_QUOCGIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_TINH" EntityType="Self.DM_TINH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_XA" EntityType="Self.DM_XA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_KTDAUVAO" EntityType="Self.SM_KTDAUVAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_LICENSE" EntityType="Self.SM_LICENSE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_LICHHOC" EntityType="Self.SM_LICHHOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_LOPHOC" EntityType="Self.SM_LOPHOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_NGUOITHAN" EntityType="Self.SM_NGUOITHAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_OPTION" EntityType="Self.SM_OPTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_QTHOCTAP" EntityType="Self.SM_QTHOCTAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_STUDENT" EntityType="Self.SM_STUDENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_TBLLOG" EntityType="Self.SM_TBLLOG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_TBLUSER" EntityType="Self.SM_TBLUSER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_TBLUSER_PERMISSION" EntityType="Self.SM_TBLUSER_PERMISSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_VERSION" EntityType="Self.SM_VERSION" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="O2S_STUDENTMANAGEMENTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="O2S_STUDENTMANAGEMENTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DM_BANGCAP" EntityType="O2S_STUDENTMANAGEMENTModel.DM_BANGCAP" />
+          <EntitySet Name="DM_CHUYENNGANH" EntityType="O2S_STUDENTMANAGEMENTModel.DM_CHUYENNGANH" />
+          <EntitySet Name="DM_DANTOC" EntityType="O2S_STUDENTMANAGEMENTModel.DM_DANTOC" />
+          <EntitySet Name="DM_HUYEN" EntityType="O2S_STUDENTMANAGEMENTModel.DM_HUYEN" />
+          <EntitySet Name="DM_NGHENGHIEP" EntityType="O2S_STUDENTMANAGEMENTModel.DM_NGHENGHIEP" />
+          <EntitySet Name="DM_QUOCGIA" EntityType="O2S_STUDENTMANAGEMENTModel.DM_QUOCGIA" />
+          <EntitySet Name="DM_TINH" EntityType="O2S_STUDENTMANAGEMENTModel.DM_TINH" />
+          <EntitySet Name="DM_XA" EntityType="O2S_STUDENTMANAGEMENTModel.DM_XA" />
+          <EntitySet Name="SM_KTDAUVAO" EntityType="O2S_STUDENTMANAGEMENTModel.SM_KTDAUVAO" />
+          <EntitySet Name="SM_LICENSE" EntityType="O2S_STUDENTMANAGEMENTModel.SM_LICENSE" />
+          <EntitySet Name="SM_LICHHOC" EntityType="O2S_STUDENTMANAGEMENTModel.SM_LICHHOC" />
+          <EntitySet Name="SM_LOPHOC" EntityType="O2S_STUDENTMANAGEMENTModel.SM_LOPHOC" />
+          <EntitySet Name="SM_NGUOITHAN" EntityType="O2S_STUDENTMANAGEMENTModel.SM_NGUOITHAN" />
+          <EntitySet Name="SM_OPTION" EntityType="O2S_STUDENTMANAGEMENTModel.SM_OPTION" />
+          <EntitySet Name="SM_QTHOCTAP" EntityType="O2S_STUDENTMANAGEMENTModel.SM_QTHOCTAP" />
+          <EntitySet Name="SM_STUDENT" EntityType="O2S_STUDENTMANAGEMENTModel.SM_STUDENT" />
+          <EntitySet Name="SM_TBLLOG" EntityType="O2S_STUDENTMANAGEMENTModel.SM_TBLLOG" />
+          <EntitySet Name="SM_TBLUSER" EntityType="O2S_STUDENTMANAGEMENTModel.SM_TBLUSER" />
+          <EntitySet Name="SM_TBLUSER_PERMISSION" EntityType="O2S_STUDENTMANAGEMENTModel.SM_TBLUSER_PERMISSION" />
+          <EntitySet Name="SM_VERSION" EntityType="O2S_STUDENTMANAGEMENTModel.SM_VERSION" />
+          <EntitySet Name="DM_OTHERLIST" EntityType="O2S_STUDENTMANAGEMENTModel.DM_OTHERLIST" />
+          <EntitySet Name="DM_OTHERTYPELIST" EntityType="O2S_STUDENTMANAGEMENTModel.DM_OTHERTYPELIST" />
+        </EntityContainer>
+        <EntityType Name="DM_BANGCAP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_vn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_other" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_CHUYENNGANH">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_vn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_other" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_DANTOC">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_vn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_other" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ISREMOVE" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_HUYEN">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_vn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tinh_id" Type="Int32" />
+          <Property Name="caphuyen_id" Type="Int32" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_NGHENGHIEP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_vn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_other" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_QUOCGIA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_vn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_TINH">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_vn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="quocgia_id" Type="Int32" />
+          <Property Name="captinh_id" Type="Int32" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_XA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_en" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="name_vn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="huyen_id" Type="Int32" />
+          <Property Name="capxa_id" Type="Int32" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_KTDAUVAO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="student_id" Type="Int32" />
+          <Property Name="kynangnghe_id" Type="Int32" />
+          <Property Name="kynangnoi_id" Type="Int32" />
+          <Property Name="kynangviet_id" Type="Int32" />
+          <Property Name="ghichu" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_LICENSE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="datakey" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="licensekey" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_LICHHOC">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lophoccode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lophocten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="soluong" Type="Int32" />
+          <Property Name="ngaydukien" Type="DateTime" Precision="3" />
+          <Property Name="ngaybatdau" Type="DateTime" Precision="3" />
+          <Property Name="sotiethoc" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="ghichu" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_LOPHOC">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lophoccode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lophocten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="soluong" Type="Int32" />
+          <Property Name="ngaydukien" Type="DateTime" Precision="3" />
+          <Property Name="ngaybatdau" Type="DateTime" Precision="3" />
+          <Property Name="sotiethoc" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="ghichu" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_NGUOITHAN">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="student_id" Type="Int32" />
+          <Property Name="quanhe_id" Type="Int32" />
+          <Property Name="hoten" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ngaysinh" Type="DateTime" Precision="3" />
+          <Property Name="nghenghiep_id" Type="Int32" />
+          <Property Name="tinh_id" Type="Int32" />
+          <Property Name="huyen_id" Type="Int32" />
+          <Property Name="xa_id" Type="Int32" />
+          <Property Name="thonxom" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ghichu" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_OPTION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="optioncode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="optionname" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="optionvalue" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="optionnote" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="optionlook" Type="Int32" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_QTHOCTAP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="student_id" Type="Int32" />
+          <Property Name="truonghoc_id" Type="Int32" />
+          <Property Name="truonghocten" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="chuyennganh_id" Type="Int32" />
+          <Property Name="noidung" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="diachi" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="thoigianhoctu" Type="DateTime" Precision="3" />
+          <Property Name="thoigianhocden" Type="DateTime" Precision="3" />
+          <Property Name="hocphi" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ketqua_id" Type="Int32" />
+          <Property Name="bangcap_id" Type="Int32" />
+          <Property Name="ghichu" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_STUDENT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studentcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="first_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="full_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="gioitinh_id" Type="Int32" />
+          <Property Name="ngaysinh" Type="DateTime" Precision="3" />
+          <Property Name="dantoc_id" Type="Int32" />
+          <Property Name="nghenghiep_id" Type="Int32" />
+          <Property Name="tinh_id" Type="Int32" />
+          <Property Name="huyen_id" Type="Int32" />
+          <Property Name="xa_id" Type="Int32" />
+          <Property Name="thonxom" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="cmtnd" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="cmtnd_ngaycap" Type="DateTime" Precision="3" />
+          <Property Name="sodienthoai" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ngayvao" Type="DateTime" Precision="3" />
+          <Property Name="trangthai_id" Type="Int32" />
+          <Property Name="chuyennganh_id" Type="Int32" />
+          <Property Name="bangcap_id" Type="Int32" />
+          <Property Name="isremoveid" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_TBLLOG">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="logusercode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="logvalue" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ipaddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="computername" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="softversion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="logtime" Type="DateTime" Precision="3" />
+          <Property Name="logtypecode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_TBLUSER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usercode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="userpassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="userstatus" Type="Int32" />
+          <Property Name="usergnhom" Type="Int32" />
+          <Property Name="usernote" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_TBLUSER_PERMISSION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="permissioncode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="permissionname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="usercode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="permissioncheck" Type="Boolean" />
+          <Property Name="ghichu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SM_VERSION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appversion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="app_link" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="app_type" Type="Int32" />
+          <Property Name="updateapp" Type="Binary" MaxLength="1" FixedLength="false" />
+          <Property Name="appsize" Type="Int32" />
+          <Property Name="sqlversion" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="updatesql" Type="Binary" MaxLength="1" FixedLength="false" />
+          <Property Name="sqlsize" Type="Int32" />
+          <Property Name="sync_flag" Type="Int32" />
+          <Property Name="update_flag" Type="Int32" />
+          <Property Name="urlfullserver" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_OTHERLIST">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="othertypelist_id" Type="Int32" />
+          <Property Name="otherlistcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="otherlistname" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="otherlistvalue" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="otherliststatus" Type="Int32" />
+          <Property Name="otherlistnote" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_OTHERTYPELIST">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="othertypelistcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="othertypelistname" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="othertypeliststatus" Type="Int32" />
+          <Property Name="othertypelistnote" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="isremove" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="created_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="modified_log" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="O2S_STUDENTMANAGEMENTModelStoreContainer" CdmEntityContainer="O2S_STUDENTMANAGEMENTEntities">
+          <EntitySetMapping Name="DM_BANGCAP">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.DM_BANGCAP">
+              <MappingFragment StoreEntitySet="DM_BANGCAP">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="name_other" ColumnName="name_other" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name_vn" ColumnName="name_vn" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_CHUYENNGANH">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.DM_CHUYENNGANH">
+              <MappingFragment StoreEntitySet="DM_CHUYENNGANH">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="name_other" ColumnName="name_other" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name_vn" ColumnName="name_vn" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_DANTOC">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.DM_DANTOC">
+              <MappingFragment StoreEntitySet="DM_DANTOC">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="ISREMOVE" ColumnName="ISREMOVE" />
+                <ScalarProperty Name="name_other" ColumnName="name_other" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name_vn" ColumnName="name_vn" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_HUYEN">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.DM_HUYEN">
+              <MappingFragment StoreEntitySet="DM_HUYEN">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="caphuyen_id" ColumnName="caphuyen_id" />
+                <ScalarProperty Name="tinh_id" ColumnName="tinh_id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name_vn" ColumnName="name_vn" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_NGHENGHIEP">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.DM_NGHENGHIEP">
+              <MappingFragment StoreEntitySet="DM_NGHENGHIEP">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="name_other" ColumnName="name_other" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name_vn" ColumnName="name_vn" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_QUOCGIA">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.DM_QUOCGIA">
+              <MappingFragment StoreEntitySet="DM_QUOCGIA">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name_vn" ColumnName="name_vn" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_TINH">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.DM_TINH">
+              <MappingFragment StoreEntitySet="DM_TINH">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="captinh_id" ColumnName="captinh_id" />
+                <ScalarProperty Name="quocgia_id" ColumnName="quocgia_id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name_vn" ColumnName="name_vn" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_XA">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.DM_XA">
+              <MappingFragment StoreEntitySet="DM_XA">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="capxa_id" ColumnName="capxa_id" />
+                <ScalarProperty Name="huyen_id" ColumnName="huyen_id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name_vn" ColumnName="name_vn" />
+                <ScalarProperty Name="name_en" ColumnName="name_en" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_KTDAUVAO">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_KTDAUVAO">
+              <MappingFragment StoreEntitySet="SM_KTDAUVAO">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="ghichu" ColumnName="ghichu" />
+                <ScalarProperty Name="kynangviet_id" ColumnName="kynangviet_id" />
+                <ScalarProperty Name="kynangnoi_id" ColumnName="kynangnoi_id" />
+                <ScalarProperty Name="kynangnghe_id" ColumnName="kynangnghe_id" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_LICENSE">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_LICENSE">
+              <MappingFragment StoreEntitySet="SM_LICENSE">
+                <ScalarProperty Name="licensekey" ColumnName="licensekey" />
+                <ScalarProperty Name="datakey" ColumnName="datakey" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_LICHHOC">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_LICHHOC">
+              <MappingFragment StoreEntitySet="SM_LICHHOC">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="ghichu" ColumnName="ghichu" />
+                <ScalarProperty Name="sotiethoc" ColumnName="sotiethoc" />
+                <ScalarProperty Name="ngaybatdau" ColumnName="ngaybatdau" />
+                <ScalarProperty Name="ngaydukien" ColumnName="ngaydukien" />
+                <ScalarProperty Name="soluong" ColumnName="soluong" />
+                <ScalarProperty Name="lophocten" ColumnName="lophocten" />
+                <ScalarProperty Name="lophoccode" ColumnName="lophoccode" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_LOPHOC">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_LOPHOC">
+              <MappingFragment StoreEntitySet="SM_LOPHOC">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="ghichu" ColumnName="ghichu" />
+                <ScalarProperty Name="sotiethoc" ColumnName="sotiethoc" />
+                <ScalarProperty Name="ngaybatdau" ColumnName="ngaybatdau" />
+                <ScalarProperty Name="ngaydukien" ColumnName="ngaydukien" />
+                <ScalarProperty Name="soluong" ColumnName="soluong" />
+                <ScalarProperty Name="lophocten" ColumnName="lophocten" />
+                <ScalarProperty Name="lophoccode" ColumnName="lophoccode" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_NGUOITHAN">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_NGUOITHAN">
+              <MappingFragment StoreEntitySet="SM_NGUOITHAN">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="ghichu" ColumnName="ghichu" />
+                <ScalarProperty Name="thonxom" ColumnName="thonxom" />
+                <ScalarProperty Name="xa_id" ColumnName="xa_id" />
+                <ScalarProperty Name="huyen_id" ColumnName="huyen_id" />
+                <ScalarProperty Name="tinh_id" ColumnName="tinh_id" />
+                <ScalarProperty Name="nghenghiep_id" ColumnName="nghenghiep_id" />
+                <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
+                <ScalarProperty Name="hoten" ColumnName="hoten" />
+                <ScalarProperty Name="quanhe_id" ColumnName="quanhe_id" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_OPTION">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_OPTION">
+              <MappingFragment StoreEntitySet="SM_OPTION">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="optionlook" ColumnName="optionlook" />
+                <ScalarProperty Name="optionnote" ColumnName="optionnote" />
+                <ScalarProperty Name="optionvalue" ColumnName="optionvalue" />
+                <ScalarProperty Name="optionname" ColumnName="optionname" />
+                <ScalarProperty Name="optioncode" ColumnName="optioncode" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_QTHOCTAP">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_QTHOCTAP">
+              <MappingFragment StoreEntitySet="SM_QTHOCTAP">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="ghichu" ColumnName="ghichu" />
+                <ScalarProperty Name="bangcap_id" ColumnName="bangcap_id" />
+                <ScalarProperty Name="ketqua_id" ColumnName="ketqua_id" />
+                <ScalarProperty Name="hocphi" ColumnName="hocphi" />
+                <ScalarProperty Name="thoigianhocden" ColumnName="thoigianhocden" />
+                <ScalarProperty Name="thoigianhoctu" ColumnName="thoigianhoctu" />
+                <ScalarProperty Name="diachi" ColumnName="diachi" />
+                <ScalarProperty Name="noidung" ColumnName="noidung" />
+                <ScalarProperty Name="chuyennganh_id" ColumnName="chuyennganh_id" />
+                <ScalarProperty Name="truonghocten" ColumnName="truonghocten" />
+                <ScalarProperty Name="truonghoc_id" ColumnName="truonghoc_id" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_STUDENT">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_STUDENT">
+              <MappingFragment StoreEntitySet="SM_STUDENT">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremoveid" ColumnName="isremoveid" />
+                <ScalarProperty Name="bangcap_id" ColumnName="bangcap_id" />
+                <ScalarProperty Name="chuyennganh_id" ColumnName="chuyennganh_id" />
+                <ScalarProperty Name="trangthai_id" ColumnName="trangthai_id" />
+                <ScalarProperty Name="ngayvao" ColumnName="ngayvao" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="sodienthoai" ColumnName="sodienthoai" />
+                <ScalarProperty Name="cmtnd_ngaycap" ColumnName="cmtnd_ngaycap" />
+                <ScalarProperty Name="cmtnd" ColumnName="cmtnd" />
+                <ScalarProperty Name="thonxom" ColumnName="thonxom" />
+                <ScalarProperty Name="xa_id" ColumnName="xa_id" />
+                <ScalarProperty Name="huyen_id" ColumnName="huyen_id" />
+                <ScalarProperty Name="tinh_id" ColumnName="tinh_id" />
+                <ScalarProperty Name="nghenghiep_id" ColumnName="nghenghiep_id" />
+                <ScalarProperty Name="dantoc_id" ColumnName="dantoc_id" />
+                <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
+                <ScalarProperty Name="gioitinh_id" ColumnName="gioitinh_id" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="studentcode" ColumnName="studentcode" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_TBLLOG">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_TBLLOG">
+              <MappingFragment StoreEntitySet="SM_TBLLOG">
+                <ScalarProperty Name="logtypecode" ColumnName="logtypecode" />
+                <ScalarProperty Name="logtime" ColumnName="logtime" />
+                <ScalarProperty Name="softversion" ColumnName="softversion" />
+                <ScalarProperty Name="computername" ColumnName="computername" />
+                <ScalarProperty Name="ipaddress" ColumnName="ipaddress" />
+                <ScalarProperty Name="logvalue" ColumnName="logvalue" />
+                <ScalarProperty Name="logusercode" ColumnName="logusercode" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_TBLUSER">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_TBLUSER">
+              <MappingFragment StoreEntitySet="SM_TBLUSER">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="usernote" ColumnName="usernote" />
+                <ScalarProperty Name="usergnhom" ColumnName="usergnhom" />
+                <ScalarProperty Name="userstatus" ColumnName="userstatus" />
+                <ScalarProperty Name="userpassword" ColumnName="userpassword" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="usercode" ColumnName="usercode" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_TBLUSER_PERMISSION">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_TBLUSER_PERMISSION">
+              <MappingFragment StoreEntitySet="SM_TBLUSER_PERMISSION">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="ghichu" ColumnName="ghichu" />
+                <ScalarProperty Name="permissioncheck" ColumnName="permissioncheck" />
+                <ScalarProperty Name="usercode" ColumnName="usercode" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="permissionname" ColumnName="permissionname" />
+                <ScalarProperty Name="permissioncode" ColumnName="permissioncode" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_VERSION">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.SM_VERSION">
+              <MappingFragment StoreEntitySet="SM_VERSION">
+                <ScalarProperty Name="urlfullserver" ColumnName="urlfullserver" />
+                <ScalarProperty Name="update_flag" ColumnName="update_flag" />
+                <ScalarProperty Name="sync_flag" ColumnName="sync_flag" />
+                <ScalarProperty Name="sqlsize" ColumnName="sqlsize" />
+                <ScalarProperty Name="updatesql" ColumnName="updatesql" />
+                <ScalarProperty Name="sqlversion" ColumnName="sqlversion" />
+                <ScalarProperty Name="appsize" ColumnName="appsize" />
+                <ScalarProperty Name="updateapp" ColumnName="updateapp" />
+                <ScalarProperty Name="app_type" ColumnName="app_type" />
+                <ScalarProperty Name="app_link" ColumnName="app_link" />
+                <ScalarProperty Name="appversion" ColumnName="appversion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_OTHERLIST">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.DM_OTHERLIST">
+              <MappingFragment StoreEntitySet="DM_OTHERLIST">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="otherlistnote" ColumnName="otherlistnote" />
+                <ScalarProperty Name="otherliststatus" ColumnName="otherliststatus" />
+                <ScalarProperty Name="otherlistvalue" ColumnName="otherlistvalue" />
+                <ScalarProperty Name="otherlistname" ColumnName="otherlistname" />
+                <ScalarProperty Name="otherlistcode" ColumnName="otherlistcode" />
+                <ScalarProperty Name="othertypelist_id" ColumnName="othertypelist_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_OTHERTYPELIST">
+            <EntityTypeMapping TypeName="O2S_STUDENTMANAGEMENTModel.DM_OTHERTYPELIST">
+              <MappingFragment StoreEntitySet="DM_OTHERTYPELIST">
+                <ScalarProperty Name="modified_log" ColumnName="modified_log" />
+                <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+                <ScalarProperty Name="created_log" ColumnName="created_log" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="isremove" ColumnName="isremove" />
+                <ScalarProperty Name="othertypelistnote" ColumnName="othertypelistnote" />
+                <ScalarProperty Name="othertypeliststatus" ColumnName="othertypeliststatus" />
+                <ScalarProperty Name="othertypelistname" ColumnName="othertypelistname" />
+                <ScalarProperty Name="othertypelistcode" ColumnName="othertypelistcode" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,831 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F177399C-4E98-4A8A-912D-77D7F77F5E6E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>O2S_StudentManagement</RootNamespace>
+    <AssemblyName>O2S StudentManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>StudentManagement.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\Library\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Words">
+      <HintPath>..\Library\Aspose.Words.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.BonusSkins.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Images.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Office.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v15.2.Drawing, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Sparkline.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Spreadsheet.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v15.2.Extensions, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraSpreadsheet.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework6.Npgsql, Version=3.1.1.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework6.Npgsql.3.1.1\lib\net45\EntityFramework6.Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\Library\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="JWT, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JWT.3.0.0\lib\net35\JWT.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Library\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Library\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Library\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>..\Library\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql, Version=3.2.2.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.3.2.2\lib\net45\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="O2S_License, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\O2S_License\bin\Debug\O2S_License.dll</HintPath>
+    </Reference>
+    <Reference Include="Office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\netstandard1.0\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\bienTrongBaoCao.cs" />
+    <Compile Include="Base\CheckPermission.cs" />
+    <Compile Include="Base\IDGiaTriTrangThai.cs" />
+    <Compile Include="DAL\ConnectDatabase.cs" />
+    <Compile Include="Base\listChucNang.cs" />
+    <Compile Include="Base\ReadExcelFile.cs" />
+    <Compile Include="Base\SessionLogin.cs" />
+    <Compile Include="Base\ThongBaoLable.cs" />
+    <Compile Include="Base\ClassEncoding.cs" />
+    <Compile Include="Base\HardwareInfo.cs" />
+    <Compile Include="Base\KiemTraLicense.cs" />
+    <Compile Include="DAL\DatabaseModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DatabaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DatabaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_BANGCAP.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_CHUYENNGANH.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_DANTOC.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_HUYEN.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_NGHENGHIEP.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_OTHERLIST.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_OTHERTYPELIST.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_QUOCGIA.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_TINH.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DM_XA.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\LoadDuLieuNghiepVu.cs" />
+    <Compile Include="DAL\SM_KTDAUVAO.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SM_LICENSE.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SM_LICHHOC.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SM_LOPHOC.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SM_NGUOITHAN.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SM_OPTION.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SM_QTHOCTAP.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SM_STUDENT.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SM_TBLLOG.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SM_TBLUSER.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SM_TBLUSER_PERMISSION.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SM_VERSION.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\LoadDuLieuDanhMuc.cs" />
+    <Compile Include="DTO\SM_STUDENT_Plus.cs" />
+    <Compile Include="GUI\FormCommon\ucMenuQLGiaoVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\FormCommon\ucMenuQLGiaoVien.Designer.cs">
+      <DependentUpon>ucMenuQLGiaoVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormCommon\ucMenuTaiChinh.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\FormCommon\ucMenuTaiChinh.Designer.cs">
+      <DependentUpon>ucMenuTaiChinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormCommon\ucMenuQLHocVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\FormCommon\ucMenuQLHocVien.Designer.cs">
+      <DependentUpon>ucMenuQLHocVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormCommon\ucMenuQLHocVu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\FormCommon\ucMenuQLHocVu.Designer.cs">
+      <DependentUpon>ucMenuQLHocVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\frmThongTinHocVien_ChiTiet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\frmThongTinHocVien_ChiTiet.Designer.cs">
+      <DependentUpon>frmThongTinHocVien_ChiTiet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_QuocGia.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_QuocGia.Designer.cs">
+      <DependentUpon>ucQLHVDM_QuocGia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_Tinh.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_Tinh.Designer.cs">
+      <DependentUpon>ucQLHVDM_Tinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_DanToc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_DanToc.Designer.cs">
+      <DependentUpon>ucQLHVDM_DanToc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_Xa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_Xa.Designer.cs">
+      <DependentUpon>ucQLHVDM_Xa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_NgheNghiep.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_NgheNghiep.Designer.cs">
+      <DependentUpon>ucQLHVDM_NgheNghiep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_Huyen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVDM_Huyen.Designer.cs">
+      <DependentUpon>ucQLHVDM_Huyen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHV_BaoCao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHV_BaoCao.Designer.cs">
+      <DependentUpon>ucQLHV_BaoCao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHV_NghiepVu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHV_NghiepVu.Designer.cs">
+      <DependentUpon>ucQLHV_NghiepVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHV_DanhMuc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHV_DanhMuc.Designer.cs">
+      <DependentUpon>ucQLHV_DanhMuc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVNV_KTDauVao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVNV_KTDauVao.Designer.cs">
+      <DependentUpon>ucQLHVNV_KTDauVao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVNV_TTHocVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVien\ucQLHVNV_TTHocVien.Designer.cs">
+      <DependentUpon>ucQLHVNV_TTHocVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVu\ucQLHV_DanhMuc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuQLHocVu\ucQLHV_DanhMuc.Designer.cs">
+      <DependentUpon>ucQLHV_DanhMuc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\ChucNangKhac\frmTaoTemplateWord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\ChucNangKhac\frmTaoTemplateWord.Designer.cs">
+      <DependentUpon>frmTaoTemplateWord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormCommon\frmConnectDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormCommon\frmConnectDB.Designer.cs">
+      <DependentUpon>frmConnectDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormCommon\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormCommon\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormCommon\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\FormCommon\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormCommon\frmMain_Plus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BUS\LoadDataSystems.cs" />
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucCauHinhHeThong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucCauHinhHeThong.Designer.cs">
+      <DependentUpon>ucCauHinhHeThong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucDanhMucDungChung.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucDanhMucDungChung.Designer.cs">
+      <DependentUpon>ucDanhMucDungChung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucMaHoaVaGiaiMa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucMaHoaVaGiaiMa.Designer.cs">
+      <DependentUpon>ucMaHoaVaGiaiMa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucQuanLyNguoiDung.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucQuanLyNguoiDung.Designer.cs">
+      <DependentUpon>ucQuanLyNguoiDung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BUS\TabControlProcess.cs" />
+    <Compile Include="GUI\MenuTrangChu\ChucNangKhac\frmThayPass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\ChucNangKhac\frmThayPass.Designer.cs">
+      <DependentUpon>frmThayPass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucSettingDatabase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucSettingDatabase.Designer.cs">
+      <DependentUpon>ucSettingDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucSettingLicense.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\MenuTrangChu\TabCaiDat\ucSettingLicense.Designer.cs">
+      <DependentUpon>ucSettingLicense.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormCommon\ucMenuTrangChu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\FormCommon\ucMenuTrangChu.Designer.cs">
+      <DependentUpon>ucMenuTrangChu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\FormCommon\ucTrangChu_TabCaiDat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GlobalStore.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\GridView\GridExtensions.cs" />
+    <Compile Include="Utilities\PrintPreview\PrintPreview_ExcelFileTemplate.cs" />
+    <Compile Include="Utilities\PrintPreview\PrintRibbonControllerResources.Designer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Common.Excel\ExcelExport.cs" />
+    <Compile Include="Utilities\Common.Word\WordMergeTemplateExport.cs" />
+    <Compile Include="Utilities\Common.Word\WordOpenFile.cs" />
+    <Compile Include="Utilities\GUIGridView\Util_GUIGridView.cs" />
+    <Compile Include="Utilities\PrintPreview\CoolPrintPreviewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utilities\PrintPreview\CoolPrintPreviewDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\PrintPreview\CoolPrintPreviewDialog.designer.cs">
+      <DependentUpon>CoolPrintPreviewDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\PrintPreview\frmDevPrintPreviewDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\PrintPreview\frmDevPrintPreviewDialog.Designer.cs">
+      <DependentUpon>frmDevPrintPreviewDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\PrintPreview\PageImageList.cs" />
+    <Compile Include="Utilities\ThongBao\frmThongBao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\ThongBao\frmThongBao.Designer.cs">
+      <DependentUpon>frmThongBao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ThongBao\SplashScreen1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\ThongBao\SplashScreen1.Designer.cs">
+      <DependentUpon>SplashScreen1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ThongBao\WaitForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\ThongBao\WaitForm1.Designer.cs">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
+    </Compile>
+    <EntityDeploy Include="DAL\DatabaseModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatabaseModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAL\DatabaseModel.edmx.diagram">
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+    </None>
+    <None Include="Resources\categorize-161.png" />
+    <Content Include="DAL\DatabaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+      <LastGenOutput>DatabaseModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\DatabaseModel.edmx.sql" />
+    <Content Include="DAL\DatabaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+      <LastGenOutput>DatabaseModel.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\group-16.png" />
+    <None Include="Resources\delete-16.png" />
+    <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\nugetexample.js" />
+    <EmbeddedResource Include="GUI\FormCommon\ucMenuQLGiaoVien.resx">
+      <DependentUpon>ucMenuQLGiaoVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormCommon\ucMenuTaiChinh.resx">
+      <DependentUpon>ucMenuTaiChinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormCommon\ucMenuQLHocVien.resx">
+      <DependentUpon>ucMenuQLHocVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormCommon\ucMenuQLHocVu.resx">
+      <DependentUpon>ucMenuQLHocVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\frmThongTinHocVien_ChiTiet.resx">
+      <DependentUpon>frmThongTinHocVien_ChiTiet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHVDM_QuocGia.resx">
+      <DependentUpon>ucQLHVDM_QuocGia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHVDM_Tinh.resx">
+      <DependentUpon>ucQLHVDM_Tinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHVDM_DanToc.resx">
+      <DependentUpon>ucQLHVDM_DanToc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHVDM_Xa.resx">
+      <DependentUpon>ucQLHVDM_Xa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHVDM_NgheNghiep.resx">
+      <DependentUpon>ucQLHVDM_NgheNghiep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHVDM_Huyen.resx">
+      <DependentUpon>ucQLHVDM_Huyen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHV_BaoCao.resx">
+      <DependentUpon>ucQLHV_BaoCao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHV_NghiepVu.resx">
+      <DependentUpon>ucQLHV_NghiepVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHV_DanhMuc.resx">
+      <DependentUpon>ucQLHV_DanhMuc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHVNV_KTDauVao.resx">
+      <DependentUpon>ucQLHVNV_KTDauVao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVien\ucQLHVNV_TTHocVien.resx">
+      <DependentUpon>ucQLHVNV_TTHocVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuQLHocVu\ucQLHV_DanhMuc.resx">
+      <DependentUpon>ucQLHV_DanhMuc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuTrangChu\ChucNangKhac\frmTaoTemplateWord.resx">
+      <DependentUpon>frmTaoTemplateWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormCommon\frmConnectDB.resx">
+      <DependentUpon>frmConnectDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormCommon\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormCommon\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuTrangChu\TabCaiDat\ucCauHinhHeThong.resx">
+      <DependentUpon>ucCauHinhHeThong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuTrangChu\TabCaiDat\ucDanhMucDungChung.resx">
+      <DependentUpon>ucDanhMucDungChung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuTrangChu\TabCaiDat\ucMaHoaVaGiaiMa.resx">
+      <DependentUpon>ucMaHoaVaGiaiMa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuTrangChu\TabCaiDat\ucQuanLyNguoiDung.resx">
+      <DependentUpon>ucQuanLyNguoiDung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuTrangChu\ChucNangKhac\frmThayPass.resx">
+      <DependentUpon>frmThayPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuTrangChu\TabCaiDat\ucSettingDatabase.resx">
+      <DependentUpon>ucSettingDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MenuTrangChu\TabCaiDat\ucSettingLicense.resx">
+      <DependentUpon>ucSettingLicense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\FormCommon\ucMenuTrangChu.resx">
+      <DependentUpon>ucMenuTrangChu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PrintPreview\PrintRibbonControllerResources.resx" />
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PrintPreview\CoolPrintPreviewDialog.resx">
+      <DependentUpon>CoolPrintPreviewDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\PrintPreview\frmDevPrintPreviewDialog.resx">
+      <DependentUpon>frmDevPrintPreviewDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\ThongBao\frmThongBao.resx">
+      <DependentUpon>frmThongBao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\ThongBao\SplashScreen1.resx">
+      <DependentUpon>SplashScreen1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\ThongBao\WaitForm1.resx">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AppSettings.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Resources\fast-forward-2-16.png" />
+    <None Include="Resources\book-stack-16.png" />
+    <None Include="Resources\copy-16.png" />
+    <None Include="Resources\info-16.png" />
+    <None Include="Resources\printer-16.png" />
+    <None Include="Resources\xml_16.png" />
+    <None Include="Resources\xml_161.png" />
+    <None Include="Resources\side-right-view-161.png" />
+    <None Include="Resources\arrow-97-16.png" />
+    <None Include="Resources\53_warning-16.png" />
+    <None Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="StudentManagement.ico" />
+    <Content Include="Templates\BienLaiThuTien_TamUng.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\TOOL_05_LichSuKiemTraXeRa.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\TOOL_07_LichSuCapNhatNoiTru.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\BienLaiThuTien_HoanUng.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\BienLaiThuTien_NopTien.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\REPORT_01_BCTaiChinhGiaoDich.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\TOOL_06_LichSuXeVaoRa.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\REPORT_02_BCTaiChinhGiaoDich_TongHop.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\REPORT_03_BCTinhHinh_TongHop.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\TOOL_09_CapNhatMatTheNgoaiTru.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\BienLaiThuTien_NopTien_MatTheXe.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\REPORT_04_BCDSTheXeNoiTru.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\REPORT_05_BCTheXeHuyMatMat.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\question-mark-16.png" />
+    <None Include="Resources\add-user-16.png" />
+    <None Include="Resources\delete-2-16.png" />
+    <None Include="Resources\arrow-32-16.png" />
+    <None Include="Resources\edit-5-161.png" />
+    <None Include="Resources\refresh-2-16.png" />
+    <None Include="Resources\pie-16.png" />
+    <None Include="Resources\quote-16.png" />
+    <None Include="Resources\edit-11-16.png" />
+    <None Include="Resources\delete-row-16.png" />
+    <None Include="Resources\categorize-16.png" />
+    <None Include="Resources\folder-2-16.png" />
+    <None Include="Resources\edit-user-16.png" />
+    <None Include="Resources\house-16.png" />
+    <None Include="Resources\list-view-16.png" />
+    <None Include="Resources\list-rich-16.png" />
+    <None Include="Resources\list-2-16.png" />
+    <None Include="Resources\inbox-5-16.png" />
+    <None Include="Resources\pages-4-16.png" />
+    <None Include="Resources\redo-16.png" />
+    <None Include="Resources\sun-2-16.png" />
+    <None Include="Resources\star-2-16.png" />
+    <None Include="Resources\snow-storm-16.png" />
+    <None Include="Resources\sitemap-16.png" />
+    <None Include="Resources\sinchronize-16.png" />
+    <None Include="Resources\side-right-view-16.png" />
+    <None Include="Resources\settings-24-16.png" />
+    <None Include="Resources\settings-19-16.png" />
+    <None Include="Resources\settings-12-16.png" />
+    <None Include="Resources\settings-11-16.png" />
+    <None Include="Resources\settings-7-16.png" />
+    <None Include="Resources\search-3-16.png" />
+    <None Include="Resources\unlock-16.png" />
+    <None Include="Resources\text-file-4-16.png" />
+    <None Include="Resources\timeline-16.png" />
+    <None Include="Resources\undo-16.png" />
+    <None Include="Resources\user-2-16.png" />
+    <None Include="Resources\zoom-out-16.png" />
+    <None Include="Resources\zoom-in-16.png" />
+    <None Include="Resources\x-mark-16.png" />
+    <None Include="Resources\plus-2-16.png" />
+    <None Include="Resources\minus-16.png" />
+    <None Include="Resources\microsoft-word-16.png" />
+    <None Include="Resources\edit-5-16.png" />
+    <None Include="Resources\excel-3-16.png" />
+    <None Include="Resources\save-16.png" />
+    <None Include="Resources\medical-records_2.png" />
+    <None Include="Resources\checkmark-16.png" />
+    <None Include="Resources\save-as-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\O2S_StudentManagement.Common\O2S_StudentManagement.Common.csproj">
+      <Project>{6c338723-1358-4581-9d20-d14a18b5e3b8}</Project>
+      <Name>O2S_StudentManagement.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\O2S_StudentManagement.Model\O2S_StudentManagement.Model.csproj">
+      <Project>{cc38c10d-babc-425e-87e6-0f6fb58f958e}</Project>
+      <Name>O2S_StudentManagement.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GUI\MenuBaoCao\" />
+    <Folder Include="GUI\MenuQuanTri\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
