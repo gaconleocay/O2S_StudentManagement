@@ -13,13 +13,30 @@ namespace O2S_QuanLyHocVien.Pages
 {
     public partial class frmTiepNhanHocVien : Form
     {
+        #region Khai bao
         private bool isInsert = false;
         private HOCVIEN hocVien;
 
+        #endregion
         public frmTiepNhanHocVien()
         {
             InitializeComponent();
         }
+
+        #region Load
+        private void frmTiepNhanHocVien_Load(object sender, EventArgs e)
+        {
+            dateNgaySinh.MaxDate = DateTime.Now;
+
+            LockPanelControl();
+            InitializeLoaiHV();
+            InitializeHocVien();
+        }
+
+        #endregion
+
+
+        #region Process
 
         /// <summary>
         /// Khóa điều khiển các control
@@ -72,6 +89,8 @@ namespace O2S_QuanLyHocVien.Pages
             txtMatKhau.Text = string.Empty;
         }
 
+        #endregion
+
         /// <summary>
         /// Nạp học viên lên giao diện
         /// </summary>
@@ -101,12 +120,12 @@ namespace O2S_QuanLyHocVien.Pages
                     txtMatKhau.Text = hv.TAIKHOAN != null ? hv.TAIKHOAN.MatKhau : string.Empty;
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 ResetPanelControl();
                 LockPanelControl();
+                Common.Logging.LogSystem.Error(ex);
             }
-
         }
 
         /// <summary>
@@ -174,19 +193,11 @@ namespace O2S_QuanLyHocVien.Pages
                 throw new ArgumentException("Số điện thoại không được trống");
         }
 
+        #region Events
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
             GlobalPages.TiepNhanHocVien = null;
-        }
-
-        private void frmTiepNhanHocVien_Load(object sender, EventArgs e)
-        {
-            dateNgaySinh.MaxDate = DateTime.Now;
-
-            LockPanelControl();
-            InitializeLoaiHV();
-            InitializeHocVien();          
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -237,9 +248,16 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void gridDSHV_Click(object sender, EventArgs e)
         {
+            try
+            {
             LockPanelControl();
             hocVien = HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHV"].Value.ToString());
             LoadPanelControl(hocVien);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnHuyBo_Click(object sender, EventArgs e)
@@ -267,7 +285,7 @@ namespace O2S_QuanLyHocVien.Pages
                     ResetPanelControl();
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 MessageBox.Show("Có lỗi xảy ra", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -278,6 +296,9 @@ namespace O2S_QuanLyHocVien.Pages
             btnSua_Click(sender, e);
         }
 
+        #endregion
+
+        #region Custom
         private void cboLoaiHV_SelectedValueChanged(object sender, EventArgs e)
         {
             if (cboLoaiHV.SelectedValue.ToString() == "LHV00")
@@ -313,5 +334,7 @@ namespace O2S_QuanLyHocVien.Pages
                 e.Handled = true;
             }
         }
+
+        #endregion
     }
 }

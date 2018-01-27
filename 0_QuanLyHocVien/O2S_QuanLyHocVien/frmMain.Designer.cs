@@ -305,7 +305,7 @@
             this.tabGiangVien.Location = new System.Drawing.Point(4, 4);
             this.tabGiangVien.Name = "tabGiangVien";
             this.tabGiangVien.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGiangVien.Size = new System.Drawing.Size(1150, 62);
+            this.tabGiangVien.Size = new System.Drawing.Size(1150, 34);
             this.tabGiangVien.TabIndex = 1;
             this.tabGiangVien.Text = "Giảng viên";
             // 
@@ -367,7 +367,7 @@
             this.tabHocVien.Controls.Add(this.btnBangDiem);
             this.tabHocVien.Location = new System.Drawing.Point(4, 4);
             this.tabHocVien.Name = "tabHocVien";
-            this.tabHocVien.Size = new System.Drawing.Size(1150, 62);
+            this.tabHocVien.Size = new System.Drawing.Size(1150, 34);
             this.tabHocVien.TabIndex = 2;
             this.tabHocVien.Text = "Học viên";
             // 
@@ -466,7 +466,7 @@
             this.tabQuanTri.Controls.Add(this.btnQuanLyHocVien);
             this.tabQuanTri.Location = new System.Drawing.Point(4, 4);
             this.tabQuanTri.Name = "tabQuanTri";
-            this.tabQuanTri.Size = new System.Drawing.Size(1150, 62);
+            this.tabQuanTri.Size = new System.Drawing.Size(1150, 34);
             this.tabQuanTri.TabIndex = 3;
             this.tabQuanTri.Text = "Quản trị";
             // 
@@ -638,7 +638,7 @@
             this.tabTroGiup.Controls.Add(this.btnTroGiup);
             this.tabTroGiup.Location = new System.Drawing.Point(4, 4);
             this.tabTroGiup.Name = "tabTroGiup";
-            this.tabTroGiup.Size = new System.Drawing.Size(1150, 62);
+            this.tabTroGiup.Size = new System.Drawing.Size(1150, 34);
             this.tabTroGiup.TabIndex = 4;
             this.tabTroGiup.Text = "Trợ giúp";
             // 

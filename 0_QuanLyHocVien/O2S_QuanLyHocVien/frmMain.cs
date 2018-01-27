@@ -12,6 +12,7 @@ using O2S_QuanLyHocVien.Popups;
 using System.Diagnostics;
 using System.Threading;
 using System.Globalization;
+using System.Configuration;
 
 namespace O2S_QuanLyHocVien
 {
@@ -23,6 +24,195 @@ namespace O2S_QuanLyHocVien
             Thread.CurrentThread.CurrentCulture = new CultureInfo("vi-VN");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-VN");
         }
+
+        #region Load
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            DangNhap();
+        }
+
+        #endregion
+
+        #region Đăng nhập và khởi động
+
+        /// <summary>
+        /// Đăng nhập vào phần mềm
+        /// </summary>
+        private void DangNhap()
+        {
+            this.Hide();
+            try
+            {
+                GlobalSettings.ConnectToDatabase();
+
+                frmDangNhap frm = new frmDangNhap();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadGiaoDien();
+                    HienThiThongTinVePhanMem_Version();
+                    this.Show();
+
+                    timer.Start();
+                }
+            }
+            catch (Exception ex)
+            {
+                Reconnect();
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+        /// <summary>
+        /// Kết nối lại cơ sở dữ liệu
+        /// </summary>
+        private void Reconnect()
+        {
+            frmKetNoiCSDL frm = new frmKetNoiCSDL();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                if (DialogResult.Yes == MessageBox.Show("Bạn cần khởi động lại chương trình để thay đổi có hiệu lực." + Environment.NewLine + "Khởi động ngay?", "Khởi động lại", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    Application.Restart();
+                else
+                    Application.Exit();
+            }
+            else
+            {
+                MessageBox.Show("Bạn không thể sử dụng chương trình nếu kết nối cơ sở dữ liệu chưa được thiết lập" + Environment.NewLine + "Hãy chạy lại chương trình vào lần tới để thiết lập lại kết nối cơ sở dữ liệu", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Application.Exit();
+            }
+        }
+
+        /// <summary>
+        /// Phân quyền người dùng
+        /// </summary>
+        /// <param name="userType">Kiểu người dùng</param>
+        /// <param name="userName">Tên người dùng</param>
+        public void PhanQuyen(UserType userType, string userName)
+        {
+            switch (userType)
+            {
+                case UserType.NhanVien:
+                    string nvType = NhanVien.Select(GlobalSettings.UserID).MaLoaiNV;
+                    switch (nvType)
+                    {
+                        //nhân viên ghi danh
+                        case "LNV01":
+                            btnGiangVienTitle.Visible = false;
+                            btnHocVienTitle.Visible = false;
+                            btnQuanTriTitle.Visible = false;
+                            btnThongKeNoHocVien.Enabled = false;
+                            btnThongKeDiemTheoLop.Enabled = false;
+                            btnQuanLyDiem.Enabled = false;
+                            btnXepLop.Enabled = false;
+                            btnNhanVienTitle_Click(btnNhanVienTitle, null);
+                            break;
+                        //nhân viên học vụ
+                        case "LNV02":
+                            btnGiangVienTitle.Visible = false;
+                            btnHocVienTitle.Visible = false;
+                            btnTiepNhanHocVien.Enabled = false;
+                            btnLapPhieuGhiDanh.Enabled = false;
+                            btnBaoCaoHocVienTheoThang.Enabled = false;
+                            btnThongKeNoHocVien.Enabled = false;
+                            btnQuanLyNhanVien.Enabled = false;
+                            btnQuanLyHocPhi.Enabled = false;
+                            btnQuanLyTaiKhoan.Enabled = false;
+                            btnThayDoiQuyDinh.Enabled = false;
+                            btnKetNoiCSDL.Enabled = false;
+                            btnQuanLyTaiKhoan.Enabled = false;
+                            btnThongTinTrungTam.Enabled = false;
+                            btnNhanVienTitle_Click(btnNhanVienTitle, null);
+                            break;
+                        //nhân viên kế toán
+                        case "LNV03":
+                            btnGiangVienTitle.Visible = false;
+                            btnHocVienTitle.Visible = false;
+                            btnTiepNhanHocVien.Enabled = false;
+                            btnLapPhieuGhiDanh.Enabled = false;
+                            btnBaoCaoHocVienTheoThang.Enabled = false;
+                            btnThongKeDiemTheoLop.Enabled = false;
+                            btnQuanLyDiem.Enabled = false;
+                            btnXepLop.Enabled = false;
+                            btnQuanLyHocVien.Enabled = false;
+                            btnQuanLyNhanVien.Enabled = false;
+                            btnQuanLyGiangVien.Enabled = false;
+                            btnQuanLyLopHoc.Enabled = false;
+                            btnQuanLyKhoaHoc.Enabled = false;
+                            btnQuanLyTaiKhoan.Enabled = false;
+                            btnThayDoiQuyDinh.Enabled = false;
+                            btnKetNoiCSDL.Enabled = false;
+                            btnQuanLyTaiKhoan.Enabled = false;
+                            btnThongTinTrungTam.Enabled = false;
+                            btnNhanVienTitle_Click(btnNhanVienTitle, null);
+                            break;
+                        default:
+                            btnHocVienTitle.Visible = false;
+                            btnGiangVienTitle.Visible = false;
+                            btnQuanTriTitle_Click(btnQuanTriTitle, null);
+                            break;
+                    }
+                    break;
+                case UserType.HocVien:
+                    btnNhanVienTitle.Visible = false;
+                    btnQuanTriTitle.Visible = false;
+                    btnGiangVienTitle.Visible = false;
+                    btnHocVienTitle_Click(this.btnHocVienTitle, null);
+                    break;
+                case UserType.GiangVien:
+                    btnNhanVienTitle.Visible = false;
+                    btnQuanTriTitle.Visible = false;
+                    btnHocVienTitle.Visible = false;
+                    btnGiangVienTitle_Click(this.btnGiangVienTitle, null);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Nạp giao diện phần mềm
+        /// </summary>
+        public void LoadGiaoDien()
+        {
+            try
+            {
+                ResetRibbonControlStatus();
+
+                lblUserName.Text = GlobalSettings.UserName;
+
+                PhanQuyen(GlobalSettings.UserType, GlobalSettings.UserName);
+                pnlWorkspace.Controls.Clear();
+
+                if (GlobalSettings.UserType == UserType.NhanVien)
+                    GlobalPages.LoadEssentialPages();
+
+                GlobalSettings.LoadCenterInformation();
+                GlobalSettings.LoadQuyDinh();
+
+                btnTrangMoDau_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        private void HienThiThongTinVePhanMem_Version()
+        {
+            try
+            {
+                System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                string version = fvi.FileVersion;
+                this.Text = "Quản lý Học viên Trung tâm Anh ngữ (v" + version + ")";
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        #endregion
+
 
         #region Ribbon bar
 
@@ -42,42 +232,77 @@ namespace O2S_QuanLyHocVien
 
         private void btnNhanVienTitle_Click(object sender, EventArgs e)
         {
+            try
+            {
             tabRibbon.SelectedTab = tabRibbon.TabPages["tabNhanVien"];
 
             ResetColorTabTitle();
             ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnGiangVienTitle_Click(object sender, EventArgs e)
         {
+            try
+            {
             tabRibbon.SelectedTab = tabRibbon.TabPages["tabGiangVien"];
 
             ResetColorTabTitle();
             ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnHocVienTitle_Click(object sender, EventArgs e)
         {
+            try
+            {
             tabRibbon.SelectedTab = tabRibbon.TabPages["tabHocVien"];
 
             ResetColorTabTitle();
             ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnQuanTriTitle_Click(object sender, EventArgs e)
         {
+            try
+            {
             tabRibbon.SelectedTab = tabRibbon.TabPages["tabQuanTri"];
 
             ResetColorTabTitle();
             ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnTroGiupTitle_Click(object sender, EventArgs e)
         {
-            tabRibbon.SelectedTab = tabRibbon.TabPages["tabTroGiup"];
+            try
+            {
+           tabRibbon.SelectedTab = tabRibbon.TabPages["tabTroGiup"];
 
             ResetColorTabTitle();
             ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         #endregion
@@ -97,6 +322,8 @@ namespace O2S_QuanLyHocVien
 
         private void btnTiepNhanHocVien_Click(object sender, EventArgs e)
         {
+            try
+            {
             pnlWorkspace.Controls.Clear();
 
             if (GlobalPages.TiepNhanHocVien == null)
@@ -108,10 +335,17 @@ namespace O2S_QuanLyHocVien
 
             pnlWorkspace.Controls.Add(GlobalPages.TiepNhanHocVien);
             GlobalPages.TiepNhanHocVien.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnLapPhieuGhiDanh_Click(object sender, EventArgs e)
         {
+            try
+            {
             pnlWorkspace.Controls.Clear();
 
             if (GlobalPages.LapPhieuGhiDanh == null)
@@ -123,6 +357,11 @@ namespace O2S_QuanLyHocVien
 
             pnlWorkspace.Controls.Add(GlobalPages.LapPhieuGhiDanh);
             GlobalPages.LapPhieuGhiDanh.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnGVDoiMatKhau_Click(object sender, EventArgs e)
@@ -151,6 +390,8 @@ namespace O2S_QuanLyHocVien
 
         private void btnBangDiem_Click(object sender, EventArgs e)
         {
+            try
+            {
             pnlWorkspace.Controls.Clear();
 
             if (GlobalPages.BangDiem == null)
@@ -162,10 +403,17 @@ namespace O2S_QuanLyHocVien
 
             pnlWorkspace.Controls.Add(GlobalPages.BangDiem);
             GlobalPages.BangDiem.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnXemCacLopDay_Click(object sender, EventArgs e)
         {
+            try
+            {
             pnlWorkspace.Controls.Clear();
 
             if (GlobalPages.XemCacLopDay == null)
@@ -177,10 +425,17 @@ namespace O2S_QuanLyHocVien
 
             pnlWorkspace.Controls.Add(GlobalPages.XemCacLopDay);
             GlobalPages.XemCacLopDay.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnHocPhi_Click(object sender, EventArgs e)
         {
+            try
+            {
             pnlWorkspace.Controls.Clear();
 
             if (GlobalPages.HocPhiHocVien == null)
@@ -192,10 +447,17 @@ namespace O2S_QuanLyHocVien
 
             pnlWorkspace.Controls.Add(GlobalPages.HocPhiHocVien);
             GlobalPages.HocPhiHocVien.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnCacLopDaHoc_Click(object sender, EventArgs e)
         {
+            try
+            {
             pnlWorkspace.Controls.Clear();
 
             if (GlobalPages.CacLopDaHoc == null)
@@ -207,10 +469,17 @@ namespace O2S_QuanLyHocVien
 
             pnlWorkspace.Controls.Add(GlobalPages.CacLopDaHoc);
             GlobalPages.CacLopDaHoc.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnQuanLyHocVien_Click(object sender, EventArgs e)
         {
+            try
+            {
             pnlWorkspace.Controls.Clear();
 
             if (GlobalPages.QuanLyHocVien == null)
@@ -222,6 +491,11 @@ namespace O2S_QuanLyHocVien
 
             pnlWorkspace.Controls.Add(GlobalPages.QuanLyHocVien);
             GlobalPages.QuanLyHocVien.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnQuanLyNhanVien_Click(object sender, EventArgs e)
@@ -361,11 +635,18 @@ namespace O2S_QuanLyHocVien
 
         private void btnTrangMoDau_Click(object sender, EventArgs e)
         {
+            try
+            {
             pnlWorkspace.Controls.Clear();
 
             frmTrangMoDau frm = new frmTrangMoDau() { Dock = DockStyle.Fill, TopLevel = false };
             pnlWorkspace.Controls.Add(frm);
             frm.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         private void btnXepLop_Click(object sender, EventArgs e)
@@ -423,7 +704,7 @@ namespace O2S_QuanLyHocVien
 
         private void btnTroGiup_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/chidokun/QuanLyHocVien/wiki");
+            //Process.Start("https://");
         }
 
         private void btnQuanLyHocPhi_Click(object sender, EventArgs e)
@@ -476,183 +757,7 @@ namespace O2S_QuanLyHocVien
 
         #endregion
 
-        #region Đăng nhập và khởi động
-
-        /// <summary>
-        /// Đăng nhập vào phần mềm
-        /// </summary>
-        public void DangNhap()
-        {
-            this.Hide();
-            try
-            {
-                GlobalSettings.ConnectToDatabase();
-
-                frmDangNhap frm = new frmDangNhap();
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    LoadGiaoDien();
-                    LoadThongTinPhanMem();
-                    this.Show();
-
-                    timer.Start();
-                }
-            }
-            catch
-            {
-                Reconnect();
-            }
-        }
-
-        /// <summary>
-        /// Kết nối lại cơ sở dữ liệu
-        /// </summary>
-        private void Reconnect()
-        {
-            frmKetNoiCSDL frm = new frmKetNoiCSDL();
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                if (DialogResult.Yes == MessageBox.Show("Bạn cần khởi động lại chương trình để thay đổi có hiệu lực." + Environment.NewLine + "Khởi động ngay?", "Khởi động lại", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                    Application.Restart();
-                else
-                    Application.Exit();
-            }
-            else
-            {
-                MessageBox.Show("Bạn không thể sử dụng chương trình nếu kết nối cơ sở dữ liệu chưa được thiết lập" + Environment.NewLine + "Hãy chạy lại chương trình vào lần tới để thiết lập lại kết nối cơ sở dữ liệu", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Application.Exit();
-            }
-        }
-
-        /// <summary>
-        /// Phân quyền người dùng
-        /// </summary>
-        /// <param name="userType">Kiểu người dùng</param>
-        /// <param name="userName">Tên người dùng</param>
-        public void PhanQuyen(UserType userType, string userName)
-        {
-            switch (userType)
-            {
-                case UserType.NhanVien:
-                    string nvType = NhanVien.Select(GlobalSettings.UserID).MaLoaiNV;
-                    switch (nvType)
-                    {
-                        //nhân viên ghi danh
-                        case "LNV01":
-                            btnGiangVienTitle.Visible = false;
-                            btnHocVienTitle.Visible = false;
-                            btnQuanTriTitle.Visible = false;
-                            btnThongKeNoHocVien.Enabled = false;
-                            btnThongKeDiemTheoLop.Enabled = false;
-                            btnQuanLyDiem.Enabled = false;
-                            btnXepLop.Enabled = false;
-                            btnNhanVienTitle_Click(btnNhanVienTitle, null);
-                            break;
-                        //nhân viên học vụ
-                        case "LNV02":
-                            btnGiangVienTitle.Visible = false;
-                            btnHocVienTitle.Visible = false;
-                            btnTiepNhanHocVien.Enabled = false;
-                            btnLapPhieuGhiDanh.Enabled = false;
-                            btnBaoCaoHocVienTheoThang.Enabled = false;
-                            btnThongKeNoHocVien.Enabled = false;
-                            btnQuanLyNhanVien.Enabled = false;
-                            btnQuanLyHocPhi.Enabled = false;
-                            btnQuanLyTaiKhoan.Enabled = false;
-                            btnThayDoiQuyDinh.Enabled = false;
-                            btnKetNoiCSDL.Enabled = false;
-                            btnQuanLyTaiKhoan.Enabled = false;
-                            btnThongTinTrungTam.Enabled = false;
-                            btnNhanVienTitle_Click(btnNhanVienTitle, null);
-                            break;
-                        //nhân viên kế toán
-                        case "LNV03":
-                            btnGiangVienTitle.Visible = false;
-                            btnHocVienTitle.Visible = false;
-                            btnTiepNhanHocVien.Enabled = false;
-                            btnLapPhieuGhiDanh.Enabled = false;
-                            btnBaoCaoHocVienTheoThang.Enabled = false;
-                            btnThongKeDiemTheoLop.Enabled = false;
-                            btnQuanLyDiem.Enabled = false;
-                            btnXepLop.Enabled = false;
-                            btnQuanLyHocVien.Enabled = false;
-                            btnQuanLyNhanVien.Enabled = false;
-                            btnQuanLyGiangVien.Enabled = false;
-                            btnQuanLyLopHoc.Enabled = false;
-                            btnQuanLyKhoaHoc.Enabled = false;
-                            btnQuanLyTaiKhoan.Enabled = false;
-                            btnThayDoiQuyDinh.Enabled = false;
-                            btnKetNoiCSDL.Enabled = false;
-                            btnQuanLyTaiKhoan.Enabled = false;
-                            btnThongTinTrungTam.Enabled = false;
-                            btnNhanVienTitle_Click(btnNhanVienTitle, null);
-                            break;
-                        default:
-                            btnHocVienTitle.Visible = false;
-                            btnGiangVienTitle.Visible = false;
-                            btnQuanTriTitle_Click(btnQuanTriTitle, null);
-                            break;
-                    }
-                    break;
-                case UserType.HocVien:
-                    btnNhanVienTitle.Visible = false;
-                    btnQuanTriTitle.Visible = false;
-                    btnGiangVienTitle.Visible = false;
-                    btnHocVienTitle_Click(this.btnHocVienTitle, null);
-                    break;
-                case UserType.GiangVien:
-                    btnNhanVienTitle.Visible = false;
-                    btnQuanTriTitle.Visible = false;
-                    btnHocVienTitle.Visible = false;
-                    btnGiangVienTitle_Click(this.btnGiangVienTitle, null);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Nạp giao diện phần mềm
-        /// </summary>
-        public void LoadGiaoDien()
-        {
-            ResetRibbonControlStatus();
-
-            lblUserName.Text = GlobalSettings.UserName;
-
-            PhanQuyen(GlobalSettings.UserType, GlobalSettings.UserName);
-            pnlWorkspace.Controls.Clear();
-
-            if (GlobalSettings.UserType == UserType.NhanVien)
-                GlobalPages.LoadEssentialPages();
-
-            GlobalSettings.LoadCenterInformation();
-            GlobalSettings.LoadQuyDinh();
-
-            btnTrangMoDau_Click(null, null);
-        }
-
-        #endregion
-
-        #region Load
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-            DangNhap();
-        }
-        private void LoadThongTinPhanMem()
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
-
-        #endregion
-
+      
+  
     }
 }

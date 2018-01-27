@@ -18,7 +18,7 @@ namespace O2S_QuanLyHocVien.Popups
             InitializeComponent();
         }
 
-        #region Events
+        #region Load
         private void frmDangNhap_Load(object sender, EventArgs e)
         {
             chkSave.Checked = Settings.Default.Login_IsSaved;
@@ -32,11 +32,9 @@ namespace O2S_QuanLyHocVien.Popups
             lblNotification.Text = string.Empty;
         }
 
-        private void chkSave_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.Login_IsSaved = chkSave.Checked;
-            Settings.Default.Save();
-        }
+        #endregion
+
+        #region Events
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
@@ -64,6 +62,12 @@ namespace O2S_QuanLyHocVien.Popups
                 System.Media.SystemSounds.Exclamation.Play();
             }
         }
+        private void chkSave_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.Login_IsSaved = chkSave.Checked;
+            Settings.Default.Save();
+        }
         #endregion
+
     }
 }

@@ -14,6 +14,11 @@ namespace O2S_QuanLyHocVien
     /// </summary>
     public static class GlobalPages
     {
+        #region Bien dung chung
+        public static string TenTrungTam { get; set; }
+        public static string DiaChiTrungTam { get; set; }
+
+        #endregion
         public static frmTiepNhanHocVien TiepNhanHocVien { get; set; } = null;
 
         public static frmLapPhieuGhiDanh LapPhieuGhiDanh { get; set; } = null;
