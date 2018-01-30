@@ -5,12 +5,13 @@
 
 using System;
 using System.Windows.Forms;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using System.Threading;
 using O2S_QuanLyHocVien.Reports;
 using Microsoft.Reporting.WinForms;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -194,17 +195,24 @@ namespace O2S_QuanLyHocVien.Pages
                 PhieuGhiDanh.Insert(new PHIEUGHIDANH()
                 {
                     MaPhieu = maPhieu,
-                    NgayGhiDanh = dateNgayGhiDanh.Value,
+                    NgayGhiDanh = DateTime.ParseExact(dateNgayGhiDanh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     DaDong = numDaDong.Value,
                     ConNo = numConNo.Value,
                     MaNV = GlobalSettings.UserID,
 
-                    DANGKies = new DANGKY()
+
+                    DANGKies = new System.Data.Linq.EntitySet<DANGKY>()
                     {
-                        MaHV = maHV,
-                        MaKH = maKH,
-                        MaPhieu = maPhieu
+                        // MaHV = maHV,
+                        //MaKH = maKH,
+                        //MaPhieu = maPhieu
                     }
+                    //DANGKies = new DANGKY()
+                    //{
+                    //    MaHV = maHV,
+                    //    MaKH = maKH,
+                    //    MaPhieu = maPhieu
+                    //}
                 });
 
                 MessageBox.Show(string.Format("Phiếu ghi danh {0} đã được thêm thành công", maPhieu), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -6,7 +6,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.Pages;
 using O2S_QuanLyHocVien.Popups;
 using System.Diagnostics;
@@ -28,7 +28,14 @@ namespace O2S_QuanLyHocVien
         #region Load
         private void frmMain_Load(object sender, EventArgs e)
         {
-            DangNhap();
+            try
+            {
+                DangNhap();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         #endregion

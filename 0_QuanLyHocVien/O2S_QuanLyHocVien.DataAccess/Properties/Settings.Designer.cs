@@ -44,5 +44,16 @@ namespace O2S_QuanLyHocVien.DataAccess.Properties {
                 return ((string)(this["QLHVTTECConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HONGNHAT_DEV\\SQLEXPRESS;Initial Catalog=QLHVTTEC;Persist Security Inf" +
+            "o=True;User ID=sa")]
+        public string QLHVTTECConnectionString2 {
+            get {
+                return ((string)(this["QLHVTTECConnectionString2"]));
+            }
+        }
     }
 }

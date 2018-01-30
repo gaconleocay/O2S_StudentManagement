@@ -47,7 +47,6 @@ namespace O2S_QuanLyHocVienLauncher
             catch (Exception ex)
             {
                 kiemtraketnoi = false;
-                //Common.Logging.LogSystem.Error("Loi dong ket noi den CSDL: " + ex.ToString());
             }
         }
         public DataTable GetDataTable(string sql)

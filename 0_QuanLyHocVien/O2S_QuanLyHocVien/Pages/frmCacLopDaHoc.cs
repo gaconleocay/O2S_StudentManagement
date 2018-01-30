@@ -5,7 +5,8 @@
 
 using System;
 using System.Windows.Forms;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
+using System.Globalization;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -49,8 +50,8 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            gridLop.DataSource = BangDiem.SelectDSLop(GlobalSettings.UserID, rdKhoangThoiGian.Checked ? (DateTime?)dateDenNgay.Value : null,
-                rdKhoangThoiGian.Checked ? (DateTime?)dateDenNgay.Value : null, rdKhoaHoc.Checked ? cboKhoaHoc.SelectedValue.ToString() : null);
+            gridLop.DataSource = BangDiem.SelectDSLop(GlobalSettings.UserID, rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateTuNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null,
+                rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateDenNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null, rdKhoaHoc.Checked ? cboKhoaHoc.SelectedValue.ToString() : null);
 
             gridLop_Click(sender, e);
         }

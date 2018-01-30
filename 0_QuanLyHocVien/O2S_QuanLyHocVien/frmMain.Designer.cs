@@ -102,7 +102,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1150, 88);
+            this.panel1.Size = new System.Drawing.Size(1184, 88);
             this.panel1.TabIndex = 0;
             // 
             // panel4
@@ -112,7 +112,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 28);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1150, 60);
+            this.panel4.Size = new System.Drawing.Size(1184, 60);
             this.panel4.TabIndex = 1;
             // 
             // tabRibbon
@@ -129,7 +129,7 @@
             this.tabRibbon.Location = new System.Drawing.Point(-4, -5);
             this.tabRibbon.Name = "tabRibbon";
             this.tabRibbon.SelectedIndex = 0;
-            this.tabRibbon.Size = new System.Drawing.Size(1158, 90);
+            this.tabRibbon.Size = new System.Drawing.Size(1192, 90);
             this.tabRibbon.TabIndex = 0;
             this.tabRibbon.TabStop = false;
             // 
@@ -148,7 +148,7 @@
             this.tabNhanVien.Location = new System.Drawing.Point(4, 4);
             this.tabNhanVien.Name = "tabNhanVien";
             this.tabNhanVien.Padding = new System.Windows.Forms.Padding(3);
-            this.tabNhanVien.Size = new System.Drawing.Size(1150, 62);
+            this.tabNhanVien.Size = new System.Drawing.Size(1184, 62);
             this.tabNhanVien.TabIndex = 0;
             this.tabNhanVien.Text = "Nhân viên";
             // 
@@ -305,7 +305,7 @@
             this.tabGiangVien.Location = new System.Drawing.Point(4, 4);
             this.tabGiangVien.Name = "tabGiangVien";
             this.tabGiangVien.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGiangVien.Size = new System.Drawing.Size(1150, 34);
+            this.tabGiangVien.Size = new System.Drawing.Size(1150, 62);
             this.tabGiangVien.TabIndex = 1;
             this.tabGiangVien.Text = "Giảng viên";
             // 
@@ -367,7 +367,7 @@
             this.tabHocVien.Controls.Add(this.btnBangDiem);
             this.tabHocVien.Location = new System.Drawing.Point(4, 4);
             this.tabHocVien.Name = "tabHocVien";
-            this.tabHocVien.Size = new System.Drawing.Size(1150, 34);
+            this.tabHocVien.Size = new System.Drawing.Size(1150, 62);
             this.tabHocVien.TabIndex = 2;
             this.tabHocVien.Text = "Học viên";
             // 
@@ -466,7 +466,7 @@
             this.tabQuanTri.Controls.Add(this.btnQuanLyHocVien);
             this.tabQuanTri.Location = new System.Drawing.Point(4, 4);
             this.tabQuanTri.Name = "tabQuanTri";
-            this.tabQuanTri.Size = new System.Drawing.Size(1150, 34);
+            this.tabQuanTri.Size = new System.Drawing.Size(1150, 62);
             this.tabQuanTri.TabIndex = 3;
             this.tabQuanTri.Text = "Quản trị";
             // 
@@ -638,7 +638,7 @@
             this.tabTroGiup.Controls.Add(this.btnTroGiup);
             this.tabTroGiup.Location = new System.Drawing.Point(4, 4);
             this.tabTroGiup.Name = "tabTroGiup";
-            this.tabTroGiup.Size = new System.Drawing.Size(1150, 34);
+            this.tabTroGiup.Size = new System.Drawing.Size(1150, 62);
             this.tabTroGiup.TabIndex = 4;
             this.tabTroGiup.Text = "Trợ giúp";
             // 
@@ -702,7 +702,7 @@
             this.pnlTabTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTabTitle.Location = new System.Drawing.Point(0, 0);
             this.pnlTabTitle.Name = "pnlTabTitle";
-            this.pnlTabTitle.Size = new System.Drawing.Size(1150, 28);
+            this.pnlTabTitle.Size = new System.Drawing.Size(1184, 28);
             this.pnlTabTitle.TabIndex = 0;
             // 
             // lblUserName
@@ -710,7 +710,7 @@
             this.lblUserName.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.lblUserName.ForeColor = System.Drawing.Color.Green;
-            this.lblUserName.Location = new System.Drawing.Point(819, 0);
+            this.lblUserName.Location = new System.Drawing.Point(853, 0);
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(261, 28);
             this.lblUserName.TabIndex = 6;
@@ -725,7 +725,7 @@
             this.btnDangXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDangXuat.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnDangXuat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
-            this.btnDangXuat.Location = new System.Drawing.Point(1080, 0);
+            this.btnDangXuat.Location = new System.Drawing.Point(1114, 0);
             this.btnDangXuat.Name = "btnDangXuat";
             this.btnDangXuat.Size = new System.Drawing.Size(70, 28);
             this.btnDangXuat.TabIndex = 5;
@@ -819,7 +819,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 88);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1150, 5);
+            this.panel3.Size = new System.Drawing.Size(1184, 5);
             this.panel3.TabIndex = 2;
             // 
             // panel2
@@ -829,9 +829,9 @@
             this.panel2.Controls.Add(this.lblDateTime);
             this.panel2.Controls.Add(this.lblServerName);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 560);
+            this.panel2.Location = new System.Drawing.Point(0, 638);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1150, 24);
+            this.panel2.Size = new System.Drawing.Size(1184, 24);
             this.panel2.TabIndex = 3;
             // 
             // lblCenterName
@@ -854,7 +854,7 @@
             this.lblDateTime.ForeColor = System.Drawing.Color.White;
             this.lblDateTime.Image = global::O2S_QuanLyHocVien.Properties.Resources.icon_Time_16dp;
             this.lblDateTime.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblDateTime.Location = new System.Drawing.Point(965, 0);
+            this.lblDateTime.Location = new System.Drawing.Point(999, 0);
             this.lblDateTime.Name = "lblDateTime";
             this.lblDateTime.Size = new System.Drawing.Size(179, 24);
             this.lblDateTime.TabIndex = 2;
@@ -872,7 +872,7 @@
             this.lblServerName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblServerName.ForeColor = System.Drawing.Color.White;
             this.lblServerName.Image = global::O2S_QuanLyHocVien.Properties.Resources.icon_Server_16dp;
-            this.lblServerName.Location = new System.Drawing.Point(749, 0);
+            this.lblServerName.Location = new System.Drawing.Point(783, 0);
             this.lblServerName.Name = "lblServerName";
             this.lblServerName.Size = new System.Drawing.Size(210, 24);
             this.lblServerName.TabIndex = 1;
@@ -886,7 +886,7 @@
             this.pnlWorkspace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlWorkspace.Location = new System.Drawing.Point(0, 93);
             this.pnlWorkspace.Name = "pnlWorkspace";
-            this.pnlWorkspace.Size = new System.Drawing.Size(1150, 467);
+            this.pnlWorkspace.Size = new System.Drawing.Size(1184, 545);
             this.pnlWorkspace.TabIndex = 4;
             // 
             // timer
@@ -899,7 +899,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1150, 584);
+            this.ClientSize = new System.Drawing.Size(1184, 662);
             this.Controls.Add(this.pnlWorkspace);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);

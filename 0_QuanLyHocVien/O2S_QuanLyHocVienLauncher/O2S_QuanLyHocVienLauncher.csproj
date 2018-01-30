@@ -80,7 +80,6 @@
     <Compile Include="Checksum\GetFileCheckSum.cs" />
     <Compile Include="ConnectDatabase.cs" />
     <Compile Include="EncryptAndDecrypt\EncryptAndDecrypt.cs" />
-    <Compile Include="KeyTrongPhanMem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,8 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.ico" />
-    <Content Include="CarParking.ico" />
-    <Content Include="InsuranceExpertise.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -105,6 +102,20 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\O2S_License\O2S_License.csproj">
+      <Project>{f702a0ce-ce71-4f28-a1ea-2710d1778a43}</Project>
+      <Name>O2S_License</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\O2S_QuanLyHocVien.BusinessLogic\O2S_QuanLyHocVien.BusinessLogic.csproj">
+      <Project>{f4cc2ba6-93db-40a9-b91b-b3ea682a4cfb}</Project>
+      <Name>O2S_QuanLyHocVien.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\O2S_QuanLyHocVien.DataAccess\O2S_QuanLyHocVien.DataAccess.csproj">
+      <Project>{31127f93-2cd8-4dd4-9653-bc4ae82bc8ea}</Project>
+      <Name>O2S_QuanLyHocVien.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

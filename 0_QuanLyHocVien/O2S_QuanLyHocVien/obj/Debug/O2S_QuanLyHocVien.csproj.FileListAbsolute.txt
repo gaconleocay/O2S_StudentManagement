@@ -151,7 +151,6 @@ C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Deb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.Xpo.v15.2.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.CodeParser.v15.2.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.XtraVerticalGrid.v15.2.dll
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_License.pdb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.Spreadsheet.v15.2.Core.xml
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.XtraSpreadsheet.v15.2.xml
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.DataAccess.v15.2.xml
@@ -202,3 +201,8 @@ C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Deb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\es\DevExpress.XtraVerticalGrid.v15.2.resources.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\ja\DevExpress.XtraVerticalGrid.v15.2.resources.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\ru\DevExpress.XtraVerticalGrid.v15.2.resources.dll
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.exe.licenses
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Newtonsoft.Json.dll
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_License.pdb
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_QuanLyHocVien.Common.pdb
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Newtonsoft.Json.xml

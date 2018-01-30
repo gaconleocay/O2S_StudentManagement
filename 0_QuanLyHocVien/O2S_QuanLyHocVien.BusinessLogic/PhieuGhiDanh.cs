@@ -7,10 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static BusinessLogic.GlobalSettings;
+using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using O2S_QuanLyHocVien.DataAccess;
 
-namespace BusinessLogic
+namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public struct BaoCaoHocVienNo
     {
@@ -37,10 +37,11 @@ namespace BusinessLogic
         public static object SelectAll()
         {
             return (from p in Database.PHIEUGHIDANHs
+                    join dk in Database.DANGKies on p.MaPhieu equals dk.MaPhieu
                     select new
                     {
                         MaPhieu = p.MaPhieu,
-                        MaHV = p.DANGKies.MaHV,
+                        MaHV = dk.MaHV,
                         NgayGhiDanh = p.NgayGhiDanh,
                         DaDong = p.DaDong,
                         ConNo = p.ConNo
@@ -56,15 +57,18 @@ namespace BusinessLogic
         public static IQueryable<BaoCaoHocVienGhiDanh> BaoCaoHocVienGhiDanhTheoThang(int month, int year)
         {
             return from p in Database.PHIEUGHIDANHs
+                   join dk in Database.DANGKies on p.MaPhieu equals dk.MaPhieu
+                   join hv in Database.HOCVIENs on dk.MaHV equals hv.MaHV
+                   join kh in Database.KHOAHOCs on dk.MaKH equals kh.MaKH
                    where (p.NgayGhiDanh.Value.Month == month) &&
                          (p.NgayGhiDanh.Value.Year == year)
                    select new BaoCaoHocVienGhiDanh()
                    {
-                       MaHV = p.DANGKies.MaHV,
-                       TenHV = p.DANGKies.HOCVIEN.TenHV,
-                       GioiTinhHV = p.DANGKies.HOCVIEN.GioiTinhHV,
+                       MaHV = dk.MaHV,
+                       TenHV = hv.TenHV,
+                       GioiTinhHV = hv.GioiTinhHV,
                        NgayGhiDanh = p.NgayGhiDanh,
-                       TenKH = p.DANGKies.KHOAHOC.TenKH
+                       TenKH = kh.TenKH
                    };
         }
 
@@ -75,13 +79,16 @@ namespace BusinessLogic
         public static IQueryable<BaoCaoHocVienNo> ThongKeDanhSachNoHocPhi()
         {
             return (from p in Database.PHIEUGHIDANHs
+                    join dk in Database.DANGKies on p.MaPhieu equals dk.MaPhieu
+                    join hv in Database.HOCVIENs on dk.MaHV equals hv.MaHV
+                    join kh in Database.KHOAHOCs on dk.MaKH equals kh.MaKH
                     where p.ConNo > 0
                     select new BaoCaoHocVienNo()
                     {
-                        MaHV = p.DANGKies.MaHV,
-                        TenHV = p.DANGKies.HOCVIEN.TenHV,
-                        GioiTinhHV = p.DANGKies.HOCVIEN.GioiTinhHV,
-                        TenKH = p.DANGKies.KHOAHOC.TenKH,
+                        MaHV = dk.MaHV,
+                        TenHV = hv.TenHV,
+                        GioiTinhHV = hv.GioiTinhHV,
+                        TenKH = kh.TenKH,
                         ConNo = p.ConNo
                     });
         }

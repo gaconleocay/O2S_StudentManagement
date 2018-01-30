@@ -5,8 +5,9 @@
 
 using System;
 using System.Windows.Forms;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
+using System.Globalization;
 
 namespace O2S_QuanLyHocVien.Popups
 {
@@ -55,10 +56,10 @@ namespace O2S_QuanLyHocVien.Popups
             {
                 MaLop = txtMaLop.Text,
                 TenLop = txtTenLop.Text,
-                NgayBD = dateNgayBD.Value,
-                NgayKT = dateNgayKT.Value,
+                NgayBD = DateTime.ParseExact(dateNgayBD.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                NgayKT = DateTime.ParseExact(dateNgayKT.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 SiSo = lh == null ? 0 : lh.SiSo,
-                MaKH=cboKhoa.SelectedValue.ToString(),
+                MaKH = cboKhoa.SelectedValue.ToString(),
                 DangMo = rdMo.Checked
             };
         }

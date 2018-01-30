@@ -6,7 +6,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 
 namespace O2S_QuanLyHocVien.Pages
 {

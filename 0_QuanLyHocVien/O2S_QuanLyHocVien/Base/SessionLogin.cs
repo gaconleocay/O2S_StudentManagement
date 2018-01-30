@@ -8,7 +8,6 @@ namespace O2S_QuanLyHocVien.Base
     /// </summary>
     public static class SessionLogin
     {
-        public static long SessionUserID { get; set; }  // ID user
         public static string SessionUsercode { get; set; }  // code user
         public static string SessionUsername { get; set; }  // Tên user
         public static string SessionMachineName { get; set; }   // Tên máy
@@ -17,14 +16,9 @@ namespace O2S_QuanLyHocVien.Base
         public static bool KiemTraLicenseSuDung { get; set; } //kiem tra license: neu false thi out phan mem, neu true thi cho su dung tiep
         public static string License_KeyDB { get; set; } //License lay tu DB
         public static string MaDatabase { get; set; }//Lay thong tin database
-        public static string UserName_GDBHYT { get; set; }//username dang nhap cong BHYT
-        public static string Password_GDBHYT { get; set; }//pass dang nhap cong BHYT
-        public static string Password_GDBHYT_MD5 { get; set; }
-        public static string UrlFullServer { get; set; }
 
 
         public static List<classPermission> SessionLstPhanQuyenNguoiDung { get; set; }
-        //public static List<DTO.classUserDepartment> SessionlstPhanQuyen_KhoaPhong { get; set; }
     }
 
 

@@ -5,7 +5,7 @@
 
 using System;
 using System.Windows.Forms;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.Reports;
 using O2S_QuanLyHocVien.DataAccess;
 using System.Collections.Generic;
@@ -158,7 +158,8 @@ namespace O2S_QuanLyHocVien.Pages
                     NgayGhiDanh = p.NgayGhiDanh,
                     MaNV = p.MaNV,
                     DaDong = p.DaDong + numNop.Value,
-                    ConNo = p.DANGKies.KHOAHOC.HocPhi - (p.DaDong+numNop.Value)
+                    ConNo = p.DANGKies[0].KHOAHOC.HocPhi - (p.DaDong + numNop.Value)
+                    //ConNo = p.DANGKies.KHOAHOC.HocPhi - (p.DaDong+numNop.Value)
                 });
 
                 gridKetQua_Click(sender, e);

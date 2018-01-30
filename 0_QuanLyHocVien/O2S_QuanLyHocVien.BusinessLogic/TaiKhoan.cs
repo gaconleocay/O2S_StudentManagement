@@ -5,10 +5,10 @@
 
 using System.Linq;
 using O2S_QuanLyHocVien.DataAccess;
-using static BusinessLogic.GlobalSettings;
+using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using System.Collections.Generic;
 
-namespace BusinessLogic
+namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class TaiKhoan
     {

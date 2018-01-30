@@ -4,10 +4,10 @@
 // Writing by NhatHM (hongminhnhat15@gmail.com)
 
 using System.Linq;
-using static BusinessLogic.GlobalSettings;
+using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using O2S_QuanLyHocVien.DataAccess;
 
-namespace BusinessLogic
+namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class KhoaHoc
     {

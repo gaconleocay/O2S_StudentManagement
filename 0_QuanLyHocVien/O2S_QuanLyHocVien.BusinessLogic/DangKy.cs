@@ -7,10 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static BusinessLogic.GlobalSettings;
+using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using O2S_QuanLyHocVien.DataAccess;
 
-namespace BusinessLogic
+namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class DangKy
     {

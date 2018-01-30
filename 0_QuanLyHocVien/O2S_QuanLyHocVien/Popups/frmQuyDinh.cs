@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 
 namespace O2S_QuanLyHocVien.Popups

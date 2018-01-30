@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using O2S_QuanLyHocVien.DataAccess;
 
-namespace BusinessLogic
+namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class LoaiHV
     {

@@ -6,7 +6,7 @@
 using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.DataAccess;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 
 namespace O2S_QuanLyHocVien.Popups
 {

@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 using System.Data;
 using O2S_QuanLyHocVien.BusinessLogic.Properties;
 
-namespace BusinessLogic
+namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public enum UserType { NhanVien, HocVien, GiangVien }
     public static class GlobalSettings

@@ -5,9 +5,10 @@
 
 using System;
 using System.Windows.Forms;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using O2S_QuanLyHocVien.Popups;
+using System.Globalization;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -106,7 +107,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void frmQuanLyLopHoc_Load(object sender, EventArgs e)
         {
-            dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.Now;
+            dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             cboKhoa.DataSource = KhoaHoc.SelectAll();
             cboKhoa.DisplayMember = "TenKH";

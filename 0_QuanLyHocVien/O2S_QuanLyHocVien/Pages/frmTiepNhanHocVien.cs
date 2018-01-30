@@ -5,9 +5,10 @@
 
 using System;
 using System.Windows.Forms;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using System.Threading;
+using System.Globalization;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -138,7 +139,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 MaHV = txtMaHV.Text,
                 TenHV = txtHoTen.Text,
-                NgaySinh = dateNgaySinh.Value,
+                NgaySinh = DateTime.ParseExact(dateNgaySinh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 GioiTinhHV = cboGioiTinh.Text,
                 DiaChi = txtDiaChi.Text,
                 SdtHV = txtSDT.Text,

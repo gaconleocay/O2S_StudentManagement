@@ -5,8 +5,9 @@
 
 using System;
 using System.Windows.Forms;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
+using System.Globalization;
 
 namespace O2S_QuanLyHocVien.Popups
 {
@@ -70,7 +71,7 @@ namespace O2S_QuanLyHocVien.Popups
                     MaHV = txtMaHV.Text,
                     TenHV = txtTenHV.Text,
                     GioiTinhHV = cboGioiTinh.Text,
-                    NgaySinh = dateNgaySinh.Value,
+                    NgaySinh = DateTime.ParseExact(dateNgaySinh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     DiaChi = txtDiaChi.Text,
                     SdtHV = txtSDT.Text,
                     EmailHV = txtEmail.Text,

@@ -5,7 +5,7 @@
 
 using System;
 using System.Windows.Forms;
-using BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using System.Threading;
 using O2S_QuanLyHocVien.Reports;
 using Microsoft.Reporting.WinForms;

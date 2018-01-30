@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
@@ -449,8 +449,8 @@
             // clmMaLop
             // 
             this.clmMaLop.DataPropertyName = "MaLop";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaLop.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue;
+            this.clmMaLop.DefaultCellStyle = dataGridViewCellStyle3;
             this.clmMaLop.FillWeight = 70F;
             this.clmMaLop.HeaderText = "Mã lớp";
             this.clmMaLop.Name = "clmMaLop";
@@ -459,8 +459,8 @@
             // clmTenLop
             // 
             this.clmTenLop.DataPropertyName = "TenLop";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
-            this.clmTenLop.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Green;
+            this.clmTenLop.DefaultCellStyle = dataGridViewCellStyle4;
             this.clmTenLop.FillWeight = 93.27411F;
             this.clmTenLop.HeaderText = "Tên lớp";
             this.clmTenLop.Name = "clmTenLop";

@@ -29,6 +29,7 @@ namespace O2S_QuanLyHocVienLauncher
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
+
                 if (CheckVersionUpdate()) //update - co ban cap nhat moi
                 {
                     DialogResult dialogResult = MessageBox.Show("Bạn có muốn cập nhật lên phiên bản mới? \nHãy tắt phần mềm đang chạy trước khi cập nhật.", "Thông báo có phiên bản mới.", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
@@ -43,13 +44,13 @@ namespace O2S_QuanLyHocVienLauncher
                     CopyFolder_CheckSum(tempDirectory, Environment.CurrentDirectory);
                 }
 
-                System.Diagnostics.Process.Start(@"O2S StudentManagement.exe");
+                System.Diagnostics.Process.Start(@"O2S_QuanLyHocVien.exe");
                 Application.Exit();
             }
             catch (Exception ex)
             {
                // O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
-                System.Diagnostics.Process.Start(@"O2S StudentManagement.exe");
+                System.Diagnostics.Process.Start(@"O2S_QuanLyHocVien.exe");
                 Application.Exit();
             }
         }
@@ -59,18 +60,18 @@ namespace O2S_QuanLyHocVienLauncher
             bool result = false;
             try
             {
-                DataView dataVer = new DataView(condb.GetDataTable("SELECT top 1 appversion,app_link from SM_VERSION where app_type=0;"));
+                DataView dataVer = new DataView(condb.GetDataTable("SELECT top 1 AppVersion,AppLink from VERSION where AppType=0;"));
                 if (dataVer != null && dataVer.Count > 0)
                 {
                     //versionDatabase = dataVer[0]["appversion"].ToString();
-                    tempDirectory = dataVer[0]["app_link"].ToString();
+                    tempDirectory = dataVer[0]["AppLink"].ToString();
                 }
-                //lấy thông tin version của phần mềm O2S StudentManagement.exe hien tai
-                FileVersionInfo.GetVersionInfo(Path.Combine(Environment.CurrentDirectory, "O2S StudentManagement.exe"));
-                FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.CurrentDirectory + "\\O2S StudentManagement.exe");
+                //lấy thông tin version của phần mềm O2S_QuanLyHocVien.exe hien tai
+                FileVersionInfo.GetVersionInfo(Path.Combine(Environment.CurrentDirectory, "O2S_QuanLyHocVien.exe"));
+                FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.CurrentDirectory + "\\O2S_QuanLyHocVien.exe");
                 //thong tin version tren server
-                FileVersionInfo.GetVersionInfo(Path.Combine(tempDirectory, "O2S StudentManagement.exe"));
-                FileVersionInfo myFileVersionInfo_Server = FileVersionInfo.GetVersionInfo(tempDirectory + "\\O2S StudentManagement.exe");
+                FileVersionInfo.GetVersionInfo(Path.Combine(tempDirectory, "O2S_QuanLyHocVien.exe"));
+                FileVersionInfo myFileVersionInfo_Server = FileVersionInfo.GetVersionInfo(tempDirectory + "\\O2S_QuanLyHocVien.exe");
 
                 if (myFileVersionInfo.FileVersion.ToString() != myFileVersionInfo_Server.FileVersion.ToString())
                 {
@@ -88,7 +89,7 @@ namespace O2S_QuanLyHocVienLauncher
         {
             try
             {
-                Process[] pProcess = System.Diagnostics.Process.GetProcessesByName("O2S StudentManagement");
+                Process[] pProcess = System.Diagnostics.Process.GetProcessesByName("O2S_QuanLyHocVien");
                 foreach (Process p in pProcess)
                 {
                     p.Kill();
