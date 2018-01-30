@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Globalization;
 using System.Configuration;
+using O2S_License.PasswordKey;
 
 namespace O2S_QuanLyHocVien
 {
@@ -211,6 +212,9 @@ namespace O2S_QuanLyHocVien
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
                 string version = fvi.FileVersion;
                 this.Text = "Quản lý Học viên Trung tâm Anh ngữ (v" + version + ")";
+
+                lblCenterName.Text = GlobalSettings.CenterName;
+                lblServerName.Text = GlobalSettings.ServerName;
             }
             catch (Exception ex)
             {
@@ -677,13 +681,6 @@ namespace O2S_QuanLyHocVien
             frm.ShowDialog();
         }
 
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            lblCenterName.Text = GlobalSettings.CenterName;
-            lblServerName.Text = GlobalSettings.ServerName;
-            lblDateTime.Text = DateTime.Now.ToString();
-        }
-
         private void btnThayDoiThongTinNV_Click(object sender, EventArgs e)
         {
             frmThayDoiThongTinNV frm = new frmThayDoiThongTinNV();
@@ -762,9 +759,45 @@ namespace O2S_QuanLyHocVien
             btnThongTinTrungTam.Enabled = true;
         }
 
+
+
         #endregion
 
-      
-  
+        #region Timer
+        private void timerKiemTraLicense_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Base.SessionLogin.SessionUsercode != KeyTrongPhanMem.AdminUser_key)
+                {
+                    Base.KiemTraLicense.KiemTraLicenseHopLe();
+                    if (Base.SessionLogin.KiemTraLicenseSuDung == false)
+                    {
+                        timerKiemTraLicense.Stop();
+                        DialogResult dialogResult = MessageBox.Show("Phần mềm hết bản quyền! \nVui lòng liên hệ với tác giả để được trợ giúp.\nAuthor: Hồng Minh Nhất \nE-mail: hongminhnhat15@gmail.com \nPhone: 0868-915-456", "Thông báo !!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        if (dialogResult == DialogResult.OK)
+                        {
+                            this.Visible = false;
+                            this.Dispose();
+                            frmDangNhap frm = new frmDangNhap();
+                            frm.Show();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            lblDateTime.Text = DateTime.Now.ToString();
+        }
+        #endregion
+
+
+
+
     }
 }

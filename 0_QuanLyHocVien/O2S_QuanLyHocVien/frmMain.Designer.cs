@@ -83,6 +83,7 @@
             this.lblServerName = new System.Windows.Forms.Button();
             this.pnlWorkspace = new System.Windows.Forms.Panel();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.timerKiemTraLicense = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabRibbon.SuspendLayout();
@@ -305,7 +306,7 @@
             this.tabGiangVien.Location = new System.Drawing.Point(4, 4);
             this.tabGiangVien.Name = "tabGiangVien";
             this.tabGiangVien.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGiangVien.Size = new System.Drawing.Size(1150, 62);
+            this.tabGiangVien.Size = new System.Drawing.Size(1184, 62);
             this.tabGiangVien.TabIndex = 1;
             this.tabGiangVien.Text = "Giảng viên";
             // 
@@ -367,7 +368,7 @@
             this.tabHocVien.Controls.Add(this.btnBangDiem);
             this.tabHocVien.Location = new System.Drawing.Point(4, 4);
             this.tabHocVien.Name = "tabHocVien";
-            this.tabHocVien.Size = new System.Drawing.Size(1150, 62);
+            this.tabHocVien.Size = new System.Drawing.Size(1184, 62);
             this.tabHocVien.TabIndex = 2;
             this.tabHocVien.Text = "Học viên";
             // 
@@ -466,7 +467,7 @@
             this.tabQuanTri.Controls.Add(this.btnQuanLyHocVien);
             this.tabQuanTri.Location = new System.Drawing.Point(4, 4);
             this.tabQuanTri.Name = "tabQuanTri";
-            this.tabQuanTri.Size = new System.Drawing.Size(1150, 62);
+            this.tabQuanTri.Size = new System.Drawing.Size(1184, 62);
             this.tabQuanTri.TabIndex = 3;
             this.tabQuanTri.Text = "Quản trị";
             // 
@@ -638,7 +639,7 @@
             this.tabTroGiup.Controls.Add(this.btnTroGiup);
             this.tabTroGiup.Location = new System.Drawing.Point(4, 4);
             this.tabTroGiup.Name = "tabTroGiup";
-            this.tabTroGiup.Size = new System.Drawing.Size(1150, 62);
+            this.tabTroGiup.Size = new System.Drawing.Size(1184, 62);
             this.tabTroGiup.TabIndex = 4;
             this.tabTroGiup.Text = "Trợ giúp";
             // 
@@ -894,6 +895,11 @@
             this.timer.Interval = 50;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // timerKiemTraLicense
+            // 
+            this.timerKiemTraLicense.Interval = 360000;
+            this.timerKiemTraLicense.Tick += new System.EventHandler(this.timerKiemTraLicense_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -982,5 +988,6 @@
         private System.Windows.Forms.Button btnDangXuat;
         private System.Windows.Forms.Button btnKetNoiCSDL;
         private System.Windows.Forms.Label lblUserName;
+        private System.Windows.Forms.Timer timerKiemTraLicense;
     }
 }

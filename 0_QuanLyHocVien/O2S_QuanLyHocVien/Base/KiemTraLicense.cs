@@ -9,26 +9,24 @@ using System.Threading.Tasks;
 using O2S_QuanLyHocVien.Common;
 using System.Configuration;
 using O2S_License.PasswordKey;
+using O2S_QuanLyHocVien.BusinessLogic;
+using O2S_QuanLyHocVien.DataAccess;
+
 
 namespace O2S_QuanLyHocVien.Base
 {
     internal static class KiemTraLicense
     {
-        //static DAL.ConnectDatabase condb = new DAL.ConnectDatabase();
+        static DAL.ConnectDatabase condb = new DAL.ConnectDatabase();
 
         internal static void KiemTraLicenseHopLe()
         {
             try
             {
                 SessionLogin.KiemTraLicenseSuDung = false;
-                string license_keydb = "";
                 //Load License tu DB ra
-                //using (var db = new O2S_QuanLyHocVienEntities())
-                //{
-                //    license_keydb = db.SM_LICENSE.Where(o => o.datakey == SessionLogin.MaDatabase).SingleOrDefault().licensekey;
-                //}
-
-                if (license_keydb != "")
+                string license_keydb = BusinessLogic.License.Select(SessionLogin.MaDatabase).LicenseKey ?? null;
+                if (license_keydb != null)
                 {
                     //Giai ma
                     string makichhoat_giaima = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(license_keydb, true);
@@ -39,12 +37,12 @@ namespace O2S_QuanLyHocVien.Base
                     //lay thoi gian may chu database: neu khong lay duoc thi lay thoi gian tren may client
                     try
                     {
-                        //string sql_dateDB = "SELECT FORMAT(SYSDATETIME(),'yyyyMMdd') as sysdatedb;";
-                        //DataView dtdatetime = new DataView(condb.GetDataTable(sql_dateDB));
-                        //if (dtdatetime != null && dtdatetime.Count > 0)
-                        //{
-                        //    datetimenow = Common.TypeConvert.TypeConvertParse.ToInt64(dtdatetime[0]["sysdatedb"].ToString());
-                        //}
+                        string sql_dateDB = "SELECT FORMAT(SYSDATETIME(),'yyyyMMdd') as 'yyyyMMdd';";
+                        DataView dtdatetime = new DataView(condb.GetDataTable(sql_dateDB));
+                        if (dtdatetime != null && dtdatetime.Count > 0)
+                        {
+                            datetimenow = Common.TypeConvert.TypeConvertParse.ToInt64(dtdatetime[0]["yyyyMMdd"].ToString());
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -89,14 +87,14 @@ namespace O2S_QuanLyHocVien.Base
             string MaDatabase = "";
             try
             {
-                //string serveruser_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
+                string serveruser_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
 
-                //string sqlLayMaDatabase = "select service_broker_guid from sys.databases where name='" + serveruser_SM + "';";
-                //DataView dataMaDB = new DataView(condb.GetDataTable(sqlLayMaDatabase));
-                //if (dataMaDB != null && dataMaDB.Count > 0)
-                //{
-                //    MaDatabase = dataMaDB[0]["service_broker_guid"].ToString().ToUpper();
-                //}
+                string sqlLayMaDatabase = "select service_broker_guid from sys.databases where name='" + serveruser_SM + "';";
+                DataView dataMaDB = new DataView(condb.GetDataTable(sqlLayMaDatabase));
+                if (dataMaDB != null && dataMaDB.Count > 0)
+                {
+                    MaDatabase = dataMaDB[0]["service_broker_guid"].ToString().ToUpper();
+                }
             }
             catch (Exception ex)
             {
@@ -142,7 +140,7 @@ namespace O2S_QuanLyHocVien.Base
                 {
                     mamay_keykichhoat = makichhoat_tach[1];
                     mabanquyenkhongthoihan = makichhoat_tach[2];
-                    if (mamay_keykichhoat == SessionLogin.MaDatabase && mabanquyenkhongthoihan ==KeyTrongPhanMem.BanQuyenKhongThoiHan)
+                    if (mamay_keykichhoat == SessionLogin.MaDatabase && mabanquyenkhongthoihan == KeyTrongPhanMem.BanQuyenKhongThoiHan)
                     {
                         thoiGianSuDung = "License không thời hạn!";
                     }
