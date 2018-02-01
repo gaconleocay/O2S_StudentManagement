@@ -115,6 +115,7 @@
     <Compile Include="Base\ReadExcelFile.cs" />
     <Compile Include="Base\SessionLogin.cs" />
     <Compile Include="Base\ThongBaoLable.cs" />
+    <Compile Include="DAL\ConnectDatabase.cs" />
     <Compile Include="Pages\frmBangDiem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +139,12 @@
     </Compile>
     <Compile Include="Pages\frmQuanLyHocPhi.Designer.cs">
       <DependentUpon>frmQuanLyHocPhi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Popups\frmDangKyBanQuyen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Popups\frmDangKyBanQuyen.Designer.cs">
+      <DependentUpon>frmDangKyBanQuyen.cs</DependentUpon>
     </Compile>
     <Compile Include="Popups\frmQuyDinh.cs">
       <SubType>Form</SubType>
@@ -380,6 +387,9 @@
     <EmbeddedResource Include="Pages\frmQuanLyHocPhi.resx">
       <DependentUpon>frmQuanLyHocPhi.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Popups\frmDangKyBanQuyen.resx">
+      <DependentUpon>frmDangKyBanQuyen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Popups\frmQuyDinh.resx">
       <DependentUpon>frmQuyDinh.cs</DependentUpon>
     </EmbeddedResource>
@@ -503,6 +513,9 @@
       <DependentUpon>WaitForm1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="AppSettings.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -653,6 +666,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.ico" />
+    <None Include="Resources\key-16.png" />
+    <None Include="Resources\fantasy-16.png" />
+    <None Include="Resources\question-mark-16.png" />
+    <None Include="Resources\info-16.png" />
+    <None Include="Resources\add-database-16.png" />
+    <None Include="Resources\settings-19-16.png" />
+    <None Include="Resources\us-dollar-161.png" />
+    <None Include="Resources\book-16-16.png" />
+    <None Include="Resources\house-16.png" />
+    <None Include="Resources\us-dollar-16.png" />
+    <None Include="Resources\list-2-161.png" />
+    <None Include="Resources\edit-5-16.png" />
+    <None Include="Resources\unlock-16.png" />
+    <None Include="Resources\list-2-16.png" />
+    <None Include="Resources\bar-chart-5-16.png" />
+    <None Include="Resources\text-file-4-16.png" />
+    <None Include="Resources\pie-16.png" />
+    <None Include="Resources\excel-3-16.png" />
+    <None Include="Resources\edit-11-16.png" />
+    <None Include="Resources\plus-2-16.png" />
+    <None Include="Resources\user-2-16.png" />
+    <None Include="Resources\group-16.png" />
+    <None Include="Resources\administrator-16.png" />
     <None Include="Resources\ec-logo.png" />
     <None Include="Resources\remove_16x16.png" />
     <None Include="Resources\add_16x16.png" />

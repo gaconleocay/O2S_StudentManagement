@@ -92,8 +92,15 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void cboLop_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (isLoaded)
-                LoadBangDiem(GlobalSettings.UserName, cboLop.SelectedValue.ToString());
+            try
+            {
+                if (isLoaded)
+                    LoadBangDiem(GlobalSettings.UserName, cboLop.SelectedValue.ToString());
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         #endregion

@@ -30,7 +30,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return (from p in Database.KHOAHOCs
                     where p.MaKH == maKH
-                    select p).Single();
+                    select p).FirstOrDefault();
         }
 
         /// <summary>

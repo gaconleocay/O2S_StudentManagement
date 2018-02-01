@@ -23,7 +23,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return (from p in Database.NHANVIENs
                     where p.MaNV == maNV
-                    select p).Single();
+                    select p).FirstOrDefault();
         }
 
         /// <summary>

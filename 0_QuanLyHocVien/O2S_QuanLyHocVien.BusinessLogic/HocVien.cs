@@ -79,7 +79,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return (from p in GlobalSettings.Database.HOCVIENs
                     where p.MaHV == maHV
-                    select p).Single();
+                    select p).FirstOrDefault();
         }
 
         /// <summary>

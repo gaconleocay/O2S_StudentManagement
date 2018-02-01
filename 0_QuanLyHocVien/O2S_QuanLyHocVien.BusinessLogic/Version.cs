@@ -21,7 +21,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return (from p in Database.VERSIONs
                     where p.AppType == _AppType
-                    select p).Single();
+                    select p).FirstOrDefault();
         }
 
         /// <summary>

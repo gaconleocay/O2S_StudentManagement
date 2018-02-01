@@ -100,7 +100,7 @@ namespace O2S_QuanLyHocVien
             switch (userType)
             {
                 case UserType.NhanVien:
-                    string nvType = NhanVien.Select(GlobalSettings.UserID).MaLoaiNV;
+                    string nvType = NhanVien.Select(GlobalSettings.UserID) != null ? NhanVien.Select(GlobalSettings.UserID).MaLoaiNV : "";
                     switch (nvType)
                     {
                         //nhân viên ghi danh
@@ -127,6 +127,7 @@ namespace O2S_QuanLyHocVien
                             btnQuanLyTaiKhoan.Enabled = false;
                             btnThayDoiQuyDinh.Enabled = false;
                             btnKetNoiCSDL.Enabled = false;
+                            btnBanQuyen.Enabled = false;
                             btnQuanLyTaiKhoan.Enabled = false;
                             btnThongTinTrungTam.Enabled = false;
                             btnNhanVienTitle_Click(btnNhanVienTitle, null);
@@ -149,6 +150,7 @@ namespace O2S_QuanLyHocVien
                             btnQuanLyTaiKhoan.Enabled = false;
                             btnThayDoiQuyDinh.Enabled = false;
                             btnKetNoiCSDL.Enabled = false;
+                            btnBanQuyen.Enabled = false;
                             btnQuanLyTaiKhoan.Enabled = false;
                             btnThongTinTrungTam.Enabled = false;
                             btnNhanVienTitle_Click(btnNhanVienTitle, null);
@@ -245,10 +247,10 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            tabRibbon.SelectedTab = tabRibbon.TabPages["tabNhanVien"];
+                tabRibbon.SelectedTab = tabRibbon.TabPages["tabNhanVien"];
 
-            ResetColorTabTitle();
-            ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
+                ResetColorTabTitle();
+                ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
             }
             catch (Exception ex)
             {
@@ -260,10 +262,10 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            tabRibbon.SelectedTab = tabRibbon.TabPages["tabGiangVien"];
+                tabRibbon.SelectedTab = tabRibbon.TabPages["tabGiangVien"];
 
-            ResetColorTabTitle();
-            ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
+                ResetColorTabTitle();
+                ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
             }
             catch (Exception ex)
             {
@@ -275,10 +277,10 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            tabRibbon.SelectedTab = tabRibbon.TabPages["tabHocVien"];
+                tabRibbon.SelectedTab = tabRibbon.TabPages["tabHocVien"];
 
-            ResetColorTabTitle();
-            ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
+                ResetColorTabTitle();
+                ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
             }
             catch (Exception ex)
             {
@@ -290,10 +292,10 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            tabRibbon.SelectedTab = tabRibbon.TabPages["tabQuanTri"];
+                tabRibbon.SelectedTab = tabRibbon.TabPages["tabQuanTri"];
 
-            ResetColorTabTitle();
-            ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
+                ResetColorTabTitle();
+                ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
             }
             catch (Exception ex)
             {
@@ -305,10 +307,10 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-           tabRibbon.SelectedTab = tabRibbon.TabPages["tabTroGiup"];
+                tabRibbon.SelectedTab = tabRibbon.TabPages["tabTroGiup"];
 
-            ResetColorTabTitle();
-            ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
+                ResetColorTabTitle();
+                ((Button)sender).BackColor = Color.FromArgb(233, 233, 233);
             }
             catch (Exception ex)
             {
@@ -335,17 +337,17 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            pnlWorkspace.Controls.Clear();
+                pnlWorkspace.Controls.Clear();
 
-            if (GlobalPages.TiepNhanHocVien == null)
-                GlobalPages.TiepNhanHocVien = new frmTiepNhanHocVien()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+                if (GlobalPages.TiepNhanHocVien == null)
+                    GlobalPages.TiepNhanHocVien = new frmTiepNhanHocVien()
+                    {
+                        Dock = DockStyle.Fill,
+                        TopLevel = false
+                    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.TiepNhanHocVien);
-            GlobalPages.TiepNhanHocVien.Show();
+                pnlWorkspace.Controls.Add(GlobalPages.TiepNhanHocVien);
+                GlobalPages.TiepNhanHocVien.Show();
             }
             catch (Exception ex)
             {
@@ -357,17 +359,17 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            pnlWorkspace.Controls.Clear();
+                pnlWorkspace.Controls.Clear();
 
-            if (GlobalPages.LapPhieuGhiDanh == null)
-                GlobalPages.LapPhieuGhiDanh = new frmLapPhieuGhiDanh()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+                if (GlobalPages.LapPhieuGhiDanh == null)
+                    GlobalPages.LapPhieuGhiDanh = new frmLapPhieuGhiDanh()
+                    {
+                        Dock = DockStyle.Fill,
+                        TopLevel = false
+                    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.LapPhieuGhiDanh);
-            GlobalPages.LapPhieuGhiDanh.Show();
+                pnlWorkspace.Controls.Add(GlobalPages.LapPhieuGhiDanh);
+                GlobalPages.LapPhieuGhiDanh.Show();
             }
             catch (Exception ex)
             {
@@ -403,17 +405,17 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            pnlWorkspace.Controls.Clear();
+                pnlWorkspace.Controls.Clear();
 
-            if (GlobalPages.BangDiem == null)
-                GlobalPages.BangDiem = new frmBangDiem()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+                if (GlobalPages.BangDiem == null)
+                    GlobalPages.BangDiem = new frmBangDiem()
+                    {
+                        Dock = DockStyle.Fill,
+                        TopLevel = false
+                    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.BangDiem);
-            GlobalPages.BangDiem.Show();
+                pnlWorkspace.Controls.Add(GlobalPages.BangDiem);
+                GlobalPages.BangDiem.Show();
             }
             catch (Exception ex)
             {
@@ -425,17 +427,17 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            pnlWorkspace.Controls.Clear();
+                pnlWorkspace.Controls.Clear();
 
-            if (GlobalPages.XemCacLopDay == null)
-                GlobalPages.XemCacLopDay = new frmXemCacLopDay()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+                if (GlobalPages.XemCacLopDay == null)
+                    GlobalPages.XemCacLopDay = new frmXemCacLopDay()
+                    {
+                        Dock = DockStyle.Fill,
+                        TopLevel = false
+                    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.XemCacLopDay);
-            GlobalPages.XemCacLopDay.Show();
+                pnlWorkspace.Controls.Add(GlobalPages.XemCacLopDay);
+                GlobalPages.XemCacLopDay.Show();
             }
             catch (Exception ex)
             {
@@ -447,17 +449,17 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            pnlWorkspace.Controls.Clear();
+                pnlWorkspace.Controls.Clear();
 
-            if (GlobalPages.HocPhiHocVien == null)
-                GlobalPages.HocPhiHocVien = new frmHocPhiHocVien()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+                if (GlobalPages.HocPhiHocVien == null)
+                    GlobalPages.HocPhiHocVien = new frmHocPhiHocVien()
+                    {
+                        Dock = DockStyle.Fill,
+                        TopLevel = false
+                    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.HocPhiHocVien);
-            GlobalPages.HocPhiHocVien.Show();
+                pnlWorkspace.Controls.Add(GlobalPages.HocPhiHocVien);
+                GlobalPages.HocPhiHocVien.Show();
             }
             catch (Exception ex)
             {
@@ -469,17 +471,17 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            pnlWorkspace.Controls.Clear();
+                pnlWorkspace.Controls.Clear();
 
-            if (GlobalPages.CacLopDaHoc == null)
-                GlobalPages.CacLopDaHoc = new frmCacLopDaHoc()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+                if (GlobalPages.CacLopDaHoc == null)
+                    GlobalPages.CacLopDaHoc = new frmCacLopDaHoc()
+                    {
+                        Dock = DockStyle.Fill,
+                        TopLevel = false
+                    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.CacLopDaHoc);
-            GlobalPages.CacLopDaHoc.Show();
+                pnlWorkspace.Controls.Add(GlobalPages.CacLopDaHoc);
+                GlobalPages.CacLopDaHoc.Show();
             }
             catch (Exception ex)
             {
@@ -491,17 +493,17 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            pnlWorkspace.Controls.Clear();
+                pnlWorkspace.Controls.Clear();
 
-            if (GlobalPages.QuanLyHocVien == null)
-                GlobalPages.QuanLyHocVien = new frmQuanLyHocVien()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+                if (GlobalPages.QuanLyHocVien == null)
+                    GlobalPages.QuanLyHocVien = new frmQuanLyHocVien()
+                    {
+                        Dock = DockStyle.Fill,
+                        TopLevel = false
+                    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.QuanLyHocVien);
-            GlobalPages.QuanLyHocVien.Show();
+                pnlWorkspace.Controls.Add(GlobalPages.QuanLyHocVien);
+                GlobalPages.QuanLyHocVien.Show();
             }
             catch (Exception ex)
             {
@@ -648,11 +650,11 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-            pnlWorkspace.Controls.Clear();
+                pnlWorkspace.Controls.Clear();
 
-            frmTrangMoDau frm = new frmTrangMoDau() { Dock = DockStyle.Fill, TopLevel = false };
-            pnlWorkspace.Controls.Add(frm);
-            frm.Show();
+                frmTrangMoDau frm = new frmTrangMoDau() { Dock = DockStyle.Fill, TopLevel = false };
+                pnlWorkspace.Controls.Add(frm);
+                frm.Show();
             }
             catch (Exception ex)
             {
@@ -705,7 +707,18 @@ namespace O2S_QuanLyHocVien
             frmKetNoiCSDL frm = new frmKetNoiCSDL();
             frm.ShowDialog();
         }
-
+        private void btnBanQuyen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmDangKyBanQuyen frm = new frmDangKyBanQuyen();
+                frm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
         private void btnTroGiup_Click(object sender, EventArgs e)
         {
             //Process.Start("https://");
@@ -755,6 +768,7 @@ namespace O2S_QuanLyHocVien
             btnQuanLyTaiKhoan.Enabled = true;
             btnThayDoiQuyDinh.Enabled = true;
             btnKetNoiCSDL.Enabled = true;
+            btnBanQuyen.Enabled = true;
             btnQuanLyTaiKhoan.Enabled = true;
             btnThongTinTrungTam.Enabled = true;
         }
@@ -794,9 +808,10 @@ namespace O2S_QuanLyHocVien
         {
             lblDateTime.Text = DateTime.Now.ToString();
         }
+
+
+
         #endregion
-
-
 
 
     }

@@ -18,7 +18,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static CHITIETTRUNGTAM Select()
         {
             return (from p in Database.CHITIETTRUNGTAMs
-                    select p).Single();
+                    select p).FirstOrDefault();
         }
 
         /// <summary>

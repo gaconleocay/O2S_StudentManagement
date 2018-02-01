@@ -16,7 +16,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return (from p in Database.LICENSEs
                     where p.DataKey == _DataKey
-                    select p).Single();
+                    select p).FirstOrDefault();
         }
 
         public static void Delete(string _DataKey)

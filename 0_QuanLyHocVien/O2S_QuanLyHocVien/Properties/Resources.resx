@@ -118,131 +118,56 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cancel_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cancel_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_XemDiem_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_XemDiem_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="add_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_ThongTin_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_ThongTin_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_QuanLyDiem_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_QuanLyDiem_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_TrungTam_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_TrungTam_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="remove_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\remove_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="additem_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\additem_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_NhanVien_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_NhanVien_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_CSDL_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_CSDL_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_Lop_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_Lop_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_GiangVien_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_GiangVien_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="refresh2_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\refresh2_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="zoom_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\zoom_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_DangNhap_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_DangNhap_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="edit_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\edit_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_HocVien_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_HocVien_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_KhoaHoc_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_KhoaHoc_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_Server_16dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_Server_16dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_MatKhau_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_MatKhau_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_LapPhieuGhiDanh_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_LapPhieuGhiDanh_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_TiepNhanHocVien_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_TiepNhanHocVien_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_MatKhau_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_MatKhau_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_GiangVien_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_GiangVien_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_TroGiup_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_TroGiup_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_XepLop_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_XepLop_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_LopHoc_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_LopHoc_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_Time_16dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_Time_16dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="refresh_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\refresh_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ec-logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ec-logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_DangNhap_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_DangNhap_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="save_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\save_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="deletelist_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\deletelist_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="add-database-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\add-database-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_NhanVien_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_NhanVien_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pie-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pie-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="show_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\show_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_TrungTam_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_TrungTam_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_ThongKeHocPhi_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_ThongKeHocPhi_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="house-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\house-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_LopHoc_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_LopHoc_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_GiangVien_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_GiangVien_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_Close_9dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_Close_9dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_XepLop_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_XepLop_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_TrangMoDau_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_TrangMoDau_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_NguoiDung_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_NguoiDung_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_TroGiup_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_TroGiup_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_ThayDoiThongTin_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_ThayDoiThongTin_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_DangNhap_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_DangNhap_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_TrungTam_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_TrungTam_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_BangDiem_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_BangDiem_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_LapPhieuGhiDanh_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_LapPhieuGhiDanh_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_HocVien_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_HocVien_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refresh_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_ThongTin_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_ThongTin_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_DangNhap_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_DangNhap_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_CSDL_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_CSDL_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -250,19 +175,163 @@
   <data name="icon_CaiDat_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_CaiDat_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="deletelist_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\deletelist_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_Lop_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_Lop_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_GiangVien_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_GiangVien_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_ThongKeHocPhi_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_ThongKeHocPhi_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="info-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\info-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_CSDL_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_CSDL_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fantasy-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fantasy-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="administrator_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\administrator-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="plus-2-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\plus-2-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_MatKhau_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_MatKhau_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="list-2-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list-2-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="us-dollar-161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\us-dollar-161.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_BangDiem_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_BangDiem_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bar-chart-5-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bar-chart-5-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_TroGiup_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_TroGiup_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_MatKhau_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_MatKhau_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_NguoiDung_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_NguoiDung_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_BaoCaoHocVienTheoThang_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_BaoCaoHocVienTheoThang_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="print_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\print_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_Server_16dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_Server_16dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="add_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\add_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="excel-3-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\excel-3-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="list-2-161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list-2-161.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="group_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\group-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="us-dollar-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\us-dollar-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_TroGiup_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_TroGiup_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_QuanLyHocVien_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_QuanLyHocVien_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_KhoaHoc_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_KhoaHoc_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_NhanVien_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_NhanVien_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_2_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-2-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_TiepNhanHocVien_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_TiepNhanHocVien_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_TrangMoDau_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_TrangMoDau_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="remove_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\remove_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_XemDiem_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_XemDiem_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="question-mark-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\question-mark-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_QuanLyDiem_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_QuanLyDiem_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="book-16-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\book-16-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zoom_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zoom_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit-5-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit-5-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="additem_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\additem_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="preview_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\preview_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ec-logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ec-logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="unlock-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\unlock-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit-11-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit-11-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_Close_9dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_Close_9dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="text-file-4-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\text-file-4-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_NhanVien_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_NhanVien_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_ThayDoiThongTin_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_ThayDoiThongTin_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh2_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refresh2_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="settings-19-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\settings-19-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="show_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\show_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="key-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\key-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

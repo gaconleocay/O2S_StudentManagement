@@ -21,7 +21,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return (from p in Database.TAIKHOANs
                     where p.TenDangNhap == tenDangNhap
-                    select p).Single();
+                    select p).FirstOrDefault();
         }
 
         /// <summary>
