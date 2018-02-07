@@ -14,6 +14,7 @@ using System.Threading;
 using System.Globalization;
 using System.Configuration;
 using O2S_License.PasswordKey;
+using O2S_QuanLyHocVien.Base;
 
 namespace O2S_QuanLyHocVien
 {
@@ -60,7 +61,10 @@ namespace O2S_QuanLyHocVien
                     HienThiThongTinVePhanMem_Version();
                     this.Show();
 
-                    timer.Start();
+                    timerClock.Start();
+                    timerKiemTraLicense.Interval = KeyTrongPhanMem.ThoiGianKiemTraLicense;
+                    timerKiemTraLicense.Start();
+                    KiemTraLicensevaEnableChucNang(); //kiem tra license truoc khi kiem tra phan quyen
                 }
             }
             catch (Exception ex)
@@ -190,7 +194,7 @@ namespace O2S_QuanLyHocVien
 
                 lblUserName.Text = GlobalSettings.UserName;
 
-                PhanQuyen(GlobalSettings.UserType, GlobalSettings.UserName);
+                //PhanQuyen(GlobalSettings.UserType, GlobalSettings.UserName);
                 pnlWorkspace.Controls.Clear();
 
                 if (GlobalSettings.UserType == UserType.NhanVien)
@@ -210,10 +214,10 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-                System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fvi.FileVersion;
-                this.Text = "Quản lý Học viên Trung tâm Anh ngữ (v" + version + ")";
+                //System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                //FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                //string version = fvi.FileVersion;
+                this.Text = "Quản lý Học viên Trung tâm Anh ngữ (v" + Application.ProductVersion + ")";
 
                 lblCenterName.Text = GlobalSettings.CenterName;
                 lblServerName.Text = GlobalSettings.ServerName;
@@ -224,6 +228,31 @@ namespace O2S_QuanLyHocVien
             }
         }
 
+        private void KiemTraLicensevaEnableChucNang()
+        {
+            try
+            {
+                //Kiểm tra phân quyền
+                if (SessionLogin.SessionUsercode != KeyTrongPhanMem.AdminUser_key)
+                {
+                    if (!SessionLogin.KiemTraLicenseSuDung)
+                    {
+                        EnableAndDisableTabChucNang(false);
+                        DialogResult dialogResult = MessageBox.Show("Phần mềm hết bản quyền! \nVui lòng liên hệ với tác giả để được trợ giúp.\nAuthor: Hồng Minh Nhất \nE-mail: hongminhnhat15@gmail.com \nPhone: 0868-915-456", "Thông báo !!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        btnTroGiupTitle_Click(null,null);
+                    }
+                    else
+                    {
+                        //KiemTraPhanQuyenNguoiDung();
+                        PhanQuyen(GlobalSettings.UserType, GlobalSettings.UserName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
         #endregion
 
 
@@ -788,14 +817,15 @@ namespace O2S_QuanLyHocVien
                     if (Base.SessionLogin.KiemTraLicenseSuDung == false)
                     {
                         timerKiemTraLicense.Stop();
+                        btnTroGiup.PerformClick();
                         DialogResult dialogResult = MessageBox.Show("Phần mềm hết bản quyền! \nVui lòng liên hệ với tác giả để được trợ giúp.\nAuthor: Hồng Minh Nhất \nE-mail: hongminhnhat15@gmail.com \nPhone: 0868-915-456", "Thông báo !!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        if (dialogResult == DialogResult.OK)
-                        {
-                            this.Visible = false;
-                            this.Dispose();
-                            frmDangNhap frm = new frmDangNhap();
-                            frm.Show();
-                        }
+                        //if (dialogResult == DialogResult.OK)
+                        //{
+                        //    this.Visible = false;
+                        //    this.Dispose();
+                        //    frmDangNhap frm = new frmDangNhap();
+                        //    frm.Show();
+                        //}
                     }
                 }
             }
@@ -813,6 +843,23 @@ namespace O2S_QuanLyHocVien
 
         #endregion
 
+        #region Process
+        private void EnableAndDisableTabChucNang(bool enabledisable)
+        {
+            try
+            {
+                btnNhanVienTitle.Visible = enabledisable;
+                btnGiangVienTitle.Visible = enabledisable;
+                btnHocVienTitle.Visible = enabledisable;
+                btnQuanTriTitle.Visible = enabledisable;
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+                throw;
+            }
+        }
+        #endregion
 
     }
 }

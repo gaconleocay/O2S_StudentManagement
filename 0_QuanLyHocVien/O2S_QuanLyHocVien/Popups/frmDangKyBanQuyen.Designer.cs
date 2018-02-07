@@ -105,7 +105,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(327, 118);
+            this.label7.Location = new System.Drawing.Point(341, 118);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(27, 15);
             this.label7.TabIndex = 62;
@@ -116,10 +116,9 @@
             this.dtTaoLicenseKeyDenNgay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtTaoLicenseKeyDenNgay.CustomFormat = "dd/MM/yyyy";
-            this.dtTaoLicenseKeyDenNgay.Enabled = false;
             this.dtTaoLicenseKeyDenNgay.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dtTaoLicenseKeyDenNgay.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtTaoLicenseKeyDenNgay.Location = new System.Drawing.Point(366, 110);
+            this.dtTaoLicenseKeyDenNgay.Location = new System.Drawing.Point(388, 110);
             this.dtTaoLicenseKeyDenNgay.Name = "dtTaoLicenseKeyDenNgay";
             this.dtTaoLicenseKeyDenNgay.Size = new System.Drawing.Size(196, 25);
             this.dtTaoLicenseKeyDenNgay.TabIndex = 61;
@@ -129,7 +128,6 @@
             this.dtTaoLicenseKeyTuNgay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtTaoLicenseKeyTuNgay.CustomFormat = "dd/MM/yyyy";
-            this.dtTaoLicenseKeyTuNgay.Enabled = false;
             this.dtTaoLicenseKeyTuNgay.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dtTaoLicenseKeyTuNgay.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtTaoLicenseKeyTuNgay.Location = new System.Drawing.Point(119, 110);
@@ -159,13 +157,12 @@
             // 
             this.btnTaoLicenseTao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTaoLicenseTao.BackColor = System.Drawing.Color.Silver;
-            this.btnTaoLicenseTao.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnTaoLicenseTao.FlatAppearance.BorderSize = 0;
             this.btnTaoLicenseTao.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.btnTaoLicenseTao.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnTaoLicenseTao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTaoLicenseTao.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnTaoLicenseTao.Location = new System.Drawing.Point(289, 173);
+            this.btnTaoLicenseTao.Location = new System.Drawing.Point(366, 170);
             this.btnTaoLicenseTao.Name = "btnTaoLicenseTao";
             this.btnTaoLicenseTao.Size = new System.Drawing.Size(100, 30);
             this.btnTaoLicenseTao.TabIndex = 52;
@@ -179,7 +176,7 @@
             this.txtTaoLicenseMaKichHoat.Location = new System.Drawing.Point(119, 241);
             this.txtTaoLicenseMaKichHoat.Multiline = true;
             this.txtTaoLicenseMaKichHoat.Name = "txtTaoLicenseMaKichHoat";
-            this.txtTaoLicenseMaKichHoat.Size = new System.Drawing.Size(443, 50);
+            this.txtTaoLicenseMaKichHoat.Size = new System.Drawing.Size(614, 50);
             this.txtTaoLicenseMaKichHoat.TabIndex = 51;
             // 
             // txtTaoLicensePassword
@@ -187,7 +184,8 @@
             this.txtTaoLicensePassword.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtTaoLicensePassword.Location = new System.Drawing.Point(119, 22);
             this.txtTaoLicensePassword.Name = "txtTaoLicensePassword";
-            this.txtTaoLicensePassword.Size = new System.Drawing.Size(443, 25);
+            this.txtTaoLicensePassword.PasswordChar = '*';
+            this.txtTaoLicensePassword.Size = new System.Drawing.Size(614, 25);
             this.txtTaoLicensePassword.TabIndex = 47;
             this.txtTaoLicensePassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTaoLicensePassword_KeyDown);
             // 
@@ -195,13 +193,12 @@
             // 
             this.btnTaoLicenseCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTaoLicenseCopy.BackColor = System.Drawing.Color.Silver;
-            this.btnTaoLicenseCopy.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnTaoLicenseCopy.FlatAppearance.BorderSize = 0;
             this.btnTaoLicenseCopy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.btnTaoLicenseCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnTaoLicenseCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTaoLicenseCopy.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnTaoLicenseCopy.Location = new System.Drawing.Point(568, 241);
+            this.btnTaoLicenseCopy.Location = new System.Drawing.Point(739, 241);
             this.btnTaoLicenseCopy.Name = "btnTaoLicenseCopy";
             this.btnTaoLicenseCopy.Size = new System.Drawing.Size(90, 50);
             this.btnTaoLicenseCopy.TabIndex = 50;
@@ -224,7 +221,7 @@
             this.txtTaoLicenseMaMay.Location = new System.Drawing.Point(119, 53);
             this.txtTaoLicenseMaMay.Multiline = true;
             this.txtTaoLicenseMaMay.Name = "txtTaoLicenseMaMay";
-            this.txtTaoLicenseMaMay.Size = new System.Drawing.Size(443, 49);
+            this.txtTaoLicenseMaMay.Size = new System.Drawing.Size(614, 49);
             this.txtTaoLicenseMaMay.TabIndex = 49;
             // 
             // label3
@@ -258,13 +255,12 @@
             // 
             this.btnLicenseLuu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLicenseLuu.BackColor = System.Drawing.Color.Silver;
-            this.btnLicenseLuu.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnLicenseLuu.FlatAppearance.BorderSize = 0;
             this.btnLicenseLuu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.btnLicenseLuu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnLicenseLuu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLicenseLuu.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnLicenseLuu.Location = new System.Drawing.Point(360, 108);
+            this.btnLicenseLuu.Location = new System.Drawing.Point(441, 113);
             this.btnLicenseLuu.Name = "btnLicenseLuu";
             this.btnLicenseLuu.Size = new System.Drawing.Size(100, 30);
             this.btnLicenseLuu.TabIndex = 47;
@@ -276,13 +272,12 @@
             // 
             this.btnLicenseKiemTra.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLicenseKiemTra.BackColor = System.Drawing.Color.Silver;
-            this.btnLicenseKiemTra.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnLicenseKiemTra.FlatAppearance.BorderSize = 0;
             this.btnLicenseKiemTra.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.btnLicenseKiemTra.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnLicenseKiemTra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLicenseKiemTra.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnLicenseKiemTra.Location = new System.Drawing.Point(221, 108);
+            this.btnLicenseKiemTra.Location = new System.Drawing.Point(302, 113);
             this.btnLicenseKiemTra.Name = "btnLicenseKiemTra";
             this.btnLicenseKiemTra.Size = new System.Drawing.Size(100, 30);
             this.btnLicenseKiemTra.TabIndex = 46;
@@ -294,9 +289,9 @@
             // 
             this.lblThoiGianSuDung.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblThoiGianSuDung.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lblThoiGianSuDung.Location = new System.Drawing.Point(119, 150);
+            this.lblThoiGianSuDung.Location = new System.Drawing.Point(115, 152);
             this.lblThoiGianSuDung.Name = "lblThoiGianSuDung";
-            this.lblThoiGianSuDung.Size = new System.Drawing.Size(443, 30);
+            this.lblThoiGianSuDung.Size = new System.Drawing.Size(618, 30);
             this.lblThoiGianSuDung.TabIndex = 42;
             this.lblThoiGianSuDung.Text = "Thời hạn";
             this.lblThoiGianSuDung.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -306,20 +301,19 @@
             this.txtMaMay.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtMaMay.Location = new System.Drawing.Point(119, 22);
             this.txtMaMay.Name = "txtMaMay";
-            this.txtMaMay.Size = new System.Drawing.Size(443, 25);
+            this.txtMaMay.Size = new System.Drawing.Size(614, 25);
             this.txtMaMay.TabIndex = 20;
             // 
             // btnLicenseCopy
             // 
             this.btnLicenseCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLicenseCopy.BackColor = System.Drawing.Color.Silver;
-            this.btnLicenseCopy.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnLicenseCopy.FlatAppearance.BorderSize = 0;
             this.btnLicenseCopy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.btnLicenseCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnLicenseCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLicenseCopy.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnLicenseCopy.Location = new System.Drawing.Point(568, 21);
+            this.btnLicenseCopy.Location = new System.Drawing.Point(739, 22);
             this.btnLicenseCopy.Name = "btnLicenseCopy";
             this.btnLicenseCopy.Size = new System.Drawing.Size(90, 25);
             this.btnLicenseCopy.TabIndex = 45;
@@ -342,7 +336,7 @@
             this.txtKeyKichHoat.Location = new System.Drawing.Point(119, 53);
             this.txtKeyKichHoat.Multiline = true;
             this.txtKeyKichHoat.Name = "txtKeyKichHoat";
-            this.txtKeyKichHoat.Size = new System.Drawing.Size(443, 49);
+            this.txtKeyKichHoat.Size = new System.Drawing.Size(614, 49);
             this.txtKeyKichHoat.TabIndex = 44;
             // 
             // label1

@@ -112,6 +112,7 @@ namespace O2S_QuanLyHocVien.Popups
             try
             {
                 LICENSE _license = new LICENSE();
+                _license.DataKey = txtMaMay.Text;
                 _license.LicenseKey = txtKeyKichHoat.Text.Trim();
                 try
                 {
@@ -159,8 +160,8 @@ namespace O2S_QuanLyHocVien.Popups
                     }
                     else
                     {
-                        string datetungay = DateTime.ParseExact(dtTaoLicenseKeyTuNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
-                        string datedenngay = DateTime.ParseExact(dtTaoLicenseKeyDenNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
+                        string datetungay = DateTime.ParseExact(dtTaoLicenseKeyTuNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
+                        string datedenngay = DateTime.ParseExact(dtTaoLicenseKeyDenNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
                         MaDatabaseVaThoiGianSuDung = KeyTrongPhanMem.SaltEncrypt + "$" + txtTaoLicenseMaMay.Text + "$" + datetungay + "$" + datedenngay;
                     }
                     txtTaoLicenseMaKichHoat.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(MaDatabaseVaThoiGianSuDung, true);
