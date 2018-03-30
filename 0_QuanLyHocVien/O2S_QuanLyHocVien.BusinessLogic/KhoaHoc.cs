@@ -11,10 +11,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class KhoaHoc
     {
-        /// <summary>
-        /// Chọn tất cả khóa học
-        /// </summary>
-        /// <returns></returns>
         public static object SelectAll()
         {
             return (from p in Database.KHOAHOCs
@@ -22,14 +18,25 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         }
 
         /// <summary>
-        /// Chọn một khóa học
+        /// Chọn tất cả khóa học theo cơ sở
         /// </summary>
-        /// <param name="maKH">Mã khóa học</param>
         /// <returns></returns>
-        public static KHOAHOC Select(string maKH)
+        public static object SelectTheoCoCo()
         {
             return (from p in Database.KHOAHOCs
-                    where p.MaKH == maKH
+                    where (p.MaCoSo == GlobalSettings.MaCoSo)
+                    select p).ToList();
+        }
+
+        /// <summary>
+        /// Chọn một khóa học
+        /// </summary>
+        /// <param name="MaKhoaHoc">Mã khóa học</param>
+        /// <returns></returns>
+        public static KHOAHOC Select(string MaKhoaHoc)
+        {
+            return (from p in Database.KHOAHOCs
+                    where p.MaKhoaHoc == MaKhoaHoc
                     select p).FirstOrDefault();
         }
 
@@ -49,14 +56,14 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <param name="kh">Khóa học cần sửa</param>
         public static void Update(KHOAHOC kh)
         {
-            var khoaHocCu = Select(kh.MaKH);
+            var khoaHocCu = Select(kh.MaKhoaHoc);
 
-            khoaHocCu.TenKH = kh.TenKH;
+            khoaHocCu.TenKhoaHoc = kh.TenKhoaHoc;
             khoaHocCu.HocPhi = kh.HocPhi;
-            khoaHocCu.HeSoNghe = kh.HeSoNghe;
-            khoaHocCu.HeSoNoi = kh.HeSoNoi;
-            khoaHocCu.HeSoDoc = kh.HeSoDoc;
-            khoaHocCu.HeSoViet = kh.HeSoViet;
+            //khoaHocCu.HeSoNghe = kh.HeSoNghe;
+            //khoaHocCu.HeSoNoi = kh.HeSoNoi;
+            //khoaHocCu.HeSoDoc = kh.HeSoDoc;
+            //khoaHocCu.HeSoViet = kh.HeSoViet;
 
             Database.SubmitChanges();
         }
@@ -64,27 +71,33 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <summary>
         /// Xóa một khóa học
         /// </summary>
-        /// <param name="maKH">Mã khóa học</param>
-        public static void Delete(string maKH)
+        /// <param name="MaKhoaHoc">Mã khóa học</param>
+        public static void Delete(string MaKhoaHoc)
         {
             var kh = (from p in Database.KHOAHOCs
-                      where p.MaKH == maKH
+                      where p.MaKhoaHoc == MaKhoaHoc
                       select p).Single();
 
             //xóa bảng đăng ký
             var dk = from p in Database.DANGKies
-                     where p.MaKH == maKH
+                     where p.MaKhoaHoc == MaKhoaHoc
                      select p;
             Database.DANGKies.DeleteAllOnSubmit(dk);
 
             //xóa bảng lớp học
             var l = from p in Database.LOPHOCs
-                    where p.MaKH == maKH
+                    where p.MaKhoaHoc == MaKhoaHoc
                     select p;
             foreach (var i in l)
             {
                 LopHoc.Delete(i.MaLop);
             }
+
+            //Xóa bảng [KHOAHOC_MONHOC]
+            var khmh = from p in Database.KHOAHOC_MONHOCs
+                     where p.MaKhoaHoc == MaKhoaHoc
+                     select p;
+            Database.KHOAHOC_MONHOCs.DeleteAllOnSubmit(khmh);
 
             //xóa khóa học
             Database.KHOAHOCs.DeleteOnSubmit(kh);
@@ -99,7 +112,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             string result = "KH";
             var temp = from p in GlobalSettings.Database.KHOAHOCs
-                       select p.MaKH;
+                       select p.MaKhoaHoc;
             int max = -1;
 
             foreach (var i in temp)
@@ -110,5 +123,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
             return string.Format("{0}{1:D2}", result, max + 1);
         }
+
     }
 }

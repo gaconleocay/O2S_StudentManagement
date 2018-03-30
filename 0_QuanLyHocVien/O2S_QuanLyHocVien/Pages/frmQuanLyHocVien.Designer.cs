@@ -31,11 +31,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gridDSHV = new System.Windows.Forms.DataGridView();
-            this.clmMaHV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenHV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmMaHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmNgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmGioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmSdtHV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmSdtHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmNgayTiepNhan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,9 +59,9 @@
             this.cboGioiTinh = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.chkGioiTinh = new System.Windows.Forms.CheckBox();
-            this.txtTenHV = new System.Windows.Forms.TextBox();
+            this.txtTenHocVien = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.chkTenHV = new System.Windows.Forms.CheckBox();
+            this.chkTenHocVien = new System.Windows.Forms.CheckBox();
             this.txtMaHV = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.chkMaHV = new System.Windows.Forms.CheckBox();
@@ -92,11 +92,11 @@
             this.gridDSHV.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridDSHV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridDSHV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaHV,
-            this.clmTenHV,
+            this.clmMaHocVien,
+            this.clmTenHocVien,
             this.clmNgaySinh,
             this.clmGioiTinh,
-            this.clmSdtHV,
+            this.clmSdtHocVien,
             this.clmDiaChi,
             this.clmNgayTiepNhan,
             this.clmEmail});
@@ -113,25 +113,25 @@
             this.gridDSHV.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridDSHV_RowsRemoved);
             this.gridDSHV.DoubleClick += new System.EventHandler(this.gridDSHV_DoubleClick);
             // 
-            // clmMaHV
+            // clmMaHocVien
             // 
-            this.clmMaHV.DataPropertyName = "MaHV";
+            this.clmMaHocVien.DataPropertyName = "MaHocVien";
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaHV.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMaHV.FillWeight = 75F;
-            this.clmMaHV.HeaderText = "Mã học viên";
-            this.clmMaHV.Name = "clmMaHV";
-            this.clmMaHV.ReadOnly = true;
+            this.clmMaHocVien.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmMaHocVien.FillWeight = 75F;
+            this.clmMaHocVien.HeaderText = "Mã học viên";
+            this.clmMaHocVien.Name = "clmMaHocVien";
+            this.clmMaHocVien.ReadOnly = true;
             // 
-            // clmTenHV
+            // clmTenHocVien
             // 
-            this.clmTenHV.DataPropertyName = "TenHV";
+            this.clmTenHocVien.DataPropertyName = "TenHocVien";
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
-            this.clmTenHV.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clmTenHV.FillWeight = 110F;
-            this.clmTenHV.HeaderText = "Họ và tên";
-            this.clmTenHV.Name = "clmTenHV";
-            this.clmTenHV.ReadOnly = true;
+            this.clmTenHocVien.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clmTenHocVien.FillWeight = 110F;
+            this.clmTenHocVien.HeaderText = "Họ và tên";
+            this.clmTenHocVien.Name = "clmTenHocVien";
+            this.clmTenHocVien.ReadOnly = true;
             // 
             // clmNgaySinh
             // 
@@ -142,18 +142,18 @@
             // 
             // clmGioiTinh
             // 
-            this.clmGioiTinh.DataPropertyName = "GioiTinhHV";
+            this.clmGioiTinh.DataPropertyName = "GioiTinhHocVien";
             this.clmGioiTinh.FillWeight = 70F;
             this.clmGioiTinh.HeaderText = "Giới tính";
             this.clmGioiTinh.Name = "clmGioiTinh";
             this.clmGioiTinh.ReadOnly = true;
             // 
-            // clmSdtHV
+            // clmSdtHocVien
             // 
-            this.clmSdtHV.DataPropertyName = "SdtHV";
-            this.clmSdtHV.HeaderText = "SĐT";
-            this.clmSdtHV.Name = "clmSdtHV";
-            this.clmSdtHV.ReadOnly = true;
+            this.clmSdtHocVien.DataPropertyName = "SdtHocVien";
+            this.clmSdtHocVien.HeaderText = "SĐT";
+            this.clmSdtHocVien.Name = "clmSdtHocVien";
+            this.clmSdtHocVien.ReadOnly = true;
             // 
             // clmDiaChi
             // 
@@ -171,7 +171,7 @@
             // 
             // clmEmail
             // 
-            this.clmEmail.DataPropertyName = "EmailHV";
+            this.clmEmail.DataPropertyName = "EmailHocVien";
             this.clmEmail.HeaderText = "Email";
             this.clmEmail.Name = "clmEmail";
             this.clmEmail.ReadOnly = true;
@@ -324,9 +324,9 @@
             this.splitContainer1.Panel1.Controls.Add(this.cboGioiTinh);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.chkGioiTinh);
-            this.splitContainer1.Panel1.Controls.Add(this.txtTenHV);
+            this.splitContainer1.Panel1.Controls.Add(this.txtTenHocVien);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
-            this.splitContainer1.Panel1.Controls.Add(this.chkTenHV);
+            this.splitContainer1.Panel1.Controls.Add(this.chkTenHocVien);
             this.splitContainer1.Panel1.Controls.Add(this.txtMaHV);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.chkMaHV);
@@ -474,16 +474,16 @@
             this.chkGioiTinh.UseVisualStyleBackColor = true;
             this.chkGioiTinh.CheckedChanged += new System.EventHandler(this.chkGioiTinh_CheckedChanged);
             // 
-            // txtTenHV
+            // txtTenHocVien
             // 
-            this.txtTenHV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtTenHocVien.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTenHV.Enabled = false;
-            this.txtTenHV.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtTenHV.Location = new System.Drawing.Point(139, 140);
-            this.txtTenHV.Name = "txtTenHV";
-            this.txtTenHV.Size = new System.Drawing.Size(196, 25);
-            this.txtTenHV.TabIndex = 51;
+            this.txtTenHocVien.Enabled = false;
+            this.txtTenHocVien.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtTenHocVien.Location = new System.Drawing.Point(139, 140);
+            this.txtTenHocVien.Name = "txtTenHocVien";
+            this.txtTenHocVien.Size = new System.Drawing.Size(196, 25);
+            this.txtTenHocVien.TabIndex = 51;
             // 
             // label4
             // 
@@ -494,16 +494,16 @@
             this.label4.TabIndex = 50;
             this.label4.Text = "Tên học viên:";
             // 
-            // chkTenHV
+            // chkTenHocVien
             // 
-            this.chkTenHV.AutoSize = true;
-            this.chkTenHV.Location = new System.Drawing.Point(23, 115);
-            this.chkTenHV.Name = "chkTenHV";
-            this.chkTenHV.Size = new System.Drawing.Size(121, 19);
-            this.chkTenHV.TabIndex = 49;
-            this.chkTenHV.Text = "Theo tên học viên";
-            this.chkTenHV.UseVisualStyleBackColor = true;
-            this.chkTenHV.CheckedChanged += new System.EventHandler(this.chkTenHV_CheckedChanged);
+            this.chkTenHocVien.AutoSize = true;
+            this.chkTenHocVien.Location = new System.Drawing.Point(23, 115);
+            this.chkTenHocVien.Name = "chkTenHocVien";
+            this.chkTenHocVien.Size = new System.Drawing.Size(121, 19);
+            this.chkTenHocVien.TabIndex = 49;
+            this.chkTenHocVien.Text = "Theo tên học viên";
+            this.chkTenHocVien.UseVisualStyleBackColor = true;
+            this.chkTenHocVien.CheckedChanged += new System.EventHandler(this.chkTenHocVien_CheckedChanged);
             // 
             // txtMaHV
             // 
@@ -629,9 +629,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkMaHV;
         private System.Windows.Forms.CheckBox chkGioiTinh;
-        private System.Windows.Forms.TextBox txtTenHV;
+        private System.Windows.Forms.TextBox txtTenHocVien;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox chkTenHV;
+        private System.Windows.Forms.CheckBox chkTenHocVien;
         private System.Windows.Forms.TextBox txtMaHV;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
@@ -646,11 +646,11 @@
         private System.Windows.Forms.ComboBox cboLoaiHV;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnXemTatCa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaHV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenHV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaHocVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenHocVien;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmNgaySinh;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmGioiTinh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmSdtHV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmSdtHocVien;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDiaChi;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmNgayTiepNhan;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmEmail;

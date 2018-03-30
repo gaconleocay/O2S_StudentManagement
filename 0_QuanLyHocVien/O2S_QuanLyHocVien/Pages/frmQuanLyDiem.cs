@@ -8,54 +8,64 @@ using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using System.Threading;
+using System.Collections.Generic;
+using O2S_QuanLyHocVien.BusinessLogic.Model;
 
 namespace O2S_QuanLyHocVien.Pages
 {
     public partial class frmQuanLyDiem : Form
     {
+        #region Khai bao
         private Thread thLop;
         private Thread thHocVien;
         private Thread thPanelDiem;
-
+        private BangDiemFullDTO bangDiemFull_Click { get; set; }
+        #endregion
         public frmQuanLyDiem()
         {
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Nạp bảng điểm lên giao diện
-        /// </summary>
-        /// <param name="maHV">Mã học viên</param>
-        /// <param name="maLop">Mã lớp</param>
-        public void LoadPanelDiem(string maHV, string maLop)
+        #region Load
+        private void frmQuanLyDiem_Load(object sender, EventArgs e)
         {
-            var d = BangDiem.SelectDetail(maHV, maLop);
-            lblMaLop.Text = d.MaLop;
-            lblTenLop.Text = d.TenLop;
-            lblKhoa.Text = d.TenKH;
-            lblMaHV.Text = d.MaHV;
-            lblTenHV.Text = d.TenHV;
-            numDiemNghe.Value = d.DiemNghe;
-            numDiemNoi.Value = d.DiemNoi;
-            numDiemDoc.Value = d.DiemDoc;
-            numDiemViet.Value = d.DiemViet;
+            lblMaLop.Text = string.Empty;
+            lblTenLop.Text = string.Empty;
+            lblKhoa.Text = string.Empty;
+            lblMaHV.Text = string.Empty;
+            lblTenHocVien.Text = string.Empty;
+
+            gridDSHV.AutoGenerateColumns = false;
+            gridLop.AutoGenerateColumns = false;
+
+            btnHienTatCa_Click(sender, e);
+            gridLop_Click(sender, e);
+            gridDSHV_Click(sender, e);
         }
 
-        /// <summary>
-        /// Nạp giao diện xuống bảng điểm
-        /// </summary>
-        /// <returns></returns>
-        public BANGDIEM LoadDiem()
+        #endregion
+        public void LoadPanelDiem(string maHV, string maLop)
         {
-            return new BANGDIEM()
-            {
-                MaHV = lblMaHV.Text,
-                MaLop = lblMaLop.Text,
-                DiemNghe = (int)numDiemNghe.Value,
-                DiemNoi = (int)numDiemNoi.Value,
-                DiemDoc = (int)numDiemDoc.Value,
-                DiemViet = (int)numDiemViet.Value,
-            };
+            List<BangDiemChiTietDTO> _lstBangDiem = new List<BangDiemChiTietDTO>();
+
+            this.bangDiemFull_Click = BangDiem.SelectDetail(maHV, maLop);
+            lblMaLop.Text = this.bangDiemFull_Click.MaLop;
+            lblTenLop.Text = this.bangDiemFull_Click.TenLop;
+            lblKhoa.Text = this.bangDiemFull_Click.TenKhoaHoc;
+            lblMaHV.Text = this.bangDiemFull_Click.MaHocVien;
+            lblTenHocVien.Text = this.bangDiemFull_Click.TenHocVien;
+            ////load Danh sach diem
+            //foreach (var item in this.bangDiemFull_Click.BangDiemChiTiets)
+            //{
+            //    BangDiemChiTietDTO _bangdiem = new BangDiemChiTietDTO();
+            //    _bangdiem.BangDiemChiTietId = item.BangDiemChiTietId; ;
+            //    _bangdiem.BangDiemId = this.bangDiemFull_Click.BangDiemId;
+            //    _bangdiem.MaMonHoc = item.MaMonHoc;
+            //    _bangdiem.TenMonHoc = item.TenMonHoc;
+            //    _bangdiem.Diem = item.Diem ?? 0;
+            //    _lstBangDiem.Add(_bangdiem);
+            //}
+            gridControlDSDiem.DataSource = this.bangDiemFull_Click.BangDiemChiTiets;
         }
 
         /// <summary>
@@ -78,7 +88,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             thLop = new Thread(() =>
             {
-                object source = LopHoc.SelectAll();
+                object source = LopHoc.SelectTheoCoCo();
 
                 gridLop.Invoke((MethodInvoker)delegate
                 {
@@ -107,11 +117,11 @@ namespace O2S_QuanLyHocVien.Pages
 
                 thLop.Start();
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -162,14 +172,17 @@ namespace O2S_QuanLyHocVien.Pages
 
                     gridLop.Invoke((MethodInvoker)delegate
                     {
-                        LoadPanelDiem(gridDSHV.SelectedRows[0].Cells["clmMaHV"].Value.ToString(),
+                        LoadPanelDiem(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString(),
                                     gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
                     });
                 });
 
                 thPanelDiem.Start();
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
 
         private void btnHuyBo_Click(object sender, EventArgs e)
@@ -177,31 +190,13 @@ namespace O2S_QuanLyHocVien.Pages
             gridDSHV_Click(sender, e);
         }
 
-        private void frmQuanLyDiem_Load(object sender, EventArgs e)
-        {
-            lblMaLop.Text = string.Empty;
-            lblTenLop.Text = string.Empty;
-            lblKhoa.Text = string.Empty;
-            lblMaHV.Text = string.Empty;
-            lblTenHV.Text = string.Empty;
-            numDiemNghe.Value = 0;
-            numDiemNoi.Value = 0;
-            numDiemDoc.Value = 0;
-            numDiemViet.Value = 0;
 
-            gridDSHV.AutoGenerateColumns = false;
-            gridLop.AutoGenerateColumns = false;
-
-            btnHienTatCa_Click(sender, e);
-            gridLop_Click(sender, e);
-            gridDSHV_Click(sender, e);
-        }
 
         private void btnLuuThongTin_Click(object sender, EventArgs e)
         {
             try
             {
-                BangDiem.Update(LoadDiem());
+                BangDiem.UpdateFull(this.bangDiemFull_Click);
 
                 MessageBox.Show("Cập nhật bảng điểm thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -211,5 +206,6 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
         #endregion
+
     }
 }

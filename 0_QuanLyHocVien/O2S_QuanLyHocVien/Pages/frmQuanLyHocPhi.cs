@@ -27,7 +27,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             if (chkMaHV.Checked && txtMaHV.Text == string.Empty)
                 throw new ArgumentException("Mã học viên không được trống");
-            if (chkTenHV.Checked && txtTenHV.Text == string.Empty)
+            if (chkTenHocVien.Checked && txtTenHocVien.Text == string.Empty)
                 throw new ArgumentException("Họ và tên học viên không được trống");
         }
 
@@ -60,9 +60,9 @@ namespace O2S_QuanLyHocVien.Pages
             txtMaHV.Enabled = chkMaHV.Checked;
         }
 
-        private void chkTenHV_CheckedChanged(object sender, EventArgs e)
+        private void chkTenHocVien_CheckedChanged(object sender, EventArgs e)
         {
-            txtTenHV.Enabled = chkTenHV.Checked;
+            txtTenHocVien.Enabled = chkTenHocVien.Checked;
         }
 
         private void chkGioiTinh_CheckedChanged(object sender, EventArgs e)
@@ -80,7 +80,7 @@ namespace O2S_QuanLyHocVien.Pages
             chkMaHV.Checked = true;
 
             txtMaHV.Text = string.Empty;
-            txtTenHV.Text = string.Empty;
+            txtTenHocVien.Text = string.Empty;
             numTu.Value = numDen.Value = 0;
         }
 
@@ -91,7 +91,7 @@ namespace O2S_QuanLyHocVien.Pages
                 ValidateSearch();
 
                 gridKetQua.DataSource = BangDiem.DanhSachNoHocPhi(chkMaHV.Checked ? txtMaHV.Text : null,
-                    chkTenHV.Checked ? txtTenHV.Text : null,
+                    chkTenHocVien.Checked ? txtTenHocVien.Text : null,
                     chkGioiTinh.Checked ? cboGioiTinh.Text : null,
                     chkSoTienNo.Checked ? (decimal?)numTu.Value : null,
                     chkSoTienNo.Checked ? (decimal?)numDen.Value : null);
@@ -116,13 +116,13 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 DataGridViewRow r = gridKetQua.SelectedRows[0];
-                var f = BangDiem.Select(r.Cells["clmMaHV"].Value.ToString(), r.Cells["clmMaLop"].Value.ToString());
+                var f = BangDiem.Select(r.Cells["clmMaHocVien"].Value.ToString(), r.Cells["clmMaLop"].Value.ToString());
 
-                lblMaHV.Text = f.MaHV;
-                lblTenHV.Text = f.HOCVIEN.TenHV;
+                lblMaHV.Text = f.MaHocVien;
+                lblTenHocVien.Text = f.HOCVIEN.TenHocVien;
                 lblMaLop.Text = f.MaLop;
                 lblTenLop.Text = f.LOPHOC.TenLop;
-                lblTenKH.Text = f.LOPHOC.KHOAHOC.TenKH;
+                lblTenKhoaHoc.Text = f.LOPHOC.KHOAHOC.TenKhoaHoc;
                 lblHocPhi.Text = ((decimal)f.LOPHOC.KHOAHOC.HocPhi).ToString("C0");
                 lblDaDong.Text = ((decimal)f.PHIEUGHIDANH.DaDong).ToString("C0");
                 lblConNo.Text = ((decimal)f.PHIEUGHIDANH.ConNo).ToString("C0");
@@ -133,10 +133,10 @@ namespace O2S_QuanLyHocVien.Pages
             catch
             {
                 lblMaHV.Text = string.Empty;
-                lblTenHV.Text = string.Empty;
+                lblTenHocVien.Text = string.Empty;
                 lblMaLop.Text = string.Empty;
                 lblTenLop.Text = string.Empty;
-                lblTenKH.Text = string.Empty;
+                lblTenKhoaHoc.Text = string.Empty;
                 lblHocPhi.Text = string.Empty;
                 lblDaDong.Text = string.Empty;
                 lblConNo.Text = string.Empty;
@@ -156,7 +156,7 @@ namespace O2S_QuanLyHocVien.Pages
                 {
                     MaPhieu = p.MaPhieu,
                     NgayGhiDanh = p.NgayGhiDanh,
-                    MaNV = p.MaNV,
+                    MaNhanVien = p.MaNhanVien,
                     DaDong = p.DaDong + numNop.Value,
                     ConNo = p.DANGKies[0].KHOAHOC.HocPhi - (p.DaDong + numNop.Value)
                     //ConNo = p.DANGKies.KHOAHOC.HocPhi - (p.DaDong+numNop.Value)
@@ -185,16 +185,16 @@ namespace O2S_QuanLyHocVien.Pages
                 {
                     new ReportParameter("CenterName", GlobalSettings.CenterName),
                     new ReportParameter("CenterWebsite", GlobalSettings.CenterWebsite),
-                    new ReportParameter("MaHV", lblMaHV.Text),
-                    new ReportParameter("TenHV", lblTenHV.Text),
-                    new ReportParameter("TenKH", lblTenKH.Text),
+                    new ReportParameter("MaHocVien", lblMaHV.Text),
+                    new ReportParameter("TenHocVien", lblTenHocVien.Text),
+                    new ReportParameter("TenKhoaHoc", lblTenKhoaHoc.Text),
                     new ReportParameter("HocPhi",lblHocPhi.Text),
                     new ReportParameter("DaDong", lblDaDong.Text),
                     new ReportParameter("ConNo", lblConNo.Text),
                 };
 
-            frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptBienLaiHocPhi.rdlc";
-
+            //frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptBienLaiHocPhi.rdlc";
+            frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptBienLaiHocPhi.rdlc";
             frm.ReportViewer.LocalReport.SetParameters(_params);
             frm.ReportViewer.LocalReport.DisplayName = "Biên lai học phí";
             frm.Text = "Biên lai học phí";

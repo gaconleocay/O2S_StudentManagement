@@ -26,7 +26,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             if (chkMaHV.Checked && txtMaHV.Text == string.Empty)
                 throw new ArgumentException("Mã học viên không được trống");
-            if (chkTenHV.Checked && txtTenHV.Text == string.Empty)
+            if (chkTenHocVien.Checked && txtTenHocVien.Text == string.Empty)
                 throw new ArgumentException("Họ và tên học viên không được trống");
         }
 
@@ -49,9 +49,9 @@ namespace O2S_QuanLyHocVien.Pages
             txtMaHV.Enabled = chkMaHV.Checked;
         }
 
-        private void chkTenHV_CheckedChanged(object sender, EventArgs e)
+        private void chkTenHocVien_CheckedChanged(object sender, EventArgs e)
         {
-            txtTenHV.Enabled = chkTenHV.Checked;
+            txtTenHocVien.Enabled = chkTenHocVien.Checked;
         }
 
         private void chkGioiTinh_CheckedChanged(object sender, EventArgs e)
@@ -67,9 +67,9 @@ namespace O2S_QuanLyHocVien.Pages
         private void btnDatLai_Click(object sender, EventArgs e)
         {
             chkMaHV.Checked = true;
-            chkTenHV.Checked = chkGioiTinh.Checked = chkNgayTiepNhan.Checked = false;
+            chkTenHocVien.Checked = chkGioiTinh.Checked = chkNgayTiepNhan.Checked = false;
 
-            txtMaHV.Text = txtTenHV.Text = string.Empty;
+            txtMaHV.Text = txtTenHocVien.Text = string.Empty;
             btnXemTatCa_Click(sender, e);
         }
 
@@ -78,8 +78,8 @@ namespace O2S_QuanLyHocVien.Pages
             dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             cboLoaiHV.DataSource = LoaiHV.SelectAll();
-            cboLoaiHV.DisplayMember = "TenLoaiHV";
-            cboLoaiHV.ValueMember = "MaLoaiHV";
+            cboLoaiHV.DisplayMember = "TenLoaiHocVien";
+            cboLoaiHV.ValueMember = "MaLoaiHocVien";
 
             cboGioiTinh.SelectedIndex = 0;
 
@@ -114,7 +114,7 @@ namespace O2S_QuanLyHocVien.Pages
                 ValidateSearch();
 
                 gridDSHV.DataSource = HocVien.SelectAll(chkMaHV.Checked ? txtMaHV.Text : null,
-                    chkTenHV.Checked ? txtTenHV.Text : null,
+                    chkTenHocVien.Checked ? txtTenHocVien.Text : null,
                     chkGioiTinh.Checked ? cboGioiTinh.Text : null,
                     chkNgayTiepNhan.Checked ? (DateTime?)dateTuNgay.Value : null,
                     chkNgayTiepNhan.Checked ? (DateTime?)dateDenNgay.Value : null,
@@ -132,7 +132,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            frmHocVienEdit frm = new frmHocVienEdit(HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHV"].Value.ToString()));
+            frmHocVienEdit frm = new frmHocVienEdit(HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString()));
             frm.Text = "Cập nhật thông tin học viên";
             frm.ShowDialog();
             btnXemTatCa_Click(sender, e);
@@ -149,7 +149,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    HocVien.Delete(gridDSHV.SelectedRows[0].Cells["clmMaHV"].Value.ToString());
+                    HocVien.Delete(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString());
 
                     MessageBox.Show("Xóa học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btnXemTatCa_Click(sender, e);

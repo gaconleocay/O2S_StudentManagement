@@ -34,11 +34,11 @@ namespace O2S_QuanLyHocVien.Popups
             }
             else
             {
-                txtMaNV.Text = nv.MaNV;
-                txtTenNV.Text = nv.TenNV;
-                txtSDT.Text = nv.SdtNV;
-                txtEmail.Text = nv.EmailNV;
-                cboLoaiNV.SelectedValue = nv.MaLoaiNV;
+                txtMaNV.Text = nv.MaNhanVien;
+                txtTenNV.Text = nv.TenNhanVien;
+                txtSDT.Text = nv.SdtNhanVien;
+                txtEmail.Text = nv.EmailNhanVien;
+                cboLoaiNV.SelectedValue = nv.MaLoaiNhanVien;
                 txtTenDangNhap.Text = nv.TenDangNhap;
                 txtMatKhau.Text = nv.TAIKHOAN.MatKhau;
                 txtTenDangNhap.Enabled = false;
@@ -53,11 +53,11 @@ namespace O2S_QuanLyHocVien.Popups
         {
             return new NHANVIEN()
             {
-                MaNV = txtMaNV.Text,
-                TenNV = txtTenNV.Text,
-                SdtNV = txtSDT.Text,
-                EmailNV = txtEmail.Text,
-                MaLoaiNV = cboLoaiNV.SelectedValue.ToString(),
+                MaNhanVien = txtMaNV.Text,
+                TenNhanVien = txtTenNV.Text,
+                SdtNhanVien = txtSDT.Text,
+                EmailNhanVien = txtEmail.Text,
+                MaLoaiNhanVien = cboLoaiNV.SelectedValue.ToString(),
                 TenDangNhap = txtTenDangNhap.Text
             };
         }
@@ -90,8 +90,8 @@ namespace O2S_QuanLyHocVien.Popups
         {
             //load loại nhân viên
             cboLoaiNV.DataSource = LoaiNV.SelectAll();
-            cboLoaiNV.DisplayMember = "TenLoaiNV";
-            cboLoaiNV.ValueMember = "MaLoaiNV";
+            cboLoaiNV.DisplayMember = "TenLoaiNhanVien";
+            cboLoaiNV.ValueMember = "MaLoaiNhanVien";
 
             LoadUI(nv);
         }

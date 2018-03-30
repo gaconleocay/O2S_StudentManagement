@@ -20,7 +20,7 @@ namespace O2S_QuanLyHocVien.Pages
         private Thread thHocVien;
         private string maPhieu;
         private string maHV;
-        private string maKH;
+        private string MaKhoaHoc;
         private bool isSave = false;
 
         public frmLapPhieuGhiDanh()
@@ -35,7 +35,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             //thPhieuGhiDanh = new Thread(() =>
             //{
-            object source = PhieuGhiDanh.SelectAll();
+            object source = PhieuGhiDanh.SelectTheoCoSo();
 
             //gridPhieuGhiDanh.Invoke((MethodInvoker)delegate
             // {
@@ -52,7 +52,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             if (rdMaHV.Checked && txtMaHV.Text == string.Empty)
                 throw new ArgumentException("Mã học viên không được trống");
-            if (rdTenHV.Checked && txtTenHV.Text == string.Empty)
+            if (rdTenHocVien.Checked && txtTenHocVien.Text == string.Empty)
                 throw new ArgumentException("Họ và tên học viên không được trống");
         }
 
@@ -61,7 +61,7 @@ namespace O2S_QuanLyHocVien.Pages
         /// </summary>
         public void ValidatePhieu()
         {
-            var f = DangKy.SelectAll(gridDSHV.SelectedRows[0].Cells["clmMaHV"].Value.ToString());
+            var f = DangKy.SelectAll(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString());
 
             foreach (var i in f)
                 if (i.PHIEUGHIDANH.ConNo > 0)
@@ -82,14 +82,14 @@ namespace O2S_QuanLyHocVien.Pages
             txtMaHV.Enabled = rdMaHV.Checked;
         }
 
-        private void rdTenHV_CheckedChanged(object sender, EventArgs e)
+        private void rdTenHocVien_CheckedChanged(object sender, EventArgs e)
         {
-            txtTenHV.Enabled = rdTenHV.Checked;
+            txtTenHocVien.Enabled = rdTenHocVien.Checked;
         }
 
         private void btnDatLai_Click(object sender, EventArgs e)
         {
-            txtMaHV.Text = txtTenHV.Text = string.Empty;
+            txtMaHV.Text = txtTenHocVien.Text = string.Empty;
             rdMaHV.Checked = true;
         }
 
@@ -101,7 +101,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 //thPhieuGhiDanh.Join();
 
-                object source = HocVien.SelectAll();
+                object source = HocVien.SelectTheoCoSo();
 
                 gridDSHV.Invoke((MethodInvoker)delegate
                 {
@@ -129,8 +129,8 @@ namespace O2S_QuanLyHocVien.Pages
 
                 if (rdMaHV.Checked)
                     gridDSHV.DataSource = HocVien.SelectAll(txtMaHV.Text, null, null, null, null, null);
-                else if (rdTenHV.Checked)
-                    gridDSHV.DataSource = HocVien.SelectAll(null, txtTenHV.Text, null, null, null, null);
+                else if (rdTenHocVien.Checked)
+                    gridDSHV.DataSource = HocVien.SelectAll(null, txtTenHocVien.Text, null, null, null, null);
             }
             catch (ArgumentException ex)
             {
@@ -142,7 +142,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             //load khóa học
             cboKhoaHoc.DataSource = KhoaHoc.SelectAll();
-            cboKhoaHoc.DisplayMember = "TenKH";
+            cboKhoaHoc.DisplayMember = "TenKhoaHoc";
 
             //tạo mã phiếu
             txtMaPhieu.Text = PhieuGhiDanh.AutoGenerateId();
@@ -190,56 +190,63 @@ namespace O2S_QuanLyHocVien.Pages
                 ValidatePhieu();
 
                 maPhieu = txtMaPhieu.Text;
-                maHV = gridDSHV.SelectedRows[0].Cells["clmMaHV"].Value.ToString();
-                maKH = ((KHOAHOC)cboKhoaHoc.SelectedValue).MaKH;
+                maHV = gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString();
+                MaKhoaHoc = ((KHOAHOC)cboKhoaHoc.SelectedValue).MaKhoaHoc;
                 PhieuGhiDanh.Insert(new PHIEUGHIDANH()
                 {
                     MaPhieu = maPhieu,
                     NgayGhiDanh = DateTime.ParseExact(dateNgayGhiDanh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     DaDong = numDaDong.Value,
                     ConNo = numConNo.Value,
-                    MaNV = GlobalSettings.UserID,
+                    MaNhanVien = GlobalSettings.UserID,
 
-
-                    DANGKies = new System.Data.Linq.EntitySet<DANGKY>()
-                    {
-                        // MaHV = maHV,
-                        //MaKH = maKH,
-                        //MaPhieu = maPhieu
-                    }
                     //DANGKies = new DANGKY()
                     //{
-                    //    MaHV = maHV,
-                    //    MaKH = maKH,
+                    //    MaHocVien = maHV,
+                    //    MaKhoaHoc = MaKhoaHoc,
                     //    MaPhieu = maPhieu
                     //}
+
+                    //DANGKies = new System.Data.Linq.EntitySet<DANGKY>()
+                    //{
+                    //    //MaHocVien = maHV,
+                    //    //MaKhoaHoc = MaKhoaHoc,
+                    //    //MaPhieu = maPhieu
+                    //}
+
+                });
+                DangKy.Insert(new DANGKY()
+                {
+                    MaHocVien = maHV,
+                    MaKhoaHoc = MaKhoaHoc,
+                    MaPhieu = maPhieu
                 });
 
                 MessageBox.Show(string.Format("Phiếu ghi danh {0} đã được thêm thành công", maPhieu), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 var h = HocVien.Select(maHV);
-                if (h.MaLoaiHV == "LHV00")
+                if (h.MaLoaiHocVien == "LHV00")
                 {
                     HocVien.Update(new HOCVIEN()
                     {
-                        MaHV = h.MaHV,
-                        TenHV = h.TenHV,
-                        GioiTinhHV = h.GioiTinhHV,
+                        MaHocVien = h.MaHocVien,
+                        TenHocVien = h.TenHocVien,
+                        GioiTinhHocVien = h.GioiTinhHocVien,
                         NgaySinh = h.NgaySinh,
                         DiaChi = h.DiaChi,
-                        SdtHV = h.SdtHV,
-                        EmailHV = h.EmailHV,
+                        SdtHocVien = h.SdtHocVien,
+                        EmailHocVien = h.EmailHocVien,
                         NgayTiepNhan = h.NgayTiepNhan,
-                        MaLoaiHV = "LHV01",
-                        TenDangNhap = h.MaHV,
+                        MaLoaiHocVien = "LHV01",
+                        TenDangNhap = h.MaHocVien,
                     },
                     new TAIKHOAN()
                     {
-                        TenDangNhap = h.MaHV,
-                        MatKhau = h.MaHV
+                        TenDangNhap = h.MaHocVien,
+                        MatKhau = h.MaHocVien
                     });
                     MessageBox.Show(string.Format("Học viên {0} đã được chuyển thành học viên chính thức với tài khoản:{1}Tên đăng nhập: {2}{3}Mật khẩu: {4}",
-                        h.TenHV, Environment.NewLine, h.MaHV, Environment.NewLine, h.MaHV),
+                        h.TenHocVien, Environment.NewLine, h.MaHocVien, Environment.NewLine, h.MaHocVien),
                         "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -260,22 +267,22 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 frmReport frm = new frmReport();
 
-                DANGKY d = DangKy.Select(maHV, maKH, maPhieu);
+                DANGKY d = DangKy.Select(maHV, MaKhoaHoc, maPhieu);
 
                 List<ReportParameter> _params = new List<ReportParameter>()
                 {
                     new ReportParameter("CenterName", GlobalSettings.CenterName),
                     new ReportParameter("CenterWebsite", GlobalSettings.CenterWebsite),
-                    new ReportParameter("MaHV", maHV),
-                    new ReportParameter("TenHV", d.HOCVIEN.TenHV),
-                    new ReportParameter("TenKH", d.KHOAHOC.TenKH),
+                    new ReportParameter("MaHocVien", maHV),
+                    new ReportParameter("TenHocVien", d.HOCVIEN.TenHocVien),
+                    new ReportParameter("TenKhoaHoc", d.KHOAHOC.TenKhoaHoc),
                     new ReportParameter("HocPhi",((decimal)d.KHOAHOC.HocPhi).ToString("C0")),
                     new ReportParameter("DaDong", ((decimal)d.PHIEUGHIDANH.DaDong).ToString("C0")),
                     new ReportParameter("ConNo", ((decimal)d.PHIEUGHIDANH.ConNo).ToString("C0")),
                 };
 
-                frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptBienLaiHocPhi.rdlc";
-
+               // frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptBienLaiHocPhi.rdlc";
+                frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptBienLaiHocPhi.rdlc";
                 frm.ReportViewer.LocalReport.SetParameters(_params);
                 frm.ReportViewer.LocalReport.DisplayName = "Biên lai học phí";
                 frm.Text = "Biên lai học phí";

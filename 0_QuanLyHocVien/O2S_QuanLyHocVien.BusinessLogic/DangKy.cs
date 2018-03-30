@@ -28,13 +28,13 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// Chọn một đăng ký
         /// </summary>
         /// <param name="maHV">Mã học viên</param>
-        /// <param name="maKH">Mã khóa học</param>
+        /// <param name="MaKhoaHoc">Mã khóa học</param>
         /// <param name="maPhieu">Mã phiếu</param>
         /// <returns></returns>
-        public static DANGKY Select(string maHV, string maKH, string maPhieu)
+        public static DANGKY Select(string maHV, string MaKhoaHoc, string maPhieu)
         {
             return (from p in Database.DANGKies
-                    where p.MaHV == maHV && p.MaKH == maKH && p.MaPhieu == maPhieu
+                    where p.MaHocVien == maHV && p.MaKhoaHoc == MaKhoaHoc && p.MaPhieu == maPhieu
                     select p).Single();
         }
 
@@ -46,7 +46,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static IQueryable<DANGKY> SelectAll(string maHV)
         {
             return (from p in Database.DANGKies
-                    where p.MaHV == maHV
+                    where p.MaHocVien == maHV
                     select p);
         }
     }

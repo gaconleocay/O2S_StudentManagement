@@ -39,15 +39,15 @@ namespace O2S_QuanLyHocVien.Popups
         private void frmThayDoiThongTinNV_Load(object sender, EventArgs e)
         {
             cboLoaiNV.DataSource = LoaiNV.SelectAll();
-            cboLoaiNV.DisplayMember = "TenLoaiNV";
-            cboLoaiNV.ValueMember = "MaLoaiNV";
+            cboLoaiNV.DisplayMember = "TenLoaiNhanVien";
+            cboLoaiNV.ValueMember = "MaLoaiNhanVien";
 
             NHANVIEN nv = NhanVien.Select(GlobalSettings.UserID);
-            txtMaNV.Text = nv.MaNV;
-            txtTenNV.Text = nv.TenNV;
-            txtEmail.Text = nv.EmailNV;
-            txtSDT.Text = nv.SdtNV;
-            cboLoaiNV.SelectedValue = nv.MaLoaiNV;
+            txtMaNV.Text = nv.MaNhanVien;
+            txtTenNV.Text = nv.TenNhanVien;
+            txtEmail.Text = nv.EmailNhanVien;
+            txtSDT.Text = nv.SdtNhanVien;
+            cboLoaiNV.SelectedValue = nv.MaLoaiNhanVien;
         }
 
         private void btnLuuThongTin_Click(object sender, EventArgs e)
@@ -58,11 +58,11 @@ namespace O2S_QuanLyHocVien.Popups
 
                 NhanVien.Update(new NHANVIEN()
                 {
-                    MaNV = txtMaNV.Text,
-                    TenNV = txtTenNV.Text,
-                    EmailNV = txtEmail.Text,
-                    SdtNV = txtSDT.Text,
-                    MaLoaiNV = cboLoaiNV.SelectedValue.ToString()
+                    MaNhanVien = txtMaNV.Text,
+                    TenNhanVien = txtTenNV.Text,
+                    EmailNhanVien = txtEmail.Text,
+                    SdtNhanVien = txtSDT.Text,
+                    MaLoaiNhanVien = cboLoaiNV.SelectedValue.ToString()
                 });
 
                 MessageBox.Show("Cập nhật thông tin nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

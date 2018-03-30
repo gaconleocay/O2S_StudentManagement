@@ -28,41 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.label13 = new System.Windows.Forms.Label();
-            this.numDiemViet = new System.Windows.Forms.NumericUpDown();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.numDiemDoc = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.numDiemNoi = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
+            this.gridControlDSMonHoc = new DevExpress.XtraGrid.GridControl();
+            this.gridViewDSMonHoc = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label6 = new System.Windows.Forms.Label();
-            this.numDiemNghe = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.numHocPhi = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.btnHuyBo = new System.Windows.Forms.Button();
             this.btnLuuThongTin = new System.Windows.Forms.Button();
-            this.txtTenKH = new System.Windows.Forms.TextBox();
+            this.txtTenKhoaHoc = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtMaKH = new System.Windows.Forms.TextBox();
+            this.txtMaKhoaHoc = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gridKH = new System.Windows.Forms.DataGridView();
-            this.clmMaKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmMaKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmHocPhi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmHSNghe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmHSNoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmHSDoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmHSViet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblTongCong = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -74,10 +66,9 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numDiemViet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDiemDoc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDiemNoi)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDiemNghe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlDSMonHoc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewDSMonHoc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHocPhi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridKH)).BeginInit();
             this.panel3.SuspendLayout();
@@ -101,7 +92,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(18, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 15);
+            this.label1.Size = new System.Drawing.Size(123, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "QUẢN LÝ KHÓA HỌC";
             // 
@@ -130,26 +121,16 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.White;
-            this.splitContainer1.Panel1.Controls.Add(this.label13);
-            this.splitContainer1.Panel1.Controls.Add(this.numDiemViet);
-            this.splitContainer1.Panel1.Controls.Add(this.label14);
-            this.splitContainer1.Panel1.Controls.Add(this.label10);
-            this.splitContainer1.Panel1.Controls.Add(this.numDiemDoc);
-            this.splitContainer1.Panel1.Controls.Add(this.label11);
-            this.splitContainer1.Panel1.Controls.Add(this.label8);
-            this.splitContainer1.Panel1.Controls.Add(this.numDiemNoi);
-            this.splitContainer1.Panel1.Controls.Add(this.label9);
+            this.splitContainer1.Panel1.Controls.Add(this.gridControlDSMonHoc);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
-            this.splitContainer1.Panel1.Controls.Add(this.numDiemNghe);
-            this.splitContainer1.Panel1.Controls.Add(this.label7);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.numHocPhi);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
             this.splitContainer1.Panel1.Controls.Add(this.btnHuyBo);
             this.splitContainer1.Panel1.Controls.Add(this.btnLuuThongTin);
-            this.splitContainer1.Panel1.Controls.Add(this.txtTenKH);
+            this.splitContainer1.Panel1.Controls.Add(this.txtTenKhoaHoc);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
-            this.splitContainer1.Panel1.Controls.Add(this.txtMaKH);
+            this.splitContainer1.Panel1.Controls.Add(this.txtMaKhoaHoc);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             // 
             // splitContainer1.Panel2
@@ -159,140 +140,119 @@
             this.splitContainer1.Panel2.Controls.Add(this.panel3);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Size = new System.Drawing.Size(1086, 516);
-            this.splitContainer1.SplitterDistance = 354;
+            this.splitContainer1.SplitterDistance = 501;
             this.splitContainer1.TabIndex = 6;
             // 
-            // label13
+            // gridControlDSMonHoc
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label13.ForeColor = System.Drawing.Color.Green;
-            this.label13.Location = new System.Drawing.Point(330, 260);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(20, 19);
-            this.label13.TabIndex = 33;
-            this.label13.Text = "%";
+            this.gridControlDSMonHoc.Location = new System.Drawing.Point(21, 162);
+            this.gridControlDSMonHoc.MainView = this.gridViewDSMonHoc;
+            this.gridControlDSMonHoc.Name = "gridControlDSMonHoc";
+            this.gridControlDSMonHoc.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemCheckEdit1});
+            this.gridControlDSMonHoc.Size = new System.Drawing.Size(462, 289);
+            this.gridControlDSMonHoc.TabIndex = 23;
+            this.gridControlDSMonHoc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewDSMonHoc});
             // 
-            // numDiemViet
+            // gridViewDSMonHoc
             // 
-            this.numDiemViet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numDiemViet.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.numDiemViet.ForeColor = System.Drawing.Color.Green;
-            this.numDiemViet.Location = new System.Drawing.Point(131, 258);
-            this.numDiemViet.Name = "numDiemViet";
-            this.numDiemViet.Size = new System.Drawing.Size(193, 25);
-            this.numDiemViet.TabIndex = 32;
-            this.numDiemViet.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.gridViewDSMonHoc.ColumnPanelRowHeight = 25;
+            this.gridViewDSMonHoc.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5});
+            this.gridViewDSMonHoc.GridControl = this.gridControlDSMonHoc;
+            this.gridViewDSMonHoc.Name = "gridViewDSMonHoc";
+            this.gridViewDSMonHoc.OptionsView.ShowGroupPanel = false;
+            this.gridViewDSMonHoc.OptionsView.ShowIndicator = false;
+            this.gridViewDSMonHoc.RowHeight = 25;
+            this.gridViewDSMonHoc.ViewCaptionHeight = 25;
             // 
-            // label14
+            // gridColumn1
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(18, 262);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(93, 15);
-            this.label14.TabIndex = 31;
-            this.label14.Text = "Hệ số điểm Viết:";
+            this.gridColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn1.AppearanceCell.Options.UseFont = true;
+            this.gridColumn1.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn1.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn1.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn1.Caption = "Check";
+            this.gridColumn1.ColumnEdit = this.repositoryItemCheckEdit1;
+            this.gridColumn1.FieldName = "IsCheck";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.FixedWidth = true;
+            this.gridColumn1.OptionsColumn.ShowCaption = false;
+            this.gridColumn1.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.Width = 35;
             // 
-            // label10
+            // repositoryItemCheckEdit1
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label10.ForeColor = System.Drawing.Color.Green;
-            this.label10.Location = new System.Drawing.Point(330, 220);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(20, 19);
-            this.label10.TabIndex = 30;
-            this.label10.Text = "%";
+            this.repositoryItemCheckEdit1.AutoHeight = false;
+            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            this.repositoryItemCheckEdit1.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             // 
-            // numDiemDoc
+            // gridColumn3
             // 
-            this.numDiemDoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numDiemDoc.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.numDiemDoc.ForeColor = System.Drawing.Color.Green;
-            this.numDiemDoc.Location = new System.Drawing.Point(131, 218);
-            this.numDiemDoc.Name = "numDiemDoc";
-            this.numDiemDoc.Size = new System.Drawing.Size(193, 25);
-            this.numDiemDoc.TabIndex = 29;
-            this.numDiemDoc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.gridColumn3.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn3.AppearanceCell.Options.UseFont = true;
+            this.gridColumn3.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn3.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn3.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn3.Caption = "Mã môn học";
+            this.gridColumn3.FieldName = "MaMonHoc";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.OptionsColumn.AllowEdit = false;
+            this.gridColumn3.OptionsColumn.ReadOnly = true;
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 1;
+            this.gridColumn3.Width = 85;
             // 
-            // label11
+            // gridColumn4
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(18, 222);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(94, 15);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "Hệ số điểm Đọc:";
+            this.gridColumn4.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn4.AppearanceCell.Options.UseFont = true;
+            this.gridColumn4.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn4.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn4.Caption = "Tên môn học";
+            this.gridColumn4.FieldName = "TenMonHoc";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.OptionsColumn.AllowEdit = false;
+            this.gridColumn4.OptionsColumn.ReadOnly = true;
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 2;
+            this.gridColumn4.Width = 210;
             // 
-            // label8
+            // gridColumn5
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label8.ForeColor = System.Drawing.Color.Green;
-            this.label8.Location = new System.Drawing.Point(330, 179);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(20, 19);
-            this.label8.TabIndex = 27;
-            this.label8.Text = "%";
-            // 
-            // numDiemNoi
-            // 
-            this.numDiemNoi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numDiemNoi.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.numDiemNoi.ForeColor = System.Drawing.Color.Green;
-            this.numDiemNoi.Location = new System.Drawing.Point(131, 177);
-            this.numDiemNoi.Name = "numDiemNoi";
-            this.numDiemNoi.Size = new System.Drawing.Size(193, 25);
-            this.numDiemNoi.TabIndex = 26;
-            this.numDiemNoi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(18, 181);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(92, 15);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "Hệ số điểm Nói:";
+            this.gridColumn5.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn5.AppearanceCell.Options.UseFont = true;
+            this.gridColumn5.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn5.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn5.Caption = "Điểm đạt";
+            this.gridColumn5.FieldName = "DiemDat";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 3;
+            this.gridColumn5.Width = 100;
             // 
             // label6
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label6.ForeColor = System.Drawing.Color.Green;
-            this.label6.Location = new System.Drawing.Point(330, 137);
+            this.label6.Location = new System.Drawing.Point(18, 144);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(20, 19);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "%";
-            // 
-            // numDiemNghe
-            // 
-            this.numDiemNghe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numDiemNghe.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.numDiemNghe.ForeColor = System.Drawing.Color.Green;
-            this.numDiemNghe.Location = new System.Drawing.Point(131, 135);
-            this.numDiemNghe.Name = "numDiemNghe";
-            this.numDiemNghe.Size = new System.Drawing.Size(193, 25);
-            this.numDiemNghe.TabIndex = 23;
-            this.numDiemNghe.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 139);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(102, 15);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Hệ số điểm Nghe:";
+            this.label6.Size = new System.Drawing.Size(116, 15);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Danh sách môn học:";
             // 
             // label5
             // 
@@ -300,7 +260,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.Blue;
-            this.label5.Location = new System.Drawing.Point(330, 96);
+            this.label5.Location = new System.Drawing.Point(296, 96);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(18, 19);
             this.label5.TabIndex = 21;
@@ -312,14 +272,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.numHocPhi.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.numHocPhi.ForeColor = System.Drawing.Color.Blue;
-            this.numHocPhi.Location = new System.Drawing.Point(131, 94);
+            this.numHocPhi.Location = new System.Drawing.Point(103, 94);
             this.numHocPhi.Maximum = new decimal(new int[] {
             -1981284353,
             -1966660860,
             0,
             0});
             this.numHocPhi.Name = "numHocPhi";
-            this.numHocPhi.Size = new System.Drawing.Size(193, 25);
+            this.numHocPhi.Size = new System.Drawing.Size(187, 25);
             this.numHocPhi.TabIndex = 20;
             this.numHocPhi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -343,7 +303,7 @@
             this.btnHuyBo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHuyBo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnHuyBo.Image = global::O2S_QuanLyHocVien.Properties.Resources.cancel_16x16;
-            this.btnHuyBo.Location = new System.Drawing.Point(233, 317);
+            this.btnHuyBo.Location = new System.Drawing.Point(375, 457);
             this.btnHuyBo.Name = "btnHuyBo";
             this.btnHuyBo.Size = new System.Drawing.Size(107, 34);
             this.btnHuyBo.TabIndex = 18;
@@ -362,7 +322,7 @@
             this.btnLuuThongTin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLuuThongTin.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLuuThongTin.Image = global::O2S_QuanLyHocVien.Properties.Resources.save_16x16;
-            this.btnLuuThongTin.Location = new System.Drawing.Point(106, 317);
+            this.btnLuuThongTin.Location = new System.Drawing.Point(248, 457);
             this.btnLuuThongTin.Name = "btnLuuThongTin";
             this.btnLuuThongTin.Size = new System.Drawing.Size(121, 34);
             this.btnLuuThongTin.TabIndex = 17;
@@ -371,35 +331,35 @@
             this.btnLuuThongTin.UseVisualStyleBackColor = false;
             this.btnLuuThongTin.Click += new System.EventHandler(this.btnLuuThongTin_Click);
             // 
-            // txtTenKH
+            // txtTenKhoaHoc
             // 
-            this.txtTenKH.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtTenKhoaHoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTenKH.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtTenKH.Location = new System.Drawing.Point(131, 52);
-            this.txtTenKH.Name = "txtTenKH";
-            this.txtTenKH.Size = new System.Drawing.Size(209, 25);
-            this.txtTenKH.TabIndex = 3;
+            this.txtTenKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtTenKhoaHoc.Location = new System.Drawing.Point(103, 52);
+            this.txtTenKhoaHoc.Name = "txtTenKhoaHoc";
+            this.txtTenKhoaHoc.Size = new System.Drawing.Size(380, 25);
+            this.txtTenKhoaHoc.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(18, 57);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 15);
+            this.label3.Size = new System.Drawing.Size(82, 15);
             this.label3.TabIndex = 2;
             this.label3.Text = "Tên khóa học:";
             // 
-            // txtMaKH
+            // txtMaKhoaHoc
             // 
-            this.txtMaKH.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtMaKhoaHoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMaKH.Enabled = false;
-            this.txtMaKH.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtMaKH.Location = new System.Drawing.Point(131, 12);
-            this.txtMaKH.Name = "txtMaKH";
-            this.txtMaKH.Size = new System.Drawing.Size(209, 25);
-            this.txtMaKH.TabIndex = 1;
+            this.txtMaKhoaHoc.Enabled = false;
+            this.txtMaKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtMaKhoaHoc.Location = new System.Drawing.Point(103, 12);
+            this.txtMaKhoaHoc.Name = "txtMaKhoaHoc";
+            this.txtMaKhoaHoc.Size = new System.Drawing.Size(187, 25);
+            this.txtMaKhoaHoc.TabIndex = 1;
             // 
             // label2
             // 
@@ -421,42 +381,38 @@
             this.gridKH.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridKH.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridKH.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaKH,
-            this.clmTenKH,
-            this.clmHocPhi,
-            this.clmHSNghe,
-            this.clmHSNoi,
-            this.clmHSDoc,
-            this.clmHSViet});
+            this.clmMaKhoaHoc,
+            this.clmTenKhoaHoc,
+            this.clmHocPhi});
             this.gridKH.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridKH.Location = new System.Drawing.Point(12, 39);
             this.gridKH.MultiSelect = false;
             this.gridKH.Name = "gridKH";
             this.gridKH.RowHeadersVisible = false;
             this.gridKH.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridKH.Size = new System.Drawing.Size(704, 441);
+            this.gridKH.Size = new System.Drawing.Size(557, 441);
             this.gridKH.TabIndex = 1;
             this.gridKH.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridKH_RowsAdded);
             this.gridKH.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridKH_RowsRemoved);
             this.gridKH.Click += new System.EventHandler(this.gridKH_Click);
             this.gridKH.DoubleClick += new System.EventHandler(this.gridKH_DoubleClick);
             // 
-            // clmMaKH
+            // clmMaKhoaHoc
             // 
-            this.clmMaKH.DataPropertyName = "MaKH";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaKH.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMaKH.HeaderText = "Mã khóa học";
-            this.clmMaKH.Name = "clmMaKH";
+            this.clmMaKhoaHoc.DataPropertyName = "MaKhoaHoc";
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue;
+            this.clmMaKhoaHoc.DefaultCellStyle = dataGridViewCellStyle3;
+            this.clmMaKhoaHoc.HeaderText = "Mã khóa học";
+            this.clmMaKhoaHoc.Name = "clmMaKhoaHoc";
             // 
-            // clmTenKH
+            // clmTenKhoaHoc
             // 
-            this.clmTenKH.DataPropertyName = "TenKH";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
-            this.clmTenKH.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clmTenKH.FillWeight = 120F;
-            this.clmTenKH.HeaderText = "Tên khóa học";
-            this.clmTenKH.Name = "clmTenKH";
+            this.clmTenKhoaHoc.DataPropertyName = "TenKhoaHoc";
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Green;
+            this.clmTenKhoaHoc.DefaultCellStyle = dataGridViewCellStyle4;
+            this.clmTenKhoaHoc.FillWeight = 120F;
+            this.clmTenKhoaHoc.HeaderText = "Tên khóa học";
+            this.clmTenKhoaHoc.Name = "clmTenKhoaHoc";
             // 
             // clmHocPhi
             // 
@@ -464,37 +420,13 @@
             this.clmHocPhi.HeaderText = "Học phí";
             this.clmHocPhi.Name = "clmHocPhi";
             // 
-            // clmHSNghe
-            // 
-            this.clmHSNghe.DataPropertyName = "HeSoNghe";
-            this.clmHSNghe.HeaderText = "Hệ số Nghe";
-            this.clmHSNghe.Name = "clmHSNghe";
-            // 
-            // clmHSNoi
-            // 
-            this.clmHSNoi.DataPropertyName = "HeSoNoi";
-            this.clmHSNoi.HeaderText = "Hệ số Nói";
-            this.clmHSNoi.Name = "clmHSNoi";
-            // 
-            // clmHSDoc
-            // 
-            this.clmHSDoc.DataPropertyName = "HeSoDoc";
-            this.clmHSDoc.HeaderText = "Hệ số Đọc";
-            this.clmHSDoc.Name = "clmHSDoc";
-            // 
-            // clmHSViet
-            // 
-            this.clmHSViet.DataPropertyName = "HeSoViet";
-            this.clmHSViet.HeaderText = "Hệ số Viết";
-            this.clmHSViet.Name = "clmHSViet";
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.lblTongCong);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 486);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(728, 30);
+            this.panel3.Size = new System.Drawing.Size(581, 30);
             this.panel3.TabIndex = 2;
             // 
             // lblTongCong
@@ -514,7 +446,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(728, 37);
+            this.panel2.Size = new System.Drawing.Size(581, 37);
             this.panel2.TabIndex = 0;
             // 
             // btnXoa
@@ -592,10 +524,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numDiemViet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDiemDoc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDiemNoi)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDiemNghe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlDSMonHoc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewDSMonHoc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHocPhi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridKH)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -611,26 +542,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.NumericUpDown numDiemViet;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown numDiemDoc;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown numDiemNoi;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numDiemNghe;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numHocPhi;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnHuyBo;
         private System.Windows.Forms.Button btnLuuThongTin;
-        private System.Windows.Forms.TextBox txtTenKH;
+        private System.Windows.Forms.TextBox txtTenKhoaHoc;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtMaKH;
+        private System.Windows.Forms.TextBox txtMaKhoaHoc;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView gridKH;
         private System.Windows.Forms.Panel panel3;
@@ -639,12 +558,16 @@
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaKH;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenKH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaKhoaHoc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenKhoaHoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmHocPhi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmHSNghe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmHSNoi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmHSDoc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmHSViet;
+        private System.Windows.Forms.Label label6;
+        private DevExpress.XtraGrid.GridControl gridControlDSMonHoc;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewDSMonHoc;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
     }
 }

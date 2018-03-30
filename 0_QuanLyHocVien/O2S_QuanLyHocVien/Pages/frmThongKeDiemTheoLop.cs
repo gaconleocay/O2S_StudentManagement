@@ -29,13 +29,13 @@ namespace O2S_QuanLyHocVien.Pages
         /// Tính điểm trung bình lớp
         /// </summary>
         /// <returns></returns>
-        public double DiemTrungBinhLop()
+        public decimal DiemTrungBinhLop()
         {
-            double diem = 0;
+            decimal diem = 0;
             for (int i = 0; i < gridThongKe.Rows.Count; i++)
-                diem += Convert.ToDouble(gridThongKe.Rows[i].Cells["clmDiemTrungBinh"].Value);
+                diem += Convert.ToDecimal(gridThongKe.Rows[i].Cells["clmDiemTrungBinh"].Value);
 
-            return diem / gridThongKe.Rows.Count;
+            return Math.Round((diem / gridThongKe.Rows.Count),2);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             thLop = new Thread(() =>
             {
-                object source = LopHoc.SelectAll();
+                object source = LopHoc.SelectTheoCoCo();
 
                 gridLop.Invoke((MethodInvoker)delegate
                 {
@@ -148,13 +148,14 @@ namespace O2S_QuanLyHocVien.Pages
                 new ReportParameter("DiemTBLop", string.Format("{0:N2}",DiemTrungBinhLop()))
             };
 
-            frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptBangDiemLop.rdlc";
+            //frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptBangDiemLop.rdlc";
+            frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptBangDiemLop.rdlc";
 
             dsSource.dtBangDiemLopDataTable dt = new dsSource.dtBangDiemLopDataTable();
             var query = BangDiem.SelectBangDiemLop(gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
             foreach (var i in query)
             {
-                dt.Rows.Add(i.MaHV, i.TenHV, i.DiemNghe, i.DiemNoi, i.DiemDoc, i.DiemViet, i.DiemTrungBinh);
+                dt.Rows.Add(i.MaHocVien, i.TenHocVien, i.DiemTrungBinh);
             }
 
             frm.ReportViewer.LocalReport.DataSources.Clear();

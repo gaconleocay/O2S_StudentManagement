@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Aspose.Cells;
 using System.IO;
 using System.Windows.Forms;
+using O2S_QuanLyHocVien.BusinessLogic;
 
 namespace O2S_QuanLyHocVien.Utilities.Common.Excel
 {
@@ -43,7 +44,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Excel
                     newRow["DIACHITRUNGTAM"] = GlobalPages.DiaChiTrungTam;
 
                     orderTable.Columns.Add("CURRENTUSER", typeof(string));
-                    newRow["CURRENTUSER"] = Base.SessionLogin.SessionUsername;
+                    newRow["CURRENTUSER"] = GlobalSettings.UserName;
 
 
 

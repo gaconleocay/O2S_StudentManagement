@@ -69,8 +69,8 @@ namespace O2S_QuanLyHocVien.Pages
         {
             //load loại nhân viên
             cboLoaiNV.DataSource = LoaiNV.SelectAll();
-            cboLoaiNV.DisplayMember = "TenLoaiNV";
-            cboLoaiNV.ValueMember = "MaLoaiNV";
+            cboLoaiNV.DisplayMember = "TenLoaiNhanVien";
+            cboLoaiNV.ValueMember = "MaLoaiNhanVien";
 
             btnDatLai_Click(sender, e);
             btnHienTatCa_Click(sender, e);

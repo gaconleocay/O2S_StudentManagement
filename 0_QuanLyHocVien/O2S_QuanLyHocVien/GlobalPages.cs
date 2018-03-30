@@ -54,6 +54,9 @@ namespace O2S_QuanLyHocVien
         public static frmQuanLyHocPhi QuanLyHocPhi { get; set; } = null;
 
         public static frmQuanLyTaiKhoan QuanLyTaiKhoan { get; set; } = null;
+        public static frmQuanLyCoSo QuanLyCoSo { get; set; } = null;
+        public static frmQuanLyMonHoc QuanLyMonHoc { get; set; } = null;
+
 
         /// <summary>
         /// Nạp các page cần thiết

@@ -35,11 +35,11 @@ namespace O2S_QuanLyHocVien.Popups
             }
             else
             {
-                txtMaGV.Text = gv.MaGV;
-                txtTenGV.Text = gv.TenGV;
-                cboGioiTinh.Text = gv.GioiTinhGV;
-                txtSDT.Text = gv.SdtGV;
-                txtEmail.Text = gv.EmailGV;
+                txtMaGV.Text = gv.MaGiangVien;
+                txtTenGV.Text = gv.TenGiangVien;
+                cboGioiTinh.Text = gv.GioiTinhGiangVien;
+                txtSDT.Text = gv.SdtGiangVien;
+                txtEmail.Text = gv.EmailGiangVien;
                 txtTenDangNhap.Text = gv.TenDangNhap;
                 txtMatKhau.Text = gv.TAIKHOAN.MatKhau;
                 txtTenDangNhap.Enabled = false;
@@ -54,12 +54,13 @@ namespace O2S_QuanLyHocVien.Popups
         {
             return new GIANGVIEN()
             {
-                MaGV = txtMaGV.Text,
-                TenGV = txtTenGV.Text,
-                GioiTinhGV = cboGioiTinh.Text,
-                SdtGV = txtSDT.Text,
-                EmailGV = txtEmail.Text,
-                TenDangNhap = txtTenDangNhap.Text
+                MaGiangVien = txtMaGV.Text,
+                TenGiangVien = txtTenGV.Text,
+                GioiTinhGiangVien = cboGioiTinh.Text,
+                SdtGiangVien = txtSDT.Text,
+                EmailGiangVien = txtEmail.Text,
+                TenDangNhap = txtTenDangNhap.Text,
+                MaCoSo=GlobalSettings.MaCoSo
             };
         }
 

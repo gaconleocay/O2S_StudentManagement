@@ -38,8 +38,8 @@
             this.btnThemVaoLop = new System.Windows.Forms.Button();
             this.lblTongCongHV = new System.Windows.Forms.Label();
             this.gridDSHV = new System.Windows.Forms.DataGridView();
-            this.clmMaHV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenHV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmMaHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmMaPhieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmNgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmGioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmSdtHV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmSdtHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmMaPhieuLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
@@ -170,8 +170,8 @@
             this.gridDSHV.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridDSHV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridDSHV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaHV,
-            this.clmTenHV,
+            this.clmMaHocVien,
+            this.clmTenHocVien,
             this.clmMaPhieu,
             this.clmKhoaHoc});
             this.gridDSHV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -185,19 +185,19 @@
             this.gridDSHV.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridDSHV_RowsAdded);
             this.gridDSHV.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridDSHV_RowsRemoved);
             // 
-            // clmMaHV
+            // clmMaHocVien
             // 
-            this.clmMaHV.DataPropertyName = "MaHV";
+            this.clmMaHocVien.DataPropertyName = "MaHocVien";
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaHV.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMaHV.HeaderText = "Mã học viên";
-            this.clmMaHV.Name = "clmMaHV";
+            this.clmMaHocVien.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmMaHocVien.HeaderText = "Mã học viên";
+            this.clmMaHocVien.Name = "clmMaHocVien";
             // 
-            // clmTenHV
+            // clmTenHocVien
             // 
-            this.clmTenHV.DataPropertyName = "TenHV";
-            this.clmTenHV.HeaderText = "Họ và tên";
-            this.clmTenHV.Name = "clmTenHV";
+            this.clmTenHocVien.DataPropertyName = "TenHocVien";
+            this.clmTenHocVien.HeaderText = "Họ và tên";
+            this.clmTenHocVien.Name = "clmTenHocVien";
             // 
             // clmMaPhieu
             // 
@@ -207,7 +207,7 @@
             // 
             // clmKhoaHoc
             // 
-            this.clmKhoaHoc.DataPropertyName = "TenKH";
+            this.clmKhoaHoc.DataPropertyName = "TenKhoaHoc";
             this.clmKhoaHoc.HeaderText = "Khóa học";
             this.clmKhoaHoc.Name = "clmKhoaHoc";
             // 
@@ -322,7 +322,7 @@
             this.dataGridViewTextBoxColumn2,
             this.clmNgaySinh,
             this.clmGioiTinh,
-            this.clmSdtHV,
+            this.clmSdtHocVien,
             this.clmDiaChi,
             this.clmMaPhieuLop});
             this.gridDSHVLop.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -339,7 +339,7 @@
             // 
             // clmMaHVLop
             // 
-            this.clmMaHVLop.DataPropertyName = "MaHV";
+            this.clmMaHVLop.DataPropertyName = "MaHocVien";
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Blue;
             this.clmMaHVLop.DefaultCellStyle = dataGridViewCellStyle2;
             this.clmMaHVLop.HeaderText = "Mã học viên";
@@ -348,7 +348,7 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "TenHV";
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "TenHocVien";
             this.dataGridViewTextBoxColumn2.HeaderText = "Họ và tên";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -362,17 +362,17 @@
             // 
             // clmGioiTinh
             // 
-            this.clmGioiTinh.DataPropertyName = "GioiTinhHV";
+            this.clmGioiTinh.DataPropertyName = "GioiTinhHocVien";
             this.clmGioiTinh.HeaderText = "Giới tính";
             this.clmGioiTinh.Name = "clmGioiTinh";
             this.clmGioiTinh.ReadOnly = true;
             // 
-            // clmSdtHV
+            // clmSdtHocVien
             // 
-            this.clmSdtHV.DataPropertyName = "SdtHV";
-            this.clmSdtHV.HeaderText = "SĐT";
-            this.clmSdtHV.Name = "clmSdtHV";
-            this.clmSdtHV.ReadOnly = true;
+            this.clmSdtHocVien.DataPropertyName = "SdtHocVien";
+            this.clmSdtHocVien.HeaderText = "SĐT";
+            this.clmSdtHocVien.Name = "clmSdtHocVien";
+            this.clmSdtHocVien.ReadOnly = true;
             // 
             // clmDiaChi
             // 
@@ -488,15 +488,15 @@
         private System.Windows.Forms.Button btnLuuLop;
         private System.Windows.Forms.Button btnBoKhoiLop;
         private System.Windows.Forms.Button btnDatLai;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaHV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenHV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaHocVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenHocVien;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmMaPhieu;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmKhoaHoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmMaHVLop;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmNgaySinh;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmGioiTinh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmSdtHV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmSdtHocVien;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDiaChi;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmMaPhieuLop;
     }

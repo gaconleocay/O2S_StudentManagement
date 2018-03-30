@@ -50,11 +50,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.gridGV = new System.Windows.Forms.DataGridView();
-            this.clmMaGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmGioiTinhGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmSdtGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmEmailGV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmMaGiangVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenGiangVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmGioiTinhGiangVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmSdtGiangVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmEmailGiangVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTongCongGV = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.gridLop = new System.Windows.Forms.DataGridView();
@@ -327,11 +327,11 @@
             this.gridGV.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaGV,
-            this.clmTenGV,
-            this.clmGioiTinhGV,
-            this.clmSdtGV,
-            this.clmEmailGV});
+            this.clmMaGiangVien,
+            this.clmTenGiangVien,
+            this.clmGioiTinhGiangVien,
+            this.clmSdtGiangVien,
+            this.clmEmailGiangVien});
             this.gridGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridGV.Location = new System.Drawing.Point(12, 3);
             this.gridGV.MultiSelect = false;
@@ -346,48 +346,48 @@
             this.gridGV.Click += new System.EventHandler(this.gridGV_Click);
             this.gridGV.DoubleClick += new System.EventHandler(this.gridGV_DoubleClick);
             // 
-            // clmMaGV
+            // clmMaGiangVien
             // 
-            this.clmMaGV.DataPropertyName = "MaGV";
+            this.clmMaGiangVien.DataPropertyName = "MaGiangVien";
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaGV.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMaGV.FillWeight = 70F;
-            this.clmMaGV.HeaderText = "Mã giảng viên";
-            this.clmMaGV.Name = "clmMaGV";
-            this.clmMaGV.ReadOnly = true;
+            this.clmMaGiangVien.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmMaGiangVien.FillWeight = 70F;
+            this.clmMaGiangVien.HeaderText = "Mã giảng viên";
+            this.clmMaGiangVien.Name = "clmMaGiangVien";
+            this.clmMaGiangVien.ReadOnly = true;
             // 
-            // clmTenGV
+            // clmTenGiangVien
             // 
-            this.clmTenGV.DataPropertyName = "TenGV";
+            this.clmTenGiangVien.DataPropertyName = "TenGiangVien";
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
-            this.clmTenGV.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clmTenGV.FillWeight = 93.27411F;
-            this.clmTenGV.HeaderText = "Họ và tên";
-            this.clmTenGV.Name = "clmTenGV";
-            this.clmTenGV.ReadOnly = true;
+            this.clmTenGiangVien.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clmTenGiangVien.FillWeight = 93.27411F;
+            this.clmTenGiangVien.HeaderText = "Họ và tên";
+            this.clmTenGiangVien.Name = "clmTenGiangVien";
+            this.clmTenGiangVien.ReadOnly = true;
             // 
-            // clmGioiTinhGV
+            // clmGioiTinhGiangVien
             // 
-            this.clmGioiTinhGV.DataPropertyName = "GioiTinhGV";
-            this.clmGioiTinhGV.HeaderText = "Giới tính";
-            this.clmGioiTinhGV.Name = "clmGioiTinhGV";
-            this.clmGioiTinhGV.ReadOnly = true;
+            this.clmGioiTinhGiangVien.DataPropertyName = "GioiTinhGiangVien";
+            this.clmGioiTinhGiangVien.HeaderText = "Giới tính";
+            this.clmGioiTinhGiangVien.Name = "clmGioiTinhGiangVien";
+            this.clmGioiTinhGiangVien.ReadOnly = true;
             // 
-            // clmSdtGV
+            // clmSdtGiangVien
             // 
-            this.clmSdtGV.DataPropertyName = "SdtGV";
-            this.clmSdtGV.FillWeight = 93.27411F;
-            this.clmSdtGV.HeaderText = "SĐT";
-            this.clmSdtGV.Name = "clmSdtGV";
-            this.clmSdtGV.ReadOnly = true;
+            this.clmSdtGiangVien.DataPropertyName = "SdtGiangVien";
+            this.clmSdtGiangVien.FillWeight = 93.27411F;
+            this.clmSdtGiangVien.HeaderText = "SĐT";
+            this.clmSdtGiangVien.Name = "clmSdtGiangVien";
+            this.clmSdtGiangVien.ReadOnly = true;
             // 
-            // clmEmailGV
+            // clmEmailGiangVien
             // 
-            this.clmEmailGV.DataPropertyName = "EmailGV";
-            this.clmEmailGV.FillWeight = 93.27411F;
-            this.clmEmailGV.HeaderText = "Email";
-            this.clmEmailGV.Name = "clmEmailGV";
-            this.clmEmailGV.ReadOnly = true;
+            this.clmEmailGiangVien.DataPropertyName = "EmailGiangVien";
+            this.clmEmailGiangVien.FillWeight = 93.27411F;
+            this.clmEmailGiangVien.HeaderText = "Email";
+            this.clmEmailGiangVien.Name = "clmEmailGiangVien";
+            this.clmEmailGiangVien.ReadOnly = true;
             // 
             // lblTongCongGV
             // 
@@ -668,11 +668,11 @@
         private System.Windows.Forms.DataGridView gridGV;
         private System.Windows.Forms.DataGridView gridLop;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmGioiTinhGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmSdtGV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmEmailGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaGiangVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenGiangVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmGioiTinhGiangVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmSdtGiangVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmEmailGiangVien;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;

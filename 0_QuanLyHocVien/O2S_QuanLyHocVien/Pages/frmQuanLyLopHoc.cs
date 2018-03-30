@@ -110,8 +110,8 @@ namespace O2S_QuanLyHocVien.Pages
             dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             cboKhoa.DataSource = KhoaHoc.SelectAll();
-            cboKhoa.DisplayMember = "TenKH";
-            cboKhoa.ValueMember = "MaKH";
+            cboKhoa.DisplayMember = "TenKhoaHoc";
+            cboKhoa.ValueMember = "MaKhoaHoc";
 
             btnDatLai_Click(sender, e);
 
@@ -121,7 +121,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnHienTatCa_Click(object sender, EventArgs e)
         {
-            gridLop.DataSource = LopHoc.SelectAll();
+            gridLop.DataSource = LopHoc.SelectTheoCoCo();
 
             gridLop_Click(sender, e);
         }
@@ -144,7 +144,7 @@ namespace O2S_QuanLyHocVien.Pages
 
                 lblTenLop.Text = lop.TenLop;
                 lblMaLop.Text = lop.MaLop;
-                lblKhoa.Text = lop.KHOAHOC.TenKH;
+                lblKhoa.Text = lop.KHOAHOC.TenKhoaHoc;
                 lblSiSo.Text = lop.SiSo.ToString();
                 lblNgayBatDau.Text = lop.NgayBD.ToString();
                 lblNgayKetThuc.Text = lop.NgayKT.ToString();

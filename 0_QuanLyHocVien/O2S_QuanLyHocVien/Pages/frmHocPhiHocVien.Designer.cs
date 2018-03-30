@@ -54,7 +54,7 @@
             this.lblSiSo = new System.Windows.Forms.Label();
             this.lblNgayKT = new System.Windows.Forms.Label();
             this.lblNgayBD = new System.Windows.Forms.Label();
-            this.lblTenKH = new System.Windows.Forms.Label();
+            this.lblTenKhoaHoc = new System.Windows.Forms.Label();
             this.lblMaLop = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -282,7 +282,7 @@
             this.panel6.Controls.Add(this.lblSiSo);
             this.panel6.Controls.Add(this.lblNgayKT);
             this.panel6.Controls.Add(this.lblNgayBD);
-            this.panel6.Controls.Add(this.lblTenKH);
+            this.panel6.Controls.Add(this.lblTenKhoaHoc);
             this.panel6.Controls.Add(this.lblMaLop);
             this.panel6.Controls.Add(this.label13);
             this.panel6.Controls.Add(this.label12);
@@ -398,16 +398,16 @@
             this.lblNgayBD.TabIndex = 44;
             this.lblNgayBD.Text = "<date start>";
             // 
-            // lblTenKH
+            // lblTenKhoaHoc
             // 
-            this.lblTenKH.AutoSize = true;
-            this.lblTenKH.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblTenKH.ForeColor = System.Drawing.Color.Blue;
-            this.lblTenKH.Location = new System.Drawing.Point(152, 122);
-            this.lblTenKH.Name = "lblTenKH";
-            this.lblTenKH.Size = new System.Drawing.Size(114, 19);
-            this.lblTenKH.TabIndex = 43;
-            this.lblTenKH.Text = "<course name>";
+            this.lblTenKhoaHoc.AutoSize = true;
+            this.lblTenKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTenKhoaHoc.ForeColor = System.Drawing.Color.Blue;
+            this.lblTenKhoaHoc.Location = new System.Drawing.Point(152, 122);
+            this.lblTenKhoaHoc.Name = "lblTenKhoaHoc";
+            this.lblTenKhoaHoc.Size = new System.Drawing.Size(114, 19);
+            this.lblTenKhoaHoc.TabIndex = 43;
+            this.lblTenKhoaHoc.Text = "<course name>";
             // 
             // lblMaLop
             // 
@@ -652,7 +652,7 @@
         private System.Windows.Forms.Label lblSiSo;
         private System.Windows.Forms.Label lblNgayKT;
         private System.Windows.Forms.Label lblNgayBD;
-        private System.Windows.Forms.Label lblTenKH;
+        private System.Windows.Forms.Label lblTenKhoaHoc;
         private System.Windows.Forms.Label lblMaLop;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;

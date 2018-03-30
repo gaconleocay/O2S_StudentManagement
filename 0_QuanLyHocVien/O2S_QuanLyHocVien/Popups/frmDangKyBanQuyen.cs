@@ -64,7 +64,7 @@ namespace O2S_QuanLyHocVien.Popups
         {
             try
             {
-                if (Base.SessionLogin.SessionUsercode == O2S_License.PasswordKey.KeyTrongPhanMem.AdminUser_key)
+                if (GlobalSettings.UserCode == O2S_License.PasswordKey.KeyTrongPhanMem.AdminUser_key)
                 {
                     groupBoxTaoLicense.Visible = true;
                     txtTaoLicensePassword.Focus();
@@ -191,7 +191,7 @@ namespace O2S_QuanLyHocVien.Popups
                 if (e.KeyCode == Keys.Enter)
                 {
                     //Kiem tra pass dung hay sai?
-                    if (txtTaoLicensePassword.Text.Trim() == KeyTrongPhanMem.LayLicense_key && SessionLogin.SessionUsercode ==KeyTrongPhanMem.AdminUser_key)
+                    if (txtTaoLicensePassword.Text.Trim() == KeyTrongPhanMem.LayLicense_key && GlobalSettings.UserCode ==KeyTrongPhanMem.AdminUser_key)
                     {
                         btnTaoLicenseTao.Enabled = true;
                     }

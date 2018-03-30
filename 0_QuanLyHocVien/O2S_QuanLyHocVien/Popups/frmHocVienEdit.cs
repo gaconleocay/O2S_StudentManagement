@@ -36,16 +36,16 @@ namespace O2S_QuanLyHocVien.Popups
             }
             else
             {
-                txtMaHV.Text = hv.MaHV;
-                txtHoTen.Text = hv.TenHV;
+                txtMaHV.Text = hv.MaHocVien;
+                txtHoTen.Text = hv.TenHocVien;
                 dateNgaySinh.Value = (DateTime)hv.NgaySinh;
-                cboGioiTinh.Text = hv.GioiTinhHV;
+                cboGioiTinh.Text = hv.GioiTinhHocVien;
                 txtDiaChi.Text = hv.DiaChi;
-                txtSDT.Text = hv.SdtHV;
-                txtEmail.Text = hv.EmailHV;
-                cboLoaiHV.SelectedValue = hv.MaLoaiHV;
+                txtSDT.Text = hv.SdtHocVien;
+                txtEmail.Text = hv.EmailHocVien;
+                cboLoaiHV.SelectedValue = hv.MaLoaiHocVien;
 
-                if (hv.MaLoaiHV == "LHV01")
+                if (hv.MaLoaiHocVien == "LHV01")
                 {
                     cboLoaiHV.Enabled = false;
                     txtMatKhau.Enabled = false;
@@ -69,16 +69,17 @@ namespace O2S_QuanLyHocVien.Popups
         {
             return new HOCVIEN()
             {
-                MaHV = txtMaHV.Text,
-                TenHV = txtHoTen.Text,
+                MaHocVien = txtMaHV.Text,
+                TenHocVien = txtHoTen.Text,
                 NgaySinh = DateTime.ParseExact(dateNgaySinh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                GioiTinhHV = cboGioiTinh.Text,
+                GioiTinhHocVien = cboGioiTinh.Text,
                 DiaChi = txtDiaChi.Text,
-                SdtHV = txtSDT.Text,
-                EmailHV = txtEmail.Text,
-                MaLoaiHV = cboLoaiHV.SelectedValue.ToString(),
+                SdtHocVien = txtSDT.Text,
+                EmailHocVien = txtEmail.Text,
+                MaLoaiHocVien = cboLoaiHV.SelectedValue.ToString(),
                 NgayTiepNhan = DateTime.Now,
-                TenDangNhap = (string)cboLoaiHV.SelectedValue == "LHV00" ? null : txtTenDangNhap.Text
+                TenDangNhap = (string)cboLoaiHV.SelectedValue == "LHV00" ? null : txtTenDangNhap.Text,
+                MaCoSo = GlobalSettings.MaCoSo
             };
         }
 
@@ -105,8 +106,8 @@ namespace O2S_QuanLyHocVien.Popups
         private void frmHocVienEdit_Load(object sender, EventArgs e)
         {
             cboLoaiHV.DataSource = LoaiHV.SelectAll();
-            cboLoaiHV.DisplayMember = "TenLoaiHV";
-            cboLoaiHV.ValueMember = "MaLoaiHV";
+            cboLoaiHV.DisplayMember = "TenLoaiHocVien";
+            cboLoaiHV.ValueMember = "MaLoaiHocVien";
 
             LoadUI(hv);
         }

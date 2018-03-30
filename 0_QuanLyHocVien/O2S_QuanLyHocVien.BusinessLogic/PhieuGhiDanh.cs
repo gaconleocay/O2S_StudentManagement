@@ -14,37 +14,57 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public struct BaoCaoHocVienNo
     {
-        public string MaHV { get; set; }
-        public string TenHV { get; set; }
-        public string GioiTinhHV { get; set; }
-        public string TenKH { get; set; }
+        public string MaHocVien { get; set; }
+        public string TenHocVien { get; set; }
+        public string GioiTinhHocVien { get; set; }
+        public string TenKhoaHoc { get; set; }
         public decimal? ConNo { get; set; }
     }
     public struct BaoCaoHocVienGhiDanh
     {
-        public string MaHV { get; set; }
-        public string TenHV { get; set; }
-        public string GioiTinhHV { get; set; }
+        public string MaHocVien { get; set; }
+        public string TenHocVien { get; set; }
+        public string GioiTinhHocVien { get; set; }
         public DateTime? NgayGhiDanh { get; set; }
-        public string TenKH { get; set; }
+        public string TenKhoaHoc { get; set; }
     }
     public static class PhieuGhiDanh
     {
-        /// <summary>
-        /// Chọn tất cả phiếu ghi danh
-        /// </summary>
-        /// <returns></returns>
         public static object SelectAll()
         {
             return (from p in Database.PHIEUGHIDANHs
                     join dk in Database.DANGKies on p.MaPhieu equals dk.MaPhieu
+                    join hv in Database.HOCVIENs on dk.MaHocVien equals hv.MaHocVien
                     select new
                     {
                         MaPhieu = p.MaPhieu,
-                        MaHV = dk.MaHV,
+                        MaHocVien = dk.MaHocVien,
+                        TenHocVien = hv.TenHocVien,
                         NgayGhiDanh = p.NgayGhiDanh,
                         DaDong = p.DaDong,
                         ConNo = p.ConNo
+                    }).ToList();
+        }
+
+        /// <summary>
+        /// Chọn tất cả phiếu ghi danh
+        /// </summary>
+        /// <returns></returns>
+        public static object SelectTheoCoSo()
+        {
+            return (from p in Database.PHIEUGHIDANHs
+                    join dk in Database.DANGKies on p.MaPhieu equals dk.MaPhieu
+                    join hv in Database.HOCVIENs on dk.MaHocVien equals hv.MaHocVien
+                    where (hv.MaCoSo==GlobalSettings.MaCoSo)
+                    select new
+                    {
+                        MaPhieu = p.MaPhieu,
+                        MaHocVien = dk.MaHocVien,
+                        TenHocVien=hv.TenHocVien,
+                        NgayGhiDanh = p.NgayGhiDanh,
+                        DaDong = p.DaDong,
+                        ConNo = p.ConNo,
+                        TenKhoaHoc =dk.KHOAHOC.TenKhoaHoc,
                     }).ToList();
         }
 
@@ -58,17 +78,17 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return from p in Database.PHIEUGHIDANHs
                    join dk in Database.DANGKies on p.MaPhieu equals dk.MaPhieu
-                   join hv in Database.HOCVIENs on dk.MaHV equals hv.MaHV
-                   join kh in Database.KHOAHOCs on dk.MaKH equals kh.MaKH
+                   join hv in Database.HOCVIENs on dk.MaHocVien equals hv.MaHocVien
+                   join kh in Database.KHOAHOCs on dk.MaKhoaHoc equals kh.MaKhoaHoc
                    where (p.NgayGhiDanh.Value.Month == month) &&
                          (p.NgayGhiDanh.Value.Year == year)
                    select new BaoCaoHocVienGhiDanh()
                    {
-                       MaHV = dk.MaHV,
-                       TenHV = hv.TenHV,
-                       GioiTinhHV = hv.GioiTinhHV,
+                       MaHocVien = dk.MaHocVien,
+                       TenHocVien = hv.TenHocVien,
+                       GioiTinhHocVien = hv.GioiTinhHocVien,
                        NgayGhiDanh = p.NgayGhiDanh,
-                       TenKH = kh.TenKH
+                       TenKhoaHoc = kh.TenKhoaHoc
                    };
         }
 
@@ -80,15 +100,15 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return (from p in Database.PHIEUGHIDANHs
                     join dk in Database.DANGKies on p.MaPhieu equals dk.MaPhieu
-                    join hv in Database.HOCVIENs on dk.MaHV equals hv.MaHV
-                    join kh in Database.KHOAHOCs on dk.MaKH equals kh.MaKH
+                    join hv in Database.HOCVIENs on dk.MaHocVien equals hv.MaHocVien
+                    join kh in Database.KHOAHOCs on dk.MaKhoaHoc equals kh.MaKhoaHoc
                     where p.ConNo > 0
                     select new BaoCaoHocVienNo()
                     {
-                        MaHV = dk.MaHV,
-                        TenHV = hv.TenHV,
-                        GioiTinhHV = hv.GioiTinhHV,
-                        TenKH = kh.TenKH,
+                        MaHocVien = dk.MaHocVien,
+                        TenHocVien = hv.TenHocVien,
+                        GioiTinhHocVien = hv.GioiTinhHocVien,
+                        TenKhoaHoc = kh.TenKhoaHoc,
                         ConNo = p.ConNo
                     });
         }
@@ -128,7 +148,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             pCu.NgayGhiDanh = ph.NgayGhiDanh;
             pCu.DaDong = ph.DaDong;
             pCu.ConNo = ph.ConNo;
-            pCu.MaNV = ph.MaNV;
+            pCu.MaNhanVien = ph.MaNhanVien;
 
             Database.SubmitChanges();
         }

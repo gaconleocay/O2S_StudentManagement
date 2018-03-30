@@ -43,13 +43,13 @@ namespace O2S_QuanLyHocVien.Popups
         {
             hv = HocVien.Select(GlobalSettings.UserID);
 
-            txtMaHV.Text = hv.MaHV;
-            txtTenHV.Text = hv.TenHV;
+            txtMaHV.Text = hv.MaHocVien;
+            txtTenHocVien.Text = hv.TenHocVien;
             dateNgaySinh.Value = (DateTime)hv.NgaySinh;
-            cboGioiTinh.Text = hv.GioiTinhHV;
+            cboGioiTinh.Text = hv.GioiTinhHocVien;
             txtDiaChi.Text = hv.DiaChi;
-            txtSDT.Text = hv.SdtHV;
-            txtEmail.Text = hv.EmailHV;
+            txtSDT.Text = hv.SdtHocVien;
+            txtEmail.Text = hv.EmailHocVien;
         }
 
         private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)
@@ -68,14 +68,14 @@ namespace O2S_QuanLyHocVien.Popups
 
                 HocVien.Update(new HOCVIEN()
                 {
-                    MaHV = txtMaHV.Text,
-                    TenHV = txtTenHV.Text,
-                    GioiTinhHV = cboGioiTinh.Text,
+                    MaHocVien = txtMaHV.Text,
+                    TenHocVien = txtTenHocVien.Text,
+                    GioiTinhHocVien = cboGioiTinh.Text,
                     NgaySinh = DateTime.ParseExact(dateNgaySinh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     DiaChi = txtDiaChi.Text,
-                    SdtHV = txtSDT.Text,
-                    EmailHV = txtEmail.Text,
-                    MaLoaiHV = hv.MaLoaiHV
+                    SdtHocVien = txtSDT.Text,
+                    EmailHocVien = txtEmail.Text,
+                    MaLoaiHocVien = hv.MaLoaiHocVien
                 });
 
                 MessageBox.Show("Cập nhật thông tin học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

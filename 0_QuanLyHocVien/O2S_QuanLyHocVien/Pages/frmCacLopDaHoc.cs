@@ -29,8 +29,8 @@ namespace O2S_QuanLyHocVien.Pages
             dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.Now;
 
             cboKhoaHoc.DataSource = KhoaHoc.SelectAll();
-            cboKhoaHoc.DisplayMember = "TenKH";
-            cboKhoaHoc.ValueMember = "MaKH";
+            cboKhoaHoc.DisplayMember = "TenKhoaHoc";
+            cboKhoaHoc.ValueMember = "MaKhoaHoc";
 
             gridLop.AutoGenerateColumns = false;
 
@@ -75,7 +75,7 @@ namespace O2S_QuanLyHocVien.Pages
                 var temp = BangDiem.SelectDetail(GlobalSettings.UserID, gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
                 lblTenLop.Text = temp.TenLop;
                 lblMaLop.Text = temp.MaLop;
-                lblTenKH.Text = temp.TenKH;
+                lblTenKhoaHoc.Text = temp.TenKhoaHoc;
                 lblNgayBD.Text = temp.NgayBD.Value.ToShortDateString();
                 lblNgayKT.Text = temp.NgayKT.Value.ToShortDateString();
                 lblSiSo.Text = temp.SiSo.ToString();
@@ -86,7 +86,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 lblTenLop.Text = string.Empty;
                 lblMaLop.Text = string.Empty;
-                lblTenKH.Text = string.Empty;
+                lblTenKhoaHoc.Text = string.Empty;
                 lblNgayBD.Text = string.Empty;
                 lblNgayKT.Text = string.Empty;
                 lblSiSo.Text = string.Empty;

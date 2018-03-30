@@ -27,7 +27,7 @@ namespace O2S_QuanLyHocVien.Popups
 
             lblUserName.Text = TaiKhoan.FullUserName(currentUser);
 
-            txtTenDangNhap.Text = GlobalSettings.UserName;
+            txtTenDangNhap.Text = GlobalSettings.UserCode;
         }
 
         private void btnLuuThongTin_Click(object sender, EventArgs e)

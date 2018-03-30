@@ -36,7 +36,7 @@
             this.cboLop = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.lblTenKhoa = new System.Windows.Forms.Label();
+            this.lblTenKhoaHocoa = new System.Windows.Forms.Label();
             this.lblTenLop = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblDiemViet = new System.Windows.Forms.Label();
@@ -157,7 +157,7 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.lblTenKhoa);
+            this.panel4.Controls.Add(this.lblTenKhoaHocoa);
             this.panel4.Controls.Add(this.lblTenLop);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(188, 41);
@@ -165,17 +165,17 @@
             this.panel4.Size = new System.Drawing.Size(494, 31);
             this.panel4.TabIndex = 1;
             // 
-            // lblTenKhoa
+            // lblTenKhoaHocoa
             // 
-            this.lblTenKhoa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTenKhoa.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTenKhoa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lblTenKhoa.Location = new System.Drawing.Point(202, 5);
-            this.lblTenKhoa.Name = "lblTenKhoa";
-            this.lblTenKhoa.Size = new System.Drawing.Size(288, 21);
-            this.lblTenKhoa.TabIndex = 40;
-            this.lblTenKhoa.Text = "<course name>";
-            this.lblTenKhoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTenKhoaHocoa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTenKhoaHocoa.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblTenKhoaHocoa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lblTenKhoaHocoa.Location = new System.Drawing.Point(202, 5);
+            this.lblTenKhoaHocoa.Name = "lblTenKhoaHocoa";
+            this.lblTenKhoaHocoa.Size = new System.Drawing.Size(288, 21);
+            this.lblTenKhoaHocoa.TabIndex = 40;
+            this.lblTenKhoaHocoa.Text = "<course name>";
+            this.lblTenKhoaHocoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblTenLop
             // 
@@ -474,7 +474,7 @@
         private System.Windows.Forms.ComboBox cboLop;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label lblTenKhoa;
+        private System.Windows.Forms.Label lblTenKhoaHocoa;
         private System.Windows.Forms.Label lblTenLop;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label lblDiemViet;

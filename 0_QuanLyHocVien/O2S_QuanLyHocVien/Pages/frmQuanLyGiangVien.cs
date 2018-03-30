@@ -72,7 +72,7 @@ namespace O2S_QuanLyHocVien.Pages
         private void btnHienTatCa_Click(object sender, EventArgs e)
         {
             gridGV.AutoGenerateColumns = false;
-            gridGV.DataSource = GiangVien.SelectAll();
+            gridGV.DataSource = GiangVien.SelectTheoCoSo();
         }
 
         private void gridGV_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -88,7 +88,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            frmGiangVienEdit frm = new frmGiangVienEdit(GiangVien.Select(gridGV.SelectedRows[0].Cells["clmMaGV"].Value.ToString()));
+            frmGiangVienEdit frm = new frmGiangVienEdit(GiangVien.Select(gridGV.SelectedRows[0].Cells["clmMaGiangVien"].Value.ToString()));
             frm.Text = "Cập nhật thông tin giảng viên";
             frm.ShowDialog();
 
@@ -101,7 +101,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    GiangVien.Delete(gridGV.SelectedRows[0].Cells["clmMaGV"].Value.ToString());
+                    GiangVien.Delete(gridGV.SelectedRows[0].Cells["clmMaGiangVien"].Value.ToString());
 
                     MessageBox.Show("Xóa giảng viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -131,8 +131,11 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void gridGV_Click(object sender, EventArgs e)
         {
-            gridLop.AutoGenerateColumns = false;
-            gridLop.DataSource = GiangDay.Select(gridGV.SelectedRows[0].Cells["clmMaGV"].Value.ToString());
+            if (gridLop != null && gridLop.RowCount > 0)
+            {
+                gridLop.AutoGenerateColumns = false;
+                gridLop.DataSource = GiangDay.Select(gridGV.SelectedRows[0].Cells["clmMaGiangVien"].Value.ToString());
+            }
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)

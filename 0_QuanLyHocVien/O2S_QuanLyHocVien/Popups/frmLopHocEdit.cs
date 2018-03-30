@@ -40,7 +40,7 @@ namespace O2S_QuanLyHocVien.Popups
                 dateNgayBD.Value = (DateTime)lh.NgayBD;
                 dateNgayBD.Enabled = cboKhoa.Enabled = isInsert;
                 dateNgayKT.Value = (DateTime)lh.NgayKT;
-                cboKhoa.SelectedValue = lh.MaKH;
+                cboKhoa.SelectedValue = lh.MaKhoaHoc;
                 rdMo.Checked = (bool)lh.DangMo;
                 rdDong.Checked = !(bool)lh.DangMo;
             }
@@ -59,8 +59,9 @@ namespace O2S_QuanLyHocVien.Popups
                 NgayBD = DateTime.ParseExact(dateNgayBD.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 NgayKT = DateTime.ParseExact(dateNgayKT.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 SiSo = lh == null ? 0 : lh.SiSo,
-                MaKH = cboKhoa.SelectedValue.ToString(),
-                DangMo = rdMo.Checked
+                MaKhoaHoc = cboKhoa.SelectedValue.ToString(),
+                DangMo = rdMo.Checked,
+                MaCoSo = GlobalSettings.MaCoSo
             };
         }
 
@@ -89,8 +90,8 @@ namespace O2S_QuanLyHocVien.Popups
             dateNgayBD.Value = DateTime.Now;
 
             cboKhoa.DataSource = KhoaHoc.SelectAll();
-            cboKhoa.DisplayMember = "TenKH";
-            cboKhoa.ValueMember = "MaKH";
+            cboKhoa.DisplayMember = "TenKhoaHoc";
+            cboKhoa.ValueMember = "MaKhoaHoc";
 
             LoadUI(lh);
         }

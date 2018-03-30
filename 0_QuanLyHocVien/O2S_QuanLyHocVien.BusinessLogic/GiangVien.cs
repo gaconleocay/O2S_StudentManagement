@@ -22,17 +22,24 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static GIANGVIEN Select(string maGV)
         {
             return (from p in Database.GIANGVIENs
-                    where p.MaGV == maGV
+                    where p.MaGiangVien == maGV
                     select p).FirstOrDefault();
+        }
+
+        public static object SelectAll()
+        {
+            return (from p in Database.GIANGVIENs
+                    select p).ToList();
         }
 
         /// <summary>
         /// Chọn tất cả giảng viên
         /// </summary>
         /// <returns></returns>
-        public static object SelectAll()
+        public static object SelectTheoCoSo()
         {
             return (from p in Database.GIANGVIENs
+                    where (p.MaCoSo==GlobalSettings.MaCoSo)
                     select p).ToList();
         }
 
@@ -46,9 +53,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static object SelectAll(string maGV, string tenGV, string gioiTinh)
         {
             return (from p in Database.GIANGVIENs
-                    where (maGV == null ? true : p.MaGV.Contains(maGV)) &&
-                          (tenGV == null ? true : p.TenGV.Contains(tenGV)) &&
-                          (gioiTinh == null ? true : p.GioiTinhGV == gioiTinh)
+                    where (maGV == null ? true : p.MaGiangVien.Contains(maGV)) &&
+                          (tenGV == null ? true : p.TenGiangVien.Contains(tenGV)) &&
+                          (gioiTinh == null ? true : p.GioiTinhGiangVien == gioiTinh)
                     select p).ToList();
         }
 
@@ -76,12 +83,12 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <param name="taiKhoan"></param>
         public static void Update(GIANGVIEN giangVien, TAIKHOAN taiKhoan = null)
         {
-            var giangVienCu = Select(giangVien.MaGV);
+            var giangVienCu = Select(giangVien.MaGiangVien);
 
-            giangVienCu.TenGV = giangVien.TenGV;
-            giangVienCu.GioiTinhGV = giangVien.GioiTinhGV;
-            giangVienCu.SdtGV = giangVien.SdtGV;
-            giangVienCu.EmailGV = giangVien.EmailGV;
+            giangVienCu.TenGiangVien = giangVien.TenGiangVien;
+            giangVienCu.GioiTinhGiangVien = giangVien.GioiTinhGiangVien;
+            giangVienCu.SdtGiangVien = giangVien.SdtGiangVien;
+            giangVienCu.EmailGiangVien = giangVien.EmailGiangVien;
 
             Database.SubmitChanges();
             if(taiKhoan!=null)
@@ -116,8 +123,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             string result = "GV";
             var temp = from p in GlobalSettings.Database.GIANGVIENs
-                       where p.MaGV.StartsWith(result)
-                       select p.MaGV;
+                       where p.MaGiangVien.StartsWith(result)
+                       select p.MaGiangVien;
             int max = -1;
 
             foreach (var i in temp)

@@ -87,23 +87,51 @@
       <HintPath>..\packages\Microsoft.Reporting.WinForms.v11.1.0.0.0\lib\Microsoft.SqlServer.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.Linq" />
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Management">
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Deployment">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\bienTrongBaoCao.cs" />
@@ -113,7 +141,6 @@
     <Compile Include="Base\KiemTraLicense.cs" />
     <Compile Include="Base\listChucNang.cs" />
     <Compile Include="Base\ReadExcelFile.cs" />
-    <Compile Include="Base\SessionLogin.cs" />
     <Compile Include="Base\ThongBaoLable.cs" />
     <Compile Include="DAL\ConnectDatabase.cs" />
     <Compile Include="Pages\frmBangDiem.cs">
@@ -134,17 +161,35 @@
     <Compile Include="Pages\frmCacLopDaHoc.Designer.cs">
       <DependentUpon>frmCacLopDaHoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\frmQuanLyMonHoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\frmQuanLyMonHoc.Designer.cs">
+      <DependentUpon>frmQuanLyMonHoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\frmQuanLyHocPhi.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Pages\frmQuanLyHocPhi.Designer.cs">
       <DependentUpon>frmQuanLyHocPhi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\frmQuanLyCoSo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\frmQuanLyCoSo.Designer.cs">
+      <DependentUpon>frmQuanLyCoSo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Popups\frmDangKyBanQuyen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Popups\frmDangKyBanQuyen.Designer.cs">
       <DependentUpon>frmDangKyBanQuyen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Popups\frmChonCoSo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Popups\frmChonCoSo.Designer.cs">
+      <DependentUpon>frmChonCoSo.cs</DependentUpon>
     </Compile>
     <Compile Include="Popups\frmQuyDinh.cs">
       <SubType>Form</SubType>
@@ -384,11 +429,20 @@
     <EmbeddedResource Include="Pages\frmCacLopDaHoc.resx">
       <DependentUpon>frmCacLopDaHoc.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pages\frmQuanLyMonHoc.resx">
+      <DependentUpon>frmQuanLyMonHoc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\frmQuanLyHocPhi.resx">
       <DependentUpon>frmQuanLyHocPhi.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pages\frmQuanLyCoSo.resx">
+      <DependentUpon>frmQuanLyCoSo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Popups\frmDangKyBanQuyen.resx">
       <DependentUpon>frmDangKyBanQuyen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Popups\frmChonCoSo.resx">
+      <DependentUpon>frmChonCoSo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Popups\frmQuyDinh.resx">
       <DependentUpon>frmQuyDinh.cs</DependentUpon>
@@ -491,11 +545,22 @@
     <EmbeddedResource Include="Reports\frmReport.resx">
       <DependentUpon>frmReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\rptBangDiemLop.rdlc" />
-    <EmbeddedResource Include="Reports\rptBaoCaoHocVienGhiDanhTheoThang.rdlc" />
-    <EmbeddedResource Include="Reports\rptBaoCaoHocVienNo.rdlc" />
-    <EmbeddedResource Include="Reports\rptBienLaiHocPhi.rdlc" />
-    <EmbeddedResource Include="Reports\rptInBangDiem.rdlc" />
+    <Content Include="Reports\rptBangDiemLop.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\rptBaoCaoHocVienGhiDanhTheoThang.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\rptBaoCaoHocVienNo.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\rptBienLaiHocPhi.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\rptInBangDiem.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Utilities\PrintPreview\CoolPrintPreviewDialog.resx">
       <DependentUpon>CoolPrintPreviewDialog.cs</DependentUpon>
     </EmbeddedResource>

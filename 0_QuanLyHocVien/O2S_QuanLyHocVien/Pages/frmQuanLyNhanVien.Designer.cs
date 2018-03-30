@@ -279,7 +279,7 @@
             // 
             // clmMaNV
             // 
-            this.clmMaNV.DataPropertyName = "MaNV";
+            this.clmMaNV.DataPropertyName = "MaNhanVien";
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue;
             this.clmMaNV.DefaultCellStyle = dataGridViewCellStyle3;
             this.clmMaNV.FillWeight = 70F;
@@ -288,7 +288,7 @@
             // 
             // clmTenNV
             // 
-            this.clmTenNV.DataPropertyName = "TenNV";
+            this.clmTenNV.DataPropertyName = "TenNhanVien";
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.clmTenNV.DefaultCellStyle = dataGridViewCellStyle4;
             this.clmTenNV.FillWeight = 93.27411F;
@@ -297,21 +297,21 @@
             // 
             // clmSdtNV
             // 
-            this.clmSdtNV.DataPropertyName = "SdtNV";
+            this.clmSdtNV.DataPropertyName = "SdtNhanVien";
             this.clmSdtNV.FillWeight = 93.27411F;
             this.clmSdtNV.HeaderText = "SĐT";
             this.clmSdtNV.Name = "clmSdtNV";
             // 
             // clmEmailNV
             // 
-            this.clmEmailNV.DataPropertyName = "EmailNV";
+            this.clmEmailNV.DataPropertyName = "EmailNhanVien";
             this.clmEmailNV.FillWeight = 93.27411F;
             this.clmEmailNV.HeaderText = "Email";
             this.clmEmailNV.Name = "clmEmailNV";
             // 
             // clmTenLoaiNV
             // 
-            this.clmTenLoaiNV.DataPropertyName = "TenLoaiNV";
+            this.clmTenLoaiNV.DataPropertyName = "TenLoaiNhanVien";
             this.clmTenLoaiNV.FillWeight = 93.27411F;
             this.clmTenLoaiNV.HeaderText = "Loại nhân viên";
             this.clmTenLoaiNV.Name = "clmTenLoaiNV";

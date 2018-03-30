@@ -196,6 +196,34 @@ CREATE INDEX VERSION_AppType_idx ON VERSION (AppType);
 
 
 
+--=================================================== UPDATE DATA
+
+
+ --Bảng Loại Nhân Viên
+Insert into LOAINV(MaLoaiNV,TenLoaiNV) values ('LNV00' , N'Quản trị viên')
+Insert into LOAINV(MaLoaiNV,TenLoaiNV) values ('LNV01' , N'Nhân viên ghi danh')
+Insert into LOAINV(MaLoaiNV,TenLoaiNV) values ('LNV02' , N'Nhân viên học vụ')
+Insert into LOAINV(MaLoaiNV,TenLoaiNV) values ('LNV03' , N'Nhân viên kế toán')
+
+--Loại Học viên
+insert into LOAIHV(MaLoaiHV,TenLoaiHV) values ('LHV00',N'Học viên tiềm năng')
+insert into LOAIHV(MaLoaiHV,TenLoaiHV) values ('LHV01',N'Học viên chính thức')
+
+--Bảng Thông tin trung tâm
+Insert into CHITIETTRUNGTAM values('English Center', N'Ha Noi','0943834934','ec.edu.com','support@ec.edu.com')
+
+--Bảng Quy Định
+Insert into QUYDINH(MaQD,TenQD,GiaTri) values ('QD0000',N'Sĩ số học viên tối đa',40)
+Insert into QUYDINH(MaQD,TenQD,GiaTri) values ('QD0001',N'Số tiền tối thiểu phải đóng khi ghi danh',0)
+
+
+
+--thieu xep giao vien - lop hoc
+
+
+
+
+
 
 
 

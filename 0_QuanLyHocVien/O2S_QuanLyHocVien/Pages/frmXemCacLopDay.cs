@@ -28,7 +28,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 lblTenLop.Text = lh.TenLop;
                 lblMaLop.Text = lh.MaLop;
-                lblKhoa.Text = lh.KHOAHOC.TenKH;
+                lblKhoa.Text = lh.KHOAHOC.TenKhoaHoc;
                 lblNgayBatDau.Text = lh.NgayBD.Value.ToShortDateString();
                 lblNgayKetThuc.Text = lh.NgayKT.Value.ToShortDateString();
                 lblSiSo.Text = lh.SiSo.ToString();
@@ -66,8 +66,8 @@ namespace O2S_QuanLyHocVien.Pages
 
             //load khóa học
             cboKhoaHoc.DataSource = KhoaHoc.SelectAll();
-            cboKhoaHoc.DisplayMember = "TenKH";
-            cboKhoaHoc.ValueMember = "MaKH";
+            cboKhoaHoc.DisplayMember = "TenKhoaHoc";
+            cboKhoaHoc.ValueMember = "MaKhoaHoc";
 
             gridKetQuaTimKiem.AutoGenerateColumns = false;
 

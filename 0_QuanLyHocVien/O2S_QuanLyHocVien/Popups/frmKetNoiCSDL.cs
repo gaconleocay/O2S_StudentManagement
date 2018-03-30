@@ -6,6 +6,7 @@
 using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
+using System.Configuration;
 
 namespace O2S_QuanLyHocVien.Popups
 {
@@ -92,9 +93,29 @@ namespace O2S_QuanLyHocVien.Popups
 
             GlobalSettings.SaveDatabaseConnection();
 
+            LuuLaiCauHinhFileConfig();
+
             MessageBox.Show("Đã lưu cài đặt kết nối cơ sở dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             DialogResult = DialogResult.OK;
             Close();
+        }
+        private void LuuLaiCauHinhFileConfig()
+        {
+            try
+            {
+                Configuration _config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                _config.AppSettings.Settings["ServerHost"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtTenServer.Text.Trim(), true);  
+                _config.AppSettings.Settings["Username"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtTenDangNhap.Text.Trim(), true);
+                _config.AppSettings.Settings["Password"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtMatKhau.Text.Trim(), true);
+                _config.AppSettings.Settings["Database"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(cboDatabase.Text, true);
+
+                _config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("appSettings");
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         #endregion

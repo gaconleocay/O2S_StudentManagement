@@ -41,7 +41,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cboGioiTinh = new System.Windows.Forms.ComboBox();
-            this.txtTenHV = new System.Windows.Forms.TextBox();
+            this.txtTenHocVien = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtMaHV = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -70,7 +70,7 @@
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.cboGioiTinh);
-            this.panel1.Controls.Add(this.txtTenHV);
+            this.panel1.Controls.Add(this.txtTenHocVien);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtMaHV);
             this.panel1.Controls.Add(this.label4);
@@ -199,14 +199,14 @@
             this.cboGioiTinh.Size = new System.Drawing.Size(238, 25);
             this.cboGioiTinh.TabIndex = 40;
             // 
-            // txtTenHV
+            // txtTenHocVien
             // 
-            this.txtTenHV.Enabled = false;
-            this.txtTenHV.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtTenHV.Location = new System.Drawing.Point(146, 154);
-            this.txtTenHV.Name = "txtTenHV";
-            this.txtTenHV.Size = new System.Drawing.Size(238, 25);
-            this.txtTenHV.TabIndex = 35;
+            this.txtTenHocVien.Enabled = false;
+            this.txtTenHocVien.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtTenHocVien.Location = new System.Drawing.Point(146, 154);
+            this.txtTenHocVien.Name = "txtTenHocVien";
+            this.txtTenHocVien.Size = new System.Drawing.Size(238, 25);
+            this.txtTenHocVien.TabIndex = 35;
             // 
             // label3
             // 
@@ -348,7 +348,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cboGioiTinh;
-        private System.Windows.Forms.TextBox txtTenHV;
+        private System.Windows.Forms.TextBox txtTenHocVien;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMaHV;
         private System.Windows.Forms.Label label4;

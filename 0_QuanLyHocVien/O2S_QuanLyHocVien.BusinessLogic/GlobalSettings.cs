@@ -11,77 +11,48 @@ using O2S_QuanLyHocVien.DataAccess;
 using System.Data.SqlClient;
 using System.Data;
 using O2S_QuanLyHocVien.BusinessLogic.Properties;
+using O2S_QuanLyHocVien.Model.Models;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public enum UserType { NhanVien, HocVien, GiangVien }
     public static class GlobalSettings
     {
-        /// <summary>
-        /// Đại diện cho cơ sở dữ liệu của chương trình
-        /// </summary>
-        public static QuanLyHocVienDataContext Database { get; set; }
+        #region Bien Session
+        public static QuanLyHocVienDataContext Database { get; set; } //Đại diện cho cơ sở dữ liệu của chương trình
+        public static string ConnectionString { get; set; }// Đại diện cho chuỗi kết nối
 
-        /// <summary>
-        /// Đại diện cho chuỗi kết nối
-        /// </summary>
-        public static string ConnectionString { get; set; }
-
-        /// <summary>
-        /// Đại diện cho mã người dùng đăng nhập
-        /// </summary>
         public static string UserID { get; set; }
+        public static string UserCode { get; set; }
+        public static string UserName { get; set; }  // Tên user
+        public static UserType UserType { get; set; }//Đại diện cho kiểu người dùng đăng nhập
+        public static string SessionMachineName { get; set; }   // Tên máy
+        public static string SessionMyIP { get; set; }  // Địa chỉ IP máy
+        public static string SessionVersion { get; set; } // Version phần mềm
+        public static bool KiemTraLicenseSuDung { get; set; } //kiem tra license: neu false thi out phan mem, neu true thi cho su dung tiep
+        public static string License_KeyDB { get; set; } //License lay tu DB
+        public static string MaDatabase { get; set; }//Lay thong tin database
+        public static List<classPermission> SessionLstPhanQuyenNguoiDung { get; set; }
 
-        /// <summary>
-        /// Đại diện cho tên người dùng đăng nhập
-        /// </summary>
-        public static string UserName { get; set; }
+        public static string ServerName { get; set; }//Đại diện cho tên server
+        public static string ServerCatalog { get; set; }//Đại diện cho tên database
+        public static string CenterName { get; set; }//Đại diện cho tên trung tâm
+        public static string MaCoSo { get; set; }//Co so trung tam
+        public static string TenCoSo { get; set; }
+        public static string CenterAddress { get; set; }//Đại diện cho địa chỉ trung tâm
+        public static string CenterWebsite { get; set; }// Đại diện cho website trung tâm
+        public static string CenterEmail { get; set; }// Đại diện cho email trung tâm
+        public static string CenterTelephone { get; set; }// Đại diện cho số điện thoại trung tâm
+        public static Dictionary<string,int> QuyDinh { get; set; }// Đại diện cho danh sách quy định
 
-        /// <summary>
-        /// Đại diện cho kiểu người dùng đăng nhập
-        /// </summary>
-        public static UserType UserType { get; set; }
+        //
 
-        /// <summary>
-        /// Đại diện cho tên server
-        /// </summary>
-        public static string ServerName { get; set; }
 
-        /// <summary>
-        /// Đại diện cho tên database
-        /// </summary>
-        public static string ServerCatalog { get; set; }
 
-        /// <summary>
-        /// Đại diện cho tên trung tâm
-        /// </summary>
-        public static string CenterName { get; set; }
+        #endregion
 
-        /// <summary>
-        /// Đại diện cho địa chỉ trung tâm
-        /// </summary>
-        public static string CenterAddress { get; set; }
 
-        /// <summary>
-        /// Đại diện cho website trung tâm
-        /// </summary>
-        public static string CenterWebsite { get; set; }
-
-        /// <summary>
-        /// Đại diện cho email trung tâm
-        /// </summary>
-        public static string CenterEmail { get; set; }
-
-        /// <summary>
-        /// Đại diện cho số điện thoại trung tâm
-        /// </summary>
-        public static string CenterTelephone { get; set; }
-
-        /// <summary>
-        /// Đại diện cho danh sách quy định
-        /// </summary>
-        public static Dictionary<string,int> QuyDinh { get; set; }
-
+        #region Function
 
         /// <summary>
         /// Kết nối đến cơ sở dữ liệu
@@ -163,5 +134,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             foreach (var i in f)
                 QuyDinh.Add(i.MaQD, (int)i.GiaTri);
         }
+
+
+        #endregion
     }
 }

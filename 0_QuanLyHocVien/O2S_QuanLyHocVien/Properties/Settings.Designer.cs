@@ -62,7 +62,7 @@ namespace O2S_QuanLyHocVien.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=QLHVTTEC;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=O2S_QLHV;Integrated Security=True")]
         public string QLHVTTECConnectionString {
             get {
                 return ((string)(this["QLHVTTECConnectionString"]));

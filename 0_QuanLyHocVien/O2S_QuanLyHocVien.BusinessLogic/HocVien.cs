@@ -14,13 +14,20 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class HocVien
     {
-        /// <summary>
-        /// Chọn tất cả
-        /// </summary>
-        /// <returns></returns>
         public static object SelectAll()
         {
             return (from p in GlobalSettings.Database.HOCVIENs
+                    select p).ToList();
+        }
+
+        /// <summary>
+        /// Chọn tất cả theo cơ sở
+        /// </summary>
+        /// <returns></returns>
+        public static object SelectTheoCoSo()
+        {
+            return (from p in GlobalSettings.Database.HOCVIENs
+                    where (p.MaCoSo == GlobalSettings.MaCoSo)
                     select p).ToList();
         }
 
@@ -32,7 +39,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static object SelectAll(string maloai)
         {
             return (from p in GlobalSettings.Database.HOCVIENs
-                    where p.MaLoaiHV == maloai
+                    where p.MaLoaiHocVien == maloai
                     select p).ToList();
         }
 
@@ -40,19 +47,19 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// Chọn các học viên thỏa điều kiện
         /// </summary>
         /// <param name="maHV">Mã học viên</param>
-        /// <param name="tenHV">Tên học viên</param>
+        /// <param name="TenHocVien">Tên học viên</param>
         /// <param name="gioiTinh">Giới tính</param>
         /// <param name="tuNgay">Tiếp nhận từ ngày</param>
         /// <param name="denNgay">Tiếp nhận đến ngày</param>
         /// <param name="loai">Loại học viên</param>
         /// <returns></returns>
-        public static object SelectAll(string maHV, string tenHV, string gioiTinh, DateTime? tuNgay, DateTime? denNgay, string maLoai)
+        public static object SelectAll(string maHV, string TenHocVien, string gioiTinh, DateTime? tuNgay, DateTime? denNgay, string maLoai)
         {
             return (from p in GlobalSettings.Database.HOCVIENs
-                    where  (maLoai == null ? true : p.MaLoaiHV == maLoai) &&
-                           (maHV == null ? true : p.MaHV.Contains(maHV)) &&
-                           (tenHV == null ? true : p.TenHV.Contains(tenHV)) &&
-                           (gioiTinh == null ? true : p.GioiTinhHV.Contains(gioiTinh)) &&
+                    where (maLoai == null ? true : p.MaLoaiHocVien == maLoai) &&
+                           (maHV == null ? true : p.MaHocVien.Contains(maHV)) &&
+                           (TenHocVien == null ? true : p.TenHocVien.Contains(TenHocVien)) &&
+                           (gioiTinh == null ? true : p.GioiTinhHocVien.Contains(gioiTinh)) &&
                            (tuNgay == null ? true : p.NgayTiepNhan >= tuNgay) &&
                            (denNgay == null ? true : p.NgayTiepNhan <= denNgay)
                     select p).ToList();
@@ -78,7 +85,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static HOCVIEN Select(string maHV)
         {
             return (from p in GlobalSettings.Database.HOCVIENs
-                    where p.MaHV == maHV
+                    where p.MaHocVien == maHV
                     select p).FirstOrDefault();
         }
 
@@ -88,7 +95,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <param name="hocVien">Học viên cần thêm</param>
         public static void Insert(HOCVIEN hocVien, TAIKHOAN taiKhoan)
         {
-            if (hocVien.MaLoaiHV == "LHV01")
+            if (hocVien.MaLoaiHocVien == "LHV01")
                 Database.TAIKHOANs.InsertOnSubmit(taiKhoan);
             Database.HOCVIENs.InsertOnSubmit(hocVien);
             Database.SubmitChanges();
@@ -101,29 +108,33 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <param name="taiKhoan">Tài khoản cần thêm mới</param>
         public static void Update(HOCVIEN hocVien, TAIKHOAN taiKhoan = null)
         {
-            var hocVienCu = Select(hocVien.MaHV);
+            var hocVienCu = Select(hocVien.MaHocVien);
 
             //không thay đổi loại
-            hocVienCu.TenHV = hocVien.TenHV;
+            hocVienCu.TenHocVien = hocVien.TenHocVien;
             hocVienCu.NgaySinh = hocVien.NgaySinh;
-            hocVienCu.GioiTinhHV = hocVien.GioiTinhHV;
+            hocVienCu.GioiTinhHocVien = hocVien.GioiTinhHocVien;
             hocVienCu.DiaChi = hocVien.DiaChi;
-            hocVienCu.SdtHV = hocVien.SdtHV;
-            hocVienCu.EmailHV = hocVien.EmailHV;
+            hocVienCu.SdtHocVien = hocVien.SdtHocVien;
+            hocVienCu.EmailHocVien = hocVien.EmailHocVien;
             hocVienCu.NgayTiepNhan = hocVien.NgayTiepNhan;
+            hocVienCu.SdtBo = hocVien.SdtBo;
+            hocVienCu.EmailBo = hocVien.EmailBo;
+            hocVienCu.SdtMe = hocVien.SdtMe;
+            hocVienCu.EmailMe = hocVien.EmailMe;
 
-            if (hocVienCu.MaLoaiHV != hocVien.MaLoaiHV)
+            if (hocVienCu.MaLoaiHocVien != hocVien.MaLoaiHocVien)
             {
                 //đổi từ tiềm năng sang chính thức
-                if (hocVien.MaLoaiHV == "LHV01")
+                if (hocVien.MaLoaiHocVien == "LHV01")
                 {
                     Database.TAIKHOANs.InsertOnSubmit(taiKhoan);
-                    hocVienCu.MaLoaiHV = hocVien.MaLoaiHV;
+                    hocVienCu.MaLoaiHocVien = hocVien.MaLoaiHocVien;
                     hocVienCu.TenDangNhap = hocVien.TenDangNhap;
                 }
                 else
                 {
-                    hocVienCu.MaLoaiHV = hocVien.MaLoaiHV;
+                    hocVienCu.MaLoaiHocVien = hocVien.MaLoaiHocVien;
                     Database.TAIKHOANs.DeleteOnSubmit((from p in Database.TAIKHOANs where p.TenDangNhap == hocVienCu.TenDangNhap select p).Single());
                     hocVienCu.TenDangNhap = null;
                 }
@@ -138,7 +149,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static void Delete(string maHV)
         {
             var temp = Select(maHV);
-            string maLoai = temp.MaLoaiHV;
+            string maLoai = temp.MaLoaiHocVien;
             string tenDangNhap = temp.TenDangNhap;
 
             Database.HOCVIENs.DeleteOnSubmit(temp);
@@ -156,8 +167,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             string result = "HV" + DateTime.Now.ToString("yyMMdd");
             var temp = from p in GlobalSettings.Database.HOCVIENs
-                       where p.MaHV.StartsWith(result)
-                       select p.MaHV;
+                       where p.MaHocVien.StartsWith(result)
+                       select p.MaHocVien;
             int max = -1;
 
             foreach (var i in temp)
@@ -176,6 +187,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static int Count()
         {
             return (from p in GlobalSettings.Database.HOCVIENs
+                    where (p.MaCoSo == GlobalSettings.MaCoSo)
                     select p).Count();
         }
 
@@ -186,7 +198,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static int CountTiemNang()
         {
             return (from p in GlobalSettings.Database.HOCVIENs
-                    where p.MaLoaiHV == "LHV00"
+                    where p.MaLoaiHocVien == "LHV00" && p.MaCoSo == GlobalSettings.MaCoSo
                     select p).Count();
         }
 
@@ -197,7 +209,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static int CountChinhThuc()
         {
             return (from p in GlobalSettings.Database.HOCVIENs
-                    where p.MaLoaiHV == "LHV01"
+                    where p.MaLoaiHocVien == "LHV01" && p.MaCoSo == GlobalSettings.MaCoSo
                     select p).Count();
         }
     }

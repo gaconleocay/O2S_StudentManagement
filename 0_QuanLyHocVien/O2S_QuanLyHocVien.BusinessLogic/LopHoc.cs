@@ -14,13 +14,20 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class LopHoc
     {
-        /// <summary>
-        /// Lấy danh sách lớp
-        /// </summary>
-        /// <returns></returns>
         public static object SelectAll()
         {
             return (from p in Database.LOPHOCs
+                    select p).ToList();
+        }
+
+        /// <summary>
+        /// Lấy danh sách lớp theo Cơ sở
+        /// </summary>
+        /// <returns></returns>
+        public static object SelectTheoCoCo()
+        {
+            return (from p in Database.LOPHOCs
+                    where (p.MaCoSo==GlobalSettings.MaCoSo)
                     select p).ToList();
         }
 
@@ -29,17 +36,17 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// </summary>
         /// <param name="maLop">Mã lớp</param>
         /// <param name="tenLop">Tên lớp</param>
-        /// <param name="maKH">Mã khóa học</param>
+        /// <param name="MaKhoaHoc">Mã khóa học</param>
         /// <param name="tuNgay">Từ ngày</param>
         /// <param name="denNgay">Đến ngày</param>
         /// <param name="dangMo">Đang mở</param>
         /// <returns></returns>
-        public static object SelectAll(string maLop, string tenLop, string maKH, DateTime? tuNgay, DateTime? denNgay, bool? dangMo)
+        public static object SelectAll(string maLop, string tenLop, string MaKhoaHoc, DateTime? tuNgay, DateTime? denNgay, bool? dangMo)
         {
             return (from p in Database.LOPHOCs
                     where (maLop == null ? true : p.MaLop.Contains(maLop)) &&
                           (tenLop == null ? true : p.TenLop.Contains(tenLop)) &&
-                          (maKH == null ? true : p.MaKH == maKH) &&
+                          (MaKhoaHoc == null ? true : p.MaKhoaHoc == MaKhoaHoc) &&
                           (tuNgay == null ? true : p.NgayBD <= tuNgay) &&
                           (denNgay == null ? true : p.NgayKT >= denNgay) &&
                           (dangMo == null ? true : p.DangMo == dangMo)
@@ -55,8 +62,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             string result = "LH" + ngayBD.ToString("yyMMdd");
             var temp = from p in GlobalSettings.Database.HOCVIENs
-                       where p.MaHV.StartsWith(result)
-                       select p.MaHV;
+                       where p.MaHocVien.StartsWith(result)
+                       select p.MaHocVien;
             int max = -1;
 
             foreach (var i in temp)
@@ -95,12 +102,12 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <summary>
         /// Lấy danh sách lớp trống
         /// </summary>
-        /// <param name="maKhoa">Mã khóa học</param>
+        /// <param name="MaKhoaHocoa">Mã khóa học</param>
         /// <returns></returns>
-        public static object DanhSachLopTrong(string maKhoa)
+        public static object DanhSachLopTrong(string MaKhoaHocoa)
         {
             return (from p in Database.LOPHOCs
-                    where p.MaKH == maKhoa &&
+                    where p.MaKhoaHoc == MaKhoaHocoa &&
                             p.SiSo < (from q in Database.QUYDINHs
                                       where q.MaQD == "QD0000"
                                       select q.GiaTri).Single()
@@ -133,7 +140,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             lopCu.NgayBD = lh.NgayBD;
             lopCu.NgayKT = lh.NgayKT;
             lopCu.SiSo = lh.SiSo;
-            lopCu.MaKH = lh.MaKH;
+            lopCu.MaKhoaHoc = lh.MaKhoaHoc;
             lopCu.DangMo = lh.DangMo;
 
             Database.SubmitChanges();

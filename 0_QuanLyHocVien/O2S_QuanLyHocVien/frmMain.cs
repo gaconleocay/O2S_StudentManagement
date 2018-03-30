@@ -104,7 +104,7 @@ namespace O2S_QuanLyHocVien
             switch (userType)
             {
                 case UserType.NhanVien:
-                    string nvType = NhanVien.Select(GlobalSettings.UserID) != null ? NhanVien.Select(GlobalSettings.UserID).MaLoaiNV : "";
+                    string nvType = NhanVien.Select(GlobalSettings.UserID) != null ? NhanVien.Select(GlobalSettings.UserID).MaLoaiNhanVien : "";
                     switch (nvType)
                     {
                         //nhân viên ghi danh
@@ -135,6 +135,8 @@ namespace O2S_QuanLyHocVien
                             btnQuanLyTaiKhoan.Enabled = false;
                             btnThongTinTrungTam.Enabled = false;
                             btnNhanVienTitle_Click(btnNhanVienTitle, null);
+                            btnQuanLyCoSo.Enabled = false;
+                            btnQuanLyMonHoc.Enabled = false;
                             break;
                         //nhân viên kế toán
                         case "LNV03":
@@ -157,6 +159,8 @@ namespace O2S_QuanLyHocVien
                             btnBanQuyen.Enabled = false;
                             btnQuanLyTaiKhoan.Enabled = false;
                             btnThongTinTrungTam.Enabled = false;
+                            btnQuanLyCoSo.Enabled = false;
+                            btnQuanLyMonHoc.Enabled = false;
                             btnNhanVienTitle_Click(btnNhanVienTitle, null);
                             break;
                         default:
@@ -192,7 +196,7 @@ namespace O2S_QuanLyHocVien
             {
                 ResetRibbonControlStatus();
 
-                lblUserName.Text = GlobalSettings.UserName;
+                lblUserName.Text = GlobalSettings.UserCode;
 
                 //PhanQuyen(GlobalSettings.UserType, GlobalSettings.UserName);
                 pnlWorkspace.Controls.Clear();
@@ -219,7 +223,7 @@ namespace O2S_QuanLyHocVien
                 //string version = fvi.FileVersion;
                 this.Text = "Quản lý Học viên Trung tâm Anh ngữ (v" + Application.ProductVersion + ")";
 
-                lblCenterName.Text = GlobalSettings.CenterName;
+                lblCenterName.Text = GlobalSettings.CenterName + " - [" + GlobalSettings.TenCoSo + "]";
                 lblServerName.Text = GlobalSettings.ServerName;
             }
             catch (Exception ex)
@@ -233,18 +237,18 @@ namespace O2S_QuanLyHocVien
             try
             {
                 //Kiểm tra phân quyền
-                if (SessionLogin.SessionUsercode != KeyTrongPhanMem.AdminUser_key)
+                if (GlobalSettings.UserCode != KeyTrongPhanMem.AdminUser_key)
                 {
-                    if (!SessionLogin.KiemTraLicenseSuDung)
+                    if (!GlobalSettings.KiemTraLicenseSuDung)
                     {
                         EnableAndDisableTabChucNang(false);
                         DialogResult dialogResult = MessageBox.Show("Phần mềm hết bản quyền! \nVui lòng liên hệ với tác giả để được trợ giúp.\nAuthor: Hồng Minh Nhất \nE-mail: hongminhnhat15@gmail.com \nPhone: 0868-915-456", "Thông báo !!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        btnTroGiupTitle_Click(null,null);
+                        btnTroGiupTitle_Click(null, null);
                     }
                     else
                     {
                         //KiemTraPhanQuyenNguoiDung();
-                        PhanQuyen(GlobalSettings.UserType, GlobalSettings.UserName);
+                        PhanQuyen(GlobalSettings.UserType, GlobalSettings.UserCode);
                     }
                 }
             }
@@ -408,13 +412,13 @@ namespace O2S_QuanLyHocVien
 
         private void btnGVDoiMatKhau_Click(object sender, EventArgs e)
         {
-            frmDoiMatKhau frm = new frmDoiMatKhau(GlobalSettings.UserName);
+            frmDoiMatKhau frm = new frmDoiMatKhau(GlobalSettings.UserCode);
             frm.ShowDialog();
         }
 
         private void btnHVDoiMatKhau_Click(object sender, EventArgs e)
         {
-            frmDoiMatKhau frm = new frmDoiMatKhau(GlobalSettings.UserName);
+            frmDoiMatKhau frm = new frmDoiMatKhau(GlobalSettings.UserCode);
             frm.ShowDialog();
         }
 
@@ -708,7 +712,7 @@ namespace O2S_QuanLyHocVien
 
         private void btnNVDoiMatKhau_Click(object sender, EventArgs e)
         {
-            frmDoiMatKhau frm = new frmDoiMatKhau(GlobalSettings.UserName);
+            frmDoiMatKhau frm = new frmDoiMatKhau(GlobalSettings.UserCode);
             frm.ShowDialog();
         }
 
@@ -767,6 +771,34 @@ namespace O2S_QuanLyHocVien
             pnlWorkspace.Controls.Add(GlobalPages.QuanLyHocPhi);
             GlobalPages.QuanLyHocPhi.Show();
         }
+        private void btnQuanLyCoSo_Click(object sender, EventArgs e)
+        {
+            pnlWorkspace.Controls.Clear();
+
+            if (GlobalPages.QuanLyCoSo == null)
+                GlobalPages.QuanLyCoSo = new frmQuanLyCoSo()
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false
+                };
+
+            pnlWorkspace.Controls.Add(GlobalPages.QuanLyCoSo);
+            GlobalPages.QuanLyCoSo.Show();
+        }
+        private void btnQuanLyMonHoc_Click(object sender, EventArgs e)
+        {
+            pnlWorkspace.Controls.Clear();
+
+            if (GlobalPages.QuanLyMonHoc == null)
+                GlobalPages.QuanLyMonHoc = new frmQuanLyMonHoc()
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false
+                };
+
+            pnlWorkspace.Controls.Add(GlobalPages.QuanLyMonHoc);
+            GlobalPages.QuanLyMonHoc.Show();
+        }
 
         #endregion
 
@@ -800,6 +832,8 @@ namespace O2S_QuanLyHocVien
             btnBanQuyen.Enabled = true;
             btnQuanLyTaiKhoan.Enabled = true;
             btnThongTinTrungTam.Enabled = true;
+            btnQuanLyCoSo.Enabled = true;
+            btnQuanLyMonHoc.Enabled = true;
         }
 
 
@@ -811,10 +845,10 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-                if (Base.SessionLogin.SessionUsercode != KeyTrongPhanMem.AdminUser_key)
+                if (GlobalSettings.UserCode != KeyTrongPhanMem.AdminUser_key)
                 {
                     Base.KiemTraLicense.KiemTraLicenseHopLe();
-                    if (Base.SessionLogin.KiemTraLicenseSuDung == false)
+                    if (GlobalSettings.KiemTraLicenseSuDung == false)
                     {
                         timerKiemTraLicense.Stop();
                         btnTroGiup.PerformClick();
@@ -860,6 +894,7 @@ namespace O2S_QuanLyHocVien
             }
         }
         #endregion
+
 
     }
 }

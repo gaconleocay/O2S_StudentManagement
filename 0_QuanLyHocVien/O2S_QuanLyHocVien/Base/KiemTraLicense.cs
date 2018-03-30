@@ -23,9 +23,9 @@ namespace O2S_QuanLyHocVien.Base
         {
             try
             {
-                SessionLogin.KiemTraLicenseSuDung = false;
+                GlobalSettings.KiemTraLicenseSuDung = false;
                 //Load License tu DB ra
-                string license_keydb = BusinessLogic.License.Select(SessionLogin.MaDatabase).LicenseKey ?? null;
+                string license_keydb = BusinessLogic.License.Select(GlobalSettings.MaDatabase).LicenseKey ?? null;
                 if (license_keydb != null)
                 {
                     //Giai ma
@@ -59,18 +59,18 @@ namespace O2S_QuanLyHocVien.Base
                             datetimenow = Convert.ToInt64(DateTime.Now.ToString("yyyyMMdd"));
 
                             //Kiem tra License hop le
-                            if (mamay_keykichhoat == SessionLogin.MaDatabase && datetimenow <= Convert.ToInt64(makichhoat_tach[3].ToString().Trim() ?? "0"))
+                            if (mamay_keykichhoat == GlobalSettings.MaDatabase && datetimenow <= Convert.ToInt64(makichhoat_tach[3].ToString().Trim() ?? "0"))
                             {
-                                SessionLogin.KiemTraLicenseSuDung = true;
+                                GlobalSettings.KiemTraLicenseSuDung = true;
                             }
                         }
                         else if (makichhoat_tach.Length == 3)
                         {
                             mamay_keykichhoat = makichhoat_tach[1];
                             mabanquyenkhongthoihan = makichhoat_tach[2];
-                            if (mamay_keykichhoat == SessionLogin.MaDatabase && mabanquyenkhongthoihan == KeyTrongPhanMem.BanQuyenKhongThoiHan)
+                            if (mamay_keykichhoat == GlobalSettings.MaDatabase && mabanquyenkhongthoihan == KeyTrongPhanMem.BanQuyenKhongThoiHan)
                             {
-                                SessionLogin.KiemTraLicenseSuDung = true;
+                                GlobalSettings.KiemTraLicenseSuDung = true;
                             }
                         }
                     }
@@ -127,7 +127,7 @@ namespace O2S_QuanLyHocVien.Base
                     string thoigianTu_text = DateTime.ParseExact(thoigianTu.ToString(), "yyyyMMddHHmmss", CultureInfo.InvariantCulture).ToString("dd-MM-yyyy");
                     string thoigianDen_text = DateTime.ParseExact(thoigianDen.ToString(), "yyyyMMddHHmmss", CultureInfo.InvariantCulture).ToString("dd-MM-yyyy");
                     //Kiem tra License hop le
-                    if (mamay_keykichhoat == SessionLogin.MaDatabase && datetime < thoigianDen)
+                    if (mamay_keykichhoat == GlobalSettings.MaDatabase && datetime < thoigianDen)
                     {
                         thoiGianSuDung = "Từ: " + thoigianTu_text + " đến: " + thoigianDen_text;
                     }
@@ -140,7 +140,7 @@ namespace O2S_QuanLyHocVien.Base
                 {
                     mamay_keykichhoat = makichhoat_tach[1];
                     mabanquyenkhongthoihan = makichhoat_tach[2];
-                    if (mamay_keykichhoat == SessionLogin.MaDatabase && mabanquyenkhongthoihan == KeyTrongPhanMem.BanQuyenKhongThoiHan)
+                    if (mamay_keykichhoat == GlobalSettings.MaDatabase && mabanquyenkhongthoihan == KeyTrongPhanMem.BanQuyenKhongThoiHan)
                     {
                         thoiGianSuDung = "License không thời hạn!";
                     }

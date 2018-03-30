@@ -33,7 +33,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             foreach (var i in dsChuaCoLop)
             {
-                string[] s = { i.MaHV, i.HOCVIEN.TenHV, i.MaPhieu, i.KHOAHOC.TenKH };
+                string[] s = { i.MaHocVien, i.HOCVIEN.TenHocVien, i.MaPhieu, i.KHOAHOC.TenKhoaHoc };
                 gridDSHV.Rows.Add(s);
             }
         }
@@ -51,7 +51,7 @@ namespace O2S_QuanLyHocVien.Pages
                 gridDSHVLop.Rows.Clear();
                 foreach (var i in dsLopChuaDu)
                 {
-                    string[] s = { i.MaHV, i.TenHV, i.NgaySinh.ToString(), i.GioiTinhHV, i.SdtHV, i.DiaChi, BangDiem.Select(i.MaHV, maLop).MaPhieu };
+                    string[] s = { i.MaHocVien, i.TenHocVien, i.NgaySinh.ToString(), i.GioiTinhHocVien, i.SdtHocVien, i.DiaChi, BangDiem.Select(i.MaHocVien, maLop).MaPhieu };
                     gridDSHVLop.Rows.Add(s);
                 }
             }
@@ -77,8 +77,8 @@ namespace O2S_QuanLyHocVien.Pages
 
             //load khóa học
             cboKhoa.DataSource = KhoaHoc.SelectAll();
-            cboKhoa.DisplayMember = "TenKH";
-            cboKhoa.ValueMember = "MaKH";
+            cboKhoa.DisplayMember = "TenKhoaHoc";
+            cboKhoa.ValueMember = "MaKhoaHoc";
 
             //load lớp trống của khóa
             cboLop.DataSource = LopHoc.DanhSachLopTrong(cboKhoa.SelectedValue.ToString());
@@ -113,7 +113,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                HOCVIEN hv = HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHV"].Value.ToString());
+                HOCVIEN hv = HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString());
 
                 if (gridDSHVLop.Rows.Count < GlobalSettings.QuyDinh["QD0000"] ||
                 MessageBox.Show("Số học viên tối đa của lớp là " + GlobalSettings.QuyDinh["QD0000"] + Environment.NewLine + "Bạn có chắc sẽ thêm?",
@@ -121,11 +121,11 @@ namespace O2S_QuanLyHocVien.Pages
                 {
                     string[] s = new string[]
                     {
-                        hv.MaHV,
-                        hv.TenHV,
+                        hv.MaHocVien,
+                        hv.TenHocVien,
                         ((DateTime)hv.NgaySinh).ToString("dd/MM/yyyy"),
-                        hv.GioiTinhHV,
-                        hv.SdtHV,
+                        hv.GioiTinhHocVien,
+                        hv.SdtHocVien,
                         hv.DiaChi,
                         gridDSHV.SelectedRows[0].Cells["clmMaPhieu"].Value.ToString()
                     };
@@ -144,9 +144,9 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 foreach (var i in dsChuaCoLop)
                 {
-                    if (gridDSHVLop.SelectedRows[0].Cells["clmMaHVLop"].Value.ToString() == i.MaHV)
+                    if (gridDSHVLop.SelectedRows[0].Cells["clmMaHVLop"].Value.ToString() == i.MaHocVien)
                     {
-                        string[] s = { i.MaHV, i.HOCVIEN.TenHV, i.MaPhieu, i.KHOAHOC.TenKH };
+                        string[] s = { i.MaHocVien, i.HOCVIEN.TenHocVien, i.MaPhieu, i.KHOAHOC.TenKhoaHoc };
                         gridDSHV.Rows.Add(s);
                         break;
                     }
@@ -181,29 +181,29 @@ namespace O2S_QuanLyHocVien.Pages
                 foreach (DataGridViewRow i in rows)
                 {
                     bool isAdded = false;
-                    foreach(var j in dsLopChuaDu)
+                    foreach (var j in dsLopChuaDu)
                     {
-                        if(i.Cells["clmMaHVLop"].Value.ToString()==j.MaHV)
+                        if (i.Cells["clmMaHVLop"].Value.ToString() == j.MaHocVien)
                         {
                             isAdded = true;
                             break;
                         }
                     }
 
-                    if(!isAdded)
+                    if (!isAdded)
                     {
                         BangDiem.Insert(new BANGDIEM()
                         {
-                            MaHV = i.Cells["clmMaHVLop"].Value.ToString(),
+                            MaHocVien = i.Cells["clmMaHVLop"].Value.ToString(),
                             MaLop = cboLop.SelectedValue.ToString(),
                             MaPhieu = i.Cells["clmMaPhieuLop"].Value.ToString(),
-                            DiemNghe = 0,
-                            DiemNoi = 0,
-                            DiemDoc = 0,
-                            DiemViet = 0
+                            CreatedDate = DateTime.Now,
+                            CreatedBy = GlobalSettings.UserCode,
+                            MaKhoaHoc = cboKhoa.SelectedValue.ToString(),
+                            TrangThai = 0,//=0: xep lop; =1: dang hoc; =99:ket thuc
                         });
                     }
-                    
+
                 }
 
                 LOPHOC lh = LopHoc.Select(cboLop.SelectedValue.ToString());
@@ -214,7 +214,7 @@ namespace O2S_QuanLyHocVien.Pages
                     NgayBD = lh.NgayBD,
                     NgayKT = lh.NgayKT,
                     SiSo = gridDSHVLop.Rows.Count,
-                    MaKH = lh.MaKH,
+                    MaKhoaHoc = lh.MaKhoaHoc,
                     DangMo = lh.DangMo
                 });
 

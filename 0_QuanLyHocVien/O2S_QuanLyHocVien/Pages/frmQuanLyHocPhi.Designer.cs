@@ -35,9 +35,9 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.gridKetQua = new System.Windows.Forms.DataGridView();
-            this.clmMaHV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenHV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmGioiTinhHV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmMaHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmGioiTinhHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmMaLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmMaPhieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmConNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,13 +56,13 @@
             this.label23 = new System.Windows.Forms.Label();
             this.lblHocPhi = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.lblTenKH = new System.Windows.Forms.Label();
+            this.lblTenKhoaHoc = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.lblTenLop = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.lblMaLop = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.lblTenHV = new System.Windows.Forms.Label();
+            this.lblTenHocVien = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lblMaHV = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -81,9 +81,9 @@
             this.cboGioiTinh = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.chkGioiTinh = new System.Windows.Forms.CheckBox();
-            this.txtTenHV = new System.Windows.Forms.TextBox();
+            this.txtTenHocVien = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.chkTenHV = new System.Windows.Forms.CheckBox();
+            this.chkTenHocVien = new System.Windows.Forms.CheckBox();
             this.txtMaHV = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.chkMaHV = new System.Windows.Forms.CheckBox();
@@ -138,9 +138,9 @@
             this.gridKetQua.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridKetQua.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridKetQua.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaHV,
-            this.clmTenHV,
-            this.clmGioiTinhHV,
+            this.clmMaHocVien,
+            this.clmTenHocVien,
+            this.clmGioiTinhHocVien,
             this.clmMaLop,
             this.clmMaPhieu,
             this.clmConNo});
@@ -155,33 +155,33 @@
             this.gridKetQua.TabIndex = 67;
             this.gridKetQua.Click += new System.EventHandler(this.gridKetQua_Click);
             // 
-            // clmMaHV
+            // clmMaHocVien
             // 
-            this.clmMaHV.DataPropertyName = "MaHV";
+            this.clmMaHocVien.DataPropertyName = "MaHocVien";
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaHV.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMaHV.FillWeight = 75F;
-            this.clmMaHV.HeaderText = "Mã học viên";
-            this.clmMaHV.Name = "clmMaHV";
-            this.clmMaHV.ReadOnly = true;
+            this.clmMaHocVien.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmMaHocVien.FillWeight = 75F;
+            this.clmMaHocVien.HeaderText = "Mã học viên";
+            this.clmMaHocVien.Name = "clmMaHocVien";
+            this.clmMaHocVien.ReadOnly = true;
             // 
-            // clmTenHV
+            // clmTenHocVien
             // 
-            this.clmTenHV.DataPropertyName = "TenHV";
+            this.clmTenHocVien.DataPropertyName = "TenHocVien";
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
-            this.clmTenHV.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clmTenHV.FillWeight = 150F;
-            this.clmTenHV.HeaderText = "Họ và tên";
-            this.clmTenHV.Name = "clmTenHV";
-            this.clmTenHV.ReadOnly = true;
+            this.clmTenHocVien.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clmTenHocVien.FillWeight = 150F;
+            this.clmTenHocVien.HeaderText = "Họ và tên";
+            this.clmTenHocVien.Name = "clmTenHocVien";
+            this.clmTenHocVien.ReadOnly = true;
             // 
-            // clmGioiTinhHV
+            // clmGioiTinhHocVien
             // 
-            this.clmGioiTinhHV.DataPropertyName = "GioiTinhHV";
-            this.clmGioiTinhHV.FillWeight = 70F;
-            this.clmGioiTinhHV.HeaderText = "Giới tính";
-            this.clmGioiTinhHV.Name = "clmGioiTinhHV";
-            this.clmGioiTinhHV.ReadOnly = true;
+            this.clmGioiTinhHocVien.DataPropertyName = "GioiTinhHocVien";
+            this.clmGioiTinhHocVien.FillWeight = 70F;
+            this.clmGioiTinhHocVien.HeaderText = "Giới tính";
+            this.clmGioiTinhHocVien.Name = "clmGioiTinhHocVien";
+            this.clmGioiTinhHocVien.ReadOnly = true;
             // 
             // clmMaLop
             // 
@@ -262,13 +262,13 @@
             this.panel7.Controls.Add(this.label23);
             this.panel7.Controls.Add(this.lblHocPhi);
             this.panel7.Controls.Add(this.label21);
-            this.panel7.Controls.Add(this.lblTenKH);
+            this.panel7.Controls.Add(this.lblTenKhoaHoc);
             this.panel7.Controls.Add(this.label19);
             this.panel7.Controls.Add(this.lblTenLop);
             this.panel7.Controls.Add(this.label17);
             this.panel7.Controls.Add(this.lblMaLop);
             this.panel7.Controls.Add(this.label15);
-            this.panel7.Controls.Add(this.lblTenHV);
+            this.panel7.Controls.Add(this.lblTenHocVien);
             this.panel7.Controls.Add(this.label13);
             this.panel7.Controls.Add(this.lblMaHV);
             this.panel7.Controls.Add(this.label4);
@@ -430,16 +430,16 @@
             this.label21.TabIndex = 75;
             this.label21.Text = "Học phí:";
             // 
-            // lblTenKH
+            // lblTenKhoaHoc
             // 
-            this.lblTenKH.AutoSize = true;
-            this.lblTenKH.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblTenKH.ForeColor = System.Drawing.Color.Blue;
-            this.lblTenKH.Location = new System.Drawing.Point(157, 207);
-            this.lblTenKH.Name = "lblTenKH";
-            this.lblTenKH.Size = new System.Drawing.Size(66, 19);
-            this.lblTenKH.TabIndex = 74;
-            this.lblTenKH.Text = "<name>";
+            this.lblTenKhoaHoc.AutoSize = true;
+            this.lblTenKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTenKhoaHoc.ForeColor = System.Drawing.Color.Blue;
+            this.lblTenKhoaHoc.Location = new System.Drawing.Point(157, 207);
+            this.lblTenKhoaHoc.Name = "lblTenKhoaHoc";
+            this.lblTenKhoaHoc.Size = new System.Drawing.Size(66, 19);
+            this.lblTenKhoaHoc.TabIndex = 74;
+            this.lblTenKhoaHoc.Text = "<name>";
             // 
             // label19
             // 
@@ -496,16 +496,16 @@
             this.label15.TabIndex = 69;
             this.label15.Text = "Mã lớp:";
             // 
-            // lblTenHV
+            // lblTenHocVien
             // 
-            this.lblTenHV.AutoSize = true;
-            this.lblTenHV.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblTenHV.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
-            this.lblTenHV.Location = new System.Drawing.Point(157, 96);
-            this.lblTenHV.Name = "lblTenHV";
-            this.lblTenHV.Size = new System.Drawing.Size(66, 19);
-            this.lblTenHV.TabIndex = 68;
-            this.lblTenHV.Text = "<name>";
+            this.lblTenHocVien.AutoSize = true;
+            this.lblTenHocVien.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTenHocVien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
+            this.lblTenHocVien.Location = new System.Drawing.Point(157, 96);
+            this.lblTenHocVien.Name = "lblTenHocVien";
+            this.lblTenHocVien.Size = new System.Drawing.Size(66, 19);
+            this.lblTenHocVien.TabIndex = 68;
+            this.lblTenHocVien.Text = "<name>";
             // 
             // label13
             // 
@@ -574,9 +574,9 @@
             this.panel4.Controls.Add(this.cboGioiTinh);
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.chkGioiTinh);
-            this.panel4.Controls.Add(this.txtTenHV);
+            this.panel4.Controls.Add(this.txtTenHocVien);
             this.panel4.Controls.Add(this.label6);
-            this.panel4.Controls.Add(this.chkTenHV);
+            this.panel4.Controls.Add(this.chkTenHocVien);
             this.panel4.Controls.Add(this.txtMaHV);
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.chkMaHV);
@@ -756,16 +756,16 @@
             this.chkGioiTinh.UseVisualStyleBackColor = true;
             this.chkGioiTinh.CheckedChanged += new System.EventHandler(this.chkGioiTinh_CheckedChanged);
             // 
-            // txtTenHV
+            // txtTenHocVien
             // 
-            this.txtTenHV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtTenHocVien.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTenHV.Enabled = false;
-            this.txtTenHV.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtTenHV.Location = new System.Drawing.Point(137, 133);
-            this.txtTenHV.Name = "txtTenHV";
-            this.txtTenHV.Size = new System.Drawing.Size(157, 25);
-            this.txtTenHV.TabIndex = 60;
+            this.txtTenHocVien.Enabled = false;
+            this.txtTenHocVien.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtTenHocVien.Location = new System.Drawing.Point(137, 133);
+            this.txtTenHocVien.Name = "txtTenHocVien";
+            this.txtTenHocVien.Size = new System.Drawing.Size(157, 25);
+            this.txtTenHocVien.TabIndex = 60;
             // 
             // label6
             // 
@@ -776,16 +776,16 @@
             this.label6.TabIndex = 59;
             this.label6.Text = "Tên học viên:";
             // 
-            // chkTenHV
+            // chkTenHocVien
             // 
-            this.chkTenHV.AutoSize = true;
-            this.chkTenHV.Location = new System.Drawing.Point(21, 108);
-            this.chkTenHV.Name = "chkTenHV";
-            this.chkTenHV.Size = new System.Drawing.Size(121, 19);
-            this.chkTenHV.TabIndex = 58;
-            this.chkTenHV.Text = "Theo tên học viên";
-            this.chkTenHV.UseVisualStyleBackColor = true;
-            this.chkTenHV.CheckedChanged += new System.EventHandler(this.chkTenHV_CheckedChanged);
+            this.chkTenHocVien.AutoSize = true;
+            this.chkTenHocVien.Location = new System.Drawing.Point(21, 108);
+            this.chkTenHocVien.Name = "chkTenHocVien";
+            this.chkTenHocVien.Size = new System.Drawing.Size(121, 19);
+            this.chkTenHocVien.TabIndex = 58;
+            this.chkTenHocVien.Text = "Theo tên học viên";
+            this.chkTenHocVien.UseVisualStyleBackColor = true;
+            this.chkTenHocVien.CheckedChanged += new System.EventHandler(this.chkTenHocVien_CheckedChanged);
             // 
             // txtMaHV
             // 
@@ -915,9 +915,9 @@
         private System.Windows.Forms.ComboBox cboGioiTinh;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox chkGioiTinh;
-        private System.Windows.Forms.TextBox txtTenHV;
+        private System.Windows.Forms.TextBox txtTenHocVien;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.CheckBox chkTenHV;
+        private System.Windows.Forms.CheckBox chkTenHocVien;
         private System.Windows.Forms.TextBox txtMaHV;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox chkMaHV;
@@ -928,14 +928,14 @@
         private System.Windows.Forms.NumericUpDown numTu;
         private System.Windows.Forms.Button btnDatLai;
         private System.Windows.Forms.Button btnTimKiem;
-        private System.Windows.Forms.Label lblTenHV;
+        private System.Windows.Forms.Label lblTenHocVien;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lblMaHV;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblHocPhi;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label lblTenKH;
+        private System.Windows.Forms.Label lblTenKhoaHoc;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label lblTenLop;
         private System.Windows.Forms.Label label17;
@@ -951,9 +951,9 @@
         private System.Windows.Forms.Button btnInBienLai;
         private System.Windows.Forms.Button btnLuuLai;
         private System.Windows.Forms.DataGridView gridKetQua;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaHV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenHV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmGioiTinhHV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaHocVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenHocVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmGioiTinhHocVien;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmMaLop;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmMaPhieu;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmConNo;

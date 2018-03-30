@@ -94,19 +94,19 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                      where p.TenDangNhap == tk.TenDangNhap
                      select p).SingleOrDefault();
             if (a != null)
-                return a.MaNV;
+                return a.MaNhanVien;
 
             var b = (from p in Database.HOCVIENs
                      where p.TenDangNhap == tk.TenDangNhap
                      select p).SingleOrDefault();
             if (b != null)
-                return b.MaHV;
+                return b.MaHocVien;
 
             var c = (from p in Database.GIANGVIENs
                      where p.TenDangNhap == tk.TenDangNhap
                      select p).SingleOrDefault();
             if (c != null)
-                return c.MaGV;
+                return c.MaGiangVien;
 
             return null;
         }
@@ -147,19 +147,19 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                      where p.TenDangNhap == tk.TenDangNhap
                      select p).SingleOrDefault();
             if (a != null)
-                return a.TenNV;
+                return a.TenNhanVien;
 
             var b = (from p in Database.HOCVIENs
                      where p.TenDangNhap == tk.TenDangNhap
                      select p).SingleOrDefault();
             if (b != null)
-                return b.TenHV;
+                return b.TenHocVien;
 
             var c = (from p in Database.GIANGVIENs
                      where p.TenDangNhap == tk.TenDangNhap
                      select p).SingleOrDefault();
             if (c != null)
-                return c.TenGV;
+                return c.TenGiangVien;
             return null;
         }
 

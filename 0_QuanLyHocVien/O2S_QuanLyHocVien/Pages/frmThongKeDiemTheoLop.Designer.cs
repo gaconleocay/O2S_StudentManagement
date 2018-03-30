@@ -51,8 +51,8 @@
             this.lblTongCong = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.gridThongKe = new System.Windows.Forms.DataGridView();
-            this.clmMaHV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenHV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmMaHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDiemNghe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDiemNoi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDiemDoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -330,8 +330,8 @@
             this.gridThongKe.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridThongKe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridThongKe.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaHV,
-            this.clmTenHV,
+            this.clmMaHocVien,
+            this.clmTenHocVien,
             this.clmDiemNghe,
             this.clmDiemNoi,
             this.clmDiemDoc,
@@ -348,22 +348,22 @@
             this.gridThongKe.TabIndex = 66;
             this.gridThongKe.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridThongKe_RowsAdded);
             // 
-            // clmMaHV
+            // clmMaHocVien
             // 
-            this.clmMaHV.DataPropertyName = "MaHV";
+            this.clmMaHocVien.DataPropertyName = "MaHocVien";
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaHV.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clmMaHV.FillWeight = 70F;
-            this.clmMaHV.HeaderText = "Mã học viên";
-            this.clmMaHV.Name = "clmMaHV";
-            this.clmMaHV.ReadOnly = true;
+            this.clmMaHocVien.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clmMaHocVien.FillWeight = 70F;
+            this.clmMaHocVien.HeaderText = "Mã học viên";
+            this.clmMaHocVien.Name = "clmMaHocVien";
+            this.clmMaHocVien.ReadOnly = true;
             // 
-            // clmTenHV
+            // clmTenHocVien
             // 
-            this.clmTenHV.DataPropertyName = "TenHV";
-            this.clmTenHV.HeaderText = "Tên học viên";
-            this.clmTenHV.Name = "clmTenHV";
-            this.clmTenHV.ReadOnly = true;
+            this.clmTenHocVien.DataPropertyName = "TenHocVien";
+            this.clmTenHocVien.HeaderText = "Tên học viên";
+            this.clmTenHocVien.Name = "clmTenHocVien";
+            this.clmTenHocVien.ReadOnly = true;
             // 
             // clmDiemNghe
             // 
@@ -372,6 +372,7 @@
             this.clmDiemNghe.HeaderText = "Điểm nghe";
             this.clmDiemNghe.Name = "clmDiemNghe";
             this.clmDiemNghe.ReadOnly = true;
+            this.clmDiemNghe.Visible = false;
             // 
             // clmDiemNoi
             // 
@@ -380,6 +381,7 @@
             this.clmDiemNoi.HeaderText = "Điểm nói";
             this.clmDiemNoi.Name = "clmDiemNoi";
             this.clmDiemNoi.ReadOnly = true;
+            this.clmDiemNoi.Visible = false;
             // 
             // clmDiemDoc
             // 
@@ -388,6 +390,7 @@
             this.clmDiemDoc.HeaderText = "Điểm đọc";
             this.clmDiemDoc.Name = "clmDiemDoc";
             this.clmDiemDoc.ReadOnly = true;
+            this.clmDiemDoc.Visible = false;
             // 
             // clmDiemViet
             // 
@@ -396,6 +399,7 @@
             this.clmDiemViet.HeaderText = "Điểm viết";
             this.clmDiemViet.Name = "clmDiemViet";
             this.clmDiemViet.ReadOnly = true;
+            this.clmDiemViet.Visible = false;
             // 
             // clmDiemTrungBinh
             // 
@@ -460,8 +464,8 @@
         private System.Windows.Forms.DataGridView gridThongKe;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmMaLop;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmTenLop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaHV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenHV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaHocVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenHocVien;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDiemNghe;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDiemNoi;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDiemDoc;

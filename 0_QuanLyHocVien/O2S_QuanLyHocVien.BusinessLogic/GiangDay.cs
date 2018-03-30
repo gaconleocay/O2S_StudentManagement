@@ -22,7 +22,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static object Select(string maGV)
         {
             return (from p in Database.GIANGDAYs
-                    where p.MaGV == maGV
+                    where p.MaGiangVien == maGV
                     select new
                     {
                         MaLop = p.MaLop,
@@ -42,7 +42,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static void Delete(string maGV)
         {
             var temp = (from p in Database.GIANGDAYs
-                        where p.MaGV == maGV
+                        where p.MaGiangVien == maGV
                         select p);
 
             Database.GIANGDAYs.DeleteAllOnSubmit(temp);
@@ -55,15 +55,15 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <param name="maGV">Mã giảng viên</param>
         /// <param name="tuNgay">Từ ngày</param>
         /// <param name="denNgay">Đến ngày</param>
-        /// <param name="maKH">Mã khóa học</param>
+        /// <param name="MaKhoaHoc">Mã khóa học</param>
         /// <returns></returns>
-        public static object SelectAll(string maGV, DateTime? tuNgay, DateTime? denNgay, string maKH)
+        public static object SelectAll(string maGV, DateTime? tuNgay, DateTime? denNgay, string MaKhoaHoc)
         {
             return (from p in Database.GIANGDAYs
-                    where p.MaGV == maGV &&
+                    where p.MaGiangVien == maGV &&
                           (tuNgay == null ? true : p.LOPHOC.NgayBD >= tuNgay) &&
                           (denNgay == null ? true : p.LOPHOC.NgayKT <= denNgay) &&
-                          (maKH == null ? true : p.LOPHOC.MaKH == maKH)
+                          (MaKhoaHoc == null ? true : p.LOPHOC.MaKhoaHoc == MaKhoaHoc)
                     select new
                     {
                         MaLop = p.MaLop,

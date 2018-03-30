@@ -38,11 +38,11 @@ namespace O2S_QuanLyHocVien.Popups
         private void frmThayDoiThongTinGV_Load(object sender, EventArgs e)
         {
             GIANGVIEN gv = GiangVien.Select(GlobalSettings.UserID);
-            txtMaGV.Text = gv.MaGV;
-            txtTenGV.Text = gv.TenGV;
-            cboGioiTinh.Text = gv.GioiTinhGV;
-            txtEmail.Text = gv.EmailGV;
-            txtSDT.Text = gv.SdtGV;
+            txtMaGV.Text = gv.MaGiangVien;
+            txtTenGV.Text = gv.TenGiangVien;
+            cboGioiTinh.Text = gv.GioiTinhGiangVien;
+            txtEmail.Text = gv.EmailGiangVien;
+            txtSDT.Text = gv.SdtGiangVien;
         }
 
         private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)
@@ -61,11 +61,11 @@ namespace O2S_QuanLyHocVien.Popups
 
                 GiangVien.Update(new GIANGVIEN()
                 {
-                    MaGV = txtMaGV.Text,
-                    TenGV = txtTenGV.Text,
-                    GioiTinhGV = cboGioiTinh.Text,
-                    EmailGV = txtEmail.Text,
-                    SdtGV = txtSDT.Text
+                    MaGiangVien = txtMaGV.Text,
+                    TenGiangVien = txtTenGV.Text,
+                    GioiTinhGiangVien = cboGioiTinh.Text,
+                    EmailGiangVien = txtEmail.Text,
+                    SdtGiangVien = txtSDT.Text
                 });
 
                 MessageBox.Show("Cập nhật thông tin giảng viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -50,6 +50,10 @@ namespace O2S_QuanLyHocVien.Pages
             txtDiaChi.Enabled = false;
             txtSDT.Enabled = false;
             txtEmail.Enabled = false;
+            txtSDTBo.Enabled = false;
+            txtEmailBo.Enabled = false;
+            txtSDTMe.Enabled = false;
+            txtEmailMe.Enabled = false;
             cboLoaiHV.Enabled = false;
             txtMatKhau.Enabled = false;
             btnLuuThongTin.Enabled = false;
@@ -67,6 +71,10 @@ namespace O2S_QuanLyHocVien.Pages
             txtDiaChi.Enabled = true;
             txtSDT.Enabled = true;
             txtEmail.Enabled = true;
+            txtSDTBo.Enabled = true;
+            txtEmailBo.Enabled = true;
+            txtSDTMe.Enabled = true;
+            txtEmailMe.Enabled = true;
             cboLoaiHV.Enabled = true;
             txtMatKhau.Enabled = true;
             btnLuuThongTin.Enabled = true;
@@ -85,6 +93,10 @@ namespace O2S_QuanLyHocVien.Pages
             txtDiaChi.Text = string.Empty;
             txtSDT.Text = string.Empty;
             txtEmail.Text = string.Empty;
+            txtSDTBo.Text = string.Empty;
+            txtEmailBo.Text = string.Empty;
+            txtSDTMe.Text = string.Empty;
+            txtEmailMe.Text = string.Empty;
             cboLoaiHV.SelectedIndex = 0;
             txtTenDangNhap.Text = string.Empty;
             txtMatKhau.Text = string.Empty;
@@ -109,14 +121,18 @@ namespace O2S_QuanLyHocVien.Pages
                 }
                 else
                 {
-                    txtMaHV.Text = hv.MaHV;
-                    txtHoTen.Text = hv.TenHV;
+                    txtMaHV.Text = hv.MaHocVien;
+                    txtHoTen.Text = hv.TenHocVien;
                     dateNgaySinh.Value = (DateTime)hv.NgaySinh;
-                    cboGioiTinh.Text = hv.GioiTinhHV;
+                    cboGioiTinh.Text = hv.GioiTinhHocVien;
                     txtDiaChi.Text = hv.DiaChi;
-                    txtSDT.Text = hv.SdtHV;
-                    txtEmail.Text = hv.EmailHV;
-                    cboLoaiHV.SelectedValue = hv.MaLoaiHV;
+                    txtSDT.Text = hv.SdtHocVien;
+                    txtEmail.Text = hv.EmailHocVien;
+                    txtSDTBo.Text = hv.SdtBo;
+                    txtEmailBo.Text = hv.EmailBo;
+                    txtSDTMe.Text = hv.SdtMe;
+                    txtEmailMe.Text = hv.EmailMe;
+                    cboLoaiHV.SelectedValue = hv.MaLoaiHocVien;
                     txtTenDangNhap.Text = hv.TenDangNhap;
                     txtMatKhau.Text = hv.TAIKHOAN != null ? hv.TAIKHOAN.MatKhau : string.Empty;
                 }
@@ -137,16 +153,21 @@ namespace O2S_QuanLyHocVien.Pages
         {
             hocVien = new HOCVIEN()
             {
-                MaHV = txtMaHV.Text,
-                TenHV = txtHoTen.Text,
+                MaHocVien = txtMaHV.Text,
+                TenHocVien = txtHoTen.Text,
                 NgaySinh = DateTime.ParseExact(dateNgaySinh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                GioiTinhHV = cboGioiTinh.Text,
+                GioiTinhHocVien = cboGioiTinh.Text,
                 DiaChi = txtDiaChi.Text,
-                SdtHV = txtSDT.Text,
-                EmailHV = txtEmail.Text,
-                MaLoaiHV = (string)cboLoaiHV.SelectedValue,
+                SdtHocVien = txtSDT.Text,
+                EmailHocVien = txtEmail.Text,
+                SdtBo = txtSDTBo.Text,
+                EmailBo = txtEmailBo.Text,
+                SdtMe = txtSDTMe.Text,
+                EmailMe = txtEmailMe.Text,
+                MaLoaiHocVien = (string)cboLoaiHV.SelectedValue,
                 NgayTiepNhan = DateTime.Now,
-                TenDangNhap = (string)cboLoaiHV.SelectedValue == "LHV00" ? null : txtTenDangNhap.Text
+                TenDangNhap = (string)cboLoaiHV.SelectedValue == "LHV00" ? null : txtTenDangNhap.Text,
+                MaCoSo = GlobalSettings.MaCoSo
             };
             return hocVien;
         }
@@ -157,8 +178,8 @@ namespace O2S_QuanLyHocVien.Pages
         public void InitializeLoaiHV()
         {
             cboLoaiHV.DataSource = LoaiHV.SelectAll();
-            cboLoaiHV.DisplayMember = "TenLoaiHV";
-            cboLoaiHV.ValueMember = "MaLoaiHV";
+            cboLoaiHV.DisplayMember = "TenLoaiHocVien";
+            cboLoaiHV.ValueMember = "MaLoaiHocVien";
         }
 
         /// <summary>
@@ -170,7 +191,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             Thread th = new Thread(() =>
             {
-                object dshv = HocVien.SelectAll();
+                object dshv = HocVien.SelectTheoCoSo();
 
                 gridDSHV.Invoke((MethodInvoker)delegate
                 {
@@ -254,7 +275,7 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 LockPanelControl();
-                hocVien = HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHV"].Value.ToString());
+                hocVien = HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString());
                 LoadPanelControl(hocVien);
             }
             catch (Exception ex)

@@ -11,6 +11,7 @@ using O2S_QuanLyHocVien.Properties;
 using System.Data;
 using System.IO;
 using O2S_License.PasswordKey;
+using System.Collections.Generic;
 
 namespace O2S_QuanLyHocVien.Popups
 {
@@ -58,12 +59,12 @@ namespace O2S_QuanLyHocVien.Popups
         {
             try
             {
-                Base.SessionLogin.MaDatabase = Base.KiemTraLicense.LayThongTinMaDatabase();
-                LICENSE _license = License.Select(Base.SessionLogin.MaDatabase);
+                GlobalSettings.MaDatabase = Base.KiemTraLicense.LayThongTinMaDatabase();
+                LICENSE _license = License.Select(GlobalSettings.MaDatabase);
                 if (_license == null) //Insert
                 {
                     LICENSE _insert = new LICENSE();
-                    _insert.DataKey = Base.SessionLogin.MaDatabase;
+                    _insert.DataKey = GlobalSettings.MaDatabase;
                     _insert.LicenseKey = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt("", true);
                     License.Insert(_insert);
                 }
@@ -88,30 +89,27 @@ namespace O2S_QuanLyHocVien.Popups
             {
                 if (txtTenDangNhap.Text.ToLower() == KeyTrongPhanMem.AdminUser_key && txtMatKhau.Text == KeyTrongPhanMem.AdminPass_key)
                 {
-                    Base.SessionLogin.SessionUsercode = txtTenDangNhap.Text.Trim().ToLower();
-                    Base.SessionLogin.SessionUsername = "Administrator";
-
                     //TAIKHOAN tk = TaiKhoan.Select(txtTenDangNhap.Text);
                     GlobalSettings.UserID = "-1";
-                    GlobalSettings.UserName = txtTenDangNhap.Text;
+                    GlobalSettings.UserCode = txtTenDangNhap.Text.Trim().ToLower();
+                    GlobalSettings.UserName = "Administrator";
                     //GlobalSettings.UserType = (UserType)TaiKhoan.FullUserType(tk);
 
                     Settings.Default.Login_UserName = txtTenDangNhap.Text;
                     Settings.Default.Login_Password = txtMatKhau.Text;
                     Settings.Default.Save();
                     LoadDuLieuSauKhiDangNhap();
+                    LayCoSoTrungTam();
                     this.DialogResult = DialogResult.OK;
                 }
                 else
                 {
                     if (TaiKhoan.IsValid(txtTenDangNhap.Text, txtMatKhau.Text))
                     {
-                        Base.SessionLogin.SessionUsercode = txtTenDangNhap.Text.Trim().ToLower();
-                        Base.SessionLogin.SessionUsername = txtTenDangNhap.Text.Trim().ToLower();
-
                         TAIKHOAN tk = TaiKhoan.Select(txtTenDangNhap.Text);
                         GlobalSettings.UserID = TaiKhoan.FullUserID(tk);
-                        GlobalSettings.UserName = txtTenDangNhap.Text;
+                        GlobalSettings.UserCode = txtTenDangNhap.Text.Trim().ToLower();
+                        GlobalSettings.UserName = TaiKhoan.FullUserName(tk);
                         GlobalSettings.UserType = (UserType)TaiKhoan.FullUserType(tk);
 
                         Settings.Default.Login_UserName = txtTenDangNhap.Text;
@@ -119,6 +117,7 @@ namespace O2S_QuanLyHocVien.Popups
                         Settings.Default.Save();
                         Base.KiemTraLicense.KiemTraLicenseHopLe();
                         LoadDuLieuSauKhiDangNhap();
+                        LayCoSoTrungTam();
                         this.DialogResult = DialogResult.OK;
                     }
                     else
@@ -138,6 +137,29 @@ namespace O2S_QuanLyHocVien.Popups
             Settings.Default.Login_IsSaved = chkSave.Checked;
             Settings.Default.Save();
         }
+
+        private void LayCoSoTrungTam()
+        {
+            try
+            {
+                List<COSOTRUNGTAM> ObjectList = CoSoTrungTam.SelectAll() as List<COSOTRUNGTAM>;
+                if (ObjectList.Count == 1)
+                {
+                    GlobalSettings.MaCoSo = ObjectList[0].MaCoSo;
+                    GlobalSettings.TenCoSo = ObjectList[0].TenCoSo;
+                }
+                else
+                {
+                    frmChonCoSo _frm = new frmChonCoSo();
+                    _frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
         #endregion
 
         #region Kiem tra va copy Lanucher
@@ -198,7 +220,7 @@ namespace O2S_QuanLyHocVien.Popups
         {
             try
             {
-                Base.SessionLogin.SessionLstPhanQuyenNguoiDung = Base.CheckPermission.GetListPhanQuyenNguoiDung();
+                GlobalSettings.SessionLstPhanQuyenNguoiDung = Base.CheckPermission.GetListPhanQuyenNguoiDung();
             }
             catch (Exception ex)
             {

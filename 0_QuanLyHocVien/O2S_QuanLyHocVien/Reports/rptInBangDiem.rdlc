@@ -61,21 +61,21 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="MaHV">
+      <Textbox Name="MaHocVien">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Parameters!MaHV.Value</Value>
+                <Value>=Parameters!MaHocVien.Value</Value>
                 <Style />
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>MaHV</rd:DefaultName>
+        <rd:DefaultName>MaHocVien</rd:DefaultName>
         <Top>0.48479cm</Top>
         <Left>3.09655cm</Left>
         <Height>0.6cm</Height>
@@ -91,21 +91,21 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="TenHV">
+      <Textbox Name="TenHocVien">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Parameters!TenHV.Value</Value>
+                <Value>=Parameters!TenHocVien.Value</Value>
                 <Style />
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>TenHV</rd:DefaultName>
+        <rd:DefaultName>TenHocVien</rd:DefaultName>
         <Top>1.26118cm</Top>
         <Left>3.09655cm</Left>
         <Height>0.6cm</Height>
@@ -241,21 +241,21 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="TenKH">
+      <Textbox Name="TenKhoaHoc">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Parameters!TenKH.Value</Value>
+                <Value>=Parameters!TenKhoaHoc.Value</Value>
                 <Style />
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>TenKH</rd:DefaultName>
+        <rd:DefaultName>TenKhoaHoc</rd:DefaultName>
         <Top>1.26118cm</Top>
         <Left>8.73217cm</Left>
         <Height>0.6cm</Height>
@@ -831,11 +831,11 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="MaHV">
+    <ReportParameter Name="MaHocVien">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="TenHV">
+    <ReportParameter Name="TenHocVien">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
@@ -847,7 +847,7 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="TenKH">
+    <ReportParameter Name="TenKhoaHoc">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>

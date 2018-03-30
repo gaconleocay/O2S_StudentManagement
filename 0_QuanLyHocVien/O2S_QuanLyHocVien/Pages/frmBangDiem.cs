@@ -31,11 +31,11 @@ namespace O2S_QuanLyHocVien.Pages
         {
             var bangDiem = BangDiem.SelectDetail(maHV, maLop);
             lblTenLop.Text = bangDiem.TenLop;
-            lblTenKhoa.Text = bangDiem.TenKH;
-            lblDiemNghe.Text = bangDiem.DiemNghe.ToString();
-            lblDiemNoi.Text = bangDiem.DiemNoi.ToString();
-            lblDiemDoc.Text = bangDiem.DiemDoc.ToString();
-            lblDiemViet.Text = bangDiem.DiemViet.ToString();
+            lblTenKhoaHocoa.Text = bangDiem.TenKhoaHoc;
+            //lblDiemNghe.Text = bangDiem.DiemNghe.ToString();
+            //lblDiemNoi.Text = bangDiem.DiemNoi.ToString();
+            //lblDiemDoc.Text = bangDiem.DiemDoc.ToString();
+            //lblDiemViet.Text = bangDiem.DiemViet.ToString();
             lblDiemTrungBinh.Text = bangDiem.DiemTrungBinh.ToString("N2");
         }
 
@@ -48,12 +48,12 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void frmBangDiem_Load(object sender, EventArgs e)
         {
-            lblTitle.Text = string.Format("Bảng điểm của {0}", TaiKhoan.FullUserName(new TAIKHOAN() { TenDangNhap = GlobalSettings.UserName }));
+            lblTitle.Text = string.Format("Bảng điểm của {0}", TaiKhoan.FullUserName(new TAIKHOAN() { TenDangNhap = GlobalSettings.UserCode }));
             cboLop.DataSource = BangDiem.SelectDSLop(GlobalSettings.UserID);
             cboLop.DisplayMember = "TenLop";
             cboLop.ValueMember = "MaLop";
 
-            lblTenLop.Text = lblTenKhoa.Text = string.Empty;
+            lblTenLop.Text = lblTenKhoaHocoa.Text = string.Empty;
 
             lblDiemNghe.Text = lblDiemNoi.Text = lblDiemDoc.Text = lblDiemViet.Text = lblDiemTrungBinh.Text = 0.ToString();
 
@@ -69,11 +69,11 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 new ReportParameter("CenterName", GlobalSettings.CenterName),
                 new ReportParameter("CenterWebsite", GlobalSettings.CenterWebsite),
-                new ReportParameter("MaHV", GlobalSettings.UserID),
-                new ReportParameter("TenHV", TaiKhoan.FullUserName(new TAIKHOAN() {TenDangNhap = GlobalSettings.UserName })),
+                new ReportParameter("MaHocVien", GlobalSettings.UserID),
+                new ReportParameter("TenHocVien", TaiKhoan.FullUserName(new TAIKHOAN() {TenDangNhap = GlobalSettings.UserCode })),
                 new ReportParameter("MaLop", cboLop.SelectedValue.ToString()),
                 new ReportParameter("TenLop",lblTenLop.Text),
-                new ReportParameter("TenKH", lblTenKhoa.Text),
+                new ReportParameter("TenKhoaHoc", lblTenKhoaHocoa.Text),
                 new ReportParameter("DiemNghe", lblDiemNghe.Text),
                 new ReportParameter("DiemNoi",lblDiemNoi.Text),
                 new ReportParameter("DiemDoc",lblDiemDoc.Text),
@@ -81,7 +81,8 @@ namespace O2S_QuanLyHocVien.Pages
                 new ReportParameter("DiemTB",lblDiemTrungBinh.Text)
             };
 
-            frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptInBangDiem.rdlc";
+           // frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptInBangDiem.rdlc";
+            frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptInBangDiem.rdlc";
 
             frm.ReportViewer.LocalReport.SetParameters(_params);
             frm.ReportViewer.LocalReport.DisplayName = "Bảng điểm học viên";
@@ -95,7 +96,7 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 if (isLoaded)
-                    LoadBangDiem(GlobalSettings.UserName, cboLop.SelectedValue.ToString());
+                    LoadBangDiem(GlobalSettings.UserCode, cboLop.SelectedValue.ToString());
             }
             catch (Exception ex)
             {

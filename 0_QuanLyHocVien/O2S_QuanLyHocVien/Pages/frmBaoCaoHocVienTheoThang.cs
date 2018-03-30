@@ -68,13 +68,14 @@ namespace O2S_QuanLyHocVien.Pages
                 new ReportParameter("Year", dateThang.Value.Year.ToString())             
             };
 
-            frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptBaoCaoHocVienGhiDanhTheoThang.rdlc";
+            //frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptBaoCaoHocVienGhiDanhTheoThang.rdlc";
+            frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptBaoCaoHocVienGhiDanhTheoThang.rdlc";
 
             dsSource.dtBaoCaoHocVienTheoThangDataTable dt = new dsSource.dtBaoCaoHocVienTheoThangDataTable();
             var query = PhieuGhiDanh.BaoCaoHocVienGhiDanhTheoThang(dateThang.Value.Month, dateThang.Value.Year);
             foreach (var i in query)
             {
-                dt.Rows.Add(i.MaHV, i.TenHV, i.GioiTinhHV, i.NgayGhiDanh, i.TenKH);
+                dt.Rows.Add(i.MaHocVien, i.TenHocVien, i.GioiTinhHocVien, i.NgayGhiDanh, i.TenKhoaHoc);
             }
 
             frm.ReportViewer.LocalReport.DataSources.Clear();

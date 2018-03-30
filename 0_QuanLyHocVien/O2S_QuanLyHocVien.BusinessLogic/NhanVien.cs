@@ -22,7 +22,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static NHANVIEN Select(string maNV)
         {
             return (from p in Database.NHANVIENs
-                    where p.MaNV == maNV
+                    where p.MaNhanVien == maNV
                     select p).FirstOrDefault();
         }
 
@@ -35,11 +35,11 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             return (from p in Database.NHANVIENs
                     select new
                     {
-                        MaNV = p.MaNV,
-                        TenNV = p.TenNV,
-                        SdtNV = p.SdtNV,
-                        EmailNV = p.EmailNV,
-                        TenLoaiNV = p.LOAINV.TenLoaiNV
+                        MaNhanVien = p.MaNhanVien,
+                        TenNhanVien = p.TenNhanVien,
+                        SdtNhanVien = p.SdtNhanVien,
+                        EmailNhanVien = p.EmailNhanVien,
+                        TenLoaiNhanVien = p.LOAINV.TenLoaiNhanVien
                     }).ToList();
         }
 
@@ -53,16 +53,16 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static object SelectAll(string maNV, string tenNV, string maLoaiHV)
         {
             return (from p in GlobalSettings.Database.NHANVIENs
-                    where (maNV == null ? true : p.MaNV.Contains(maNV)) &&
-                          (tenNV == null ? true : p.TenNV.Contains(tenNV)) &&
-                          (maLoaiHV == null ? true : p.MaLoaiNV == maLoaiHV)
+                    where (maNV == null ? true : p.MaNhanVien.Contains(maNV)) &&
+                          (tenNV == null ? true : p.TenNhanVien.Contains(tenNV)) &&
+                          (maLoaiHV == null ? true : p.MaLoaiNhanVien == maLoaiHV)
                     select new
                     {
-                        MaNV = p.MaNV,
-                        TenNV = p.TenNV,
-                        SdtNV = p.SdtNV,
-                        EmailNV = p.EmailNV,
-                        TenLoaiNV = p.LOAINV.TenLoaiNV
+                        MaNhanVien = p.MaNhanVien,
+                        TenNhanVien = p.TenNhanVien,
+                        SdtNhanVien = p.SdtNhanVien,
+                        EmailNhanVien = p.EmailNhanVien,
+                        TenLoaiNhanVien = p.LOAINV.TenLoaiNhanVien
                     }).ToList();
         }
 
@@ -90,12 +90,12 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <param name="taiKhoan"></param>
         public static void Update(NHANVIEN nhanVien, TAIKHOAN taiKhoan = null)
         {
-            var nhanVienCu = Select(nhanVien.MaNV);
+            var nhanVienCu = Select(nhanVien.MaNhanVien);
 
-            nhanVienCu.TenNV = nhanVien.TenNV;
-            nhanVienCu.SdtNV = nhanVien.SdtNV;
-            nhanVienCu.EmailNV = nhanVien.EmailNV;
-            nhanVienCu.MaLoaiNV = nhanVien.MaLoaiNV;
+            nhanVienCu.TenNhanVien = nhanVien.TenNhanVien;
+            nhanVienCu.SdtNhanVien = nhanVien.SdtNhanVien;
+            nhanVienCu.EmailNhanVien = nhanVien.EmailNhanVien;
+            nhanVienCu.MaLoaiNhanVien = nhanVien.MaLoaiNhanVien;
 
             Database.SubmitChanges();
             if(taiKhoan!=null)
@@ -125,8 +125,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             string result = "NV";
             var temp = from p in GlobalSettings.Database.NHANVIENs
-                       where p.MaNV.StartsWith(result)
-                       select p.MaNV;
+                       where p.MaNhanVien.StartsWith(result)
+                       select p.MaNhanVien;
             int max = -1;
 
             foreach (var i in temp)

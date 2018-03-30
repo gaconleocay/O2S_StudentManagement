@@ -1,4 +1,5 @@
 ﻿using O2S_License.PasswordKey;
+using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.Model.Models;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,13 @@ namespace O2S_QuanLyHocVien.Base
             bool result = false;
             try
             {
-                if (SessionLogin.SessionUsercode == KeyTrongPhanMem.AdminUser_key)
+                if (GlobalSettings.UserCode == KeyTrongPhanMem.AdminUser_key)
                 {
                     result = true;
                 }
                 else
                 {
-                    var checkPhanQuyen = SessionLogin.SessionLstPhanQuyenNguoiDung.Where(s => s.permissioncode.Contains(percode)).ToList();
+                    var checkPhanQuyen = GlobalSettings.SessionLstPhanQuyenNguoiDung.Where(s => s.permissioncode.Contains(percode)).ToList();
                     if (checkPhanQuyen != null && checkPhanQuyen.Count > 0)
                     {
                         result = true;
@@ -42,7 +43,7 @@ namespace O2S_QuanLyHocVien.Base
             List<classPermission> lstPhanQuyen = new List<classPermission>();
             try
             {
-                if (SessionLogin.SessionUsercode == KeyTrongPhanMem.AdminUser_key)
+                if (GlobalSettings.UserCode == KeyTrongPhanMem.AdminUser_key)
                 {
                     lstPhanQuyen = Base.listChucNang.getDanhSachChucNang();
                     foreach (var item in lstPhanQuyen)
@@ -55,7 +56,7 @@ namespace O2S_QuanLyHocVien.Base
                     //TODO
                     //using (var db = new O2S_QuanLyHocVienEntities())
                     //{
-                    //    string en_usercode = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(SessionLogin.SessionUsercode, true);
+                    //    string en_usercode = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(GlobalSettings.SessionUsercode, true);
                     //    List<SM_TBLUSER_PERMISSION> lstUserPer = db.SM_TBLUSER_PERMISSION.Where(o => o.usercode == en_usercode && o.permissioncheck == true).ToList();
                     //    if (lstUserPer != null && lstUserPer.Count > 0)
                     //    {

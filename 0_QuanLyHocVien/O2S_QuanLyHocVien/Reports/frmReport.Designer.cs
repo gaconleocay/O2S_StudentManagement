@@ -34,7 +34,9 @@
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptInBangDiem.rdlc";
+            //this.reportViewer1.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptInBangDiem.rdlc";
+            this.reportViewer1.LocalReport.ReportPath = @"Reports\rptInBangDiem.rdlc";
+
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.Size = new System.Drawing.Size(659, 450);

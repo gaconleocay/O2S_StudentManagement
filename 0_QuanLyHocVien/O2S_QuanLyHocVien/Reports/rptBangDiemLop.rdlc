@@ -309,21 +309,21 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="MaHV">
+                    <Textbox Name="MaHocVien">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!MaHV.Value</Value>
+                              <Value>=Fields!MaHocVien.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>MaHV</rd:DefaultName>
+                      <rd:DefaultName>MaHocVien</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -339,21 +339,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TenHV">
+                    <Textbox Name="TenHocVien">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TenHV.Value</Value>
+                              <Value>=Fields!TenHocVien.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>TenHV</rd:DefaultName>
+                      <rd:DefaultName>TenHocVien</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -759,12 +759,12 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="MaHV">
-          <DataField>MaHV</DataField>
+        <Field Name="MaHocVien">
+          <DataField>MaHocVien</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="TenHV">
-          <DataField>TenHV</DataField>
+        <Field Name="TenHocVien">
+          <DataField>TenHocVien</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="DiemNghe">
