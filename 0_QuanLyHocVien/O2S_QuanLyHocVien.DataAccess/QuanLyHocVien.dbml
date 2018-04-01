@@ -1,5 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="O2S_QLHV" Class="QuanLyHocVienDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=ADMIN\SQLEXPRESS;Initial Catalog=O2S_QLHV;Persist Security Info=True;User ID=sa" SettingsObjectName="O2S_QuanLyHocVien.DataAccess.Properties.Settings" SettingsPropertyName="O2S_QLHVConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.BANGDIEM" Member="BANGDIEMs">
+    <Type Name="BANGDIEM">
+      <Column Name="BangDiemId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaHocVien" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MaLop" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MaPhieu" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="MaKhoaHoc" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DiemTrungBinh" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TrangThai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsRemoveid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="BANGDIEM_BANGDIEMCHITIET" Member="BANGDIEMCHITIETs" ThisKey="BangDiemId" OtherKey="BangDiemId" Type="BANGDIEMCHITIET" />
+      <Association Name="HOCVIEN_BANGDIEM" Member="HOCVIEN" ThisKey="MaHocVien" OtherKey="MaHocVien" Type="HOCVIEN" IsForeignKey="true" />
+      <Association Name="KHOAHOC_BANGDIEM" Member="KHOAHOC" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="KHOAHOC" IsForeignKey="true" />
+      <Association Name="LOPHOC_BANGDIEM" Member="LOPHOC" ThisKey="MaLop" OtherKey="MaLop" Type="LOPHOC" IsForeignKey="true" />
+      <Association Name="PHIEUGHIDANH_BANGDIEM" Member="PHIEUGHIDANH" ThisKey="MaPhieu" OtherKey="MaPhieu" Type="PHIEUGHIDANH" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.VERSION" Member="VERSIONs">
     <Type Name="VERSION">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -10,6 +33,18 @@
       <Column Name="AppMD5Hash" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="SqlVersion" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="SqlResults" Type="System.Data.Linq.Binary" DbType="VarBinary(1)" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BANGDIEMCHITIET" Member="BANGDIEMCHITIETs">
+    <Type Name="BANGDIEMCHITIET">
+      <Column Name="BangDiemChiTietId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BangDiemId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaMonHoc" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Diem" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="IsRemoveid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TenMonHoc" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="BANGDIEM_BANGDIEMCHITIET" Member="BANGDIEM" ThisKey="BangDiemId" OtherKey="BangDiemId" Type="BANGDIEM" IsForeignKey="true" />
+      <Association Name="MONHOC_BANGDIEMCHITIET" Member="MONHOC" ThisKey="MaMonHoc" OtherKey="MaMonHoc" Type="MONHOC" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.CHITIETTRUNGTAM" Member="CHITIETTRUNGTAMs">
@@ -84,6 +119,7 @@
   </Table>
   <Table Name="dbo.HOCVIEN" Member="HOCVIENs">
     <Type Name="HOCVIEN">
+      <Column Name="HocVienId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MaHocVien" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="TenHocVien" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="GioiTinhHocVien" Type="System.String" DbType="NVarChar(3)" CanBeNull="true" />
@@ -92,8 +128,14 @@
       <Column Name="SdtHocVien" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
       <Column Name="EmailHocVien" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="MaLoaiHocVien" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="TenLoaiHocVien" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="NgayTiepNhan" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="TenDangNhap" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="SdtBo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="EmailBo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="SdtMe" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="EmailMe" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="MaCoSo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="IsRemoveid" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -101,15 +143,8 @@
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SdtBo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
-      <Column Name="EmailBo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="SdtMe" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
-      <Column Name="EmailMe" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="MaCoSo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Association Name="HOCVIEN_DANGKY" Member="DANGKies" ThisKey="MaHocVien" OtherKey="MaHocVien" Type="DANGKY" />
       <Association Name="HOCVIEN_BANGDIEM" Member="BANGDIEMs" ThisKey="MaHocVien" OtherKey="MaHocVien" Type="BANGDIEM" />
-      <Association Name="LOAIHV_HOCVIEN" Member="LOAIHV" ThisKey="MaLoaiHocVien" OtherKey="MaLoaiHocVien" Type="LOAIHV" IsForeignKey="true" />
-      <Association Name="TAIKHOAN_HOCVIEN" Member="TAIKHOAN" ThisKey="TenDangNhap" OtherKey="TenDangNhap" Type="TAIKHOAN" IsForeignKey="true" />
+      <Association Name="HOCVIEN_DANGKY" Member="DANGKies" ThisKey="MaHocVien" OtherKey="MaHocVien" Type="DANGKY" />
     </Type>
   </Table>
   <Table Name="dbo.KHOAHOC" Member="KHOAHOCs">
@@ -125,10 +160,10 @@
       <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="MaCoSo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="KHOAHOC_BANGDIEM" Member="BANGDIEMs" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="BANGDIEM" />
       <Association Name="KHOAHOC_DANGKY" Member="DANGKies" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="DANGKY" />
       <Association Name="KHOAHOC_KHOAHOC_MONHOC" Member="KHOAHOC_MONHOCs" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="KHOAHOC_MONHOC" />
       <Association Name="KHOAHOC_LOPHOC" Member="LOPHOCs" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="LOPHOC" />
-      <Association Name="KHOAHOC_BANGDIEM" Member="BANGDIEMs" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="BANGDIEM" />
     </Type>
   </Table>
   <Table Name="dbo.KHOAHOC_MONHOC" Member="KHOAHOC_MONHOCs">
@@ -161,7 +196,6 @@
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="LOAIHV_HOCVIEN" Member="HOCVIENs" ThisKey="MaLoaiHocVien" OtherKey="MaLoaiHocVien" Type="HOCVIEN" />
     </Type>
   </Table>
   <Table Name="dbo.LOAINV" Member="LOAINVs">
@@ -195,8 +229,8 @@
       <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="MaCoSo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Association Name="LOPHOC_GIANGDAY" Member="GIANGDAYs" ThisKey="MaLop" OtherKey="MaLop" Type="GIANGDAY" />
       <Association Name="LOPHOC_BANGDIEM" Member="BANGDIEMs" ThisKey="MaLop" OtherKey="MaLop" Type="BANGDIEM" />
+      <Association Name="LOPHOC_GIANGDAY" Member="GIANGDAYs" ThisKey="MaLop" OtherKey="MaLop" Type="GIANGDAY" />
       <Association Name="KHOAHOC_LOPHOC" Member="KHOAHOC" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="KHOAHOC" IsForeignKey="true" />
     </Type>
   </Table>
@@ -205,8 +239,8 @@
       <Column Name="MaMonHoc" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="TenMonHoc" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="DiemToiDa" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Association Name="MONHOC_KHOAHOC_MONHOC" Member="KHOAHOC_MONHOCs" ThisKey="MaMonHoc" OtherKey="MaMonHoc" Type="KHOAHOC_MONHOC" />
       <Association Name="MONHOC_BANGDIEMCHITIET" Member="BANGDIEMCHITIETs" ThisKey="MaMonHoc" OtherKey="MaMonHoc" Type="BANGDIEMCHITIET" />
+      <Association Name="MONHOC_KHOAHOC_MONHOC" Member="KHOAHOC_MONHOCs" ThisKey="MaMonHoc" OtherKey="MaMonHoc" Type="KHOAHOC_MONHOC" />
     </Type>
   </Table>
   <Table Name="dbo.NHANVIEN" Member="NHANVIENs">
@@ -244,8 +278,8 @@
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="PHIEUGHIDANH_DANGKY" Member="DANGKies" ThisKey="MaPhieu" OtherKey="MaPhieu" Type="DANGKY" />
       <Association Name="PHIEUGHIDANH_BANGDIEM" Member="BANGDIEMs" ThisKey="MaPhieu" OtherKey="MaPhieu" Type="BANGDIEM" />
+      <Association Name="PHIEUGHIDANH_DANGKY" Member="DANGKies" ThisKey="MaPhieu" OtherKey="MaPhieu" Type="DANGKY" />
     </Type>
   </Table>
   <Table Name="dbo.PHIEUTHU" Member="PHIEUTHUs">
@@ -293,43 +327,7 @@
       <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="TAIKHOAN_GIANGVIEN" Member="GIANGVIENs" ThisKey="TenDangNhap" OtherKey="TenDangNhap" Type="GIANGVIEN" />
-      <Association Name="TAIKHOAN_HOCVIEN" Member="HOCVIENs" ThisKey="TenDangNhap" OtherKey="TenDangNhap" Type="HOCVIEN" />
       <Association Name="TAIKHOAN_NHANVIEN" Member="NHANVIENs" ThisKey="TenDangNhap" OtherKey="TenDangNhap" Type="NHANVIEN" />
-    </Type>
-  </Table>
-  <Table Name="dbo.BANGDIEMCHITIET" Member="BANGDIEMCHITIETs">
-    <Type Name="BANGDIEMCHITIET">
-      <Column Name="BangDiemChiTietId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="BangDiemId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MaMonHoc" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Diem" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="IsRemoveid" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TenMonHoc" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="MONHOC_BANGDIEMCHITIET" Member="MONHOC" ThisKey="MaMonHoc" OtherKey="MaMonHoc" Type="MONHOC" IsForeignKey="true" />
-      <Association Name="BANGDIEM_BANGDIEMCHITIET" Member="BANGDIEM" ThisKey="BangDiemId" OtherKey="BangDiemId" Type="BANGDIEM" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.BANGDIEM" Member="BANGDIEMs">
-    <Type Name="BANGDIEM">
-      <Column Name="BangDiemId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="MaHocVien" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="MaLop" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="MaPhieu" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="IsRemoveid" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CreatedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="DiemTrungBinh" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="MaKhoaHoc" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="TrangThai" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="BANGDIEM_BANGDIEMCHITIET" Member="BANGDIEMCHITIETs" ThisKey="BangDiemId" OtherKey="BangDiemId" Type="BANGDIEMCHITIET" />
-      <Association Name="HOCVIEN_BANGDIEM" Member="HOCVIEN" ThisKey="MaHocVien" OtherKey="MaHocVien" Type="HOCVIEN" IsForeignKey="true" />
-      <Association Name="KHOAHOC_BANGDIEM" Member="KHOAHOC" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="KHOAHOC" IsForeignKey="true" />
-      <Association Name="LOPHOC_BANGDIEM" Member="LOPHOC" ThisKey="MaLop" OtherKey="MaLop" Type="LOPHOC" IsForeignKey="true" />
-      <Association Name="PHIEUGHIDANH_BANGDIEM" Member="PHIEUGHIDANH" ThisKey="MaPhieu" OtherKey="MaPhieu" Type="PHIEUGHIDANH" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

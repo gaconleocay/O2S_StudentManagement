@@ -61,7 +61,7 @@
             this.cboCoSo.Location = new System.Drawing.Point(115, 102);
             this.cboCoSo.Name = "cboCoSo";
             this.cboCoSo.Size = new System.Drawing.Size(375, 33);
-            this.cboCoSo.TabIndex = 31;
+            this.cboCoSo.TabIndex = 1;
             // 
             // pictureBox1
             // 

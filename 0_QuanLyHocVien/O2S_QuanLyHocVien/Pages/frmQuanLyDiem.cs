@@ -166,18 +166,21 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                thPanelDiem = new Thread(() =>
+                if (gridDSHV.RowCount > 0)
                 {
-                    thHocVien.Join();
-
-                    gridLop.Invoke((MethodInvoker)delegate
+                    thPanelDiem = new Thread(() =>
                     {
-                        LoadPanelDiem(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString(),
-                                    gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
-                    });
-                });
+                        thHocVien.Join();
 
-                thPanelDiem.Start();
+                        gridLop.Invoke((MethodInvoker)delegate
+                        {
+                            LoadPanelDiem(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString(),
+                                        gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
+                        });
+                    });
+
+                    thPanelDiem.Start();
+                }
             }
             catch (Exception ex)
             {

@@ -53,6 +53,7 @@
     <Compile Include="Model\BangDiemFullDTO.cs" />
     <Compile Include="Model\BangDiemChiTietDTO.cs" />
     <Compile Include="Model\KhoaHocMonHocDTO.cs" />
+    <Compile Include="Model\PhieThu_KhoanKhacDTO.cs" />
     <Compile Include="MonHoc.cs" />
     <Compile Include="DangKy.cs" />
     <Compile Include="GiangDay.cs" />

@@ -109,7 +109,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-            cboKhoa.DataSource = KhoaHoc.SelectAll();
+            cboKhoa.DataSource = KhoaHoc.SelectTheoCoCo();
             cboKhoa.DisplayMember = "TenKhoaHoc";
             cboKhoa.ValueMember = "MaKhoaHoc";
 

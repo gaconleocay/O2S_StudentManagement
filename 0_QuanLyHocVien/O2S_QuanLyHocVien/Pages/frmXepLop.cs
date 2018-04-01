@@ -76,7 +76,7 @@ namespace O2S_QuanLyHocVien.Pages
             LoadDSHVChuaCoLop();
 
             //load khóa học
-            cboKhoa.DataSource = KhoaHoc.SelectAll();
+            cboKhoa.DataSource = KhoaHoc.SelectTheoCoCo();
             cboKhoa.DisplayMember = "TenKhoaHoc";
             cboKhoa.ValueMember = "MaKhoaHoc";
 

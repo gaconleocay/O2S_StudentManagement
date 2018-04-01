@@ -89,7 +89,7 @@ namespace O2S_QuanLyHocVien.Popups
         {
             dateNgayBD.Value = DateTime.Now;
 
-            cboKhoa.DataSource = KhoaHoc.SelectAll();
+            cboKhoa.DataSource = KhoaHoc.SelectTheoCoCo();
             cboKhoa.DisplayMember = "TenKhoaHoc";
             cboKhoa.ValueMember = "MaKhoaHoc";
 

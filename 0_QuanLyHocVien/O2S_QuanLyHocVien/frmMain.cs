@@ -107,6 +107,12 @@ namespace O2S_QuanLyHocVien
                     string nvType = NhanVien.Select(GlobalSettings.UserID) != null ? NhanVien.Select(GlobalSettings.UserID).MaLoaiNhanVien : "";
                     switch (nvType)
                     {
+                        //Quan tri vien
+                        case "LNV00":
+                            {
+                                btnBanQuyen.Visible = true;
+                                break;
+                            }
                         //nhân viên ghi danh
                         case "LNV01":
                             btnGiangVienTitle.Visible = false;
@@ -117,6 +123,7 @@ namespace O2S_QuanLyHocVien
                             btnQuanLyDiem.Enabled = false;
                             btnXepLop.Enabled = false;
                             btnNhanVienTitle_Click(btnNhanVienTitle, null);
+                            btnBanQuyen.Visible = false;
                             break;
                         //nhân viên học vụ
                         case "LNV02":
@@ -131,7 +138,7 @@ namespace O2S_QuanLyHocVien
                             btnQuanLyTaiKhoan.Enabled = false;
                             btnThayDoiQuyDinh.Enabled = false;
                             btnKetNoiCSDL.Enabled = false;
-                            btnBanQuyen.Enabled = false;
+                            btnBanQuyen.Visible = false;
                             btnQuanLyTaiKhoan.Enabled = false;
                             btnThongTinTrungTam.Enabled = false;
                             btnNhanVienTitle_Click(btnNhanVienTitle, null);
@@ -156,7 +163,7 @@ namespace O2S_QuanLyHocVien
                             btnQuanLyTaiKhoan.Enabled = false;
                             btnThayDoiQuyDinh.Enabled = false;
                             btnKetNoiCSDL.Enabled = false;
-                            btnBanQuyen.Enabled = false;
+                            btnBanQuyen.Visible = false;
                             btnQuanLyTaiKhoan.Enabled = false;
                             btnThongTinTrungTam.Enabled = false;
                             btnQuanLyCoSo.Enabled = false;
@@ -166,6 +173,7 @@ namespace O2S_QuanLyHocVien
                         default:
                             btnHocVienTitle.Visible = false;
                             btnGiangVienTitle.Visible = false;
+                            btnBanQuyen.Visible = false;
                             btnQuanTriTitle_Click(btnQuanTriTitle, null);
                             break;
                     }
@@ -174,15 +182,18 @@ namespace O2S_QuanLyHocVien
                     btnNhanVienTitle.Visible = false;
                     btnQuanTriTitle.Visible = false;
                     btnGiangVienTitle.Visible = false;
+                    btnBanQuyen.Visible = false;
                     btnHocVienTitle_Click(this.btnHocVienTitle, null);
                     break;
                 case UserType.GiangVien:
                     btnNhanVienTitle.Visible = false;
                     btnQuanTriTitle.Visible = false;
                     btnHocVienTitle.Visible = false;
+                    btnBanQuyen.Visible = false;
                     btnGiangVienTitle_Click(this.btnGiangVienTitle, null);
                     break;
                 default:
+                    btnBanQuyen.Visible = false;
                     break;
             }
         }

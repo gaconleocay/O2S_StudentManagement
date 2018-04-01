@@ -140,7 +140,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                gridKH.DataSource = KhoaHoc.SelectAll();
+                gridKH.DataSource = KhoaHoc.SelectTheoCoCo();
             }
             catch (Exception ex)
             {

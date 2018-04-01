@@ -62,6 +62,7 @@
     <Compile Include="EncryptAndDecrypt\Base64.cs" />
     <Compile Include="EncryptAndDecrypt\EncryptAndDecrypt.cs" />
     <Compile Include="GridControl\GridControlConvert.cs" />
+    <Compile Include="GridView\GUI_RowCellStyle.cs" />
     <Compile Include="Number\Check.cs" />
     <Compile Include="String\StringConvert.cs" />
     <Compile Include="DataTables\ConvertDataTable.cs" />

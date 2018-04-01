@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
@@ -56,12 +56,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.gridLop = new System.Windows.Forms.DataGridView();
-            this.clmMaLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmNgayBD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmNgayKT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmDangMo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.clmSiSo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTongCong = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblSiSo = new System.Windows.Forms.Label();
@@ -80,6 +74,12 @@
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
+            this.clmMaLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmNgayBD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmNgayKT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmDangMo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.clmSiSo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -446,56 +446,6 @@
             this.gridLop.Click += new System.EventHandler(this.gridLop_Click);
             this.gridLop.DoubleClick += new System.EventHandler(this.gridLop_DoubleClick);
             // 
-            // clmMaLop
-            // 
-            this.clmMaLop.DataPropertyName = "MaLop";
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaLop.DefaultCellStyle = dataGridViewCellStyle3;
-            this.clmMaLop.FillWeight = 70F;
-            this.clmMaLop.HeaderText = "Mã lớp";
-            this.clmMaLop.Name = "clmMaLop";
-            this.clmMaLop.ReadOnly = true;
-            // 
-            // clmTenLop
-            // 
-            this.clmTenLop.DataPropertyName = "TenLop";
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Green;
-            this.clmTenLop.DefaultCellStyle = dataGridViewCellStyle4;
-            this.clmTenLop.FillWeight = 93.27411F;
-            this.clmTenLop.HeaderText = "Tên lớp";
-            this.clmTenLop.Name = "clmTenLop";
-            this.clmTenLop.ReadOnly = true;
-            // 
-            // clmNgayBD
-            // 
-            this.clmNgayBD.DataPropertyName = "NgayBD";
-            this.clmNgayBD.HeaderText = "Ngày bắt đầu";
-            this.clmNgayBD.Name = "clmNgayBD";
-            this.clmNgayBD.ReadOnly = true;
-            // 
-            // clmNgayKT
-            // 
-            this.clmNgayKT.DataPropertyName = "NgayKT";
-            this.clmNgayKT.FillWeight = 93.27411F;
-            this.clmNgayKT.HeaderText = "Ngày kết thúc";
-            this.clmNgayKT.Name = "clmNgayKT";
-            this.clmNgayKT.ReadOnly = true;
-            // 
-            // clmDangMo
-            // 
-            this.clmDangMo.DataPropertyName = "DangMo";
-            this.clmDangMo.HeaderText = "Đang mở";
-            this.clmDangMo.Name = "clmDangMo";
-            this.clmDangMo.ReadOnly = true;
-            // 
-            // clmSiSo
-            // 
-            this.clmSiSo.DataPropertyName = "SiSo";
-            this.clmSiSo.FillWeight = 93.27411F;
-            this.clmSiSo.HeaderText = "Sỉ số";
-            this.clmSiSo.Name = "clmSiSo";
-            this.clmSiSo.ReadOnly = true;
-            // 
             // lblTongCong
             // 
             this.lblTongCong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -731,6 +681,56 @@
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+            // 
+            // clmMaLop
+            // 
+            this.clmMaLop.DataPropertyName = "MaLop";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmMaLop.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmMaLop.FillWeight = 70F;
+            this.clmMaLop.HeaderText = "Mã lớp";
+            this.clmMaLop.Name = "clmMaLop";
+            this.clmMaLop.ReadOnly = true;
+            // 
+            // clmTenLop
+            // 
+            this.clmTenLop.DataPropertyName = "TenLop";
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
+            this.clmTenLop.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clmTenLop.FillWeight = 93.27411F;
+            this.clmTenLop.HeaderText = "Tên lớp";
+            this.clmTenLop.Name = "clmTenLop";
+            this.clmTenLop.ReadOnly = true;
+            // 
+            // clmNgayBD
+            // 
+            this.clmNgayBD.DataPropertyName = "NgayBD";
+            this.clmNgayBD.HeaderText = "Ngày bắt đầu";
+            this.clmNgayBD.Name = "clmNgayBD";
+            this.clmNgayBD.ReadOnly = true;
+            // 
+            // clmNgayKT
+            // 
+            this.clmNgayKT.DataPropertyName = "NgayKT";
+            this.clmNgayKT.FillWeight = 93.27411F;
+            this.clmNgayKT.HeaderText = "Ngày kết thúc";
+            this.clmNgayKT.Name = "clmNgayKT";
+            this.clmNgayKT.ReadOnly = true;
+            // 
+            // clmDangMo
+            // 
+            this.clmDangMo.DataPropertyName = "DangMo";
+            this.clmDangMo.HeaderText = "Đang mở";
+            this.clmDangMo.Name = "clmDangMo";
+            this.clmDangMo.ReadOnly = true;
+            // 
+            // clmSiSo
+            // 
+            this.clmSiSo.DataPropertyName = "SiSo";
+            this.clmSiSo.FillWeight = 93.27411F;
+            this.clmSiSo.HeaderText = "Sĩ số";
+            this.clmSiSo.Name = "clmSiSo";
+            this.clmSiSo.ReadOnly = true;
             // 
             // frmQuanLyLopHoc
             // 

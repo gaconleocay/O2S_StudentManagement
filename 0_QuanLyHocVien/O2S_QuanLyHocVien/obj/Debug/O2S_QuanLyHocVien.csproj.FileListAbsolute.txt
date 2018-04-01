@@ -224,6 +224,9 @@ C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Deb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.Pages.frmQuanLyCoSo.resources
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.Popups.frmChonCoSo.resources
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.Pages.frmQuanLyMonHoc.resources
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\RdlCompile.cache
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\RdlCompile.compiled
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Reports\BienLaiThuTien_NopTien.xlsx
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Newtonsoft.Json.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_License.pdb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_QuanLyHocVien.Common.pdb

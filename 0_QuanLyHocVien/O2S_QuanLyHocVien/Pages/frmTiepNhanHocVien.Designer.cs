@@ -743,7 +743,7 @@
             // 
             // clmLoaiHocVien
             // 
-            this.clmLoaiHocVien.DataPropertyName = "MaLoaiHocVien";
+            this.clmLoaiHocVien.DataPropertyName = "TenLoaiHocVien";
             this.clmLoaiHocVien.HeaderText = "Loại học viên";
             this.clmLoaiHocVien.Name = "clmLoaiHocVien";
             // 

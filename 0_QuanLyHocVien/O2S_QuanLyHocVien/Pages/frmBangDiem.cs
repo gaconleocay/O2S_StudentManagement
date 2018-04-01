@@ -10,6 +10,7 @@ using O2S_QuanLyHocVien.DataAccess;
 using System.Collections.Generic;
 using Microsoft.Reporting.WinForms;
 using O2S_QuanLyHocVien.Reports;
+using System.Data;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -29,14 +30,18 @@ namespace O2S_QuanLyHocVien.Pages
         /// <param name="maLop">Mã lớp</param>
         public void LoadBangDiem(string maHV, string maLop)
         {
-            var bangDiem = BangDiem.SelectDetail(maHV, maLop);
-            lblTenLop.Text = bangDiem.TenLop;
-            lblTenKhoaHocoa.Text = bangDiem.TenKhoaHoc;
-            //lblDiemNghe.Text = bangDiem.DiemNghe.ToString();
-            //lblDiemNoi.Text = bangDiem.DiemNoi.ToString();
-            //lblDiemDoc.Text = bangDiem.DiemDoc.ToString();
-            //lblDiemViet.Text = bangDiem.DiemViet.ToString();
-            lblDiemTrungBinh.Text = bangDiem.DiemTrungBinh.ToString("N2");
+            try
+            {
+                var bangDiem = BangDiem.SelectDetail(maHV, maLop);
+                lblTenLop.Text = bangDiem.TenLop;
+                lblTenKhoaHocoa.Text = bangDiem.TenKhoaHoc;
+                lblDiemTrungBinh.Text = bangDiem.DiemTrungBinh.ToString("N2");
+                gridControlDSDiem.DataSource = bangDiem.BangDiemChiTiets;
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
 
         #region Events
@@ -55,7 +60,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             lblTenLop.Text = lblTenKhoaHocoa.Text = string.Empty;
 
-            lblDiemNghe.Text = lblDiemNoi.Text = lblDiemDoc.Text = lblDiemViet.Text = lblDiemTrungBinh.Text = 0.ToString();
+            lblDiemTrungBinh.Text = 0.ToString();
 
             isLoaded = true;
             cboLop_SelectedValueChanged(sender, e);
@@ -74,15 +79,27 @@ namespace O2S_QuanLyHocVien.Pages
                 new ReportParameter("MaLop", cboLop.SelectedValue.ToString()),
                 new ReportParameter("TenLop",lblTenLop.Text),
                 new ReportParameter("TenKhoaHoc", lblTenKhoaHocoa.Text),
-                new ReportParameter("DiemNghe", lblDiemNghe.Text),
-                new ReportParameter("DiemNoi",lblDiemNoi.Text),
-                new ReportParameter("DiemDoc",lblDiemDoc.Text),
-                new ReportParameter("DiemViet",lblDiemViet.Text),
                 new ReportParameter("DiemTB",lblDiemTrungBinh.Text)
             };
-
-           // frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptInBangDiem.rdlc";
             frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptInBangDiem.rdlc";
+
+            dsSource.dtBangDiemHocVienDataTable dt = new dsSource.dtBangDiemHocVienDataTable();
+            for (int i = 0; i < gridViewDSDiem.RowCount; i++)
+            {
+                dt.Rows.Add(gridViewDSDiem.GetRowCellValue(i, "MaMonHoc").ToString(), gridViewDSDiem.GetRowCellValue(i, "TenMonHoc").ToString(), gridViewDSDiem.GetRowCellValue(i, "Diem").ToString());
+            }
+
+            //var query = BangDiem.SelectBangDiemLop(gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
+            //var bangDiem = BangDiem.SelectDetail(maHV, maLop);
+            //gridControlDSDiem.DataSource = bangDiem.BangDiemChiTiets;
+
+            //foreach (var i in query)
+            //{
+            //    dt.Rows.Add(i.MaHocVien, i.TenHocVien, i.DiemTrungBinh);
+            //}
+
+            frm.ReportViewer.LocalReport.DataSources.Clear();
+            frm.ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", (DataTable)dt));
 
             frm.ReportViewer.LocalReport.SetParameters(_params);
             frm.ReportViewer.LocalReport.DisplayName = "Bảng điểm học viên";

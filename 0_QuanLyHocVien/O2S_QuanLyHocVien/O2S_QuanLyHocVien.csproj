@@ -614,6 +614,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Reports\BienLaiThuTien_NopTien.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Reports\dsSource.xsc">
       <DependentUpon>dsSource.xsd</DependentUpon>
     </None>

@@ -54,6 +54,7 @@
             this.btnHocPhi = new System.Windows.Forms.Button();
             this.btnBangDiem = new System.Windows.Forms.Button();
             this.tabQuanTri = new System.Windows.Forms.TabPage();
+            this.btnQuanLyMonHoc = new System.Windows.Forms.Button();
             this.btnQuanLyCoSo = new System.Windows.Forms.Button();
             this.btnKetNoiCSDL = new System.Windows.Forms.Button();
             this.btnThongTinTrungTam = new System.Windows.Forms.Button();
@@ -86,7 +87,6 @@
             this.pnlWorkspace = new System.Windows.Forms.Panel();
             this.timerClock = new System.Windows.Forms.Timer(this.components);
             this.timerKiemTraLicense = new System.Windows.Forms.Timer(this.components);
-            this.btnQuanLyMonHoc = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabRibbon.SuspendLayout();
@@ -163,7 +163,7 @@
             this.btnThayDoiThongTinNV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThayDoiThongTinNV.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
             this.btnThayDoiThongTinNV.Image = global::O2S_QuanLyHocVien.Properties.Resources.edit_5_16;
-            this.btnThayDoiThongTinNV.Location = new System.Drawing.Point(847, 7);
+            this.btnThayDoiThongTinNV.Location = new System.Drawing.Point(833, 7);
             this.btnThayDoiThongTinNV.Name = "btnThayDoiThongTinNV";
             this.btnThayDoiThongTinNV.Size = new System.Drawing.Size(90, 40);
             this.btnThayDoiThongTinNV.TabIndex = 12;
@@ -179,7 +179,7 @@
             this.btnNVDoiMatKhau.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNVDoiMatKhau.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
             this.btnNVDoiMatKhau.Image = global::O2S_QuanLyHocVien.Properties.Resources.unlock_16;
-            this.btnNVDoiMatKhau.Location = new System.Drawing.Point(751, 7);
+            this.btnNVDoiMatKhau.Location = new System.Drawing.Point(737, 7);
             this.btnNVDoiMatKhau.Name = "btnNVDoiMatKhau";
             this.btnNVDoiMatKhau.Size = new System.Drawing.Size(90, 40);
             this.btnNVDoiMatKhau.TabIndex = 11;
@@ -195,7 +195,7 @@
             this.btnXepLop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXepLop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
             this.btnXepLop.Image = global::O2S_QuanLyHocVien.Properties.Resources.list_2_16;
-            this.btnXepLop.Location = new System.Drawing.Point(655, 7);
+            this.btnXepLop.Location = new System.Drawing.Point(198, 7);
             this.btnXepLop.Name = "btnXepLop";
             this.btnXepLop.Size = new System.Drawing.Size(90, 40);
             this.btnXepLop.TabIndex = 10;
@@ -211,7 +211,7 @@
             this.btnThongKeDiemTheoLop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThongKeDiemTheoLop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
             this.btnThongKeDiemTheoLop.Image = global::O2S_QuanLyHocVien.Properties.Resources.bar_chart_5_16;
-            this.btnThongKeDiemTheoLop.Location = new System.Drawing.Point(559, 7);
+            this.btnThongKeDiemTheoLop.Location = new System.Drawing.Point(384, 7);
             this.btnThongKeDiemTheoLop.Name = "btnThongKeDiemTheoLop";
             this.btnThongKeDiemTheoLop.Size = new System.Drawing.Size(90, 40);
             this.btnThongKeDiemTheoLop.TabIndex = 9;
@@ -227,7 +227,7 @@
             this.btnQuanLyDiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuanLyDiem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
             this.btnQuanLyDiem.Image = global::O2S_QuanLyHocVien.Properties.Resources.text_file_4_16;
-            this.btnQuanLyDiem.Location = new System.Drawing.Point(463, 7);
+            this.btnQuanLyDiem.Location = new System.Drawing.Point(294, 7);
             this.btnQuanLyDiem.Name = "btnQuanLyDiem";
             this.btnQuanLyDiem.Size = new System.Drawing.Size(90, 40);
             this.btnQuanLyDiem.TabIndex = 8;
@@ -243,7 +243,7 @@
             this.btnThongKeNoHocVien.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThongKeNoHocVien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
             this.btnThongKeNoHocVien.Image = global::O2S_QuanLyHocVien.Properties.Resources.pie_16;
-            this.btnThongKeNoHocVien.Location = new System.Drawing.Point(357, 7);
+            this.btnThongKeNoHocVien.Location = new System.Drawing.Point(480, 7);
             this.btnThongKeNoHocVien.Name = "btnThongKeNoHocVien";
             this.btnThongKeNoHocVien.Size = new System.Drawing.Size(100, 40);
             this.btnThongKeNoHocVien.TabIndex = 7;
@@ -259,7 +259,7 @@
             this.btnBaoCaoHocVienTheoThang.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBaoCaoHocVienTheoThang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
             this.btnBaoCaoHocVienTheoThang.Image = global::O2S_QuanLyHocVien.Properties.Resources.excel_3_16;
-            this.btnBaoCaoHocVienTheoThang.Location = new System.Drawing.Point(204, 7);
+            this.btnBaoCaoHocVienTheoThang.Location = new System.Drawing.Point(586, 7);
             this.btnBaoCaoHocVienTheoThang.Name = "btnBaoCaoHocVienTheoThang";
             this.btnBaoCaoHocVienTheoThang.Size = new System.Drawing.Size(145, 40);
             this.btnBaoCaoHocVienTheoThang.TabIndex = 6;
@@ -475,6 +475,22 @@
             this.tabQuanTri.Size = new System.Drawing.Size(1184, 54);
             this.tabQuanTri.TabIndex = 3;
             this.tabQuanTri.Text = "Quản trị";
+            // 
+            // btnQuanLyMonHoc
+            // 
+            this.btnQuanLyMonHoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
+            this.btnQuanLyMonHoc.FlatAppearance.BorderSize = 0;
+            this.btnQuanLyMonHoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuanLyMonHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
+            this.btnQuanLyMonHoc.Image = global::O2S_QuanLyHocVien.Properties.Resources.list_2_161;
+            this.btnQuanLyMonHoc.Location = new System.Drawing.Point(492, 7);
+            this.btnQuanLyMonHoc.Name = "btnQuanLyMonHoc";
+            this.btnQuanLyMonHoc.Size = new System.Drawing.Size(90, 40);
+            this.btnQuanLyMonHoc.TabIndex = 16;
+            this.btnQuanLyMonHoc.Text = "Quản lý môn học";
+            this.btnQuanLyMonHoc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnQuanLyMonHoc.UseVisualStyleBackColor = false;
+            this.btnQuanLyMonHoc.Click += new System.EventHandler(this.btnQuanLyMonHoc_Click);
             // 
             // btnQuanLyCoSo
             // 
@@ -937,22 +953,6 @@
             // 
             this.timerKiemTraLicense.Interval = 360000;
             this.timerKiemTraLicense.Tick += new System.EventHandler(this.timerKiemTraLicense_Tick);
-            // 
-            // btnQuanLyMonHoc
-            // 
-            this.btnQuanLyMonHoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.btnQuanLyMonHoc.FlatAppearance.BorderSize = 0;
-            this.btnQuanLyMonHoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuanLyMonHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
-            this.btnQuanLyMonHoc.Image = global::O2S_QuanLyHocVien.Properties.Resources.list_2_161;
-            this.btnQuanLyMonHoc.Location = new System.Drawing.Point(492, 7);
-            this.btnQuanLyMonHoc.Name = "btnQuanLyMonHoc";
-            this.btnQuanLyMonHoc.Size = new System.Drawing.Size(90, 40);
-            this.btnQuanLyMonHoc.TabIndex = 16;
-            this.btnQuanLyMonHoc.Text = "Quản lý môn học";
-            this.btnQuanLyMonHoc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnQuanLyMonHoc.UseVisualStyleBackColor = false;
-            this.btnQuanLyMonHoc.Click += new System.EventHandler(this.btnQuanLyMonHoc_Click);
             // 
             // frmMain
             // 

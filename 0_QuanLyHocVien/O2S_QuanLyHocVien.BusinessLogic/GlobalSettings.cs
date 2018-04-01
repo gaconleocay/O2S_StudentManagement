@@ -15,7 +15,7 @@ using O2S_QuanLyHocVien.Model.Models;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
-    public enum UserType { NhanVien, HocVien, GiangVien }
+    public enum UserType { NhanVien, HocVien, GiangVien,QuanTri }
     public static class GlobalSettings
     {
         #region Bien Session

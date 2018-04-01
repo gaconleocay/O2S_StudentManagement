@@ -11,7 +11,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class KhoaHoc
     {
-        public static object SelectAll()
+        public static object Select()
         {
             return (from p in Database.KHOAHOCs
                     select p).ToList();

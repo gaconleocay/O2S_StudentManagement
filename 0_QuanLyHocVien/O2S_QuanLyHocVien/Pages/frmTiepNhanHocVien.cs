@@ -104,10 +104,6 @@ namespace O2S_QuanLyHocVien.Pages
 
         #endregion
 
-        /// <summary>
-        /// Nạp học viên lên giao diện
-        /// </summary>
-        /// <param name="hv"></param>
         public void LoadPanelControl(HOCVIEN hv = null)
         {
             try
@@ -145,10 +141,6 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
 
-        /// <summary>
-        /// Nạp giao diện thành học viên
-        /// </summary>
-        /// <returns></returns>
         public HOCVIEN LoadHocVien()
         {
             hocVien = new HOCVIEN()
@@ -165,6 +157,7 @@ namespace O2S_QuanLyHocVien.Pages
                 SdtMe = txtSDTMe.Text,
                 EmailMe = txtEmailMe.Text,
                 MaLoaiHocVien = (string)cboLoaiHV.SelectedValue,
+                TenLoaiHocVien = cboLoaiHV.Text,
                 NgayTiepNhan = DateTime.Now,
                 TenDangNhap = (string)cboLoaiHV.SelectedValue == "LHV00" ? null : txtTenDangNhap.Text,
                 MaCoSo = GlobalSettings.MaCoSo
@@ -172,9 +165,6 @@ namespace O2S_QuanLyHocVien.Pages
             return hocVien;
         }
 
-        /// <summary>
-        /// Nạp loại học viên
-        /// </summary>
         public void InitializeLoaiHV()
         {
             cboLoaiHV.DataSource = LoaiHV.SelectAll();
@@ -182,9 +172,6 @@ namespace O2S_QuanLyHocVien.Pages
             cboLoaiHV.ValueMember = "MaLoaiHocVien";
         }
 
-        /// <summary>
-        /// Nạp danh sách học viên
-        /// </summary>
         public void InitializeHocVien()
         {
             gridDSHV.AutoGenerateColumns = false;

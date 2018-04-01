@@ -65,7 +65,7 @@ namespace O2S_QuanLyHocVien.Pages
             dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             //load khóa học
-            cboKhoaHoc.DataSource = KhoaHoc.SelectAll();
+            cboKhoaHoc.DataSource = KhoaHoc.SelectTheoCoCo();
             cboKhoaHoc.DisplayMember = "TenKhoaHoc";
             cboKhoaHoc.ValueMember = "MaKhoaHoc";
 

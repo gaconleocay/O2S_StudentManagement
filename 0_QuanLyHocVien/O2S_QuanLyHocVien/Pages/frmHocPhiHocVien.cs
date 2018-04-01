@@ -31,7 +31,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             gridLop.AutoGenerateColumns = false;
 
-            cboKhoaHoc.DataSource = KhoaHoc.SelectAll();
+            cboKhoaHoc.DataSource = KhoaHoc.SelectTheoCoCo();
             cboKhoaHoc.DisplayMember = "TenKhoaHoc";
             cboKhoaHoc.ValueMember = "MaKhoaHoc";
 

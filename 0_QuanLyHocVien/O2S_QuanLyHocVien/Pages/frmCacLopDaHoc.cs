@@ -28,7 +28,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.Now;
 
-            cboKhoaHoc.DataSource = KhoaHoc.SelectAll();
+            cboKhoaHoc.DataSource = KhoaHoc.SelectTheoCoCo();
             cboKhoaHoc.DisplayMember = "TenKhoaHoc";
             cboKhoaHoc.ValueMember = "MaKhoaHoc";
 

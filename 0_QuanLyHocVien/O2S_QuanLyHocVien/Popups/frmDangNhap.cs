@@ -93,7 +93,7 @@ namespace O2S_QuanLyHocVien.Popups
                     GlobalSettings.UserID = "-1";
                     GlobalSettings.UserCode = txtTenDangNhap.Text.Trim().ToLower();
                     GlobalSettings.UserName = "Administrator";
-                    //GlobalSettings.UserType = (UserType)TaiKhoan.FullUserType(tk);
+                    GlobalSettings.UserType = UserType.QuanTri;
 
                     Settings.Default.Login_UserName = txtTenDangNhap.Text;
                     Settings.Default.Login_Password = txtMatKhau.Text;
@@ -142,16 +142,19 @@ namespace O2S_QuanLyHocVien.Popups
         {
             try
             {
-                List<COSOTRUNGTAM> ObjectList = CoSoTrungTam.SelectAll() as List<COSOTRUNGTAM>;
-                if (ObjectList.Count == 1)
+                if (GlobalSettings.UserType != UserType.HocVien) //khong phai Hoc vien
                 {
-                    GlobalSettings.MaCoSo = ObjectList[0].MaCoSo;
-                    GlobalSettings.TenCoSo = ObjectList[0].TenCoSo;
-                }
-                else
-                {
-                    frmChonCoSo _frm = new frmChonCoSo();
-                    _frm.ShowDialog();
+                    List<COSOTRUNGTAM> ObjectList = CoSoTrungTam.SelectAll() as List<COSOTRUNGTAM>;
+                    if (ObjectList.Count == 1)
+                    {
+                        GlobalSettings.MaCoSo = ObjectList[0].MaCoSo;
+                        GlobalSettings.TenCoSo = ObjectList[0].TenCoSo;
+                    }
+                    else
+                    {
+                        frmChonCoSo _frm = new frmChonCoSo();
+                        _frm.ShowDialog();
+                    }
                 }
             }
             catch (Exception ex)

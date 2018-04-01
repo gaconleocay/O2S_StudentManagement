@@ -77,6 +77,7 @@ namespace O2S_QuanLyHocVien.Popups
                 SdtHocVien = txtSDT.Text,
                 EmailHocVien = txtEmail.Text,
                 MaLoaiHocVien = cboLoaiHV.SelectedValue.ToString(),
+                TenLoaiHocVien = cboLoaiHV.Text,
                 NgayTiepNhan = DateTime.Now,
                 TenDangNhap = (string)cboLoaiHV.SelectedValue == "LHV00" ? null : txtTenDangNhap.Text,
                 MaCoSo = GlobalSettings.MaCoSo
