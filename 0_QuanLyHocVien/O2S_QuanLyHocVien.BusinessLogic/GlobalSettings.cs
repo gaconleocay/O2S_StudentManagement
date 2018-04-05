@@ -11,7 +11,7 @@ using O2S_QuanLyHocVien.DataAccess;
 using System.Data.SqlClient;
 using System.Data;
 using O2S_QuanLyHocVien.BusinessLogic.Properties;
-using O2S_QuanLyHocVien.Model.Models;
+using O2S_QuanLyHocVien.BusinessLogic.Models;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
@@ -22,7 +22,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static QuanLyHocVienDataContext Database { get; set; } //Đại diện cho cơ sở dữ liệu của chương trình
         public static string ConnectionString { get; set; }// Đại diện cho chuỗi kết nối
 
-        public static string UserID { get; set; }
+        public static int UserID { get; set; }
         public static string UserCode { get; set; }
         public static string UserName { get; set; }  // Tên user
         public static UserType UserType { get; set; }//Đại diện cho kiểu người dùng đăng nhập
@@ -37,7 +37,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static string ServerName { get; set; }//Đại diện cho tên server
         public static string ServerCatalog { get; set; }//Đại diện cho tên database
         public static string CenterName { get; set; }//Đại diện cho tên trung tâm
-        public static string MaCoSo { get; set; }//Co so trung tam
+        public static int CoSoId { get; set; }//Co so trung tam
         public static string TenCoSo { get; set; }
         public static string CenterAddress { get; set; }//Đại diện cho địa chỉ trung tâm
         public static string CenterWebsite { get; set; }// Đại diện cho website trung tâm
@@ -79,13 +79,15 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// </summary>
         public static void LoadCenterInformation()
         {
-            CHITIETTRUNGTAM detail = ChiTietTrungTam.Select();
-
-            CenterName = detail.TenTT;
-            CenterAddress = detail.DiaChiTT;
-            CenterWebsite = detail.Website;
-            CenterEmail = detail.EmailTT;
-            CenterTelephone = detail.SdtTT;
+            THONGTINTRUNGTAM detail = ChiTietTrungTamLogic.Select();
+            if (detail != null)
+            {
+                CenterName = detail.TenTrungTam;
+                CenterAddress = detail.DiaChi;
+                CenterWebsite = detail.Website;
+                CenterEmail = detail.Email;
+                CenterTelephone = detail.Sdt;
+            }
         }
 
         /// <summary>
@@ -129,10 +131,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             QuyDinh = new Dictionary<string, int>();
 
-            var f = BusinessLogic.QuyDinh.SelectAll();
+            var f = BusinessLogic.QuyDinhLogic.SelectAll();
 
             foreach (var i in f)
-                QuyDinh.Add(i.MaQD, (int)i.GiaTri);
+                QuyDinh.Add(i.MaQuyDinh, (int)i.GiaTri);
         }
 
 

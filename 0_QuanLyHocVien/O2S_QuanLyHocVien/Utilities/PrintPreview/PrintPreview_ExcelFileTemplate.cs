@@ -10,7 +10,7 @@ namespace O2S_QuanLyHocVien.Utilities.PrintPreview
 {
     public static class PrintPreview_ExcelFileTemplate
     {
-        public static void ShowPrintPreview_UsingExcelTemplate(string fileNameTemplate, List<Model.Models.reportExcelDTO> thongTinThem, DataTable dataTable)
+        public static void ShowPrintPreview_UsingExcelTemplate(string fileNameTemplate, List<BusinessLogic.Models.reportExcelDTO> thongTinThem, DataTable dataTable)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace O2S_QuanLyHocVien.Utilities.PrintPreview
             }
         }
 
-        public static void ShowPrintPreview_UsingExcelTemplate(string fileNameTemplate, List<Model.Models.reportExcelDTO> thongTinThem)
+        public static void ShowPrintPreview_UsingExcelTemplate(string fileNameTemplate, List<BusinessLogic.Models.reportExcelDTO> thongTinThem)
         {
             try
             {

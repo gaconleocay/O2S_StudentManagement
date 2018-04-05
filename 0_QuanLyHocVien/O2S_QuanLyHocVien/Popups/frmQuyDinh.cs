@@ -25,12 +25,12 @@ namespace O2S_QuanLyHocVien.Popups
         private void frmQuyDinh_Load(object sender, EventArgs e)
         {
             gridQD.AutoGenerateColumns = false;
-            List<QUYDINH> source = QuyDinh.SelectAll();
+            List<QUYDINH> source = QuyDinhLogic.SelectAll();
             foreach (var i in source)
                 gridQD.Rows.Add(new string[]
                 {
-                    i.MaQD,
-                    i.TenQD,
+                    i.MaQuyDinh,
+                    i.TenQuyDinh,
                     i.GiaTri.ToString()
                 });
 
@@ -45,9 +45,9 @@ namespace O2S_QuanLyHocVien.Popups
         private void gridQD_Click(object sender, EventArgs e)
         {
             var r = gridQD.SelectedRows[0];
-            lblTenQD.Text = r.Cells["clmTenQD"].Value.ToString();
+            lblTenQuyDinh.Text = r.Cells["clmTenQuyDinh"].Value.ToString();
             numGiaTri.Value = Convert.ToDecimal(r.Cells["clmGiaTri"].Value);
-            currentQD = r.Cells["clmMaQD"].Value.ToString();
+            currentQD = r.Cells["clmMaQuyDinh"].Value.ToString();
         }
 
         private void btnDat_Click(object sender, EventArgs e)
@@ -63,9 +63,9 @@ namespace O2S_QuanLyHocVien.Popups
                 var rows = gridQD.Rows;
                 foreach (DataGridViewRow i in rows)
                 {
-                    QuyDinh.Update(new QUYDINH()
+                    QuyDinhLogic.Update(new QUYDINH()
                     {
-                        MaQD = i.Cells["clmMaQD"].Value.ToString(),
+                        MaQuyDinh = i.Cells["clmMaQuyDinh"].Value.ToString(),
                         GiaTri = Convert.ToInt32(i.Cells["clmGiaTri"].Value)
                     });
                 }

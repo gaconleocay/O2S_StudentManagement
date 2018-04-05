@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,43 +47,71 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BangDiem.cs" />
-    <Compile Include="ChiTietTrungTam.cs" />
-    <Compile Include="BangDiemChiTiet.cs" />
-    <Compile Include="KhoaHocMonHoc.cs" />
+    <Compile Include="Filter\PhieuGhiDanhFilter.cs" />
+    <Compile Include="Filter\HocPhiHocVienFilter.cs" />
+    <Compile Include="KeySetting.cs" />
+    <Compile Include="Logic\BangDiemLogic.cs" />
+    <Compile Include="Logic\HocPhiHocVienLogic.cs" />
+    <Compile Include="Logic\PhieuThuLogic.cs" />
+    <Compile Include="Logic\ThongTinTrungTamLogic.cs" />
+    <Compile Include="Logic\BangDiemChiTietLogic.cs" />
+    <Compile Include="Filter\GiangVienFilter.cs" />
+    <Compile Include="Filter\GiangDayFilter.cs" />
+    <Compile Include="Filter\PhieuThuFilter.cs" />
+    <Compile Include="Filter\LopHocFilter.cs" />
+    <Compile Include="Filter\NhanVienFilter.cs" />
+    <Compile Include="Filter\MonHocFilter.cs" />
+    <Compile Include="Filter\KhoaHocFilter.cs" />
+    <Compile Include="Filter\HocVienFilter.cs" />
+    <Compile Include="Logic\KhoaHocMonHocLogic.cs" />
     <Compile Include="Model\BangDiemFullDTO.cs" />
     <Compile Include="Model\BangDiemChiTietDTO.cs" />
+    <Compile Include="Model\GiangDay_PlusDTO.cs" />
+    <Compile Include="Model\KhoaHoc_MonHoc_PlusDTO.cs" />
+    <Compile Include="Model\GiangVien_PlusDTO.cs" />
+    <Compile Include="Model\QLHocPhi_PlusDTO.cs" />
+    <Compile Include="Model\PhieuGhiDanh_PlusDTO.cs" />
+    <Compile Include="Model\HocPhiHocVien_PlusDTO.cs" />
+    <Compile Include="Model\PhieuThu_PlusDTO.cs" />
+    <Compile Include="Model\LopHoc_PlusDTO.cs" />
+    <Compile Include="Model\NhanVien_PlusDTO.cs" />
+    <Compile Include="Model\MonHoc_PlusDTO.cs" />
+    <Compile Include="Model\KhoaHoc_PlusDTO.cs" />
+    <Compile Include="Model\HocVien_PlusDTO.cs" />
     <Compile Include="Model\KhoaHocMonHocDTO.cs" />
-    <Compile Include="Model\PhieThu_KhoanKhacDTO.cs" />
-    <Compile Include="MonHoc.cs" />
-    <Compile Include="DangKy.cs" />
-    <Compile Include="GiangDay.cs" />
-    <Compile Include="GiangVien.cs" />
+    <Compile Include="Model\PhieuThu_KhoanKhacDTO.cs" />
+    <Compile Include="Logic\MonHocLogic.cs" />
+    <Compile Include="Logic\GiangDayLogic.cs" />
+    <Compile Include="Logic\GiangVienLogic.cs" />
     <Compile Include="GlobalSettings.cs" />
-    <Compile Include="HocVien.cs" />
-    <Compile Include="CoSoTrungTam.cs" />
-    <Compile Include="KhoaHoc.cs" />
-    <Compile Include="LoaiHV.cs" />
-    <Compile Include="LoaiNV.cs" />
-    <Compile Include="LopHoc.cs" />
+    <Compile Include="Logic\HocVienLogic.cs" />
+    <Compile Include="Logic\CoSoTrungTamLogic.cs" />
+    <Compile Include="Logic\KhoaHocLogic.cs" />
+    <Compile Include="Logic\LoaiHocVienLogic.cs" />
+    <Compile Include="Logic\LoaiNhanVienLogic.cs" />
+    <Compile Include="Logic\LopHocLogic.cs" />
     <Compile Include="Model\classPermission.cs" />
     <Compile Include="Model\classUserDepartment.cs" />
     <Compile Include="Model\OptionDTO.cs" />
     <Compile Include="Model\reportExcelDTO.cs" />
-    <Compile Include="NhanVien.cs" />
-    <Compile Include="PhieuGhiDanh.cs" />
+    <Compile Include="Logic\NhanVienLogic.cs" />
+    <Compile Include="Logic\PhieuGhiDanhLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="QuyDinh.cs" />
-    <Compile Include="License.cs" />
-    <Compile Include="Version.cs" />
-    <Compile Include="TaiKhoan.cs" />
+    <Compile Include="Logic\QuyDinhLogic.cs" />
+    <Compile Include="Logic\LicenseLogic.cs" />
+    <Compile Include="Logic\VersionLogic.cs" />
+    <Compile Include="Logic\TaiKhoanLogic.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\O2S_QuanLyHocVien.Common\O2S_QuanLyHocVien.Common.csproj">
+      <Project>{6c338723-1358-4581-9d20-d14a18b5e3b8}</Project>
+      <Name>O2S_QuanLyHocVien.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\O2S_QuanLyHocVien.DataAccess\O2S_QuanLyHocVien.DataAccess.csproj">
       <Project>{31127f93-2cd8-4dd4-9653-bc4ae82bc8ea}</Project>
       <Name>O2S_QuanLyHocVien.DataAccess</Name>

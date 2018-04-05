@@ -13,13 +13,13 @@ namespace O2S_QuanLyHocVien.Popups
 {
     public partial class frmHocVienEdit : Form
     {
-        private HOCVIEN hv;
+        private HOCVIEN hocVienCurrent;
         private bool isInsert = true;
 
         public frmHocVienEdit(HOCVIEN hv)
         {
             InitializeComponent();
-            this.hv = hv;
+            this.hocVienCurrent = hv;
             isInsert = hv == null;
         }
 
@@ -31,29 +31,28 @@ namespace O2S_QuanLyHocVien.Popups
         {
             if (hv == null)
             {
-                txtMaHV.Text = HocVien.AutoGenerateId();
                 cboGioiTinh.SelectedIndex = 0;
             }
             else
             {
-                txtMaHV.Text = hv.MaHocVien;
+                txtMaHV.Text = hv.HocVienId.ToString();
                 txtHoTen.Text = hv.TenHocVien;
                 dateNgaySinh.Value = (DateTime)hv.NgaySinh;
-                cboGioiTinh.Text = hv.GioiTinhHocVien;
+                cboGioiTinh.Text = hv.GioiTinh;
                 txtDiaChi.Text = hv.DiaChi;
-                txtSDT.Text = hv.SdtHocVien;
-                txtEmail.Text = hv.EmailHocVien;
-                cboLoaiHV.SelectedValue = hv.MaLoaiHocVien;
+                txtSDT.Text = hv.Sdt;
+                txtEmail.Text = hv.Email;
+                cboLoaiHV.SelectedValue = hv.LoaiHocVienId;
 
-                if (hv.MaLoaiHocVien == "LHV01")
+                if (hv.LoaiHocVienId == 2)
                 {
                     cboLoaiHV.Enabled = false;
                     txtMatKhau.Enabled = false;
                 }
 
-                if (hv.TenDangNhap != null)
+                if (hv.TaiKhoanId != null && hv.TaiKhoanId != 0)
                 {
-                    txtTenDangNhap.Text = hv.TenDangNhap;
+                    txtTenDangNhap.Text = hv.TAIKHOAN.TenDangNhap;
                     txtMatKhau.Text = hv.TAIKHOAN.MatKhau;
                 }
                 else
@@ -69,18 +68,17 @@ namespace O2S_QuanLyHocVien.Popups
         {
             return new HOCVIEN()
             {
-                MaHocVien = txtMaHV.Text,
+                HocVienId = Common.TypeConvert.TypeConvertParse.ToInt32(txtMaHV.Text),
                 TenHocVien = txtHoTen.Text,
                 NgaySinh = DateTime.ParseExact(dateNgaySinh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                GioiTinhHocVien = cboGioiTinh.Text,
+                GioiTinh = cboGioiTinh.Text,
                 DiaChi = txtDiaChi.Text,
-                SdtHocVien = txtSDT.Text,
-                EmailHocVien = txtEmail.Text,
-                MaLoaiHocVien = cboLoaiHV.SelectedValue.ToString(),
-                TenLoaiHocVien = cboLoaiHV.Text,
+                Sdt = txtSDT.Text,
+                Email = txtEmail.Text,
+                LoaiHocVienId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLoaiHV.SelectedValue.ToString()),
                 NgayTiepNhan = DateTime.Now,
-                TenDangNhap = (string)cboLoaiHV.SelectedValue == "LHV00" ? null : txtTenDangNhap.Text,
-                MaCoSo = GlobalSettings.MaCoSo
+                //TenDangNhap = (string)cboLoaiHV.SelectedValue == "2" ? null : txtTenDangNhap.Text,
+                CoSoId = GlobalSettings.CoSoId
             };
         }
 
@@ -106,16 +104,16 @@ namespace O2S_QuanLyHocVien.Popups
 
         private void frmHocVienEdit_Load(object sender, EventArgs e)
         {
-            cboLoaiHV.DataSource = LoaiHV.SelectAll();
+            cboLoaiHV.DataSource = LoaiHocVienLogic.SelectAll();
             cboLoaiHV.DisplayMember = "TenLoaiHocVien";
-            cboLoaiHV.ValueMember = "MaLoaiHocVien";
+            cboLoaiHV.ValueMember = "LoaiHocVienId";
 
-            LoadUI(hv);
+            LoadUI(hocVienCurrent);
         }
 
         private void cboLoaiHV_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cboLoaiHV.SelectedValue.ToString() != "LHV00")
+            if (cboLoaiHV.SelectedValue.ToString() != "2")
             {
                 txtMatKhau.Enabled = true;
                 txtTenDangNhap.Text = txtMaHV.Text;
@@ -137,17 +135,19 @@ namespace O2S_QuanLyHocVien.Popups
 
                 if (isInsert)
                 {
-                    HocVien.Insert(LoadHocVien(), new TAIKHOAN()
+                    int _hocVienId = 0;
+                    if (HocVienLogic.Insert(LoadHocVien(), new TAIKHOAN()
                     {
                         TenDangNhap = txtTenDangNhap.Text,
                         MatKhau = txtMatKhau.Text,
-                    });
-
-                    MessageBox.Show("Thêm học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }, ref _hocVienId))
+                    {
+                        MessageBox.Show("Thêm học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
-                    HocVien.Update(LoadHocVien(), new TAIKHOAN()
+                    HocVienLogic.Update(LoadHocVien(), new TAIKHOAN()
                     {
                         TenDangNhap = txtTenDangNhap.Text,
                         MatKhau = txtMatKhau.Text,

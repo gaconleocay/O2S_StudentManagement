@@ -50,8 +50,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnXemTatCa = new System.Windows.Forms.Button();
             this.gridLop = new System.Windows.Forms.DataGridView();
-            this.clmMaLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -69,6 +67,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
+            this.clmLopHocId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenLopHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel6.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridLop)).BeginInit();
@@ -327,8 +327,8 @@
             this.gridLop.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridLop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridLop.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaLop,
-            this.clmTenLop});
+            this.clmLopHocId,
+            this.clmTenLopHoc});
             this.gridLop.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridLop.Location = new System.Drawing.Point(23, 46);
             this.gridLop.MultiSelect = false;
@@ -338,21 +338,6 @@
             this.gridLop.Size = new System.Drawing.Size(302, 356);
             this.gridLop.TabIndex = 36;
             this.gridLop.Click += new System.EventHandler(this.gridLop_Click);
-            // 
-            // clmMaLop
-            // 
-            this.clmMaLop.DataPropertyName = "MaLop";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaLop.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMaLop.FillWeight = 50F;
-            this.clmMaLop.HeaderText = "Mã";
-            this.clmMaLop.Name = "clmMaLop";
-            // 
-            // clmTenLop
-            // 
-            this.clmTenLop.DataPropertyName = "TenLop";
-            this.clmTenLop.HeaderText = "Tên lớp";
-            this.clmTenLop.Name = "clmTenLop";
             // 
             // label5
             // 
@@ -566,6 +551,21 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // clmLopHocId
+            // 
+            this.clmLopHocId.DataPropertyName = "LopHocId";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmLopHocId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmLopHocId.FillWeight = 50F;
+            this.clmLopHocId.HeaderText = "Mã";
+            this.clmLopHocId.Name = "clmLopHocId";
+            // 
+            // clmTenLopHoc
+            // 
+            this.clmTenLopHoc.DataPropertyName = "TenLopHoc";
+            this.clmTenLopHoc.HeaderText = "Tên lớp";
+            this.clmTenLopHoc.Name = "clmTenLopHoc";
+            // 
             // frmCacLopDaHoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -616,8 +616,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnXemTatCa;
         private System.Windows.Forms.DataGridView gridLop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaLop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenLop;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
@@ -639,5 +637,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lblTinhTrang;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmLopHocId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenLopHoc;
     }
 }

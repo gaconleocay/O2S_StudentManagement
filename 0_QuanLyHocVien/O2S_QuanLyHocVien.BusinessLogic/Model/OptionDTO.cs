@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace O2S_QuanLyHocVien.Model
+namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public class OptionDTO
     {

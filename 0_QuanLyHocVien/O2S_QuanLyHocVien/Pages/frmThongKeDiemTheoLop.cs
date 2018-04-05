@@ -12,6 +12,7 @@ using O2S_QuanLyHocVien.Reports;
 using Microsoft.Reporting.WinForms;
 using System.Data;
 using System.Collections.Generic;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -25,49 +26,54 @@ namespace O2S_QuanLyHocVien.Pages
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Tính điểm trung bình lớp
-        /// </summary>
-        /// <returns></returns>
-        public decimal DiemTrungBinhLop()
+        #region Load
+        private void frmThongKeDiemTheoLop_Load(object sender, EventArgs e)
         {
-            decimal diem = 0;
-            for (int i = 0; i < gridThongKe.Rows.Count; i++)
-                diem += Convert.ToDecimal(gridThongKe.Rows[i].Cells["clmDiemTrungBinh"].Value);
-
-            return Math.Round((diem / gridThongKe.Rows.Count),2);
+            gridLop.AutoGenerateColumns = false;
+            btnTimKiem_Click(sender, e);
+            gridLop_Click(sender, e);
         }
 
-        /// <summary>
-        /// Kiểm tra nhập liệu tìm kiếm có hợp lệ
-        /// </summary>
-        public void ValidateSearch()
-        {
-            if (string.IsNullOrWhiteSpace(txtMaLop.Text))
-                throw new ArgumentException("Mã lớp không được trống");
-        }
 
+        #endregion
+
+        #region Events
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.ThongKeDiemTheoLop = null;
+            //GlobalPages.ThongKeDiemTheoLop = null;
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             try
             {
-                ValidateSearch();
-
-                thLop = new Thread(() =>
+                if (txtMaLop.Text != "")
                 {
-                    object source = LopHoc.Select(txtMaLop.Text);
-
-                    gridLop.Invoke((MethodInvoker)delegate
+                    thLop = new Thread(() =>
                     {
-                        gridLop.DataSource = source;
+                        object source = LopHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(txtMaLop.Text));
+
+                        gridLop.Invoke((MethodInvoker)delegate
+                        {
+                            gridLop.DataSource = source;
+                        });
                     });
-                });
+                }
+                else
+                {
+                    thLop = new Thread(() =>
+                    {
+                        LopHocFilter _filter = new LopHocFilter();
+                        _filter.CoSoId = GlobalSettings.CoSoId;
+                        object source = LopHocLogic.Select(_filter);
+
+                        gridLop.Invoke((MethodInvoker)delegate
+                        {
+                            gridLop.DataSource = source;
+                        });
+                    });
+                }
 
                 thLop.Start();
             }
@@ -81,26 +87,6 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
 
-        private void btnDatLai_Click(object sender, EventArgs e)
-        {
-            txtMaLop.Text = string.Empty;
-        }
-
-        private void btnHienTatCa_Click(object sender, EventArgs e)
-        {
-            thLop = new Thread(() =>
-            {
-                object source = LopHoc.SelectTheoCoCo();
-
-                gridLop.Invoke((MethodInvoker)delegate
-                {
-                    gridLop.DataSource = source;
-                });
-            });
-
-            thLop.Start();
-        }
-
         private void gridLop_Click(object sender, EventArgs e)
         {
             try
@@ -109,7 +95,7 @@ namespace O2S_QuanLyHocVien.Pages
                 {
                     thLop.Join();
 
-                    object source = BangDiem.SelectBangDiemLop(gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
+                    object source = BangDiemLogic.SelectBangDiemLop(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
 
                     gridThongKe.Invoke((MethodInvoker)delegate
                     {
@@ -121,20 +107,6 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch { }
         }
-
-        private void gridThongKe_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            lblTongCong.Text = string.Format("Tổng cộng: {0} học viên. Điểm trung bình của lớp: {1:N2} điểm.", gridThongKe.Rows.Count, DiemTrungBinhLop());
-        }
-
-        private void frmThongKeDiemTheoLop_Load(object sender, EventArgs e)
-        {
-            gridLop.AutoGenerateColumns = false;
-
-            btnHienTatCa_Click(sender, e);
-            gridLop_Click(sender, e);
-        }
-
         private void btnTaoBaoCao_Click(object sender, EventArgs e)
         {
             frmReport frm = new frmReport();
@@ -143,8 +115,8 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 new ReportParameter("CenterName", GlobalSettings.CenterName),
                 new ReportParameter("CenterWebsite", GlobalSettings.CenterWebsite),
-                new ReportParameter("MaLop", gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString()),
-                new ReportParameter("TenLop", gridLop.SelectedRows[0].Cells["clmTenLop"].Value.ToString()),
+                new ReportParameter("MaLop", gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()),
+                new ReportParameter("TenLop", gridLop.SelectedRows[0].Cells["clmTenLophoc"].Value.ToString()),
                 new ReportParameter("DiemTBLop", string.Format("{0:N2}",DiemTrungBinhLop()))
             };
 
@@ -152,7 +124,7 @@ namespace O2S_QuanLyHocVien.Pages
             frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptBangDiemLop.rdlc";
 
             dsSource.dtBangDiemLopDataTable dt = new dsSource.dtBangDiemLopDataTable();
-            var query = BangDiem.SelectBangDiemLop(gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
+            var query = BangDiemLogic.SelectBangDiemLop(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
             foreach (var i in query)
             {
                 dt.Rows.Add(i.MaHocVien, i.TenHocVien, i.DiemTrungBinh);
@@ -167,5 +139,36 @@ namespace O2S_QuanLyHocVien.Pages
 
             frm.ShowDialog();
         }
+        public decimal DiemTrungBinhLop()
+        {
+            decimal diem = 0;
+            for (int i = 0; i < gridThongKe.Rows.Count; i++)
+                diem += Convert.ToDecimal(gridThongKe.Rows[i].Cells["clmDiemTrungBinh"].Value);
+
+            return Math.Round((diem / gridThongKe.Rows.Count), 2);
+        }
+
+        private void gridThongKe_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            lblTongCong.Text = string.Format("Tổng cộng: {0} học viên. Điểm trung bình của lớp: {1:N2} điểm.", gridThongKe.Rows.Count, DiemTrungBinhLop());
+        }
+
+        #endregion
+
+        #region Cusstom
+        private void txtMaLop_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        #endregion
+
+
+
+
+
+
     }
 }

@@ -7,6 +7,8 @@ using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using System.Globalization;
+using O2S_QuanLyKhoaHoc.BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -21,16 +23,17 @@ namespace O2S_QuanLyHocVien.Pages
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.CacLopDaHoc = null;
+            //GlobalPages.CacLopDaHoc = null;
         }
 
         private void frmCacLopDaHoc_Load(object sender, EventArgs e)
         {
             dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.Now;
-
-            cboKhoaHoc.DataSource = KhoaHoc.SelectTheoCoCo();
+            KhoaHocFilter _filter = new KhoaHocFilter();
+            _filter.CoSoId = GlobalSettings.CoSoId;
+            cboKhoaHoc.DataSource = KhoaHocLogic.Select(_filter);
             cboKhoaHoc.DisplayMember = "TenKhoaHoc";
-            cboKhoaHoc.ValueMember = "MaKhoaHoc";
+            cboKhoaHoc.ValueMember = "KhoaHocId";
 
             gridLop.AutoGenerateColumns = false;
 
@@ -50,8 +53,8 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            gridLop.DataSource = BangDiem.SelectDSLop(GlobalSettings.UserID, rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateTuNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null,
-                rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateDenNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null, rdKhoaHoc.Checked ? cboKhoaHoc.SelectedValue.ToString() : null);
+            gridLop.DataSource = BangDiemLogic.SelectDSLop(GlobalSettings.UserID, rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateTuNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null,
+                rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateDenNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null, rdKhoaHoc.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString()) : 0);
 
             gridLop_Click(sender, e);
         }
@@ -63,7 +66,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnXemTatCa_Click(object sender, EventArgs e)
         {
-            gridLop.DataSource = BangDiem.SelectDSLop(GlobalSettings.UserID, null, null, null);
+            gridLop.DataSource = BangDiemLogic.SelectDSLop(GlobalSettings.UserID, null, null, 0);
 
             gridLop_Click(sender, e);
         }
@@ -72,12 +75,12 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                var temp = BangDiem.SelectDetail(GlobalSettings.UserID, gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
+                var temp = BangDiemLogic.SelectDetail(GlobalSettings.UserID, Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
                 lblTenLop.Text = temp.TenLop;
-                lblMaLop.Text = temp.MaLop;
+                lblMaLop.Text = temp.LopHocId.ToString();
                 lblTenKhoaHoc.Text = temp.TenKhoaHoc;
-                lblNgayBD.Text = temp.NgayBD.Value.ToShortDateString();
-                lblNgayKT.Text = temp.NgayKT.Value.ToShortDateString();
+                lblNgayBD.Text = temp.NgayBatDau.Value.ToShortDateString();
+                lblNgayKT.Text = temp.NgayKetThuc.Value.ToShortDateString();
                 lblSiSo.Text = temp.SiSo.ToString();
                 lblTinhTrang.Text = (bool)temp.DangMo ? "Đang mở" : "Đã đóng";
                 lblDiemTB.Text = temp.DiemTrungBinh.ToString();

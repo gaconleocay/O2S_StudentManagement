@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
@@ -52,7 +52,7 @@
             this.txtMaKhoaHoc = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gridKH = new System.Windows.Forms.DataGridView();
-            this.clmMaKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmKhoaHocId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmTenKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmHocPhi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -204,7 +204,7 @@
             this.gridColumn3.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn3.Caption = "Mã môn học";
-            this.gridColumn3.FieldName = "MaMonHoc";
+            this.gridColumn3.FieldName = "MonHocId";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.OptionsColumn.ReadOnly = true;
@@ -358,6 +358,7 @@
             this.txtMaKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtMaKhoaHoc.Location = new System.Drawing.Point(103, 12);
             this.txtMaKhoaHoc.Name = "txtMaKhoaHoc";
+            this.txtMaKhoaHoc.ReadOnly = true;
             this.txtMaKhoaHoc.Size = new System.Drawing.Size(187, 25);
             this.txtMaKhoaHoc.TabIndex = 1;
             // 
@@ -381,7 +382,7 @@
             this.gridKH.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridKH.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridKH.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaKhoaHoc,
+            this.clmKhoaHocId,
             this.clmTenKhoaHoc,
             this.clmHocPhi});
             this.gridKH.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -397,19 +398,19 @@
             this.gridKH.Click += new System.EventHandler(this.gridKH_Click);
             this.gridKH.DoubleClick += new System.EventHandler(this.gridKH_DoubleClick);
             // 
-            // clmMaKhoaHoc
+            // clmKhoaHocId
             // 
-            this.clmMaKhoaHoc.DataPropertyName = "MaKhoaHoc";
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaKhoaHoc.DefaultCellStyle = dataGridViewCellStyle3;
-            this.clmMaKhoaHoc.HeaderText = "Mã khóa học";
-            this.clmMaKhoaHoc.Name = "clmMaKhoaHoc";
+            this.clmKhoaHocId.DataPropertyName = "KhoaHocId";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmKhoaHocId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmKhoaHocId.HeaderText = "Mã khóa học";
+            this.clmKhoaHocId.Name = "clmKhoaHocId";
             // 
             // clmTenKhoaHoc
             // 
             this.clmTenKhoaHoc.DataPropertyName = "TenKhoaHoc";
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Green;
-            this.clmTenKhoaHoc.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
+            this.clmTenKhoaHoc.DefaultCellStyle = dataGridViewCellStyle2;
             this.clmTenKhoaHoc.FillWeight = 120F;
             this.clmTenKhoaHoc.HeaderText = "Tên khóa học";
             this.clmTenKhoaHoc.Name = "clmTenKhoaHoc";
@@ -558,9 +559,6 @@
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaKhoaHoc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenKhoaHoc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmHocPhi;
         private System.Windows.Forms.Label label6;
         private DevExpress.XtraGrid.GridControl gridControlDSMonHoc;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewDSMonHoc;
@@ -569,5 +567,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmKhoaHocId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenKhoaHoc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmHocPhi;
     }
 }

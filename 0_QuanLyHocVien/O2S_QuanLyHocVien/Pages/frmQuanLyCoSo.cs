@@ -58,7 +58,7 @@ namespace O2S_QuanLyHocVien.Pages
         /// <param name="kh">cơ sở</param>
         public void LoadUI(COSOTRUNGTAM kh)
         {
-            txtMaCoSo.Text = kh.MaCoSo;
+            txtMaCoSo.Text = kh.CoSoId.ToString();
             txtTenCoSo.Text = kh.TenCoSo;
             txtDiaChi.Text = kh.DiaChi;
 
@@ -72,21 +72,21 @@ namespace O2S_QuanLyHocVien.Pages
         {
             return new COSOTRUNGTAM()
             {
-                MaCoSo = txtMaCoSo.Text,
+               CoSoId =Common.TypeConvert.TypeConvertParse.ToInt32( txtMaCoSo.Text),
                 TenCoSo = txtTenCoSo.Text,
                 DiaChi = txtDiaChi.Text,
             };
         }
         public void LoadGridKhoaHoc()
         {
-            gridKH.DataSource = CoSoTrungTam.SelectAll();
+            gridKH.DataSource = CoSoTrungTamLogic.SelectAll();
         }
 
         #region Events
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.QuanLyCoSo = null;
+            //GlobalPages.QuanLyCoSo = null;
         }
 
         private void btnHuyBo_Click(object sender, EventArgs e)
@@ -119,7 +119,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             try
             {
-                LoadUI(CoSoTrungTam.Select(gridKH.SelectedRows[0].Cells["clmMaCoSo"].Value.ToString()));
+                LoadUI(CoSoTrungTamLogic.Select(Common.TypeConvert.TypeConvertParse.ToInt32(gridKH.SelectedRows[0].Cells["clmCoSoId"].Value.ToString())));
             }
             catch
             {
@@ -131,7 +131,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             UnlockPanelControl();
             ResetPanelControl();
-            txtMaCoSo.Text = CoSoTrungTam.AutoGenerateId();
+            //txtMaCoSo.Text = CoSoTrungTamLogic.AutoGenerateId();
             isInsert = true;
         }
 
@@ -152,7 +152,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    CoSoTrungTam.Delete(gridKH.SelectedRows[0].Cells["clmMaKhoaHoc"].Value.ToString());
+                    CoSoTrungTamLogic.Delete(Common.TypeConvert.TypeConvertParse.ToInt32(gridKH.SelectedRows[0].Cells["clmCoSoId"].Value.ToString()));
 
                     MessageBox.Show("Xóa cơ sở thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadGridKhoaHoc();
@@ -170,13 +170,13 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (isInsert)
                 {
-                    CoSoTrungTam.Insert(LoadCoSoTrungTam());
+                    CoSoTrungTamLogic.Insert(LoadCoSoTrungTam());
 
                     MessageBox.Show("Thêm cơ sở thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    CoSoTrungTam.Update(LoadCoSoTrungTam());
+                    CoSoTrungTamLogic.Update(LoadCoSoTrungTam());
 
                     MessageBox.Show("Sửa cơ sở thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

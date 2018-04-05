@@ -1,6 +1,6 @@
 ﻿using O2S_License.PasswordKey;
 using O2S_QuanLyHocVien.BusinessLogic;
-using O2S_QuanLyHocVien.Model.Models;
+using O2S_QuanLyHocVien.BusinessLogic.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;

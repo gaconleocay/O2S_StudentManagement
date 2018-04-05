@@ -10,6 +10,7 @@ using O2S_QuanLyHocVien.DataAccess;
 using System.Threading;
 using System.Collections.Generic;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -38,21 +39,19 @@ namespace O2S_QuanLyHocVien.Pages
             gridDSHV.AutoGenerateColumns = false;
             gridLop.AutoGenerateColumns = false;
 
-            btnHienTatCa_Click(sender, e);
+            btnTimKiem_Click(sender, e);
             gridLop_Click(sender, e);
             gridDSHV_Click(sender, e);
         }
-
-        #endregion
-        public void LoadPanelDiem(string maHV, string maLop)
+        public void LoadPanelDiem(int maHV, int maLop)
         {
             List<BangDiemChiTietDTO> _lstBangDiem = new List<BangDiemChiTietDTO>();
 
-            this.bangDiemFull_Click = BangDiem.SelectDetail(maHV, maLop);
-            lblMaLop.Text = this.bangDiemFull_Click.MaLop;
+            this.bangDiemFull_Click = BangDiemLogic.SelectDetail(maHV, maLop);
+            lblMaLop.Text = this.bangDiemFull_Click.LopHocId.ToString();
             lblTenLop.Text = this.bangDiemFull_Click.TenLop;
             lblKhoa.Text = this.bangDiemFull_Click.TenKhoaHoc;
-            lblMaHV.Text = this.bangDiemFull_Click.MaHocVien;
+            lblMaHV.Text = this.bangDiemFull_Click.HocVienId.ToString();
             lblTenHocVien.Text = this.bangDiemFull_Click.TenHocVien;
             ////load Danh sach diem
             //foreach (var item in this.bangDiemFull_Click.BangDiemChiTiets)
@@ -68,52 +67,45 @@ namespace O2S_QuanLyHocVien.Pages
             gridControlDSDiem.DataSource = this.bangDiemFull_Click.BangDiemChiTiets;
         }
 
-        /// <summary>
-        /// Kiểm tra nhập liệu tìm kiếm có hợp lệ
-        /// </summary>
-        public void ValidateSearch()
-        {
-            if (txtMaLop.Text == string.Empty)
-                throw new ArgumentException("Mã lớp không được trống");
-        }
+        #endregion
 
         #region Events
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.QuanLyDiem = null;
-        }
-
-        private void btnHienTatCa_Click(object sender, EventArgs e)
-        {
-            thLop = new Thread(() =>
-            {
-                object source = LopHoc.SelectTheoCoCo();
-
-                gridLop.Invoke((MethodInvoker)delegate
-                {
-                    gridLop.DataSource = source;
-                });
-            });
-
-            thLop.Start();
+            //GlobalPages.QuanLyDiem = null;
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             try
             {
-                ValidateSearch();
-
-                thLop = new Thread(() =>
+                if (txtMaLop.Text != "")
                 {
-                    object source = LopHoc.SelectAll(txtMaLop.Text);
-
-                    gridLop.Invoke((MethodInvoker)delegate
+                    thLop = new Thread(() =>
                     {
-                        gridLop.DataSource = source;
+                        object source = LopHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(txtMaLop.Text));
+
+                        gridLop.Invoke((MethodInvoker)delegate
+                        {
+                            gridLop.DataSource = source;
+                        });
                     });
-                });
+                }
+                else
+                {
+                    thLop = new Thread(() =>
+                    {
+                        LopHocFilter _filter = new LopHocFilter();
+                        _filter.CoSoId = GlobalSettings.CoSoId;
+                        object source = LopHocLogic.Select(_filter);
+
+                        gridLop.Invoke((MethodInvoker)delegate
+                        {
+                            gridLop.DataSource = source;
+                        });
+                    });
+                }
 
                 thLop.Start();
             }
@@ -127,11 +119,6 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
 
-        private void btnDatLai_Click(object sender, EventArgs e)
-        {
-            txtMaLop.Text = string.Empty;
-        }
-
         private void gridLop_Click(object sender, EventArgs e)
         {
             try
@@ -139,7 +126,7 @@ namespace O2S_QuanLyHocVien.Pages
                 thHocVien = new Thread(() =>
                 {
                     thLop.Join();
-                    object source = BangDiem.SelectDSHV(gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
+                    object source = BangDiemLogic.SelectDSHV(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
 
                     gridDSHV.Invoke((MethodInvoker)delegate
                     {
@@ -174,8 +161,8 @@ namespace O2S_QuanLyHocVien.Pages
 
                         gridLop.Invoke((MethodInvoker)delegate
                         {
-                            LoadPanelDiem(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString(),
-                                        gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
+                            LoadPanelDiem(Common.TypeConvert.TypeConvertParse.ToInt32(gridDSHV.SelectedRows[0].Cells["clmHocVienId"].Value.ToString()),
+                                        Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
                         });
                     });
 
@@ -199,7 +186,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                BangDiem.UpdateFull(this.bangDiemFull_Click);
+                BangDiemLogic.UpdateFull(this.bangDiemFull_Click);
 
                 MessageBox.Show("Cập nhật bảng điểm thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -210,5 +197,15 @@ namespace O2S_QuanLyHocVien.Pages
         }
         #endregion
 
+        #region Cusstom
+        private void txtMaLop_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        #endregion
     }
 }

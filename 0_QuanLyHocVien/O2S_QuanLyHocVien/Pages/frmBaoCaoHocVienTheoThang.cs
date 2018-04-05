@@ -19,20 +19,21 @@ namespace O2S_QuanLyHocVien.Pages
         public frmBaoCaoHocVienTheoThang()
         {
             InitializeComponent();
+            gridBaoCao.AutoGenerateColumns = false;
         }
 
         #region Events
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.BaoCaoHocVienTheoThang = null;
+            //.BaoCaoHocVienTheoThang = null;
         }
 
         private void btnXem_Click(object sender, EventArgs e)
         {
             Thread th = new Thread(() =>
             {
-                object dshv = PhieuGhiDanh.BaoCaoHocVienGhiDanhTheoThang(dateThang.Value.Month, dateThang.Value.Year);
+                object dshv = PhieuGhiDanhLogic.BaoCaoHocVienGhiDanhTheoThang(dateThang.Value.Month, dateThang.Value.Year);
 
                 gridBaoCao.Invoke((MethodInvoker)delegate
                 {
@@ -72,10 +73,10 @@ namespace O2S_QuanLyHocVien.Pages
             frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptBaoCaoHocVienGhiDanhTheoThang.rdlc";
 
             dsSource.dtBaoCaoHocVienTheoThangDataTable dt = new dsSource.dtBaoCaoHocVienTheoThangDataTable();
-            var query = PhieuGhiDanh.BaoCaoHocVienGhiDanhTheoThang(dateThang.Value.Month, dateThang.Value.Year);
+            var query = PhieuGhiDanhLogic.BaoCaoHocVienGhiDanhTheoThang(dateThang.Value.Month, dateThang.Value.Year);
             foreach (var i in query)
             {
-                dt.Rows.Add(i.MaHocVien, i.TenHocVien, i.GioiTinhHocVien, i.NgayGhiDanh, i.TenKhoaHoc);
+                dt.Rows.Add(i.MaHocVien, i.TenHocVien, i.GioiTinh, i.NgayGhiDanh, i.TenKhoaHoc);
             }
 
             frm.ReportViewer.LocalReport.DataSources.Clear();

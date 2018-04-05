@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnDat = new System.Windows.Forms.Button();
-            this.lblTenQD = new System.Windows.Forms.Label();
+            this.lblTenQuyDinh = new System.Windows.Forms.Label();
             this.numGiaTri = new System.Windows.Forms.NumericUpDown();
             this.gridQD = new System.Windows.Forms.DataGridView();
-            this.clmMaQD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenQD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmGiaTri = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHuyBo = new System.Windows.Forms.Button();
             this.btnLuuQuyDinh = new System.Windows.Forms.Button();
+            this.clmMaQuyDinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenQuyDinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmGiaTri = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numGiaTri)).BeginInit();
@@ -65,7 +65,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.btnDat);
-            this.groupBox2.Controls.Add(this.lblTenQD);
+            this.groupBox2.Controls.Add(this.lblTenQuyDinh);
             this.groupBox2.Controls.Add(this.numGiaTri);
             this.groupBox2.Controls.Add(this.gridQD);
             this.groupBox2.Controls.Add(this.label5);
@@ -95,16 +95,16 @@
             this.btnDat.UseVisualStyleBackColor = false;
             this.btnDat.Click += new System.EventHandler(this.btnDat_Click);
             // 
-            // lblTenQD
+            // lblTenQuyDinh
             // 
-            this.lblTenQD.AutoSize = true;
-            this.lblTenQD.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblTenQD.ForeColor = System.Drawing.Color.Green;
-            this.lblTenQD.Location = new System.Drawing.Point(102, 26);
-            this.lblTenQD.Name = "lblTenQD";
-            this.lblTenQD.Size = new System.Drawing.Size(74, 19);
-            this.lblTenQD.TabIndex = 67;
-            this.lblTenQD.Text = "<setting>";
+            this.lblTenQuyDinh.AutoSize = true;
+            this.lblTenQuyDinh.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTenQuyDinh.ForeColor = System.Drawing.Color.Green;
+            this.lblTenQuyDinh.Location = new System.Drawing.Point(102, 26);
+            this.lblTenQuyDinh.Name = "lblTenQuyDinh";
+            this.lblTenQuyDinh.Size = new System.Drawing.Size(74, 19);
+            this.lblTenQuyDinh.TabIndex = 67;
+            this.lblTenQuyDinh.Text = "<setting>";
             // 
             // numGiaTri
             // 
@@ -132,8 +132,8 @@
             this.gridQD.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridQD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridQD.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaQD,
-            this.clmTenQD,
+            this.clmMaQuyDinh,
+            this.clmTenQuyDinh,
             this.clmGiaTri});
             this.gridQD.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridQD.Location = new System.Drawing.Point(14, 73);
@@ -146,31 +146,6 @@
             this.gridQD.StandardTab = true;
             this.gridQD.TabIndex = 1;
             this.gridQD.Click += new System.EventHandler(this.gridQD_Click);
-            // 
-            // clmMaQD
-            // 
-            this.clmMaQD.DataPropertyName = "MaQD";
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaQD.DefaultCellStyle = dataGridViewCellStyle4;
-            this.clmMaQD.FillWeight = 30F;
-            this.clmMaQD.HeaderText = "Mã quy định";
-            this.clmMaQD.Name = "clmMaQD";
-            this.clmMaQD.ReadOnly = true;
-            // 
-            // clmTenQD
-            // 
-            this.clmTenQD.DataPropertyName = "TenQD";
-            this.clmTenQD.HeaderText = "Tên quy định";
-            this.clmTenQD.Name = "clmTenQD";
-            this.clmTenQD.ReadOnly = true;
-            // 
-            // clmGiaTri
-            // 
-            this.clmGiaTri.DataPropertyName = "GiaTri";
-            this.clmGiaTri.FillWeight = 25F;
-            this.clmGiaTri.HeaderText = "Giá trị";
-            this.clmGiaTri.Name = "clmGiaTri";
-            this.clmGiaTri.ReadOnly = true;
             // 
             // label5
             // 
@@ -185,7 +160,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(11, 28);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 15);
+            this.label4.Size = new System.Drawing.Size(80, 15);
             this.label4.TabIndex = 25;
             this.label4.Text = "Tên quy định:";
             // 
@@ -244,6 +219,31 @@
             this.btnLuuQuyDinh.UseVisualStyleBackColor = false;
             this.btnLuuQuyDinh.Click += new System.EventHandler(this.btnLuuQuyDinh_Click);
             // 
+            // clmMaQuyDinh
+            // 
+            this.clmMaQuyDinh.DataPropertyName = "MaQuyDinh";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmMaQuyDinh.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmMaQuyDinh.FillWeight = 30F;
+            this.clmMaQuyDinh.HeaderText = "Mã quy định";
+            this.clmMaQuyDinh.Name = "clmMaQuyDinh";
+            this.clmMaQuyDinh.ReadOnly = true;
+            // 
+            // clmTenQuyDinh
+            // 
+            this.clmTenQuyDinh.DataPropertyName = "TenQuyDinh";
+            this.clmTenQuyDinh.HeaderText = "Tên quy định";
+            this.clmTenQuyDinh.Name = "clmTenQuyDinh";
+            this.clmTenQuyDinh.ReadOnly = true;
+            // 
+            // clmGiaTri
+            // 
+            this.clmGiaTri.DataPropertyName = "GiaTri";
+            this.clmGiaTri.FillWeight = 25F;
+            this.clmGiaTri.HeaderText = "Giá trị";
+            this.clmGiaTri.Name = "clmGiaTri";
+            this.clmGiaTri.ReadOnly = true;
+            // 
             // frmQuyDinh
             // 
             this.AcceptButton = this.btnLuuQuyDinh;
@@ -284,12 +284,12 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblTenQD;
+        private System.Windows.Forms.Label lblTenQuyDinh;
         private System.Windows.Forms.NumericUpDown numGiaTri;
         private System.Windows.Forms.DataGridView gridQD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaQD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenQD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmGiaTri;
         private System.Windows.Forms.Button btnDat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaQuyDinh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenQuyDinh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmGiaTri;
     }
 }

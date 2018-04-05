@@ -17,7 +17,7 @@ namespace O2S_QuanLyHocVien.Popups
         public frmDoiMatKhau(string userName)
         {
             InitializeComponent();
-            currentUser = TaiKhoan.Select(userName);
+            currentUser = TaiKhoanLogic.Select(userName);
         }
 
         #region Events
@@ -25,7 +25,7 @@ namespace O2S_QuanLyHocVien.Popups
         private void frmDoiMatKhau_Load(object sender, EventArgs e)
         {
 
-            lblUserName.Text = TaiKhoan.FullUserName(currentUser);
+            lblUserName.Text = TaiKhoanLogic.FullUserName(currentUser);
 
             txtTenDangNhap.Text = GlobalSettings.UserCode;
         }
@@ -39,7 +39,7 @@ namespace O2S_QuanLyHocVien.Popups
                     if (!string.IsNullOrEmpty(txtMatKhauMoi.Text) && txtMatKhauMoi.Text == txtMatKhauMoiAgain.Text)
                     {
                         currentUser.MatKhau = txtMatKhauMoi.Text;
-                        TaiKhoan.Update(currentUser);
+                        TaiKhoanLogic.Update(currentUser);
 
                         MessageBox.Show("Đổi mật khẩu thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();

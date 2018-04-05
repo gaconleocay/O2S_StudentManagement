@@ -7,6 +7,7 @@ using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.DataAccess;
 using O2S_QuanLyHocVien.BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Popups
 {
@@ -38,16 +39,16 @@ namespace O2S_QuanLyHocVien.Popups
 
         private void frmThayDoiThongTinNV_Load(object sender, EventArgs e)
         {
-            cboLoaiNV.DataSource = LoaiNV.SelectAll();
+            cboLoaiNV.DataSource = LoaiNhanVienLogic.SelectAll();
             cboLoaiNV.DisplayMember = "TenLoaiNhanVien";
-            cboLoaiNV.ValueMember = "MaLoaiNhanVien";
+            cboLoaiNV.ValueMember = "LoaiNhanVienId";
 
-            NHANVIEN nv = NhanVien.Select(GlobalSettings.UserID);
+            NHANVIEN nv = NhanVienLogic.SelectSingle(GlobalSettings.UserID);
             txtMaNV.Text = nv.MaNhanVien;
             txtTenNV.Text = nv.TenNhanVien;
-            txtEmail.Text = nv.EmailNhanVien;
-            txtSDT.Text = nv.SdtNhanVien;
-            cboLoaiNV.SelectedValue = nv.MaLoaiNhanVien;
+            txtEmail.Text = nv.Email;
+            txtSDT.Text = nv.Sdt;
+            cboLoaiNV.SelectedValue = nv.LoaiNhanVienId;
         }
 
         private void btnLuuThongTin_Click(object sender, EventArgs e)
@@ -56,13 +57,13 @@ namespace O2S_QuanLyHocVien.Popups
             {
                 ValidateLuu();
 
-                NhanVien.Update(new NHANVIEN()
+                NhanVienLogic.Update(new NHANVIEN()
                 {
                     MaNhanVien = txtMaNV.Text,
                     TenNhanVien = txtTenNV.Text,
-                    EmailNhanVien = txtEmail.Text,
-                    SdtNhanVien = txtSDT.Text,
-                    MaLoaiNhanVien = cboLoaiNV.SelectedValue.ToString()
+                    Email = txtEmail.Text,
+                    Sdt = txtSDT.Text,
+                    LoaiNhanVienId =Common.TypeConvert.TypeConvertParse.ToInt32( cboLoaiNV.SelectedValue.ToString())
                 });
 
                 MessageBox.Show("Cập nhật thông tin nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

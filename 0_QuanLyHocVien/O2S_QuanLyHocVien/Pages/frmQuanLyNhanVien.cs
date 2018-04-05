@@ -7,6 +7,7 @@ using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.Popups;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -17,21 +18,40 @@ namespace O2S_QuanLyHocVien.Pages
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Kiểm tra nhập liệu tìm kiếm có hợp lệ
-        /// </summary>
+
+        private void chkLoaiNV_CheckedChanged(object sender, EventArgs e)
+        {
+            cboLoaiNV.Enabled = chkLoaiNV.Checked;
+        }
+
+        private void btnDatLai_Click(object sender, EventArgs e)
+        {
+            chkMaNV.Checked = true;
+            txtMaNV.Text = string.Empty;
+            chkLoaiNV.Checked = false;
+        }
+
+        private void frmQuanLyNhanVien_Load(object sender, EventArgs e)
+        {
+            //load loại nhân viên          
+            cboLoaiNV.DataSource = LoaiNhanVienLogic.SelectAll();
+            cboLoaiNV.DisplayMember = "TenLoaiNhanVien";
+            cboLoaiNV.ValueMember = "LoaiNhanVienId";
+
+            btnDatLai_Click(sender, e);
+            btnHienTatCa_Click(sender, e);
+        }
+
         public void ValidateSearch()
         {
             if (chkMaNV.Checked && txtMaNV.Text == string.Empty)
                 throw new ArgumentException("Mã nhân viên không được trống");
-            if (chkTenNV.Checked && txtTenNV.Text == string.Empty)
-                throw new ArgumentException("Họ và tên nhân viên không được trống");
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.QuanLyNhanVien = null;
+            //GlobalPages.QuanLyNhanVien = null;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -48,34 +68,6 @@ namespace O2S_QuanLyHocVien.Pages
             txtMaNV.Enabled = chkMaNV.Checked;
         }
 
-        private void chkTenNV_CheckedChanged(object sender, EventArgs e)
-        {
-            txtTenNV.Enabled = chkTenNV.Checked;
-        }
-
-        private void chkLoaiNV_CheckedChanged(object sender, EventArgs e)
-        {
-            cboLoaiNV.Enabled = chkLoaiNV.Checked;
-        }
-
-        private void btnDatLai_Click(object sender, EventArgs e)
-        {
-            chkMaNV.Checked = true;
-            txtMaNV.Text = txtTenNV.Text = string.Empty;
-            chkTenNV.Checked = chkLoaiNV.Checked = false;
-        }
-
-        private void frmQuanLyNhanVien_Load(object sender, EventArgs e)
-        {
-            //load loại nhân viên
-            cboLoaiNV.DataSource = LoaiNV.SelectAll();
-            cboLoaiNV.DisplayMember = "TenLoaiNhanVien";
-            cboLoaiNV.ValueMember = "MaLoaiNhanVien";
-
-            btnDatLai_Click(sender, e);
-            btnHienTatCa_Click(sender, e);
-        }
-
         private void gridNV_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             lblTongCong.Text = string.Format("Tổng cộng: {0} nhân viên", gridNV.Rows.Count);
@@ -88,17 +80,22 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnHienTatCa_Click(object sender, EventArgs e)
         {
-            gridNV.DataSource = NhanVien.SelectAll();
+            gridNV.AutoGenerateColumns = false;
+            NhanVienFilter _filter = new NhanVienFilter();
+            gridNV.DataSource = NhanVienLogic.Select(_filter);
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             try
             {
+                gridNV.AutoGenerateColumns = false;
                 ValidateSearch();
+                NhanVienFilter _filter = new NhanVienFilter();
+                _filter.NhanVienId = chkMaNV.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(txtMaNV.Text) : 0;
+                _filter.LoaiNhanVienId = chkLoaiNV.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(cboLoaiNV.SelectedValue.ToString()) : 0;
 
-                gridNV.DataSource = NhanVien.SelectAll(chkMaNV.Checked ? txtMaNV.Text : null,
-                chkTenNV.Checked ? txtTenNV.Text : null, chkLoaiNV.Checked ? cboLoaiNV.SelectedValue.ToString() : null);
+                gridNV.DataSource = NhanVienLogic.Select(_filter);
             }
             catch (ArgumentException ex)
             {
@@ -112,7 +109,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            frmNhanVienEdit frm = new frmNhanVienEdit(NhanVien.Select(gridNV.SelectedRows[0].Cells["clmMaNV"].Value.ToString()));
+            frmNhanVienEdit frm = new frmNhanVienEdit(NhanVienLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridNV.SelectedRows[0].Cells["clmNhanVienId"].Value.ToString())));
             frm.Text = "Cập nhật thông tin nhân viên";
             frm.ShowDialog();
 
@@ -125,11 +122,12 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    NhanVien.Delete(gridNV.SelectedRows[0].Cells["clmMaNV"].Value.ToString());
+                    if (NhanVienLogic.Delete(Common.TypeConvert.TypeConvertParse.ToInt32(gridNV.SelectedRows[0].Cells["clmNhanVienId"].Value.ToString())))
+                    {
+                        MessageBox.Show("Xóa nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    MessageBox.Show("Xóa nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    btnHienTatCa_Click(sender, e);
+                        btnHienTatCa_Click(sender, e);
+                    }
                 }
             }
             catch
@@ -141,6 +139,14 @@ namespace O2S_QuanLyHocVien.Pages
         private void gridNV_DoubleClick(object sender, EventArgs e)
         {
             btnSua_Click(sender, e);
+        }
+
+        private void txtMaNV_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

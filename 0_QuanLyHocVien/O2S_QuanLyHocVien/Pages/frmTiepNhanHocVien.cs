@@ -9,6 +9,10 @@ using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using System.Threading;
 using System.Globalization;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using O2S_QuanLyHocVien.BusinessLogic.Model;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -16,8 +20,9 @@ namespace O2S_QuanLyHocVien.Pages
     {
         #region Khai bao
         private bool isInsert = false;
-        private HOCVIEN hocVien;
-
+        //private HOCVIEN hocVien;
+        private int hocvienId_Select { get; set; }
+        private List<HocVien_PlusDTO> _lstHocVien { get; set; }
         #endregion
         public frmTiepNhanHocVien()
         {
@@ -29,61 +34,90 @@ namespace O2S_QuanLyHocVien.Pages
         {
             dateNgaySinh.MaxDate = DateTime.Now;
 
-            LockPanelControl();
+            LockAndUnlockPanelControl(false);
             InitializeLoaiHV();
             InitializeHocVien();
         }
+        public void InitializeLoaiHV()
+        {
+            cboLoaiHV.DataSource = LoaiHocVienLogic.SelectAll();
+            cboLoaiHV.DisplayMember = "TenLoaiHocVien";
+            cboLoaiHV.ValueMember = "LoaiHocVienId";
+        }
 
+        public void InitializeHocVien()
+        {
+            gridDSHV.AutoGenerateColumns = false;
+
+            Thread th = new Thread(() =>
+            {
+                HocVienFilter _filter = new HocVienFilter();
+                _filter.CoSoId = GlobalSettings.CoSoId;
+
+                this._lstHocVien = HocVienLogic.Select(_filter);
+
+                gridDSHV.Invoke((MethodInvoker)delegate
+                {
+                    gridDSHV.DataSource = this._lstHocVien;
+                });
+            });
+
+            th.Start();
+        }
+        public void LoadPanelControl(HOCVIEN hv = null)
+        {
+            try
+            {
+                if (hv == null)
+                {
+                    ResetPanelControl();
+                    cboLoaiHV_SelectedValueChanged(null, null);
+                }
+                else
+                {
+                    txtMaHV.Text = hv.MaHocVien;
+                    txtHoTen.Text = hv.TenHocVien;
+                    dateNgaySinh.Value = (DateTime)hv.NgaySinh;
+                    cboGioiTinh.Text = hv.GioiTinh;
+                    txtDiaChi.Text = hv.DiaChi;
+                    txtSDT.Text = hv.Sdt;
+                    txtEmail.Text = hv.Email;
+                    txtSDTBo.Text = hv.SdtBo;
+                    txtEmailBo.Text = hv.EmailBo;
+                    txtSDTMe.Text = hv.SdtMe;
+                    txtEmailMe.Text = hv.EmailMe;
+                    cboLoaiHV.SelectedValue = hv.LoaiHocVienId;
+                    txtTenDangNhap.Text = hv.TAIKHOAN.IsRemove != 1 ? hv.TAIKHOAN.TenDangNhap : string.Empty;
+                    txtMatKhau.Text = hv.TAIKHOAN.IsRemove != 1 ? hv.TAIKHOAN.MatKhau : string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                ResetPanelControl();
+                LockAndUnlockPanelControl(false);
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
         #endregion
-
 
         #region Process
 
-        /// <summary>
-        /// Khóa điều khiển các control
-        /// </summary>
-        public void LockPanelControl()
+        public void LockAndUnlockPanelControl(bool _result)
         {
-            txtHoTen.Enabled = false;
-            dateNgaySinh.Enabled = false;
-            cboGioiTinh.Enabled = false;
-            txtDiaChi.Enabled = false;
-            txtSDT.Enabled = false;
-            txtEmail.Enabled = false;
-            txtSDTBo.Enabled = false;
-            txtEmailBo.Enabled = false;
-            txtSDTMe.Enabled = false;
-            txtEmailMe.Enabled = false;
-            cboLoaiHV.Enabled = false;
-            txtMatKhau.Enabled = false;
-            btnLuuThongTin.Enabled = false;
-            btnHuyBo.Enabled = false;
+            txtHoTen.ReadOnly = !_result;
+            dateNgaySinh.Enabled = _result;
+            cboGioiTinh.Enabled = _result;
+            txtDiaChi.ReadOnly = !_result;
+            txtSDT.ReadOnly = !_result;
+            txtEmail.ReadOnly = !_result;
+            txtSDTBo.ReadOnly = !_result;
+            txtEmailBo.ReadOnly = !_result;
+            txtSDTMe.ReadOnly = !_result;
+            txtEmailMe.ReadOnly = !_result;
+            cboLoaiHV.Enabled = _result;
+            btnLuuThongTin.Enabled = _result;
+            btnHuyBo.Enabled = _result;
         }
-
-        /// <summary>
-        /// Mở khóa điều khiển các control
-        /// </summary>
-        public void UnlockPanelControl()
-        {
-            txtHoTen.Enabled = true;
-            dateNgaySinh.Enabled = true;
-            cboGioiTinh.Enabled = true;
-            txtDiaChi.Enabled = true;
-            txtSDT.Enabled = true;
-            txtEmail.Enabled = true;
-            txtSDTBo.Enabled = true;
-            txtEmailBo.Enabled = true;
-            txtSDTMe.Enabled = true;
-            txtEmailMe.Enabled = true;
-            cboLoaiHV.Enabled = true;
-            txtMatKhau.Enabled = true;
-            btnLuuThongTin.Enabled = true;
-            btnHuyBo.Enabled = true;
-        }
-
-        /// <summary>
-        /// Đặt lại giá trị của các control trong panel
-        /// </summary>
         public void ResetPanelControl()
         {
             txtMaHV.Text = string.Empty;
@@ -101,97 +135,27 @@ namespace O2S_QuanLyHocVien.Pages
             txtTenDangNhap.Text = string.Empty;
             txtMatKhau.Text = string.Empty;
         }
-
-        #endregion
-
-        public void LoadPanelControl(HOCVIEN hv = null)
+        private HOCVIEN LoadHocVien()
         {
-            try
+            HOCVIEN _hocVien = new HOCVIEN()
             {
-                if (hv == null)
-                {
-                    ResetPanelControl();
-                    txtMaHV.Text = HocVien.AutoGenerateId();
-                    txtTenDangNhap.Text = txtMaHV.Text;
-                    cboLoaiHV_SelectedValueChanged(null, null);
-                }
-                else
-                {
-                    txtMaHV.Text = hv.MaHocVien;
-                    txtHoTen.Text = hv.TenHocVien;
-                    dateNgaySinh.Value = (DateTime)hv.NgaySinh;
-                    cboGioiTinh.Text = hv.GioiTinhHocVien;
-                    txtDiaChi.Text = hv.DiaChi;
-                    txtSDT.Text = hv.SdtHocVien;
-                    txtEmail.Text = hv.EmailHocVien;
-                    txtSDTBo.Text = hv.SdtBo;
-                    txtEmailBo.Text = hv.EmailBo;
-                    txtSDTMe.Text = hv.SdtMe;
-                    txtEmailMe.Text = hv.EmailMe;
-                    cboLoaiHV.SelectedValue = hv.MaLoaiHocVien;
-                    txtTenDangNhap.Text = hv.TenDangNhap;
-                    txtMatKhau.Text = hv.TAIKHOAN != null ? hv.TAIKHOAN.MatKhau : string.Empty;
-                }
-            }
-            catch (Exception ex)
-            {
-                ResetPanelControl();
-                LockPanelControl();
-                Common.Logging.LogSystem.Error(ex);
-            }
-        }
-
-        public HOCVIEN LoadHocVien()
-        {
-            hocVien = new HOCVIEN()
-            {
-                MaHocVien = txtMaHV.Text,
+                HocVienId = this.hocvienId_Select,
                 TenHocVien = txtHoTen.Text,
                 NgaySinh = DateTime.ParseExact(dateNgaySinh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                GioiTinhHocVien = cboGioiTinh.Text,
+                GioiTinh = cboGioiTinh.Text,
                 DiaChi = txtDiaChi.Text,
-                SdtHocVien = txtSDT.Text,
-                EmailHocVien = txtEmail.Text,
+                Sdt = txtSDT.Text,
+                Email = txtEmail.Text,
                 SdtBo = txtSDTBo.Text,
                 EmailBo = txtEmailBo.Text,
                 SdtMe = txtSDTMe.Text,
                 EmailMe = txtEmailMe.Text,
-                MaLoaiHocVien = (string)cboLoaiHV.SelectedValue,
-                TenLoaiHocVien = cboLoaiHV.Text,
+                LoaiHocVienId = (int)cboLoaiHV.SelectedValue,
                 NgayTiepNhan = DateTime.Now,
-                TenDangNhap = (string)cboLoaiHV.SelectedValue == "LHV00" ? null : txtTenDangNhap.Text,
-                MaCoSo = GlobalSettings.MaCoSo
+                CoSoId = GlobalSettings.CoSoId
             };
-            return hocVien;
+            return _hocVien;
         }
-
-        public void InitializeLoaiHV()
-        {
-            cboLoaiHV.DataSource = LoaiHV.SelectAll();
-            cboLoaiHV.DisplayMember = "TenLoaiHocVien";
-            cboLoaiHV.ValueMember = "MaLoaiHocVien";
-        }
-
-        public void InitializeHocVien()
-        {
-            gridDSHV.AutoGenerateColumns = false;
-
-            Thread th = new Thread(() =>
-            {
-                object dshv = HocVien.SelectTheoCoSo();
-
-                gridDSHV.Invoke((MethodInvoker)delegate
-                {
-                    gridDSHV.DataSource = dshv;
-                });
-            });
-
-            th.Start();
-        }
-
-        /// <summary>
-        /// Kiểm tra thông tin nhập vào có đầy đủ và hợp lệ
-        /// </summary>
         public void ValidateLuu()
         {
             if (string.IsNullOrWhiteSpace(txtHoTen.Text))
@@ -201,17 +165,18 @@ namespace O2S_QuanLyHocVien.Pages
             if (string.IsNullOrWhiteSpace(txtSDT.Text))
                 throw new ArgumentException("Số điện thoại không được trống");
         }
+        #endregion
 
         #region Events
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.TiepNhanHocVien = null;
+            //GlobalPages.TiepNhanHocVien = null;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            UnlockPanelControl();
+            LockAndUnlockPanelControl(true);
             isInsert = true;
             LoadPanelControl();
         }
@@ -224,25 +189,30 @@ namespace O2S_QuanLyHocVien.Pages
 
                 if (isInsert)
                 {
-                    HocVien.Insert(LoadHocVien(), new TAIKHOAN()
+                    int _hocvienId = 0;
+                    if (HocVienLogic.Insert(LoadHocVien(), new TAIKHOAN()
                     {
                         TenDangNhap = txtTenDangNhap.Text,
                         MatKhau = txtMatKhau.Text,
-                    });
-
-                    InitializeHocVien();
-                    MessageBox.Show("Thêm học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }, ref _hocvienId))
+                    {
+                        InitializeHocVien();
+                        MessageBox.Show("Thêm học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LockAndUnlockPanelControl(false);
+                    }
                 }
                 else
                 {
-                    HocVien.Update(LoadHocVien(), new TAIKHOAN()
+                    if (HocVienLogic.Update(LoadHocVien(), new TAIKHOAN()
                     {
                         TenDangNhap = txtTenDangNhap.Text,
                         MatKhau = txtMatKhau.Text,
-                    });
-
-                    InitializeHocVien();
-                    MessageBox.Show("Sửa học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }))
+                    {
+                        InitializeHocVien();
+                        MessageBox.Show("Sửa học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LockAndUnlockPanelControl(false);
+                    }
                 }
             }
             catch (ArgumentException ex)
@@ -261,9 +231,10 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                LockPanelControl();
-                hocVien = HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString());
+                HOCVIEN hocVien = HocVienLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridDSHV.SelectedRows[0].Cells["clmHocVienId"].Value.ToString()));
+                this.hocvienId_Select = hocVien.HocVienId;
                 LoadPanelControl(hocVien);
+                LockAndUnlockPanelControl(false);
             }
             catch (Exception ex)
             {
@@ -273,14 +244,15 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnHuyBo_Click(object sender, EventArgs e)
         {
-            LockPanelControl();
+            LockAndUnlockPanelControl(false);
             gridDSHV_Click(sender, e);
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            UnlockPanelControl();
+            LockAndUnlockPanelControl(true);
             isInsert = false;
+            cboLoaiHV_SelectedValueChanged(null, null);
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
@@ -289,11 +261,12 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    HocVien.Delete(txtMaHV.Text);
-
-                    MessageBox.Show("Xóa học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    InitializeHocVien();
-                    ResetPanelControl();
+                    if (HocVienLogic.Delete(this.hocvienId_Select))
+                    {
+                        MessageBox.Show("Xóa học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        InitializeHocVien();
+                        ResetPanelControl();
+                    }
                 }
             }
             catch (Exception ex)
@@ -314,30 +287,29 @@ namespace O2S_QuanLyHocVien.Pages
         #region Custom
         private void cboLoaiHV_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cboLoaiHV.SelectedValue.ToString() == "LHV00")
+            if (cboLoaiHV.SelectedValue.ToString() == KeySetting.LOAIHOCVIEN_TIEMNANG.ToString())//tiem nang
             {
                 txtTenDangNhap.Text = string.Empty;
                 txtMatKhau.Text = string.Empty;
-                txtMatKhau.Enabled = false;
-            }
-            else
-            {
-                txtTenDangNhap.Text = txtMaHV.Text;
-                txtMatKhau.Text = txtMaHV.Text;
-                txtMatKhau.Enabled = true;
             }
         }
 
         private void gridDSHV_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức và {2} học viên tiềm năng)",
-                HocVien.Count(), HocVien.CountChinhThuc(), HocVien.CountTiemNang());
+            if (this._lstHocVien != null && this._lstHocVien.Count > 0)
+            {
+                lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức và {2} học viên tiềm năng)",
+                    this._lstHocVien.Count, this._lstHocVien.Where(o => o.LoaiHocVienId == 1).ToList().Count, this._lstHocVien.Where(o => o.LoaiHocVienId == 2).ToList().Count);
+            }
         }
 
         private void gridDSHV_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức và {2} học viên tiềm năng)",
-                HocVien.Count(), HocVien.CountChinhThuc(), HocVien.CountTiemNang());
+            if (this._lstHocVien != null && this._lstHocVien.Count > 0)
+            {
+                lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức và {2} học viên tiềm năng)",
+                    this._lstHocVien.Count, this._lstHocVien.Where(o => o.LoaiHocVienId == 1).ToList().Count, this._lstHocVien.Where(o => o.LoaiHocVienId == 2).ToList().Count);
+            }
         }
 
         private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)

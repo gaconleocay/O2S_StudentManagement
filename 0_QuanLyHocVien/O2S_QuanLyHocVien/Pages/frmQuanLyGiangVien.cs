@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using O2S_QuanLyHocVien.Popups;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -25,8 +26,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             if (chkMaGV.Checked && txtMaGV.Text == string.Empty)
                 throw new ArgumentException("Mã giảng viên không được trống");
-            if (chkTenGV.Checked && txtTenGV.Text == string.Empty)
-                throw new ArgumentException("Họ và tên giảng viên không được trống");
+
         }
 
         #region Events
@@ -44,22 +44,10 @@ namespace O2S_QuanLyHocVien.Pages
             txtMaGV.Enabled = chkMaGV.Checked;
         }
 
-        private void chkTenGV_CheckedChanged(object sender, EventArgs e)
-        {
-            txtTenGV.Enabled = chkTenGV.Checked;
-        }
-
-        private void chkGioiTinh_CheckedChanged(object sender, EventArgs e)
-        {
-            cboGioiTinh.Enabled = chkGioiTinh.Checked;
-        }
-
         private void btnDatLai_Click(object sender, EventArgs e)
         {
             chkMaGV.Checked = true;
-            chkTenGV.Checked = chkGioiTinh.Checked = false;
-            txtMaGV.Text = txtTenGV.Text = string.Empty;
-            cboGioiTinh.SelectedIndex = 0;
+            txtMaGV.Text = string.Empty;
         }
 
         private void frmQuanLyGiangVien_Load(object sender, EventArgs e)
@@ -71,8 +59,10 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnHienTatCa_Click(object sender, EventArgs e)
         {
+            GiangVienFilter _filter = new GiangVienFilter();
+            _filter.CoSoId = GlobalSettings.CoSoId;
             gridGV.AutoGenerateColumns = false;
-            gridGV.DataSource = GiangVien.SelectTheoCoSo();
+            gridGV.DataSource = GiangVienLogic.Select(_filter);
         }
 
         private void gridGV_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -88,7 +78,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            frmGiangVienEdit frm = new frmGiangVienEdit(GiangVien.Select(gridGV.SelectedRows[0].Cells["clmMaGiangVien"].Value.ToString()));
+            frmGiangVienEdit frm = new frmGiangVienEdit(GiangVienLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridGV.SelectedRows[0].Cells["clmGiangVienId"].Value.ToString())));
             frm.Text = "Cập nhật thông tin giảng viên";
             frm.ShowDialog();
 
@@ -101,7 +91,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    GiangVien.Delete(gridGV.SelectedRows[0].Cells["clmMaGiangVien"].Value.ToString());
+                    GiangVienLogic.Delete(Common.TypeConvert.TypeConvertParse.ToInt32(gridGV.SelectedRows[0].Cells["clmGiangVienId"].Value.ToString()));
 
                     MessageBox.Show("Xóa giảng viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -133,8 +123,10 @@ namespace O2S_QuanLyHocVien.Pages
         {
             if (gridLop != null && gridLop.RowCount > 0)
             {
+                GiangDayFilter _filter = new GiangDayFilter();
+                _filter.GiangVienId = Common.TypeConvert.TypeConvertParse.ToInt32(gridGV.SelectedRows[0].Cells["clmGiangVienId"].Value.ToString());
                 gridLop.AutoGenerateColumns = false;
-                gridLop.DataSource = GiangDay.Select(gridGV.SelectedRows[0].Cells["clmMaGiangVien"].Value.ToString());
+                gridLop.DataSource = GiangDayLogic.Select(_filter);
             }
         }
 
@@ -143,9 +135,12 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 ValidateSearch();
+                GiangVienFilter _filter = new GiangVienFilter();
+                _filter.CoSoId = GlobalSettings.CoSoId;
+                _filter.GiangVienId = chkMaGV.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(txtMaGV.Text) : 0;
 
-                gridGV.DataSource = GiangVien.SelectAll(chkMaGV.Checked ? txtMaGV.Text : null,
-                    chkTenGV.Checked ? txtTenGV.Text : null, chkGioiTinh.Checked ? cboGioiTinh.Text : null);
+
+                gridGV.DataSource = GiangVienLogic.Select(_filter);
             }
             catch (ArgumentException ex)
             {
@@ -160,8 +155,16 @@ namespace O2S_QuanLyHocVien.Pages
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.QuanLyGiangVien = null;
+            //GlobalPages.QuanLyGiangVien = null;
         }
         #endregion
+
+        private void txtMaGV_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

@@ -34,6 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtDiaChi = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnHuyBo = new System.Windows.Forms.Button();
             this.btnLuuThongTin = new System.Windows.Forms.Button();
             this.txtTenCoSo = new System.Windows.Forms.TextBox();
@@ -41,17 +43,15 @@
             this.txtMaCoSo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gridKH = new System.Windows.Forms.DataGridView();
+            this.clmCoSoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenCoSo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblTongCong = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
-            this.txtDiaChi = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.clmMaCoSo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -127,6 +127,25 @@
             this.splitContainer1.SplitterDistance = 354;
             this.splitContainer1.TabIndex = 6;
             // 
+            // txtDiaChi
+            // 
+            this.txtDiaChi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDiaChi.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtDiaChi.Location = new System.Drawing.Point(92, 92);
+            this.txtDiaChi.Name = "txtDiaChi";
+            this.txtDiaChi.Size = new System.Drawing.Size(248, 25);
+            this.txtDiaChi.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(18, 97);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 15);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Địa chỉ:";
+            // 
             // btnHuyBo
             // 
             this.btnHuyBo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -193,6 +212,7 @@
             this.txtMaCoSo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtMaCoSo.Location = new System.Drawing.Point(92, 12);
             this.txtMaCoSo.Name = "txtMaCoSo";
+            this.txtMaCoSo.ReadOnly = true;
             this.txtMaCoSo.Size = new System.Drawing.Size(248, 25);
             this.txtMaCoSo.TabIndex = 1;
             // 
@@ -214,8 +234,8 @@
             this.gridKH.BackgroundColor = System.Drawing.Color.White;
             this.gridKH.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridKH.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaCoSo,
-            this.clmTenKhoaHoc,
+            this.clmCoSoId,
+            this.clmTenCoSo,
             this.clmDiaChi});
             this.gridKH.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridKH.Location = new System.Drawing.Point(12, 39);
@@ -229,6 +249,34 @@
             this.gridKH.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridKH_RowsRemoved);
             this.gridKH.Click += new System.EventHandler(this.gridKH_Click);
             this.gridKH.DoubleClick += new System.EventHandler(this.gridKH_DoubleClick);
+            // 
+            // clmCoSoId
+            // 
+            this.clmCoSoId.DataPropertyName = "CoSoId";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmCoSoId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmCoSoId.FillWeight = 7.383478F;
+            this.clmCoSoId.HeaderText = "Mã cơ sở";
+            this.clmCoSoId.Name = "clmCoSoId";
+            this.clmCoSoId.Width = 80;
+            // 
+            // clmTenCoSo
+            // 
+            this.clmTenCoSo.DataPropertyName = "TenCoSo";
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
+            this.clmTenCoSo.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clmTenCoSo.FillWeight = 8.860174F;
+            this.clmTenCoSo.HeaderText = "Tên cơ sở";
+            this.clmTenCoSo.Name = "clmTenCoSo";
+            this.clmTenCoSo.Width = 250;
+            // 
+            // clmDiaChi
+            // 
+            this.clmDiaChi.DataPropertyName = "DiaChi";
+            this.clmDiaChi.FillWeight = 303.7563F;
+            this.clmDiaChi.HeaderText = "Địa chỉ";
+            this.clmDiaChi.Name = "clmDiaChi";
+            this.clmDiaChi.Width = 665;
             // 
             // panel3
             // 
@@ -313,53 +361,6 @@
             this.btnThem.UseVisualStyleBackColor = false;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
-            // txtDiaChi
-            // 
-            this.txtDiaChi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDiaChi.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtDiaChi.Location = new System.Drawing.Point(92, 92);
-            this.txtDiaChi.Name = "txtDiaChi";
-            this.txtDiaChi.Size = new System.Drawing.Size(248, 25);
-            this.txtDiaChi.TabIndex = 4;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 97);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 15);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Địa chỉ:";
-            // 
-            // clmMaCoSo
-            // 
-            this.clmMaCoSo.DataPropertyName = "MaCoSo";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaCoSo.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMaCoSo.FillWeight = 7.383478F;
-            this.clmMaCoSo.HeaderText = "Mã cơ sở";
-            this.clmMaCoSo.Name = "clmMaCoSo";
-            this.clmMaCoSo.Width = 80;
-            // 
-            // clmTenKhoaHoc
-            // 
-            this.clmTenKhoaHoc.DataPropertyName = "TenCoSo";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
-            this.clmTenKhoaHoc.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clmTenKhoaHoc.FillWeight = 8.860174F;
-            this.clmTenKhoaHoc.HeaderText = "Tên cơ sở";
-            this.clmTenKhoaHoc.Name = "clmTenKhoaHoc";
-            this.clmTenKhoaHoc.Width = 150;
-            // 
-            // clmDiaChi
-            // 
-            this.clmDiaChi.DataPropertyName = "DiaChi";
-            this.clmDiaChi.FillWeight = 303.7563F;
-            this.clmDiaChi.HeaderText = "Địa chỉ";
-            this.clmDiaChi.Name = "clmDiaChi";
-            this.clmDiaChi.Width = 665;
-            // 
             // frmQuanLyCoSo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -410,8 +411,8 @@
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.TextBox txtDiaChi;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaCoSo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenKhoaHoc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmCoSoId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenCoSo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDiaChi;
     }
 }

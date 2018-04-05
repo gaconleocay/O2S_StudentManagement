@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using System.Globalization;
+using O2S_QuanLyKhoaHoc.BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -26,11 +28,11 @@ namespace O2S_QuanLyHocVien.Pages
         {
             if (lh != null)
             {
-                lblTenLop.Text = lh.TenLop;
-                lblMaLop.Text = lh.MaLop;
+                lblTenLop.Text = lh.TenLopHoc;
+                lblMaLop.Text = lh.MaLopHoc;
                 lblKhoa.Text = lh.KHOAHOC.TenKhoaHoc;
-                lblNgayBatDau.Text = lh.NgayBD.Value.ToShortDateString();
-                lblNgayKetThuc.Text = lh.NgayKT.Value.ToShortDateString();
+                lblNgayBatDau.Text = lh.NgayBatDau.Value.ToShortDateString();
+                lblNgayKetThuc.Text = lh.NgayKetThuc.Value.ToShortDateString();
                 lblSiSo.Text = lh.SiSo.ToString();
             }
             else
@@ -65,13 +67,16 @@ namespace O2S_QuanLyHocVien.Pages
             dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             //load khóa học
-            cboKhoaHoc.DataSource = KhoaHoc.SelectTheoCoCo();
+            KhoaHocFilter _filter = new KhoaHocFilter();
+            _filter.CoSoId = GlobalSettings.CoSoId;
+
+            cboKhoaHoc.DataSource = KhoaHocLogic.Select(_filter);
             cboKhoaHoc.DisplayMember = "TenKhoaHoc";
-            cboKhoaHoc.ValueMember = "MaKhoaHoc";
+            cboKhoaHoc.ValueMember = "KhoaHocId";
 
             gridKetQuaTimKiem.AutoGenerateColumns = false;
 
-            btnXemTatCa_Click(sender, e);
+            btnTimKiem_Click(sender, e);
         }
 
         private void btnDatLai_Click(object sender, EventArgs e)
@@ -81,10 +86,12 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-
-            gridKetQuaTimKiem.DataSource = GiangDay.SelectAll(GlobalSettings.UserID, rdKhoangThoiGian.Checked ? (DateTime?)dateTuNgay.Value : null,
-                rdKhoangThoiGian.Checked ? (DateTime?)dateDenNgay.Value : null, rdKhoaHoc.Checked ? cboKhoaHoc.SelectedValue.ToString() : null);
-
+            GiangDayFilter _filter = new GiangDayFilter();
+            _filter.GiangVienId = GlobalSettings.UserID;
+            _filter.KhoaHocId = rdKhoaHoc.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString()) : 0;
+            _filter.NgayBatDau = rdKhoangThoiGian.Checked ? (DateTime?)dateTuNgay.Value : null;
+            _filter.NgayKetThuc = rdKhoangThoiGian.Checked ? (DateTime?)dateDenNgay.Value : null;
+            gridKetQuaTimKiem.DataSource = GiangDayLogic.Select(_filter);
             gridKetQuaTimKiem_Click(sender, e);
         }
 
@@ -92,19 +99,12 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                LoadUI(LopHoc.Select(gridKetQuaTimKiem.SelectedRows[0].Cells["clmMaLop"].Value.ToString()));
+                LoadUI(LopHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridKetQuaTimKiem.SelectedRows[0].Cells["clmLopHocId"].Value.ToString())));
             }
             catch
             {
                 LoadUI();
             }
-        }
-
-        private void btnXemTatCa_Click(object sender, EventArgs e)
-        {
-            gridKetQuaTimKiem.DataSource = GiangDay.SelectAll(GlobalSettings.UserID, null, null, null);
-
-            gridKetQuaTimKiem_Click(sender, e);
         }
 
         private void dateDenNgay_ValueChanged(object sender, EventArgs e)

@@ -9,12 +9,14 @@ using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using System.Collections.Generic;
 using System.Threading;
+using O2S_QuanLyKhoaHoc.BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
 {
     public partial class frmXepLop : Form
     {
-        private List<DANGKY> dsChuaCoLop;
+        private List<PHIEUGHIDANH> dsChuaCoLop;
         private List<HOCVIEN> dsLopChuaDu;
 
         public frmXepLop()
@@ -29,11 +31,11 @@ namespace O2S_QuanLyHocVien.Pages
         {
             gridDSHV.Rows.Clear();
 
-            dsChuaCoLop = HocVien.DanhSachChuaCoLop();
+            dsChuaCoLop = HocVienLogic.DanhSachChuaCoLop();
 
             foreach (var i in dsChuaCoLop)
             {
-                string[] s = { i.MaHocVien, i.HOCVIEN.TenHocVien, i.MaPhieu, i.KHOAHOC.TenKhoaHoc };
+                string[] s = { i.HocVienId.ToString(), i.HOCVIEN.TenHocVien, i.PhieuGhiDanhId.ToString(), i.KHOAHOC.TenKhoaHoc };
                 gridDSHV.Rows.Add(s);
             }
         }
@@ -45,17 +47,24 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                string maLop = cboLop.SelectedValue.ToString();
-                dsLopChuaDu = BangDiem.SelectDSHV(maLop);
-
-                gridDSHVLop.Rows.Clear();
-                foreach (var i in dsLopChuaDu)
+                if (cboLop.SelectedValue != null)
                 {
-                    string[] s = { i.MaHocVien, i.TenHocVien, i.NgaySinh.ToString(), i.GioiTinhHocVien, i.SdtHocVien, i.DiaChi, BangDiem.Select(i.MaHocVien, maLop).MaPhieu };
-                    gridDSHVLop.Rows.Add(s);
+                    int _lophocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLop.SelectedValue.ToString());
+                    dsLopChuaDu = BangDiemLogic.SelectDSHV(_lophocId);
+
+                    gridDSHVLop.Rows.Clear();
+                    foreach (var i in dsLopChuaDu)
+                    {
+                        string[] s = { i.HocVienId.ToString(), i.TenHocVien, i.NgaySinh.ToString(), i.GioiTinh, i.Sdt, i.DiaChi, BangDiemLogic.Select(i.HocVienId, _lophocId).PhieuGhiDanhId.ToString() };
+                        gridDSHVLop.Rows.Add(s);
+                    }
+                }
+                else
+                {
+                    gridDSHVLop.Rows.Clear();
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 gridDSHVLop.Rows.Clear();
             }
@@ -65,7 +74,7 @@ namespace O2S_QuanLyHocVien.Pages
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.XepLop = null;
+            //GlobalPages.XepLop = null;
         }
 
         private void frmXepLop_Load(object sender, EventArgs e)
@@ -76,14 +85,16 @@ namespace O2S_QuanLyHocVien.Pages
             LoadDSHVChuaCoLop();
 
             //load khóa học
-            cboKhoa.DataSource = KhoaHoc.SelectTheoCoCo();
+            KhoaHocFilter _filter = new KhoaHocFilter();
+            _filter.CoSoId = GlobalSettings.CoSoId;
+            cboKhoa.DataSource = KhoaHocLogic.Select(_filter);
             cboKhoa.DisplayMember = "TenKhoaHoc";
-            cboKhoa.ValueMember = "MaKhoaHoc";
+            cboKhoa.ValueMember = "KhoaHocId";
 
             //load lớp trống của khóa
-            cboLop.DataSource = LopHoc.DanhSachLopTrong(cboKhoa.SelectedValue.ToString());
-            cboLop.DisplayMember = "TenLop";
-            cboLop.ValueMember = "MaLop";
+            cboLop.DataSource = LopHocLogic.DanhSachLopTrong(Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoa.SelectedValue.ToString()));
+            cboLop.DisplayMember = "TenLopHoc";
+            cboLop.ValueMember = "LopHocId";
 
             LoadDSHVLopChuaDu();
 
@@ -113,7 +124,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                HOCVIEN hv = HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString());
+                HOCVIEN hv = HocVienLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridDSHV.SelectedRows[0].Cells["clmHocVienId"].Value.ToString()));
 
                 if (gridDSHVLop.Rows.Count < GlobalSettings.QuyDinh["QD0000"] ||
                 MessageBox.Show("Số học viên tối đa của lớp là " + GlobalSettings.QuyDinh["QD0000"] + Environment.NewLine + "Bạn có chắc sẽ thêm?",
@@ -121,13 +132,13 @@ namespace O2S_QuanLyHocVien.Pages
                 {
                     string[] s = new string[]
                     {
-                        hv.MaHocVien,
+                        hv.HocVienId.ToString(),
                         hv.TenHocVien,
                         ((DateTime)hv.NgaySinh).ToString("dd/MM/yyyy"),
-                        hv.GioiTinhHocVien,
-                        hv.SdtHocVien,
+                        hv.GioiTinh,
+                        hv.Sdt,
                         hv.DiaChi,
-                        gridDSHV.SelectedRows[0].Cells["clmMaPhieu"].Value.ToString()
+                        gridDSHV.SelectedRows[0].Cells["clmPhieuGhiDanhId"].Value.ToString()
                     };
 
                     gridDSHV.Rows.RemoveAt(gridDSHV.SelectedRows[0].Index);
@@ -144,9 +155,9 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 foreach (var i in dsChuaCoLop)
                 {
-                    if (gridDSHVLop.SelectedRows[0].Cells["clmMaHVLop"].Value.ToString() == i.MaHocVien)
+                    if (gridDSHVLop.SelectedRows[0].Cells["clmMaHVLop"].Value.ToString() == i.HocVienId.ToString())
                     {
-                        string[] s = { i.MaHocVien, i.HOCVIEN.TenHocVien, i.MaPhieu, i.KHOAHOC.TenKhoaHoc };
+                        string[] s = { i.HocVienId.ToString(), i.HOCVIEN.TenHocVien, i.PhieuGhiDanhId.ToString(), i.KHOAHOC.TenKhoaHoc };
                         gridDSHV.Rows.Add(s);
                         break;
                     }
@@ -167,9 +178,9 @@ namespace O2S_QuanLyHocVien.Pages
         private void cboKhoa_SelectedValueChanged(object sender, EventArgs e)
         {
             //load lớp trống của khóa
-            cboLop.DataSource = LopHoc.DanhSachLopTrong(cboKhoa.SelectedValue.ToString());
-            cboLop.DisplayMember = "TenLop";
-            cboLop.ValueMember = "MaLop";
+            cboLop.DataSource = LopHocLogic.DanhSachLopTrong(Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoa.SelectedValue.ToString()));
+            cboLop.DisplayMember = "TenLopHoc";
+            cboLop.ValueMember = "LopHocId";
         }
 
         private void btnLuuLop_Click(object sender, EventArgs e)
@@ -192,29 +203,29 @@ namespace O2S_QuanLyHocVien.Pages
 
                     if (!isAdded)
                     {
-                        BangDiem.Insert(new BANGDIEM()
+                        BangDiemLogic.Insert(new BANGDIEM()
                         {
-                            MaHocVien = i.Cells["clmMaHVLop"].Value.ToString(),
-                            MaLop = cboLop.SelectedValue.ToString(),
-                            MaPhieu = i.Cells["clmMaPhieuLop"].Value.ToString(),
+                            HocVienId = Common.TypeConvert.TypeConvertParse.ToInt32(i.Cells["clmMaHVLop"].Value.ToString()),
+                            LopHocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLop.SelectedValue.ToString()),
+                            PhieuGhiDanhId = Common.TypeConvert.TypeConvertParse.ToInt32(i.Cells["clmMaPhieuLop"].Value.ToString()),
                             CreatedDate = DateTime.Now,
                             CreatedBy = GlobalSettings.UserCode,
-                            MaKhoaHoc = cboKhoa.SelectedValue.ToString(),
+                            KhoaHocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoa.SelectedValue.ToString()),
                             TrangThai = 0,//=0: xep lop; =1: dang hoc; =99:ket thuc
                         });
                     }
 
                 }
 
-                LOPHOC lh = LopHoc.Select(cboLop.SelectedValue.ToString());
-                LopHoc.Update(new LOPHOC()
+                LOPHOC lh = LopHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(cboLop.SelectedValue.ToString()));
+                LopHocLogic.Update(new LOPHOC()
                 {
-                    MaLop = lh.MaLop,
-                    TenLop = lh.TenLop,
-                    NgayBD = lh.NgayBD,
-                    NgayKT = lh.NgayKT,
+                    LopHocId = lh.LopHocId,
+                    TenLopHoc = lh.TenLopHoc,
+                    NgayBatDau = lh.NgayBatDau,
+                    NgayKetThuc = lh.NgayKetThuc,
                     SiSo = gridDSHVLop.Rows.Count,
-                    MaKhoaHoc = lh.MaKhoaHoc,
+                    KhoaHocId = lh.KhoaHocId,
                     DangMo = lh.DangMo
                 });
 

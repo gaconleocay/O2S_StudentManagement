@@ -7,6 +7,8 @@ using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using System.Globalization;
+using O2S_QuanLyKhoaHoc.BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -20,7 +22,7 @@ namespace O2S_QuanLyHocVien.Pages
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.HocPhiHocVien = null;
+            //GlobalPages.HocPhiHocVien = null;
         }
 
         private void frmHocPhiHocVien_Load(object sender, EventArgs e)
@@ -30,12 +32,13 @@ namespace O2S_QuanLyHocVien.Pages
             btnDatLai_Click(sender, e);
 
             gridLop.AutoGenerateColumns = false;
-
-            cboKhoaHoc.DataSource = KhoaHoc.SelectTheoCoCo();
+            KhoaHocFilter _filter = new KhoaHocFilter();
+            _filter.CoSoId = GlobalSettings.CoSoId;
+            cboKhoaHoc.DataSource = KhoaHocLogic.Select(_filter);
             cboKhoaHoc.DisplayMember = "TenKhoaHoc";
             cboKhoaHoc.ValueMember = "MaKhoaHoc";
 
-            btnXemTatCa_Click(sender, e);            
+            btnXemTatCa_Click(sender, e);
         }
 
         private void rdKhoangThoiGian_CheckedChanged(object sender, EventArgs e)
@@ -55,15 +58,16 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            gridLop.DataSource = BangDiem.SelectDSLop(GlobalSettings.UserID, rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateTuNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null,
-                rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateDenNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null, rdKhoaHoc.Checked ? cboKhoaHoc.SelectedValue.ToString() : null);
+            gridLop.DataSource = BangDiemLogic.SelectDSLop(GlobalSettings.UserID, rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateTuNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null,
+                rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateDenNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null,
+                rdKhoaHoc.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString()) : 0);
 
             gridLop_Click(sender, e);
         }
 
         private void btnXemTatCa_Click(object sender, EventArgs e)
         {
-            gridLop.DataSource = BangDiem.SelectDSLop(GlobalSettings.UserID);
+            gridLop.DataSource = BangDiemLogic.SelectDSLop(GlobalSettings.UserID);
 
             gridLop_Click(sender, e);
         }
@@ -72,16 +76,16 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                var f = BangDiem.Select(GlobalSettings.UserID, gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
-                lblTenLop.Text = f.LOPHOC.TenLop;
-                lblMaLop.Text = f.MaLop;
+                var f = BangDiemLogic.Select(GlobalSettings.UserID, Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
+                lblTenLop.Text = f.LOPHOC.TenLopHoc;
+                lblMaLop.Text = f.LopHocId.ToString();
                 lblTenKhoaHoc.Text = f.LOPHOC.KHOAHOC.TenKhoaHoc;
-                lblNgayBD.Text = f.LOPHOC.NgayBD.Value.ToShortDateString();
-                lblNgayKT.Text = f.LOPHOC.NgayKT.Value.ToShortDateString();
+                lblNgayBD.Text = f.LOPHOC.NgayBatDau.Value.ToShortDateString();
+                lblNgayKT.Text = f.LOPHOC.NgayKetThuc.Value.ToShortDateString();
                 lblSiSo.Text = f.LOPHOC.SiSo.ToString();
                 lblDaDong.Text = ((decimal)f.PHIEUGHIDANH.DaDong).ToString("C0");
                 lblConNo.Text = ((decimal)f.PHIEUGHIDANH.ConNo).ToString("C0");
-                lblTongNoTatCa.Text = BangDiem.TongNoCacLop(GlobalSettings.UserID).ToString("C0");
+                lblTongNoTatCa.Text = BangDiemLogic.TongNoCacLop(GlobalSettings.UserID).ToString("C0");
             }
             catch
             {

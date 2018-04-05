@@ -19,6 +19,7 @@ namespace O2S_QuanLyHocVien
         public static string DiaChiTrungTam { get; set; }
 
         #endregion
+        /*
         public static frmTiepNhanHocVien TiepNhanHocVien { get; set; } = null;
 
         public static frmLapPhieuGhiDanh LapPhieuGhiDanh { get; set; } = null;
@@ -56,34 +57,34 @@ namespace O2S_QuanLyHocVien
         public static frmQuanLyTaiKhoan QuanLyTaiKhoan { get; set; } = null;
         public static frmQuanLyCoSo QuanLyCoSo { get; set; } = null;
         public static frmQuanLyMonHoc QuanLyMonHoc { get; set; } = null;
-
+        */
 
         /// <summary>
         /// Nạp các page cần thiết
         /// </summary>
-        public static void LoadEssentialPages()
-        {
-            Thread thread = new Thread(() =>
-            {
-                if (TiepNhanHocVien == null) TiepNhanHocVien = new frmTiepNhanHocVien() { Dock = DockStyle.Fill, TopLevel = false };
-                if (LapPhieuGhiDanh == null) LapPhieuGhiDanh = new frmLapPhieuGhiDanh() { Dock = DockStyle.Fill, TopLevel = false };
-                if (BaoCaoHocVienTheoThang == null) BaoCaoHocVienTheoThang = new frmBaoCaoHocVienTheoThang() { Dock = DockStyle.Fill, TopLevel = false };
-                if (ThongKeNoHocVien == null) ThongKeNoHocVien = new frmThongKeNoHocVien() { Dock = DockStyle.Fill, TopLevel = false };
-                if (QuanLyDiem == null) QuanLyDiem = new frmQuanLyDiem() { Dock = DockStyle.Fill, TopLevel = false };
-                if (ThongKeDiemTheoLop == null) ThongKeDiemTheoLop = new frmThongKeDiemTheoLop() { Dock = DockStyle.Fill, TopLevel = false };
-                if (XepLop == null) XepLop = new frmXepLop() { Dock = DockStyle.Fill, TopLevel = false };
-                if (QuanLyHocVien == null) QuanLyHocVien = new frmQuanLyHocVien() { Dock = DockStyle.Fill, TopLevel = false };
-                if (QuanLyNhanVien == null) QuanLyNhanVien = new frmQuanLyNhanVien() { Dock = DockStyle.Fill, TopLevel = false };
-                if (QuanLyGiangVien == null) QuanLyGiangVien = new frmQuanLyGiangVien() { Dock = DockStyle.Fill, TopLevel = false };
-                if (QuanLyLopHoc == null) QuanLyLopHoc = new frmQuanLyLopHoc() { Dock = DockStyle.Fill, TopLevel = false };
-                if (QuanLyKhoaHoc == null) QuanLyKhoaHoc = new frmQuanLyKhoaHoc() { Dock = DockStyle.Fill, TopLevel = false };
-                if (QuanLyHocPhi == null) QuanLyHocPhi = new frmQuanLyHocPhi(){ Dock = DockStyle.Fill, TopLevel = false };
-                if (QuanLyTaiKhoan == null) QuanLyTaiKhoan = new frmQuanLyTaiKhoan() { Dock = DockStyle.Fill, TopLevel = false };
+        //public static void LoadEssentialPages()
+        //{
+        //    Thread thread = new Thread(() =>
+        //    {
+        //        if (TiepNhanHocVien == null) TiepNhanHocVien = new frmTiepNhanHocVien() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (LapPhieuGhiDanh == null) LapPhieuGhiDanh = new frmLapPhieuGhiDanh() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (BaoCaoHocVienTheoThang == null) BaoCaoHocVienTheoThang = new frmBaoCaoHocVienTheoThang() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (ThongKeNoHocVien == null) ThongKeNoHocVien = new frmThongKeNoHocVien() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (QuanLyDiem == null) QuanLyDiem = new frmQuanLyDiem() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (ThongKeDiemTheoLop == null) ThongKeDiemTheoLop = new frmThongKeDiemTheoLop() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (XepLop == null) XepLop = new frmXepLop() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (QuanLyHocVien == null) QuanLyHocVien = new frmQuanLyHocVien() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (QuanLyNhanVien == null) QuanLyNhanVien = new frmQuanLyNhanVien() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (QuanLyGiangVien == null) QuanLyGiangVien = new frmQuanLyGiangVien() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (QuanLyLopHoc == null) QuanLyLopHoc = new frmQuanLyLopHoc() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (QuanLyKhoaHoc == null) QuanLyKhoaHoc = new frmQuanLyKhoaHoc() { Dock = DockStyle.Fill, TopLevel = false };
+        //        if (QuanLyHocPhi == null) QuanLyHocPhi = new frmQuanLyHocPhi(){ Dock = DockStyle.Fill, TopLevel = false };
+        //        if (QuanLyTaiKhoan == null) QuanLyTaiKhoan = new frmQuanLyTaiKhoan() { Dock = DockStyle.Fill, TopLevel = false };
 
-            });
+        //    });
 
-            thread.Priority = ThreadPriority.Highest;
-            thread.Start();
-        }
+        //    thread.Priority = ThreadPriority.Highest;
+        //    thread.Start();
+        //}
     }
 }

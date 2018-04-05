@@ -30,16 +30,16 @@ namespace O2S_QuanLyHocVien.Popups
         {
             if (nv == null)
             {
-                txtMaNV.Text = NhanVien.AutoGenerateId();
+                //txtMaNV.Text = NhanVienLogic.AutoGenerateId();
             }
             else
             {
                 txtMaNV.Text = nv.MaNhanVien;
                 txtTenNV.Text = nv.TenNhanVien;
-                txtSDT.Text = nv.SdtNhanVien;
-                txtEmail.Text = nv.EmailNhanVien;
-                cboLoaiNV.SelectedValue = nv.MaLoaiNhanVien;
-                txtTenDangNhap.Text = nv.TenDangNhap;
+                txtSDT.Text = nv.Sdt;
+                txtEmail.Text = nv.Email;
+                cboLoaiNV.SelectedValue = nv.LoaiNhanVienId;
+                txtTenDangNhap.Text = nv.TAIKHOAN.TenDangNhap;
                 txtMatKhau.Text = nv.TAIKHOAN.MatKhau;
                 txtTenDangNhap.Enabled = false;
             }
@@ -55,10 +55,10 @@ namespace O2S_QuanLyHocVien.Popups
             {
                 MaNhanVien = txtMaNV.Text,
                 TenNhanVien = txtTenNV.Text,
-                SdtNhanVien = txtSDT.Text,
-                EmailNhanVien = txtEmail.Text,
-                MaLoaiNhanVien = cboLoaiNV.SelectedValue.ToString(),
-                TenDangNhap = txtTenDangNhap.Text
+                Sdt = txtSDT.Text,
+                Email = txtEmail.Text,
+                LoaiNhanVienId =Common.TypeConvert.TypeConvertParse.ToInt32( cboLoaiNV.SelectedValue.ToString()),
+                //TaiKhoanId = txtTenDangNhap.Text
             };
         }
 
@@ -89,9 +89,9 @@ namespace O2S_QuanLyHocVien.Popups
         private void frmNhanVienEdit_Load(object sender, EventArgs e)
         {
             //load loại nhân viên
-            cboLoaiNV.DataSource = LoaiNV.SelectAll();
+            cboLoaiNV.DataSource = LoaiNhanVienLogic.SelectAll();
             cboLoaiNV.DisplayMember = "TenLoaiNhanVien";
-            cboLoaiNV.ValueMember = "MaLoaiNhanVien";
+            cboLoaiNV.ValueMember = "LoaiNhanVienId";
 
             LoadUI(nv);
         }
@@ -101,20 +101,20 @@ namespace O2S_QuanLyHocVien.Popups
             try
             {
                 ValidateLuu();
-
                 if (isInsert)
                 {
-                    NhanVien.Insert(LoadNhanVien(), new TAIKHOAN()
+                    if (NhanVienLogic.Insert(LoadNhanVien(), new TAIKHOAN()
                     {
                         TenDangNhap = txtTenDangNhap.Text,
                         MatKhau = txtMatKhau.Text,
-                    });
-
-                    MessageBox.Show("Thêm nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }))
+                    {
+                        MessageBox.Show("Thêm nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
-                    NhanVien.Update(LoadNhanVien(), new TAIKHOAN()
+                    NhanVienLogic.Update(LoadNhanVien(), new TAIKHOAN()
                     {
                         TenDangNhap = txtTenDangNhap.Text,
                         MatKhau = txtMatKhau.Text,

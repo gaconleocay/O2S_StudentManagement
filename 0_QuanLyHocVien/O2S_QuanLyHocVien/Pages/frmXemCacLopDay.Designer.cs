@@ -47,10 +47,9 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.btnXemTatCa = new System.Windows.Forms.Button();
             this.gridKetQuaTimKiem = new System.Windows.Forms.DataGridView();
-            this.clmMaLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmLopHocId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenLopHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -277,7 +276,6 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.btnXemTatCa);
             this.panel4.Controls.Add(this.gridKetQuaTimKiem);
             this.panel4.Controls.Add(this.label5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
@@ -285,26 +283,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(338, 442);
             this.panel4.TabIndex = 7;
-            // 
-            // btnXemTatCa
-            // 
-            this.btnXemTatCa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnXemTatCa.BackColor = System.Drawing.Color.Silver;
-            this.btnXemTatCa.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnXemTatCa.FlatAppearance.BorderSize = 0;
-            this.btnXemTatCa.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.btnXemTatCa.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnXemTatCa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXemTatCa.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnXemTatCa.Image = global::O2S_QuanLyHocVien.Properties.Resources.show_16x16;
-            this.btnXemTatCa.Location = new System.Drawing.Point(209, 401);
-            this.btnXemTatCa.Name = "btnXemTatCa";
-            this.btnXemTatCa.Size = new System.Drawing.Size(113, 29);
-            this.btnXemTatCa.TabIndex = 45;
-            this.btnXemTatCa.Text = "Xem tất cả";
-            this.btnXemTatCa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnXemTatCa.UseVisualStyleBackColor = false;
-            this.btnXemTatCa.Click += new System.EventHandler(this.btnXemTatCa_Click);
             // 
             // gridKetQuaTimKiem
             // 
@@ -318,34 +296,34 @@
             this.gridKetQuaTimKiem.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridKetQuaTimKiem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridKetQuaTimKiem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaLop,
-            this.clmTenLop});
+            this.clmLopHocId,
+            this.clmTenLopHoc});
             this.gridKetQuaTimKiem.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridKetQuaTimKiem.Location = new System.Drawing.Point(23, 46);
             this.gridKetQuaTimKiem.MultiSelect = false;
             this.gridKetQuaTimKiem.Name = "gridKetQuaTimKiem";
             this.gridKetQuaTimKiem.RowHeadersVisible = false;
             this.gridKetQuaTimKiem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridKetQuaTimKiem.Size = new System.Drawing.Size(299, 340);
+            this.gridKetQuaTimKiem.Size = new System.Drawing.Size(299, 384);
             this.gridKetQuaTimKiem.TabIndex = 36;
             this.gridKetQuaTimKiem.Click += new System.EventHandler(this.gridKetQuaTimKiem_Click);
             // 
-            // clmMaLop
+            // clmLopHocId
             // 
-            this.clmMaLop.DataPropertyName = "MaLop";
+            this.clmLopHocId.DataPropertyName = "LopHocId";
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaLop.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMaLop.FillWeight = 50F;
-            this.clmMaLop.HeaderText = "Mã";
-            this.clmMaLop.Name = "clmMaLop";
+            this.clmLopHocId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmLopHocId.FillWeight = 50F;
+            this.clmLopHocId.HeaderText = "Mã";
+            this.clmLopHocId.Name = "clmLopHocId";
             // 
-            // clmTenLop
+            // clmTenLopHoc
             // 
-            this.clmTenLop.DataPropertyName = "TenLop";
+            this.clmTenLopHoc.DataPropertyName = "TenLopHoc";
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
-            this.clmTenLop.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clmTenLop.HeaderText = "Tên lớp";
-            this.clmTenLop.Name = "clmTenLop";
+            this.clmTenLopHoc.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clmTenLopHoc.HeaderText = "Tên lớp";
+            this.clmTenLopHoc.Name = "clmTenLopHoc";
             // 
             // label5
             // 
@@ -569,7 +547,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView gridKetQuaTimKiem;
-        private System.Windows.Forms.Button btnXemTatCa;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label6;
@@ -584,7 +561,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblTenLop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaLop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenLop;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmLopHocId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenLopHoc;
     }
 }

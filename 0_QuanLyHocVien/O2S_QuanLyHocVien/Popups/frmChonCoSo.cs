@@ -25,9 +25,9 @@ namespace O2S_QuanLyHocVien.Popups
         }
         public void InitializeLoaiCoSo()
         {
-            cboCoSo.DataSource = CoSoTrungTam.SelectAll();
+            cboCoSo.DataSource = CoSoTrungTamLogic.SelectAll();
             cboCoSo.DisplayMember = "TenCoSo";
-            cboCoSo.ValueMember = "MaCoSo";
+            cboCoSo.ValueMember = "CoSoId";
 
             cboCoSo.SelectedIndex = 0;
         }
@@ -41,7 +41,7 @@ namespace O2S_QuanLyHocVien.Popups
                 if (string.IsNullOrWhiteSpace(cboCoSo.Text))
                     throw new ArgumentException("Cơ sở không được trống");
 
-                GlobalSettings.MaCoSo = (string)cboCoSo.SelectedValue;
+                GlobalSettings.CoSoId = Common.TypeConvert.TypeConvertParse.ToInt32(cboCoSo.SelectedValue.ToString());
                 GlobalSettings.TenCoSo = cboCoSo.Text;
                 this.Hide();
                 this.Visible = false;

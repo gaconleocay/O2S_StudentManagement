@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnDatLai = new System.Windows.Forms.Button();
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.chkLoaiNV = new System.Windows.Forms.CheckBox();
-            this.txtTenNV = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.chkTenNV = new System.Windows.Forms.CheckBox();
             this.txtMaNV = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.chkMaNV = new System.Windows.Forms.CheckBox();
@@ -44,11 +41,11 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label9 = new System.Windows.Forms.Label();
             this.gridNV = new System.Windows.Forms.DataGridView();
-            this.clmMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmSdtNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmEmailNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenLoaiNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmNhanVienId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenNhanVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmSdt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenLoaiNhanVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblTongCong = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -112,44 +109,13 @@
             // chkLoaiNV
             // 
             this.chkLoaiNV.AutoSize = true;
-            this.chkLoaiNV.Location = new System.Drawing.Point(23, 180);
+            this.chkLoaiNV.Location = new System.Drawing.Point(23, 125);
             this.chkLoaiNV.Name = "chkLoaiNV";
             this.chkLoaiNV.Size = new System.Drawing.Size(130, 19);
             this.chkLoaiNV.TabIndex = 52;
             this.chkLoaiNV.Text = "Theo loại nhân viên";
             this.chkLoaiNV.UseVisualStyleBackColor = true;
             this.chkLoaiNV.CheckedChanged += new System.EventHandler(this.chkLoaiNV_CheckedChanged);
-            // 
-            // txtTenNV
-            // 
-            this.txtTenNV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTenNV.Enabled = false;
-            this.txtTenNV.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtTenNV.Location = new System.Drawing.Point(139, 140);
-            this.txtTenNV.Name = "txtTenNV";
-            this.txtTenNV.Size = new System.Drawing.Size(187, 25);
-            this.txtTenNV.TabIndex = 51;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(42, 145);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 15);
-            this.label4.TabIndex = 50;
-            this.label4.Text = "Tên nhân viên:";
-            // 
-            // chkTenNV
-            // 
-            this.chkTenNV.AutoSize = true;
-            this.chkTenNV.Location = new System.Drawing.Point(23, 115);
-            this.chkTenNV.Name = "chkTenNV";
-            this.chkTenNV.Size = new System.Drawing.Size(128, 19);
-            this.chkTenNV.TabIndex = 49;
-            this.chkTenNV.Text = "Theo tên nhân viên";
-            this.chkTenNV.UseVisualStyleBackColor = true;
-            this.chkTenNV.CheckedChanged += new System.EventHandler(this.chkTenNV_CheckedChanged);
             // 
             // txtMaNV
             // 
@@ -160,6 +126,7 @@
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(187, 25);
             this.txtMaNV.TabIndex = 48;
+            this.txtMaNV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaNV_KeyPress);
             // 
             // label3
             // 
@@ -189,7 +156,7 @@
             this.cboLoaiNV.Enabled = false;
             this.cboLoaiNV.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboLoaiNV.FormattingEnabled = true;
-            this.cboLoaiNV.Location = new System.Drawing.Point(139, 205);
+            this.cboLoaiNV.Location = new System.Drawing.Point(139, 150);
             this.cboLoaiNV.Name = "cboLoaiNV";
             this.cboLoaiNV.Size = new System.Drawing.Size(187, 25);
             this.cboLoaiNV.TabIndex = 22;
@@ -221,9 +188,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.btnDatLai);
             this.splitContainer1.Panel1.Controls.Add(this.btnTimKiem);
             this.splitContainer1.Panel1.Controls.Add(this.chkLoaiNV);
-            this.splitContainer1.Panel1.Controls.Add(this.txtTenNV);
-            this.splitContainer1.Panel1.Controls.Add(this.label4);
-            this.splitContainer1.Panel1.Controls.Add(this.chkTenNV);
             this.splitContainer1.Panel1.Controls.Add(this.txtMaNV);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.chkMaNV);
@@ -242,7 +206,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(42, 210);
+            this.label9.Location = new System.Drawing.Point(42, 155);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(87, 15);
             this.label9.TabIndex = 21;
@@ -255,16 +219,15 @@
             this.gridNV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridNV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridNV.BackgroundColor = System.Drawing.Color.White;
             this.gridNV.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridNV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridNV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaNV,
-            this.clmTenNV,
-            this.clmSdtNV,
-            this.clmEmailNV,
-            this.clmTenLoaiNV});
+            this.clmNhanVienId,
+            this.clmTenNhanVien,
+            this.clmSdt,
+            this.clmEmail,
+            this.clmTenLoaiNhanVien});
             this.gridNV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridNV.Location = new System.Drawing.Point(12, 38);
             this.gridNV.MultiSelect = false;
@@ -277,44 +240,49 @@
             this.gridNV.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridNV_RowsRemoved);
             this.gridNV.DoubleClick += new System.EventHandler(this.gridNV_DoubleClick);
             // 
-            // clmMaNV
+            // clmNhanVienId
             // 
-            this.clmMaNV.DataPropertyName = "MaNhanVien";
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaNV.DefaultCellStyle = dataGridViewCellStyle3;
-            this.clmMaNV.FillWeight = 70F;
-            this.clmMaNV.HeaderText = "Mã nhân viên";
-            this.clmMaNV.Name = "clmMaNV";
+            this.clmNhanVienId.DataPropertyName = "NhanVienId";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmNhanVienId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmNhanVienId.FillWeight = 70F;
+            this.clmNhanVienId.HeaderText = "Mã nhân viên";
+            this.clmNhanVienId.Name = "clmNhanVienId";
+            this.clmNhanVienId.Width = 115;
             // 
-            // clmTenNV
+            // clmTenNhanVien
             // 
-            this.clmTenNV.DataPropertyName = "TenNhanVien";
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.clmTenNV.DefaultCellStyle = dataGridViewCellStyle4;
-            this.clmTenNV.FillWeight = 93.27411F;
-            this.clmTenNV.HeaderText = "Họ và tên";
-            this.clmTenNV.Name = "clmTenNV";
+            this.clmTenNhanVien.DataPropertyName = "TenNhanVien";
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.clmTenNhanVien.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clmTenNhanVien.FillWeight = 93.27411F;
+            this.clmTenNhanVien.HeaderText = "Họ và tên";
+            this.clmTenNhanVien.Name = "clmTenNhanVien";
+            this.clmTenNhanVien.Width = 153;
             // 
-            // clmSdtNV
+            // clmSdt
             // 
-            this.clmSdtNV.DataPropertyName = "SdtNhanVien";
-            this.clmSdtNV.FillWeight = 93.27411F;
-            this.clmSdtNV.HeaderText = "SĐT";
-            this.clmSdtNV.Name = "clmSdtNV";
+            this.clmSdt.DataPropertyName = "Sdt";
+            this.clmSdt.FillWeight = 93.27411F;
+            this.clmSdt.HeaderText = "SĐT";
+            this.clmSdt.Name = "clmSdt";
+            this.clmSdt.Width = 154;
             // 
-            // clmEmailNV
+            // clmEmail
             // 
-            this.clmEmailNV.DataPropertyName = "EmailNhanVien";
-            this.clmEmailNV.FillWeight = 93.27411F;
-            this.clmEmailNV.HeaderText = "Email";
-            this.clmEmailNV.Name = "clmEmailNV";
+            this.clmEmail.DataPropertyName = "Email";
+            this.clmEmail.FillWeight = 93.27411F;
+            this.clmEmail.HeaderText = "Email";
+            this.clmEmail.Name = "clmEmail";
+            this.clmEmail.Width = 153;
             // 
-            // clmTenLoaiNV
+            // clmTenLoaiNhanVien
             // 
-            this.clmTenLoaiNV.DataPropertyName = "TenLoaiNhanVien";
-            this.clmTenLoaiNV.FillWeight = 93.27411F;
-            this.clmTenLoaiNV.HeaderText = "Loại nhân viên";
-            this.clmTenLoaiNV.Name = "clmTenLoaiNV";
+            this.clmTenLoaiNhanVien.DataPropertyName = "TenLoaiNhanVien";
+            this.clmTenLoaiNhanVien.FillWeight = 93.27411F;
+            this.clmTenLoaiNhanVien.HeaderText = "Loại nhân viên";
+            this.clmTenLoaiNhanVien.Name = "clmTenLoaiNhanVien";
+            this.clmTenLoaiNhanVien.Width = 153;
             // 
             // panel3
             // 
@@ -437,7 +405,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(18, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 15);
+            this.label1.Size = new System.Drawing.Size(126, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "QUẢN LÝ NHÂN VIÊN";
             // 
@@ -489,9 +457,6 @@
         private System.Windows.Forms.Button btnDatLai;
         private System.Windows.Forms.Button btnTimKiem;
         private System.Windows.Forms.CheckBox chkLoaiNV;
-        private System.Windows.Forms.TextBox txtTenNV;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox chkTenNV;
         private System.Windows.Forms.TextBox txtMaNV;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox chkMaNV;
@@ -510,10 +475,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnHienTatCa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaNV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenNV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmSdtNV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmEmailNV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenLoaiNV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmNhanVienId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenNhanVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmSdt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenLoaiNhanVien;
     }
 }

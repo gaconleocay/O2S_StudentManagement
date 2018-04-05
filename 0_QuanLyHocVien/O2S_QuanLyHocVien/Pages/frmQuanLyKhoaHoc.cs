@@ -10,6 +10,8 @@ using O2S_QuanLyHocVien.DataAccess;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
 using System.Collections.Generic;
 using System.Linq;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using O2S_QuanLyKhoaHoc.BusinessLogic;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -37,11 +39,12 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 this.lstKHMH = new List<KhoaHocMonHocDTO>();
-                List<MONHOC> _lstMonHoc = MonHoc.SelectAll() as List<MONHOC>;
+                List<MonHoc_PlusDTO> _lstMonHoc = MonHocLogic.Select(new MonHocFilter());
                 foreach (var item in _lstMonHoc)
                 {
                     KhoaHocMonHocDTO _khmh = new KhoaHocMonHocDTO();
                     _khmh.IsCheck = false;
+                    _khmh.MonHocId = item.MonHocId;
                     _khmh.MaMonHoc = item.MaMonHoc;
                     _khmh.TenMonHoc = item.TenMonHoc;
                     _khmh.DiemDat = 0;
@@ -58,7 +61,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         public void LockPanelControl(bool result)
         {
-            txtMaKhoaHoc.Enabled = result;
+            //txtMaKhoaHoc.Enabled = result;
             txtTenKhoaHoc.Enabled = result;
             numHocPhi.Enabled = result;
             btnLuuThongTin.Enabled = result;
@@ -81,17 +84,17 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                txtMaKhoaHoc.Text = kh.MaKhoaHoc;
+                txtMaKhoaHoc.Text = kh.KhoaHocId.ToString();
                 txtTenKhoaHoc.Text = kh.TenKhoaHoc;
                 numHocPhi.Value = (decimal)kh.HocPhi;
                 //Load mon hoc cua Khoa hoc
                 List<KhoaHocMonHocDTO> _lstKHMH = this.lstKHMH;
-                List<KHOAHOC_MONHOC> _khmh = KhoaHocMonHoc.SelectTheoKhoaHoc(kh.MaKhoaHoc);
+                List<KHOAHOC_MONHOC> _khmh = KhoaHocMonHocLogic.SelectTheoKhoaHoc(kh.KhoaHocId);
                 if (_khmh != null && _khmh.Count > 0)
                 {
                     foreach (var item in _lstKHMH)
                     {
-                        List<KHOAHOC_MONHOC> _kiemtra = _khmh.Where(o => o.MaMonHoc == item.MaMonHoc).ToList();
+                        List<KHOAHOC_MONHOC> _kiemtra = _khmh.Where(o => o.MonHocId == item.MonHocId).ToList();
                         if (_kiemtra != null && _kiemtra.Count > 0)
                         {
                             item.IsCheck = true;
@@ -129,10 +132,10 @@ namespace O2S_QuanLyHocVien.Pages
         {
             return new KHOAHOC()
             {
-                MaKhoaHoc = txtMaKhoaHoc.Text,
+                KhoaHocId = Common.TypeConvert.TypeConvertParse.ToInt32(txtMaKhoaHoc.Text),
                 TenKhoaHoc = txtTenKhoaHoc.Text,
                 HocPhi = numHocPhi.Value,
-                MaCoSo = GlobalSettings.MaCoSo
+                CoSoId = GlobalSettings.CoSoId
             };
         }
 
@@ -140,7 +143,9 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                gridKH.DataSource = KhoaHoc.SelectTheoCoCo();
+                KhoaHocFilter _filter = new KhoaHocFilter();
+                _filter.CoSoId = GlobalSettings.CoSoId;
+                gridKH.DataSource = KhoaHocLogic.Select(_filter);
             }
             catch (Exception ex)
             {
@@ -152,7 +157,7 @@ namespace O2S_QuanLyHocVien.Pages
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.QuanLyKhoaHoc = null;
+            //GlobalPages.QuanLyKhoaHoc = null;
         }
 
         private void btnHuyBo_Click(object sender, EventArgs e)
@@ -177,7 +182,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             try
             {
-                LoadUI(KhoaHoc.Select(gridKH.SelectedRows[0].Cells["clmMaKhoaHoc"].Value.ToString()));
+                LoadUI(KhoaHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridKH.SelectedRows[0].Cells["clmKhoaHocId"].Value.ToString())));
             }
             catch
             {
@@ -189,7 +194,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             LockPanelControl(true);
             ResetPanelControl();
-            txtMaKhoaHoc.Text = KhoaHoc.AutoGenerateId();
+            //txtMaKhoaHoc.Text = KhoaHocLogic.AutoGenerateId();
             isInsert = true;
         }
 
@@ -210,13 +215,13 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    KhoaHoc.Delete(gridKH.SelectedRows[0].Cells["clmMaKhoaHoc"].Value.ToString());
+                    KhoaHocLogic.Delete(Common.TypeConvert.TypeConvertParse.ToInt32(gridKH.SelectedRows[0].Cells["clmKhoaHocId"].Value.ToString()));
 
                     MessageBox.Show("Xóa khóa học thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadGridKhoaHoc();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Có lỗi xảy ra", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -230,42 +235,43 @@ namespace O2S_QuanLyHocVien.Pages
 
                 if (isInsert)
                 {
-                    KhoaHoc.Insert(LoadKhoaHoc());
-                    //Insert Khoa hoc-mon hoc
-                    for (int i = 0; i < gridViewDSMonHoc.RowCount; i++)
-                    {
-                        bool _IsCheck = Common.TypeConvert.TypeConvertParse.ToBoolean(gridViewDSMonHoc.GetRowCellValue(i, "IsCheck").ToString());
-                        if (_IsCheck)
+                    int _khoaHocId = 0;
+                    if (KhoaHocLogic.Insert(LoadKhoaHoc(), ref _khoaHocId))
+                    {//Insert Khoa hoc-mon hoc
+                        for (int i = 0; i < gridViewDSMonHoc.RowCount; i++)
                         {
-                            KHOAHOC_MONHOC _khmh = new KHOAHOC_MONHOC();
-                            _khmh.MaKhoaHoc = txtMaKhoaHoc.Text;
-                            _khmh.TenKhoaHoc = txtTenKhoaHoc.Text;
-                            _khmh.MaMonHoc = gridViewDSMonHoc.GetRowCellValue(i, "MaMonHoc").ToString();
-                            _khmh.TenMonHoc = gridViewDSMonHoc.GetRowCellValue(i, "TenMonHoc").ToString();
-                            _khmh.DiemDat = Common.TypeConvert.TypeConvertParse.ToDecimal(gridViewDSMonHoc.GetRowCellValue(i, "DiemDat").ToString());
-                            KhoaHocMonHoc.Insert(_khmh);
+                            bool _IsCheck = Common.TypeConvert.TypeConvertParse.ToBoolean(gridViewDSMonHoc.GetRowCellValue(i, "IsCheck").ToString());
+                            if (_IsCheck)
+                            {
+                                KHOAHOC_MONHOC _khmh = new KHOAHOC_MONHOC();
+                                _khmh.KhoaHocId = _khoaHocId;
+                                _khmh.TenKhoaHoc = txtTenKhoaHoc.Text;
+                                _khmh.MonHocId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewDSMonHoc.GetRowCellValue(i, "MonHocId").ToString());
+                                _khmh.TenMonHoc = gridViewDSMonHoc.GetRowCellValue(i, "TenMonHoc").ToString();
+                                _khmh.DiemDat = Common.TypeConvert.TypeConvertParse.ToDecimal(gridViewDSMonHoc.GetRowCellValue(i, "DiemDat").ToString());
+                                KhoaHocMonHocLogic.Insert(_khmh);
+                            }
                         }
+                        MessageBox.Show("Thêm khóa học thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-
-                    MessageBox.Show("Thêm khóa học thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    KhoaHoc.Update(LoadKhoaHoc());
+                    KhoaHocLogic.Update(LoadKhoaHoc());
                     //INsert Khoa hoc-mon hoc
-                    KhoaHocMonHoc.DeleteTheoKhoaHoc(txtMaKhoaHoc.Text);
+                    KhoaHocMonHocLogic.DeleteTheoKhoaHoc(Common.TypeConvert.TypeConvertParse.ToInt32(txtMaKhoaHoc.Text));
                     for (int i = 0; i < gridViewDSMonHoc.RowCount; i++)
                     {
                         bool _IsCheck = Common.TypeConvert.TypeConvertParse.ToBoolean(gridViewDSMonHoc.GetRowCellValue(i, "IsCheck").ToString());
                         if (_IsCheck)
                         {
                             KHOAHOC_MONHOC _khmh = new KHOAHOC_MONHOC();
-                            _khmh.MaKhoaHoc = txtMaKhoaHoc.Text;
+                            _khmh.KhoaHocId = Common.TypeConvert.TypeConvertParse.ToInt32(txtMaKhoaHoc.Text);
                             _khmh.TenKhoaHoc = txtTenKhoaHoc.Text;
-                            _khmh.MaMonHoc = gridViewDSMonHoc.GetRowCellValue(i, "MaMonHoc").ToString();
+                            _khmh.MonHocId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewDSMonHoc.GetRowCellValue(i, "MonHocId").ToString());
                             _khmh.TenMonHoc = gridViewDSMonHoc.GetRowCellValue(i, "TenMonHoc").ToString();
                             _khmh.DiemDat = Common.TypeConvert.TypeConvertParse.ToDecimal(gridViewDSMonHoc.GetRowCellValue(i, "DiemDat").ToString());
-                            KhoaHocMonHoc.Insert(_khmh);
+                            KhoaHocMonHocLogic.Insert(_khmh);
                         }
                     }
 

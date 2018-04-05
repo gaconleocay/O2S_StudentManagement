@@ -47,7 +47,7 @@ namespace O2S_QuanLyHocVien.Popups
                 MaDatabase = Base.KiemTraLicense.LayThongTinMaDatabase();
                 txtMaMay.Text = MaDatabase;
                 txtMaMay.ReadOnly = true;
-                LICENSE license = License.Select(MaDatabase);
+                LICENSE license = LicenseLogic.Select(MaDatabase);
                 if (license != null)
                 {
                     txtKeyKichHoat.Text = license.LicenseKey;
@@ -116,7 +116,7 @@ namespace O2S_QuanLyHocVien.Popups
                 _license.LicenseKey = txtKeyKichHoat.Text.Trim();
                 try
                 {
-                    License.Update(_license);
+                    LicenseLogic.Update(_license);
                     Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao("Lưu mã kích hoạt thành công!");
                     frmthongbao.Show();
                 }

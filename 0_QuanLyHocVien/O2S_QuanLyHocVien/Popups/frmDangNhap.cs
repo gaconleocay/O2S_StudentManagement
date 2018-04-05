@@ -60,13 +60,13 @@ namespace O2S_QuanLyHocVien.Popups
             try
             {
                 GlobalSettings.MaDatabase = Base.KiemTraLicense.LayThongTinMaDatabase();
-                LICENSE _license = License.Select(GlobalSettings.MaDatabase);
+                LICENSE _license = LicenseLogic.Select(GlobalSettings.MaDatabase);
                 if (_license == null) //Insert
                 {
                     LICENSE _insert = new LICENSE();
                     _insert.DataKey = GlobalSettings.MaDatabase;
                     _insert.LicenseKey = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt("", true);
-                    License.Insert(_insert);
+                    LicenseLogic.Insert(_insert);
                 }
             }
             catch (Exception ex)
@@ -90,7 +90,7 @@ namespace O2S_QuanLyHocVien.Popups
                 if (txtTenDangNhap.Text.ToLower() == KeyTrongPhanMem.AdminUser_key && txtMatKhau.Text == KeyTrongPhanMem.AdminPass_key)
                 {
                     //TAIKHOAN tk = TaiKhoan.Select(txtTenDangNhap.Text);
-                    GlobalSettings.UserID = "-1";
+                    GlobalSettings.UserID = -1;
                     GlobalSettings.UserCode = txtTenDangNhap.Text.Trim().ToLower();
                     GlobalSettings.UserName = "Administrator";
                     GlobalSettings.UserType = UserType.QuanTri;
@@ -104,13 +104,13 @@ namespace O2S_QuanLyHocVien.Popups
                 }
                 else
                 {
-                    if (TaiKhoan.IsValid(txtTenDangNhap.Text, txtMatKhau.Text))
+                    if (TaiKhoanLogic.IsValid(txtTenDangNhap.Text, txtMatKhau.Text))
                     {
-                        TAIKHOAN tk = TaiKhoan.Select(txtTenDangNhap.Text);
-                        GlobalSettings.UserID = TaiKhoan.FullUserID(tk);
+                        TAIKHOAN tk = TaiKhoanLogic.Select(txtTenDangNhap.Text);
+                        GlobalSettings.UserID = TaiKhoanLogic.FullUserID(tk);
                         GlobalSettings.UserCode = txtTenDangNhap.Text.Trim().ToLower();
-                        GlobalSettings.UserName = TaiKhoan.FullUserName(tk);
-                        GlobalSettings.UserType = (UserType)TaiKhoan.FullUserType(tk);
+                        GlobalSettings.UserName = TaiKhoanLogic.FullUserName(tk);
+                        GlobalSettings.UserType = (UserType)TaiKhoanLogic.FullUserType(tk);
 
                         Settings.Default.Login_UserName = txtTenDangNhap.Text;
                         Settings.Default.Login_Password = txtMatKhau.Text;
@@ -144,10 +144,10 @@ namespace O2S_QuanLyHocVien.Popups
             {
                 if (GlobalSettings.UserType != UserType.HocVien) //khong phai Hoc vien
                 {
-                    List<COSOTRUNGTAM> ObjectList = CoSoTrungTam.SelectAll() as List<COSOTRUNGTAM>;
+                    List<COSOTRUNGTAM> ObjectList = CoSoTrungTamLogic.SelectAll() as List<COSOTRUNGTAM>;
                     if (ObjectList.Count == 1)
                     {
-                        GlobalSettings.MaCoSo = ObjectList[0].MaCoSo;
+                        GlobalSettings.CoSoId = ObjectList[0].CoSoId;
                         GlobalSettings.TenCoSo = ObjectList[0].TenCoSo;
                     }
                     else
@@ -170,7 +170,7 @@ namespace O2S_QuanLyHocVien.Popups
         {
             try
             {
-                VERSION dataversion = BusinessLogic.Version.Select(1);
+                VERSION dataversion = BusinessLogic.VersionLogic.Select(1);
                 if (dataversion != null)
                 {
                     CopyFolder_CheckSum(dataversion.AppLink, Environment.CurrentDirectory);

@@ -30,17 +30,17 @@ namespace O2S_QuanLyHocVien.Popups
         {
             if (gv == null)
             {
-                txtMaGV.Text = GiangVien.AutoGenerateId();
+                //txtMaGV.Text = GiangVienLogic.AutoGenerateId();
                 cboGioiTinh.SelectedIndex = 0;
             }
             else
             {
                 txtMaGV.Text = gv.MaGiangVien;
                 txtTenGV.Text = gv.TenGiangVien;
-                cboGioiTinh.Text = gv.GioiTinhGiangVien;
-                txtSDT.Text = gv.SdtGiangVien;
-                txtEmail.Text = gv.EmailGiangVien;
-                txtTenDangNhap.Text = gv.TenDangNhap;
+                cboGioiTinh.Text = gv.GioiTinh;
+                txtSDT.Text = gv.Sdt;
+                txtEmail.Text = gv.Email;
+                txtTenDangNhap.Text = gv.TAIKHOAN.TenDangNhap;
                 txtMatKhau.Text = gv.TAIKHOAN.MatKhau;
                 txtTenDangNhap.Enabled = false;
             }
@@ -54,13 +54,13 @@ namespace O2S_QuanLyHocVien.Popups
         {
             return new GIANGVIEN()
             {
-                MaGiangVien = txtMaGV.Text,
+                GiangVienId = Common.TypeConvert.TypeConvertParse.ToInt32(txtMaGV.Text),
                 TenGiangVien = txtTenGV.Text,
-                GioiTinhGiangVien = cboGioiTinh.Text,
-                SdtGiangVien = txtSDT.Text,
-                EmailGiangVien = txtEmail.Text,
-                TenDangNhap = txtTenDangNhap.Text,
-                MaCoSo=GlobalSettings.MaCoSo
+                GioiTinh = cboGioiTinh.Text,
+                Sdt = txtSDT.Text,
+                Email = txtEmail.Text,
+                //TenDangNhap = txtTenDangNhap.Text,
+                CoSoId=GlobalSettings.CoSoId
             };
         }
 
@@ -109,7 +109,7 @@ namespace O2S_QuanLyHocVien.Popups
 
                 if (isInsert)
                 {
-                    GiangVien.Insert(LoadGiangVien(), new TAIKHOAN()
+                    GiangVienLogic.Insert(LoadGiangVien(), new TAIKHOAN()
                     {
                         TenDangNhap = txtTenDangNhap.Text,
                         MatKhau = txtMatKhau.Text,
@@ -119,7 +119,7 @@ namespace O2S_QuanLyHocVien.Popups
                 }
                 else
                 {
-                    GiangVien.Update(LoadGiangVien(), new TAIKHOAN()
+                    GiangVienLogic.Update(LoadGiangVien(), new TAIKHOAN()
                     {
                         TenDangNhap = txtTenDangNhap.Text,
                         MatKhau = txtMatKhau.Text,

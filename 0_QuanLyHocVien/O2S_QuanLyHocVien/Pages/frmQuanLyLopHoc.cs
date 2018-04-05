@@ -9,6 +9,8 @@ using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using O2S_QuanLyHocVien.Popups;
 using System.Globalization;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using O2S_QuanLyKhoaHoc.BusinessLogic;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -25,16 +27,14 @@ namespace O2S_QuanLyHocVien.Pages
         public void ValidateSearch()
         {
             if (chkMaLop.Checked && txtMaLop.Text == string.Empty)
-                throw new ArgumentException("Mã lớp không được trống");
-            if (chkTenLop.Checked && txtTenLop.Text == string.Empty)
-                throw new ArgumentException("Tên lớp không được trống");
+                throw new ArgumentException("Mã lớp không được trống");       
         }
 
         #region Events
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.QuanLyLopHoc = null;
+            //GlobalPages.QuanLyLopHoc = null;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -51,19 +51,9 @@ namespace O2S_QuanLyHocVien.Pages
             txtMaLop.Enabled = chkMaLop.Checked;
         }
 
-        private void chkTenLop_CheckedChanged(object sender, EventArgs e)
-        {
-            txtTenLop.Enabled = chkTenLop.Checked;
-        }
-
         private void chkKhoa_CheckedChanged(object sender, EventArgs e)
         {
             cboKhoa.Enabled = chkKhoa.Checked;
-        }
-
-        private void chkKhoangTG_CheckedChanged(object sender, EventArgs e)
-        {
-            dateTuNgay.Enabled = dateDenNgay.Enabled = chkKhoangTG.Checked;
         }
 
         private void chkTinhTrang_CheckedChanged(object sender, EventArgs e)
@@ -76,13 +66,13 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 ValidateSearch();
+                LopHocFilter _filter = new LopHocFilter();
+                _filter.CoSoId = GlobalSettings.CoSoId;
+                _filter.LopHocId = chkMaLop.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(txtMaLop.Text) : 0;
+                _filter.KhoaHocId = chkKhoa.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoa.SelectedValue.ToString()) : 0;
+                _filter.DangMo = chkTinhTrang.Checked ? (bool?)rdMo.Checked : null;
 
-                gridLop.DataSource = LopHoc.SelectAll(chkMaLop.Checked ? txtMaLop.Text : null,
-                    chkTenLop.Checked ? txtTenLop.Text : null,
-                    chkKhoa.Checked ? cboKhoa.SelectedValue.ToString() : null,
-                    chkKhoangTG.Checked ? (DateTime?)dateTuNgay.Value : null,
-                    chkKhoangTG.Checked ? (DateTime?)dateDenNgay.Value : null,
-                    chkTinhTrang.Checked ? (bool?)rdMo.Checked : null);
+                gridLop.DataSource = LopHocLogic.Select(_filter);
             }
             catch (ArgumentException ex)
             {
@@ -98,20 +88,17 @@ namespace O2S_QuanLyHocVien.Pages
         {
             chkMaLop.Checked = true;
             txtMaLop.Text = string.Empty;
-            chkTenLop.Checked = false;
-            txtTenLop.Text = string.Empty;
             chkKhoa.Checked = false;
-            chkKhoangTG.Checked = false;
             chkTinhTrang.Checked = false;
         }
 
         private void frmQuanLyLopHoc_Load(object sender, EventArgs e)
         {
-            dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-            cboKhoa.DataSource = KhoaHoc.SelectTheoCoCo();
+            KhoaHocFilter _filter = new KhoaHocFilter();
+            _filter.CoSoId = GlobalSettings.CoSoId;
+            cboKhoa.DataSource = KhoaHocLogic.Select(_filter);
             cboKhoa.DisplayMember = "TenKhoaHoc";
-            cboKhoa.ValueMember = "MaKhoaHoc";
+            cboKhoa.ValueMember = "KhoaHocId";
 
             btnDatLai_Click(sender, e);
 
@@ -121,7 +108,9 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnHienTatCa_Click(object sender, EventArgs e)
         {
-            gridLop.DataSource = LopHoc.SelectTheoCoCo();
+            LopHocFilter _filter = new LopHocFilter();
+            _filter.CoSoId = GlobalSettings.CoSoId;
+            gridLop.DataSource = LopHocLogic.Select(_filter);
 
             gridLop_Click(sender, e);
         }
@@ -140,14 +129,14 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                LOPHOC lop = LopHoc.Select(gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
+                LOPHOC lop = LopHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
 
-                lblTenLop.Text = lop.TenLop;
-                lblMaLop.Text = lop.MaLop;
+                lblTenLop.Text = lop.TenLopHoc;
+                lblMaLop.Text = lop.MaLopHoc;
                 lblKhoa.Text = lop.KHOAHOC.TenKhoaHoc;
                 lblSiSo.Text = lop.SiSo.ToString();
-                lblNgayBatDau.Text = lop.NgayBD.ToString();
-                lblNgayKetThuc.Text = lop.NgayKT.ToString();
+                lblNgayBatDau.Text = lop.NgayBatDau.ToString();
+                lblNgayKetThuc.Text = lop.NgayKetThuc.ToString();
             }
             catch { }
         }
@@ -159,7 +148,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            frmLopHocEdit frm = new frmLopHocEdit(LopHoc.Select(gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString()));
+            frmLopHocEdit frm = new frmLopHocEdit(LopHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString())));
             frm.Text = "Cập nhật thông tin lớp";
             frm.ShowDialog();
 
@@ -172,7 +161,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    LopHoc.Delete(gridLop.SelectedRows[0].Cells["clmMaLop"].Value.ToString());
+                    LopHocLogic.Delete(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
 
                     MessageBox.Show("Xóa lớp thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -184,11 +173,14 @@ namespace O2S_QuanLyHocVien.Pages
                 MessageBox.Show("Có lỗi xảy ra", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void dateDenNgay_ValueChanged(object sender, EventArgs e)
-        {
-            dateTuNgay.MaxDate = dateDenNgay.Value;
-        }
         #endregion
+
+        private void txtMaLop_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Excel
     public class ExcelExport
     {
         #region Process_TMP
-        private DataTable InsertOrders(List<Model.Models.reportExcelDTO> thongTinThem)
+        private DataTable InsertOrders(List<BusinessLogic.Models.reportExcelDTO> thongTinThem)
         {
             DataTable orderTable = new DataTable("DATA");
             try
@@ -62,7 +62,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Excel
         #endregion
 
 
-        public void ExportExcelTemplate(string pv_sErr, string fileNameTemplate, List<Model.Models.reportExcelDTO> thongTinThem, DataTable dataTable)
+        public void ExportExcelTemplate(string pv_sErr, string fileNameTemplate, List<BusinessLogic.Models.reportExcelDTO> thongTinThem, DataTable dataTable)
         {
             try
             {
@@ -190,7 +190,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Excel
             }
         }
 
-        public MemoryStream ExportExcelTemplate_ToStream(string pv_sErr, string fileNameTemplate, List<Model.Models.reportExcelDTO> thongTinThem, DataTable dataTable)
+        public MemoryStream ExportExcelTemplate_ToStream(string pv_sErr, string fileNameTemplate, List<BusinessLogic.Models.reportExcelDTO> thongTinThem, DataTable dataTable)
         {
             MemoryStream result = new MemoryStream();
             try
@@ -233,7 +233,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Excel
             return result;
         }
 
-        public MemoryStream ExportExcelTemplate_ToStream(string pv_sErr, string fileNameTemplate, List<Model.Models.reportExcelDTO> thongTinThem)
+        public MemoryStream ExportExcelTemplate_ToStream(string pv_sErr, string fileNameTemplate, List<BusinessLogic.Models.reportExcelDTO> thongTinThem)
         {
             MemoryStream result = new MemoryStream();
             try

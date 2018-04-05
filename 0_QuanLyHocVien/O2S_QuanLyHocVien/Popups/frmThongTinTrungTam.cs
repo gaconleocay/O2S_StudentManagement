@@ -21,14 +21,14 @@ namespace O2S_QuanLyHocVien.Popups
         /// Chuyển giao diện thành đối tượng
         /// </summary>
         /// <returns></returns>
-        public CHITIETTRUNGTAM LoadChiTiet()
+        public THONGTINTRUNGTAM LoadChiTiet()
         {
-            return new CHITIETTRUNGTAM()
+            return new THONGTINTRUNGTAM()
             {
-                TenTT = txtTenTrungTam.Text,
-                DiaChiTT = txtDiaChi.Text,
-                SdtTT = txtSDT.Text,
-                EmailTT = txtEmail.Text,
+                TenTrungTam = txtTenTrungTam.Text,
+                DiaChi = txtDiaChi.Text,
+                Sdt = txtSDT.Text,
+                Email = txtEmail.Text,
                 Website = txtWebsite.Text,
             };
         }
@@ -42,11 +42,11 @@ namespace O2S_QuanLyHocVien.Popups
 
         private void frmThongTinTrungTam_Load(object sender, EventArgs e)
         {
-            var item = ChiTietTrungTam.Select();
-            txtTenTrungTam.Text = item.TenTT;
-            txtDiaChi.Text = item.DiaChiTT;
-            txtSDT.Text = item.SdtTT;
-            txtEmail.Text = item.EmailTT;
+            var item = ChiTietTrungTamLogic.Select();
+            txtTenTrungTam.Text = item.TenTrungTam;
+            txtDiaChi.Text = item.DiaChi;
+            txtSDT.Text = item.Sdt;
+            txtEmail.Text = item.Email;
             txtWebsite.Text = item.Website;
         }
 
@@ -62,7 +62,7 @@ namespace O2S_QuanLyHocVien.Popups
         {
             try
             {
-                ChiTietTrungTam.Update(LoadChiTiet());
+                ChiTietTrungTamLogic.Update(LoadChiTiet());
 
                 MessageBox.Show("Thay đổi thông tin trung tâm thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 GlobalSettings.LoadCenterInformation();

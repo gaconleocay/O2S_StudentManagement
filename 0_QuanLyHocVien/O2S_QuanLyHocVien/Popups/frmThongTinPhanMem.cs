@@ -30,7 +30,7 @@ namespace O2S_QuanLyHocVien.Popups
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("mailto:nguyentuanit96@gmail.com");
+           // Process.Start("mailto:nguyentuanit96@gmail.com");
         }
 
         #endregion

@@ -29,7 +29,7 @@ namespace O2S_QuanLyHocVien.Pages
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.QuanLyTaiKhoan = null; 
+            //GlobalPages.QuanLyTaiKhoan = null; 
         }
 
         private void chkTen_CheckedChanged(object sender, EventArgs e)
@@ -65,7 +65,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnXemTatCa_Click(object sender, EventArgs e)
         {
-            gridKetQua.DataSource = TaiKhoan.SelectAll(null, null);
+            gridKetQua.DataSource = TaiKhoanLogic.SelectAll(null, null);
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
@@ -74,7 +74,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 ValidateSearch();
 
-                gridKetQua.DataSource = TaiKhoan.SelectAll(chkTen.Checked ? txtTen.Text : null, chkLoaiTK.Checked ? (UserType?)cboLoaiTK.SelectedIndex : null);
+                gridKetQua.DataSource = TaiKhoanLogic.SelectAll(chkTen.Checked ? txtTen.Text : null, chkLoaiTK.Checked ? (UserType?)cboLoaiTK.SelectedIndex : null);
             }
             catch (ArgumentException ex)
             {
@@ -115,7 +115,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                TaiKhoan.Update(new TAIKHOAN()
+                TaiKhoanLogic.Update(new TAIKHOAN()
                 {
                     TenDangNhap = txtTenDangNhap.Text,
                     MatKhau = txtMatKhau.Text,

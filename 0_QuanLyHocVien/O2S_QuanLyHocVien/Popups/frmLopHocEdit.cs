@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using System.Globalization;
+using O2S_QuanLyKhoaHoc.BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Popups
 {
@@ -31,16 +33,16 @@ namespace O2S_QuanLyHocVien.Popups
         {
             if (lh == null)
             {
-                txtMaLop.Text = LopHoc.AutoGenerateId(dateNgayBD.Value);
+                // txtMaLop.Text = LopHocLogic.AutoGenerateId(dateNgayBD.Value);
             }
             else
             {
-                txtMaLop.Text = lh.MaLop;
-                txtTenLop.Text = lh.TenLop;
-                dateNgayBD.Value = (DateTime)lh.NgayBD;
+                txtMaLop.Text = lh.LopHocId.ToString();
+                txtTenLop.Text = lh.TenLopHoc;
+                dateNgayBD.Value = (DateTime)lh.NgayBatDau;
                 dateNgayBD.Enabled = cboKhoa.Enabled = isInsert;
-                dateNgayKT.Value = (DateTime)lh.NgayKT;
-                cboKhoa.SelectedValue = lh.MaKhoaHoc;
+                dateNgayKT.Value = (DateTime)lh.NgayKetThuc;
+                cboKhoa.SelectedValue = lh.KhoaHocId;
                 rdMo.Checked = (bool)lh.DangMo;
                 rdDong.Checked = !(bool)lh.DangMo;
             }
@@ -54,14 +56,14 @@ namespace O2S_QuanLyHocVien.Popups
         {
             return new LOPHOC()
             {
-                MaLop = txtMaLop.Text,
-                TenLop = txtTenLop.Text,
-                NgayBD = DateTime.ParseExact(dateNgayBD.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                NgayKT = DateTime.ParseExact(dateNgayKT.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                LopHocId = Common.TypeConvert.TypeConvertParse.ToInt32(txtMaLop.Text),
+                TenLopHoc = txtTenLop.Text,
+                NgayBatDau = DateTime.ParseExact(dateNgayBD.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                NgayKetThuc = DateTime.ParseExact(dateNgayKT.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 SiSo = lh == null ? 0 : lh.SiSo,
-                MaKhoaHoc = cboKhoa.SelectedValue.ToString(),
+                KhoaHocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoa.SelectedValue.ToString()),
                 DangMo = rdMo.Checked,
-                MaCoSo = GlobalSettings.MaCoSo
+                CoSoId = GlobalSettings.CoSoId
             };
         }
 
@@ -78,8 +80,8 @@ namespace O2S_QuanLyHocVien.Popups
 
         private void dateNgayBD_ValueChanged(object sender, EventArgs e)
         {
-            if (isInsert)
-                txtMaLop.Text = LopHoc.AutoGenerateId(dateNgayBD.Value);
+            //if (isInsert)
+            //    txtMaLop.Text = LopHocLogic.AutoGenerateId(dateNgayBD.Value);
 
             dateNgayKT.MinDate = dateNgayBD.Value;
             dateNgayKT.Value = dateNgayBD.Value + TimeSpan.FromDays(180);
@@ -89,9 +91,11 @@ namespace O2S_QuanLyHocVien.Popups
         {
             dateNgayBD.Value = DateTime.Now;
 
-            cboKhoa.DataSource = KhoaHoc.SelectTheoCoCo();
+            KhoaHocFilter _filter = new KhoaHocFilter();
+            _filter.CoSoId = GlobalSettings.CoSoId;
+            cboKhoa.DataSource = KhoaHocLogic.Select(_filter);
             cboKhoa.DisplayMember = "TenKhoaHoc";
-            cboKhoa.ValueMember = "MaKhoaHoc";
+            cboKhoa.ValueMember = "KhoaHocId";
 
             LoadUI(lh);
         }
@@ -101,16 +105,17 @@ namespace O2S_QuanLyHocVien.Popups
             try
             {
                 ValidateLuu();
-
+                int _khoaHocId = 0;
                 if (isInsert)
                 {
-                    LopHoc.Insert(LoadLopHoc());
-
-                    MessageBox.Show("Thêm lớp thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (LopHocLogic.Insert(LoadLopHoc(), ref _khoaHocId))
+                    {
+                        MessageBox.Show("Thêm lớp thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
-                    LopHoc.Update(LoadLopHoc());
+                    LopHocLogic.Update(LoadLopHoc());
 
                     MessageBox.Show("Sửa lớp thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

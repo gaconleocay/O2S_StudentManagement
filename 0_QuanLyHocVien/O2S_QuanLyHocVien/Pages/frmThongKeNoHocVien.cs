@@ -40,7 +40,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             Thread th = new Thread(() =>
             {
-                object source = PhieuGhiDanh.ThongKeDanhSachNoHocPhi();
+                object source = PhieuGhiDanhLogic.ThongKeDanhSachNoHocPhi();
 
                 gridBaoCao.Invoke((MethodInvoker)delegate
                 {
@@ -64,7 +64,7 @@ namespace O2S_QuanLyHocVien.Pages
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.ThongKeNoHocVien = null;
+            //GlobalPages.ThongKeNoHocVien = null;
         }
 
         private void btnTaoBaoCao_Click(object sender, EventArgs e)
@@ -83,10 +83,10 @@ namespace O2S_QuanLyHocVien.Pages
             frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptBaoCaoHocVienNo.rdlc";
 
             dsSource.dtBaoCaoNoHocVienDataTable dt = new dsSource.dtBaoCaoNoHocVienDataTable();
-            var query = PhieuGhiDanh.ThongKeDanhSachNoHocPhi();
+            var query = PhieuGhiDanhLogic.ThongKeDanhSachNoHocPhi();
             foreach (var i in query)
             {
-                dt.Rows.Add(i.MaHocVien, i.TenHocVien, i.GioiTinhHocVien, i.TenKhoaHoc,i.ConNo);
+                dt.Rows.Add(i.MaHocVien, i.TenHocVien, i.GioiTinh, i.TenKhoaHoc,i.ConNo);
             }
 
             frm.ReportViewer.LocalReport.DataSources.Clear();

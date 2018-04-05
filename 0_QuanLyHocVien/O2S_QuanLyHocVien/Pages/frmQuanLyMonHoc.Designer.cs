@@ -43,7 +43,7 @@
             this.txtMaMonHoc = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gridKH = new System.Windows.Forms.DataGridView();
-            this.clmMaMonHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmMonHocId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmTenMonHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDiemToiDa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -214,6 +214,7 @@
             this.txtMaMonHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtMaMonHoc.Location = new System.Drawing.Point(106, 12);
             this.txtMaMonHoc.Name = "txtMaMonHoc";
+            this.txtMaMonHoc.ReadOnly = true;
             this.txtMaMonHoc.Size = new System.Drawing.Size(234, 25);
             this.txtMaMonHoc.TabIndex = 1;
             // 
@@ -235,7 +236,7 @@
             this.gridKH.BackgroundColor = System.Drawing.Color.White;
             this.gridKH.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridKH.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaMonHoc,
+            this.clmMonHocId,
             this.clmTenMonHoc,
             this.clmDiemToiDa});
             this.gridKH.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -251,15 +252,15 @@
             this.gridKH.Click += new System.EventHandler(this.gridKH_Click);
             this.gridKH.DoubleClick += new System.EventHandler(this.gridKH_DoubleClick);
             // 
-            // clmMaMonHoc
+            // clmMonHocId
             // 
-            this.clmMaMonHoc.DataPropertyName = "MaMonHoc";
+            this.clmMonHocId.DataPropertyName = "MonHocId";
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaMonHoc.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMaMonHoc.FillWeight = 7.383478F;
-            this.clmMaMonHoc.HeaderText = "Mã môn học";
-            this.clmMaMonHoc.Name = "clmMaMonHoc";
-            this.clmMaMonHoc.Width = 80;
+            this.clmMonHocId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmMonHocId.FillWeight = 7.383478F;
+            this.clmMonHocId.HeaderText = "Mã môn học";
+            this.clmMonHocId.Name = "clmMonHocId";
+            this.clmMonHocId.Width = 80;
             // 
             // clmTenMonHoc
             // 
@@ -411,7 +412,7 @@
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.TextBox numDiemToiDa;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaMonHoc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmMonHocId;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmTenMonHoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDiemToiDa;
     }

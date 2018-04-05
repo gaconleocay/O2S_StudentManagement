@@ -7,6 +7,7 @@ using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -24,7 +25,7 @@ namespace O2S_QuanLyHocVien.Pages
         /// </summary>
         public void LockPanelControl()
         {
-            txtMaMonHoc.Enabled = false;
+            //txtMaMonHoc.Enabled = false;
             txtTenMonHoc.Enabled = false;
             numDiemToiDa.Enabled = false;
             btnLuuThongTin.Enabled = false;
@@ -58,7 +59,7 @@ namespace O2S_QuanLyHocVien.Pages
         /// <param name="kh">môn học</param>
         public void LoadUI(MONHOC kh)
         {
-            txtMaMonHoc.Text = kh.MaMonHoc;
+            txtMaMonHoc.Text = kh.MonHocId.ToString();
             txtTenMonHoc.Text = kh.TenMonHoc;
             numDiemToiDa.Text = kh.DiemToiDa.ToString();
 
@@ -72,21 +73,21 @@ namespace O2S_QuanLyHocVien.Pages
         {
             return new MONHOC()
             {
-                MaMonHoc = txtMaMonHoc.Text,
+                MonHocId = Common.TypeConvert.TypeConvertParse.ToInt32(txtMaMonHoc.Text),
                 TenMonHoc = txtTenMonHoc.Text,
                 DiemToiDa = Common.TypeConvert.TypeConvertParse.ToDecimal(numDiemToiDa.Text),
             };
         }
         public void LoadGridMonHoc()
         {
-            gridKH.DataSource = MonHoc.SelectAll();
+            gridKH.DataSource = MonHocLogic.Select(new MonHocFilter());
         }
 
         #region Events
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.QuanLyMonHoc = null;
+            //GlobalPages.QuanLyMonHoc = null;
         }
 
         private void btnHuyBo_Click(object sender, EventArgs e)
@@ -119,7 +120,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             try
             {
-                LoadUI(MonHoc.Select(gridKH.SelectedRows[0].Cells["clmMaMonHoc"].Value.ToString()));
+                LoadUI(MonHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridKH.SelectedRows[0].Cells["clmMonHocId"].Value.ToString())));
             }
             catch
             {
@@ -131,7 +132,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             UnlockPanelControl();
             ResetPanelControl();
-            txtMaMonHoc.Text = MonHoc.AutoGenerateId();
+            //txtMaMonHoc.Text = MonHocLogic.AutoGenerateId();
             isInsert = true;
         }
 
@@ -152,7 +153,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    MonHoc.Delete(gridKH.SelectedRows[0].Cells["clmMaKhoaHoc"].Value.ToString());
+                    MonHocLogic.Delete(Common.TypeConvert.TypeConvertParse.ToInt32(gridKH.SelectedRows[0].Cells["clmMonHocId"].Value.ToString()));
 
                     MessageBox.Show("Xóa môn học thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadGridMonHoc();
@@ -170,13 +171,15 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (isInsert)
                 {
-                    MonHoc.Insert(LoadMonHoc());
-
-                    MessageBox.Show("Thêm môn học thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    int _monHocId = 0;
+                    if (MonHocLogic.Insert(LoadMonHoc(), ref _monHocId))
+                    {
+                        MessageBox.Show("Thêm môn học thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
-                    MonHoc.Update(LoadMonHoc());
+                    MonHocLogic.Update(LoadMonHoc());
 
                     MessageBox.Show("Sửa môn học thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

@@ -25,7 +25,7 @@ namespace O2S_QuanLyHocVien.Base
             {
                 GlobalSettings.KiemTraLicenseSuDung = false;
                 //Load License tu DB ra
-                string license_keydb = BusinessLogic.License.Select(GlobalSettings.MaDatabase).LicenseKey ?? null;
+                string license_keydb = BusinessLogic.LicenseLogic.Select(GlobalSettings.MaDatabase).LicenseKey ?? null;
                 if (license_keydb != null)
                 {
                     //Giai ma

@@ -15,6 +15,8 @@ using System.Globalization;
 using System.Configuration;
 using O2S_License.PasswordKey;
 using O2S_QuanLyHocVien.Base;
+using System.Net;
+using System.Linq;
 
 namespace O2S_QuanLyHocVien
 {
@@ -58,6 +60,7 @@ namespace O2S_QuanLyHocVien
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     LoadGiaoDien();
+                    LoadDuLieuChuongTrinh();
                     HienThiThongTinVePhanMem_Version();
                     this.Show();
 
@@ -74,9 +77,6 @@ namespace O2S_QuanLyHocVien
             }
         }
 
-        /// <summary>
-        /// Kết nối lại cơ sở dữ liệu
-        /// </summary>
         private void Reconnect()
         {
             frmKetNoiCSDL frm = new frmKetNoiCSDL();
@@ -93,18 +93,12 @@ namespace O2S_QuanLyHocVien
                 Application.Exit();
             }
         }
-
-        /// <summary>
-        /// Phân quyền người dùng
-        /// </summary>
-        /// <param name="userType">Kiểu người dùng</param>
-        /// <param name="userName">Tên người dùng</param>
         public void PhanQuyen(UserType userType, string userName)
         {
             switch (userType)
             {
                 case UserType.NhanVien:
-                    string nvType = NhanVien.Select(GlobalSettings.UserID) != null ? NhanVien.Select(GlobalSettings.UserID).MaLoaiNhanVien : "";
+                    string nvType = NhanVienLogic.SelectSingle(GlobalSettings.UserID) != null ? NhanVienLogic.SelectSingle(GlobalSettings.UserID).LOAINHANVIEN.TenLoaiNhanVien : "";
                     switch (nvType)
                     {
                         //Quan tri vien
@@ -198,31 +192,44 @@ namespace O2S_QuanLyHocVien
             }
         }
 
-        /// <summary>
-        /// Nạp giao diện phần mềm
-        /// </summary>
         public void LoadGiaoDien()
         {
             try
             {
                 ResetRibbonControlStatus();
-
                 lblUserName.Text = GlobalSettings.UserCode;
 
                 //PhanQuyen(GlobalSettings.UserType, GlobalSettings.UserName);
                 pnlWorkspace.Controls.Clear();
-
-                if (GlobalSettings.UserType == UserType.NhanVien)
-                    GlobalPages.LoadEssentialPages();
-
-                GlobalSettings.LoadCenterInformation();
-                GlobalSettings.LoadQuyDinh();
-
                 btnTrangMoDau_Click(null, null);
             }
             catch (Exception ex)
             {
                 Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        private void LoadDuLieuChuongTrinh()
+        {
+            try
+            {
+                GlobalSettings.LoadCenterInformation();
+                GlobalSettings.LoadQuyDinh();
+
+                // Địa chỉ Ip
+                String strHostName = Dns.GetHostName();
+                IPHostEntry iphostentry = Dns.GetHostByName(strHostName);
+                //int nIP = 0;
+                string listIP = "";
+                for (int i = 0; i < iphostentry.AddressList.Count(); i++)
+                {
+                    listIP += iphostentry.AddressList[i] + ";";
+                }
+                GlobalSettings.SessionMyIP = listIP;
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
         private void HienThiThongTinVePhanMem_Version()
@@ -382,16 +389,14 @@ namespace O2S_QuanLyHocVien
             try
             {
                 pnlWorkspace.Controls.Clear();
+                frmTiepNhanHocVien _frm = new frmTiepNhanHocVien()
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false
+                };
 
-                if (GlobalPages.TiepNhanHocVien == null)
-                    GlobalPages.TiepNhanHocVien = new frmTiepNhanHocVien()
-                    {
-                        Dock = DockStyle.Fill,
-                        TopLevel = false
-                    };
-
-                pnlWorkspace.Controls.Add(GlobalPages.TiepNhanHocVien);
-                GlobalPages.TiepNhanHocVien.Show();
+                pnlWorkspace.Controls.Add(_frm);
+                _frm.Show();
             }
             catch (Exception ex)
             {
@@ -405,15 +410,23 @@ namespace O2S_QuanLyHocVien
             {
                 pnlWorkspace.Controls.Clear();
 
-                if (GlobalPages.LapPhieuGhiDanh == null)
-                    GlobalPages.LapPhieuGhiDanh = new frmLapPhieuGhiDanh()
-                    {
-                        Dock = DockStyle.Fill,
-                        TopLevel = false
-                    };
+                //if (GlobalPages.LapPhieuGhiDanh == null)
+                //    GlobalPages.LapPhieuGhiDanh = new frmLapPhieuGhiDanh()
+                //    {
+                //        Dock = DockStyle.Fill,
+                //        TopLevel = false
+                //    };
 
-                pnlWorkspace.Controls.Add(GlobalPages.LapPhieuGhiDanh);
-                GlobalPages.LapPhieuGhiDanh.Show();
+                //pnlWorkspace.Controls.Add(GlobalPages.LapPhieuGhiDanh);
+                //GlobalPages.LapPhieuGhiDanh.Show();
+                frmLapPhieuGhiDanh _frm = new frmLapPhieuGhiDanh()
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false
+                };
+
+                pnlWorkspace.Controls.Add(_frm);
+                _frm.Show();
             }
             catch (Exception ex)
             {
@@ -451,15 +464,23 @@ namespace O2S_QuanLyHocVien
             {
                 pnlWorkspace.Controls.Clear();
 
-                if (GlobalPages.BangDiem == null)
-                    GlobalPages.BangDiem = new frmBangDiem()
-                    {
-                        Dock = DockStyle.Fill,
-                        TopLevel = false
-                    };
+                //if (GlobalPages.BangDiem == null)
+                //    GlobalPages.BangDiem = new frmBangDiem()
+                //    {
+                //        Dock = DockStyle.Fill,
+                //        TopLevel = false
+                //    };
 
-                pnlWorkspace.Controls.Add(GlobalPages.BangDiem);
-                GlobalPages.BangDiem.Show();
+                //pnlWorkspace.Controls.Add(GlobalPages.BangDiem);
+                //GlobalPages.BangDiem.Show();
+                frmBangDiem _frm = new frmBangDiem()
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false
+                };
+
+                pnlWorkspace.Controls.Add(_frm);
+                _frm.Show();
             }
             catch (Exception ex)
             {
@@ -472,16 +493,23 @@ namespace O2S_QuanLyHocVien
             try
             {
                 pnlWorkspace.Controls.Clear();
+                frmXemCacLopDay _frm = new frmXemCacLopDay()
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false
+                };
 
-                if (GlobalPages.XemCacLopDay == null)
-                    GlobalPages.XemCacLopDay = new frmXemCacLopDay()
-                    {
-                        Dock = DockStyle.Fill,
-                        TopLevel = false
-                    };
+                pnlWorkspace.Controls.Add(_frm);
+                _frm.Show();
+                //if (GlobalPages.XemCacLopDay == null)
+                //    GlobalPages.XemCacLopDay = new frmXemCacLopDay()
+                //    {
+                //        Dock = DockStyle.Fill,
+                //        TopLevel = false
+                //    };
 
-                pnlWorkspace.Controls.Add(GlobalPages.XemCacLopDay);
-                GlobalPages.XemCacLopDay.Show();
+                //pnlWorkspace.Controls.Add(GlobalPages.XemCacLopDay);
+                //GlobalPages.XemCacLopDay.Show();
             }
             catch (Exception ex)
             {
@@ -494,16 +522,23 @@ namespace O2S_QuanLyHocVien
             try
             {
                 pnlWorkspace.Controls.Clear();
+                frmHocPhiHocVien _frm = new frmHocPhiHocVien()
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false
+                };
 
-                if (GlobalPages.HocPhiHocVien == null)
-                    GlobalPages.HocPhiHocVien = new frmHocPhiHocVien()
-                    {
-                        Dock = DockStyle.Fill,
-                        TopLevel = false
-                    };
+                pnlWorkspace.Controls.Add(_frm);
+                _frm.Show();
+                //if (GlobalPages.HocPhiHocVien == null)
+                //    GlobalPages.HocPhiHocVien = new frmHocPhiHocVien()
+                //    {
+                //        Dock = DockStyle.Fill,
+                //        TopLevel = false
+                //    };
 
-                pnlWorkspace.Controls.Add(GlobalPages.HocPhiHocVien);
-                GlobalPages.HocPhiHocVien.Show();
+                //pnlWorkspace.Controls.Add(GlobalPages.HocPhiHocVien);
+                //GlobalPages.HocPhiHocVien.Show();
             }
             catch (Exception ex)
             {
@@ -516,16 +551,23 @@ namespace O2S_QuanLyHocVien
             try
             {
                 pnlWorkspace.Controls.Clear();
+                frmCacLopDaHoc _frm = new frmCacLopDaHoc()
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false
+                };
 
-                if (GlobalPages.CacLopDaHoc == null)
-                    GlobalPages.CacLopDaHoc = new frmCacLopDaHoc()
-                    {
-                        Dock = DockStyle.Fill,
-                        TopLevel = false
-                    };
+                pnlWorkspace.Controls.Add(_frm);
+                _frm.Show();
+                //if (GlobalPages.CacLopDaHoc == null)
+                //    GlobalPages.CacLopDaHoc = new frmCacLopDaHoc()
+                //    {
+                //        Dock = DockStyle.Fill,
+                //        TopLevel = false
+                //    };
 
-                pnlWorkspace.Controls.Add(GlobalPages.CacLopDaHoc);
-                GlobalPages.CacLopDaHoc.Show();
+                //pnlWorkspace.Controls.Add(GlobalPages.CacLopDaHoc);
+                //GlobalPages.CacLopDaHoc.Show();
             }
             catch (Exception ex)
             {
@@ -538,16 +580,23 @@ namespace O2S_QuanLyHocVien
             try
             {
                 pnlWorkspace.Controls.Clear();
+                frmQuanLyHocVien _frm = new frmQuanLyHocVien()
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false
+                };
 
-                if (GlobalPages.QuanLyHocVien == null)
-                    GlobalPages.QuanLyHocVien = new frmQuanLyHocVien()
-                    {
-                        Dock = DockStyle.Fill,
-                        TopLevel = false
-                    };
+                pnlWorkspace.Controls.Add(_frm);
+                _frm.Show();
+                //if (GlobalPages.QuanLyHocVien == null)
+                //    GlobalPages.QuanLyHocVien = new frmQuanLyHocVien()
+                //    {
+                //        Dock = DockStyle.Fill,
+                //        TopLevel = false
+                //    };
 
-                pnlWorkspace.Controls.Add(GlobalPages.QuanLyHocVien);
-                GlobalPages.QuanLyHocVien.Show();
+                //pnlWorkspace.Controls.Add(GlobalPages.QuanLyHocVien);
+                //GlobalPages.QuanLyHocVien.Show();
             }
             catch (Exception ex)
             {
@@ -558,136 +607,199 @@ namespace O2S_QuanLyHocVien
         private void btnQuanLyNhanVien_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmQuanLyNhanVien _frm = new frmQuanLyNhanVien()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.QuanLyNhanVien == null)
-                GlobalPages.QuanLyNhanVien = new frmQuanLyNhanVien()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.QuanLyNhanVien == null)
+            //    GlobalPages.QuanLyNhanVien = new frmQuanLyNhanVien()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.QuanLyNhanVien);
-            GlobalPages.QuanLyNhanVien.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.QuanLyNhanVien);
+            //GlobalPages.QuanLyNhanVien.Show();
         }
 
         private void btnQuanLyGiangVien_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmQuanLyGiangVien _frm = new frmQuanLyGiangVien()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.QuanLyGiangVien == null)
-                GlobalPages.QuanLyGiangVien = new frmQuanLyGiangVien()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.QuanLyGiangVien == null)
+            //    GlobalPages.QuanLyGiangVien = new frmQuanLyGiangVien()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.QuanLyGiangVien);
-            GlobalPages.QuanLyGiangVien.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.QuanLyGiangVien);
+            //GlobalPages.QuanLyGiangVien.Show();
         }
 
         private void btnQuanLyLopHoc_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmQuanLyLopHoc _frm = new frmQuanLyLopHoc()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.QuanLyLopHoc == null)
-                GlobalPages.QuanLyLopHoc = new frmQuanLyLopHoc()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.QuanLyLopHoc == null)
+            //    GlobalPages.QuanLyLopHoc = new frmQuanLyLopHoc()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.QuanLyLopHoc);
-            GlobalPages.QuanLyLopHoc.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.QuanLyLopHoc);
+            //GlobalPages.QuanLyLopHoc.Show();
         }
 
         private void btnQuanLyKhoaHoc_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmQuanLyKhoaHoc _frm = new frmQuanLyKhoaHoc()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.QuanLyKhoaHoc == null)
-                GlobalPages.QuanLyKhoaHoc = new frmQuanLyKhoaHoc()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.QuanLyKhoaHoc == null)
+            //    GlobalPages.QuanLyKhoaHoc = new frmQuanLyKhoaHoc()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.QuanLyKhoaHoc);
-            GlobalPages.QuanLyKhoaHoc.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.QuanLyKhoaHoc);
+            //GlobalPages.QuanLyKhoaHoc.Show();
         }
 
         private void btnQuanLyTaiKhoan_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmQuanLyTaiKhoan _frm = new frmQuanLyTaiKhoan()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.QuanLyTaiKhoan == null)
-                GlobalPages.QuanLyTaiKhoan = new frmQuanLyTaiKhoan()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.QuanLyTaiKhoan == null)
+            //    GlobalPages.QuanLyTaiKhoan = new frmQuanLyTaiKhoan()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.QuanLyTaiKhoan);
-            GlobalPages.QuanLyTaiKhoan.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.QuanLyTaiKhoan);
+            //GlobalPages.QuanLyTaiKhoan.Show();
         }
 
         private void btnQuanLyDiem_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmQuanLyDiem _frm = new frmQuanLyDiem()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.QuanLyDiem == null)
-                GlobalPages.QuanLyDiem = new frmQuanLyDiem()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.QuanLyDiem == null)
+            //    GlobalPages.QuanLyDiem = new frmQuanLyDiem()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.QuanLyDiem);
-            GlobalPages.QuanLyDiem.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.QuanLyDiem);
+            //GlobalPages.QuanLyDiem.Show();
         }
 
         private void btnThongKeDiemTheoLop_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmThongKeDiemTheoLop _frm = new frmThongKeDiemTheoLop()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.ThongKeDiemTheoLop == null)
-                GlobalPages.ThongKeDiemTheoLop = new frmThongKeDiemTheoLop()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.ThongKeDiemTheoLop == null)
+            //    GlobalPages.ThongKeDiemTheoLop = new frmThongKeDiemTheoLop()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.ThongKeDiemTheoLop);
-            GlobalPages.ThongKeDiemTheoLop.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.ThongKeDiemTheoLop);
+            //GlobalPages.ThongKeDiemTheoLop.Show();
         }
 
         private void btnThongKeNoHocVien_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmThongKeNoHocVien _frm = new frmThongKeNoHocVien()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.ThongKeNoHocVien == null)
-                GlobalPages.ThongKeNoHocVien = new frmThongKeNoHocVien()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.ThongKeNoHocVien == null)
+            //    GlobalPages.ThongKeNoHocVien = new frmThongKeNoHocVien()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.ThongKeNoHocVien);
-            GlobalPages.ThongKeNoHocVien.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.ThongKeNoHocVien);
+            //GlobalPages.ThongKeNoHocVien.Show();
         }
 
         private void btnBaoCaoHocVienTheoThang_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmBaoCaoHocVienTheoThang _frm = new frmBaoCaoHocVienTheoThang()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.BaoCaoHocVienTheoThang == null)
-                GlobalPages.BaoCaoHocVienTheoThang = new frmBaoCaoHocVienTheoThang()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.BaoCaoHocVienTheoThang == null)
+            //    GlobalPages.BaoCaoHocVienTheoThang = new frmBaoCaoHocVienTheoThang()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.BaoCaoHocVienTheoThang);
-            GlobalPages.BaoCaoHocVienTheoThang.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.BaoCaoHocVienTheoThang);
+            //GlobalPages.BaoCaoHocVienTheoThang.Show();
         }
 
         private void btnTrangMoDau_Click(object sender, EventArgs e)
@@ -709,16 +821,23 @@ namespace O2S_QuanLyHocVien
         private void btnXepLop_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmXepLop _frm = new frmXepLop()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.XepLop == null)
-                GlobalPages.XepLop = new frmXepLop()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.XepLop == null)
+            //    GlobalPages.XepLop = new frmXepLop()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.XepLop);
-            GlobalPages.XepLop.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.XepLop);
+            //GlobalPages.XepLop.Show();
         }
 
         private void btnNVDoiMatKhau_Click(object sender, EventArgs e)
@@ -771,44 +890,64 @@ namespace O2S_QuanLyHocVien
         private void btnQuanLyHocPhi_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmQuanLyHocPhi _frm = new frmQuanLyHocPhi()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.QuanLyHocPhi == null)
-                GlobalPages.QuanLyHocPhi = new frmQuanLyHocPhi()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.QuanLyHocPhi == null)
+            //    GlobalPages.QuanLyHocPhi = new frmQuanLyHocPhi()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.QuanLyHocPhi);
-            GlobalPages.QuanLyHocPhi.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.QuanLyHocPhi);
+            //GlobalPages.QuanLyHocPhi.Show();
         }
         private void btnQuanLyCoSo_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmQuanLyCoSo _frm = new frmQuanLyCoSo()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.QuanLyCoSo == null)
-                GlobalPages.QuanLyCoSo = new frmQuanLyCoSo()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //frmLapPhieuGhiDanh1 _frm = new frmLapPhieuGhiDanh1()
+            //{
+            //    Dock = DockStyle.Fill,
+            //    TopLevel = false
+            //};
 
-            pnlWorkspace.Controls.Add(GlobalPages.QuanLyCoSo);
-            GlobalPages.QuanLyCoSo.Show();
+            //pnlWorkspace.Controls.Add(_frm);
+            //_frm.Show();
         }
         private void btnQuanLyMonHoc_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
+            frmQuanLyMonHoc _frm = new frmQuanLyMonHoc()
+            {
+                Dock = DockStyle.Fill,
+                TopLevel = false
+            };
 
-            if (GlobalPages.QuanLyMonHoc == null)
-                GlobalPages.QuanLyMonHoc = new frmQuanLyMonHoc()
-                {
-                    Dock = DockStyle.Fill,
-                    TopLevel = false
-                };
+            pnlWorkspace.Controls.Add(_frm);
+            _frm.Show();
+            //if (GlobalPages.QuanLyMonHoc == null)
+            //    GlobalPages.QuanLyMonHoc = new frmQuanLyMonHoc()
+            //    {
+            //        Dock = DockStyle.Fill,
+            //        TopLevel = false
+            //    };
 
-            pnlWorkspace.Controls.Add(GlobalPages.QuanLyMonHoc);
-            GlobalPages.QuanLyMonHoc.Show();
+            //pnlWorkspace.Controls.Add(GlobalPages.QuanLyMonHoc);
+            //GlobalPages.QuanLyMonHoc.Show();
         }
 
         #endregion

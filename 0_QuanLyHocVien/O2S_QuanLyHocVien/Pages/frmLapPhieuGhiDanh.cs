@@ -16,6 +16,11 @@ using O2S_QuanLyHocVien.BusinessLogic.Model;
 using System.Linq;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Drawing;
+using O2S_QuanLyKhoaHoc.BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using DevExpress.XtraSplashScreen;
+using O2S_QuanLyHocVien.BusinessLogic.Models;
+using System.Data;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -23,11 +28,11 @@ namespace O2S_QuanLyHocVien.Pages
     {
         #region Khai bao
         private Thread thHocVien;
-        private string maPhieu;
-        private string MaHocVienSelect;
-        private string MaKhoaHoc;
+        private int HocVienId_Select;
         private bool isSave = false;
-        List<PhieThu_KhoanKhacDTO> lstKhoanKhac { get; set; }
+        private int PhieuGhiDanhId = 0;
+
+        List<PhieuThu_KhoanKhacDTO> lstKhoanKhac { get; set; }
 
         #endregion
 
@@ -41,13 +46,16 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00");
+                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.AddDays(-15).ToString("yyyy-MM-dd") + " 00:00:00");
                 date_DenNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
-                cboKhoaHoc.DataSource = KhoaHoc.SelectTheoCoCo();
+                KhoaHocFilter _filter = new KhoaHocFilter();
+                cboKhoaHoc.DataSource = KhoaHocLogic.Select(_filter);
                 cboKhoaHoc.DisplayMember = "TenKhoaHoc";
+                cboKhoaHoc.ValueMember = "KhoaHocId";
                 LoadPhieuGhiDanh();
                 LoadKhoanKhacMacDinh();
                 LoadDanhSachHocVien();
+                btnInBienLai.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -58,7 +66,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             //thPhieuGhiDanh = new Thread(() =>
             //{
-            object source = PhieuGhiDanh.SelectTheoCoSo();
+            object source = PhieuGhiDanhLogic.SelectTheoCoSo();
 
             //gridPhieuGhiDanh.Invoke((MethodInvoker)delegate
             // {
@@ -71,8 +79,8 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                this.lstKhoanKhac = new List<PhieThu_KhoanKhacDTO>();
-                PhieThu_KhoanKhacDTO _new = new PhieThu_KhoanKhacDTO();
+                this.lstKhoanKhac = new List<PhieuThu_KhoanKhacDTO>();
+                PhieuThu_KhoanKhacDTO _new = new PhieuThu_KhoanKhacDTO();
                 _new.stt = 1;
                 this.lstKhoanKhac.Add(_new);
 
@@ -88,7 +96,10 @@ namespace O2S_QuanLyHocVien.Pages
             thHocVien = new Thread(() =>
             {
                 //thPhieuGhiDanh.Join();
-                object source = HocVien.SelectTheoCoSo(date_TuNgay.DateTime, date_DenNgay.DateTime);
+                HocVienFilter _filter = new HocVienFilter();
+                _filter.NgayTiepNhan_Tu = date_TuNgay.DateTime;
+                _filter.NgayTiepNhan_Den = date_DenNgay.DateTime;
+                object source = HocVienLogic.Select(_filter);
 
                 gridControlDSHocVien.Invoke((MethodInvoker)delegate
                 {
@@ -99,31 +110,32 @@ namespace O2S_QuanLyHocVien.Pages
         }
         #endregion
 
-        public void ValidateSearch()
-        {
-            //if (rdMaHV.Checked && txtMaHV.Text == string.Empty)
-            //    throw new ArgumentException("Mã học viên không được trống");
-            //if (rdTenHocVien.Checked && txtTenHocVien.Text == string.Empty)
-            //    throw new ArgumentException("Họ và tên học viên không được trống");
-        }
-
+        #region Process
         public void ValidatePhieu()
         {
-            var rowHandle = gridViewKhoanKhac.FocusedRowHandle;
-            var f = DangKy.SelectAll(gridViewKhoanKhac.GetRowCellValue(rowHandle, "MaHocVien").ToString());
+            var rowHandle = gridViewDSHocVien.FocusedRowHandle;
+
+            PhieuGhiDanhFilter _filter = new PhieuGhiDanhFilter();
+            _filter.HocVienId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewDSHocVien.GetRowCellValue(rowHandle, "HocVienId").ToString());
+
+            var f = PhieuGhiDanhLogic.Select(_filter);
 
             foreach (var i in f)
-                if (i.PHIEUGHIDANH.ConNo > 0)
+            {
+                if (i.ConNo > 0)
                     throw new Exception("Học viên đang nợ không được phép ghi danh mới");
-            if (numDaDong.Value < GlobalSettings.QuyDinh["QD0001"])
+            }
+            if (Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text) < GlobalSettings.QuyDinh["QD0001"])
                 throw new Exception(string.Format("Số tiền đóng khi ghi danh phải ít nhất bằng {0:C0}", GlobalSettings.QuyDinh["QD0001"]));
         }
+
+        #endregion
 
         #region Events
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.LapPhieuGhiDanh = null;
+            //GlobalPages.LapPhieuGhiDanh = null;
         }
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
@@ -137,85 +149,86 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
 
-        private void gridPhieuGhiDanh_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            lblTongCongPhieu.Text = string.Format("Tổng cộng: {0} phiếu ghi danh", gridPhieuGhiDanh.Rows.Count);
-        }
-
-        private void gridPhieuGhiDanh_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            lblTongCongPhieu.Text = string.Format("Tổng cộng: {0} phiếu ghi danh", gridPhieuGhiDanh.Rows.Count);
-        }
 
         private void btnLuuPhieu_Click(object sender, EventArgs e)
         {
             try
             {
                 ValidatePhieu();
-                var rowHandle = gridViewKhoanKhac.FocusedRowHandle;
-                MaKhoaHoc = ((KHOAHOC)cboKhoaHoc.SelectedValue).MaKhoaHoc;
-                PhieuGhiDanh.Insert(new PHIEUGHIDANH()
+                //var rowHandle = gridViewKhoanKhac.FocusedRowHandle;
+                //Insert bang PHIEUGHIDANH
+                //insert bang PHIEUTHU; HOCPHIHOCVIEN
+                //cap nhat bang HOCVIEN trang thai hoc vien = hoc vien chinh thuc + TAIKHOAN=chinh thuc
+                PHIEUGHIDANH _phieughidanh = new PHIEUGHIDANH();
+                _phieughidanh.HocVienId = this.HocVienId_Select;
+                _phieughidanh.KhoaHocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
+                _phieughidanh.NgayGhiDanh = DateTime.ParseExact(dateNgayGhiDanh.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture);
+                _phieughidanh.TongTien = Common.TypeConvert.TypeConvertParse.ToDecimal(numTongTien.Text);
+                _phieughidanh.DaDong = Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text);
+                _phieughidanh.ConNo = Common.TypeConvert.TypeConvertParse.ToDecimal(numConNo.Text);
+                if (GlobalSettings.UserID != -1)
                 {
-                    MaPhieu = maPhieu,
-                    NgayGhiDanh = DateTime.ParseExact(dateNgayGhiDanh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    DaDong = numDaDong.Value,
-                    ConNo = Common.TypeConvert.TypeConvertParse.ToDecimal(numConNo.Text),
-                    MaNhanVien = GlobalSettings.UserID,
-
-                    //DANGKies = new DANGKY()
-                    //{
-                    //    MaHocVien = maHV,
-                    //    MaKhoaHoc = MaKhoaHoc,
-                    //    MaPhieu = maPhieu
-                    //}
-
-                    //DANGKies = new System.Data.Linq.EntitySet<DANGKY>()
-                    //{
-                    //    //MaHocVien = maHV,
-                    //    //MaKhoaHoc = MaKhoaHoc,
-                    //    //MaPhieu = maPhieu
-                    //}
-
-                });
-                DangKy.Insert(new DANGKY()
-                {
-                    MaHocVien = MaHocVienSelect,
-                    MaKhoaHoc = MaKhoaHoc,
-                    MaPhieu = maPhieu
-                });
-
-                MessageBox.Show(string.Format("Phiếu ghi danh {0} đã được thêm thành công", maPhieu), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                var h = HocVien.Select(MaHocVienSelect);
-                if (h.MaLoaiHocVien == "LHV00")
-                {
-                    HocVien.Update(new HOCVIEN()
-                    {
-                        MaHocVien = h.MaHocVien,
-                        TenHocVien = h.TenHocVien,
-                        GioiTinhHocVien = h.GioiTinhHocVien,
-                        NgaySinh = h.NgaySinh,
-                        DiaChi = h.DiaChi,
-                        SdtHocVien = h.SdtHocVien,
-                        EmailHocVien = h.EmailHocVien,
-                        NgayTiepNhan = h.NgayTiepNhan,
-                        MaLoaiHocVien = "LHV01",
-                        TenDangNhap = h.MaHocVien,
-                    },
-                    new TAIKHOAN()
-                    {
-                        TenDangNhap = h.MaHocVien,
-                        MatKhau = h.MaHocVien
-                    });
-                    MessageBox.Show(string.Format("Học viên {0} đã được chuyển thành học viên chính thức với tài khoản:{1}Tên đăng nhập: {2}{3}Mật khẩu: {4}",
-                        h.TenHocVien, Environment.NewLine, h.MaHocVien, Environment.NewLine, h.MaHocVien),
-                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _phieughidanh.NhanVienId = GlobalSettings.UserID;
                 }
 
-                isSave = true;
-                LoadPhieuGhiDanh();
-                if (MessageBox.Show("Bạn có muốn in phiếu ghi danh vừa lưu?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    btnInBienLai_Click(sender, e);
+                //insert bang PHIEUTHU
+                PHIEUTHU _phieuthu = new PHIEUTHU();
+                List<HOCPHIHOCVIEN> _lsthphv = new List<HOCPHIHOCVIEN>();
+                if (Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text) > 0)
+                {
+                    //_phieuthuInsert.PhieuGhiDanhId = this.PhieuGhiDanhId;
+                    _phieuthu.HocVienId = this.HocVienId_Select;
+                    _phieuthu.ThoiGianThu = DateTime.Now;
+                    _phieuthu.SoTien = Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text);
+                    _phieuthu.GhiChu = "Thu tiền lập phiếu ghi danh";
+                    //Tien Khoa Hoc
+                    HOCPHIHOCVIEN _hphv_kh = new HOCPHIHOCVIEN()
+                    {
+                        HocVienId = this.HocVienId_Select,
+                        DmDichVuId = Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString()),
+                        TenDichVu = cboKhoaHoc.Text,
+                        SoTien = Common.TypeConvert.TypeConvertParse.ToDecimal(numHocPhi.Text),
+                        SoLuong = 1,
+                        //PhieuThuId = _phieuthuId,
+                        GhiChu = "Thu tiền khóa học",
+                    };
+                    _lsthphv.Add(_hphv_kh);
+
+                    //tien khoan Khac
+                    if (gridViewKhoanKhac.RowCount > 0)
+                    {
+                        for (int i = 0; i < gridViewKhoanKhac.RowCount; i++)
+                        {
+                            HOCPHIHOCVIEN _hphv_khac = new HOCPHIHOCVIEN()
+                            {
+                                HocVienId = this.HocVienId_Select,
+                                DmDichVuId = 0,
+                                TenDichVu = gridViewKhoanKhac.GetRowCellValue(i, "noidung") == null ? "" : gridViewKhoanKhac.GetRowCellValue(i, "noidung").ToString(),
+                                SoTien = Common.TypeConvert.TypeConvertParse.ToDecimal(gridViewKhoanKhac.GetRowCellValue(i, "sotien").ToString()),
+                                SoLuong = 1,
+                                //PhieuThuId = _phieuthuId,
+                                GhiChu = gridViewKhoanKhac.GetRowCellValue(i, "ghichu") == null ? "" : gridViewKhoanKhac.GetRowCellValue(i, "ghichu").ToString(),
+                            };
+                            _lsthphv.Add(_hphv_khac);
+                        }
+                    }
+                }
+
+                if (PhieuGhiDanhLogic.InsertPGDFull(_phieughidanh, _phieuthu, _lsthphv, ref this.PhieuGhiDanhId))
+                {
+                    HOCVIEN _hv = HocVienLogic.SelectSingle(this.HocVienId_Select);
+                    MessageBox.Show(string.Format("Học viên {0} đã được chuyển thành học viên chính thức với tài khoản:{1}Tên đăng nhập: {2}{3}Mật khẩu: {4}",
+                 _hv.TenHocVien, Environment.NewLine, _hv.MaHocVien, Environment.NewLine, _hv.MaHocVien),
+                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    isSave = true;
+                    btnInBienLai.Enabled = true;
+                    LoadPhieuGhiDanh();
+                    if (MessageBox.Show("Bạn có muốn in phiếu ghi danh vừa lưu?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        btnInBienLai_Click(sender, e);
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -225,50 +238,96 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnInBienLai_Click(object sender, EventArgs e)
         {
-            if (isSave)
+            try
             {
-                frmReport frm = new frmReport();
+                SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
 
-                DANGKY d = DangKy.Select(MaHocVienSelect, MaKhoaHoc, maPhieu);
+                HOCVIEN _hocvien = HocVienLogic.SelectSingle(this.HocVienId_Select);
 
-                List<ReportParameter> _params = new List<ReportParameter>()
+                List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
+
+                reportExcelDTO item_MAHOCVIEN = new reportExcelDTO();
+                item_MAHOCVIEN.name = "MAHOCVIEN";
+                item_MAHOCVIEN.value = lblMaHocVien.Text;
+                thongTinThem.Add(item_MAHOCVIEN);
+
+                reportExcelDTO item_TENHOCVIEN = new reportExcelDTO();
+                item_TENHOCVIEN.name = "TENHOCVIEN";
+                item_TENHOCVIEN.value = lblTenHocVien.Text;
+                thongTinThem.Add(item_TENHOCVIEN);
+
+                reportExcelDTO item_DIACHI = new reportExcelDTO();
+                item_DIACHI.name = "DIACHI";
+                item_DIACHI.value = _hocvien.DiaChi;
+                thongTinThem.Add(item_DIACHI);
+
+                reportExcelDTO item_KHOAHOC = new reportExcelDTO();
+                item_KHOAHOC.name = "KHOAHOC";
+                item_KHOAHOC.value = cboKhoaHoc.Text;
+                thongTinThem.Add(item_KHOAHOC);
+
+                reportExcelDTO item_NAMSINH = new reportExcelDTO();
+                item_NAMSINH.name = "NAMSINH";
+                item_NAMSINH.value = _hocvien.NgaySinh!= null ? _hocvien.NgaySinh.ToString() : "";
+                thongTinThem.Add(item_NAMSINH);
+
+                reportExcelDTO item_LOPHOC = new reportExcelDTO();
+                item_LOPHOC.name = "LOPHOC";
+                item_LOPHOC.value = "";
+                thongTinThem.Add(item_LOPHOC);
+
+                reportExcelDTO item_sotienchu = new reportExcelDTO();
+                item_sotienchu.name = "SOTIENBANGCHU";
+                item_sotienchu.value = Common.String.StringConvert.CurrencyToVneseString(numDaDong.Text.Replace(".", ""));
+                thongTinThem.Add(item_sotienchu);
+
+                DataTable dataExport = new DataTable();
+                dataExport.Columns.Add("STT", typeof(string));
+                dataExport.Columns.Add("KHOANTHU", typeof(string));
+                dataExport.Columns.Add("SOTIEN", typeof(string));
+                dataExport.Columns.Add("GHICHU", typeof(string));
+                DataRow newRow = dataExport.NewRow();
+                newRow["STT"] = "1";
+                newRow["KHOANTHU"] = cboKhoaHoc.Text;
+                newRow["SOTIEN"] = Common.Number.NumberConvert.NumberToString(Common.TypeConvert.TypeConvertParse.ToDecimal(numHocPhi.Text), 0);
+                newRow["GHICHU"] = "";
+                dataExport.Rows.Add(newRow);
+
+                if (gridViewKhoanKhac.RowCount > 0)
                 {
-                    new ReportParameter("CenterName", GlobalSettings.CenterName),
-                    new ReportParameter("CenterWebsite", GlobalSettings.CenterWebsite),
-                    new ReportParameter("MaHocVien", MaHocVienSelect),
-                    new ReportParameter("TenHocVien", d.HOCVIEN.TenHocVien),
-                    new ReportParameter("TenKhoaHoc", d.KHOAHOC.TenKhoaHoc),
-                    new ReportParameter("HocPhi",((decimal)d.KHOAHOC.HocPhi).ToString("C0")),
-                    new ReportParameter("DaDong", ((decimal)d.PHIEUGHIDANH.DaDong).ToString("C0")),
-                    new ReportParameter("ConNo", ((decimal)d.PHIEUGHIDANH.ConNo).ToString("C0")),
-                };
+                    for (int i = 0; i < gridViewKhoanKhac.RowCount; i++)
+                    {
+                        DataRow newRow_khac = dataExport.NewRow();
+                        newRow_khac["STT"] = (i + 2).ToString();
+                        newRow_khac["KHOANTHU"] = gridViewKhoanKhac.GetRowCellValue(i, "noidung") == null ? "" : gridViewKhoanKhac.GetRowCellValue(i, "noidung").ToString();
+                        newRow_khac["SOTIEN"] = Common.Number.NumberConvert.NumberToString(Common.TypeConvert.TypeConvertParse.ToDecimal(gridViewKhoanKhac.GetRowCellValue(i, "sotien").ToString()),0);
+                        newRow_khac["GHICHU"] = gridViewKhoanKhac.GetRowCellValue(i, "ghichu") == null ? "" : gridViewKhoanKhac.GetRowCellValue(i, "ghichu").ToString();
+                        dataExport.Rows.Add(newRow_khac);
+                    }
+                }
 
-                // frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptBienLaiHocPhi.rdlc";
-                frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptBienLaiHocPhi.rdlc";
-                frm.ReportViewer.LocalReport.SetParameters(_params);
-                frm.ReportViewer.LocalReport.DisplayName = "Biên lai học phí";
-                frm.Text = "Biên lai học phí";
-
-                frm.ShowDialog();
+                string fileTemplatePath = "BienLaiThuTien_NopTien.xlsx"; Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
             }
-            else
-                MessageBox.Show("Vui lòng lưu phiếu trước khi in", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+            SplashScreenManager.CloseForm();
         }
         private void gridControlDSHocVien_Click(object sender, EventArgs e)
         {
             try
             {
                 isSave = false;
-                numDaDong.Value = 0;
-                var rowHandle = gridViewKhoanKhac.FocusedRowHandle;
-                this.MaHocVienSelect = gridViewKhoanKhac.GetRowCellValue(rowHandle, "MaHocVien").ToString();
-                lblMaHocVien.Text = this.MaHocVienSelect;
+                numDaDong.Text = "0";
+                var rowHandle = gridViewDSHocVien.FocusedRowHandle;
+                this.HocVienId_Select = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewDSHocVien.GetRowCellValue(rowHandle, "HocVienId").ToString());
+                lblMaHocVien.Text = gridViewDSHocVien.GetRowCellValue(rowHandle, "MaHocVien").ToString();
 
-                lblTenHocVien.Text = gridViewKhoanKhac.GetRowCellValue(rowHandle, "TenHocVien").ToString();
+                lblTenHocVien.Text = gridViewDSHocVien.GetRowCellValue(rowHandle, "TenHocVien").ToString();
+                dateNgayGhiDanh.DateTime = DateTime.Now;
 
-
-
-
+                btnInBienLai.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -282,13 +341,13 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 var rowHandle = gridViewKhoanKhac.FocusedRowHandle;
                 int _stt = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewKhoanKhac.GetRowCellValue(rowHandle, "stt").ToString());
-                PhieThu_KhoanKhacDTO _delete = this.lstKhoanKhac.Where(o => o.stt == _stt).FirstOrDefault();
+                PhieuThu_KhoanKhacDTO _delete = this.lstKhoanKhac.Where(o => o.stt == _stt).FirstOrDefault();
                 this.lstKhoanKhac.Remove(_delete);
                 gridControlKhoanKhac.DataSource = null;
                 gridControlKhoanKhac.DataSource = this.lstKhoanKhac;
                 if (this.lstKhoanKhac == null || this.lstKhoanKhac.Count > 0)
                 {
-                    PhieThu_KhoanKhacDTO _new = new PhieThu_KhoanKhacDTO();
+                    PhieuThu_KhoanKhacDTO _new = new PhieuThu_KhoanKhacDTO();
                     _new.stt = 1;
                     gridControlKhoanKhac.DataSource = null;
                     gridControlKhoanKhac.DataSource = this.lstKhoanKhac;
@@ -304,7 +363,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                PhieThu_KhoanKhacDTO _new = new PhieThu_KhoanKhacDTO();
+                PhieuThu_KhoanKhacDTO _new = new PhieuThu_KhoanKhacDTO();
                 _new.stt = this.lstKhoanKhac.Count + 1;
                 this.lstKhoanKhac.Add(_new);
                 gridControlKhoanKhac.DataSource = null;
@@ -321,14 +380,33 @@ namespace O2S_QuanLyHocVien.Pages
         #region Custom
         private void cboKhoaHoc_SelectedValueChanged(object sender, EventArgs e)
         {
-            numHocPhi.Text = Common.Number.NumberConvert.NumberToString(((KHOAHOC)cboKhoaHoc.SelectedValue).HocPhi ?? 0, 0);
+            try
+            {
+                KHOAHOC _khoahoc = KhoaHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString()));
+                if (_khoahoc != null)
+                {
+                    numHocPhi.Text = Common.Number.NumberConvert.NumberToString((_khoahoc.HocPhi ?? 0), 0);
+                }
+                //numDaDong.Maximum = Common.TypeConvert.TypeConvertParse.ToDecimal(numHocPhi.Text);
 
-            numDaDong.Maximum = Common.TypeConvert.TypeConvertParse.ToDecimal(numHocPhi.Text);
-            numConNo.Text = Common.Number.NumberConvert.NumberToString((Common.TypeConvert.TypeConvertParse.ToDecimal(numHocPhi.Text) - numDaDong.Value), 0);
-        }
-        private void numDaDong_ValueChanged(object sender, EventArgs e)
-        {
-            numConNo.Text = Common.Number.NumberConvert.NumberToString((Common.TypeConvert.TypeConvertParse.ToDecimal(numHocPhi.Text) - numDaDong.Value), 0);
+                decimal _tongtien = 0;
+                _tongtien += Common.TypeConvert.TypeConvertParse.ToDecimal(numHocPhi.Text);
+                if (gridViewKhoanKhac.RowCount > 0)
+                {
+                    for (int i = 0; i < gridViewKhoanKhac.RowCount; i++)
+                    {
+                        _tongtien += Common.TypeConvert.TypeConvertParse.ToDecimal(gridViewKhoanKhac.GetRowCellValue(i, "sotien").ToString());
+                    }
+                }
+                numTongTien.Text = Common.Number.NumberConvert.NumberToString(_tongtien, 0);
+
+                numConNo.Text = Common.Number.NumberConvert.NumberToString((Common.TypeConvert.TypeConvertParse.ToDecimal(numTongTien.Text) - Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text)), 0);
+
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
         private void gridViewDSHocVien_RowCountChanged(object sender, EventArgs e)
         {
@@ -342,13 +420,20 @@ namespace O2S_QuanLyHocVien.Pages
                 Common.Logging.LogSystem.Warn(ex);
             }
         }
-        #endregion
-
         private void gridViewKhoanKhac_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             try
             {
-
+                decimal _tongtien = 0;
+                _tongtien += Common.TypeConvert.TypeConvertParse.ToDecimal(numHocPhi.Text);
+                if (gridViewKhoanKhac.RowCount > 0)
+                {
+                    for (int i = 0; i < gridViewKhoanKhac.RowCount; i++)
+                    {
+                        _tongtien += Common.TypeConvert.TypeConvertParse.ToDecimal(gridViewKhoanKhac.GetRowCellValue(i, "sotien").ToString());
+                    }
+                }
+                numTongTien.Text = Common.Number.NumberConvert.NumberToString(_tongtien, 0);
             }
             catch (Exception ex)
             {
@@ -372,5 +457,50 @@ namespace O2S_QuanLyHocVien.Pages
                 Common.Logging.LogSystem.Warn(ex);
             }
         }
+        private void numTongTien_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                numConNo.Text = Common.Number.NumberConvert.NumberToString((Common.TypeConvert.TypeConvertParse.ToDecimal(numTongTien.Text) - Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text)), 0);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        private void numDaDong_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void numDaDong_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                numConNo.Text = Common.Number.NumberConvert.NumberToString((Common.TypeConvert.TypeConvertParse.ToDecimal(numTongTien.Text) - Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text)), 0);
+                //numDaDong.Text = String.Format("{0:#,##0}", Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text));
+                //Common.Number.NumberConvert.NumberToString(Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text), 0);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private void gridPhieuGhiDanh_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            lblTongCongPhieu.Text = string.Format("Tổng cộng: {0} phiếu ghi danh", gridPhieuGhiDanh.Rows.Count);
+        }
+
+        private void gridPhieuGhiDanh_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            lblTongCongPhieu.Text = string.Format("Tổng cộng: {0} phiếu ghi danh", gridPhieuGhiDanh.Rows.Count);
+        }
+
+        #endregion
+
+
     }
 }

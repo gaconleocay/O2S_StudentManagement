@@ -28,11 +28,11 @@ namespace O2S_QuanLyHocVien.Pages
         /// </summary>
         /// <param name="maHV">Mã học viên</param>
         /// <param name="maLop">Mã lớp</param>
-        public void LoadBangDiem(string maHV, string maLop)
+        public void LoadBangDiem(int maHV, int maLop)
         {
             try
             {
-                var bangDiem = BangDiem.SelectDetail(maHV, maLop);
+                var bangDiem = BangDiemLogic.SelectDetail(maHV, maLop);
                 lblTenLop.Text = bangDiem.TenLop;
                 lblTenKhoaHocoa.Text = bangDiem.TenKhoaHoc;
                 lblDiemTrungBinh.Text = bangDiem.DiemTrungBinh.ToString("N2");
@@ -48,15 +48,15 @@ namespace O2S_QuanLyHocVien.Pages
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.BangDiem = null;
+            //GlobalPages.BangDiem = null;
         }
 
         private void frmBangDiem_Load(object sender, EventArgs e)
         {
-            lblTitle.Text = string.Format("Bảng điểm của {0}", TaiKhoan.FullUserName(new TAIKHOAN() { TenDangNhap = GlobalSettings.UserCode }));
-            cboLop.DataSource = BangDiem.SelectDSLop(GlobalSettings.UserID);
-            cboLop.DisplayMember = "TenLop";
-            cboLop.ValueMember = "MaLop";
+            lblTitle.Text = string.Format("Bảng điểm của {0}", TaiKhoanLogic.FullUserName(new TAIKHOAN() { TenDangNhap = GlobalSettings.UserCode }));
+            cboLop.DataSource = BangDiemLogic.SelectDSLop(GlobalSettings.UserID);
+            cboLop.DisplayMember = "TenLopHoc";
+            cboLop.ValueMember = "LopHocId";
 
             lblTenLop.Text = lblTenKhoaHocoa.Text = string.Empty;
 
@@ -74,8 +74,8 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 new ReportParameter("CenterName", GlobalSettings.CenterName),
                 new ReportParameter("CenterWebsite", GlobalSettings.CenterWebsite),
-                new ReportParameter("MaHocVien", GlobalSettings.UserID),
-                new ReportParameter("TenHocVien", TaiKhoan.FullUserName(new TAIKHOAN() {TenDangNhap = GlobalSettings.UserCode })),
+                new ReportParameter("MaHocVien", GlobalSettings.UserID.ToString()),
+                new ReportParameter("TenHocVien", TaiKhoanLogic.FullUserName(new TAIKHOAN() {TenDangNhap = GlobalSettings.UserCode })),
                 new ReportParameter("MaLop", cboLop.SelectedValue.ToString()),
                 new ReportParameter("TenLop",lblTenLop.Text),
                 new ReportParameter("TenKhoaHoc", lblTenKhoaHocoa.Text),
@@ -113,7 +113,7 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 if (isLoaded)
-                    LoadBangDiem(GlobalSettings.UserCode, cboLop.SelectedValue.ToString());
+                    LoadBangDiem(GlobalSettings.UserID,Common.TypeConvert.TypeConvertParse.ToInt32( cboLop.SelectedValue.ToString()));
             }
             catch (Exception ex)
             {

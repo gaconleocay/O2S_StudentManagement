@@ -39,12 +39,12 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.gridBaoCao = new System.Windows.Forms.DataGridView();
-            this.clmMaHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.clmHocVienId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmTenHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmGioiTinhHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmGioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmTenKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmConNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -166,9 +166,9 @@
             this.gridBaoCao.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.gridBaoCao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridBaoCao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMaHocVien,
+            this.clmHocVienId,
             this.clmTenHocVien,
-            this.clmGioiTinhHocVien,
+            this.clmGioiTinh,
             this.clmTenKhoaHoc,
             this.clmConNo});
             this.gridBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -184,15 +184,26 @@
             this.gridBaoCao.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridBaoCao_RowsAdded);
             this.gridBaoCao.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridBaoCao_RowsRemoved);
             // 
-            // clmMaHocVien
+            // label2
             // 
-            this.clmMaHocVien.DataPropertyName = "MaHocVien";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label2.ForeColor = System.Drawing.Color.Green;
+            this.label2.Location = new System.Drawing.Point(17, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(287, 21);
+            this.label2.TabIndex = 46;
+            this.label2.Text = "Danh sách các học viên đang nợ học phí";
+            // 
+            // clmHocVienId
+            // 
+            this.clmHocVienId.DataPropertyName = "HocVienId";
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaHocVien.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMaHocVien.FillWeight = 70F;
-            this.clmMaHocVien.HeaderText = "Mã học viên";
-            this.clmMaHocVien.Name = "clmMaHocVien";
-            this.clmMaHocVien.ReadOnly = true;
+            this.clmHocVienId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmHocVienId.FillWeight = 70F;
+            this.clmHocVienId.HeaderText = "Mã học viên";
+            this.clmHocVienId.Name = "clmHocVienId";
+            this.clmHocVienId.ReadOnly = true;
             // 
             // clmTenHocVien
             // 
@@ -202,13 +213,13 @@
             this.clmTenHocVien.Name = "clmTenHocVien";
             this.clmTenHocVien.ReadOnly = true;
             // 
-            // clmGioiTinhHocVien
+            // clmGioiTinh
             // 
-            this.clmGioiTinhHocVien.DataPropertyName = "GioiTinhHocVien";
-            this.clmGioiTinhHocVien.FillWeight = 50F;
-            this.clmGioiTinhHocVien.HeaderText = "Giới tính";
-            this.clmGioiTinhHocVien.Name = "clmGioiTinhHocVien";
-            this.clmGioiTinhHocVien.ReadOnly = true;
+            this.clmGioiTinh.DataPropertyName = "GioiTinh";
+            this.clmGioiTinh.FillWeight = 50F;
+            this.clmGioiTinh.HeaderText = "Giới tính";
+            this.clmGioiTinh.Name = "clmGioiTinh";
+            this.clmGioiTinh.ReadOnly = true;
             // 
             // clmTenKhoaHoc
             // 
@@ -228,17 +239,6 @@
             this.clmConNo.HeaderText = "Còn nợ";
             this.clmConNo.Name = "clmConNo";
             this.clmConNo.ReadOnly = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label2.ForeColor = System.Drawing.Color.Green;
-            this.label2.Location = new System.Drawing.Point(17, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(287, 21);
-            this.label2.TabIndex = 46;
-            this.label2.Text = "Danh sách các học viên đang nợ học phí";
             // 
             // frmThongKeNoHocVien
             // 
@@ -277,9 +277,9 @@
         private System.Windows.Forms.Button btnTaoBaoCao;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.DataGridView gridBaoCao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMaHocVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmHocVienId;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmTenHocVien;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmGioiTinhHocVien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmGioiTinh;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmTenKhoaHoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmConNo;
     }

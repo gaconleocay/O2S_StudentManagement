@@ -9,6 +9,9 @@ using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using O2S_QuanLyHocVien.Popups;
 using System.Globalization;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using O2S_QuanLyHocVien.BusinessLogic.Model;
+using System.Collections.Generic;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -19,21 +22,28 @@ namespace O2S_QuanLyHocVien.Pages
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Kiểm tra nhập liệu tìm kiếm có hợp lệ
-        /// </summary>
-        public void ValidateSearch()
+        private void frmQuanLyHocVien_Load(object sender, EventArgs e)
         {
-            if (chkMaHV.Checked && txtMaHV.Text == string.Empty)
-                throw new ArgumentException("Mã học viên không được trống");
-            if (chkTenHocVien.Checked && txtTenHocVien.Text == string.Empty)
-                throw new ArgumentException("Họ và tên học viên không được trống");
+            try
+            {
+                cboLoaiHV.DataSource = LoaiHocVienLogic.SelectAll();
+                cboLoaiHV.DisplayMember = "TenLoaiHocVien";
+                cboLoaiHV.ValueMember = "LoaiHocVienId";
+
+                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.AddDays(-15).ToString("yyyy-MM-dd") + " 00:00:00");
+                date_DenNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
+                LayDanhSachHocVien();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            GlobalPages.QuanLyHocVien = null;
+            //GlobalPages.QuanLyHocVien = null;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -41,50 +51,10 @@ namespace O2S_QuanLyHocVien.Pages
             frmHocVienEdit frm = new frmHocVienEdit(null);
             frm.Text = "Thêm học viên mới";
             frm.ShowDialog();
-            btnXemTatCa_Click(sender, e);
+            LayDanhSachHocVien();
         }
 
-        private void chkMaHV_CheckedChanged(object sender, EventArgs e)
-        {
-            txtMaHV.Enabled = chkMaHV.Checked;
-        }
 
-        private void chkTenHocVien_CheckedChanged(object sender, EventArgs e)
-        {
-            txtTenHocVien.Enabled = chkTenHocVien.Checked;
-        }
-
-        private void chkGioiTinh_CheckedChanged(object sender, EventArgs e)
-        {
-            cboGioiTinh.Enabled = chkGioiTinh.Checked;
-        }
-
-        private void chkNgayTiepNhan_CheckedChanged(object sender, EventArgs e)
-        {
-            dateTuNgay.Enabled = dateDenNgay.Enabled = chkNgayTiepNhan.Checked;
-        }
-
-        private void btnDatLai_Click(object sender, EventArgs e)
-        {
-            chkMaHV.Checked = true;
-            chkTenHocVien.Checked = chkGioiTinh.Checked = chkNgayTiepNhan.Checked = false;
-
-            txtMaHV.Text = txtTenHocVien.Text = string.Empty;
-            btnXemTatCa_Click(sender, e);
-        }
-
-        private void frmQuanLyHocVien_Load(object sender, EventArgs e)
-        {
-            dateTuNgay.MaxDate = dateDenNgay.MaxDate = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-            cboLoaiHV.DataSource = LoaiHV.SelectAll();
-            cboLoaiHV.DisplayMember = "TenLoaiHocVien";
-            cboLoaiHV.ValueMember = "MaLoaiHocVien";
-
-            cboGioiTinh.SelectedIndex = 0;
-
-            btnXemTatCa_Click(sender, e);
-        }
 
         private void gridDSHV_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
@@ -96,46 +66,42 @@ namespace O2S_QuanLyHocVien.Pages
             lblTongCong.Text = string.Format("Tổng cộng: {0} học viên", gridDSHV.Rows.Count);
         }
 
-        private void btnXemTatCa_Click(object sender, EventArgs e)
+        private void LayDanhSachHocVien()
         {
-            gridDSHV.AutoGenerateColumns = false;
-            gridDSHV.DataSource = HocVien.SelectAll(cboLoaiHV.SelectedValue.ToString());
-        }
+            try
+            {
+                gridDSHV.AutoGenerateColumns = false;
 
-        private void cboLoaiHV_SelectedValueChanged(object sender, EventArgs e)
-        {
-            btnXemTatCa_Click(sender, e);
+                HocVienFilter _filter = new HocVienFilter();
+                _filter.LoaiHocVienId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLoaiHV.SelectedValue.ToString());
+                _filter.NgayTiepNhan_Tu = date_TuNgay.DateTime;
+                _filter.NgayTiepNhan_Den = date_DenNgay.DateTime;
+
+                List<HocVien_PlusDTO> _lsthocvien = HocVienLogic.Select(_filter);
+                if (_lsthocvien != null && _lsthocvien.Count > 0)
+                {
+                    gridDSHV.DataSource = _lsthocvien;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ValidateSearch();
-
-                gridDSHV.DataSource = HocVien.SelectAll(chkMaHV.Checked ? txtMaHV.Text : null,
-                    chkTenHocVien.Checked ? txtTenHocVien.Text : null,
-                    chkGioiTinh.Checked ? cboGioiTinh.Text : null,
-                    chkNgayTiepNhan.Checked ? (DateTime?)dateTuNgay.Value : null,
-                    chkNgayTiepNhan.Checked ? (DateTime?)dateDenNgay.Value : null,
-                    cboLoaiHV.SelectedValue.ToString());
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            LayDanhSachHocVien();
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            frmHocVienEdit frm = new frmHocVienEdit(HocVien.Select(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString()));
+            int _hocvienId = Common.TypeConvert.TypeConvertParse.ToInt32(gridDSHV.SelectedRows[0].Cells["clmHocVienId"].Value.ToString());
+            frmHocVienEdit frm = new frmHocVienEdit(HocVienLogic.SelectSingle(_hocvienId));
             frm.Text = "Cập nhật thông tin học viên";
             frm.ShowDialog();
-            btnXemTatCa_Click(sender, e);
+            LayDanhSachHocVien();
         }
 
         private void gridDSHV_DoubleClick(object sender, EventArgs e)
@@ -149,10 +115,11 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    HocVien.Delete(gridDSHV.SelectedRows[0].Cells["clmMaHocVien"].Value.ToString());
+                    int _hocvienId = Common.TypeConvert.TypeConvertParse.ToInt32(gridDSHV.SelectedRows[0].Cells["clmHocVienId"].Value.ToString());
+                    HocVienLogic.Delete(_hocvienId);
 
                     MessageBox.Show("Xóa học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    btnXemTatCa_Click(sender, e);
+                    LayDanhSachHocVien();
                 }
             }
             catch
@@ -161,9 +128,6 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
 
-        private void dateDenNgay_ValueChanged(object sender, EventArgs e)
-        {
-            dateTuNgay.MaxDate = dateDenNgay.Value;
-        }
+
     }
 }

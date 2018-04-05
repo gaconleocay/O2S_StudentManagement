@@ -143,6 +143,12 @@
     <Compile Include="Base\ReadExcelFile.cs" />
     <Compile Include="Base\ThongBaoLable.cs" />
     <Compile Include="DAL\ConnectDatabase.cs" />
+    <Compile Include="frmMainHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainHome.Designer.cs">
+      <DependentUpon>frmMainHome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\frmBangDiem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -420,6 +426,12 @@
     <Compile Include="Utilities\ThongBao\WaitForm1.Designer.cs">
       <DependentUpon>WaitForm1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmMainHome.resx">
+      <DependentUpon>frmMainHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainHome.vi-VN.resx">
+      <DependentUpon>frmMainHome.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\frmBangDiem.resx">
       <DependentUpon>frmBangDiem.cs</DependentUpon>
     </EmbeddedResource>
@@ -614,7 +626,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Reports\BienLaiThuTien_NopTien.xlsx">
+    <Content Include="Templates\BienLaiThuTien_NopTien.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Reports\dsSource.xsc">
