@@ -1,6 +1,6 @@
 ﻿namespace O2S_QuanLyHocVien.Popups
 {
-    partial class frmThayDoiThongTinHV
+    partial class frmThayDoiThongTinHocVien
     {
         /// <summary>
         /// Required designer variable.

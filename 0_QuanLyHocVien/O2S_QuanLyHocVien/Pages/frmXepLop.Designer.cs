@@ -33,11 +33,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnThemVaoLop = new System.Windows.Forms.Button();
             this.lblTongCongHV = new System.Windows.Forms.Label();
             this.gridDSHV = new System.Windows.Forms.DataGridView();
+            this.clmHocVienId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmPhieuGhiDanhId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnBoKhoiLop = new System.Windows.Forms.Button();
@@ -45,15 +48,6 @@
             this.btnLuuLop = new System.Windows.Forms.Button();
             this.lblTongCongHVLop = new System.Windows.Forms.Label();
             this.gridDSHVLop = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cboLop = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cboKhoa = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.clmHocVienId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmPhieuGhiDanhId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmMaHVLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmNgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +55,11 @@
             this.clmSdtHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmMaPhieuLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cboLop = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cboKhoa = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -75,7 +74,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.btnClose);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -91,20 +89,6 @@
             this.label1.Size = new System.Drawing.Size(53, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "XẾP LỚP";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.LightGray;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Image = global::O2S_QuanLyHocVien.Properties.Resources.icon_Close_9dp;
-            this.btnClose.Location = new System.Drawing.Point(1074, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(28, 19);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // splitContainer1
             // 
@@ -184,6 +168,32 @@
             this.gridDSHV.TabIndex = 13;
             this.gridDSHV.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridDSHV_RowsAdded);
             this.gridDSHV.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridDSHV_RowsRemoved);
+            // 
+            // clmHocVienId
+            // 
+            this.clmHocVienId.DataPropertyName = "HocVienId";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmHocVienId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmHocVienId.HeaderText = "Mã học viên";
+            this.clmHocVienId.Name = "clmHocVienId";
+            // 
+            // clmTenHocVien
+            // 
+            this.clmTenHocVien.DataPropertyName = "TenHocVien";
+            this.clmTenHocVien.HeaderText = "Họ và tên";
+            this.clmTenHocVien.Name = "clmTenHocVien";
+            // 
+            // clmPhieuGhiDanhId
+            // 
+            this.clmPhieuGhiDanhId.DataPropertyName = "PhieuGhiDanhId";
+            this.clmPhieuGhiDanhId.HeaderText = "Mã phiếu";
+            this.clmPhieuGhiDanhId.Name = "clmPhieuGhiDanhId";
+            // 
+            // clmKhoaHoc
+            // 
+            this.clmKhoaHoc.DataPropertyName = "TenKhoaHoc";
+            this.clmKhoaHoc.HeaderText = "Khóa học";
+            this.clmKhoaHoc.Name = "clmKhoaHoc";
             // 
             // label2
             // 
@@ -311,81 +321,6 @@
             this.gridDSHVLop.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridDSHVLop_RowsAdded);
             this.gridDSHVLop.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridDSHVLop_RowsRemoved);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 45);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(162, 15);
-            this.label5.TabIndex = 68;
-            this.label5.Text = "Danh sách học viên trong lớp";
-            // 
-            // cboLop
-            // 
-            this.cboLop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLop.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cboLop.FormattingEnabled = true;
-            this.cboLop.Location = new System.Drawing.Point(411, 11);
-            this.cboLop.Name = "cboLop";
-            this.cboLop.Size = new System.Drawing.Size(215, 25);
-            this.cboLop.TabIndex = 67;
-            this.cboLop.SelectedValueChanged += new System.EventHandler(this.cboLop_SelectedValueChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(288, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 15);
-            this.label4.TabIndex = 66;
-            this.label4.Text = "Danh sách lớp trống:";
-            // 
-            // cboKhoa
-            // 
-            this.cboKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboKhoa.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cboKhoa.FormattingEnabled = true;
-            this.cboKhoa.Location = new System.Drawing.Point(87, 11);
-            this.cboKhoa.Name = "cboKhoa";
-            this.cboKhoa.Size = new System.Drawing.Size(188, 25);
-            this.cboKhoa.TabIndex = 65;
-            this.cboKhoa.SelectedValueChanged += new System.EventHandler(this.cboKhoa_SelectedValueChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 15);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Chọn khóa:";
-            // 
-            // clmHocVienId
-            // 
-            this.clmHocVienId.DataPropertyName = "HocVienId";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmHocVienId.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmHocVienId.HeaderText = "Mã học viên";
-            this.clmHocVienId.Name = "clmHocVienId";
-            // 
-            // clmTenHocVien
-            // 
-            this.clmTenHocVien.DataPropertyName = "TenHocVien";
-            this.clmTenHocVien.HeaderText = "Họ và tên";
-            this.clmTenHocVien.Name = "clmTenHocVien";
-            // 
-            // clmPhieuGhiDanhId
-            // 
-            this.clmPhieuGhiDanhId.DataPropertyName = "PhieuGhiDanhId";
-            this.clmPhieuGhiDanhId.HeaderText = "Mã phiếu";
-            this.clmPhieuGhiDanhId.Name = "clmPhieuGhiDanhId";
-            // 
-            // clmKhoaHoc
-            // 
-            this.clmKhoaHoc.DataPropertyName = "TenKhoaHoc";
-            this.clmKhoaHoc.HeaderText = "Khóa học";
-            this.clmKhoaHoc.Name = "clmKhoaHoc";
-            // 
             // clmMaHVLop
             // 
             this.clmMaHVLop.DataPropertyName = "HocVienId";
@@ -439,6 +374,55 @@
             this.clmMaPhieuLop.Name = "clmMaPhieuLop";
             this.clmMaPhieuLop.ReadOnly = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 45);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(162, 15);
+            this.label5.TabIndex = 68;
+            this.label5.Text = "Danh sách học viên trong lớp";
+            // 
+            // cboLop
+            // 
+            this.cboLop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLop.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboLop.FormattingEnabled = true;
+            this.cboLop.Location = new System.Drawing.Point(411, 11);
+            this.cboLop.Name = "cboLop";
+            this.cboLop.Size = new System.Drawing.Size(215, 25);
+            this.cboLop.TabIndex = 67;
+            this.cboLop.SelectedValueChanged += new System.EventHandler(this.cboLop_SelectedValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(288, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(117, 15);
+            this.label4.TabIndex = 66;
+            this.label4.Text = "Danh sách lớp trống:";
+            // 
+            // cboKhoa
+            // 
+            this.cboKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboKhoa.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboKhoa.FormattingEnabled = true;
+            this.cboKhoa.Location = new System.Drawing.Point(87, 11);
+            this.cboKhoa.Name = "cboKhoa";
+            this.cboKhoa.Size = new System.Drawing.Size(188, 25);
+            this.cboKhoa.TabIndex = 65;
+            this.cboKhoa.SelectedValueChanged += new System.EventHandler(this.cboKhoa_SelectedValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(68, 15);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Chọn khóa:";
+            // 
             // frmXepLop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -472,7 +456,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView gridDSHV;

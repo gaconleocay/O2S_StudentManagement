@@ -14,11 +14,11 @@ using System.Data;
 
 namespace O2S_QuanLyHocVien.Pages
 {
-    public partial class frmBangDiem : Form
+    public partial class frmBangDiemCaNhan : Form
     {
         private bool isLoaded = false;
 
-        public frmBangDiem()
+        public frmBangDiemCaNhan()
         {
             InitializeComponent();
         }

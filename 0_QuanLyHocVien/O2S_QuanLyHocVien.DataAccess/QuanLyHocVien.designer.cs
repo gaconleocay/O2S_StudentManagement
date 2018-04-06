@@ -96,7 +96,7 @@ namespace O2S_QuanLyHocVien.DataAccess
     #endregion
 		
 		public QuanLyHocVienDataContext() : 
-				base(global::O2S_QuanLyHocVien.DataAccess.Properties.Settings.Default.O2S_QLHVConnectionString, mappingSource)
+				base(global::O2S_QuanLyHocVien.DataAccess.ConnectDB.ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

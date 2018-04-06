@@ -14,9 +14,9 @@ using System.Data;
 
 namespace O2S_QuanLyHocVien.Pages
 {
-    public partial class frmBaoCaoHocVienTheoThang : Form
+    public partial class frmBaoCaoHocVienGhiDanh : Form
     {
-        public frmBaoCaoHocVienTheoThang()
+        public frmBaoCaoHocVienGhiDanh()
         {
             InitializeComponent();
             gridBaoCao.AutoGenerateColumns = false;

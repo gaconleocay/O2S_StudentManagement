@@ -12,9 +12,9 @@ using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
 {
-    public partial class frmCacLopDaHoc : Form
+    public partial class frmCacLopDaHocCaNhan : Form
     {
-        public frmCacLopDaHoc()
+        public frmCacLopDaHocCaNhan()
         {
             InitializeComponent();
         }

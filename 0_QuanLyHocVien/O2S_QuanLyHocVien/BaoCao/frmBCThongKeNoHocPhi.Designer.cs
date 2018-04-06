@@ -1,6 +1,6 @@
 ﻿namespace O2S_QuanLyHocVien.Pages
 {
-    partial class frmThongKeNoHocVien
+    partial class frmBCThongKeNoHocPhi
     {
         /// <summary>
         /// Required designer variable.
@@ -32,19 +32,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnTaoBaoCao = new System.Windows.Forms.Button();
             this.lblTongCong = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.gridBaoCao = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
             this.clmHocVienId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmTenHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmGioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmTenKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmConNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -56,7 +55,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.btnClose);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -72,20 +70,6 @@
             this.label1.Size = new System.Drawing.Size(146, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "THỐNG KÊ NỢ HỌC VIÊN";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.LightGray;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Image = global::O2S_QuanLyHocVien.Properties.Resources.icon_Close_9dp;
-            this.btnClose.Location = new System.Drawing.Point(906, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(28, 19);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // panel2
             // 
@@ -184,17 +168,6 @@
             this.gridBaoCao.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridBaoCao_RowsAdded);
             this.gridBaoCao.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridBaoCao_RowsRemoved);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label2.ForeColor = System.Drawing.Color.Green;
-            this.label2.Location = new System.Drawing.Point(17, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(287, 21);
-            this.label2.TabIndex = 46;
-            this.label2.Text = "Danh sách các học viên đang nợ học phí";
-            // 
             // clmHocVienId
             // 
             this.clmHocVienId.DataPropertyName = "HocVienId";
@@ -240,6 +213,17 @@
             this.clmConNo.Name = "clmConNo";
             this.clmConNo.ReadOnly = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label2.ForeColor = System.Drawing.Color.Green;
+            this.label2.Location = new System.Drawing.Point(17, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(287, 21);
+            this.label2.TabIndex = 46;
+            this.label2.Text = "Danh sách các học viên đang nợ học phí";
+            // 
             // frmThongKeNoHocVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -269,7 +253,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

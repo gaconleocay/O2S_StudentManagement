@@ -59,13 +59,15 @@ namespace O2S_QuanLyHocVien.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=O2S_QLHV;Integrated Security=True")]
-        public string QLHVTTECConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConnectionString {
             get {
-                return ((string)(this["QLHVTTECConnectionString"]));
+                return ((string)(this["ConnectionString"]));
+            }
+            set {
+                this["ConnectionString"] = value;
             }
         }
     }

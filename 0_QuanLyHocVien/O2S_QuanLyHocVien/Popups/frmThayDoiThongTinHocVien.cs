@@ -11,11 +11,11 @@ using System.Globalization;
 
 namespace O2S_QuanLyHocVien.Popups
 {
-    public partial class frmThayDoiThongTinHV : Form
+    public partial class frmThayDoiThongTinHocVien : Form
     {
         private HOCVIEN hv;
 
-        public frmThayDoiThongTinHV()
+        public frmThayDoiThongTinHocVien()
         {
             InitializeComponent();
         }

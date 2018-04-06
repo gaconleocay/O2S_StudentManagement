@@ -12,6 +12,9 @@ using System.Data;
 using System.IO;
 using O2S_License.PasswordKey;
 using System.Collections.Generic;
+using System.Net;
+using System.Linq;
+using System.Configuration;
 
 namespace O2S_QuanLyHocVien.Popups
 {
@@ -27,28 +30,41 @@ namespace O2S_QuanLyHocVien.Popups
         {
             try
             {
-                KiemTraInsertMayTram();
-                LoadDefaultValue();
-                KiemTraVaCopyFileLaucherNew();
+                if (!GlobalSettings.ConnectToDatabase())
+                {
+                    MessageBox.Show("Không thể kết nối đến cơ sở dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ReconnectDB();
+                }
+                else
+                {
+                    LoadDuLieuChuongTrinh();
+                    KiemTraInsertMayTram();
+                    LoadDefaultValue();
+                    KiemTraVaCopyFileLaucherNew();
+                }
             }
             catch (Exception ex)
             {
                 Common.Logging.LogSystem.Error(ex);
             }
         }
-        private void LoadDefaultValue()
+        private void LoadDuLieuChuongTrinh()
         {
             try
             {
-                chkSave.Checked = Settings.Default.Login_IsSaved;
+                GlobalSettings.LoadCenterInformation();
+                GlobalSettings.LoadQuyDinh();
 
-                if (chkSave.Checked)
+                // Địa chỉ Ip
+                String strHostName = Dns.GetHostName();
+                IPHostEntry iphostentry = Dns.GetHostByName(strHostName);
+                //int nIP = 0;
+                string listIP = "";
+                for (int i = 0; i < iphostentry.AddressList.Count(); i++)
                 {
-                    txtTenDangNhap.Text = Settings.Default.Login_UserName;
-                    txtMatKhau.Text = Settings.Default.Login_Password;
+                    listIP += iphostentry.AddressList[i] + ";";
                 }
-
-                lblNotification.Text = string.Empty;
+                GlobalSettings.SessionMyIP = listIP;
             }
             catch (Exception ex)
             {
@@ -74,96 +90,25 @@ namespace O2S_QuanLyHocVien.Popups
                 Common.Logging.LogSystem.Error(ex);
             }
         }
-
-        #endregion
-
-        #region Events
-
-        private void btnThoat_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-        private void btnDangNhap_Click(object sender, EventArgs e)
+        private void LoadDefaultValue()
         {
             try
             {
-                if (txtTenDangNhap.Text.ToLower() == KeyTrongPhanMem.AdminUser_key && txtMatKhau.Text == KeyTrongPhanMem.AdminPass_key)
-                {
-                    //TAIKHOAN tk = TaiKhoan.Select(txtTenDangNhap.Text);
-                    GlobalSettings.UserID = -1;
-                    GlobalSettings.UserCode = txtTenDangNhap.Text.Trim().ToLower();
-                    GlobalSettings.UserName = "Administrator";
-                    GlobalSettings.UserType = UserType.QuanTri;
+                chkSave.Checked = Convert.ToBoolean(ConfigurationManager.AppSettings["checkEditNhoPass"]); ;
 
-                    Settings.Default.Login_UserName = txtTenDangNhap.Text;
-                    Settings.Default.Login_Password = txtMatKhau.Text;
-                    Settings.Default.Save();
-                    LoadDuLieuSauKhiDangNhap();
-                    LayCoSoTrungTam();
-                    this.DialogResult = DialogResult.OK;
-                }
-                else
+                if (chkSave.Checked)
                 {
-                    if (TaiKhoanLogic.IsValid(txtTenDangNhap.Text, txtMatKhau.Text))
-                    {
-                        TAIKHOAN tk = TaiKhoanLogic.Select(txtTenDangNhap.Text);
-                        GlobalSettings.UserID = TaiKhoanLogic.FullUserID(tk);
-                        GlobalSettings.UserCode = txtTenDangNhap.Text.Trim().ToLower();
-                        GlobalSettings.UserName = TaiKhoanLogic.FullUserName(tk);
-                        GlobalSettings.UserType = (UserType)TaiKhoanLogic.FullUserType(tk);
-
-                        Settings.Default.Login_UserName = txtTenDangNhap.Text;
-                        Settings.Default.Login_Password = txtMatKhau.Text;
-                        Settings.Default.Save();
-                        Base.KiemTraLicense.KiemTraLicenseHopLe();
-                        LoadDuLieuSauKhiDangNhap();
-                        LayCoSoTrungTam();
-                        this.DialogResult = DialogResult.OK;
-                    }
-                    else
-                    {
-                        lblNotification.Text = "Tên đăng nhập hoặc mật khẩu không chính xác";
-                        System.Media.SystemSounds.Exclamation.Play();
-                    }
+                    txtTenDangNhap.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["LoginUser"].ToString(), true);
+                    txtMatKhau.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["LoginPassword"].ToString(), true);
                 }
+
+                lblNotification.Text = string.Empty;
             }
             catch (Exception ex)
             {
                 Common.Logging.LogSystem.Error(ex);
             }
         }
-        private void chkSave_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.Login_IsSaved = chkSave.Checked;
-            Settings.Default.Save();
-        }
-
-        private void LayCoSoTrungTam()
-        {
-            try
-            {
-                if (GlobalSettings.UserType != UserType.HocVien) //khong phai Hoc vien
-                {
-                    List<COSOTRUNGTAM> ObjectList = CoSoTrungTamLogic.SelectAll() as List<COSOTRUNGTAM>;
-                    if (ObjectList.Count == 1)
-                    {
-                        GlobalSettings.CoSoId = ObjectList[0].CoSoId;
-                        GlobalSettings.TenCoSo = ObjectList[0].TenCoSo;
-                    }
-                    else
-                    {
-                        frmChonCoSo _frm = new frmChonCoSo();
-                        _frm.ShowDialog();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Error(ex);
-            }
-        }
-
-        #endregion
 
         #region Kiem tra va copy Lanucher
         private void KiemTraVaCopyFileLaucherNew()
@@ -218,18 +163,148 @@ namespace O2S_QuanLyHocVien.Popups
         }
         #endregion
 
-        #region Load Du Lieu sau khi Dang nhap
-        private void LoadDuLieuSauKhiDangNhap()
+        private void ReconnectDB()
+        {
+            frmKetNoiCSDL frm = new frmKetNoiCSDL();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                if (DialogResult.Yes == MessageBox.Show("Bạn cần khởi động lại chương trình để thay đổi có hiệu lực." + Environment.NewLine + "Khởi động ngay?", "Khởi động lại", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    Application.Restart();
+                else
+                    Application.Exit();
+            }
+            else
+            {
+                MessageBox.Show("Bạn không thể sử dụng chương trình nếu kết nối cơ sở dữ liệu chưa được thiết lập" + Environment.NewLine + "Hãy chạy lại chương trình vào lần tới để thiết lập lại kết nối cơ sở dữ liệu", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Application.Exit();
+            }
+        }
+
+        #endregion
+
+        #region Events
+
+        private void btnDangNhap_Click(object sender, EventArgs e)
         {
             try
             {
-                GlobalSettings.SessionLstPhanQuyenNguoiDung = Base.CheckPermission.GetListPhanQuyenNguoiDung();
+                if (txtTenDangNhap.Text.ToLower() == KeyTrongPhanMem.AdminUser_key && txtMatKhau.Text == KeyTrongPhanMem.AdminPass_key)
+                {
+                    //TAIKHOAN tk = TaiKhoan.Select(txtTenDangNhap.Text);
+                    GlobalSettings.UserID = -1;
+                    GlobalSettings.UserCode = txtTenDangNhap.Text.Trim().ToLower();
+                    GlobalSettings.UserName = "Administrator";
+                    GlobalSettings.UserType = UserType.QuanTri;
+
+                    //Settings.Default.Login_UserName = txtTenDangNhap.Text;
+                    //Settings.Default.Login_Password = txtMatKhau.Text;
+                    //Settings.Default.Save();
+                    LoadDuLieuSauKhiDangNhap();
+                }
+                else
+                {
+                    if (TaiKhoanLogic.IsValid(txtTenDangNhap.Text, txtMatKhau.Text))
+                    {
+                        TAIKHOAN tk = TaiKhoanLogic.Select(txtTenDangNhap.Text);
+                        GlobalSettings.UserID = TaiKhoanLogic.FullUserID(tk);
+                        GlobalSettings.UserCode = txtTenDangNhap.Text.Trim().ToLower();
+                        GlobalSettings.UserName = TaiKhoanLogic.FullUserName(tk);
+                        GlobalSettings.UserType = (UserType)TaiKhoanLogic.FullUserType(tk);
+
+                        //Settings.Default.Login_UserName = txtTenDangNhap.Text;
+                        //Settings.Default.Login_Password = txtMatKhau.Text;
+                        //Settings.Default.Save();
+                        Base.KiemTraLicense.KiemTraLicenseHopLe();
+                        LoadDuLieuSauKhiDangNhap();
+                    }
+                    else
+                    {
+                        lblNotification.Text = "Tên đăng nhập hoặc mật khẩu không chính xác";
+                        System.Media.SystemSounds.Exclamation.Play();
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Common.Logging.LogSystem.Error(ex);
             }
         }
+
+        #endregion
+
+        #region Load Du Lieu sau khi Dang nhap
+        private void LoadDuLieuSauKhiDangNhap()
+        {
+            try
+            {
+                GlobalSettings.SessionLstPhanQuyenNguoiDung = Base.CheckPermission.GetListPhanQuyenNguoiDung();
+                LayCoSoTrungTam();
+
+                frmMainHome frmChon = new frmMainHome();
+                frmChon.Show();
+                this.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        private void LayCoSoTrungTam()
+        {
+            try
+            {
+                if (GlobalSettings.UserType != UserType.HocVien) //khong phai Hoc vien
+                {
+                    List<COSOTRUNGTAM> ObjectList = CoSoTrungTamLogic.SelectAll() as List<COSOTRUNGTAM>;
+                    if (ObjectList.Count == 1)
+                    {
+                        GlobalSettings.CoSoId = ObjectList[0].CoSoId;
+                        GlobalSettings.TenCoSo = ObjectList[0].TenCoSo;
+                    }
+                    else
+                    {
+                        frmChonCoSo _frm = new frmChonCoSo();
+                        _frm.ShowDialog();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        private void LuuLaiThongTinDangNhap()
+        {
+            try
+            {
+                // Khi được check vào nút ghi nhớ thì sẽ lưu tên đăng nhập và mật khẩu vào file config
+                if (chkSave.Checked)
+                {
+                    Configuration _config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    _config.AppSettings.Settings["checkEditNhoPass"].Value = Convert.ToString(chkSave.Checked);
+                    _config.AppSettings.Settings["LoginUser"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtTenDangNhap.Text.Trim(), true);
+                    _config.AppSettings.Settings["LoginPassword"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtMatKhau.Text.Trim(), true);
+                    _config.Save(ConfigurationSaveMode.Modified);
+
+                    ConfigurationManager.RefreshSection("appSettings");
+                }
+                // không thì sẽ xóa giá trị đã lưu trong file congfig đi
+                else
+                {
+                    Configuration _config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    _config.AppSettings.Settings["checkEditNhoPass"].Value = "false";
+                    _config.AppSettings.Settings["LoginUser"].Value = "";
+                    _config.AppSettings.Settings["LoginPassword"].Value = "";
+                    _config.Save(ConfigurationSaveMode.Modified);
+                    ConfigurationManager.RefreshSection("appSettings");
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
         #endregion
 
     }

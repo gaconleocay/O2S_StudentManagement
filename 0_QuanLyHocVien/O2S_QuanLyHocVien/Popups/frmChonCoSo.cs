@@ -25,11 +25,18 @@ namespace O2S_QuanLyHocVien.Popups
         }
         public void InitializeLoaiCoSo()
         {
-            cboCoSo.DataSource = CoSoTrungTamLogic.SelectAll();
-            cboCoSo.DisplayMember = "TenCoSo";
-            cboCoSo.ValueMember = "CoSoId";
+            try
+            {
+                cboCoSo.DataSource = CoSoTrungTamLogic.SelectAll();
+                cboCoSo.DisplayMember = "TenCoSo";
+                cboCoSo.ValueMember = "CoSoId";
 
-            cboCoSo.SelectedIndex = 0;
+                cboCoSo.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
         #endregion
 
@@ -43,12 +50,12 @@ namespace O2S_QuanLyHocVien.Popups
 
                 GlobalSettings.CoSoId = Common.TypeConvert.TypeConvertParse.ToInt32(cboCoSo.SelectedValue.ToString());
                 GlobalSettings.TenCoSo = cboCoSo.Text;
-                this.Hide();
+                //this.Hide();
                 this.Visible = false;
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Có lỗi xảy ra", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Common.Logging.LogSystem.Error(ex);
             }
         }
 

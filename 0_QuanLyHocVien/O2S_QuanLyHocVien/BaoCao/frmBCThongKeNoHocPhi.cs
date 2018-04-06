@@ -15,9 +15,9 @@ using System.Data;
 
 namespace O2S_QuanLyHocVien.Pages
 {
-    public partial class frmThongKeNoHocVien : Form
+    public partial class frmBCThongKeNoHocPhi : Form
     { 
-        public frmThongKeNoHocVien()
+        public frmBCThongKeNoHocPhi()
         {
             InitializeComponent();
         }

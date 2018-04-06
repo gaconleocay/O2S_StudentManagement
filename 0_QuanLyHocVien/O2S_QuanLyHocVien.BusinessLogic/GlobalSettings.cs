@@ -10,12 +10,13 @@ using System.Text;
 using O2S_QuanLyHocVien.DataAccess;
 using System.Data.SqlClient;
 using System.Data;
-using O2S_QuanLyHocVien.BusinessLogic.Properties;
+//using O2S_QuanLyHocVien.BusinessLogic.Properties;
 using O2S_QuanLyHocVien.BusinessLogic.Models;
+using System.Configuration;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
-    public enum UserType { NhanVien, HocVien, GiangVien,QuanTri }
+    public enum UserType { NhanVien, HocVien, GiangVien, QuanTri }
     public static class GlobalSettings
     {
         #region Bien Session
@@ -43,7 +44,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static string CenterWebsite { get; set; }// Đại diện cho website trung tâm
         public static string CenterEmail { get; set; }// Đại diện cho email trung tâm
         public static string CenterTelephone { get; set; }// Đại diện cho số điện thoại trung tâm
-        public static Dictionary<string,int> QuyDinh { get; set; }// Đại diện cho danh sách quy định
+        public static Dictionary<string, int> QuyDinh { get; set; }// Đại diện cho danh sách quy định
 
         //
 
@@ -57,21 +58,40 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <summary>
         /// Kết nối đến cơ sở dữ liệu
         /// </summary>
-        public static void ConnectToDatabase()
+        public static bool ConnectToDatabase()
         {
-            //nạp thông tin kết nối
-            ConnectionString = Settings.Default.ConnectionString;
-            ServerName = Settings.Default.Database_ServerName;
-            ServerCatalog = Settings.Default.Database_ServerCatalog;
+            bool result = false;
+            try
+            {
+                string serverhost_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
+                string serveruser_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
+                string serverpass_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
+                string serverdb_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
+                ServerName = serverhost_SM;
+                ServerCatalog = serverdb_SM;
+                string ConnectionString = "Data Source = " + serverhost_SM + "; Initial Catalog = " + serverdb_SM + ";Persist Security Info=True;User ID=" + serveruser_SM + ";Password=" + serverpass_SM;
 
-            Database = new QuanLyHocVienDataContext(ConnectionString);
 
-            //kiểm tra kết nối
-            SqlConnection connection = new SqlConnection(ConnectionString);
-            connection.Open();
-            SqlCommand cmd = new SqlCommand("select 1", connection);
-            cmd.ExecuteNonQuery();
-            connection.Close();
+                ////nạp thông tin kết nối
+                //ConnectionString = Settings.Default.ConnectionString;
+                //ServerName = Settings.Default.Database_ServerName;
+                //ServerCatalog = Settings.Default.Database_ServerCatalog;
+
+                Database = new QuanLyHocVienDataContext(ConnectionString);
+
+                //kiểm tra kết nối
+                SqlConnection connection = new SqlConnection(ConnectionString);
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("select 1", connection);
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error("Loi khi Ket noi CSDL" + ex.ToString());
+            }
+            return result;
         }
 
         /// <summary>
@@ -117,11 +137,11 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// </summary>
         public static void SaveDatabaseConnection()
         {
-            Settings.Default.ConnectionString = ConnectionString;
-            Settings.Default.Database_ServerName = ServerName;
-            Settings.Default.Database_ServerCatalog = ServerCatalog;
+            //Settings.Default.ConnectionString = ConnectionString;
+            //Settings.Default.Database_ServerName = ServerName;
+            //Settings.Default.Database_ServerCatalog = ServerCatalog;
 
-            Settings.Default.Save();
+            //Settings.Default.Save();
         }
 
         /// <summary>

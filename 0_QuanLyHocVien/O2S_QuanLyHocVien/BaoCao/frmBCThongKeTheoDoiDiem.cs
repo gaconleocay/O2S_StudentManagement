@@ -16,12 +16,12 @@ using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
 {
-    public partial class frmThongKeDiemTheoLop : Form
+    public partial class frmBCThongKeTheoDoiDiem : Form
     {
         private Thread thLop;
         private Thread thBangDiem;
 
-        public frmThongKeDiemTheoLop()
+        public frmBCThongKeTheoDoiDiem()
         {
             InitializeComponent();
         }

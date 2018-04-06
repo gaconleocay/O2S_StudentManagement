@@ -1,6 +1,6 @@
 ﻿namespace O2S_QuanLyHocVien.Pages
 {
-    partial class frmBaoCaoHocVienTheoThang
+    partial class frmBaoCaoHocVienGhiDanh
     {
         /// <summary>
         /// Required designer variable.
@@ -34,6 +34,11 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.gridBaoCao = new System.Windows.Forms.DataGridView();
+            this.clmHocVienId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmGioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmNgayGhiDanh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnTaoBaoCao = new System.Windows.Forms.Button();
@@ -42,12 +47,6 @@
             this.dateThang = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.clmHocVienId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenHocVien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmGioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmNgayGhiDanh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -127,6 +126,47 @@
             this.gridBaoCao.TabIndex = 44;
             this.gridBaoCao.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridBaoCao_RowsAdded);
             this.gridBaoCao.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridBaoCao_RowsRemoved);
+            // 
+            // clmHocVienId
+            // 
+            this.clmHocVienId.DataPropertyName = "HocVienId";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmHocVienId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmHocVienId.FillWeight = 70F;
+            this.clmHocVienId.HeaderText = "Mã học viên";
+            this.clmHocVienId.Name = "clmHocVienId";
+            this.clmHocVienId.ReadOnly = true;
+            // 
+            // clmTenHocVien
+            // 
+            this.clmTenHocVien.DataPropertyName = "TenHocVien";
+            this.clmTenHocVien.FillWeight = 150F;
+            this.clmTenHocVien.HeaderText = "Họ và tên";
+            this.clmTenHocVien.Name = "clmTenHocVien";
+            this.clmTenHocVien.ReadOnly = true;
+            // 
+            // clmGioiTinh
+            // 
+            this.clmGioiTinh.DataPropertyName = "GioiTinh";
+            this.clmGioiTinh.FillWeight = 50F;
+            this.clmGioiTinh.HeaderText = "Giới tính";
+            this.clmGioiTinh.Name = "clmGioiTinh";
+            this.clmGioiTinh.ReadOnly = true;
+            // 
+            // clmNgayGhiDanh
+            // 
+            this.clmNgayGhiDanh.DataPropertyName = "NgayGhiDanh";
+            this.clmNgayGhiDanh.FillWeight = 93.27411F;
+            this.clmNgayGhiDanh.HeaderText = "Ngày ghi danh";
+            this.clmNgayGhiDanh.Name = "clmNgayGhiDanh";
+            this.clmNgayGhiDanh.ReadOnly = true;
+            // 
+            // clmTenKhoaHoc
+            // 
+            this.clmTenKhoaHoc.DataPropertyName = "TenKhoaHoc";
+            this.clmTenKhoaHoc.HeaderText = "Khóa học";
+            this.clmTenKhoaHoc.Name = "clmTenKhoaHoc";
+            this.clmTenKhoaHoc.ReadOnly = true;
             // 
             // tableLayoutPanel1
             // 
@@ -221,7 +261,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.btnClose);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -237,61 +276,6 @@
             this.label1.Size = new System.Drawing.Size(259, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "BÁO CÁO HỌC VIÊN GHI DANH THEO THÁNG";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.LightGray;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Image = global::O2S_QuanLyHocVien.Properties.Resources.icon_Close_9dp;
-            this.btnClose.Location = new System.Drawing.Point(902, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(28, 19);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // clmHocVienId
-            // 
-            this.clmHocVienId.DataPropertyName = "HocVienId";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmHocVienId.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmHocVienId.FillWeight = 70F;
-            this.clmHocVienId.HeaderText = "Mã học viên";
-            this.clmHocVienId.Name = "clmHocVienId";
-            this.clmHocVienId.ReadOnly = true;
-            // 
-            // clmTenHocVien
-            // 
-            this.clmTenHocVien.DataPropertyName = "TenHocVien";
-            this.clmTenHocVien.FillWeight = 150F;
-            this.clmTenHocVien.HeaderText = "Họ và tên";
-            this.clmTenHocVien.Name = "clmTenHocVien";
-            this.clmTenHocVien.ReadOnly = true;
-            // 
-            // clmGioiTinh
-            // 
-            this.clmGioiTinh.DataPropertyName = "GioiTinh";
-            this.clmGioiTinh.FillWeight = 50F;
-            this.clmGioiTinh.HeaderText = "Giới tính";
-            this.clmGioiTinh.Name = "clmGioiTinh";
-            this.clmGioiTinh.ReadOnly = true;
-            // 
-            // clmNgayGhiDanh
-            // 
-            this.clmNgayGhiDanh.DataPropertyName = "NgayGhiDanh";
-            this.clmNgayGhiDanh.FillWeight = 93.27411F;
-            this.clmNgayGhiDanh.HeaderText = "Ngày ghi danh";
-            this.clmNgayGhiDanh.Name = "clmNgayGhiDanh";
-            this.clmNgayGhiDanh.ReadOnly = true;
-            // 
-            // clmTenKhoaHoc
-            // 
-            this.clmTenKhoaHoc.DataPropertyName = "TenKhoaHoc";
-            this.clmTenKhoaHoc.HeaderText = "Khóa học";
-            this.clmTenKhoaHoc.Name = "clmTenKhoaHoc";
-            this.clmTenKhoaHoc.ReadOnly = true;
             // 
             // frmBaoCaoHocVienTheoThang
             // 
@@ -327,7 +311,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.DateTimePicker dateThang;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

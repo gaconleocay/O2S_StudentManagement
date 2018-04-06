@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
+using O2S_QuanLyHocVien.Properties;
 
 namespace O2S_QuanLyHocVien.DAL
 {
@@ -24,8 +25,12 @@ namespace O2S_QuanLyHocVien.DAL
         {
             try
             {
+                //string ConnectionString = "Data Source =GEZIGRSJ0G5SFP8\\SQLEXPRESS; Initial Catalog =O2S_QLHV;Persist Security Info=True;User ID=sa;Password=123456";
+                string ConnectionString = "Data Source = " + serverhost_SM + "; Initial Catalog = " + this.serverdb_SM + ";Persist Security Info=True;User ID=" + serveruser_SM + ";Password=" + serverpass_SM;
                 if (conn_SM == null)
-                    conn_SM = new SqlConnection("Data Source = " + serverhost_SM + "; Initial Catalog = " + this.serverdb_SM + ";Persist Security Info=True;User ID=" + serveruser_SM + ";Password=" + serverpass_SM);
+                {
+                    conn_SM = new SqlConnection(ConnectionString);
+                }
                 if (conn_SM.State == ConnectionState.Closed)
                     conn_SM.Open();
                 kiemtraketnoi = true;

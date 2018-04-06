@@ -14,9 +14,9 @@ using O2S_QuanLyKhoaHoc.BusinessLogic;
 
 namespace O2S_QuanLyHocVien.Pages
 {
-    public partial class frmQuanLyLopHoc : Form
+    public partial class frmDanhMucLopHoc : Form
     {
-        public frmQuanLyLopHoc()
+        public frmDanhMucLopHoc()
         {
             InitializeComponent();
         }

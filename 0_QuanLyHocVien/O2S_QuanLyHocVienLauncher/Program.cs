@@ -11,12 +11,12 @@ using System.Threading;
 using System.IO.Compression;
 using ICSharpCode.SharpZipLib.Zip;
 using System.Windows.Forms;
+using O2S_QuanLyHocVien.BusinessLogic;
 
 namespace O2S_QuanLyHocVienLauncher
 {
     static class Program
     {
-        private static ConnectDatabase condb = new ConnectDatabase();
         private static string tempDirectory = "";
 
         /// <summary>
@@ -27,6 +27,11 @@ namespace O2S_QuanLyHocVienLauncher
         {
             try
             {
+                //if (!GlobalSettings.ConnectToDatabase())
+                //{
+                //    MessageBox.Show("Không thể kết nối đến cơ sở dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
@@ -35,7 +40,7 @@ namespace O2S_QuanLyHocVienLauncher
                     DialogResult dialogResult = MessageBox.Show("Bạn có muốn cập nhật lên phiên bản mới? \nHãy tắt phần mềm đang chạy trước khi cập nhật.", "Thông báo có phiên bản mới.", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        KillProcess_StudentManagement();
+                        KillProcess_QuanLyHocVien();
                         CopyFolder_CheckSum(tempDirectory, Environment.CurrentDirectory);
                     }
                 }
@@ -60,6 +65,7 @@ namespace O2S_QuanLyHocVienLauncher
             bool result = false;
             try
             {
+                ConnectDatabase condb = new ConnectDatabase();
                 DataView dataVer = new DataView(condb.GetDataTable("SELECT top 1 AppVersion,AppLink from VERSION where AppType=0;"));
                 if (dataVer != null && dataVer.Count > 0)
                 {
@@ -85,7 +91,7 @@ namespace O2S_QuanLyHocVienLauncher
             }
             return result;
         }
-        private static void KillProcess_StudentManagement()
+        private static void KillProcess_QuanLyHocVien()
         {
             try
             {
@@ -98,7 +104,6 @@ namespace O2S_QuanLyHocVienLauncher
             catch (Exception ex)
             {
                // O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
-                throw;
             }
         }
         private static void CopyFolder_CheckSum(string SourceFolder, string DestFolder)

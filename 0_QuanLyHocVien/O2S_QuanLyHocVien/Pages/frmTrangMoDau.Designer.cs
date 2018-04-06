@@ -30,7 +30,6 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -43,6 +42,7 @@
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblCenter = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblSoDienThoai = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -55,7 +55,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.btnClose);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -71,20 +70,6 @@
             this.label1.Size = new System.Drawing.Size(100, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "TRANG MỞ ĐẦU";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.LightGray;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Image = global::O2S_QuanLyHocVien.Properties.Resources.icon_Close_9dp;
-            this.btnClose.Location = new System.Drawing.Point(1051, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(28, 19);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -123,9 +108,9 @@
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.label9);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 93);
+            this.panel4.Location = new System.Drawing.Point(0, 124);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(594, 301);
+            this.panel4.Size = new System.Drawing.Size(594, 270);
             this.panel4.TabIndex = 53;
             // 
             // lblWelcome
@@ -143,7 +128,7 @@
             // 
             this.lblTroGiup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTroGiup.AutoSize = true;
-            this.lblTroGiup.Location = new System.Drawing.Point(217, 179);
+            this.lblTroGiup.Location = new System.Drawing.Point(217, 148);
             this.lblTroGiup.Name = "lblTroGiup";
             this.lblTroGiup.Size = new System.Drawing.Size(26, 15);
             this.lblTroGiup.TabIndex = 52;
@@ -156,7 +141,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 13F);
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(98)))), ((int)(((byte)(119)))), ((int)(((byte)(147)))));
-            this.label8.Location = new System.Drawing.Point(26, 144);
+            this.label8.Location = new System.Drawing.Point(26, 113);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(150, 25);
             this.label8.TabIndex = 50;
@@ -166,7 +151,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(28, 179);
+            this.label9.Location = new System.Drawing.Point(28, 148);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(191, 15);
             this.label9.TabIndex = 51;
@@ -175,6 +160,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(231)))), ((int)(((byte)(237)))));
+            this.panel3.Controls.Add(this.lblSoDienThoai);
             this.panel3.Controls.Add(this.lblLienHe);
             this.panel3.Controls.Add(this.lblAddress);
             this.panel3.Controls.Add(this.lblCenter);
@@ -182,13 +168,13 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(594, 93);
+            this.panel3.Size = new System.Drawing.Size(594, 124);
             this.panel3.TabIndex = 9;
             // 
             // lblLienHe
             // 
             this.lblLienHe.AutoSize = true;
-            this.lblLienHe.Location = new System.Drawing.Point(162, 67);
+            this.lblLienHe.Location = new System.Drawing.Point(162, 92);
             this.lblLienHe.Name = "lblLienHe";
             this.lblLienHe.Size = new System.Drawing.Size(90, 15);
             this.lblLienHe.TabIndex = 49;
@@ -224,6 +210,15 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // lblSoDienThoai
+            // 
+            this.lblSoDienThoai.AutoSize = true;
+            this.lblSoDienThoai.Location = new System.Drawing.Point(162, 67);
+            this.lblSoDienThoai.Name = "lblSoDienThoai";
+            this.lblSoDienThoai.Size = new System.Drawing.Size(96, 15);
+            this.lblSoDienThoai.TabIndex = 50;
+            this.lblSoDienThoai.Text = "Số điện thoại: {0}";
+            // 
             // frmTrangMoDau
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -255,7 +250,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
@@ -268,5 +262,6 @@
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblCenter;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblSoDienThoai;
     }
 }

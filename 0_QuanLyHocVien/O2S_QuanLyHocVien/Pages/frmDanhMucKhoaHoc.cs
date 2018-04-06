@@ -15,11 +15,11 @@ using O2S_QuanLyKhoaHoc.BusinessLogic;
 
 namespace O2S_QuanLyHocVien.Pages
 {
-    public partial class frmQuanLyKhoaHoc : Form
+    public partial class frmDanhMucKhoaHoc : Form
     {
         private bool isInsert = false;
         private List<KhoaHocMonHocDTO> lstKHMH { get; set; }
-        public frmQuanLyKhoaHoc()
+        public frmDanhMucKhoaHoc()
         {
             InitializeComponent();
         }

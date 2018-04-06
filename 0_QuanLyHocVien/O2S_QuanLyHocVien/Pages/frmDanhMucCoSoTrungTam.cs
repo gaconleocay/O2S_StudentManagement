@@ -10,11 +10,11 @@ using O2S_QuanLyHocVien.DataAccess;
 
 namespace O2S_QuanLyHocVien.Pages
 {
-    public partial class frmQuanLyCoSo : Form
+    public partial class frmDanhMucCoSoTrungTam : Form
     {
         private bool isInsert = false;
 
-        public frmQuanLyCoSo()
+        public frmDanhMucCoSoTrungTam()
         {
             InitializeComponent();
         }

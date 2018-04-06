@@ -1,6 +1,6 @@
 ﻿namespace O2S_QuanLyHocVien.Pages
 {
-    partial class frmHocPhiHocVien
+    partial class frmHocPhiCaNhan
     {
         /// <summary>
         /// Required designer variable.
@@ -43,7 +43,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.lblTongNoTatCa = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
@@ -67,10 +66,10 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnXemTatCa = new System.Windows.Forms.Button();
             this.gridLop = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.clmLopHocId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmTenLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -240,7 +239,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.btnClose);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -256,20 +254,6 @@
             this.label1.Size = new System.Drawing.Size(113, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "HỌC PHÍ HỌC VIÊN";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.LightGray;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Image = global::O2S_QuanLyHocVien.Properties.Resources.icon_Close_9dp;
-            this.btnClose.Location = new System.Drawing.Point(1062, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(28, 19);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // panel6
             // 
@@ -560,6 +544,21 @@
             this.gridLop.TabIndex = 36;
             this.gridLop.Click += new System.EventHandler(this.gridLop_Click);
             // 
+            // clmLopHocId
+            // 
+            this.clmLopHocId.DataPropertyName = "LopHocId";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmLopHocId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmLopHocId.FillWeight = 50F;
+            this.clmLopHocId.HeaderText = "Mã";
+            this.clmLopHocId.Name = "clmLopHocId";
+            // 
+            // clmTenLop
+            // 
+            this.clmTenLop.DataPropertyName = "TenLopHoc";
+            this.clmTenLop.HeaderText = "Tên lớp";
+            this.clmTenLop.Name = "clmTenLop";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -578,21 +577,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(5, 464);
             this.panel3.TabIndex = 10;
-            // 
-            // clmLopHocId
-            // 
-            this.clmLopHocId.DataPropertyName = "LopHocId";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmLopHocId.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmLopHocId.FillWeight = 50F;
-            this.clmLopHocId.HeaderText = "Mã";
-            this.clmLopHocId.Name = "clmLopHocId";
-            // 
-            // clmTenLop
-            // 
-            this.clmTenLop.DataPropertyName = "TenLopHoc";
-            this.clmTenLop.HeaderText = "Tên lớp";
-            this.clmTenLop.Name = "clmTenLop";
             // 
             // frmHocPhiHocVien
             // 
@@ -641,7 +625,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label lblTongNoTatCa;
         private System.Windows.Forms.Label label24;

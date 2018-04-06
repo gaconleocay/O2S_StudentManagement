@@ -15,7 +15,7 @@ namespace O2S_License.PasswordKey
         public static string AdminUser_key = "admin";
         public static string AdminPass_key = "khongchO123$";
         public static string SaltEncrypt = "yevvl";
-        public static int SoLuongTabPageChucNang = 5;
+        public static int SoLuongTabPageChucNang = 10;
         public static int SoLuongTabPageDashboard = 10;
         public static string BanQuyenKhongThoiHan = "BanQuyenKhongThoiHan";
 

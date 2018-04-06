@@ -26,54 +26,11 @@ namespace O2S_QuanLyHocVien.DataAccess.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=QLHVTTEC;Integrated Security=True")]
-        public string QLHVTTECConnectionString {
-            get {
-                return ((string)(this["QLHVTTECConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=QLHVTTEC;Integrated Security=True;En" +
-            "crypt=False;TrustServerCertificate=True")]
-        public string QLHVTTECConnectionString1 {
-            get {
-                return ((string)(this["QLHVTTECConnectionString1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=QLHVTTEC;Persist Security Info=True;" +
-            "User ID=sa")]
-        public string QLHVTTECConnectionString2 {
-            get {
-                return ((string)(this["QLHVTTECConnectionString2"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=O2S_QLHV;Persist Security Info=True;" +
             "User ID=sa;Password=123456")]
         public string O2S_QLHVConnectionString {
             get {
                 return ((string)(this["O2S_QLHVConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=O2S_QLHV;Persist Security Info=True;" +
-            "User ID=sa")]
-        public string O2S_QLHVConnectionString1 {
-            get {
-                return ((string)(this["O2S_QLHVConnectionString1"]));
             }
         }
     }

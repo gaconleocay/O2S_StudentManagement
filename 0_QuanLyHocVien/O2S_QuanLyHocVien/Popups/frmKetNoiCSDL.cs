@@ -19,6 +19,27 @@ namespace O2S_QuanLyHocVien.Popups
             InitializeComponent();
         }
 
+        #region Load
+        private void frmKetNoiCSDL_Load(object sender, EventArgs e)
+        {
+            cboKieuXacThuc.Items.AddRange(new string[]
+            {
+                "Xác thực của Windows",
+                "Xác thực của SQL Server"
+            });
+
+            cboKieuXacThuc.SelectedIndex = 1;
+
+            //load temp
+            txtTenDangNhap.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
+            txtMatKhau.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
+            txtTenServer.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
+            cboDatabase.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
+        }
+
+        #endregion
+
+
         #region Events
 
         private void btnHuyBo_Click(object sender, EventArgs e)
@@ -58,21 +79,6 @@ namespace O2S_QuanLyHocVien.Popups
             }
         }
 
-        private void frmKetNoiCSDL_Load(object sender, EventArgs e)
-        {
-            cboKieuXacThuc.Items.AddRange(new string[]
-            {
-                "Xác thực của Windows",
-                "Xác thực của SQL Server"
-            });
-
-            cboKieuXacThuc.SelectedIndex = 0;
-
-            //load temp
-            txtTenServer.Text = GlobalSettings.ServerName;
-            cboDatabase.Text = GlobalSettings.ServerCatalog;
-        }
-
         private void cboKieuXacThuc_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtTenDangNhap.Enabled = txtMatKhau.Enabled = cboKieuXacThuc.SelectedIndex == 1;
@@ -80,18 +86,18 @@ namespace O2S_QuanLyHocVien.Popups
 
         private void btnLuuThongTin_Click(object sender, EventArgs e)
         {
-            connectionString = string.Format("Data Source = {0}; Initial Catalog = {1}; ", txtTenServer.Text, cboDatabase.Text);
+            //connectionString = string.Format("Data Source = {0}; Initial Catalog = {1}; ", txtTenServer.Text, cboDatabase.Text);
 
-            if (cboKieuXacThuc.SelectedIndex == 0)
-                connectionString += "Integrated Security = True; ";
-            else
-                connectionString += string.Format("User Id = {0}; Password = {1}; ", txtTenDangNhap.Text, txtMatKhau.Text);
+            //if (cboKieuXacThuc.SelectedIndex == 0)
+            //    connectionString += "Integrated Security = True; ";
+            //else
+            //    connectionString += string.Format("User Id = {0}; Password = {1}; ", txtTenDangNhap.Text, txtMatKhau.Text);
 
-            GlobalSettings.ConnectionString = connectionString;
-            GlobalSettings.ServerName = txtTenServer.Text;
-            GlobalSettings.ServerCatalog = cboDatabase.Text;
+            //GlobalSettings.ConnectionString = connectionString;
+            //GlobalSettings.ServerName = txtTenServer.Text;
+            //GlobalSettings.ServerCatalog = cboDatabase.Text;
 
-            GlobalSettings.SaveDatabaseConnection();
+            //GlobalSettings.SaveDatabaseConnection();
 
             LuuLaiCauHinhFileConfig();
 
@@ -104,7 +110,7 @@ namespace O2S_QuanLyHocVien.Popups
             try
             {
                 Configuration _config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                _config.AppSettings.Settings["ServerHost"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtTenServer.Text.Trim(), true);  
+                _config.AppSettings.Settings["ServerHost"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtTenServer.Text.Trim(), true);
                 _config.AppSettings.Settings["Username"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtTenDangNhap.Text.Trim(), true);
                 _config.AppSettings.Settings["Password"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtMatKhau.Text.Trim(), true);
                 _config.AppSettings.Settings["Database"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(cboDatabase.Text, true);

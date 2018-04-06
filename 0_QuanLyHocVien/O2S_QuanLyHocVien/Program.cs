@@ -3,11 +3,17 @@
 // File "Program.cs"
 // Writing by NhatHM (hongminhnhat15@gmail.com)
 
-using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.UserSkins;
+using DevExpress.Skins;
+using DevExpress.LookAndFeel;
+using log4net;
+using System.Threading;
+using AutoMapper;
+using System.Globalization;
 
 namespace O2S_QuanLyHocVien
 {
@@ -23,15 +29,22 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("vi-VN");
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-VN");
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
+                BonusSkins.Register();
+                SkinManager.EnableFormSkins();
+                UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
+
                 Common.Logging.LogSystem.Info("Application_Start. Time=" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss:fff"));
             }
             catch (Exception ex)
             {
                 Common.Logging.LogSystem.Error(ex);
             }
-            Application.Run(new frmMain());
+            // Application.Run(new frmMain());
+            Application.Run(new Popups.frmDangNhap());
         }
     }
 }

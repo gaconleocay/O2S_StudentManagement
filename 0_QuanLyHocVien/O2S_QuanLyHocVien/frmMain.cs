@@ -25,8 +25,7 @@ namespace O2S_QuanLyHocVien
         public frmMain()
         {
             InitializeComponent();
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("vi-VN");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi-VN");
+
         }
 
         #region Load
@@ -454,7 +453,7 @@ namespace O2S_QuanLyHocVien
 
         private void btnHVThayDoiThongTin_Click(object sender, EventArgs e)
         {
-            frmThayDoiThongTinHV frm = new frmThayDoiThongTinHV();
+            frmThayDoiThongTinHocVien frm = new frmThayDoiThongTinHocVien();
             frm.ShowDialog();
         }
 
@@ -473,7 +472,7 @@ namespace O2S_QuanLyHocVien
 
                 //pnlWorkspace.Controls.Add(GlobalPages.BangDiem);
                 //GlobalPages.BangDiem.Show();
-                frmBangDiem _frm = new frmBangDiem()
+                frmBangDiemCaNhan _frm = new frmBangDiemCaNhan()
                 {
                     Dock = DockStyle.Fill,
                     TopLevel = false
@@ -522,7 +521,7 @@ namespace O2S_QuanLyHocVien
             try
             {
                 pnlWorkspace.Controls.Clear();
-                frmHocPhiHocVien _frm = new frmHocPhiHocVien()
+                frmHocPhiCaNhan _frm = new frmHocPhiCaNhan()
                 {
                     Dock = DockStyle.Fill,
                     TopLevel = false
@@ -551,7 +550,7 @@ namespace O2S_QuanLyHocVien
             try
             {
                 pnlWorkspace.Controls.Clear();
-                frmCacLopDaHoc _frm = new frmCacLopDaHoc()
+                frmCacLopDaHocCaNhan _frm = new frmCacLopDaHocCaNhan()
                 {
                     Dock = DockStyle.Fill,
                     TopLevel = false
@@ -651,7 +650,7 @@ namespace O2S_QuanLyHocVien
         private void btnQuanLyLopHoc_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
-            frmQuanLyLopHoc _frm = new frmQuanLyLopHoc()
+            frmDanhMucLopHoc _frm = new frmDanhMucLopHoc()
             {
                 Dock = DockStyle.Fill,
                 TopLevel = false
@@ -673,7 +672,7 @@ namespace O2S_QuanLyHocVien
         private void btnQuanLyKhoaHoc_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
-            frmQuanLyKhoaHoc _frm = new frmQuanLyKhoaHoc()
+            frmDanhMucKhoaHoc _frm = new frmDanhMucKhoaHoc()
             {
                 Dock = DockStyle.Fill,
                 TopLevel = false
@@ -739,7 +738,7 @@ namespace O2S_QuanLyHocVien
         private void btnThongKeDiemTheoLop_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
-            frmThongKeDiemTheoLop _frm = new frmThongKeDiemTheoLop()
+            frmBCThongKeTheoDoiDiem _frm = new frmBCThongKeTheoDoiDiem()
             {
                 Dock = DockStyle.Fill,
                 TopLevel = false
@@ -761,7 +760,7 @@ namespace O2S_QuanLyHocVien
         private void btnThongKeNoHocVien_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
-            frmThongKeNoHocVien _frm = new frmThongKeNoHocVien()
+            frmBCThongKeNoHocPhi _frm = new frmBCThongKeNoHocPhi()
             {
                 Dock = DockStyle.Fill,
                 TopLevel = false
@@ -783,7 +782,7 @@ namespace O2S_QuanLyHocVien
         private void btnBaoCaoHocVienTheoThang_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
-            frmBaoCaoHocVienTheoThang _frm = new frmBaoCaoHocVienTheoThang()
+            frmBaoCaoHocVienGhiDanh _frm = new frmBaoCaoHocVienGhiDanh()
             {
                 Dock = DockStyle.Fill,
                 TopLevel = false
@@ -806,11 +805,11 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-                pnlWorkspace.Controls.Clear();
+            //    pnlWorkspace.Controls.Clear();
 
-                frmTrangMoDau frm = new frmTrangMoDau() { Dock = DockStyle.Fill, TopLevel = false };
-                pnlWorkspace.Controls.Add(frm);
-                frm.Show();
+            //    frmTrangMoDau frm = new frmTrangMoDau() { Dock = DockStyle.Fill, TopLevel = false };
+            //    pnlWorkspace.Controls.Add(frm);
+            //    frm.Show();
             }
             catch (Exception ex)
             {
@@ -911,7 +910,7 @@ namespace O2S_QuanLyHocVien
         private void btnQuanLyCoSo_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
-            frmQuanLyCoSo _frm = new frmQuanLyCoSo()
+            frmDanhMucCoSoTrungTam _frm = new frmDanhMucCoSoTrungTam()
             {
                 Dock = DockStyle.Fill,
                 TopLevel = false
@@ -931,7 +930,7 @@ namespace O2S_QuanLyHocVien
         private void btnQuanLyMonHoc_Click(object sender, EventArgs e)
         {
             pnlWorkspace.Controls.Clear();
-            frmQuanLyMonHoc _frm = new frmQuanLyMonHoc()
+            frmDanhMucMonHoc _frm = new frmDanhMucMonHoc()
             {
                 Dock = DockStyle.Fill,
                 TopLevel = false

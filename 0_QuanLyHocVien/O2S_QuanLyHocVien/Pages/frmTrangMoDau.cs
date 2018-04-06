@@ -24,20 +24,20 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void lblTroGiup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-           // Process.Start("https://github.com/chidokun/QuanLyHocVien/wiki");
         }
 
         private void frmTrangMoDau_Load(object sender, EventArgs e)
         {
             lblCenter.Text = string.Format("TRUNG TÂM ANH NGỮ {0}", GlobalSettings.CenterName).ToUpper();
             lblAddress.Text = string.Format("Địa chỉ: {0}", GlobalSettings.CenterAddress);
+            lblSoDienThoai.Text = string.Format("Số điện thoại: {0}", GlobalSettings.CenterTelephone);
             lblLienHe.Text = string.Format("Liên hệ: {0} - {1}", GlobalSettings.CenterWebsite, GlobalSettings.CenterEmail);
             lblWelcome.Text = string.Format("Xin chào, {0}", TaiKhoanLogic.FullUserName(new DataAccess.TAIKHOAN() { TenDangNhap = GlobalSettings.UserCode }));
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-           // Process.Start("https://github.com/chidokun/QuanLyHocVien/");
+            // Process.Start("https://github.com/chidokun/QuanLyHocVien/");
         }
     }
 }

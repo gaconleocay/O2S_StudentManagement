@@ -41,7 +41,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnThoat = new System.Windows.Forms.Button();
             this.btnDangNhap = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -63,7 +62,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(549, 244);
+            this.panel1.Size = new System.Drawing.Size(544, 244);
             this.panel1.TabIndex = 0;
             // 
             // lblNotification
@@ -87,7 +86,6 @@
             this.chkSave.TabIndex = 8;
             this.chkSave.Text = "Lưu tên đăng nhập, mật khẩu";
             this.chkSave.UseVisualStyleBackColor = true;
-            this.chkSave.CheckedChanged += new System.EventHandler(this.chkSave_CheckedChanged);
             // 
             // txtMatKhau
             // 
@@ -120,7 +118,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(98, 115);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 15);
+            this.label4.Size = new System.Drawing.Size(90, 15);
             this.label4.TabIndex = 4;
             this.label4.Text = "Tên đăng nhập:";
             // 
@@ -166,30 +164,12 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel2.Controls.Add(this.btnThoat);
             this.panel2.Controls.Add(this.btnDangNhap);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 244);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(549, 66);
+            this.panel2.Size = new System.Drawing.Size(544, 66);
             this.panel2.TabIndex = 9;
-            // 
-            // btnThoat
-            // 
-            this.btnThoat.BackColor = System.Drawing.Color.Silver;
-            this.btnThoat.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnThoat.FlatAppearance.BorderSize = 0;
-            this.btnThoat.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.btnThoat.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnThoat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnThoat.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnThoat.Location = new System.Drawing.Point(421, 15);
-            this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(107, 37);
-            this.btnThoat.TabIndex = 1;
-            this.btnThoat.Text = "Thoát";
-            this.btnThoat.UseVisualStyleBackColor = false;
-            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnDangNhap
             // 
@@ -199,9 +179,9 @@
             this.btnDangNhap.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnDangNhap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDangNhap.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnDangNhap.Location = new System.Drawing.Point(308, 15);
+            this.btnDangNhap.Location = new System.Drawing.Point(212, 14);
             this.btnDangNhap.Name = "btnDangNhap";
-            this.btnDangNhap.Size = new System.Drawing.Size(107, 37);
+            this.btnDangNhap.Size = new System.Drawing.Size(120, 40);
             this.btnDangNhap.TabIndex = 0;
             this.btnDangNhap.Text = "Đăng nhập";
             this.btnDangNhap.UseVisualStyleBackColor = false;
@@ -213,9 +193,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.CancelButton = this.btnThoat;
-            this.ClientSize = new System.Drawing.Size(549, 310);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(544, 310);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -248,7 +226,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.Button btnDangNhap;
         private System.Windows.Forms.Label lblNotification;
     }
