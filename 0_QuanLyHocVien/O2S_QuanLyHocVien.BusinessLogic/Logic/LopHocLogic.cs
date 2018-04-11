@@ -107,18 +107,18 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
-        public static bool Update(LOPHOC _hocVien, TAIKHOAN taiKhoan = null)
+        public static bool Update(LOPHOC _lopHoc)
         {
             try
             {
-                var hocVienCu = SelectSingle(_hocVien.LopHocId);
+                var hocVienCu = SelectSingle(_lopHoc.LopHocId);
 
-                hocVienCu.TenLopHoc = _hocVien.TenLopHoc;
-                hocVienCu.NgayBatDau = _hocVien.NgayBatDau;
-                hocVienCu.NgayKetThuc = _hocVien.NgayKetThuc;
-                hocVienCu.SiSo = _hocVien.SiSo;
-                hocVienCu.KhoaHocId = _hocVien.KhoaHocId;
-                hocVienCu.DangMo = _hocVien.DangMo;
+                hocVienCu.TenLopHoc = _lopHoc.TenLopHoc;
+                hocVienCu.NgayBatDau = _lopHoc.NgayBatDau;
+                hocVienCu.NgayKetThuc = _lopHoc.NgayKetThuc;
+                hocVienCu.SiSo = _lopHoc.SiSo;
+                hocVienCu.KhoaHocId = _lopHoc.KhoaHocId;
+                hocVienCu.DangMo = _lopHoc.DangMo;
                 hocVienCu.ModifiedDate = DateTime.Now;
                 hocVienCu.ModifiedBy = GlobalSettings.UserCode;
                 hocVienCu.ModifiedLog = GlobalSettings.SessionMyIP;

@@ -88,6 +88,7 @@
     <Compile Include="Model\BangDiemFullDTO.cs" />
     <Compile Include="Model\BangDiemChiTietDTO.cs" />
     <Compile Include="Model\GiangDay_PlusDTO.cs" />
+    <Compile Include="Model\QuanLyHocVienDTO.cs" />
     <Compile Include="Model\KhoaHoc_MonHoc_PlusDTO.cs" />
     <Compile Include="Model\GiangVien_PlusDTO.cs" />
     <Compile Include="Model\QLHocPhi_PlusDTO.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Model\reportExcelDTO.cs" />
     <Compile Include="Logic\NhanVienLogic.cs" />
     <Compile Include="Logic\PhieuGhiDanhLogic.cs" />
+    <Compile Include="Model\XepLopDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logic\QuyDinhLogic.cs" />
     <Compile Include="Logic\LicenseLogic.cs" />

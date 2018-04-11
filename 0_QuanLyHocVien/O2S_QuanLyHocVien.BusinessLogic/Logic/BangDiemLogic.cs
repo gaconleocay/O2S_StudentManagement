@@ -61,11 +61,63 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     where p.LopHocId == _lophocId && p.HocVienId == _hocvienId
                     select p).Single();
         }
-        public static List<HOCVIEN> SelectDSHV(int _lophocId)
+        public static List<BANGDIEM> SelectTheoPhieuGhiDanh(int _phieughidanhId)
         {
-            return (from p in Database.BANGDIEMs
-                    where p.LopHocId == _lophocId
-                    select p.HOCVIEN).ToList();
+            try
+            {
+                return (from p in Database.BANGDIEMs
+                        where p.PhieuGhiDanhId == _phieughidanhId
+                        select p).ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        public static List<BANGDIEM> SelectTheoLopHoc(int _lophocId)
+        {
+            try
+            {
+                return (from p in Database.BANGDIEMs
+                        where p.LopHocId == _lophocId
+                        select p).ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+        public static List<XepLopDTO> SelectDSHV_Lop(int _lophocId)
+        {
+            try
+            {
+                var querry = (from p in Database.BANGDIEMs
+                              where (p.LopHocId == _lophocId)
+                              select new XepLopDTO()
+                              {
+                                  HocVienId = p.HocVienId,
+                                  MaHocVien = p.HOCVIEN.MaHocVien,
+                                  TenHocVien = p.HOCVIEN.TenHocVien,
+                                  PhieuGhiDanhId = p.PhieuGhiDanhId,
+                                  MaPhieuGhiDanh = p.PHIEUGHIDANH.MaPhieuGhiDanh,
+                                  NgayGhiDanh = p.PHIEUGHIDANH.NgayGhiDanh,
+                                  NgaySinh = p.HOCVIEN.NgaySinh,
+                                  GioiTinh = p.HOCVIEN.GioiTinh,
+                                  DiaChi = p.HOCVIEN.DiaChi,
+                                  KhoaHocId = p.KhoaHocId,
+                                  MaKhoaHoc = p.KHOAHOC.MaKhoaHoc,
+                                  TenKhoaHoc = p.KHOAHOC.TenKhoaHoc,
+                              });
+                return querry.ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static object SelectDSLop(int _hocvienId, DateTime? tuNgay = null, DateTime? denNgay = null, int _khoahocId = 0)
@@ -133,6 +185,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
             catch (Exception ex)
             {
+                Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -149,7 +202,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return (from p in Database.BANGDIEMs
                     where p.PHIEUGHIDANH.ConNo > 0 &&
-                          (_hocvienId == 0 ? true : p.HocVienId==_hocvienId) &&
+                          (_hocvienId == 0 ? true : p.HocVienId == _hocvienId) &&
                           (TenHocVien == null ? true : p.HOCVIEN.TenHocVien.Contains(TenHocVien)) &&
                           (gioiTinh == null ? true : p.HOCVIEN.GioiTinh == gioiTinh) &&
                           (_from == null || _to == null ? true : p.PHIEUGHIDANH.ConNo >= _from && p.PHIEUGHIDANH.ConNo <= _to)
@@ -159,7 +212,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                         TenHocVien = p.HOCVIEN.TenHocVien,
                         GioiTinhHocVien = p.HOCVIEN.GioiTinh,
                         LopHocId = p.LopHocId,
-                        TenLopHoc=p.LOPHOC.TenLopHoc,
+                        TenLopHoc = p.LOPHOC.TenLopHoc,
                         ConNo = p.PHIEUGHIDANH.ConNo,
                         PhieuGhiDanhId = p.PhieuGhiDanhId
                     }).ToList();
@@ -180,7 +233,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 _tongdiem += item.Diem ?? 0;
             }
             //Cap nhat BANGDIEM + diem trung binh
-            var _bangdiemtmp = Select(_bdct.HocVienId??0, _bdct.LopHocId??0);
+            var _bangdiemtmp = Select(_bdct.HocVienId ?? 0, _bdct.LopHocId ?? 0);
             _bangdiemtmp.DiemTrungBinh = Math.Round(_tongdiem / _bdct.BangDiemChiTiets.Count, 2);
             _bangdiemtmp.TrangThai = 3;
             Database.SubmitChanges();
@@ -213,6 +266,26 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         //    }       
         //}
 
-
+        public static bool DeleteList(List<BANGDIEM> _lstbangdiem)
+        {
+            try
+            {
+                foreach (var item in _lstbangdiem)
+                {
+                    List<BANGDIEMCHITIET> _lstBDChiTiet = (from p in Database.BANGDIEMCHITIETs
+                                                           where p.BangDiemId == item.BangDiemId
+                                                           select p).ToList();
+                    Database.BANGDIEMCHITIETs.DeleteAllOnSubmit(_lstBDChiTiet);
+                }
+                Database.BANGDIEMs.DeleteAllOnSubmit(_lstbangdiem);
+                Database.SubmitChanges();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
+        }
     }
 }

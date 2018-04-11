@@ -20,6 +20,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             try
             {
+               // GlobalSettings.NewDatacontexDatabase();
                 return (from p in GlobalSettings.Database.HOCVIENs
                         where p.HocVienId == _hocvienid
                         select p).Single();
@@ -35,6 +36,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             try
             {
+                //GlobalSettings.NewDatacontexDatabase();
                 // List<HocVien_PlusDTO> _result = null;
                 var query = (from p in GlobalSettings.Database.HOCVIENs
                              select p).AsEnumerable().Select((obj, index) => new HocVien_PlusDTO
@@ -70,7 +72,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                              });
                 if (_filter.MaHocVien != null)
                 {
-                    query = query.Where(o => o.MaHocVien == _filter.MaHocVien).ToList();
+                    query = query.Where(o => o.MaHocVien.Contains(_filter.MaHocVien)).ToList();
                 }
                 if (_filter.HocVienId != null && _filter.HocVienId != 0)
                 {
@@ -100,15 +102,114 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
             }
         }
-
-        public static List<PHIEUGHIDANH> DanhSachChuaCoLop()
+        public static List<QuanLyHocVienDTO> SelectQuanLyHocVien(HocVienFilter _filter)
         {
             try
             {
-                return (from p in Database.PHIEUGHIDANHs
-                        where !(from q in Database.BANGDIEMs
-                                select q.PhieuGhiDanhId).Contains(p.PhieuGhiDanhId)
-                        select p).ToList();
+                // List<HocVien_PlusDTO> _result = null;
+                var query = (from hv in GlobalSettings.Database.HOCVIENs
+                             join pgd in Database.PHIEUGHIDANHs on hv.HocVienId equals pgd.HocVienId into phieu
+                             from pgd1 in phieu.DefaultIfEmpty()
+                             join bd in Database.BANGDIEMs on pgd1.PhieuGhiDanhId equals bd.BangDiemId into bangdiem
+                             from bd1 in bangdiem.DefaultIfEmpty()
+                             select new QuanLyHocVienDTO
+                             {
+                                 HocVienId = hv.HocVienId,
+                                 CoSoId = hv.CoSoId,
+                                 TenCoSoTrungTam = hv.COSOTRUNGTAM.TenCoSo,
+                                 LoaiHocVienId = hv.LoaiHocVienId,
+                                 MaLoaiHocVien = hv.LOAIHOCVIEN.MaLoaiHocVien,
+                                 TenLoaiHocVien = hv.LOAIHOCVIEN.TenLoaiHocVien,
+                                 MaHocVien = hv.MaHocVien,
+                                 TenHocVien = hv.TenHocVien,
+                                 GioiTinh = hv.GioiTinh,
+                                 NgaySinh = hv.NgaySinh,
+                                 DiaChi = hv.DiaChi,
+                                 Sdt = hv.Sdt,
+                                 Email = hv.Email,
+                                 NgayTiepNhan = hv.NgayTiepNhan,
+                                 SdtBo = hv.SdtBo,
+                                 EmailBo = hv.EmailBo,
+                                 SdtMe = hv.SdtMe,
+                                 EmailMe = hv.EmailMe,
+                                 IsRemove = hv.IsRemove,
+                                 CreatedDate = hv.CreatedDate,
+                                 CreatedBy = hv.CreatedBy,
+                                 CreatedLog = hv.CreatedLog,
+                                 ModifiedDate = hv.ModifiedDate,
+                                 ModifiedBy = hv.ModifiedBy,
+                                 ModifiedLog = hv.ModifiedLog,
+                                 TenDangNhap = hv.TAIKHOAN.TenDangNhap,
+                                 PhieuGhiDanhId = pgd1 == null ? 0 : pgd1.PhieuGhiDanhId,
+                                 MaPhieuGhiDanh = pgd1 == null ? "" : pgd1.MaPhieuGhiDanh,
+                                 NgayGhiDanh = pgd1 == null ? null : pgd1.NgayGhiDanh,
+                                 TongTien = pgd1 == null ? 0 : pgd1.TongTien,
+                                 DaDong = pgd1 == null ? 0 : pgd1.DaDong,
+                                 ConNo = pgd1 == null ? 0 : pgd1.ConNo,
+                                 KhoaHocId = pgd1 == null ? 0 : pgd1.KhoaHocId,
+                                 TenKhoaHoc = pgd1 == null ? "" : pgd1.KHOAHOC.TenKhoaHoc,
+                                 LopHocId = bd1 == null ? 0 : bd1.LopHocId,
+                                 TenLopHoc = bd1 == null ? "" : bd1.LOPHOC.TenLopHoc,
+                                 BangDiemId = bd1 == null ? 0 : bd1.BangDiemId,
+                                 DiemTrungBinh = bd1 == null ? 0 : bd1.DiemTrungBinh,
+                                 TenTrangThai = bd1 == null ? "" : (bd1.TrangThai == 0 ? "Xếp lớp" : bd1.TrangThai == 1 ? "Đang học" : bd1.TrangThai == 3 ? "Có điểm" : bd1.TrangThai == 99 ? "Kết thúc" : ""),
+                             }).ToList();
+                //if (_filter.MaHocVien != null)
+                //{
+                //    query = query.Where(o => o.MaHocVien == _filter.MaHocVien).ToList();
+                //}
+                //if (_filter.HocVienId != null && _filter.HocVienId != 0)
+                //{
+                //    query = query.Where(o => o.HocVienId == _filter.HocVienId).ToList();
+                //}
+                if (_filter.CoSoId != null && _filter.CoSoId != 0)
+                {
+                    query = query.Where(o => o.CoSoId == _filter.CoSoId).ToList();
+                }
+                if (_filter.NgayTiepNhan_Tu != null && _filter.NgayTiepNhan_Den != null)
+                {
+                    query = query.Where(o => o.NgayTiepNhan >= _filter.NgayTiepNhan_Tu && o.NgayTiepNhan <= _filter.NgayTiepNhan_Den).ToList();
+                }
+                if (_filter.LoaiHocVienId != null && _filter.LoaiHocVienId != 0)
+                {
+                    query = query.Where(o => o.LoaiHocVienId == _filter.LoaiHocVienId).ToList();
+                }
+                //if (_filter.GioiTinh != null && _filter.GioiTinh != "")
+                //{
+                //    query = query.Where(o => o.GioiTinh == _filter.GioiTinh).ToList();
+                //}
+                return query.ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+        public static List<XepLopDTO> DanhSachHocVienChuaXepLop(int _cosoId)
+        {
+            try
+            {
+                var querry = (from p in Database.PHIEUGHIDANHs
+                              where p.HOCVIEN.CoSoId == _cosoId
+                              && !(from q in Database.BANGDIEMs select q.PhieuGhiDanhId).Contains(p.PhieuGhiDanhId)
+                              select new XepLopDTO()
+                              {
+                                  HocVienId = p.HocVienId,
+                                  MaHocVien = p.HOCVIEN.MaHocVien,
+                                  TenHocVien = p.HOCVIEN.TenHocVien,
+                                  PhieuGhiDanhId = p.PhieuGhiDanhId,
+                                  MaPhieuGhiDanh = p.MaPhieuGhiDanh,
+                                  NgayGhiDanh = p.NgayGhiDanh,
+                                  NgaySinh = p.HOCVIEN.NgaySinh,
+                                  GioiTinh = p.HOCVIEN.GioiTinh,
+                                  DiaChi = p.HOCVIEN.DiaChi,
+                                  KhoaHocId = p.KhoaHocId,
+                                  MaKhoaHoc = p.KHOAHOC.MaKhoaHoc,
+                                  TenKhoaHoc = p.KHOAHOC.TenKhoaHoc,
+                              });
+                return querry.ToList();
             }
             catch (System.Exception ex)
             {

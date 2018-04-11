@@ -48,6 +48,7 @@ namespace O2S_QuanLyKhoaHoc.BusinessLogic
                                  TenKhoaHoc = obj.TenKhoaHoc,
                                  HocPhi = obj.HocPhi,
                                  IsRemove = obj.IsRemove,
+                                 TrangThai_Ten = obj.IsRemove == 1 ? "Đã khóa" : "",
                                  CreatedDate = obj.CreatedDate,
                                  CreatedBy = obj.CreatedBy,
                                  CreatedLog = obj.CreatedLog,
@@ -57,15 +58,19 @@ namespace O2S_QuanLyKhoaHoc.BusinessLogic
                              });
                 if (_filter.KhoaHocId != null && _filter.KhoaHocId != 0)
                 {
-                   query = query.Where(o => o.KhoaHocId == _filter.KhoaHocId).ToList();
+                    query = query.Where(o => o.KhoaHocId == _filter.KhoaHocId).ToList();
                 }
                 if (_filter.CoSoId != null && _filter.CoSoId != 0)
                 {
-                   query = query.Where(o => o.CoSoId == _filter.CoSoId).ToList();
+                    query = query.Where(o => o.CoSoId == _filter.CoSoId).ToList();
+                }
+                if (_filter.IsRemove != null && _filter.IsRemove != 0)
+                {
+                    query = query.Where(o => o.IsRemove == _filter.IsRemove).ToList();
                 }
                 if (_filter.CreatedDate_Tu != null && _filter.CreatedDate_Den != null)
                 {
-                   query = query.Where(o => o.CreatedDate >= _filter.CreatedDate_Tu && o.CreatedDate <= _filter.CreatedDate_Den).ToList();
+                    query = query.Where(o => o.CreatedDate >= _filter.CreatedDate_Tu && o.CreatedDate <= _filter.CreatedDate_Den).ToList();
                 }
                 return query.ToList();
             }
@@ -105,6 +110,7 @@ namespace O2S_QuanLyKhoaHoc.BusinessLogic
 
                 hocVienCu.TenKhoaHoc = _hocVien.TenKhoaHoc;
                 hocVienCu.HocPhi = _hocVien.HocPhi;
+                hocVienCu.IsRemove = _hocVien.IsRemove;
                 hocVienCu.ModifiedDate = DateTime.Now;
                 hocVienCu.ModifiedBy = GlobalSettings.UserCode;
                 hocVienCu.ModifiedLog = GlobalSettings.SessionMyIP;

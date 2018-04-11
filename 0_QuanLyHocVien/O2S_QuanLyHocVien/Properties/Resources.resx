@@ -160,6 +160,9 @@
   <data name="icon_HocVien_64dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_HocVien_64dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="key-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\key-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="refresh_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -226,8 +229,8 @@
   <data name="icon_NguoiDung_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_NguoiDung_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_BaoCaoHocVienTheoThang_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_BaoCaoHocVienTheoThang_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="list-2-161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list-2-161.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="print_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\print_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -244,11 +247,11 @@
   <data name="excel-3-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\excel-3-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="list-2-161" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\list-2-161.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="group_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\group-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_NhanVien_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_NhanVien_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="us-dollar-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\us-dollar-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -261,9 +264,6 @@
   </data>
   <data name="icon_KhoaHoc_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_KhoaHoc_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_NhanVien_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_NhanVien_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="user_2_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user-2-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -282,6 +282,9 @@
   </data>
   <data name="question-mark-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\question-mark-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_BaoCaoHocVienTheoThang_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_BaoCaoHocVienTheoThang_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_QuanLyDiem_32dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_QuanLyDiem_32dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -331,7 +334,7 @@
   <data name="show_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\show_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="key-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\key-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="printer-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\printer-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

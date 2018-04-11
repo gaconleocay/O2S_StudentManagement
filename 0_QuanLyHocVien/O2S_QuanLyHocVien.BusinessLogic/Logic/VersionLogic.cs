@@ -12,40 +12,40 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class VersionLogic
     {
-        /// <summary>
-        /// Lấy 1 phiên bản
-        /// </summary>
-        /// <param name="_AppType"> 0: Phần mềm chạy; 1: Launcher</param>
-        /// <returns></returns>
-        public static VERSION Select(int _AppType)
+        public static VERSION Select()
         {
             return (from p in Database.VERSIONs
-                    where p.AppType == _AppType
                     select p).FirstOrDefault();
         }
 
-        /// <summary>
-        /// Xóa version
-        /// </summary>
-        /// <param name="_AppType">0: Phần mềm chạy; 1: Launcher</param>
-        public static void Delete(int _AppType)
+        public static void Delete()
         {
             var temp = (from p in Database.VERSIONs
-                        where p.AppType == _AppType
                         select p).Single();
 
             Database.VERSIONs.DeleteOnSubmit(temp);
             Database.SubmitChanges();
         }
 
-        /// <summary>
-        /// Update
-        /// </summary>
-        /// <param name="_version"></param>
+        public static bool Insert(VERSION _version)
+        {
+            try
+            {
+                Database.VERSIONs.InsertOnSubmit(_version);
+                Database.SubmitChanges();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+
         public static void Update(VERSION _version)
         {
             var temp = (from p in Database.VERSIONs
-                        where p.AppType == _version.AppType
                         select p).Single();
 
             temp.AppVersion = _version.AppVersion;

@@ -15,7 +15,7 @@ using System.Linq;
 using DevExpress.XtraBars;
 using O2S_QuanLyHocVien.BUS;
 using DevExpress.XtraTab;
-
+using O2S_QuanLyHocVien.CauHinh;
 
 namespace O2S_QuanLyHocVien
 {
@@ -155,9 +155,9 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-                //frmTiepNhanHocVien frmControlActive = new frmTiepNhanHocVien() { Dock = DockStyle.Fill, TopLevel = false };
-                //TabControlProcess.TabCreating(xtraTabControl_Home, "frmTiepNhanHocVien", "frmTiepNhanHocVien", "frmTiepNhanHocVien", frmControlActive);
-                //frmControlActive.Show();
+                frmBaoCaoTiepNhanHocVien frmControlActive = new frmBaoCaoTiepNhanHocVien() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmBaoCaoTiepNhanHocVien", "Báo cáo tiếp nhận học viên", "Báo cáo tiếp nhận học viên", frmControlActive);
+                frmControlActive.Show();
             }
             catch (Exception ex)
             {
@@ -363,7 +363,7 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-                frmKetNoiCSDL _frm = new frmKetNoiCSDL();
+                frmCauHinhPhanMem_CSDL _frm = new frmCauHinhPhanMem_CSDL();
                 _frm.ShowDialog();
             }
             catch (Exception ex)
