@@ -45,11 +45,11 @@ namespace O2S_QuanLyHocVien.Base
             {
                 if (GlobalSettings.UserCode == KeyTrongPhanMem.AdminUser_key)
                 {
-                    lstPhanQuyen = Base.listChucNang.getDanhSachChucNang();
-                    foreach (var item in lstPhanQuyen)
-                    {
-                        item.permissioncheck = true;
-                    }
+                    //lstPhanQuyen = Base.listChucNang.getDanhSachChucNang();
+                    //foreach (var item in lstPhanQuyen)
+                    //{
+                    //    item.permissioncheck = true;
+                    //}
                 }
                 else
                 {

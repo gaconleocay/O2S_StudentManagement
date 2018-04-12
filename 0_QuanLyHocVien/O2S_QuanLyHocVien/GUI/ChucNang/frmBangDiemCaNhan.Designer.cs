@@ -120,6 +120,7 @@
             this.gridColumn5});
             this.gridViewDSDiem.GridControl = this.gridControlDSDiem;
             this.gridViewDSDiem.Name = "gridViewDSDiem";
+            this.gridViewDSDiem.OptionsView.EnableAppearanceEvenRow = true;
             this.gridViewDSDiem.OptionsView.ShowGroupPanel = false;
             this.gridViewDSDiem.OptionsView.ShowIndicator = false;
             this.gridViewDSDiem.RowHeight = 25;
@@ -322,7 +323,7 @@
             this.label2.TabIndex = 34;
             this.label2.Text = "Chọn Lớp để xem bảng điểm học viên";
             // 
-            // frmBangDiem
+            // frmBangDiemCaNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -332,7 +333,7 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmBangDiem";
+            this.Name = "frmBangDiemCaNhan";
             this.Text = "Bảng điểm";
             this.Load += new System.EventHandler(this.frmBangDiem_Load);
             this.panel1.ResumeLayout(false);

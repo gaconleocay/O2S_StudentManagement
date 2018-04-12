@@ -7,127 +7,273 @@ using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
+using System.Collections.Generic;
+using O2S_QuanLyHocVien.BusinessLogic.Logic;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using O2S_QuanLyHocVien.BusinessLogic.Model;
+using System.Linq;
+using DevExpress.XtraGrid.Views.Grid;
+using System.Drawing;
 
 namespace O2S_QuanLyHocVien.Pages
 {
     public partial class frmQuanLyTaiKhoan : Form
     {
+        #region Khai bao
+        private TAIKHOAN TaiKhoan_Select { get; set; }
+        private List<PhanQuyenTaiKhoan_PlusDTO> lstPQ_TK_ChucNang { get; set; }
+        private List<PhanQuyenTaiKhoan_PlusDTO> lstPQ_TK_BaoCao { get; set; }
+        #endregion
         public frmQuanLyTaiKhoan()
         {
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Kiểm tra nhập liệu tìm kiếm có hợp lệ
-        /// </summary>
-        public void ValidateSearch()
-        {
-            if (chkTen.Checked && txtTen.Text == string.Empty)
-                throw new ArgumentException("Tên đăng nhập không được trống");
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            //GlobalPages.QuanLyTaiKhoan = null; 
-        }
-
-        private void chkTen_CheckedChanged(object sender, EventArgs e)
-        {
-            txtTen.Enabled = chkTen.Checked;
-        }
-
-        private void chkLoaiTK_CheckedChanged(object sender, EventArgs e)
-        {
-            cboLoaiTK.Enabled = chkLoaiTK.Checked;
-        }
-
-        private void btnDatLai_Click(object sender, EventArgs e)
-        {
-            chkTen.Checked = true;
-            txtTen.Text = string.Empty;
-        }
-
+        #region Load
         private void frmQuanLyTaiKhoan_Load(object sender, EventArgs e)
         {
-            cboLoaiTK.Items.AddRange(new string[]
+            try
             {
-                "Nhân viên",
-                "Học viên",
-                "Giảng viên"
-            });
-            cboLoaiTK.SelectedIndex = 0;
-
-            btnDatLai_Click(sender, e);
-            gridKetQua.AutoGenerateColumns = false;
-            btnXemTatCa_Click(sender, e);
+                LoadLoaiTaiKhoan();
+                LoadDanhSachTaiKhoan();
+                LoadChucNangVaBaoCao();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
-
-        private void btnXemTatCa_Click(object sender, EventArgs e)
+        private void LoadLoaiTaiKhoan()
         {
-            gridKetQua.DataSource = TaiKhoanLogic.SelectAll(null, null);
+            try
+            {
+                cboLoaiTaiKhoan.DataSource = LoaiTaiKhoanLogic.SelectAll();
+                cboLoaiTaiKhoan.DisplayMember = "TenLoaiTaiKhoan";
+                cboLoaiTaiKhoan.ValueMember = "LoaiTaiKhoanId";
+                cboLoaiTaiKhoan.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
+        private void LoadDanhSachTaiKhoan()
+        {
+            try
+            {
+                TaiKhoanFilter _filter = new TaiKhoanFilter();
+                _filter.LoaiTaiKhoanId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLoaiTaiKhoan.SelectedValue.ToString());
+                List<TaiKhoan_PlusDTO> _lstTaiKhoan = TaiKhoanLogic.SelectFilter(_filter);
+                gridControlTaiKhoan.DataSource = _lstTaiKhoan;
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        private void LoadChucNangVaBaoCao()
+        {
+            try
+            {
+                List<PhanQuyenTaiKhoan_PlusDTO> lstChucNangAll = ChucNangLogic.SelectKieuPhanQuyen();
+                List<PhanQuyenTaiKhoan_PlusDTO> _lstChucNang_ChucNang = lstChucNangAll.Where(o => o.LoaiChucNangId != 3).ToList();
+                gridControlChucNang.DataSource = _lstChucNang_ChucNang;
+                //
+                List<PhanQuyenTaiKhoan_PlusDTO> _lstChucNang_BaoCao = lstChucNangAll.Where(o => o.LoaiChucNangId == 3).ToList();
+                gridControlBaoCao.DataSource = _lstChucNang_BaoCao;
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        #endregion
 
+        #region Events
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             try
             {
-                ValidateSearch();
-
-                gridKetQua.DataSource = TaiKhoanLogic.SelectAll(chkTen.Checked ? txtTen.Text : null, chkLoaiTK.Checked ? (UserType?)cboLoaiTK.SelectedIndex : null);
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LoadDanhSachTaiKhoan();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Common.Logging.LogSystem.Warn(ex);
             }
         }
-
-        private void gridKetQua_Click(object sender, EventArgs e)
+        private void gridViewTaiKhoan_Click(object sender, EventArgs e)
         {
             try
             {
-                txtTenDangNhap.Text = gridKetQua.SelectedRows[0].Cells["clmTenDangNhap"].Value.ToString();
-                txtMatKhau.Text = gridKetQua.SelectedRows[0].Cells["clmMatKhau"].Value.ToString();
+                if (gridViewTaiKhoan.RowCount > 0)
+                {
+                    var rowHandle = gridViewTaiKhoan.FocusedRowHandle;
+                    int _taikhoanId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewTaiKhoan.GetRowCellValue(rowHandle, "TaiKhoanId").ToString());
+
+                    //hien thi tai khoan hien tai len form
+                    this.TaiKhoan_Select = TaiKhoanLogic.SelectSingle(_taikhoanId);
+                    txtTenDangNhap.Text = this.TaiKhoan_Select.TenDangNhap;
+                    txtMatKhau.Text = this.TaiKhoan_Select.MatKhau;
+
+                    LoadPhanQuyenTheoTaiKhoan(_taikhoanId);
+                }
+                else
+                {
+                    this.TaiKhoan_Select = new TAIKHOAN();
+                }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
-
-        private void gridKetQua_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void LoadPhanQuyenTheoTaiKhoan(int _taikhoanId)
         {
-            lblTongCong.Text = string.Format("Tổng cộng: {0} kết quả", gridKetQua.Rows.Count);
-        }
+            try
+            {
+                gridControlChucNang.DataSource = null;
+                gridControlBaoCao.DataSource = null;
+                this.lstPQ_TK_ChucNang = new List<PhanQuyenTaiKhoan_PlusDTO>();
+                this.lstPQ_TK_BaoCao = new List<PhanQuyenTaiKhoan_PlusDTO>();
 
-        private void gridKetQua_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            lblTongCong.Text = string.Format("Tổng cộng: {0} kết quả", gridKetQua.Rows.Count);
-        }
+                List<PhanQuyenTaiKhoan_PlusDTO> _lstPQ_TK_All = PhanQuyenTaiKhoanLogic.SelectKieuPhanQuyen(_taikhoanId);
+                this.lstPQ_TK_ChucNang = _lstPQ_TK_All.Where(o => o.LoaiChucNangId != 3).ToList();
+                gridControlChucNang.DataSource = this.lstPQ_TK_ChucNang;
 
-        private void btnHuyBo_Click(object sender, EventArgs e)
-        {
-            txtTenDangNhap.Text = txtMatKhau.Text = string.Empty;
+                this.lstPQ_TK_BaoCao = _lstPQ_TK_All.Where(o => o.LoaiChucNangId == 3).ToList();
+                gridControlBaoCao.DataSource = this.lstPQ_TK_BaoCao;
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
 
         private void btnLuuThongTin_Click(object sender, EventArgs e)
         {
             try
             {
-                TaiKhoanLogic.Update(new TAIKHOAN()
+                if (this.TaiKhoan_Select != null)
                 {
-                    TenDangNhap = txtTenDangNhap.Text,
-                    MatKhau = txtMatKhau.Text,
-                });
+                    //Update TAIKHOAN: passs
+                    this.TaiKhoan_Select.MatKhau = txtMatKhau.Text;
 
-                MessageBox.Show("Cập nhật tài khoản thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btnXemTatCa_Click(sender, e);
+                    //Update PHANQUYENTAIKHOAN
+                    List<PHANQUYENTAIKHOAN> _lstPQ_TK_All = new List<PHANQUYENTAIKHOAN>();
+                    foreach (var _item in this.lstPQ_TK_ChucNang)
+                    {
+                        if (_item.IsCheck)
+                        {
+                            PHANQUYENTAIKHOAN _phanquyen = new PHANQUYENTAIKHOAN
+                            {
+                                TaiKhoanId = this.TaiKhoan_Select.TaiKhoanId,
+                                ChucNangId = _item.ChucNangId,
+                                Them = _item.Them == true ? 1 : 0,
+                                Sua = _item.Sua == true ? 1 : 0,
+                                Xoa = _item.Xoa == true ? 1 : 0,
+                                InAn = _item.InAn == true ? 1 : 0,
+                                XuatFile = _item.XuatFile == true ? 1 : 0,
+                            };
+                            _lstPQ_TK_All.Add(_phanquyen);
+                        }
+                    }
+                    foreach (var _item in this.lstPQ_TK_BaoCao)
+                    {
+                        if (_item.IsCheck)
+                        {
+                            PHANQUYENTAIKHOAN _phanquyen = new PHANQUYENTAIKHOAN
+                            {
+                                TaiKhoanId = this.TaiKhoan_Select.TaiKhoanId,
+                                ChucNangId = _item.ChucNangId,
+                                Them = _item.Them == true ? 1 : 0,
+                                Sua = _item.Sua == true ? 1 : 0,
+                                Xoa = _item.Xoa == true ? 1 : 0,
+                                InAn = _item.InAn == true ? 1 : 0,
+                                XuatFile = _item.XuatFile == true ? 1 : 0,
+                            };
+                            _lstPQ_TK_All.Add(_phanquyen);
+                        }
+                    }
+
+                    if (TaiKhoanLogic.Update(this.TaiKhoan_Select) && PhanQuyenTaiKhoanLogic.DeleteAndInsert(_lstPQ_TK_All))
+                    {
+                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                        frmthongbao.Show();
+                    }
+                    else
+                    {
+                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
+                        frmthongbao.Show();
+                    }
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Có lỗi xảy ra", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Common.Logging.LogSystem.Warn(ex);
             }
         }
+
+        #endregion
+
+        #region Custom
+        private void cboLoaiTaiKhoan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadDanhSachTaiKhoan();
+        }
+        private void gridViewChucNang_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                if (e.RowHandle == view.FocusedRowHandle)
+                {
+                    e.Appearance.BackColor = Color.DodgerBlue;
+                    e.Appearance.ForeColor = Color.White;
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        //private void gridViewTaiKhoan_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (e.Column == clm_TaiKhoan_Stt)
+        //        {
+        //            e.DisplayText = Convert.ToString(e.RowHandle + 1);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Common.Logging.LogSystem.Warn(ex);
+        //    }
+        //}
+
+        private void gridViewBaoCao_CustomDrawRowIndicator(object sender, RowIndicatorCustomDrawEventArgs e)
+        {
+            try
+            {
+                if (e.Info.IsRowIndicator && e.RowHandle >= 0)
+                    e.Info.DisplayText = (e.RowHandle + 1).ToString();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+
+
+
+
+
+        #endregion
+
+
+
+
+
     }
 }

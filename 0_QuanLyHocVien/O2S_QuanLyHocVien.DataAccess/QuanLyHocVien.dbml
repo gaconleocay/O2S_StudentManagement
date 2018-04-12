@@ -47,6 +47,24 @@
       <Association Name="MONHOC_BANGDIEMCHITIET" Member="MONHOC" ThisKey="MonHocId" OtherKey="MonHocId" Type="MONHOC" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.CHUCNANG" Member="CHUCNANGs">
+    <Type Name="CHUCNANG">
+      <Column Name="ChucNangId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaChucNang" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TenChucNang" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LoaiChucNangId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TabMenuId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="CHUCNANG_PHANQUYENTAIKHOAN" Member="PHANQUYENTAIKHOANs" ThisKey="ChucNangId" OtherKey="ChucNangId" Type="PHANQUYENTAIKHOAN" />
+    </Type>
+  </Table>
   <Table Name="dbo.COSOTRUNGTAM" Member="COSOTRUNGTAMs">
     <Type Name="COSOTRUNGTAM">
       <Column Name="CoSoId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -226,6 +244,21 @@
       <Association Name="LOAINHANVIEN_NHANVIEN" Member="NHANVIENs" ThisKey="LoaiNhanVienId" OtherKey="LoaiNhanVienId" Type="NHANVIEN" />
     </Type>
   </Table>
+  <Table Name="dbo.LOAITAIKHOAN" Member="LOAITAIKHOANs">
+    <Type Name="LOAITAIKHOAN">
+      <Column Name="LoaiTaiKhoanId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaLoaiTaiKhoan" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TenLoaiTaiKhoan" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="LOAITAIKHOAN_TAIKHOAN" Member="TAIKHOANs" ThisKey="LoaiTaiKhoanId" OtherKey="LoaiTaiKhoanId" Type="TAIKHOAN" />
+    </Type>
+  </Table>
   <Table Name="dbo.LOPHOC" Member="LOPHOCs">
     <Type Name="LOPHOC">
       <Column Name="LopHocId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -290,6 +323,27 @@
       <Association Name="TAIKHOAN_NHANVIEN" Member="TAIKHOAN" ThisKey="TaiKhoanId" OtherKey="TaiKhoanId" Type="TAIKHOAN" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.PHANQUYENTAIKHOAN" Member="PHANQUYENTAIKHOANs">
+    <Type Name="PHANQUYENTAIKHOAN">
+      <Column Name="PhanQuyenTaiKhoanId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TaiKhoanId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChucNangId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Them" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Sua" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Xoa" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InAn" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="XuatFile" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="CHUCNANG_PHANQUYENTAIKHOAN" Member="CHUCNANG" ThisKey="ChucNangId" OtherKey="ChucNangId" Type="CHUCNANG" IsForeignKey="true" />
+      <Association Name="TAIKHOAN_PHANQUYENTAIKHOAN" Member="TAIKHOAN" ThisKey="TaiKhoanId" OtherKey="TaiKhoanId" Type="TAIKHOAN" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.PHIEUGHIDANH" Member="PHIEUGHIDANHs">
     <Type Name="PHIEUGHIDANH">
       <Column Name="PhieuGhiDanhId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -299,6 +353,8 @@
       <Column Name="NgayGhiDanh" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="TongTien" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="DaDong" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="MienGiam_PhanTram" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MienGiam_Tien" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="ConNo" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="NhanVienId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -356,7 +412,8 @@
   <Table Name="dbo.TAIKHOAN" Member="TAIKHOANs">
     <Type Name="TAIKHOAN">
       <Column Name="TaiKhoanId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TenDangNhap" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LoaiTaiKhoanId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TenDangNhap" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="MatKhau" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -368,6 +425,8 @@
       <Association Name="TAIKHOAN_GIANGVIEN" Member="GIANGVIENs" ThisKey="TaiKhoanId" OtherKey="TaiKhoanId" Type="GIANGVIEN" />
       <Association Name="TAIKHOAN_HOCVIEN" Member="HOCVIENs" ThisKey="TaiKhoanId" OtherKey="TaiKhoanId" Type="HOCVIEN" />
       <Association Name="TAIKHOAN_NHANVIEN" Member="NHANVIENs" ThisKey="TaiKhoanId" OtherKey="TaiKhoanId" Type="NHANVIEN" />
+      <Association Name="TAIKHOAN_PHANQUYENTAIKHOAN" Member="PHANQUYENTAIKHOANs" ThisKey="TaiKhoanId" OtherKey="TaiKhoanId" Type="PHANQUYENTAIKHOAN" />
+      <Association Name="LOAITAIKHOAN_TAIKHOAN" Member="LOAITAIKHOAN" ThisKey="LoaiTaiKhoanId" OtherKey="LoaiTaiKhoanId" Type="LOAITAIKHOAN" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.THONGTINTRUNGTAM" Member="THONGTINTRUNGTAMs">
@@ -375,7 +434,7 @@
       <Column Name="ThongTinTrungTamId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="MaTrungTam" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="TenTrungTam" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
-      <Column Name="Sdt" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Sdt" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="Website" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="Email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="DiaChi" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />

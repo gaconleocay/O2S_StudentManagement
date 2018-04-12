@@ -58,11 +58,15 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     select new
                     {
                         PhieuGhiDanhId = p.PhieuGhiDanhId,
+                        MaPhieuGhiDanh=p.MaPhieuGhiDanh,
                         HocVienId = p.HocVienId,
+                        MaHocVien=hv.MaHocVien,
                         TenHocVien = hv.TenHocVien,
                         NgayGhiDanh = p.NgayGhiDanh,
                         TongTien = p.TongTien,
                         DaDong = p.DaDong,
+                        MienGiam_PhanTram=p.MienGiam_PhanTram,
+                        MienGiam_Tien=p.MienGiam_Tien,
                         ConNo = p.ConNo,
                         TenKhoaHoc = p.KHOAHOC.TenKhoaHoc,
                     }).ToList();

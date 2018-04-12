@@ -277,6 +277,7 @@
             this.gridColumn5});
             this.gridViewDSDiem.GridControl = this.gridControlDSDiem;
             this.gridViewDSDiem.Name = "gridViewDSDiem";
+            this.gridViewDSDiem.OptionsView.EnableAppearanceEvenRow = true;
             this.gridViewDSDiem.OptionsView.ShowGroupPanel = false;
             this.gridViewDSDiem.OptionsView.ShowIndicator = false;
             this.gridViewDSDiem.RowHeight = 25;

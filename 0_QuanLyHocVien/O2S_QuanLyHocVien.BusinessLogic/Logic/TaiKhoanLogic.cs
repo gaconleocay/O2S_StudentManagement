@@ -7,6 +7,9 @@ using System.Linq;
 using O2S_QuanLyHocVien.DataAccess;
 using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using System.Collections.Generic;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using O2S_QuanLyHocVien.BusinessLogic.Model;
+using O2S_QuanLyHocVien.BusinessLogic.Logic;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
@@ -25,12 +28,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     select p).FirstOrDefault();
         }
 
-        /// <summary>
-        /// Lấy danh sách tài khoản
-        /// </summary>
-        /// <param name="tenDangNhap">Theo tên đăng nhập</param>
-        /// <param name="loaiTK">Theo loại tài khoản (0: Nhân viên, 1: Học viên, 2: Giảng viên)</param>
-        /// <returns></returns>
         public static List<TAIKHOAN> SelectAll(string tenDangNhap, UserType? loaiTK)
         {
             switch (loaiTK)
@@ -57,32 +54,169 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
-        /// <summary>
-        /// Xóa tài khoản
-        /// </summary>
-        /// <param name="tenDangNhap"></param>
-        public static void Delete(int TaiKhoanId)
+        public static List<TaiKhoan_PlusDTO> SelectFilter(TaiKhoanFilter _filter)
         {
-            var temp = (from p in Database.TAIKHOANs
-                        where p.TaiKhoanId == TaiKhoanId
-                        select p).Single();
-
-            Database.TAIKHOANs.DeleteOnSubmit(temp);
-            Database.SubmitChanges();
+            try
+            {
+                if (_filter.LoaiTaiKhoanId != null)
+                {
+                    if (_filter.LoaiTaiKhoanId == KeySetting.LOAITAIKHOAN_NhanVien)
+                    {
+                        return (from p in Database.NHANVIENs
+                                where (_filter.TenDangNhap == null ? true : p.TAIKHOAN.TenDangNhap.Contains(_filter.TenDangNhap)) && p.LoaiNhanVienId != KeySetting.LOAINHANVIEN_QuanTri && p.TAIKHOAN.IsRemove ==0
+                                select new TaiKhoan_PlusDTO
+                                {
+                                    TaiKhoanId = p.TAIKHOAN.TaiKhoanId,
+                                    LoaiTaiKhoanId = p.TAIKHOAN.LoaiTaiKhoanId,
+                                    TenNguoiDung = p.TenNhanVien,
+                                    TenLoaiTaiKhoan = p.TAIKHOAN.LOAITAIKHOAN.TenLoaiTaiKhoan,
+                                    TenDangNhap = p.TAIKHOAN.TenDangNhap,
+                                    MatKhau = p.TAIKHOAN.MatKhau,
+                                    IsRemove = p.TAIKHOAN.IsRemove,
+                                    CreatedDate = p.TAIKHOAN.CreatedDate,
+                                    CreatedBy = p.TAIKHOAN.CreatedBy,
+                                    CreatedLog = p.TAIKHOAN.CreatedLog,
+                                    ModifiedDate = p.TAIKHOAN.ModifiedDate,
+                                    ModifiedBy = p.TAIKHOAN.ModifiedBy,
+                                    ModifiedLog = p.TAIKHOAN.ModifiedLog,
+                                }).ToList();
+                    }
+                    else if (_filter.LoaiTaiKhoanId == KeySetting.LOAITAIKHOAN_HocVien)
+                    {
+                        return (from p in Database.HOCVIENs
+                                where p.TAIKHOAN.TenDangNhap != null &&
+                                      (_filter.TenDangNhap == null ? true : p.TAIKHOAN.TenDangNhap.Contains(_filter.TenDangNhap)) && p.TAIKHOAN.IsRemove == 0
+                                select new TaiKhoan_PlusDTO
+                                {
+                                    TaiKhoanId = p.TAIKHOAN.TaiKhoanId,
+                                    LoaiTaiKhoanId = p.TAIKHOAN.LoaiTaiKhoanId,
+                                    TenNguoiDung = p.TenHocVien,
+                                    TenLoaiTaiKhoan = p.TAIKHOAN.LOAITAIKHOAN.TenLoaiTaiKhoan,
+                                    TenDangNhap = p.TAIKHOAN.TenDangNhap,
+                                    MatKhau = p.TAIKHOAN.MatKhau,
+                                    IsRemove = p.TAIKHOAN.IsRemove,
+                                    CreatedDate = p.TAIKHOAN.CreatedDate,
+                                    CreatedBy = p.TAIKHOAN.CreatedBy,
+                                    CreatedLog = p.TAIKHOAN.CreatedLog,
+                                    ModifiedDate = p.TAIKHOAN.ModifiedDate,
+                                    ModifiedBy = p.TAIKHOAN.ModifiedBy,
+                                    ModifiedLog = p.TAIKHOAN.ModifiedLog,
+                                }).ToList();
+                    }
+                    else if (_filter.LoaiTaiKhoanId == KeySetting.LOAITAIKHOAN_GiangVien)
+                    {
+                        return (from p in Database.GIANGVIENs
+                                where (_filter.TenDangNhap == null ? true : p.TAIKHOAN.TenDangNhap.Contains(_filter.TenDangNhap)) && p.TAIKHOAN.IsRemove == 0
+                                select new TaiKhoan_PlusDTO
+                                {
+                                    TaiKhoanId = p.TAIKHOAN.TaiKhoanId,
+                                    LoaiTaiKhoanId = p.TAIKHOAN.LoaiTaiKhoanId,
+                                    TenNguoiDung = p.TenGiangVien,
+                                    TenLoaiTaiKhoan = p.TAIKHOAN.LOAITAIKHOAN.TenLoaiTaiKhoan,
+                                    TenDangNhap = p.TAIKHOAN.TenDangNhap,
+                                    MatKhau = p.TAIKHOAN.MatKhau,
+                                    IsRemove = p.TAIKHOAN.IsRemove,
+                                    CreatedDate = p.TAIKHOAN.CreatedDate,
+                                    CreatedBy = p.TAIKHOAN.CreatedBy,
+                                    CreatedLog = p.TAIKHOAN.CreatedLog,
+                                    ModifiedDate = p.TAIKHOAN.ModifiedDate,
+                                    ModifiedBy = p.TAIKHOAN.ModifiedBy,
+                                    ModifiedLog = p.TAIKHOAN.ModifiedLog,
+                                }).ToList();
+                    }
+                    else if (_filter.LoaiTaiKhoanId == KeySetting.LOAITAIKHOAN_QuanTri)
+                    {
+                        return (from p in Database.NHANVIENs
+                                where (_filter.TenDangNhap == null ? true : p.TAIKHOAN.TenDangNhap.Contains(_filter.TenDangNhap)) && p.LoaiNhanVienId == KeySetting.LOAINHANVIEN_QuanTri && p.TAIKHOAN.IsRemove == 0
+                                select new TaiKhoan_PlusDTO
+                                {
+                                    TaiKhoanId = p.TAIKHOAN.TaiKhoanId,
+                                    LoaiTaiKhoanId = p.TAIKHOAN.LoaiTaiKhoanId,
+                                    TenNguoiDung = p.TenNhanVien,
+                                    TenLoaiTaiKhoan = p.TAIKHOAN.LOAITAIKHOAN.TenLoaiTaiKhoan,
+                                    TenDangNhap = p.TAIKHOAN.TenDangNhap,
+                                    MatKhau = p.TAIKHOAN.MatKhau,
+                                    IsRemove = p.TAIKHOAN.IsRemove,
+                                    CreatedDate = p.TAIKHOAN.CreatedDate,
+                                    CreatedBy = p.TAIKHOAN.CreatedBy,
+                                    CreatedLog = p.TAIKHOAN.CreatedLog,
+                                    ModifiedDate = p.TAIKHOAN.ModifiedDate,
+                                    ModifiedBy = p.TAIKHOAN.ModifiedBy,
+                                    ModifiedLog = p.TAIKHOAN.ModifiedLog,
+                                }).ToList();
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return (from p in Database.TAIKHOANs
+                            where (_filter.TenDangNhap == null ? true : p.TenDangNhap.Contains(_filter.TenDangNhap)) && p.IsRemove == 0
+                            select new TaiKhoan_PlusDTO
+                            {
+                                TaiKhoanId = p.TaiKhoanId,
+                                LoaiTaiKhoanId = p.LoaiTaiKhoanId,
+                                TenNguoiDung = p.TenDangNhap,
+                                TenLoaiTaiKhoan = p.LOAITAIKHOAN.TenLoaiTaiKhoan,
+                                TenDangNhap = p.TenDangNhap,
+                                MatKhau = p.MatKhau,
+                                IsRemove = p.IsRemove,
+                                CreatedDate = p.CreatedDate,
+                                CreatedBy = p.CreatedBy,
+                                CreatedLog = p.CreatedLog,
+                                ModifiedDate = p.ModifiedDate,
+                                ModifiedBy = p.ModifiedBy,
+                                ModifiedLog = p.ModifiedLog,
+                            }).ToList();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
-        /// <summary>
-        /// Đổi mật khẩu
-        /// </summary>
-        /// <param name="tk"></param>
-        public static void Update(TAIKHOAN tk)
+        public static void Delete(int _TaiKhoanId)
         {
-            var temp = (from p in Database.TAIKHOANs
-                        where p.TenDangNhap == tk.TenDangNhap
-                        select p).Single();
+            try
+            {
+                //Xoa phan quyen tai khoan
+                List<PHANQUYENTAIKHOAN> _lstPhanQuyen = PhanQuyenTaiKhoanLogic.SelectTheoTaiKhoan(_TaiKhoanId);
+                Database.PHANQUYENTAIKHOANs.DeleteAllOnSubmit(_lstPhanQuyen);
+                var temp = (from p in Database.TAIKHOANs
+                            where p.TaiKhoanId == _TaiKhoanId
+                            select p).Single();
 
-            temp.MatKhau = tk.MatKhau;
-            Database.SubmitChanges();
+                Database.TAIKHOANs.DeleteOnSubmit(temp);
+                Database.SubmitChanges();
+            }
+            catch (System.Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+        public static bool Update(TAIKHOAN tk)
+        {
+            try
+            {
+                var temp = (from p in Database.TAIKHOANs
+                            where p.TenDangNhap == tk.TenDangNhap
+                            select p).Single();
+
+                temp.MatKhau = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(tk.MatKhau, true);
+                Database.SubmitChanges();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+                Common.Logging.LogSystem.Error(ex);
+            }
+
         }
 
         /// <summary>
@@ -174,7 +308,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             try
             {
-                return Select(userName).MatKhau == password;
+                return Select(userName).MatKhau == Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(password, true);
             }
             catch
             {

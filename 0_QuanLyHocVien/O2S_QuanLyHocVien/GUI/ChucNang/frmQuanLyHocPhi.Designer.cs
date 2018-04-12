@@ -160,6 +160,7 @@
             this.gridViewDSHocVien.OptionsFind.AlwaysVisible = true;
             this.gridViewDSHocVien.OptionsFind.FindNullPrompt = "Từ khóa tìm kiếm...";
             this.gridViewDSHocVien.OptionsView.ColumnAutoWidth = false;
+            this.gridViewDSHocVien.OptionsView.EnableAppearanceEvenRow = true;
             this.gridViewDSHocVien.OptionsView.ShowGroupPanel = false;
             this.gridViewDSHocVien.OptionsView.ShowIndicator = false;
             this.gridViewDSHocVien.RowHeight = 25;
@@ -621,6 +622,7 @@
             this.gridViewPhieuThu.OptionsDetail.SmartDetailExpand = false;
             this.gridViewPhieuThu.OptionsFind.FindNullPrompt = "Từ khóa tìm kiếm...";
             this.gridViewPhieuThu.OptionsView.ColumnAutoWidth = false;
+            this.gridViewPhieuThu.OptionsView.EnableAppearanceEvenRow = true;
             this.gridViewPhieuThu.OptionsView.ShowFooter = true;
             this.gridViewPhieuThu.OptionsView.ShowGroupPanel = false;
             this.gridViewPhieuThu.OptionsView.ShowIndicator = false;

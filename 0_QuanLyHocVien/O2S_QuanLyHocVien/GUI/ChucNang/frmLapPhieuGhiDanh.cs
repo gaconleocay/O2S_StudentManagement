@@ -46,6 +46,8 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
+                gridPhieuGhiDanh.AutoGenerateColumns = false;
+
                 date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.AddDays(-15).ToString("yyyy-MM-dd") + " 00:00:00");
                 date_DenNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
                 KhoaHocFilter _filter = new KhoaHocFilter();
@@ -133,16 +135,12 @@ namespace O2S_QuanLyHocVien.Pages
         #endregion
 
         #region Events
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            //GlobalPages.LapPhieuGhiDanh = null;
-        }
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             try
             {
                 LoadDanhSachHocVien();
+                LoadPhieuGhiDanh();
             }
             catch (Exception ex)
             {
@@ -167,6 +165,8 @@ namespace O2S_QuanLyHocVien.Pages
                 _phieughidanh.TongTien = Common.TypeConvert.TypeConvertParse.ToDecimal(numTongTien.Text);
                 _phieughidanh.DaDong = Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text);
                 _phieughidanh.ConNo = Common.TypeConvert.TypeConvertParse.ToDecimal(numConNo.Text);
+                _phieughidanh.MienGiam_PhanTram =Common.TypeConvert.TypeConvertParse.ToInt16( numMienGiam_PTram.Value.ToString());
+                _phieughidanh.MienGiam_Tien = Common.TypeConvert.TypeConvertParse.ToDecimal(numMienGiam_Tien.Text);
                 if (GlobalSettings.UserID != -1)
                 {
                     _phieughidanh.NhanVienId = GlobalSettings.UserID;
@@ -482,7 +482,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                numConNo.Text = Common.Number.NumberConvert.NumberToString((Common.TypeConvert.TypeConvertParse.ToDecimal(numTongTien.Text) - Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text)), 0);
+                numConNo.Text = Common.Number.NumberConvert.NumberToString((Common.TypeConvert.TypeConvertParse.ToDecimal(numTongTien.Text) - Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text) - Common.TypeConvert.TypeConvertParse.ToDecimal(numMienGiam_Tien.Text)), 0);
                 //numDaDong.Text = String.Format("{0:#,##0}", Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text));
                 //Common.Number.NumberConvert.NumberToString(Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text), 0);
             }
@@ -516,16 +516,32 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
 
-        #endregion
-
-        private void numMienGiam_PTram_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void numMienGiam_Tien_TextChanged(object sender, EventArgs e)
         {
-
+            try
+            {
+                numConNo.Text = Common.Number.NumberConvert.NumberToString((Common.TypeConvert.TypeConvertParse.ToDecimal(numTongTien.Text) - Common.TypeConvert.TypeConvertParse.ToDecimal(numDaDong.Text) - Common.TypeConvert.TypeConvertParse.ToDecimal(numMienGiam_Tien.Text)), 0);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
+
+        private void numMienGiam_PTram_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                numMienGiam_Tien.Text = Common.Number.NumberConvert.NumberToString(Common.TypeConvert.TypeConvertParse.ToDecimal(numTongTien.Text) * (numMienGiam_PTram.Value / 100), 0);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        #endregion
+
+
+
     }
 }

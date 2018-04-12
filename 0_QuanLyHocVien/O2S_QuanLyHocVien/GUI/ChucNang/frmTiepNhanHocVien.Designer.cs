@@ -721,6 +721,7 @@
             this.gridViewDSHocVien.OptionsFind.AlwaysVisible = true;
             this.gridViewDSHocVien.OptionsFind.FindNullPrompt = "Từ khóa tìm kiếm...";
             this.gridViewDSHocVien.OptionsView.ColumnAutoWidth = false;
+            this.gridViewDSHocVien.OptionsView.EnableAppearanceEvenRow = true;
             this.gridViewDSHocVien.OptionsView.ShowGroupPanel = false;
             this.gridViewDSHocVien.OptionsView.ShowIndicator = false;
             this.gridViewDSHocVien.RowHeight = 25;

@@ -29,19 +29,21 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLapPhieuGhiDanh));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject25 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject26 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject27 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject28 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject29 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject30 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject31 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject32 = new DevExpress.Utils.SerializableAppearanceObject();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -77,6 +79,10 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.numMienGiam_PTram = new System.Windows.Forms.NumericUpDown();
+            this.numMienGiam_Tien = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.numDaDong = new System.Windows.Forms.TextBox();
             this.numTongTien = new System.Windows.Forms.TextBox();
             this.numConNo = new System.Windows.Forms.TextBox();
@@ -106,14 +112,12 @@
             this.clmNgayGhiDanh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmTongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDaDong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmMienGiam_PT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmMienGiam_Tien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmConNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmKhoaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTongCongPhieu = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.numMienGiam_PTram = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.numMienGiam_Tien = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel13.SuspendLayout();
@@ -132,6 +136,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_them)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_Xoa)).BeginInit();
             this.panel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMienGiam_PTram)).BeginInit();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateNgayGhiDanh.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateNgayGhiDanh.Properties)).BeginInit();
@@ -212,6 +217,7 @@
             this.gridViewDSHocVien.OptionsFind.AlwaysVisible = true;
             this.gridViewDSHocVien.OptionsFind.FindNullPrompt = "Từ khóa tìm kiếm...";
             this.gridViewDSHocVien.OptionsView.ColumnAutoWidth = false;
+            this.gridViewDSHocVien.OptionsView.EnableAppearanceEvenRow = true;
             this.gridViewDSHocVien.OptionsView.ShowGroupPanel = false;
             this.gridViewDSHocVien.OptionsView.ShowIndicator = false;
             this.gridViewDSHocVien.RowHeight = 25;
@@ -520,6 +526,7 @@
             this.gridViewKhoanKhac.GridControl = this.gridControlKhoanKhac;
             this.gridViewKhoanKhac.Name = "gridViewKhoanKhac";
             this.gridViewKhoanKhac.OptionsView.ColumnAutoWidth = false;
+            this.gridViewKhoanKhac.OptionsView.EnableAppearanceEvenRow = true;
             this.gridViewKhoanKhac.OptionsView.ShowFooter = true;
             this.gridViewKhoanKhac.OptionsView.ShowGroupPanel = false;
             this.gridViewKhoanKhac.OptionsView.ShowIndicator = false;
@@ -542,7 +549,7 @@
             // 
             this.repositoryItemButton_them.AutoHeight = false;
             this.repositoryItemButton_them.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButton_them.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject25, serializableAppearanceObject26, serializableAppearanceObject27, serializableAppearanceObject28, "Thêm", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButton_them.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "Thêm", null, null, true)});
             this.repositoryItemButton_them.Name = "repositoryItemButton_them";
             this.repositoryItemButton_them.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.repositoryItemButton_them.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButton_them_ButtonClick);
@@ -562,7 +569,7 @@
             // 
             this.repositoryItemButton_Xoa.AutoHeight = false;
             this.repositoryItemButton_Xoa.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButton_Xoa.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject29, serializableAppearanceObject30, serializableAppearanceObject31, serializableAppearanceObject32, "Xóa", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButton_Xoa.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "Xóa", null, null, true)});
             this.repositoryItemButton_Xoa.Name = "repositoryItemButton_Xoa";
             this.repositoryItemButton_Xoa.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.repositoryItemButton_Xoa.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButton_Xoa_ButtonClick);
@@ -607,9 +614,9 @@
             // 
             // panel10
             // 
+            this.panel10.Controls.Add(this.numMienGiam_PTram);
             this.panel10.Controls.Add(this.numMienGiam_Tien);
             this.panel10.Controls.Add(this.label8);
-            this.panel10.Controls.Add(this.numMienGiam_PTram);
             this.panel10.Controls.Add(this.label7);
             this.panel10.Controls.Add(this.numDaDong);
             this.panel10.Controls.Add(this.numTongTien);
@@ -622,6 +629,49 @@
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(406, 141);
             this.panel10.TabIndex = 38;
+            // 
+            // numMienGiam_PTram
+            // 
+            this.numMienGiam_PTram.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numMienGiam_PTram.ForeColor = System.Drawing.Color.Blue;
+            this.numMienGiam_PTram.Location = new System.Drawing.Point(100, 68);
+            this.numMienGiam_PTram.Name = "numMienGiam_PTram";
+            this.numMienGiam_PTram.Size = new System.Drawing.Size(73, 25);
+            this.numMienGiam_PTram.TabIndex = 43;
+            this.numMienGiam_PTram.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numMienGiam_PTram.ValueChanged += new System.EventHandler(this.numMienGiam_PTram_ValueChanged);
+            // 
+            // numMienGiam_Tien
+            // 
+            this.numMienGiam_Tien.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numMienGiam_Tien.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numMienGiam_Tien.ForeColor = System.Drawing.Color.Blue;
+            this.numMienGiam_Tien.Location = new System.Drawing.Point(264, 68);
+            this.numMienGiam_Tien.Name = "numMienGiam_Tien";
+            this.numMienGiam_Tien.Size = new System.Drawing.Size(136, 25);
+            this.numMienGiam_Tien.TabIndex = 42;
+            this.numMienGiam_Tien.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numMienGiam_Tien.TextChanged += new System.EventHandler(this.numMienGiam_Tien_TextChanged);
+            this.numMienGiam_Tien.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numDaDong_KeyPress);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(179, 72);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(79, 15);
+            this.label8.TabIndex = 41;
+            this.label8.Text = "M.giảm(tiền):";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 72);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(88, 15);
+            this.label7.TabIndex = 39;
+            this.label7.Text = "Miễn giảm (%):";
             // 
             // numDaDong
             // 
@@ -910,6 +960,8 @@
             this.clmNgayGhiDanh,
             this.clmTongTien,
             this.clmDaDong,
+            this.clmMienGiam_PT,
+            this.clmMienGiam_Tien,
             this.clmConNo,
             this.cmKhoaHoc});
             this.gridPhieuGhiDanh.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -925,19 +977,18 @@
             // 
             // clmPhieuGhiDanhId
             // 
-            this.clmPhieuGhiDanhId.DataPropertyName = "PhieuGhiDanhId";
-            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.Blue;
-            this.clmPhieuGhiDanhId.DefaultCellStyle = dataGridViewCellStyle16;
+            this.clmPhieuGhiDanhId.DataPropertyName = "MaPhieuGhiDanh";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmPhieuGhiDanhId.DefaultCellStyle = dataGridViewCellStyle1;
             this.clmPhieuGhiDanhId.FillWeight = 37.78342F;
             this.clmPhieuGhiDanhId.HeaderText = "Mã phiếu";
             this.clmPhieuGhiDanhId.Name = "clmPhieuGhiDanhId";
-            this.clmPhieuGhiDanhId.Width = 82;
             // 
             // clmMaHV_DS
             // 
-            this.clmMaHV_DS.DataPropertyName = "HocVienId";
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.clmMaHV_DS.DefaultCellStyle = dataGridViewCellStyle17;
+            this.clmMaHV_DS.DataPropertyName = "MaHocVien";
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.clmMaHV_DS.DefaultCellStyle = dataGridViewCellStyle2;
             this.clmMaHV_DS.FillWeight = 47.22927F;
             this.clmMaHV_DS.HeaderText = "Mã học viên";
             this.clmMaHV_DS.Name = "clmMaHV_DS";
@@ -956,14 +1007,14 @@
             this.clmNgayGhiDanh.FillWeight = 47.22927F;
             this.clmNgayGhiDanh.HeaderText = "Ngày ghi danh";
             this.clmNgayGhiDanh.Name = "clmNgayGhiDanh";
-            this.clmNgayGhiDanh.Width = 110;
+            this.clmNgayGhiDanh.Width = 125;
             // 
             // clmTongTien
             // 
             this.clmTongTien.DataPropertyName = "TongTien";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.Format = "C0";
-            this.clmTongTien.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "C0";
+            this.clmTongTien.DefaultCellStyle = dataGridViewCellStyle3;
             this.clmTongTien.FillWeight = 47.22927F;
             this.clmTongTien.HeaderText = "Tổng tiền";
             this.clmTongTien.Name = "clmTongTien";
@@ -971,24 +1022,43 @@
             // clmDaDong
             // 
             this.clmDaDong.DataPropertyName = "DaDong";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Format = "C0";
-            dataGridViewCellStyle19.NullValue = null;
-            this.clmDaDong.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "C0";
+            dataGridViewCellStyle4.NullValue = null;
+            this.clmDaDong.DefaultCellStyle = dataGridViewCellStyle4;
             this.clmDaDong.FillWeight = 47.22927F;
             this.clmDaDong.HeaderText = "Đã đóng";
             this.clmDaDong.Name = "clmDaDong";
             this.clmDaDong.Width = 80;
             // 
+            // clmMienGiam_PT
+            // 
+            this.clmMienGiam_PT.DataPropertyName = "MienGiam_PhanTram";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.clmMienGiam_PT.DefaultCellStyle = dataGridViewCellStyle5;
+            this.clmMienGiam_PT.HeaderText = "Miễn giảm (%)";
+            this.clmMienGiam_PT.Name = "clmMienGiam_PT";
+            this.clmMienGiam_PT.Width = 130;
+            // 
+            // clmMienGiam_Tien
+            // 
+            this.clmMienGiam_Tien.DataPropertyName = "MienGiam_Tien";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "C0";
+            this.clmMienGiam_Tien.DefaultCellStyle = dataGridViewCellStyle6;
+            this.clmMienGiam_Tien.HeaderText = "Miễn giảm (tiền)";
+            this.clmMienGiam_Tien.Name = "clmMienGiam_Tien";
+            this.clmMienGiam_Tien.Width = 130;
+            // 
             // clmConNo
             // 
             this.clmConNo.DataPropertyName = "ConNo";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.Red;
-            dataGridViewCellStyle20.Format = "C0";
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            this.clmConNo.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle7.Format = "C0";
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.clmConNo.DefaultCellStyle = dataGridViewCellStyle7;
             this.clmConNo.FillWeight = 47.22927F;
             this.clmConNo.HeaderText = "Còn nợ";
             this.clmConNo.Name = "clmConNo";
@@ -1000,6 +1070,7 @@
             this.cmKhoaHoc.FillWeight = 47.22927F;
             this.cmKhoaHoc.HeaderText = "Khóa học";
             this.cmKhoaHoc.Name = "cmKhoaHoc";
+            this.cmKhoaHoc.Width = 180;
             // 
             // lblTongCongPhieu
             // 
@@ -1019,52 +1090,6 @@
             this.label14.Size = new System.Drawing.Size(166, 15);
             this.label14.TabIndex = 6;
             this.label14.Text = "Danh sách các phiếu ghi danh";
-            // 
-            // numMienGiam_PTram
-            // 
-            this.numMienGiam_PTram.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numMienGiam_PTram.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numMienGiam_PTram.ForeColor = System.Drawing.Color.Blue;
-            this.numMienGiam_PTram.Location = new System.Drawing.Point(100, 67);
-            this.numMienGiam_PTram.Name = "numMienGiam_PTram";
-            this.numMienGiam_PTram.Size = new System.Drawing.Size(73, 25);
-            this.numMienGiam_PTram.TabIndex = 40;
-            this.numMienGiam_PTram.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numMienGiam_PTram.TextChanged += new System.EventHandler(this.numMienGiam_PTram_TextChanged);
-            this.numMienGiam_PTram.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numDaDong_KeyPress);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 75);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 15);
-            this.label7.TabIndex = 39;
-            this.label7.Text = "Miễn giảm (%):";
-            // 
-            // numMienGiam_Tien
-            // 
-            this.numMienGiam_Tien.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numMienGiam_Tien.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numMienGiam_Tien.ForeColor = System.Drawing.Color.Blue;
-            this.numMienGiam_Tien.Location = new System.Drawing.Point(264, 67);
-            this.numMienGiam_Tien.Name = "numMienGiam_Tien";
-            this.numMienGiam_Tien.Size = new System.Drawing.Size(136, 25);
-            this.numMienGiam_Tien.TabIndex = 42;
-            this.numMienGiam_Tien.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numMienGiam_Tien.TextChanged += new System.EventHandler(this.numMienGiam_Tien_TextChanged);
-            this.numMienGiam_Tien.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numDaDong_KeyPress);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(179, 75);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(79, 15);
-            this.label8.TabIndex = 41;
-            this.label8.Text = "M.giảm(tiền):";
             // 
             // frmLapPhieuGhiDanh
             // 
@@ -1109,6 +1134,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_Xoa)).EndInit();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMienGiam_PTram)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateNgayGhiDanh.Properties.CalendarTimeProperties)).EndInit();
@@ -1183,17 +1209,19 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private System.Windows.Forms.TextBox numDaDong;
+        private System.Windows.Forms.TextBox numMienGiam_Tien;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown numMienGiam_PTram;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmPhieuGhiDanhId;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmMaHV_DS;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmTenHocVien_GD;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmNgayGhiDanh;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmTongTien;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDaDong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmMienGiam_PT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmMienGiam_Tien;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmConNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cmKhoaHoc;
-        private System.Windows.Forms.TextBox numMienGiam_Tien;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox numMienGiam_PTram;
-        private System.Windows.Forms.Label label7;
     }
 }

@@ -230,7 +230,3 @@ C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Deb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Picture\logo.png
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.Pages.frmBaoCaoTiepNhanHocVien.resources
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.CauHinh.frmCauHinhPhanMem_CSDL.resources
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Newtonsoft.Json.dll
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_License.pdb
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_QuanLyHocVien.Common.pdb
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Newtonsoft.Json.xml
