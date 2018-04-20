@@ -10,7 +10,7 @@ using O2S_QuanLyHocVien.DataAccess;
 using O2S_QuanLyHocVien.Popups;
 using System.Globalization;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
-using O2S_QuanLyKhoaHoc.BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 
 namespace O2S_QuanLyHocVien.Pages
 {

@@ -55,7 +55,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTenKhoaHoc = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.numHocPhi = new System.Windows.Forms.NumericUpDown();
             this.gridControlKhoaHoc = new DevExpress.XtraGrid.GridControl();
@@ -75,6 +74,9 @@
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.numSoTietHoc = new System.Windows.Forms.NumericUpDown();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -97,6 +99,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSoTietHoc)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -318,6 +321,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label5);
+            this.panel4.Controls.Add(this.numSoTietHoc);
             this.panel4.Controls.Add(this.date_DenNgay);
             this.panel4.Controls.Add(this.date_TuNgay);
             this.panel4.Controls.Add(this.btnTimKiem);
@@ -329,7 +334,6 @@
             this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.txtTenKhoaHoc);
-            this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.numHocPhi);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -441,7 +445,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMaKhoaHoc.Enabled = false;
             this.txtMaKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtMaKhoaHoc.Location = new System.Drawing.Point(104, 96);
+            this.txtMaKhoaHoc.Location = new System.Drawing.Point(116, 63);
             this.txtMaKhoaHoc.Name = "txtMaKhoaHoc";
             this.txtMaKhoaHoc.ReadOnly = true;
             this.txtMaKhoaHoc.Size = new System.Drawing.Size(209, 25);
@@ -449,7 +453,7 @@
             // 
             // chkDaKhoa
             // 
-            this.chkDaKhoa.Location = new System.Drawing.Point(402, 161);
+            this.chkDaKhoa.Location = new System.Drawing.Point(411, 128);
             this.chkDaKhoa.Name = "chkDaKhoa";
             this.chkDaKhoa.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDaKhoa.Properties.Appearance.Options.UseFont = true;
@@ -460,7 +464,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 101);
+            this.label2.Location = new System.Drawing.Point(19, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 15);
             this.label2.TabIndex = 0;
@@ -469,7 +473,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 132);
+            this.label3.Location = new System.Drawing.Point(19, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 15);
             this.label3.TabIndex = 2;
@@ -480,27 +484,15 @@
             this.txtTenKhoaHoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTenKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtTenKhoaHoc.Location = new System.Drawing.Point(104, 127);
+            this.txtTenKhoaHoc.Location = new System.Drawing.Point(116, 94);
             this.txtTenKhoaHoc.Name = "txtTenKhoaHoc";
-            this.txtTenKhoaHoc.Size = new System.Drawing.Size(373, 25);
+            this.txtTenKhoaHoc.Size = new System.Drawing.Size(370, 25);
             this.txtTenKhoaHoc.TabIndex = 3;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.label5.ForeColor = System.Drawing.Color.Blue;
-            this.label5.Location = new System.Drawing.Point(319, 161);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(18, 19);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "đ";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 163);
+            this.label4.Location = new System.Drawing.Point(19, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 15);
             this.label4.TabIndex = 19;
@@ -512,7 +504,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.numHocPhi.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.numHocPhi.ForeColor = System.Drawing.Color.Blue;
-            this.numHocPhi.Location = new System.Drawing.Point(104, 159);
+            this.numHocPhi.Location = new System.Drawing.Point(116, 126);
             this.numHocPhi.Maximum = new decimal(new int[] {
             -1981284353,
             -1966660860,
@@ -547,6 +539,7 @@
             this.gridColumn10,
             this.gridColumn11,
             this.gridColumn12,
+            this.gridColumn13,
             this.gridColumn6});
             this.gridViewKhoaHoc.GridControl = this.gridControlKhoaHoc;
             this.gridViewKhoaHoc.Name = "gridViewKhoaHoc";
@@ -699,7 +692,7 @@
             this.gridColumn6.OptionsColumn.AllowEdit = false;
             this.gridColumn6.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
+            this.gridColumn6.VisibleIndex = 6;
             this.gridColumn6.Width = 150;
             // 
             // repositoryItemCheckEdit2
@@ -791,6 +784,54 @@
             this.btnThem.UseVisualStyleBackColor = false;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(19, 161);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(95, 15);
+            this.label5.TabIndex = 49;
+            this.label5.Text = "Số tiết/buổi học:";
+            // 
+            // numSoTietHoc
+            // 
+            this.numSoTietHoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numSoTietHoc.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.numSoTietHoc.ForeColor = System.Drawing.Color.Blue;
+            this.numSoTietHoc.Location = new System.Drawing.Point(116, 157);
+            this.numSoTietHoc.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numSoTietHoc.Name = "numSoTietHoc";
+            this.numSoTietHoc.Size = new System.Drawing.Size(209, 25);
+            this.numSoTietHoc.TabIndex = 50;
+            this.numSoTietHoc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn13.AppearanceCell.Options.UseFont = true;
+            this.gridColumn13.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn13.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.gridColumn13.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn13.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn13.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn13.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn13.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn13.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn13.Caption = "Số tiết học";
+            this.gridColumn13.DisplayFormat.FormatString = "#,##0";
+            this.gridColumn13.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.gridColumn13.FieldName = "SoTietHoc";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.OptionsColumn.AllowEdit = false;
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 5;
+            this.gridColumn13.Width = 90;
+            // 
             // frmDanhMucKhoaHoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -830,6 +871,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numSoTietHoc)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -839,7 +881,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numHocPhi;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnHuyBo;
@@ -883,5 +924,8 @@
         private System.Windows.Forms.Label label8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown numSoTietHoc;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
     }
 }

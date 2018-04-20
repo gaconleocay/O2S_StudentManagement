@@ -18,29 +18,37 @@ namespace O2S_QuanLyHocVien.Pages
             InitializeComponent();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void lblTroGiup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-        }
-
         private void frmTrangMoDau_Load(object sender, EventArgs e)
         {
-            lblCenter.Text = string.Format("{0}", GlobalSettings.CenterName).ToUpper();
-            lblAddress.Text = string.Format("Địa chỉ: {0}", GlobalSettings.CenterAddress);
-            lblSoDienThoai.Text = string.Format("Số điện thoại: {0}", GlobalSettings.CenterTelephone);
-            lblLienHe.Text = string.Format("Liên hệ: {0} - {1}", GlobalSettings.CenterWebsite, GlobalSettings.CenterEmail);
-            lblWelcome.Text = string.Format("Xin chào, {0}", TaiKhoanLogic.FullUserName(new DataAccess.TAIKHOAN() { TenDangNhap = GlobalSettings.UserCode }));
+            try
+            {
+                lblCenter.Text = string.Format("{0}", GlobalSettings.TrungTam_Name).ToUpper();
+                lblAddress.Text = string.Format("Địa chỉ: {0}", GlobalSettings.TrungTam_DiaChi);
+                lblSoDienThoai.Text = string.Format("Số điện thoại: {0}", GlobalSettings.TrungTam_Phone);
+                lblLienHe.Text = string.Format("Liên hệ: {0} - {1}", GlobalSettings.TrungTam_Website, GlobalSettings.TrungTam_Email);
 
-            piclogotrungtam.Image = Image.FromFile(@"Picture\logo.png");
+                piclogotrungtam.Image = Image.FromFile(@"Picture\logo.jpg");
+
+                //Co so trung tam
+                lblCoSo_Ten.Text = string.Format("{0}", GlobalSettings.CoSo_Ten).ToUpper();
+                lblCoSo_DiaChi.Text = string.Format("Địa chỉ: {0}", GlobalSettings.CoSo_DiaChi);
+                lblCoSo_SDT.Text = string.Format("Số điện thoại: {0}", GlobalSettings.CoSo_Sdt);
+                lblCoSo_Email.Text = string.Format("Liên hệ: {0} - {1}", GlobalSettings.CoSo_Email, GlobalSettings.TrungTam_Email);
+                picCoSo_image.Image = GlobalSettings.CoSo_LogoCoSo;
+
+
+
+                lblWelcome.Text = string.Format("Xin chào, {0}", TaiKhoanLogic.FullUserName(new DataAccess.TAIKHOAN() { TenDangNhap = GlobalSettings.UserCode }));
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            // Process.Start("https://github.com/chidokun/QuanLyHocVien/");
-        }
+
+
+
+
     }
 }

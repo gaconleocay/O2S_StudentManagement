@@ -54,6 +54,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
             khoaHocCu.TenCoSo = kh.TenCoSo;
             khoaHocCu.DiaChi = kh.DiaChi;
+            khoaHocCu.Sdt = kh.Sdt;
+            khoaHocCu.Email = kh.Email;
+            khoaHocCu.LogoCoSo = kh.LogoCoSo;
 
             Database.SubmitChanges();
         }

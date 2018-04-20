@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmThayDoiThongTinHocVien));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -311,7 +312,7 @@
             this.btnLuuThongTin.UseVisualStyleBackColor = false;
             this.btnLuuThongTin.Click += new System.EventHandler(this.btnLuuThongTin_Click);
             // 
-            // frmThayDoiThongTinHV
+            // frmThayDoiThongTinHocVien
             // 
             this.AcceptButton = this.btnLuuThongTin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -319,14 +320,13 @@
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnHuyBo;
             this.ClientSize = new System.Drawing.Size(431, 503);
-            this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmThayDoiThongTinHV";
+            this.Name = "frmThayDoiThongTinHocVien";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thay đổi thông tin học viên";

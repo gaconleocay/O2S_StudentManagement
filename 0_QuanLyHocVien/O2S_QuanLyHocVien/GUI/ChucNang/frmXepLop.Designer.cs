@@ -65,7 +65,6 @@
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel7 = new System.Windows.Forms.Panel();
             this.cboKhoaHoc = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -73,9 +72,12 @@
             this.cboLopHoc = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.btnInAn_DSLop = new System.Windows.Forms.Button();
             this.btnBoKhoiLop = new System.Windows.Forms.Button();
             this.lblTongCongHVLop = new System.Windows.Forms.Label();
             this.btnLuuLop = new System.Windows.Forms.Button();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -475,6 +477,7 @@
             this.gridColumn18,
             this.gridColumn19,
             this.gridColumn20,
+            this.gridColumn4,
             this.gridColumn21});
             this.gridViewHV_XepLop.FooterPanelHeight = 25;
             this.gridViewHV_XepLop.GridControl = this.gridControlHV_XepLop;
@@ -490,7 +493,6 @@
             this.gridViewHV_XepLop.OptionsView.ShowIndicator = false;
             this.gridViewHV_XepLop.RowHeight = 25;
             this.gridViewHV_XepLop.ViewCaptionHeight = 25;
-            this.gridViewHV_XepLop.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridViewHV_XepLop_CustomDrawCell);
             this.gridViewHV_XepLop.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewHV_ChuaXepLop_RowCellStyle);
             // 
             // clm_xeplopstt
@@ -711,20 +713,6 @@
             this.gridColumn20.VisibleIndex = 6;
             this.gridColumn20.Width = 125;
             // 
-            // gridColumn21
-            // 
-            this.gridColumn21.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.gridColumn21.AppearanceCell.Options.UseFont = true;
-            this.gridColumn21.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.gridColumn21.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.gridColumn21.AppearanceHeader.Options.UseFont = true;
-            this.gridColumn21.AppearanceHeader.Options.UseForeColor = true;
-            this.gridColumn21.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn21.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn21.Caption = "gridColumn21";
-            this.gridColumn21.Name = "gridColumn21";
-            this.gridColumn21.OptionsColumn.AllowEdit = false;
-            // 
             // panel7
             // 
             this.panel7.Controls.Add(this.cboKhoaHoc);
@@ -789,6 +777,7 @@
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.btnInAn_DSLop);
             this.panel6.Controls.Add(this.btnBoKhoiLop);
             this.panel6.Controls.Add(this.lblTongCongHVLop);
             this.panel6.Controls.Add(this.btnLuuLop);
@@ -797,6 +786,25 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(609, 79);
             this.panel6.TabIndex = 73;
+            // 
+            // btnInAn_DSLop
+            // 
+            this.btnInAn_DSLop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInAn_DSLop.BackColor = System.Drawing.Color.Silver;
+            this.btnInAn_DSLop.FlatAppearance.BorderSize = 0;
+            this.btnInAn_DSLop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btnInAn_DSLop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnInAn_DSLop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInAn_DSLop.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnInAn_DSLop.Image = global::O2S_QuanLyHocVien.Properties.Resources.printer_16;
+            this.btnInAn_DSLop.Location = new System.Drawing.Point(469, 12);
+            this.btnInAn_DSLop.Name = "btnInAn_DSLop";
+            this.btnInAn_DSLop.Size = new System.Drawing.Size(108, 29);
+            this.btnInAn_DSLop.TabIndex = 73;
+            this.btnInAn_DSLop.Text = "In DS lớp...";
+            this.btnInAn_DSLop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnInAn_DSLop.UseVisualStyleBackColor = false;
+            this.btnInAn_DSLop.Click += new System.EventHandler(this.btnInAn_DSLop_Click);
             // 
             // btnBoKhoiLop
             // 
@@ -830,7 +838,7 @@
             // 
             // btnLuuLop
             // 
-            this.btnLuuLop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLuuLop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLuuLop.BackColor = System.Drawing.Color.Silver;
             this.btnLuuLop.FlatAppearance.BorderSize = 0;
             this.btnLuuLop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
@@ -838,7 +846,7 @@
             this.btnLuuLop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLuuLop.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLuuLop.Image = global::O2S_QuanLyHocVien.Properties.Resources.save_16x16;
-            this.btnLuuLop.Location = new System.Drawing.Point(386, 9);
+            this.btnLuuLop.Location = new System.Drawing.Point(256, 9);
             this.btnLuuLop.Name = "btnLuuLop";
             this.btnLuuLop.Size = new System.Drawing.Size(96, 34);
             this.btnLuuLop.TabIndex = 70;
@@ -846,6 +854,42 @@
             this.btnLuuLop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLuuLop.UseVisualStyleBackColor = false;
             this.btnLuuLop.Click += new System.EventHandler(this.btnLuuLop_Click);
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn4.AppearanceCell.Options.UseFont = true;
+            this.gridColumn4.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn4.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn4.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn4.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn4.Caption = "Số điện thoại";
+            this.gridColumn4.FieldName = "Sdt";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.OptionsColumn.AllowEdit = false;
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 9;
+            this.gridColumn4.Width = 130;
+            // 
+            // gridColumn21
+            // 
+            this.gridColumn21.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn21.AppearanceCell.Options.UseFont = true;
+            this.gridColumn21.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn21.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn21.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn21.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn21.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn21.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn21.Caption = "Email";
+            this.gridColumn21.FieldName = "Email";
+            this.gridColumn21.Name = "gridColumn21";
+            this.gridColumn21.OptionsColumn.AllowEdit = false;
+            this.gridColumn21.Visible = true;
+            this.gridColumn21.VisibleIndex = 10;
+            this.gridColumn21.Width = 130;
             // 
             // frmXepLop
             // 
@@ -935,7 +979,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn20;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
         private System.Windows.Forms.Button btnLamMoiDuLieu;
+        private System.Windows.Forms.Button btnInAn_DSLop;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
     }
 }

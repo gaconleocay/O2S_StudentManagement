@@ -35,7 +35,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.AddDays(-15).ToString("yyyy-MM-dd") + " 00:00:00");
+                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.AddMonths(-6).ToString("yyyy-MM-dd") + " 00:00:00");
                 date_DenNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
                 dateNgaySinh.MaxDate = DateTime.Now;
 
@@ -63,23 +63,23 @@ namespace O2S_QuanLyHocVien.Pages
                 //Thread th = new Thread(() =>
                 //{
                 HocVienFilter _filter = new HocVienFilter();
-                    _filter.CoSoId = GlobalSettings.CoSoId;
-                    _filter.NgayTiepNhan_Tu = date_TuNgay.DateTime;
-                    _filter.NgayTiepNhan_Den = date_DenNgay.DateTime;
-                    List<HocVien_PlusDTO> _lstHocVien = HocVienLogic.Select(_filter);
-                    if (_lstHocVien != null && _lstHocVien.Count > 0)
-                    {
-                        //gridControlDSHocVien.Invoke((MethodInvoker)delegate
-                        //{
-                            gridControlDSHocVien.DataSource = _lstHocVien;
-                            lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức và {2} học viên tiềm năng)", _lstHocVien.Count, _lstHocVien.Where(o => o.LoaiHocVienId == KeySetting.LOAIHOCVIEN_CHINHTHUC).ToList().Count, _lstHocVien.Where(o => o.LoaiHocVienId == KeySetting.LOAIHOCVIEN_TIEMNANG).ToList().Count);
-                        //});
-                    }
-                    else
-                    {
-                        gridControlDSHocVien.DataSource = null;
-                        lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức và {2} học viên tiềm năng)", 0, 0, 0);
-                    }
+                _filter.CoSoId = GlobalSettings.CoSoId;
+                _filter.NgayTiepNhan_Tu = date_TuNgay.DateTime;
+                _filter.NgayTiepNhan_Den = date_DenNgay.DateTime;
+                List<HocVien_PlusDTO> _lstHocVien = HocVienLogic.Select(_filter);
+                if (_lstHocVien != null && _lstHocVien.Count > 0)
+                {
+                    //gridControlDSHocVien.Invoke((MethodInvoker)delegate
+                    //{
+                    gridControlDSHocVien.DataSource = _lstHocVien;
+                    lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức và {2} học viên tiềm năng)", _lstHocVien.Count, _lstHocVien.Where(o => o.LoaiHocVienId == KeySetting.LOAIHOCVIEN_CHINHTHUC).ToList().Count, _lstHocVien.Where(o => o.LoaiHocVienId == KeySetting.LOAIHOCVIEN_TIEMNANG).ToList().Count);
+                    //});
+                }
+                else
+                {
+                    gridControlDSHocVien.DataSource = null;
+                    lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức và {2} học viên tiềm năng)", 0, 0, 0);
+                }
                 //});
 
                 //th.Start();
@@ -111,6 +111,8 @@ namespace O2S_QuanLyHocVien.Pages
                     txtEmailBo.Text = hv.EmailBo;
                     txtSDTMe.Text = hv.SdtMe;
                     txtEmailMe.Text = hv.EmailMe;
+                    txtNguoiTuVan.Text = hv.TenNguoiTuVan;
+                    txtGhiChu.Text = hv.GhiChu;
                     cboLoaiHV.SelectedValue = hv.LoaiHocVienId;
                     txtTenDangNhap.Text = hv.TAIKHOAN.IsRemove != 1 ? hv.TAIKHOAN.TenDangNhap : string.Empty;
                     txtMatKhau.Text = hv.TAIKHOAN.IsRemove != 1 ? hv.TAIKHOAN.MatKhau : string.Empty;
@@ -137,6 +139,8 @@ namespace O2S_QuanLyHocVien.Pages
             txtSDTBo.ReadOnly = !_result;
             txtEmailBo.ReadOnly = !_result;
             txtSDTMe.ReadOnly = !_result;
+            txtNguoiTuVan.ReadOnly = !_result;
+            txtGhiChu.ReadOnly = !_result;
             txtEmailMe.ReadOnly = !_result;
             cboLoaiHV.Enabled = _result;
             btnLuuThongTin.Enabled = _result;
@@ -154,6 +158,8 @@ namespace O2S_QuanLyHocVien.Pages
             txtSDTBo.Text = string.Empty;
             txtEmailBo.Text = string.Empty;
             txtSDTMe.Text = string.Empty;
+            txtNguoiTuVan.Text = string.Empty;
+            txtGhiChu.Text = string.Empty;
             txtEmailMe.Text = string.Empty;
             cboLoaiHV.SelectedIndex = 0;
             txtTenDangNhap.Text = string.Empty;
@@ -174,6 +180,8 @@ namespace O2S_QuanLyHocVien.Pages
                 EmailBo = txtEmailBo.Text,
                 SdtMe = txtSDTMe.Text,
                 EmailMe = txtEmailMe.Text,
+                TenNguoiTuVan = txtNguoiTuVan.Text,
+                GhiChu = txtGhiChu.Text,
                 LoaiHocVienId = (int)cboLoaiHV.SelectedValue,
                 NgayTiepNhan = DateTime.Now,
                 CoSoId = GlobalSettings.CoSoId
@@ -188,8 +196,19 @@ namespace O2S_QuanLyHocVien.Pages
                 throw new ArgumentException("Địa chỉ không được trống");
             if (string.IsNullOrWhiteSpace(txtSDT.Text))
                 throw new ArgumentException("Số điện thoại không được trống");
-            if (string.IsNullOrWhiteSpace(txtEmail.Text))
-                throw new ArgumentException("Email không được trống");
+            //if (string.IsNullOrWhiteSpace(txtEmail.Text))
+            //throw new ArgumentException("Email không được trống");
+            if (!string.IsNullOrWhiteSpace(txtEmail.Text) && (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains(".")))
+                throw new ArgumentException("Email không đúng");
+            if (txtEmailBo.ForeColor == Color.Red || txtEmailMe.ForeColor == Color.Red)
+                throw new ArgumentException("Email của bố hoặc của mẹ không đúng");
+            //ngay sinh
+            DateTime _ngaysinh = DateTime.ParseExact(dateNgaySinh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            int _tuoi = DateTime.Now.Year - _ngaysinh.Year;
+            if (_tuoi < 1)
+            {
+                throw new ArgumentException("Ngày sinh không đúng");
+            }
         }
         #endregion
 
@@ -248,6 +267,10 @@ namespace O2S_QuanLyHocVien.Pages
                         LockAndUnlockPanelControl(false);
                     }
                 }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
@@ -357,6 +380,83 @@ namespace O2S_QuanLyHocVien.Pages
                 if (e.Column == clm_HocVien_Stt)
                 {
                     e.DisplayText = Convert.ToString(e.RowHandle + 1);
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(txtEmail.Text))
+                {
+                    if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
+                    {
+                        txtEmail.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        txtEmail.ForeColor = Color.Black;
+                    }
+                }
+                else
+                {
+                    txtEmail.ForeColor = Color.Black;
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        private void txtEmailBo_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(txtEmailBo.Text))
+                {
+                    if (!txtEmailBo.Text.Contains("@") || !txtEmailBo.Text.Contains("."))
+                    {
+                        txtEmailBo.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        txtEmailBo.ForeColor = Color.Black;
+                    }
+                }
+                else
+                {
+                    txtEmailBo.ForeColor = Color.Black;
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        private void txtEmailMe_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(txtEmailMe.Text))
+                {
+                    if (!txtEmailMe.Text.Contains("@") || !txtEmailMe.Text.Contains("."))
+                    {
+                        txtEmailMe.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        txtEmailMe.ForeColor = Color.Black;
+                    }
+                }
+                else
+                {
+                    txtEmailMe.ForeColor = Color.Black;
                 }
             }
             catch (Exception ex)

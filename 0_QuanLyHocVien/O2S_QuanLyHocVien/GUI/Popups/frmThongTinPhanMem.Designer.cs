@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmThongTinPhanMem));
             this.panel2 = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label18 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label7 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -61,24 +62,6 @@
             this.panel2.Size = new System.Drawing.Size(522, 293);
             this.panel2.TabIndex = 3;
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(128, 105);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(0, 15);
-            this.linkLabel1.TabIndex = 8;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(32, 105);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(48, 15);
-            this.label18.TabIndex = 7;
-            this.label18.Text = "Liên hệ:";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.linkLabel1);
@@ -96,6 +79,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin phần mềm";
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(128, 105);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(0, 15);
+            this.linkLabel1.TabIndex = 8;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -104,6 +96,15 @@
             this.label7.Size = new System.Drawing.Size(160, 15);
             this.label7.TabIndex = 5;
             this.label7.Text = "© 2018, OneOne solution co.";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(32, 105);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(48, 15);
+            this.label18.TabIndex = 7;
+            this.label18.Text = "Liên hệ:";
             // 
             // label8
             // 
@@ -216,11 +217,10 @@
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnOK;
             this.ClientSize = new System.Drawing.Size(522, 354);
-            this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmThongTinPhanMem";

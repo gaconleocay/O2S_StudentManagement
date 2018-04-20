@@ -47,6 +47,7 @@ namespace O2S_QuanLyHocVien.Pages
         #region Events
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
+            SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
             try
             {
                 HocVienFilter _filter = new HocVienFilter();
@@ -67,6 +68,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 Common.Logging.LogSystem.Error(ex);
             }
+            SplashScreenManager.CloseForm();
         }
 
         private void btnInAn_Click(object sender, EventArgs e)
@@ -86,7 +88,7 @@ namespace O2S_QuanLyHocVien.Pages
                 reportitem.value = tungaydenngay;
                 thongTinThem.Add(reportitem);
 
-                string fileTemplatePath = "BC_TiepNhanHocVien.xlsx";
+                string fileTemplatePath = "BC01_TiepNhanHocVien.xlsx";
                 DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this._lstHocVien);
                 Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
             }
@@ -112,7 +114,7 @@ namespace O2S_QuanLyHocVien.Pages
                 reportitem.value = tungaydenngay;
                 thongTinThem.Add(reportitem);
 
-                string fileTemplatePath = "BC_TiepNhanHocVien.xlsx";
+                string fileTemplatePath = "BC01_TiepNhanHocVien.xlsx";
                 DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this._lstHocVien);
                 Utilities.Common.Excel.ExcelExport export = new Utilities.Common.Excel.ExcelExport();
                 export.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);

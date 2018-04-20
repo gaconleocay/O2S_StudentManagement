@@ -14,11 +14,15 @@ using O2S_QuanLyHocVien.BusinessLogic.Model;
 using System.Collections.Generic;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Drawing;
+using DevExpress.XtraSplashScreen;
+using O2S_QuanLyHocVien.BusinessLogic.Models;
+using System.Data;
 
 namespace O2S_QuanLyHocVien.Pages
 {
     public partial class frmQuanLyHocVien : Form
     {
+        private List<QuanLyHocVienDTO> lstHocVien { get; set; }
         public frmQuanLyHocVien()
         {
             InitializeComponent();
@@ -33,7 +37,7 @@ namespace O2S_QuanLyHocVien.Pages
                 cboLoaiHV.DisplayMember = "TenLoaiHocVien";
                 cboLoaiHV.ValueMember = "LoaiHocVienId";
 
-                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.AddDays(-15).ToString("yyyy-MM-dd") + " 00:00:00");
+                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.AddMonths(-6).ToString("yyyy-MM-dd") + " 00:00:00");
                 date_DenNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
                 LayDanhSachHocVien();
             }
@@ -64,10 +68,19 @@ namespace O2S_QuanLyHocVien.Pages
                 _filter.NgayTiepNhan_Tu = date_TuNgay.DateTime;
                 _filter.NgayTiepNhan_Den = date_DenNgay.DateTime;
 
-                List<QuanLyHocVienDTO> _lsthocvien = HocVienLogic.SelectQuanLyHocVien(_filter);
-                if (_lsthocvien != null && _lsthocvien.Count > 0)
+                this.lstHocVien = HocVienLogic.SelectQuanLyHocVien(_filter);
+
+                if (this.lstHocVien != null && this.lstHocVien.Count > 0)
                 {
-                    gridControlDSHocVien.DataSource = _lsthocvien;
+                    for (int i = 0; i < this.lstHocVien.Count; i++)
+                    {
+                        this.lstHocVien[i].Stt = i + 1;
+                    }
+                    gridControlDSHocVien.DataSource = this.lstHocVien;
+                }
+                else
+                {
+                    gridControlDSHocVien.DataSource = null;
                 }
                 lblTongCong.Text = string.Format("Tổng cộng: {0} học viên", gridViewDSHocVien.RowCount);
             }
@@ -162,7 +175,67 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
 
+
         #endregion
+
+        #region In va xuat excel
+        private void btnInAn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
+
+                string tungay = DateTime.ParseExact(date_TuNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+                string denngay = DateTime.ParseExact(date_DenNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+
+                string tungaydenngay = "( Từ " + tungay + " - " + denngay + " )";
+
+                List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
+                reportExcelDTO reportitem = new reportExcelDTO();
+                reportitem.name = Base.bienTrongBaoCao.THOIGIANBAOCAO;
+                reportitem.value = tungaydenngay;
+                thongTinThem.Add(reportitem);
+
+                string fileTemplatePath = "FUN_QuanLyHocVien.xlsx";
+                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstHocVien);
+                Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+            SplashScreenManager.CloseForm();
+        }
+
+        private void btnXuatExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string tungay = DateTime.ParseExact(date_TuNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+                string denngay = DateTime.ParseExact(date_DenNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+
+                string tungaydenngay = "( Từ " + tungay + " - " + denngay + " )";
+
+                List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
+                reportExcelDTO reportitem = new reportExcelDTO();
+                reportitem.name = Base.bienTrongBaoCao.THOIGIANBAOCAO;
+                reportitem.value = tungaydenngay;
+                thongTinThem.Add(reportitem);
+
+                string fileTemplatePath = "FUN_QuanLyHocVien.xlsx";
+                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstHocVien);
+                Utilities.Common.Excel.ExcelExport export = new Utilities.Common.Excel.ExcelExport();
+                export.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        #endregion
+
+
 
 
     }

@@ -20,6 +20,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         public static void Insert(BANGDIEMCHITIET bd)
         {
+            bd.IsRemove = 0;
             Database.BANGDIEMCHITIETs.InsertOnSubmit(bd);
             Database.SubmitChanges();
         }

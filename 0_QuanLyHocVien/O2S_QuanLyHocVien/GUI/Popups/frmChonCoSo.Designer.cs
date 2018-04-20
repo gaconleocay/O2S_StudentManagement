@@ -128,7 +128,7 @@
             this.Name = "frmChonCoSo";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Đổi mật khẩu";
+            this.Text = "Chọn cơ sở cho trung tâm";
             this.Load += new System.EventHandler(this.frmChonCoSo_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

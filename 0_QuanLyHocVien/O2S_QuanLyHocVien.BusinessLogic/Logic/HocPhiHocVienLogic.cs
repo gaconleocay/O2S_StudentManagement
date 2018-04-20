@@ -32,6 +32,20 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
             }
         }
+        public static List<HOCPHIHOCVIEN> SelectTheoPhieuGhiDanh(int _PhieuGhiDanhId)
+        {
+            try
+            {
+                return (from p in GlobalSettings.Database.HOCPHIHOCVIENs
+                        where p.PhieuGhiDanhId == _PhieuGhiDanhId
+                        select p).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
+        }
 
         public static List<HocPhiHocVien_PlusDTO> Select(HocPhiHocVienFilter _filter)
         {
@@ -82,12 +96,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
             }
         }
-        //public static HOCPHIHOCVIEN Select(int _HocVienId, int _PhieuGhiDanhId)
-        //{
-        //    return (from p in Database.HOCPHIHOCVIENs
-        //            where p.HocVienId == _HocVienId && p.PhieuGhiDanhId == _PhieuGhiDanhId
-        //            select p).Single();
-        //}
         public static bool Insert(HOCPHIHOCVIEN _hocphihocvien)
         {
             try
@@ -95,6 +103,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 _hocphihocvien.CreatedDate = DateTime.Now;
                 _hocphihocvien.CreatedBy = GlobalSettings.UserCode;
                 _hocphihocvien.CreatedLog = GlobalSettings.SessionMyIP;
+                _hocphihocvien.IsRemove = 0;
                 Database.HOCPHIHOCVIENs.InsertOnSubmit(_hocphihocvien);
                 Database.SubmitChanges();
                // _hocphihocvienId = _hocphihocvien.HocPhiHocVienId;
@@ -147,6 +156,20 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
             }
         }
-
+        public static bool DeleteTheoPhieuGhiDanh(int _PhieuGhiDanhId)
+        {
+            try
+            {
+                List<HOCPHIHOCVIEN> _lstPhieuThu = SelectTheoPhieuGhiDanh(_PhieuGhiDanhId);
+                Database.HOCPHIHOCVIENs.DeleteAllOnSubmit(_lstPhieuThu);
+                Database.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
+        }
     }
 }

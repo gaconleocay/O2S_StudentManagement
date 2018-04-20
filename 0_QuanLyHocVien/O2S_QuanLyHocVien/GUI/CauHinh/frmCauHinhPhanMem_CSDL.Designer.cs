@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCauHinhPhanMem_CSDL));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtUpdateVersionLink = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnKiemTra = new System.Windows.Forms.Button();
@@ -49,9 +52,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHuyBo = new System.Windows.Forms.Button();
             this.btnLuuThongTin = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtUpdateVersionLink = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -83,6 +83,33 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1000, 539);
             this.panel2.TabIndex = 3;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(775, 415);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(20, 15);
+            this.label10.TabIndex = 45;
+            this.label10.Text = "(*)";
+            // 
+            // txtUpdateVersionLink
+            // 
+            this.txtUpdateVersionLink.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtUpdateVersionLink.Location = new System.Drawing.Point(143, 410);
+            this.txtUpdateVersionLink.Name = "txtUpdateVersionLink";
+            this.txtUpdateVersionLink.Size = new System.Drawing.Size(626, 25);
+            this.txtUpdateVersionLink.TabIndex = 44;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(27, 415);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(108, 15);
+            this.label11.TabIndex = 43;
+            this.label11.Text = "Link version Server:";
             // 
             // label9
             // 
@@ -292,33 +319,6 @@
             this.btnLuuThongTin.UseVisualStyleBackColor = false;
             this.btnLuuThongTin.Click += new System.EventHandler(this.btnLuuThongTin_Click);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(775, 415);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(20, 15);
-            this.label10.TabIndex = 45;
-            this.label10.Text = "(*)";
-            // 
-            // txtUpdateVersionLink
-            // 
-            this.txtUpdateVersionLink.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtUpdateVersionLink.Location = new System.Drawing.Point(143, 410);
-            this.txtUpdateVersionLink.Name = "txtUpdateVersionLink";
-            this.txtUpdateVersionLink.Size = new System.Drawing.Size(626, 25);
-            this.txtUpdateVersionLink.TabIndex = 44;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(27, 415);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(108, 15);
-            this.label11.TabIndex = 43;
-            this.label11.Text = "Link version Server:";
-            // 
             // frmCauHinhPhanMem_CSDL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -328,7 +328,6 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

@@ -20,7 +20,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             try
             {
-               // GlobalSettings.NewDatacontexDatabase();
+                // GlobalSettings.NewDatacontexDatabase();
                 return (from p in GlobalSettings.Database.HOCVIENs
                         where p.HocVienId == _hocvienid
                         select p).Single();
@@ -60,6 +60,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  EmailBo = obj.EmailBo,
                                  SdtMe = obj.SdtMe,
                                  EmailMe = obj.EmailMe,
+                                 TenNguoiTuVan = obj.TenNguoiTuVan,
+                                 GhiChu = obj.GhiChu,
                                  IsRemove = obj.IsRemove,
                                  CreatedDate = obj.CreatedDate,
                                  CreatedBy = obj.CreatedBy,
@@ -110,8 +112,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 var query = (from hv in GlobalSettings.Database.HOCVIENs
                              join pgd in Database.PHIEUGHIDANHs on hv.HocVienId equals pgd.HocVienId into phieu
                              from pgd1 in phieu.DefaultIfEmpty()
-                             join bd in Database.BANGDIEMs on pgd1.PhieuGhiDanhId equals bd.BangDiemId into bangdiem
+                             join bd in Database.BANGDIEMs on pgd1.PhieuGhiDanhId equals bd.PhieuGhiDanhId into bangdiem
                              from bd1 in bangdiem.DefaultIfEmpty()
+                             where pgd1.IsRemove!=1
                              select new QuanLyHocVienDTO
                              {
                                  HocVienId = hv.HocVienId,
@@ -146,6 +149,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  TongTien = pgd1 == null ? 0 : pgd1.TongTien,
                                  DaDong = pgd1 == null ? 0 : pgd1.DaDong,
                                  ConNo = pgd1 == null ? 0 : pgd1.ConNo,
+                                 MienGiam_PhanTram = pgd1 == null ? 0 : pgd1.MienGiam_PhanTram,
+                                 MienGiam_Tien = pgd1 == null ? 0 : pgd1.MienGiam_Tien,
                                  KhoaHocId = pgd1 == null ? 0 : pgd1.KhoaHocId,
                                  TenKhoaHoc = pgd1 == null ? "" : pgd1.KHOAHOC.TenKhoaHoc,
                                  LopHocId = bd1 == null ? 0 : bd1.LopHocId,
@@ -193,7 +198,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             {
                 var querry = (from p in Database.PHIEUGHIDANHs
                               where p.HOCVIEN.CoSoId == _cosoId
-                              && !(from q in Database.BANGDIEMs select q.PhieuGhiDanhId).Contains(p.PhieuGhiDanhId)
+                              && !(from q in Database.BANGDIEMs select q.PhieuGhiDanhId).Contains(p.PhieuGhiDanhId) && p.IsRemove!=1
                               select new XepLopDTO()
                               {
                                   HocVienId = p.HocVienId,
@@ -225,10 +230,14 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 _hocVien.CreatedDate = DateTime.Now;
                 _hocVien.CreatedBy = GlobalSettings.UserCode;
                 _hocVien.CreatedLog = GlobalSettings.SessionMyIP;
-
+                _hocVien.IsRemove = 0;
                 if (_hocVien.LoaiHocVienId == KeySetting.LOAIHOCVIEN_TIEMNANG)
                 {
                     taiKhoan.IsRemove = 1;
+                }
+                else
+                {
+                    taiKhoan.IsRemove = 0;
                 }
                 Database.TAIKHOANs.InsertOnSubmit(taiKhoan);
                 Database.HOCVIENs.InsertOnSubmit(_hocVien);
@@ -270,6 +279,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 hocVienCu.EmailBo = _hocVien.EmailBo;
                 hocVienCu.SdtMe = _hocVien.SdtMe;
                 hocVienCu.EmailMe = _hocVien.EmailMe;
+                hocVienCu.TenNguoiTuVan = _hocVien.TenNguoiTuVan;
+                hocVienCu.GhiChu = _hocVien.GhiChu;
                 hocVienCu.ModifiedDate = DateTime.Now;
                 hocVienCu.ModifiedBy = GlobalSettings.UserCode;
                 hocVienCu.ModifiedLog = GlobalSettings.SessionMyIP;

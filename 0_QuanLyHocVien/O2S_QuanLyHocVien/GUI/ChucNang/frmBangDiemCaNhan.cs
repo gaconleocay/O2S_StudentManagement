@@ -33,9 +33,9 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 var bangDiem = BangDiemLogic.SelectDetail(maHV, maLop);
-                lblTenLop.Text = bangDiem.TenLop;
+                lblTenLop.Text = bangDiem.TenLopHoc;
                 lblTenKhoaHocoa.Text = bangDiem.TenKhoaHoc;
-                lblDiemTrungBinh.Text = bangDiem.DiemTrungBinh.ToString("N2");
+                lblDiemTrungBinh.Text = (bangDiem.DiemTrungBinh ?? 0).ToString("N2");
                 gridControlDSDiem.DataSource = bangDiem.BangDiemChiTiets;
             }
             catch (Exception ex)
@@ -72,8 +72,8 @@ namespace O2S_QuanLyHocVien.Pages
 
             List<ReportParameter> _params = new List<ReportParameter>()
             {
-                new ReportParameter("CenterName", GlobalSettings.CenterName),
-                new ReportParameter("CenterWebsite", GlobalSettings.CenterWebsite),
+                new ReportParameter("CenterName", GlobalSettings.TrungTam_Name),
+                new ReportParameter("CenterWebsite", GlobalSettings.TrungTam_Website),
                 new ReportParameter("MaHocVien", GlobalSettings.UserID.ToString()),
                 new ReportParameter("TenHocVien", TaiKhoanLogic.FullUserName(new TAIKHOAN() {TenDangNhap = GlobalSettings.UserCode })),
                 new ReportParameter("MaLop", cboLop.SelectedValue.ToString()),
@@ -113,7 +113,7 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 if (isLoaded)
-                    LoadBangDiem(GlobalSettings.UserID,Common.TypeConvert.TypeConvertParse.ToInt32( cboLop.SelectedValue.ToString()));
+                    LoadBangDiem(GlobalSettings.UserID, Common.TypeConvert.TypeConvertParse.ToInt32(cboLop.SelectedValue.ToString()));
             }
             catch (Exception ex)
             {

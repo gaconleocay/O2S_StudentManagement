@@ -11,90 +11,156 @@ using O2S_QuanLyHocVien.Reports;
 using Microsoft.Reporting.WinForms;
 using System.Collections.Generic;
 using System.Data;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using O2S_QuanLyHocVien.BusinessLogic.Model;
+using DevExpress.XtraGrid.Views.Grid;
+using System.Drawing;
+using DevExpress.XtraSplashScreen;
+using System.Globalization;
+using O2S_QuanLyHocVien.BusinessLogic.Models;
 
 namespace O2S_QuanLyHocVien.Pages
 {
     public partial class frmBaoCaoHocVienGhiDanh : Form
     {
+        private List<PhieuGhiDanh_PlusDTO> _lstPhieuGhiDanh { get; set; }
         public frmBaoCaoHocVienGhiDanh()
         {
             InitializeComponent();
-            gridBaoCao.AutoGenerateColumns = false;
         }
 
-        #region Events
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            //.BaoCaoHocVienTheoThang = null;
-        }
-
-        private void btnXem_Click(object sender, EventArgs e)
-        {
-            Thread th = new Thread(() =>
-            {
-                object dshv = PhieuGhiDanhLogic.BaoCaoHocVienGhiDanhTheoThang(dateThang.Value.Month, dateThang.Value.Year);
-
-                gridBaoCao.Invoke((MethodInvoker)delegate
-                {
-                    gridBaoCao.DataSource = dshv;
-                });
-            });
-
-            th.Start();
-
-            if (MessageBox.Show("Bạn có muốn tạo báo cáo?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                btnTaoBaoCao_Click(sender, e);
-        }
-
-        private void gridBaoCao_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            lblTongCong.Text = string.Format("Tổng cộng: {0} học viên", gridBaoCao.Rows.Count);
-        }
-
-        private void gridBaoCao_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            lblTongCong.Text = string.Format("Tổng cộng: {0} học viên", gridBaoCao.Rows.Count);
-        }
-
-        private void btnTaoBaoCao_Click(object sender, EventArgs e)
-        {
-            frmReport frm = new frmReport();
-
-            List<ReportParameter> _params = new List<ReportParameter>()
-            {
-                new ReportParameter("CenterName", GlobalSettings.CenterName),
-                new ReportParameter("CenterWebsite", GlobalSettings.CenterWebsite),
-                new ReportParameter("Month", dateThang.Value.Month.ToString()),
-                new ReportParameter("Year", dateThang.Value.Year.ToString())             
-            };
-
-            //frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptBaoCaoHocVienGhiDanhTheoThang.rdlc";
-            frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptBaoCaoHocVienGhiDanhTheoThang.rdlc";
-
-            dsSource.dtBaoCaoHocVienTheoThangDataTable dt = new dsSource.dtBaoCaoHocVienTheoThangDataTable();
-            var query = PhieuGhiDanhLogic.BaoCaoHocVienGhiDanhTheoThang(dateThang.Value.Month, dateThang.Value.Year);
-            foreach (var i in query)
-            {
-                dt.Rows.Add(i.MaHocVien, i.TenHocVien, i.GioiTinh, i.NgayGhiDanh, i.TenKhoaHoc);
-            }
-
-            frm.ReportViewer.LocalReport.DataSources.Clear();
-            frm.ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("ds", (DataTable)dt));
-            
-            frm.ReportViewer.LocalReport.SetParameters(_params);
-            frm.ReportViewer.LocalReport.DisplayName = "Báo cáo học viên ghi danh theo tháng";
-            frm.Text = "Báo cáo học viên ghi danh theo tháng";
-
-
-
-            frm.ShowDialog();
-        }
-
+        #region Load
         private void frmBaoCaoHocVienTheoThang_Load(object sender, EventArgs e)
         {
-            dateThang.MaxDate = DateTime.Now;
+            try
+            {
+                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00");
+                date_DenNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
         #endregion
+
+        #region Events
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
+            try
+            {
+                PhieuGhiDanhFilter _filter = new PhieuGhiDanhFilter();
+                _filter.CoSoId = GlobalSettings.CoSoId;
+                _filter.NgayGhiDanh_Tu = date_TuNgay.DateTime;
+                _filter.NgayGhiDanh_Den = date_DenNgay.DateTime;
+                this._lstPhieuGhiDanh = PhieuGhiDanhLogic.Select(_filter);
+                if (this._lstPhieuGhiDanh != null && this._lstPhieuGhiDanh.Count > 0)
+                {
+                    gridControlDSPhieuGhiDanh.DataSource = this._lstPhieuGhiDanh;
+                }
+                else
+                {
+                    gridControlDSPhieuGhiDanh.DataSource = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+            SplashScreenManager.CloseForm();
+        }
+
+        private void btnInAn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
+
+                string tungay = DateTime.ParseExact(date_TuNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+                string denngay = DateTime.ParseExact(date_DenNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+
+                string tungaydenngay = "( Từ " + tungay + " - " + denngay + " )";
+
+                List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
+                reportExcelDTO reportitem = new reportExcelDTO();
+                reportitem.name = Base.bienTrongBaoCao.THOIGIANBAOCAO;
+                reportitem.value = tungaydenngay;
+                thongTinThem.Add(reportitem);
+
+                string fileTemplatePath = "BC02_HocVienGhiDanh.xlsx";
+                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this._lstPhieuGhiDanh);
+                Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+            SplashScreenManager.CloseForm();
+        }
+
+        private void btnXuatExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string tungay = DateTime.ParseExact(date_TuNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+                string denngay = DateTime.ParseExact(date_DenNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+
+                string tungaydenngay = "( Từ " + tungay + " - " + denngay + " )";
+
+                List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
+                reportExcelDTO reportitem = new reportExcelDTO();
+                reportitem.name = Base.bienTrongBaoCao.THOIGIANBAOCAO;
+                reportitem.value = tungaydenngay;
+                thongTinThem.Add(reportitem);
+
+                string fileTemplatePath = "BC02_HocVienGhiDanh.xlsx";
+                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this._lstPhieuGhiDanh);
+                Utilities.Common.Excel.ExcelExport export = new Utilities.Common.Excel.ExcelExport();
+                export.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        #endregion
+
+        #region Custom
+        private void gridViewDSHocVien_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                if (e.RowHandle == view.FocusedRowHandle)
+                {
+                    e.Appearance.BackColor = Color.DodgerBlue;
+                    e.Appearance.ForeColor = Color.White;
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        private void gridViewDSHocVien_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
+        {
+            try
+            {
+                if (e.Column == clm_PhieuGhiDanh_Stt)
+                {
+                    e.DisplayText = Convert.ToString(e.RowHandle + 1);
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        #endregion
+
     }
 }

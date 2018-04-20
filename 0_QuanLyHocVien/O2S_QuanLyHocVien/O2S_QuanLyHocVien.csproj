@@ -134,30 +134,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\bienTrongBaoCao.cs" />
-    <Compile Include="Base\CheckPermission.cs" />
     <Compile Include="Base\ClassEncoding.cs" />
     <Compile Include="Base\HardwareInfo.cs" />
     <Compile Include="Base\KiemTraLicense.cs" />
     <Compile Include="Base\ReadExcelFile.cs" />
     <Compile Include="Base\ThongBaoLable.cs" />
+    <Compile Include="BUS\KiemTraPhanQuyen.cs" />
     <Compile Include="BUS\TabControlProcess.cs" />
+    <Compile Include="frmMainHome_PhanQuyen.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GUI\BaoCao\frmBaoCaoHocVienGhiDanh.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\BaoCao\frmBaoCaoHocVienGhiDanh.Designer.cs">
       <DependentUpon>frmBaoCaoHocVienGhiDanh.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\BaoCao\frmBCHocVienNoHocPhi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\BaoCao\frmBCHocVienNoHocPhi.Designer.cs">
+      <DependentUpon>frmBCHocVienNoHocPhi.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\BaoCao\frmBaoCaoTiepNhanHocVien.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\BaoCao\frmBaoCaoTiepNhanHocVien.Designer.cs">
       <DependentUpon>frmBaoCaoTiepNhanHocVien.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\BaoCao\frmBCThongKeNoHocPhi.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\BaoCao\frmBCThongKeNoHocPhi.Designer.cs">
-      <DependentUpon>frmBCThongKeNoHocPhi.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\BaoCao\frmBCThongKeTheoDoiDiem.cs">
       <SubType>Form</SubType>
@@ -170,6 +173,36 @@
     </Compile>
     <Compile Include="GUI\ChucNang\frmBangDiemCaNhan.Designer.cs">
       <DependentUpon>frmBangDiemCaNhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmBangDiemDanhHocVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmBangDiemDanhHocVien.Designer.cs">
+      <DependentUpon>frmBangDiemDanhHocVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmPopUpXoaPhieuGhiDanh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmPopUpXoaPhieuGhiDanh.Designer.cs">
+      <DependentUpon>frmPopUpXoaPhieuGhiDanh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmLichDayCuaGiangVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmLichDayCuaGiangVien.Designer.cs">
+      <DependentUpon>frmLichDayCuaGiangVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmLichHocTheoLopHoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmLichHocTheoLopHoc.Designer.cs">
+      <DependentUpon>frmLichHocTheoLopHoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmXepLichHoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmXepLichHoc.Designer.cs">
+      <DependentUpon>frmXepLichHoc.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\ChucNang\frmCacLopDaHocCaNhan.cs">
       <SubType>Form</SubType>
@@ -248,6 +281,12 @@
     </Compile>
     <Compile Include="GUI\ChucNang\frmXepLop.Designer.cs">
       <DependentUpon>frmXepLop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\DanhMuc\frmDanhMucCaHoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\DanhMuc\frmDanhMucCaHoc.Designer.cs">
+      <DependentUpon>frmDanhMucCaHoc.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Popups\frmChonCoSo.cs">
       <SubType>Form</SubType>
@@ -379,7 +418,6 @@
     <Compile Include="GUI\DanhMuc\frmDanhMucLopHoc.Designer.cs">
       <DependentUpon>frmDanhMucLopHoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="GlobalPages.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\dsSource.Designer.cs">
@@ -437,17 +475,32 @@
     <EmbeddedResource Include="GUI\BaoCao\frmBaoCaoHocVienGhiDanh.resx">
       <DependentUpon>frmBaoCaoHocVienGhiDanh.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\BaoCao\frmBCHocVienNoHocPhi.resx">
+      <DependentUpon>frmBCHocVienNoHocPhi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\BaoCao\frmBaoCaoTiepNhanHocVien.resx">
       <DependentUpon>frmBaoCaoTiepNhanHocVien.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\BaoCao\frmBCThongKeNoHocPhi.resx">
-      <DependentUpon>frmBCThongKeNoHocPhi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\BaoCao\frmBCThongKeTheoDoiDiem.resx">
       <DependentUpon>frmBCThongKeTheoDoiDiem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ChucNang\frmBangDiemCaNhan.resx">
       <DependentUpon>frmBangDiemCaNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ChucNang\frmBangDiemDanhHocVien.resx">
+      <DependentUpon>frmBangDiemDanhHocVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ChucNang\frmPopUpXoaPhieuGhiDanh.resx">
+      <DependentUpon>frmPopUpXoaPhieuGhiDanh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ChucNang\frmLichDayCuaGiangVien.resx">
+      <DependentUpon>frmLichDayCuaGiangVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ChucNang\frmLichHocTheoLopHoc.resx">
+      <DependentUpon>frmLichHocTheoLopHoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ChucNang\frmXepLichHoc.resx">
+      <DependentUpon>frmXepLichHoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ChucNang\frmCacLopDaHocCaNhan.resx">
       <DependentUpon>frmCacLopDaHocCaNhan.cs</DependentUpon>
@@ -487,6 +540,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ChucNang\frmXepLop.resx">
       <DependentUpon>frmXepLop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\DanhMuc\frmDanhMucCaHoc.resx">
+      <DependentUpon>frmDanhMucCaHoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Popups\frmChonCoSo.resx">
       <DependentUpon>frmChonCoSo.cs</DependentUpon>
@@ -607,6 +663,24 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <Content Include="Templates\BC01_TiepNhanHocVien.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\BC02_HocVienGhiDanh.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\FUN_XepLop_DanhSachLopHoc.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\BC04_ThongKeHocVienNoHocPhi.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\BC03_ThongKeTheoDoiDiem.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\FUN_QuanLyHocVien.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\O2S_License\O2S_License.csproj">

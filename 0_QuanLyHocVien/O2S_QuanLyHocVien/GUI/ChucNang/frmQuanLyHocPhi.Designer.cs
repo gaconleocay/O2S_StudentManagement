@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.gridControlDSHocVien = new DevExpress.XtraGrid.GridControl();
@@ -54,7 +58,6 @@
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.numNopThem = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.gridControlPhieuThu = new DevExpress.XtraGrid.GridControl();
@@ -83,6 +86,9 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.numNopThem = new DevExpress.XtraEditors.TextEdit();
+            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemButton_In = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlDSHocVien)).BeginInit();
@@ -97,6 +103,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControlPhieuThu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewPhieuThu)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNopThem.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_In)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -559,19 +567,6 @@
             this.panel7.Size = new System.Drawing.Size(419, 576);
             this.panel7.TabIndex = 14;
             // 
-            // numNopThem
-            // 
-            this.numNopThem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numNopThem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.numNopThem.ForeColor = System.Drawing.Color.Blue;
-            this.numNopThem.Location = new System.Drawing.Point(143, 243);
-            this.numNopThem.Name = "numNopThem";
-            this.numNopThem.Size = new System.Drawing.Size(216, 29);
-            this.numNopThem.TabIndex = 89;
-            this.numNopThem.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numNopThem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numNop_KeyPress);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -598,6 +593,8 @@
             this.gridControlPhieuThu.Location = new System.Drawing.Point(0, 0);
             this.gridControlPhieuThu.MainView = this.gridViewPhieuThu;
             this.gridControlPhieuThu.Name = "gridControlPhieuThu";
+            this.gridControlPhieuThu.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemButton_In});
             this.gridControlPhieuThu.Size = new System.Drawing.Size(419, 225);
             this.gridControlPhieuThu.TabIndex = 45;
             this.gridControlPhieuThu.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -607,6 +604,7 @@
             // 
             this.gridViewPhieuThu.ColumnPanelRowHeight = 25;
             this.gridViewPhieuThu.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn18,
             this.gridColumn19,
             this.gridColumn14,
             this.gridColumn15,
@@ -656,7 +654,7 @@
             this.gridColumn14.OptionsColumn.AllowEdit = false;
             this.gridColumn14.OptionsColumn.ReadOnly = true;
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 0;
+            this.gridColumn14.VisibleIndex = 1;
             this.gridColumn14.Width = 35;
             // 
             // gridColumn15
@@ -674,7 +672,7 @@
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.OptionsColumn.ReadOnly = true;
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 1;
+            this.gridColumn15.VisibleIndex = 2;
             this.gridColumn15.Width = 107;
             // 
             // gridColumn16
@@ -697,7 +695,7 @@
             this.gridColumn16.OptionsColumn.AllowEdit = false;
             this.gridColumn16.OptionsColumn.ReadOnly = true;
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 2;
+            this.gridColumn16.VisibleIndex = 3;
             this.gridColumn16.Width = 125;
             // 
             // gridColumn21
@@ -721,7 +719,7 @@
             this.gridColumn21.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SoTien", "{0:#,##0}")});
             this.gridColumn21.Visible = true;
-            this.gridColumn21.VisibleIndex = 3;
+            this.gridColumn21.VisibleIndex = 4;
             this.gridColumn21.Width = 155;
             // 
             // gridColumn25
@@ -739,7 +737,7 @@
             this.gridColumn25.Name = "gridColumn25";
             this.gridColumn25.OptionsColumn.AllowEdit = false;
             this.gridColumn25.Visible = true;
-            this.gridColumn25.VisibleIndex = 4;
+            this.gridColumn25.VisibleIndex = 5;
             this.gridColumn25.Width = 170;
             // 
             // gridColumn26
@@ -757,7 +755,7 @@
             this.gridColumn26.Name = "gridColumn26";
             this.gridColumn26.OptionsColumn.AllowEdit = false;
             this.gridColumn26.Visible = true;
-            this.gridColumn26.VisibleIndex = 5;
+            this.gridColumn26.VisibleIndex = 6;
             this.gridColumn26.Width = 150;
             // 
             // btnInBienLai
@@ -953,6 +951,47 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "QUẢN LÝ HỌC PHÍ";
             // 
+            // numNopThem
+            // 
+            this.numNopThem.EnterMoveNextControl = true;
+            this.numNopThem.Location = new System.Drawing.Point(143, 244);
+            this.numNopThem.Name = "numNopThem";
+            this.numNopThem.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numNopThem.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.numNopThem.Properties.Appearance.Options.UseFont = true;
+            this.numNopThem.Properties.Appearance.Options.UseForeColor = true;
+            this.numNopThem.Properties.Appearance.Options.UseTextOptions = true;
+            this.numNopThem.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.numNopThem.Properties.DisplayFormat.FormatString = "#,##0";
+            this.numNopThem.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.numNopThem.Properties.Mask.EditMask = "n0";
+            this.numNopThem.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.numNopThem.Size = new System.Drawing.Size(216, 26);
+            this.numNopThem.TabIndex = 90;
+            // 
+            // gridColumn18
+            // 
+            this.gridColumn18.Caption = "In";
+            this.gridColumn18.ColumnEdit = this.repositoryItemButton_In;
+            this.gridColumn18.FieldName = "gridColumn18";
+            this.gridColumn18.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            this.gridColumn18.Name = "gridColumn18";
+            this.gridColumn18.OptionsColumn.FixedWidth = true;
+            this.gridColumn18.OptionsColumn.ShowCaption = false;
+            this.gridColumn18.UnboundType = DevExpress.Data.UnboundColumnType.Object;
+            this.gridColumn18.Visible = true;
+            this.gridColumn18.VisibleIndex = 0;
+            this.gridColumn18.Width = 35;
+            // 
+            // repositoryItemButton_In
+            // 
+            this.repositoryItemButton_In.AutoHeight = false;
+            this.repositoryItemButton_In.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::O2S_QuanLyHocVien.Properties.Resources.printer_16, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "In", null, null, true)});
+            this.repositoryItemButton_In.Name = "repositoryItemButton_In";
+            this.repositoryItemButton_In.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.repositoryItemButton_In.Click += new System.EventHandler(this.repositoryItemButton_In_Click);
+            // 
             // frmQuanLyHocPhi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -984,6 +1023,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewPhieuThu)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNopThem.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_In)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1043,7 +1084,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn25;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn26;
-        private System.Windows.Forms.TextBox numNopThem;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
+        public DevExpress.XtraEditors.TextEdit numNopThem;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButton_In;
     }
 }

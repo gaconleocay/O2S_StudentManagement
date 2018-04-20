@@ -85,6 +85,26 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
             }
         }
+        public static List<LopHoc_PlusDTO> SelectGroupTheoLopHoc(LopHocFilter _filter)
+        {
+            try
+            {
+                var query = (from obj in GlobalSettings.Database.XEPLICHHOCs
+                             where (obj.KhoaHocId == _filter.KhoaHocId && (obj.GiaoVien_ChinhId == _filter.GiangVienId || obj.GiaoVien_TroGiangId == _filter.GiangVienId))
+                             select new LopHoc_PlusDTO
+                             {
+                                 LopHocId = obj.LopHocId ?? 0,
+                                 MaLopHoc = obj.LOPHOC.MaLopHoc,
+                                 TenLopHoc = obj.TenLopHoc,
+                             }).ToList().GroupBy(o => o.LopHocId).Select(n => n.First()).ToList();
+                return query;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
+        }
 
         public static bool Insert(LOPHOC _khoahoc, ref int _khoaHocId)
         {
@@ -93,6 +113,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 _khoahoc.CreatedDate = DateTime.Now;
                 _khoahoc.CreatedBy = GlobalSettings.UserCode;
                 _khoahoc.CreatedLog = GlobalSettings.SessionMyIP;
+                _khoahoc.IsRemove = 0;
                 Database.LOPHOCs.InsertOnSubmit(_khoahoc);
                 Database.SubmitChanges();
                 _khoaHocId = _khoahoc.LopHocId;

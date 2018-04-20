@@ -38,10 +38,13 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Excel
                     newRow["CURRENTDATE"] = "Ngày " + DateTime.Now.Day + " tháng " + DateTime.Now.Month + " năm " + DateTime.Now.Year;
 
                     orderTable.Columns.Add("TENTRUNGTAM", typeof(string));
-                    newRow["TENTRUNGTAM"] = GlobalPages.TenTrungTam;
+                    newRow["TENTRUNGTAM"] = GlobalSettings.CoSo_Ten;
 
                     orderTable.Columns.Add("DIACHITRUNGTAM", typeof(string));
-                    newRow["DIACHITRUNGTAM"] = GlobalPages.DiaChiTrungTam;
+                    newRow["DIACHITRUNGTAM"] = GlobalSettings.TrungTam_DiaChi;
+
+                    orderTable.Columns.Add("TENCOSO", typeof(string));
+                    newRow["TENCOSO"] = GlobalSettings.CoSo_Ten;
 
                     orderTable.Columns.Add("CURRENTUSER", typeof(string));
                     newRow["CURRENTUSER"] = GlobalSettings.UserName;

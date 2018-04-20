@@ -113,7 +113,7 @@ namespace O2S_QuanLyHocVien.Pages
                     //hien thi tai khoan hien tai len form
                     this.TaiKhoan_Select = TaiKhoanLogic.SelectSingle(_taikhoanId);
                     txtTenDangNhap.Text = this.TaiKhoan_Select.TenDangNhap;
-                    txtMatKhau.Text = this.TaiKhoan_Select.MatKhau;
+                    txtMatKhau.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(this.TaiKhoan_Select.MatKhau, true);
 
                     LoadPhanQuyenTheoTaiKhoan(_taikhoanId);
                 }
@@ -195,7 +195,7 @@ namespace O2S_QuanLyHocVien.Pages
                         }
                     }
 
-                    if (TaiKhoanLogic.Update(this.TaiKhoan_Select) && PhanQuyenTaiKhoanLogic.DeleteAndInsert(_lstPQ_TK_All))
+                    if (TaiKhoanLogic.Update(this.TaiKhoan_Select) && PhanQuyenTaiKhoanLogic.DeleteAndInsert(_lstPQ_TK_All, this.TaiKhoan_Select.TaiKhoanId))
                     {
                         Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                         frmthongbao.Show();

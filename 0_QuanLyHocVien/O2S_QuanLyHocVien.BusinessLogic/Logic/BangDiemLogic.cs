@@ -12,47 +12,55 @@ using O2S_QuanLyHocVien.BusinessLogic.Model;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
-    public struct BangDiemTrungBinh
-    {
-        public int HocVienId { get; set; }
-        public string MaHocVien { get; set; }
-        public string TenHocVien { get; set; }
-        public decimal? DiemTrungBinh { get; set; }
-    }
-
     public static class BangDiemLogic
     {
         public static BangDiemFullDTO SelectDetail(int _hocvienId, int _lophocId)
         {
-            return (from p in Database.BANGDIEMs
-                    where p.LopHocId == _lophocId && p.HocVienId == _hocvienId
-                    select new BangDiemFullDTO()
-                    {
-                        BangDiemId = p.BangDiemId,
-                        HocVienId = p.HocVienId,
-                        TenHocVien = p.HOCVIEN.TenHocVien,
-                        LopHocId = p.LopHocId,
-                        TenLop = p.LOPHOC.TenLopHoc,
-                        PhieuGhiDanhId = p.PhieuGhiDanhId,
-                        TenKhoaHoc = p.LOPHOC.KHOAHOC.TenKhoaHoc,
-                        NgayBatDau = p.LOPHOC.NgayBatDau,
-                        NgayKetThuc = p.LOPHOC.NgayKetThuc,
-                        SiSo = p.LOPHOC.SiSo,
-                        DangMo = p.LOPHOC.DangMo,
-                        DiemTrungBinh = p.DiemTrungBinh ?? 0,
-                        BangDiemChiTiets =
-                            (from ct in Database.BANGDIEMCHITIETs
-                             where ct.BangDiemId == p.BangDiemId
-                             select new BangDiemChiTietDTO()
-                             {
-                                 BangDiemChiTietId = ct.BangDiemChiTietId,
-                                 BangDiemId = ct.BangDiemId,
-                                 MonHocId = ct.MonHocId,
-                                 MaMonHoc = ct.MONHOC.MaMonHoc,
-                                 TenMonHoc = ct.TenMonHoc,
-                                 Diem = ct.Diem
-                             }).ToList()
-                    }).Single();
+            try
+            {
+                return (from p in Database.BANGDIEMs
+                        where p.LopHocId == _lophocId && p.HocVienId == _hocvienId
+                        select new BangDiemFullDTO()
+                        {
+                            BangDiemId = p.BangDiemId,
+                            HocVienId = p.HocVienId,
+                            MaHocVien = p.HOCVIEN.MaHocVien,
+                            TenHocVien = p.HOCVIEN.TenHocVien,
+                            NgaySinh = p.HOCVIEN.NgaySinh,
+                            GioiTinh = p.HOCVIEN.GioiTinh,
+                            PhieuGhiDanhId = p.PhieuGhiDanhId,
+                            MaPhieuGhiDanh = p.PHIEUGHIDANH.MaPhieuGhiDanh,
+                            NgayGhiDanh = p.PHIEUGHIDANH.NgayGhiDanh,
+                            LopHocId = p.LopHocId,
+                            TenLopHoc = p.LOPHOC.TenLopHoc,
+                            KhoaHocId = p.KhoaHocId,
+                            TenKhoaHoc = p.KHOAHOC.TenKhoaHoc,
+                            NgayBatDau = p.LOPHOC.NgayBatDau,
+                            NgayKetThuc = p.LOPHOC.NgayKetThuc,
+                            SiSo = p.LOPHOC.SiSo,
+                            DangMo = p.LOPHOC.DangMo,
+                            DiemTrungBinh = p.DiemTrungBinh,
+                            TrangThai = p.TrangThai,
+                            TrangThai_Ten = p.TrangThai == 0 ? "xếp lớp" : p.TrangThai == 1 ? "đang học" : p.TrangThai == 3 ? "có điểm" : p.TrangThai == 99 ? "kết thúc" : "",
+                            BangDiemChiTiets =
+                                (from ct in Database.BANGDIEMCHITIETs
+                                 where ct.BangDiemId == p.BangDiemId
+                                 select new BangDiemChiTietDTO()
+                                 {
+                                     BangDiemChiTietId = ct.BangDiemChiTietId,
+                                     BangDiemId = ct.BangDiemId,
+                                     MonHocId = ct.MonHocId,
+                                     MaMonHoc = ct.MONHOC.MaMonHoc,
+                                     TenMonHoc = ct.TenMonHoc,
+                                     Diem = ct.Diem
+                                 }).ToList()
+                        }).Single();
+            }
+            catch (Exception ex)
+            {
+                return null;
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static BANGDIEM Select(int _hocvienId, int _lophocId)
@@ -96,20 +104,23 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             {
                 var querry = (from p in Database.BANGDIEMs
                               where (p.LopHocId == _lophocId)
-                              select new XepLopDTO()
+                              select p).AsEnumerable().Select((obj, index) => new XepLopDTO
                               {
-                                  HocVienId = p.HocVienId,
-                                  MaHocVien = p.HOCVIEN.MaHocVien,
-                                  TenHocVien = p.HOCVIEN.TenHocVien,
-                                  PhieuGhiDanhId = p.PhieuGhiDanhId,
-                                  MaPhieuGhiDanh = p.PHIEUGHIDANH.MaPhieuGhiDanh,
-                                  NgayGhiDanh = p.PHIEUGHIDANH.NgayGhiDanh,
-                                  NgaySinh = p.HOCVIEN.NgaySinh,
-                                  GioiTinh = p.HOCVIEN.GioiTinh,
-                                  DiaChi = p.HOCVIEN.DiaChi,
-                                  KhoaHocId = p.KhoaHocId,
-                                  MaKhoaHoc = p.KHOAHOC.MaKhoaHoc,
-                                  TenKhoaHoc = p.KHOAHOC.TenKhoaHoc,
+                                  Stt = index + 1,
+                                  HocVienId = obj.HocVienId,
+                                  MaHocVien = obj.HOCVIEN.MaHocVien,
+                                  TenHocVien = obj.HOCVIEN.TenHocVien,
+                                  PhieuGhiDanhId = obj.PhieuGhiDanhId,
+                                  MaPhieuGhiDanh = obj.PHIEUGHIDANH.MaPhieuGhiDanh,
+                                  NgayGhiDanh = obj.PHIEUGHIDANH.NgayGhiDanh,
+                                  NgaySinh = obj.HOCVIEN.NgaySinh,
+                                  GioiTinh = obj.HOCVIEN.GioiTinh,
+                                  DiaChi = obj.HOCVIEN.DiaChi,
+                                  Sdt = obj.HOCVIEN.Sdt,
+                                  Email = obj.HOCVIEN.Email,
+                                  KhoaHocId = obj.KhoaHocId,
+                                  MaKhoaHoc = obj.KHOAHOC.MaKhoaHoc,
+                                  TenKhoaHoc = obj.KHOAHOC.TenKhoaHoc,
                               });
                 return querry.ToList();
             }
@@ -147,17 +158,53 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             return result;
         }
 
-        public static IQueryable<BangDiemTrungBinh> SelectBangDiemLop(int _lophocId)
+        public static List<BangDiemFullDTO> SelectTheoDoiBangDiemLop(int _lophocId)
         {
-            return (from p in Database.BANGDIEMs
-                    where p.LopHocId == _lophocId
-                    select new BangDiemTrungBinh()
-                    {
-                        HocVienId = p.HocVienId,
-                        MaHocVien = p.HOCVIEN.MaHocVien,
-                        TenHocVien = p.HOCVIEN.TenHocVien,
-                        DiemTrungBinh = p.DiemTrungBinh,
-                    });
+            try
+            {
+                return (from p in Database.BANGDIEMs
+                        where p.LopHocId == _lophocId
+                        select new BangDiemFullDTO()
+                        {
+                            BangDiemId = p.BangDiemId,
+                            HocVienId = p.HocVienId,
+                            MaHocVien = p.HOCVIEN.MaHocVien,
+                            TenHocVien = p.HOCVIEN.TenHocVien,
+                            NgaySinh = p.HOCVIEN.NgaySinh,
+                            GioiTinh = p.HOCVIEN.GioiTinh,
+                            PhieuGhiDanhId = p.PhieuGhiDanhId,
+                            MaPhieuGhiDanh = p.PHIEUGHIDANH.MaPhieuGhiDanh,
+                            NgayGhiDanh = p.PHIEUGHIDANH.NgayGhiDanh,
+                            LopHocId = p.LopHocId,
+                            TenLopHoc = p.LOPHOC.TenLopHoc,
+                            KhoaHocId = p.KhoaHocId,
+                            TenKhoaHoc = p.KHOAHOC.TenKhoaHoc,
+                            NgayBatDau = p.LOPHOC.NgayBatDau,
+                            NgayKetThuc = p.LOPHOC.NgayKetThuc,
+                            SiSo = p.LOPHOC.SiSo,
+                            DangMo = p.LOPHOC.DangMo,
+                            DiemTrungBinh = p.DiemTrungBinh,
+                            TrangThai = p.TrangThai,
+                            TrangThai_Ten = p.TrangThai == 0 ? "xếp lớp" : p.TrangThai == 1 ? "đang học" : p.TrangThai == 3 ? "có điểm" : p.TrangThai == 99 ? "kết thúc" : "",
+                            BangDiemChiTiets =
+                                (from ct in Database.BANGDIEMCHITIETs
+                                 where ct.BangDiemId == p.BangDiemId
+                                 select new BangDiemChiTietDTO()
+                                 {
+                                     BangDiemChiTietId = ct.BangDiemChiTietId,
+                                     BangDiemId = ct.BangDiemId,
+                                     MonHocId = ct.MonHocId,
+                                     MaMonHoc = ct.MONHOC.MaMonHoc,
+                                     TenMonHoc = ct.TenMonHoc,
+                                     Diem = ct.Diem
+                                 }).ToList()
+                        }).ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+                Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static void Insert(BANGDIEM _bangdiem)
@@ -167,6 +214,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 _bangdiem.CreatedDate = DateTime.Now;
                 _bangdiem.CreatedBy = GlobalSettings.UserCode;
                 _bangdiem.CreatedLog = GlobalSettings.SessionMyIP;
+                _bangdiem.IsRemove = 0;
                 Database.BANGDIEMs.InsertOnSubmit(_bangdiem);
                 Database.SubmitChanges();
                 int _id = _bangdiem.BangDiemId;
@@ -179,6 +227,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     _chitiet.BangDiemId = _id;
                     _chitiet.MonHocId = item.MonHocId ?? 0;
                     _chitiet.TenMonHoc = item.TenMonHoc;
+                    _chitiet.IsRemove = 0;
+                    //_chitiet.CreatedDate = DateTime.Now;
+                    //_chitiet.CreatedBy = GlobalSettings.UserCode;
+                    //_chitiet.CreatedLog = GlobalSettings.SessionMyIP;
                     Database.BANGDIEMCHITIETs.InsertOnSubmit(_chitiet);
                     Database.SubmitChanges();
                 }

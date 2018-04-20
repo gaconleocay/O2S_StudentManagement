@@ -11,7 +11,7 @@ using O2S_QuanLyHocVien.BusinessLogic.Model;
 using System.Collections.Generic;
 using System.Linq;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
-using O2S_QuanLyKhoaHoc.BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Drawing;
 
@@ -32,7 +32,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.AddDays(-15).ToString("yyyy-MM-dd") + " 00:00:00");
+                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.AddYears(-1).ToString("yyyy-MM-dd") + " 00:00:00");
                 date_DenNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
 
                 LockPanelControl(false);
@@ -73,6 +73,7 @@ namespace O2S_QuanLyHocVien.Pages
             txtMaKhoaHoc.ReadOnly = !result;
             txtTenKhoaHoc.ReadOnly = !result;
             numHocPhi.ReadOnly = !result;
+            numSoTietHoc.ReadOnly = !result;
             btnLuuThongTin.Enabled = result;
             btnHuyBo.Enabled = result;
         }
@@ -103,6 +104,7 @@ namespace O2S_QuanLyHocVien.Pages
                 txtMaKhoaHoc.ReadOnly = true;
                 txtTenKhoaHoc.Text = kh.TenKhoaHoc;
                 numHocPhi.Value = (decimal)kh.HocPhi;
+                numSoTietHoc.Value = kh.SoTietHoc != null ? (decimal)kh.SoTietHoc : 0;
                 chkDaKhoa.Checked = kh.IsRemove == 1 ? true : false;
                 //Load mon hoc cua Khoa hoc
                 List<KhoaHocMonHocDTO> _lstKHMH = this.lstKHMH;
@@ -148,6 +150,7 @@ namespace O2S_QuanLyHocVien.Pages
                 TenKhoaHoc = txtTenKhoaHoc.Text,
                 HocPhi = numHocPhi.Value,
                 CoSoId = GlobalSettings.CoSoId,
+                SoTietHoc = numSoTietHoc.Value,
                 IsRemove = chkDaKhoa.Checked ? 1 : 0,
             };
         }
@@ -156,6 +159,7 @@ namespace O2S_QuanLyHocVien.Pages
             txtMaKhoaHoc.Text = string.Empty;
             txtTenKhoaHoc.Text = string.Empty;
             numHocPhi.Value = 0;
+            numSoTietHoc.Value = 0;
             chkDaKhoa.Checked = false;
         }
         #endregion
@@ -220,11 +224,12 @@ namespace O2S_QuanLyHocVien.Pages
                     var rowHandle = gridViewKhoaHoc.FocusedRowHandle;
                     int _KhoaHocId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewKhoaHoc.GetRowCellValue(rowHandle, "KhoaHocId").ToString());
 
-                    KhoaHocLogic.Delete(_KhoaHocId);
-
-                    Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
-                    frmthongbao.Show();
-                    LoadGridKhoaHoc();
+                    if (KhoaHocLogic.Delete(_KhoaHocId))
+                    {
+                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
+                        frmthongbao.Show();
+                        LoadGridKhoaHoc();
+                    }
                 }
             }
             catch (Exception ex)
@@ -320,7 +325,6 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
             }
         }
 

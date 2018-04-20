@@ -7,6 +7,8 @@ using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
+using System.IO;
+using System.Drawing;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -19,63 +21,70 @@ namespace O2S_QuanLyHocVien.Pages
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Khóa điều khiển các control
-        /// </summary>
         public void LockPanelControl()
         {
             txtMaCoSo.Enabled = false;
             txtTenCoSo.Enabled = false;
             txtDiaChi.Enabled = false;
+            txtDienThoai.Enabled = false;
+            txtEmail.Enabled = false;
             btnLuuThongTin.Enabled = false;
             btnHuyBo.Enabled = false;
         }
 
-        /// <summary>
-        /// Mở khóa điều khiển các control
-        /// </summary>
         public void UnlockPanelControl()
         {
             txtTenCoSo.Enabled = true;
             txtDiaChi.Enabled = true;
+            txtDienThoai.Enabled = true;
+            txtEmail.Enabled = true;
             btnLuuThongTin.Enabled = true;
             btnHuyBo.Enabled = true;
         }
 
-        /// <summary>
-        /// Đặt lại giá trị của các control trong panel
-        /// </summary>
         public void ResetPanelControl()
         {
             txtMaCoSo.Text = string.Empty;
             txtTenCoSo.Text = string.Empty;
             txtDiaChi.Text = string.Empty;
+            txtDienThoai.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            picLogoCoSo.Image = null;
         }
 
-        /// <summary>
-        /// Nạp cơ sở lên giao diện
-        /// </summary>
-        /// <param name="kh">cơ sở</param>
         public void LoadUI(COSOTRUNGTAM kh)
         {
             txtMaCoSo.Text = kh.CoSoId.ToString();
             txtTenCoSo.Text = kh.TenCoSo;
             txtDiaChi.Text = kh.DiaChi;
-
+            txtDienThoai.Text = kh.Sdt;
+            txtEmail.Text = kh.Email;
+            if (kh.LogoCoSo != null && kh.LogoCoSo.Length > 0)//image type sql server - hien thi
+            {
+                byte[] Empimage = (byte[])(kh.LogoCoSo).ToArray();
+                picLogoCoSo.Image = Image.FromStream(new MemoryStream(Empimage));
+            }
+            else
+            { picLogoCoSo.Image = null; }
         }
 
-        /// <summary>
-        /// Nạp giao diện xuống cơ sở
-        /// </summary>
-        /// <returns></returns>
         public COSOTRUNGTAM LoadCoSoTrungTam()
         {
+            //luu image vao CSQL SQL server
+            Image _image = picLogoCoSo.Image;
+            MemoryStream memstrem = new System.IO.MemoryStream();
+            _image.Save(memstrem, System.Drawing.Imaging.ImageFormat.Bmp);
+
             return new COSOTRUNGTAM()
             {
-               CoSoId =Common.TypeConvert.TypeConvertParse.ToInt32( txtMaCoSo.Text),
+                CoSoId = Common.TypeConvert.TypeConvertParse.ToInt32(txtMaCoSo.Text),
                 TenCoSo = txtTenCoSo.Text,
                 DiaChi = txtDiaChi.Text,
-            };
+                Sdt=txtDienThoai.Text,
+                Email=txtEmail.Text,
+                LogoCoSo = memstrem.GetBuffer(),
+            //
+        };
         }
         public void LoadGridKhoaHoc()
         {
@@ -83,11 +92,6 @@ namespace O2S_QuanLyHocVien.Pages
         }
 
         #region Events
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            //GlobalPages.QuanLyCoSo = null;
-        }
 
         private void btnHuyBo_Click(object sender, EventArgs e)
         {
@@ -191,6 +195,28 @@ namespace O2S_QuanLyHocVien.Pages
                 MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                openFileDialog1.Title = "Chọn file logo";
+                openFileDialog1.Filter = "(*.BMP;*.JPG;*.GIF;*.ICO)|*.BMP;*.JPG;*.GIF;*.ICO|All files (*.*)|*.*";
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    picLogoCoSo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+                    picLogoCoSo.Image = Image.FromFile(openFileDialog1.FileName);
+                    //strLogoFileName = openFileDialog1.SafeFileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
         #endregion
+
+
     }
 }

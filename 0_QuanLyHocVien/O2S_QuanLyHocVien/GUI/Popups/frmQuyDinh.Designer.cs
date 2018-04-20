@@ -29,21 +29,22 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuyDinh));
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnDat = new System.Windows.Forms.Button();
             this.lblTenQuyDinh = new System.Windows.Forms.Label();
             this.numGiaTri = new System.Windows.Forms.NumericUpDown();
             this.gridQD = new System.Windows.Forms.DataGridView();
+            this.clmMaQuyDinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenQuyDinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmGiaTri = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHuyBo = new System.Windows.Forms.Button();
             this.btnLuuQuyDinh = new System.Windows.Forms.Button();
-            this.clmMaQuyDinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenQuyDinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmGiaTri = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numGiaTri)).BeginInit();
@@ -147,6 +148,31 @@
             this.gridQD.TabIndex = 1;
             this.gridQD.Click += new System.EventHandler(this.gridQD_Click);
             // 
+            // clmMaQuyDinh
+            // 
+            this.clmMaQuyDinh.DataPropertyName = "MaQuyDinh";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmMaQuyDinh.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmMaQuyDinh.FillWeight = 30F;
+            this.clmMaQuyDinh.HeaderText = "Mã quy định";
+            this.clmMaQuyDinh.Name = "clmMaQuyDinh";
+            this.clmMaQuyDinh.ReadOnly = true;
+            // 
+            // clmTenQuyDinh
+            // 
+            this.clmTenQuyDinh.DataPropertyName = "TenQuyDinh";
+            this.clmTenQuyDinh.HeaderText = "Tên quy định";
+            this.clmTenQuyDinh.Name = "clmTenQuyDinh";
+            this.clmTenQuyDinh.ReadOnly = true;
+            // 
+            // clmGiaTri
+            // 
+            this.clmGiaTri.DataPropertyName = "GiaTri";
+            this.clmGiaTri.FillWeight = 25F;
+            this.clmGiaTri.HeaderText = "Giá trị";
+            this.clmGiaTri.Name = "clmGiaTri";
+            this.clmGiaTri.ReadOnly = true;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -219,31 +245,6 @@
             this.btnLuuQuyDinh.UseVisualStyleBackColor = false;
             this.btnLuuQuyDinh.Click += new System.EventHandler(this.btnLuuQuyDinh_Click);
             // 
-            // clmMaQuyDinh
-            // 
-            this.clmMaQuyDinh.DataPropertyName = "MaQuyDinh";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMaQuyDinh.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMaQuyDinh.FillWeight = 30F;
-            this.clmMaQuyDinh.HeaderText = "Mã quy định";
-            this.clmMaQuyDinh.Name = "clmMaQuyDinh";
-            this.clmMaQuyDinh.ReadOnly = true;
-            // 
-            // clmTenQuyDinh
-            // 
-            this.clmTenQuyDinh.DataPropertyName = "TenQuyDinh";
-            this.clmTenQuyDinh.HeaderText = "Tên quy định";
-            this.clmTenQuyDinh.Name = "clmTenQuyDinh";
-            this.clmTenQuyDinh.ReadOnly = true;
-            // 
-            // clmGiaTri
-            // 
-            this.clmGiaTri.DataPropertyName = "GiaTri";
-            this.clmGiaTri.FillWeight = 25F;
-            this.clmGiaTri.HeaderText = "Giá trị";
-            this.clmGiaTri.Name = "clmGiaTri";
-            this.clmGiaTri.ReadOnly = true;
-            // 
             // frmQuyDinh
             // 
             this.AcceptButton = this.btnLuuQuyDinh;
@@ -252,11 +253,10 @@
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnHuyBo;
             this.ClientSize = new System.Drawing.Size(626, 366);
-            this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmQuyDinh";

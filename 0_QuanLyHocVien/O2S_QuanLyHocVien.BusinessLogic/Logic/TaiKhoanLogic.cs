@@ -208,6 +208,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                             select p).Single();
 
                 temp.MatKhau = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(tk.MatKhau, true);
+                temp.IsRemove = tk.IsRemove;
                 Database.SubmitChanges();
                 return true;
             }

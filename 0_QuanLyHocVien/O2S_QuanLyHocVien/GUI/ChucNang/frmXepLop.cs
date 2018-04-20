@@ -9,12 +9,15 @@ using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using System.Collections.Generic;
 using System.Threading;
-using O2S_QuanLyKhoaHoc.BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
 using System.Linq;
 using System.Drawing;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraSplashScreen;
+using O2S_QuanLyHocVien.BusinessLogic.Models;
+using System.Data;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -147,6 +150,8 @@ namespace O2S_QuanLyHocVien.Pages
                         _hocvienLop.NgaySinh = _phieuGD.HOCVIEN.NgaySinh;
                         _hocvienLop.GioiTinh = _phieuGD.HOCVIEN.GioiTinh;
                         _hocvienLop.DiaChi = _phieuGD.HOCVIEN.DiaChi;
+                        _hocvienLop.Sdt = _phieuGD.HOCVIEN.Sdt;
+                        _hocvienLop.Email = _phieuGD.HOCVIEN.Email;
                         _hocvienLop.KhoaHocId = _phieuGD.KhoaHocId;
                         _hocvienLop.MaKhoaHoc = _phieuGD.KHOAHOC.MaKhoaHoc;
                         _hocvienLop.TenKhoaHoc = _phieuGD.KHOAHOC.TenKhoaHoc;
@@ -295,20 +300,62 @@ namespace O2S_QuanLyHocVien.Pages
         }
         private void gridViewHV_XepLop_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
+            //try
+            //{
+            //    if (e.Column == clm_xeplopstt)
+            //    {
+            //        e.DisplayText = Convert.ToString(e.RowHandle + 1);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Common.Logging.LogSystem.Warn(ex);
+            //}
+        }
+
+
+        #endregion
+
+        #region In An
+        private void btnInAn_DSLop_Click(object sender, EventArgs e)
+        {
             try
             {
-                if (e.Column == clm_xeplopstt)
+                SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
+                if (cboLopHoc.SelectedValue != null)
                 {
-                    e.DisplayText = Convert.ToString(e.RowHandle + 1);
+                    List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
+                    reportExcelDTO _item_tenkhoahoc = new reportExcelDTO()
+                    {
+                        name = Base.bienTrongBaoCao.TENKHOAHOC,
+                        value = cboKhoaHoc.Text,
+                    };
+                    thongTinThem.Add(_item_tenkhoahoc);
+                    reportExcelDTO _item_tenlophoc = new reportExcelDTO()
+                    {
+                        name = Base.bienTrongBaoCao.TENLOPHOC,
+                        value = cboLopHoc.Text,
+                    };
+                    thongTinThem.Add(_item_tenlophoc);
+
+                    int _lophocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                    List<XepLopDTO> _lstXepLop = BangDiemLogic.SelectDSHV_Lop(_lophocId);
+
+                    string fileTemplatePath = "FUN_XepLop_DanhSachLopHoc.xlsx";
+                    DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(_lstXepLop);
+                    Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
                 }
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                Common.Logging.LogSystem.Error(ex);
             }
+            SplashScreenManager.CloseForm();
         }
 
         #endregion
+
+
 
 
     }

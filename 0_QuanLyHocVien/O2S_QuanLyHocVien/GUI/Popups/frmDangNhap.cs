@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Linq;
 using System.Configuration;
+using System.Drawing;
 
 namespace O2S_QuanLyHocVien.Popups
 {
@@ -54,7 +55,8 @@ namespace O2S_QuanLyHocVien.Popups
             {
                 GlobalSettings.LoadCenterInformation();
                 GlobalSettings.LoadQuyDinh();
-
+                //ten may
+                GlobalSettings.SessionMachineName = Environment.MachineName;
                 // Địa chỉ Ip
                 String strHostName = Dns.GetHostName();
                 IPHostEntry iphostentry = Dns.GetHostByName(strHostName);
@@ -237,7 +239,7 @@ namespace O2S_QuanLyHocVien.Popups
         {
             try
             {
-                GlobalSettings.SessionLstPhanQuyenNguoiDung = Base.CheckPermission.GetListPhanQuyenNguoiDung();
+                //GlobalSettings.SessionLstPhanQuyenNguoiDung = Base.CheckPermission.GetListPhanQuyenNguoiDung();
                 LayCoSoTrungTam();
 
                 frmMainHome frmChon = new frmMainHome();
@@ -259,7 +261,14 @@ namespace O2S_QuanLyHocVien.Popups
                     if (ObjectList.Count == 1)
                     {
                         GlobalSettings.CoSoId = ObjectList[0].CoSoId;
-                        GlobalSettings.TenCoSo = ObjectList[0].TenCoSo;
+                        GlobalSettings.CoSo_Ten = ObjectList[0].TenCoSo;
+                        if (ObjectList[0].LogoCoSo != null && ObjectList[0].LogoCoSo.Length > 0)
+                        {
+                            byte[] Empimage = (byte[])(ObjectList[0].LogoCoSo).ToArray();
+                            GlobalSettings.CoSo_LogoCoSo = Image.FromStream(new MemoryStream(Empimage));
+                        }
+                        else
+                        { GlobalSettings.CoSo_LogoCoSo = null; }
                     }
                     else
                     {

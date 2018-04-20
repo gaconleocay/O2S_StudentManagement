@@ -19,6 +19,22 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     select p).ToList();
         }
 
+        public static List<CHUCNANG> SelecTheoTaiKhoan()
+        {
+            try
+            {
+                return (from p in Database.CHUCNANGs
+                        join pq in Database.PHANQUYENTAIKHOANs on p.ChucNangId equals pq.ChucNangId
+                        where pq.TaiKhoanId == GlobalSettings.UserID
+                        select p).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
         public static List<PhanQuyenTaiKhoan_PlusDTO> SelectKieuPhanQuyen()
         {
             try
@@ -41,7 +57,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                             InAn = false,
                             XuatFile = false,
 
-                        }).ToList();
+                        }).OrderBy(or=>or.MaChucNang).ToList();
             }
             catch (System.Exception ex)
             {

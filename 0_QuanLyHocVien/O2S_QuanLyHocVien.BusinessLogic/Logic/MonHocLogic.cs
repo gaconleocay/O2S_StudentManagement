@@ -71,6 +71,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 _monhoc.CreatedDate = DateTime.Now;
                 _monhoc.CreatedBy = GlobalSettings.UserCode;
                 _monhoc.CreatedLog = GlobalSettings.SessionMyIP;
+                _monhoc.IsRemove = 0;
                 Database.MONHOCs.InsertOnSubmit(_monhoc);
                 Database.SubmitChanges();
                 _monHocId = _monhoc.MonHocId;

@@ -81,11 +81,11 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
             }
         }
-        public static PHIEUTHU Select(int _HocVienId, int _PhieuGhiDanhId)
+        public static List<PHIEUTHU> SelectTheoPhieuGhiDanh(int _PhieuGhiDanhId)
         {
             return (from p in Database.PHIEUTHUs
-                    where p.HocVienId == _HocVienId && p.PhieuGhiDanhId == _PhieuGhiDanhId
-                    select p).Single();
+                    where  p.PhieuGhiDanhId == _PhieuGhiDanhId
+                    select p).ToList();
         }
         public static bool Insert(PHIEUTHU _phieuthu, ref int _phieuthuId)
         {
@@ -94,6 +94,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 _phieuthu.CreatedDate = DateTime.Now;
                 _phieuthu.CreatedBy = GlobalSettings.UserCode;
                 _phieuthu.CreatedLog = GlobalSettings.SessionMyIP;
+                _phieuthu.IsRemove = 0;
                 Database.PHIEUTHUs.InsertOnSubmit(_phieuthu);
                 Database.SubmitChanges();
                 _phieuthuId = _phieuthu.PhieuThuId;
@@ -135,6 +136,21 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             {
                 var temp = SelectSingle(_phieuthuId);
                 Database.PHIEUTHUs.DeleteOnSubmit(temp);
+                Database.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        public static bool DeleteTheoPhieuGhiDanh(int _PhieuGhiDanhId)
+        {
+            try
+            {
+                List<PHIEUTHU> _lstPhieuThu = SelectTheoPhieuGhiDanh(_PhieuGhiDanhId);
+                Database.PHIEUTHUs.DeleteAllOnSubmit(_lstPhieuThu);
                 Database.SubmitChanges();
                 return true;
             }

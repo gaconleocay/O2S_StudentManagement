@@ -24,9 +24,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Logic
         public static List<PhanQuyenTaiKhoan_PlusDTO> SelectKieuPhanQuyen(int _TaiKhoanId)
         {
             var result = (from p in Database.CHUCNANGs
-                          join pq in (from tmp in Database.PHANQUYENTAIKHOANs where tmp.TaiKhoanId==_TaiKhoanId select tmp) on p.ChucNangId equals pq.ChucNangId into phanquyen
+                          join pq in (from tmp in Database.PHANQUYENTAIKHOANs where tmp.TaiKhoanId == _TaiKhoanId select tmp) on p.ChucNangId equals pq.ChucNangId into phanquyen
                           from pq1 in phanquyen.DefaultIfEmpty()
-                          //where pq1.TAIKHOAN.TaiKhoanId == _TaiKhoanId
+                              //where pq1.TAIKHOAN.TaiKhoanId == _TaiKhoanId
                           select new PhanQuyenTaiKhoan_PlusDTO
                           {
                               IsCheck = pq1 == null ? false : true,
@@ -44,21 +44,51 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Logic
                               InAn = pq1 == null ? false : (pq1.InAn == 1 ? true : false),
                               XuatFile = pq1 == null ? false : (pq1.XuatFile == 1 ? true : false),
 
-                          }).ToList();
+                          }).OrderBy(or => or.MaChucNang).ToList();
 
             return result;
         }
-
-        public static void Insert(PHANQUYENTAIKHOAN bd)
-        {
-            Database.PHANQUYENTAIKHOANs.InsertOnSubmit(bd);
-            Database.SubmitChanges();
-        }
-        public static bool DeleteAndInsert(List<PHANQUYENTAIKHOAN> _lstPQTK)
+       // public static PHANQUYENTAIKHOAN SelectTheoTenForm(string _TenForm)
+        //{
+        //    try
+        //    {
+        //        return (from p in Database.PHANQUYENTAIKHOANs
+        //                join cn in Database.CHUCNANGs on p.ChucNangId equals cn.ChucNangId
+        //                where cn.TenForm == _TenForm && p.TaiKhoanId == GlobalSettings.UserID
+        //                select p).FirstOrDefault();
+        //    }
+        //    catch (System.Exception ex)
+        //    {
+        //        return null;
+        //        Common.Logging.LogSystem.Error(ex);
+        //    }
+        //}
+        public static PHANQUYENTAIKHOAN SelectTheoMaChucNang(string _machucnang)
         {
             try
             {
-                if (DeleteTheoTaiKhoanId(_lstPQTK[0].TaiKhoanId ?? 0))
+                return (from p in Database.PHANQUYENTAIKHOANs
+                        join cn in Database.CHUCNANGs on p.ChucNangId equals cn.ChucNangId
+                        where cn.MaChucNang == _machucnang && p.TaiKhoanId == GlobalSettings.UserID
+                        select p).FirstOrDefault();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        public static void Insert(PHANQUYENTAIKHOAN bd)
+        {
+            bd.IsRemove = 0;
+            Database.PHANQUYENTAIKHOANs.InsertOnSubmit(bd);
+            Database.SubmitChanges();
+        }
+        public static bool DeleteAndInsert(List<PHANQUYENTAIKHOAN> _lstPQTK, int _TaiKhoanId)
+        {
+            try
+            {
+                if (DeleteTheoTaiKhoanId(_TaiKhoanId))
                 {
                     Database.PHANQUYENTAIKHOANs.InsertAllOnSubmit(_lstPQTK);
                     Database.SubmitChanges();

@@ -13,7 +13,7 @@ using O2S_QuanLyHocVien.BusinessLogic.Filter;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
 using O2S_QuanLyHocVien.BusinessLogic;
 
-namespace O2S_QuanLyKhoaHoc.BusinessLogic
+namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class KhoaHocLogic
     {
@@ -47,6 +47,7 @@ namespace O2S_QuanLyKhoaHoc.BusinessLogic
                                  MaKhoaHoc = obj.MaKhoaHoc,
                                  TenKhoaHoc = obj.TenKhoaHoc,
                                  HocPhi = obj.HocPhi,
+                                 SoTietHoc=obj.SoTietHoc,
                                  IsRemove = obj.IsRemove,
                                  TrangThai_Ten = obj.IsRemove == 1 ? "Đã khóa" : "",
                                  CreatedDate = obj.CreatedDate,
@@ -88,6 +89,7 @@ namespace O2S_QuanLyKhoaHoc.BusinessLogic
                 _khoahoc.CreatedDate = DateTime.Now;
                 _khoahoc.CreatedBy = GlobalSettings.UserCode;
                 _khoahoc.CreatedLog = GlobalSettings.SessionMyIP;
+                _khoahoc.IsRemove = 0;
                 Database.KHOAHOCs.InsertOnSubmit(_khoahoc);
                 Database.SubmitChanges();
                 _khoaHocId = _khoahoc.KhoaHocId;
@@ -128,6 +130,10 @@ namespace O2S_QuanLyKhoaHoc.BusinessLogic
         {
             try
             {
+                //Xoa Khoa học_mon hoc truoc
+                var _khoahocMonHoc = KhoaHocMonHocLogic.SelectTheoKhoaHoc(_khoahocId);
+                Database.KHOAHOC_MONHOCs.DeleteAllOnSubmit(_khoahocMonHoc);
+                //xoa khoa hoc
                 var temp = SelectSingle(_khoahocId);
                 Database.KHOAHOCs.DeleteOnSubmit(temp);
                 Database.SubmitChanges();

@@ -20,6 +20,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Model
         public decimal? TongTien { get; set; }
         public decimal? DaDong { get; set; }
         public decimal? ConNo { get; set; }
+        public int? MienGiam_PhanTram { get; set; }
+        public decimal? MienGiam_Tien { get; set; }
         public int? KhoaHocId { get; set; }
         public string TenKhoaHoc { get; set; }
         public int? LopHocId { get; set; }

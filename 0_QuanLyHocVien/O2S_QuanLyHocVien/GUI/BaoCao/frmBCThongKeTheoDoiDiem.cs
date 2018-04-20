@@ -1,174 +1,240 @@
 ﻿// Quản lý Học viên Trung tâm Anh ngữ
 // Copyright © 2018 OneOne solution co.
-// File "frmThongKeDiemTheoLop.cs"
+// File "frmBaoCaoHocVienTheoThang.cs"
 // Writing by NhatHM (hongminhnhat15@gmail.com)
 
 using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
-using O2S_QuanLyHocVien.DataAccess;
 using System.Threading;
 using O2S_QuanLyHocVien.Reports;
 using Microsoft.Reporting.WinForms;
-using System.Data;
 using System.Collections.Generic;
+using System.Data;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using O2S_QuanLyHocVien.BusinessLogic.Model;
+using DevExpress.XtraGrid.Views.Grid;
+using System.Drawing;
+using DevExpress.XtraSplashScreen;
+using System.Globalization;
+using O2S_QuanLyHocVien.BusinessLogic.Models;
+using O2S_QuanLyHocVien.BusinessLogic;
 
 namespace O2S_QuanLyHocVien.Pages
 {
     public partial class frmBCThongKeTheoDoiDiem : Form
     {
-        private Thread thLop;
-        private Thread thBangDiem;
-
+        private List<BangDiemFullDTO> lstBangDiem { get; set; }
         public frmBCThongKeTheoDoiDiem()
         {
             InitializeComponent();
         }
 
         #region Load
-        private void frmThongKeDiemTheoLop_Load(object sender, EventArgs e)
+        private void frmBaoCaoHocVienTheoThang_Load(object sender, EventArgs e)
         {
-            gridLop.AutoGenerateColumns = false;
-            btnTimKiem_Click(sender, e);
-            gridLop_Click(sender, e);
+            try
+            {
+                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00");
+                date_DenNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
+                LoadKhoaHoc();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
         }
-
+        private void LoadKhoaHoc()
+        {
+            try
+            {
+                KhoaHocFilter _filter = new KhoaHocFilter();
+                _filter.CoSoId = GlobalSettings.CoSoId;
+                _filter.IsRemove = 0;
+                cboKhoaHoc.DataSource = KhoaHocLogic.Select(_filter);
+                cboKhoaHoc.DisplayMember = "TenKhoaHoc";
+                cboKhoaHoc.ValueMember = "KhoaHocId";
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        private void LoadLopCuaKhoaHoc()
+        {
+            try
+            {
+                LopHocFilter _filter = new LopHocFilter();
+                _filter.CoSoId = GlobalSettings.CoSoId;
+                _filter.KhoaHocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
+                cboLopHoc.DataSource = LopHocLogic.Select(_filter);
+                cboLopHoc.DisplayMember = "TenLopHoc";
+                cboLopHoc.ValueMember = "LopHocId";
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
 
         #endregion
 
         #region Events
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            //GlobalPages.ThongKeDiemTheoLop = null;
-        }
-
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
+            SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
             try
             {
-                if (txtMaLop.Text != "")
+                if (cboLopHoc.SelectedValue != null)
                 {
-                    thLop = new Thread(() =>
+                    int _lophocid = Common.TypeConvert.TypeConvertParse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                    this.lstBangDiem = BangDiemLogic.SelectTheoDoiBangDiemLop(_lophocid);
+          
+                    if (this.lstBangDiem != null && this.lstBangDiem.Count > 0)
                     {
-                        object source = LopHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(txtMaLop.Text));
-
-                        gridLop.Invoke((MethodInvoker)delegate
+                        for (int i = 0; i < this.lstBangDiem.Count; i++)
                         {
-                            gridLop.DataSource = source;
-                        });
-                    });
+                            this.lstBangDiem[i].Stt = i + 1;
+                        }
+                        gridControlDSPhieuGhiDanh.DataSource = this.lstBangDiem;
+                    }
+                    else
+                    {
+                        gridControlDSPhieuGhiDanh.DataSource = null;
+                    }
                 }
                 else
                 {
-                    thLop = new Thread(() =>
-                    {
-                        LopHocFilter _filter = new LopHocFilter();
-                        _filter.CoSoId = GlobalSettings.CoSoId;
-                        object source = LopHocLogic.Select(_filter);
-
-                        gridLop.Invoke((MethodInvoker)delegate
-                        {
-                            gridLop.DataSource = source;
-                        });
-                    });
+                    Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.VUI_LONG_NHAP_DAY_DU_THONG_TIN);
+                    frmthongbao.Show();
                 }
-
-                thLop.Start();
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Common.Logging.LogSystem.Error(ex);
             }
+            SplashScreenManager.CloseForm();
         }
 
-        private void gridLop_Click(object sender, EventArgs e)
+        private void btnInAn_Click(object sender, EventArgs e)
         {
             try
             {
-                thBangDiem = new Thread(() =>
+                SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
+
+                string tungay = DateTime.ParseExact(date_TuNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+                string denngay = DateTime.ParseExact(date_DenNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+
+                string tungaydenngay = "( Từ " + tungay + " - " + denngay + " )";
+
+                List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
+                reportExcelDTO reportitem = new reportExcelDTO();
+                reportitem.name = Base.bienTrongBaoCao.THOIGIANBAOCAO;
+                reportitem.value = tungaydenngay;
+                thongTinThem.Add(reportitem);
+
+                string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
+                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstBangDiem);
+                Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Error(ex);
+            }
+            SplashScreenManager.CloseForm();
+        }
+
+        private void btnXuatExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string tungay = DateTime.ParseExact(date_TuNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+                string denngay = DateTime.ParseExact(date_DenNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
+
+                string tungaydenngay = "( Từ " + tungay + " - " + denngay + " )";
+
+                List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
+                reportExcelDTO reportitem = new reportExcelDTO();
+                reportitem.name = Base.bienTrongBaoCao.THOIGIANBAOCAO;
+                reportitem.value = tungaydenngay;
+                thongTinThem.Add(reportitem);
+
+                string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
+                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstBangDiem);
+                Utilities.Common.Excel.ExcelExport export = new Utilities.Common.Excel.ExcelExport();
+                export.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        #endregion
+
+        #region Custom
+        private void gridViewDSHocVien_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                if (e.RowHandle == view.FocusedRowHandle)
                 {
-                    thLop.Join();
-
-                    object source = BangDiemLogic.SelectBangDiemLop(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
-
-                    gridThongKe.Invoke((MethodInvoker)delegate
-                    {
-                        gridThongKe.DataSource = source;
-                    });
-                });
-
-                thBangDiem.Start();
+                    e.Appearance.BackColor = Color.DodgerBlue;
+                    e.Appearance.ForeColor = Color.White;
+                }
             }
-            catch { }
-        }
-        private void btnTaoBaoCao_Click(object sender, EventArgs e)
-        {
-            frmReport frm = new frmReport();
-
-            List<ReportParameter> _params = new List<ReportParameter>()
+            catch (Exception ex)
             {
-                new ReportParameter("CenterName", GlobalSettings.CenterName),
-                new ReportParameter("CenterWebsite", GlobalSettings.CenterWebsite),
-                new ReportParameter("MaLop", gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()),
-                new ReportParameter("TenLop", gridLop.SelectedRows[0].Cells["clmTenLophoc"].Value.ToString()),
-                new ReportParameter("DiemTBLop", string.Format("{0:N2}",DiemTrungBinhLop()))
-            };
-
-            //frm.ReportViewer.LocalReport.ReportEmbeddedResource = "O2S_QuanLyHocVien.Reports.rptBangDiemLop.rdlc";
-            frm.ReportViewer.LocalReport.ReportPath = @"Reports\rptBangDiemLop.rdlc";
-
-            dsSource.dtBangDiemLopDataTable dt = new dsSource.dtBangDiemLopDataTable();
-            var query = BangDiemLogic.SelectBangDiemLop(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
-            foreach (var i in query)
-            {
-                dt.Rows.Add(i.MaHocVien, i.TenHocVien, i.DiemTrungBinh);
+                Common.Logging.LogSystem.Warn(ex);
             }
-
-            frm.ReportViewer.LocalReport.DataSources.Clear();
-            frm.ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("ds", (DataTable)dt));
-
-            frm.ReportViewer.LocalReport.SetParameters(_params);
-            frm.ReportViewer.LocalReport.DisplayName = "Bảng điểm lớp";
-            frm.Text = "Thống kê điểm theo lớp";
-
-            frm.ShowDialog();
-        }
-        public decimal DiemTrungBinhLop()
-        {
-            decimal diem = 0;
-            for (int i = 0; i < gridThongKe.Rows.Count; i++)
-                diem += Convert.ToDecimal(gridThongKe.Rows[i].Cells["clmDiemTrungBinh"].Value);
-
-            return Math.Round((diem / gridThongKe.Rows.Count), 2);
         }
 
-        private void gridThongKe_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void gridViewDSHocVien_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
-            lblTongCong.Text = string.Format("Tổng cộng: {0} học viên. Điểm trung bình của lớp: {1:N2} điểm.", gridThongKe.Rows.Count, DiemTrungBinhLop());
+            try
+            {
+                if (e.Column == clm_PhieuGhiDanh_Stt)
+                {
+                    e.DisplayText = Convert.ToString(e.RowHandle + 1);
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        private void cboKhoaHoc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadLopCuaKhoaHoc();
         }
 
         #endregion
 
-        #region Cusstom
-        private void txtMaLop_KeyPress(object sender, KeyPressEventArgs e)
+        private void gridControlDSPhieuGhiDanh_ViewRegistered(object sender, DevExpress.XtraGrid.ViewOperationEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            try
             {
-                e.Handled = true;
+                (e.View as GridView).ColumnPanelRowHeight = 25;
+                (e.View as GridView).RowHeight = 25;
+                (e.View as GridView).OptionsView.ShowIndicator = false;
+
+                (e.View as GridView).Columns["BangDiemChiTietId"].Visible = false;
+                (e.View as GridView).Columns["BangDiemId"].Visible = false;
+                (e.View as GridView).Columns["MonHocId"].Visible = false;
+                //        
+                (e.View as GridView).Columns["MaMonHoc"].Width = 80;
+                (e.View as GridView).Columns["TenMonHoc"].Width = 150;
+                (e.View as GridView).Columns["Diem"].Width = 80;
+                //                 
+                (e.View as GridView).Columns["MaMonHoc"].OptionsColumn.AllowEdit = false;
+                (e.View as GridView).Columns["TenMonHoc"].OptionsColumn.AllowEdit = false;
+                (e.View as GridView).Columns["Diem"].OptionsColumn.AllowEdit = false;
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
             }
         }
-        #endregion
-
-
-
-
-
-
     }
 }

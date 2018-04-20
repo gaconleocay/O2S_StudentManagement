@@ -39,6 +39,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return (from p in Database.PHIEUGHIDANHs
                     join hv in Database.HOCVIENs on p.HocVienId equals hv.HocVienId
+                    where p.IsRemove!=1
                     select new
                     {
                         PhieuGhiDanhId = p.PhieuGhiDanhId,
@@ -54,21 +55,27 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return (from p in Database.PHIEUGHIDANHs
                     join hv in Database.HOCVIENs on p.HocVienId equals hv.HocVienId
-                    where (hv.CoSoId == GlobalSettings.CoSoId)
+                    where (hv.CoSoId == GlobalSettings.CoSoId) && p.IsRemove!=1
                     select new
                     {
+                        CoSoId = hv.CoSoId,
                         PhieuGhiDanhId = p.PhieuGhiDanhId,
-                        MaPhieuGhiDanh=p.MaPhieuGhiDanh,
                         HocVienId = p.HocVienId,
-                        MaHocVien=hv.MaHocVien,
+                        MaHocVien = hv.MaHocVien,
                         TenHocVien = hv.TenHocVien,
+                        NgaySinh = hv.NgaySinh,
+                        GioiTinh = hv.GioiTinh,
+                        KhoaHocId = p.KhoaHocId,
+                        TenKhoaHoc = p.KHOAHOC.TenKhoaHoc,
+                        MaPhieuGhiDanh = p.MaPhieuGhiDanh,
                         NgayGhiDanh = p.NgayGhiDanh,
                         TongTien = p.TongTien,
                         DaDong = p.DaDong,
-                        MienGiam_PhanTram=p.MienGiam_PhanTram,
-                        MienGiam_Tien=p.MienGiam_Tien,
+                        MienGiam_PhanTram = p.MienGiam_PhanTram,
+                        MienGiam_Tien = p.MienGiam_Tien,
                         ConNo = p.ConNo,
-                        TenKhoaHoc = p.KHOAHOC.TenKhoaHoc,
+                        IsRemove = p.IsRemove,
+                        NhanVienId = p.NhanVienId,
                     }).ToList();
         }
 
@@ -78,7 +85,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                    join hv in Database.HOCVIENs on p.HocVienId equals hv.HocVienId
                    join kh in Database.KHOAHOCs on p.KhoaHocId equals kh.KhoaHocId
                    where (p.NgayGhiDanh.Value.Month == month) &&
-                         (p.NgayGhiDanh.Value.Year == year)
+                         (p.NgayGhiDanh.Value.Year == year) && p.IsRemove!=1
                    select new BaoCaoHocVienGhiDanh()
                    {
                        HocVienId = p.HocVienId ?? 0,
@@ -93,7 +100,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             return (from p in Database.PHIEUGHIDANHs
                     join hv in Database.HOCVIENs on p.HocVienId equals hv.HocVienId
                     join kh in Database.KHOAHOCs on p.KhoaHocId equals kh.KhoaHocId
-                    where p.ConNo > 0
+                    where p.ConNo > 0 && p.IsRemove!=1
                     select new BaoCaoHocVienNo()
                     {
                         HocVienId = p.HocVienId,
@@ -107,7 +114,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static PHIEUGHIDANH SelectSingle(int _PhieuGhiDanhId)
         {
             return (from p in Database.PHIEUGHIDANHs
-                    where p.PhieuGhiDanhId == _PhieuGhiDanhId
+                    where p.PhieuGhiDanhId == _PhieuGhiDanhId && p.IsRemove!=1
                     select p).Single();
         }
         public static List<PhieuGhiDanh_PlusDTO> Select(PhieuGhiDanhFilter _filter)
@@ -115,18 +122,25 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             try
             {
                 var query = (from p in GlobalSettings.Database.PHIEUGHIDANHs
+                             where p.IsRemove != 1
                              select p).AsEnumerable().Select((obj, index) => new PhieuGhiDanh_PlusDTO
                              {
                                  Stt = index + 1,
+                                 CoSoId = obj.HOCVIEN.CoSoId,
                                  PhieuGhiDanhId = obj.PhieuGhiDanhId,
                                  HocVienId = obj.HocVienId,
+                                 MaHocVien = obj.HOCVIEN.MaHocVien,
                                  TenHocVien = obj.HOCVIEN.TenHocVien,
+                                 NgaySinh = obj.HOCVIEN.NgaySinh,
+                                 GioiTinh = obj.HOCVIEN.GioiTinh,
                                  KhoaHocId = obj.KhoaHocId,
                                  TenKhoaHoc = obj.KHOAHOC.TenKhoaHoc,
                                  MaPhieuGhiDanh = obj.MaPhieuGhiDanh,
                                  NgayGhiDanh = obj.NgayGhiDanh,
                                  TongTien = obj.TongTien,
                                  DaDong = obj.DaDong,
+                                 MienGiam_PhanTram = obj.MienGiam_PhanTram,
+                                 MienGiam_Tien = obj.MienGiam_Tien,
                                  ConNo = obj.ConNo,
                                  IsRemove = obj.IsRemove,
                                  NhanVienId = obj.NhanVienId,
@@ -137,6 +151,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  ModifiedBy = obj.ModifiedBy,
                                  ModifiedLog = obj.ModifiedLog,
                              });
+                if (_filter.CoSoId != null && _filter.CoSoId != 0)
+                {
+                    query = query.Where(o => o.CoSoId == _filter.CoSoId).ToList();
+                }
                 if (_filter.KhoaHocId != null && _filter.KhoaHocId != 0)
                 {
                     query = query.Where(o => o.KhoaHocId == _filter.KhoaHocId).ToList();
@@ -149,9 +167,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 {
                     query = query.Where(o => o.HocVienId == _filter.HocVienId).ToList();
                 }
-                if (_filter.CreatedDate_Tu != null && _filter.CreatedDate_Den != null)
+                if (_filter.NgayGhiDanh_Tu != null && _filter.NgayGhiDanh_Den != null)
                 {
-                    query = query.Where(o => o.NgayGhiDanh >= _filter.CreatedDate_Tu && o.NgayGhiDanh <= _filter.CreatedDate_Den).ToList();
+                    query = query.Where(o => o.NgayGhiDanh >= _filter.NgayGhiDanh_Tu && o.NgayGhiDanh <= _filter.NgayGhiDanh_Den).ToList();
                 }
                 return query.ToList();
             }
@@ -166,19 +184,20 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             try
             {
                 var query = (from p in GlobalSettings.Database.PHIEUGHIDANHs
+                             where p.IsRemove!=1
                              select p).AsEnumerable().Select((obj, index) => new QLHocPhi_PlusDTO
                              {
                                  Stt = index + 1,
                                  PhieuGhiDanhId = obj.PhieuGhiDanhId,
                                  HocVienId = obj.HocVienId,
                                  TenHocVien = obj.HOCVIEN.TenHocVien,
-                                 MaHocVien=obj.HOCVIEN.MaHocVien,
+                                 MaHocVien = obj.HOCVIEN.MaHocVien,
                                  GioiTinh = obj.HOCVIEN.GioiTinh,
                                  NgaySinh = obj.HOCVIEN.NgaySinh,
-                                 DiaChi=obj.HOCVIEN.DiaChi,
+                                 DiaChi = obj.HOCVIEN.DiaChi,
                                  KhoaHocId = obj.KhoaHocId,
                                  TenKhoaHoc = obj.KHOAHOC.TenKhoaHoc,
-                                 TenLopHoc = (from diem in GlobalSettings.Database.BANGDIEMs where diem.PhieuGhiDanhId == obj.PhieuGhiDanhId select diem.LOPHOC.TenLopHoc).SingleOrDefault()??"",
+                                 TenLopHoc = (from diem in GlobalSettings.Database.BANGDIEMs where diem.PhieuGhiDanhId == obj.PhieuGhiDanhId select diem.LOPHOC.TenLopHoc).SingleOrDefault() ?? "",
                                  //obj.BANGDIEMs.Where(o=>o.PhieuGhiDanhId==obj.PhieuGhiDanhId).SingleOrDefault().LOPHOC.TenLopHoc,
                                  MaPhieuGhiDanh = obj.MaPhieuGhiDanh,
                                  NgayGhiDanh = obj.NgayGhiDanh,
@@ -206,9 +225,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 {
                     query = query.Where(o => o.HocVienId == _filter.HocVienId).ToList();
                 }
-                if (_filter.CreatedDate_Tu != null && _filter.CreatedDate_Den != null)
+                if (_filter.NgayGhiDanh_Tu != null && _filter.NgayGhiDanh_Den != null)
                 {
-                    query = query.Where(o => o.NgayGhiDanh >= _filter.CreatedDate_Tu && o.NgayGhiDanh <= _filter.CreatedDate_Den).ToList();
+                    query = query.Where(o => o.NgayGhiDanh >= _filter.NgayGhiDanh_Tu && o.NgayGhiDanh <= _filter.NgayGhiDanh_Den).ToList();
                 }
                 return query.ToList();
             }
@@ -231,6 +250,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 _phieughidanh.CreatedDate = DateTime.Now;
                 _phieughidanh.CreatedBy = GlobalSettings.UserCode;
                 _phieughidanh.CreatedLog = GlobalSettings.SessionMyIP;
+                _phieughidanh.IsRemove = 0;
                 Database.PHIEUGHIDANHs.InsertOnSubmit(_phieughidanh);
                 Database.SubmitChanges();
                 _PhieuGhiDanhId = _phieughidanh.PhieuGhiDanhId;
@@ -255,6 +275,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     _phieughidanh.CreatedDate = DateTime.Now;
                     _phieughidanh.CreatedBy = GlobalSettings.UserCode;
                     _phieughidanh.CreatedLog = GlobalSettings.SessionMyIP;
+                    _phieughidanh.IsRemove = 0;
                     Database.PHIEUGHIDANHs.InsertOnSubmit(_phieughidanh);
                     Database.SubmitChanges();
                     _PhieuGhiDanhId = _phieughidanh.PhieuGhiDanhId;
@@ -268,19 +289,23 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                         _phieuthu.CreatedDate = DateTime.Now;
                         _phieuthu.CreatedBy = GlobalSettings.UserCode;
                         _phieuthu.CreatedLog = GlobalSettings.SessionMyIP;
+                        _phieuthu.IsRemove = 0;
                         Database.PHIEUTHUs.InsertOnSubmit(_phieuthu);
                         Database.SubmitChanges();
                         _phieuthu.MaPhieuThu = string.Format("{0}{1:D5}", "PT", _phieuthu.PhieuThuId);
                         Database.SubmitChanges();
                     }
+                    //Hocphihocvien
                     if (_lsthphv != null && _lsthphv.Count > 0)
                     {
                         foreach (var item in _lsthphv)
                         {
+                            item.PhieuGhiDanhId = _PhieuGhiDanhId;
                             item.PhieuThuId = _phieuthu.PhieuThuId;
                             item.CreatedDate = DateTime.Now;
                             item.CreatedBy = GlobalSettings.UserCode;
                             item.CreatedLog = GlobalSettings.SessionMyIP;
+                            item.IsRemove = 0;
                             Database.HOCPHIHOCVIENs.InsertOnSubmit(item);
                             Database.SubmitChanges();
                         }
@@ -296,7 +321,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         }
 
-        public static bool InsertQLHocPhi(PHIEUGHIDANH _phieughidanh, PHIEUTHU _phieuthu)
+        public static bool InsertQLHocPhi(PHIEUGHIDANH _phieughidanh, PHIEUTHU _phieuthu, ref int _PhieuThuId)
         {
             try
             {
@@ -307,8 +332,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     _PGD_select.DaDong = _phieughidanh.DaDong;
                     _PGD_select.ConNo = _phieughidanh.ConNo;
                     _PGD_select.ModifiedDate = DateTime.Now;
-                    _PGD_select.ModifiedBy= GlobalSettings.UserCode;
-                    _PGD_select.ModifiedLog= GlobalSettings.SessionMyIP;
+                    _PGD_select.ModifiedBy = GlobalSettings.UserCode;
+                    _PGD_select.ModifiedLog = GlobalSettings.SessionMyIP;
                     Database.SubmitChanges();
 
                     //insert bang PHIEUTHU
@@ -318,8 +343,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                         _phieuthu.CreatedDate = DateTime.Now;
                         _phieuthu.CreatedBy = GlobalSettings.UserCode;
                         _phieuthu.CreatedLog = GlobalSettings.SessionMyIP;
+                        _phieuthu.IsRemove = 0;
                         Database.PHIEUTHUs.InsertOnSubmit(_phieuthu);
                         Database.SubmitChanges();
+                        _PhieuThuId = _phieuthu.PhieuThuId;
                         _phieuthu.MaPhieuThu = string.Format("{0}{1:D5}", "PT", _phieuthu.PhieuThuId);
                         Database.SubmitChanges();
                     }
@@ -334,17 +361,78 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         }
 
-        public static void Update(PHIEUGHIDANH ph)
+        public static bool Update(PHIEUGHIDANH ph)
         {
-            PHIEUGHIDANH pCu = SelectSingle(ph.PhieuGhiDanhId);
+            try
+            {
+                PHIEUGHIDANH pCu = SelectSingle(ph.PhieuGhiDanhId);
 
-            pCu.NgayGhiDanh = ph.NgayGhiDanh;
-            pCu.DaDong = ph.DaDong;
-            pCu.ConNo = ph.ConNo;
-            pCu.NhanVienId = ph.NhanVienId;
+                pCu.NgayGhiDanh = ph.NgayGhiDanh;
+                pCu.DaDong = ph.DaDong;
+                pCu.ConNo = ph.ConNo;
+                pCu.NhanVienId = ph.NhanVienId;
 
-            Database.SubmitChanges();
+                Database.SubmitChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
+
+        public static bool XoaPhieuGhiDanh(PHIEUGHIDANH _phieuGD)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    //xoa HOCPHIHOCVIEN  
+                    List<HOCPHIHOCVIEN> _lstHPHV = HocPhiHocVienLogic.SelectTheoPhieuGhiDanh(_phieuGD.PhieuGhiDanhId);
+                    if (_lstHPHV != null && _lstHPHV.Count > 0)
+                    {
+                        Database.HOCPHIHOCVIENs.DeleteAllOnSubmit(_lstHPHV);
+                        Database.SubmitChanges();
+                    }
+                    //Xoa bang PHIEUTHU;
+                    List<PHIEUTHU> _lstPhieuThu = PhieuThuLogic.SelectTheoPhieuGhiDanh(_phieuGD.PhieuGhiDanhId);
+                    if (_lstPhieuThu != null && _lstPhieuThu.Count > 0)
+                    {
+                        Database.PHIEUTHUs.DeleteAllOnSubmit(_lstPhieuThu);
+                        Database.SubmitChanges();
+                    }
+                    //update=Xoa bang PHIEUGHIDANH
+                    PHIEUGHIDANH _phieuGDUpdate = SelectSingle(_phieuGD.PhieuGhiDanhId);
+                    _phieuGDUpdate.IsRemove = _phieuGD.IsRemove;
+                    _phieuGDUpdate.LyDoXoa = _phieuGD.LyDoXoa;
+                    _phieuGDUpdate.NguoiXoa = _phieuGD.NguoiXoa;
+                    Database.SubmitChanges();
+                    //cap nhat bang HOCVIEN va bang tai khoan: kiem tra HV hoc khoa nao ko? neu khong thi update
+                    PhieuGhiDanhFilter _filter = new PhieuGhiDanhFilter();
+                    _filter.HocVienId = _phieuGD.HocVienId;
+                    List<PhieuGhiDanh_PlusDTO> _PGD_Kiemtra = PhieuGhiDanhLogic.Select(_filter);
+                    if (_PGD_Kiemtra == null || _PGD_Kiemtra.Count == 0)
+                    {
+                        HOCVIEN _hocvien = HocVienLogic.SelectSingle(_phieuGD.HocVienId ?? 0);
+                        _hocvien.LOAIHOCVIEN = LoaiHocVienLogic.Select(KeySetting.LOAIHOCVIEN_TIEMNANG);
+                        Database.SubmitChanges();
+
+                        TAIKHOAN _taikhoan = TaiKhoanLogic.Select(_hocvien.TAIKHOAN.TenDangNhap);
+                        _taikhoan.IsRemove = 1;
+                        Database.SubmitChanges();
+                    }
+                    //
+                    ts.Complete();
+                    return true; 
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
 
     }
 }

@@ -86,6 +86,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 _khoahoc.CreatedDate = DateTime.Now;
                 _khoahoc.CreatedBy = GlobalSettings.UserCode;
                 _khoahoc.CreatedLog = GlobalSettings.SessionMyIP;
+                _khoahoc.IsRemove = 0;
                 Database.GIANGVIENs.InsertOnSubmit(_khoahoc);
                 Database.SubmitChanges();
                 _khoaHocId = _khoahoc.GiangVienId;
@@ -103,11 +104,12 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             try
             {
-
+                taiKhoan.IsRemove = 0;
                 Database.TAIKHOANs.InsertOnSubmit(taiKhoan);
                 Database.SubmitChanges();
 
                 _giangvien.TaiKhoanId = taiKhoan.TaiKhoanId;
+                _giangvien.IsRemove = 0;
                 Database.GIANGVIENs.InsertOnSubmit(_giangvien);
                 Database.SubmitChanges();
                 return true;

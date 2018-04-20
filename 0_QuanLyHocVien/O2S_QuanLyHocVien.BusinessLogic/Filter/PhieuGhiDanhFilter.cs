@@ -11,7 +11,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Filter
         public int? PhieuGhiDanhId { get; set; }
         public int? KhoaHocId { get;set;}
         public int? HocVienId { get; set; }
-        public DateTime? CreatedDate_Tu { get; set; }
-        public DateTime? CreatedDate_Den { get; set; }
+        public int? CoSoId { get; set; }
+        public DateTime? NgayGhiDanh_Tu { get; set; }
+        public DateTime? NgayGhiDanh_Den { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
     {
         #region Bien Session
         public static QuanLyHocVienDataContext Database { get; set; } //Đại diện cho cơ sở dữ liệu của chương trình
-        public static string ConnectionString { get; set; }// Đại diện cho chuỗi kết nối
+        //public static string ConnectionString { get; set; }// Đại diện cho chuỗi kết nối
 
         public static int UserID { get; set; }
         public static string UserCode { get; set; }
@@ -33,17 +33,21 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static bool KiemTraLicenseSuDung { get; set; } //kiem tra license: neu false thi out phan mem, neu true thi cho su dung tiep
         public static string License_KeyDB { get; set; } //License lay tu DB
         public static string MaDatabase { get; set; }//Lay thong tin database
-        public static List<classPermission> SessionLstPhanQuyenNguoiDung { get; set; }
-
         public static string ServerName { get; set; }//Đại diện cho tên server
         public static string ServerCatalog { get; set; }//Đại diện cho tên database
-        public static string CenterName { get; set; }//Đại diện cho tên trung tâm
-        public static int CoSoId { get; set; }//Co so trung tam
-        public static string TenCoSo { get; set; }
-        public static string CenterAddress { get; set; }//Đại diện cho địa chỉ trung tâm
-        public static string CenterWebsite { get; set; }// Đại diện cho website trung tâm
-        public static string CenterEmail { get; set; }// Đại diện cho email trung tâm
-        public static string CenterTelephone { get; set; }// Đại diện cho số điện thoại trung tâm
+        public static string TrungTam_Name { get; set; }//Đại diện cho tên trung tâm
+        public static string TrungTam_DiaChi { get; set; }//Đại diện cho địa chỉ trung tâm
+        public static string TrungTam_Website { get; set; }// Đại diện cho website trung tâm
+        public static string TrungTam_Email { get; set; }// Đại diện cho email trung tâm
+        public static string TrungTam_Phone { get; set; }// Đại diện cho số điện thoại trung tâm
+
+        //Co so trung tam
+        public static int CoSoId { get; set; }
+        public static string CoSo_Ten { get; set; }
+        public static string CoSo_DiaChi { get; set; }
+        public static string CoSo_Sdt { get; set; }
+        public static string CoSo_Email { get; set; }
+        public static System.Drawing.Image CoSo_LogoCoSo { get; set; }
         public static Dictionary<string, int> QuyDinh { get; set; }// Đại diện cho danh sách quy định
 
         //
@@ -130,11 +134,11 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             THONGTINTRUNGTAM detail = ChiTietTrungTamLogic.Select();
             if (detail != null)
             {
-                CenterName = detail.TenTrungTam;
-                CenterAddress = detail.DiaChi;
-                CenterWebsite = detail.Website;
-                CenterEmail = detail.Email;
-                CenterTelephone = detail.Sdt;
+                TrungTam_Name = detail.TenTrungTam;
+                TrungTam_DiaChi = detail.DiaChi;
+                TrungTam_Website = detail.Website;
+                TrungTam_Email = detail.Email;
+                TrungTam_Phone = detail.Sdt;
             }
         }
 

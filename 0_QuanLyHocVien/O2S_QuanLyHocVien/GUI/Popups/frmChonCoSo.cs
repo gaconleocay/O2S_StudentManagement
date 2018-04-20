@@ -7,6 +7,8 @@ using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
+using System.Drawing;
+using System.IO;
 
 namespace O2S_QuanLyHocVien.Popups
 {
@@ -49,7 +51,17 @@ namespace O2S_QuanLyHocVien.Popups
                     throw new ArgumentException("Cơ sở không được trống");
 
                 GlobalSettings.CoSoId = Common.TypeConvert.TypeConvertParse.ToInt32(cboCoSo.SelectedValue.ToString());
-                GlobalSettings.TenCoSo = cboCoSo.Text;
+
+                COSOTRUNGTAM _coso = CoSoTrungTamLogic.Select(GlobalSettings.CoSoId);
+                GlobalSettings.CoSo_Ten = _coso.TenCoSo;
+                if (_coso.LogoCoSo != null && _coso.LogoCoSo.Length > 0)
+                {
+                    byte[] Empimage = (byte[])(_coso.LogoCoSo).ToArray();
+                    GlobalSettings.CoSo_LogoCoSo = Image.FromStream(new MemoryStream(Empimage));
+                }
+                else
+                { GlobalSettings.CoSo_LogoCoSo = null; }
+
                 //this.Hide();
                 this.Visible = false;
             }

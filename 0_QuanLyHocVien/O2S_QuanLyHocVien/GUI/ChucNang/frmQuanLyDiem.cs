@@ -49,7 +49,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             this.bangDiemFull_Click = BangDiemLogic.SelectDetail(maHV, maLop);
             lblMaLop.Text = this.bangDiemFull_Click.LopHocId.ToString();
-            lblTenLop.Text = this.bangDiemFull_Click.TenLop;
+            lblTenLop.Text = this.bangDiemFull_Click.TenLopHoc;
             lblKhoa.Text = this.bangDiemFull_Click.TenKhoaHoc;
             lblMaHV.Text = this.bangDiemFull_Click.HocVienId.ToString();
             lblTenHocVien.Text = this.bangDiemFull_Click.TenHocVien;

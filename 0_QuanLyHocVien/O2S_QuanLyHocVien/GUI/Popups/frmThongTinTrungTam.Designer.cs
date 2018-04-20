@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmThongTinTrungTam));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHuyBo = new System.Windows.Forms.Button();
             this.btnLuuThongTin = new System.Windows.Forms.Button();
@@ -197,7 +198,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(54, 106);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(85, 15);
+            this.label4.Size = new System.Drawing.Size(86, 15);
             this.label4.TabIndex = 19;
             this.label4.Text = "Tên trung tâm:";
             // 
@@ -216,7 +217,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(110, 60);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(378, 15);
+            this.label2.Size = new System.Drawing.Size(379, 15);
             this.label2.TabIndex = 17;
             this.label2.Text = "Điền đầy đủ thông tin về Trung tâm và bấm Lưu thông tin để xác nhận";
             // 
@@ -227,7 +228,7 @@
             this.label1.ForeColor = System.Drawing.Color.Green;
             this.label1.Location = new System.Drawing.Point(108, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(268, 25);
+            this.label1.Size = new System.Drawing.Size(270, 25);
             this.label1.TabIndex = 16;
             this.label1.Text = "Chỉnh sửa thông tin Trung tâm";
             // 
@@ -239,11 +240,10 @@
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnHuyBo;
             this.ClientSize = new System.Drawing.Size(536, 406);
-            this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmThongTinTrungTam";

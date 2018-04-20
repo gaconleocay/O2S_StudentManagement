@@ -7,7 +7,7 @@ using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using System.Globalization;
-using O2S_QuanLyKhoaHoc.BusinessLogic;
+using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
 
 namespace O2S_QuanLyHocVien.Pages
@@ -76,7 +76,7 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 var temp = BangDiemLogic.SelectDetail(GlobalSettings.UserID, Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
-                lblTenLop.Text = temp.TenLop;
+                lblTenLop.Text = temp.TenLopHoc;
                 lblMaLop.Text = temp.LopHocId.ToString();
                 lblTenKhoaHoc.Text = temp.TenKhoaHoc;
                 lblNgayBD.Text = temp.NgayBatDau.Value.ToShortDateString();
