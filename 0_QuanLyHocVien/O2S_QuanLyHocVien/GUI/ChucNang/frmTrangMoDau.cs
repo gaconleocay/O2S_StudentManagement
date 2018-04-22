@@ -24,7 +24,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 lblCenter.Text = string.Format("{0}", GlobalSettings.TrungTam_Name).ToUpper();
                 lblAddress.Text = string.Format("Địa chỉ: {0}", GlobalSettings.TrungTam_DiaChi);
-                lblSoDienThoai.Text = string.Format("Số điện thoại: {0}", GlobalSettings.TrungTam_Phone);
+                lblSoDienThoai.Text = string.Format("Hotline: {0}", GlobalSettings.TrungTam_Phone);
                 lblLienHe.Text = string.Format("Liên hệ: {0} - {1}", GlobalSettings.TrungTam_Website, GlobalSettings.TrungTam_Email);
 
                 piclogotrungtam.Image = Image.FromFile(@"Picture\logo.jpg");
@@ -32,7 +32,7 @@ namespace O2S_QuanLyHocVien.Pages
                 //Co so trung tam
                 lblCoSo_Ten.Text = string.Format("{0}", GlobalSettings.CoSo_Ten).ToUpper();
                 lblCoSo_DiaChi.Text = string.Format("Địa chỉ: {0}", GlobalSettings.CoSo_DiaChi);
-                lblCoSo_SDT.Text = string.Format("Số điện thoại: {0}", GlobalSettings.CoSo_Sdt);
+                lblCoSo_SDT.Text = string.Format("Hotline: {0}", GlobalSettings.CoSo_Sdt);
                 lblCoSo_Email.Text = string.Format("Liên hệ: {0} - {1}", GlobalSettings.CoSo_Email, GlobalSettings.TrungTam_Email);
                 picCoSo_image.Image = GlobalSettings.CoSo_LogoCoSo;
 

@@ -33,10 +33,6 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                cboLoaiHV.DataSource = LoaiHocVienLogic.SelectAll();
-                cboLoaiHV.DisplayMember = "TenLoaiHocVien";
-                cboLoaiHV.ValueMember = "LoaiHocVienId";
-
                 date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.AddMonths(-6).ToString("yyyy-MM-dd") + " 00:00:00");
                 date_DenNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
                 LayDanhSachHocVien();
@@ -50,21 +46,13 @@ namespace O2S_QuanLyHocVien.Pages
         #endregion
 
         #region Events
-        private void btnThem_Click(object sender, EventArgs e)
-        {
-            frmHocVienEdit frm = new frmHocVienEdit(null);
-            frm.Text = "Thêm học viên mới";
-            frm.ShowDialog();
-            LayDanhSachHocVien();
-        }
-
         private void LayDanhSachHocVien()
         {
             try
             {
                 HocVienFilter _filter = new HocVienFilter();
                 _filter.CoSoId = GlobalSettings.CoSoId;
-                _filter.LoaiHocVienId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLoaiHV.SelectedValue.ToString());
+                _filter.LoaiHocVienId = KeySetting.LOAIHOCVIEN_CHINHTHUC;
                 _filter.NgayTiepNhan_Tu = date_TuNgay.DateTime;
                 _filter.NgayTiepNhan_Den = date_DenNgay.DateTime;
 
@@ -94,55 +82,9 @@ namespace O2S_QuanLyHocVien.Pages
         {
             LayDanhSachHocVien();
         }
-
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-            //int _hocvienId = Common.TypeConvert.TypeConvertParse.ToInt32(gridDSHV.SelectedRows[0].Cells["clmHocVienId"].Value.ToString());
-            //frmHocVienEdit frm = new frmHocVienEdit(HocVienLogic.SelectSingle(_hocvienId));
-            //frm.Text = "Cập nhật thông tin học viên";
-            //frm.ShowDialog();
-            //LayDanhSachHocVien();
-        }
-
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                //{
-                //    int _hocvienId = Common.TypeConvert.TypeConvertParse.ToInt32(gridDSHV.SelectedRows[0].Cells["clmHocVienId"].Value.ToString());
-                //    HocVienLogic.Delete(_hocvienId);
-
-                //    MessageBox.Show("Xóa học viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //    LayDanhSachHocVien();
-                //}
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Warn(ex);
-            }
-        }
-
         #endregion
 
         #region Custom
-        private void cboLoaiHV_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Warn(ex);
-            }
-        }
-
-        private void gridViewDSHocVien_DoubleClick(object sender, EventArgs e)
-        {
-            btnSua_Click(sender, e);
-        }
-
         private void gridViewDSHocVien_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
             try
@@ -196,7 +138,7 @@ namespace O2S_QuanLyHocVien.Pages
                 reportitem.value = tungaydenngay;
                 thongTinThem.Add(reportitem);
 
-                string fileTemplatePath = "FUN_QuanLyHocVien.xlsx";
+                string fileTemplatePath = "FUN_QuanLyHocVien_ChinhThuc.xlsx";
                 DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstHocVien);
                 Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
             }
@@ -222,7 +164,7 @@ namespace O2S_QuanLyHocVien.Pages
                 reportitem.value = tungaydenngay;
                 thongTinThem.Add(reportitem);
 
-                string fileTemplatePath = "FUN_QuanLyHocVien.xlsx";
+                string fileTemplatePath = "FUN_QuanLyHocVien_ChinhThuc.xlsx";
                 DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstHocVien);
                 Utilities.Common.Excel.ExcelExport export = new Utilities.Common.Excel.ExcelExport();
                 export.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);

@@ -144,6 +144,18 @@
     <Compile Include="frmMainHome_PhanQuyen.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GUI\BaoCao\frmBaoCaoThuTien_TongHop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\BaoCao\frmBaoCaoThuTien_TongHop.Designer.cs">
+      <DependentUpon>frmBaoCaoThuTien_TongHop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\BaoCao\frmBaoCaoThuTien_ChiTiet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\BaoCao\frmBaoCaoThuTien_ChiTiet.Designer.cs">
+      <DependentUpon>frmBaoCaoThuTien_ChiTiet.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\BaoCao\frmBaoCaoHocVienGhiDanh.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +209,12 @@
     </Compile>
     <Compile Include="GUI\ChucNang\frmLichHocTheoLopHoc.Designer.cs">
       <DependentUpon>frmLichHocTheoLopHoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmQuanLyHocVienTiemNang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmQuanLyHocVienTiemNang.Designer.cs">
+      <DependentUpon>frmQuanLyHocVienTiemNang.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\ChucNang\frmXepLichHoc.cs">
       <SubType>Form</SubType>
@@ -329,6 +347,12 @@
     </Compile>
     <Compile Include="GUI\Popups\frmKetNoiCSDL.Designer.cs">
       <DependentUpon>frmKetNoiCSDL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Popups\frmThemTuVanHocVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Popups\frmThemTuVanHocVien.Designer.cs">
+      <DependentUpon>frmThemTuVanHocVien.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Popups\frmLopHocEdit.cs">
       <SubType>Form</SubType>
@@ -472,6 +496,12 @@
     <Compile Include="Utilities\ThongBao\WaitForm1.Designer.cs">
       <DependentUpon>WaitForm1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="GUI\BaoCao\frmBaoCaoThuTien_TongHop.resx">
+      <DependentUpon>frmBaoCaoThuTien_TongHop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\BaoCao\frmBaoCaoThuTien_ChiTiet.resx">
+      <DependentUpon>frmBaoCaoThuTien_ChiTiet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\BaoCao\frmBaoCaoHocVienGhiDanh.resx">
       <DependentUpon>frmBaoCaoHocVienGhiDanh.cs</DependentUpon>
     </EmbeddedResource>
@@ -498,6 +528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ChucNang\frmLichHocTheoLopHoc.resx">
       <DependentUpon>frmLichHocTheoLopHoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ChucNang\frmQuanLyHocVienTiemNang.resx">
+      <DependentUpon>frmQuanLyHocVienTiemNang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ChucNang\frmXepLichHoc.resx">
       <DependentUpon>frmXepLichHoc.cs</DependentUpon>
@@ -564,6 +597,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Popups\frmKetNoiCSDL.resx">
       <DependentUpon>frmKetNoiCSDL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Popups\frmThemTuVanHocVien.resx">
+      <DependentUpon>frmThemTuVanHocVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Popups\frmLopHocEdit.resx">
       <DependentUpon>frmLopHocEdit.cs</DependentUpon>
@@ -678,7 +714,19 @@
     <Content Include="Templates\BC03_ThongKeTheoDoiDiem.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\FUN_QuanLyHocVien.xlsx">
+    <Content Include="Templates\BienLaiThuTien_NopTien2.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\BC05_BaoCaoThuTien_ChiTiet.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\BC06_BaoCaoThuTien_TongHop.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\FUN_QuanLyHocVien_ChinhThuc.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\FUN_QuanLyHocVien_TiemNang.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

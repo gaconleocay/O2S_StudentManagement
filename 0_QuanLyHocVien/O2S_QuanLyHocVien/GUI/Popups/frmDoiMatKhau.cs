@@ -17,7 +17,7 @@ namespace O2S_QuanLyHocVien.Popups
         public frmDoiMatKhau(string userName)
         {
             InitializeComponent();
-            currentUser = TaiKhoanLogic.Select(userName);
+            this.currentUser = TaiKhoanLogic.Select(userName);
         }
 
         #region Events
@@ -34,7 +34,7 @@ namespace O2S_QuanLyHocVien.Popups
         {
             try
             {
-                if (txtMatKhauCu.Text == currentUser.MatKhau)
+                if (txtMatKhauCu.Text ==Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt( currentUser.MatKhau,true))
                 {
                     if (!string.IsNullOrEmpty(txtMatKhauMoi.Text) && txtMatKhauMoi.Text == txtMatKhauMoiAgain.Text)
                     {

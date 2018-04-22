@@ -239,6 +239,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 {
                     taiKhoan.IsRemove = 0;
                 }
+                taiKhoan.MatKhau = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(taiKhoan.MatKhau, true);
                 Database.TAIKHOANs.InsertOnSubmit(taiKhoan);
                 Database.HOCVIENs.InsertOnSubmit(_hocVien);
                 Database.SubmitChanges();
@@ -250,7 +251,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
                 TAIKHOAN _tkUpdate = TaiKhoanLogic.SelectSingle(taiKhoan.TaiKhoanId);
                 _tkUpdate.TenDangNhap = _hocVien.MaHocVien;
-                _tkUpdate.MatKhau = _hocVien.MaHocVien;
+                _tkUpdate.MatKhau = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(_hocVien.MaHocVien,true);
                 Database.SubmitChanges();
                 return true;
             }
@@ -288,7 +289,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 //update tai khoan
                 TAIKHOAN _tk = TaiKhoanLogic.SelectSingle(hocVienCu.TaiKhoanId ?? 0);
                 //_tk.TenDangNhap = taiKhoan.TenDangNhap;
-                //_tk.MatKhau = taiKhoan.MatKhau;
+                _tk.MatKhau =Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt( taiKhoan.MatKhau,true);
                 if (_hocVien.LoaiHocVienId == KeySetting.LOAIHOCVIEN_CHINHTHUC)//chinh thuc
                 {
                     _tk.IsRemove = 0;

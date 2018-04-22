@@ -40,7 +40,7 @@ namespace O2S_QuanLyHocVien.Popups
                 txtEmail.Text = nv.Email;
                 cboLoaiNV.SelectedValue = nv.LoaiNhanVienId;
                 txtTenDangNhap.Text = nv.TAIKHOAN.TenDangNhap;
-                txtMatKhau.Text = nv.TAIKHOAN.MatKhau;
+                txtMatKhau.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(nv.TAIKHOAN.MatKhau, true);
                 txtTenDangNhap.Enabled = false;
             }
         }
@@ -53,11 +53,12 @@ namespace O2S_QuanLyHocVien.Popups
         {
             return new NHANVIEN()
             {
+                NhanVienId = this.nv != null ? this.nv.NhanVienId : 0,
                 MaNhanVien = txtMaNV.Text,
                 TenNhanVien = txtTenNV.Text,
                 Sdt = txtSDT.Text,
                 Email = txtEmail.Text,
-                LoaiNhanVienId =Common.TypeConvert.TypeConvertParse.ToInt32( cboLoaiNV.SelectedValue.ToString()),
+                LoaiNhanVienId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLoaiNV.SelectedValue.ToString()),
                 //TaiKhoanId = txtTenDangNhap.Text
             };
         }
@@ -107,6 +108,7 @@ namespace O2S_QuanLyHocVien.Popups
                     {
                         TenDangNhap = txtTenDangNhap.Text,
                         MatKhau = txtMatKhau.Text,
+                        LoaiTaiKhoanId = KeySetting.LOAITAIKHOAN_NhanVien,
                     }))
                     {
                         MessageBox.Show("Thêm nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -118,6 +120,7 @@ namespace O2S_QuanLyHocVien.Popups
                     {
                         TenDangNhap = txtTenDangNhap.Text,
                         MatKhau = txtMatKhau.Text,
+                        IsRemove=0,
                     });
 
                     MessageBox.Show("Sửa nhân viên thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

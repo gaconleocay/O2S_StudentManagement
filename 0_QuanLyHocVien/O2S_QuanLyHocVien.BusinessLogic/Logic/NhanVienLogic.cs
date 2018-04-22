@@ -11,6 +11,8 @@ using O2S_QuanLyHocVien.DataAccess;
 using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using System.Transactions;
+using O2S_QuanLyHocVien.BusinessLogic.Logic;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
@@ -107,6 +109,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             try
             {
                 taiKhoan.IsRemove = 0;
+                taiKhoan.MatKhau = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(taiKhoan.MatKhau, true);
                 Database.TAIKHOANs.InsertOnSubmit(taiKhoan);
                 Database.SubmitChanges();
 
@@ -138,8 +141,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 hocVienCu.ModifiedLog = GlobalSettings.SessionMyIP;
                 Database.SubmitChanges();
                 if (taiKhoan != null)
+                {
                     TaiKhoanLogic.Update(taiKhoan);
-
+                }
                 return true;
             }
             catch (Exception ex)
@@ -153,10 +157,26 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             try
             {
-                var temp = SelectSingle(_nhanvienId);
-                Database.NHANVIENs.DeleteOnSubmit(temp);
-                Database.SubmitChanges();
-                return true;
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    //xoa nhan vien + xoa phan quyen tai khoan + Xoa tai khoan
+                    var temp = SelectSingle(_nhanvienId);
+                    Database.NHANVIENs.DeleteOnSubmit(temp);
+                    Database.SubmitChanges();
+
+                    List<PHANQUYENTAIKHOAN> _lstpqtk = PhanQuyenTaiKhoanLogic.SelectTheoTaiKhoan(temp.TaiKhoanId ?? 0);
+                    if (_lstpqtk != null)
+                    {
+                        Database.PHANQUYENTAIKHOANs.DeleteAllOnSubmit(_lstpqtk);
+                        Database.SubmitChanges();
+                    }
+                    TAIKHOAN _taikhoan = TaiKhoanLogic.SelectSingle(temp.TaiKhoanId ?? 0);
+                    Database.TAIKHOANs.DeleteOnSubmit(_taikhoan);
+                    Database.SubmitChanges();
+
+                    ts.Complete();
+                    return true;
+                }
             }
             catch (Exception ex)
             {

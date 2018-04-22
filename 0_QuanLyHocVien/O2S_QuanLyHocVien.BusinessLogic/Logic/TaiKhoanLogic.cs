@@ -205,7 +205,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             {
                 var temp = (from p in Database.TAIKHOANs
                             where p.TenDangNhap == tk.TenDangNhap
-                            select p).Single();
+                            select p).FirstOrDefault();
 
                 temp.MatKhau = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(tk.MatKhau, true);
                 temp.IsRemove = tk.IsRemove;
@@ -220,10 +220,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         }
 
-        /// <summary>
-        /// Trả về mã của tên đăng nhập
-        /// </summary>
-        /// <param name="tk"></param>
         public static int FullUserID(TAIKHOAN tk)
         {
             var a = (from p in Database.NHANVIENs
@@ -247,10 +243,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             return 0;
         }
 
-        /// <summary>
-        /// Trả về kiểu người dùng của tên đăng nhập
-        /// </summary>
-        /// <param name="tk"></param>
         public static UserType? FullUserType(TAIKHOAN tk)
         {
             var a = (from p in Database.NHANVIENs
@@ -273,10 +265,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             return null;
         }
 
-        /// <summary>
-        /// Trả về tên người dùng của tên đăng nhập
-        /// </summary>
-        /// <param name="tk"></param>
         public static string FullUserName(TAIKHOAN tk)
         {
             var a = (from p in Database.NHANVIENs
@@ -299,12 +287,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             return null;
         }
 
-        /// <summary>
-        /// Xác định tên đăng nhập và mật khẩu có hợp lệ
-        /// </summary>
-        /// <param name="userName">Tên đăng nhập</param>
-        /// <param name="password">Mật khẩu</param>
-        /// <returns></returns>
         public static bool IsValid(string userName, string password)
         {
             try

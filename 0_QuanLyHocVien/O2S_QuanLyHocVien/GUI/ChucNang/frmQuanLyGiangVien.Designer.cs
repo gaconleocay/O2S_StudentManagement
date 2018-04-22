@@ -314,6 +314,7 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(717, 225);
             this.panel4.TabIndex = 3;
+            this.panel4.Visible = false;
             // 
             // gridLop
             // 

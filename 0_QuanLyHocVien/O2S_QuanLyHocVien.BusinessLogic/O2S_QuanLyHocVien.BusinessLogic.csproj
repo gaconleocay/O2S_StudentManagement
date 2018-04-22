@@ -85,6 +85,7 @@
     <Compile Include="Logic\HocPhiHocVienLogic.cs" />
     <Compile Include="Logic\ChucNangLogic.cs" />
     <Compile Include="Logic\CaHocLogic.cs" />
+    <Compile Include="Logic\LichSuTuVanLogic.cs" />
     <Compile Include="Logic\XepLichHocLogic.cs" />
     <Compile Include="Logic\LoaiTaiKhoanLogic.cs" />
     <Compile Include="Logic\PhanQuyenTaiKhoanLogic.cs" />
@@ -102,7 +103,10 @@
     <Compile Include="Logic\KhoaHocMonHocLogic.cs" />
     <Compile Include="Model\BangDiemFullDTO.cs" />
     <Compile Include="Model\BangDiemChiTietDTO.cs" />
+    <Compile Include="Model\BaoCaoThuTien_TongHopDTO.cs" />
+    <Compile Include="Model\BaoCaoThuTien_ChiTietDTO.cs" />
     <Compile Include="Model\GiangDay_PlusDTO.cs" />
+    <Compile Include="Model\LichSuTuVan_PlusDTO.cs" />
     <Compile Include="Model\PhanQuyenTaiKhoan_PlusDTO.cs" />
     <Compile Include="Model\QuanLyHocVienDTO.cs" />
     <Compile Include="Model\KhoaHoc_MonHoc_PlusDTO.cs" />

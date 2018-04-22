@@ -166,6 +166,7 @@ namespace O2S_QuanLyHocVien.Pages
                 _phieughidanh.ConNo = Common.TypeConvert.TypeConvertParse.ToDecimal(numConNo.Text);
                 _phieughidanh.MienGiam_PhanTram = Common.TypeConvert.TypeConvertParse.ToInt16(numMienGiam_PTram.Value.ToString());
                 _phieughidanh.MienGiam_Tien = Common.TypeConvert.TypeConvertParse.ToDecimal(numMienGiam_Tien.Text.Replace(",", ""));
+                _phieughidanh.LyDoMienGiam = txtLyDoMienGiam.Text;
                 if (GlobalSettings.UserID != -1)
                 {
                     _phieughidanh.NhanVienId = GlobalSettings.UserID;

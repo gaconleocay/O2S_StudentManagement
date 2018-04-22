@@ -38,7 +38,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             try
             {
                 var query = (from p in GlobalSettings.Database.PHIEUTHUs
-                             //where p.HocVienId==_filter.HocVienId
+                                 //where p.HocVienId==_filter.HocVienId
                              select p).AsEnumerable().Select((obj, index) => new PhieuThu_PlusDTO
                              {
                                  Stt = index + 1,
@@ -47,10 +47,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  SoThuId = obj.SoThuId,
                                  PhieuGhiDanhId = obj.PhieuGhiDanhId,
                                  HocVienId = obj.HocVienId,
-                                 TenHocVien=obj.HOCVIEN.TenHocVien,
+                                 TenHocVien = obj.HOCVIEN.TenHocVien,
                                  LoaiPhieuThuId = obj.LoaiPhieuThuId,
                                  SoTien = obj.SoTien,
-                                 ThoiGianThu=obj.ThoiGianThu,
+                                 ThoiGianThu = obj.ThoiGianThu,
                                  GhiChu = obj.GhiChu,
                                  IsRemove = obj.IsRemove,
                                  CreatedDate = obj.CreatedDate,
@@ -63,15 +63,15 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                              });
                 if (_filter.PhieuThuId != null && _filter.PhieuThuId != 0)
                 {
-                   query = query.Where(o => o.PhieuThuId == _filter.PhieuThuId).ToList();
+                    query = query.Where(o => o.PhieuThuId == _filter.PhieuThuId).ToList();
                 }
                 if (_filter.HocVienId != null && _filter.HocVienId != 0)
                 {
-                   query = query.Where(o => o.HocVienId == _filter.HocVienId).ToList();
+                    query = query.Where(o => o.HocVienId == _filter.HocVienId).ToList();
                 }
                 if (_filter.PhieuGhiDanhId != null && _filter.PhieuGhiDanhId != 0)
                 {
-                   query = query.Where(o => o.PhieuGhiDanhId == _filter.PhieuGhiDanhId).ToList();
+                    query = query.Where(o => o.PhieuGhiDanhId == _filter.PhieuGhiDanhId).ToList();
                 }
                 return query.ToList();
             }
@@ -84,7 +84,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static List<PHIEUTHU> SelectTheoPhieuGhiDanh(int _PhieuGhiDanhId)
         {
             return (from p in Database.PHIEUTHUs
-                    where  p.PhieuGhiDanhId == _PhieuGhiDanhId
+                    where p.PhieuGhiDanhId == _PhieuGhiDanhId
                     select p).ToList();
         }
         public static bool Insert(PHIEUTHU _phieuthu, ref int _phieuthuId)
@@ -160,6 +160,62 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
             }
         }
+
+        public static List<BaoCaoThuTien_ChiTietDTO> SelectBaoCaoThuTienChiTiet(PhieuThuFilter _filter)
+        {
+            try
+            {
+                var query = (from p in GlobalSettings.Database.PHIEUTHUs
+                             where (p.ThoiGianThu >= _filter.ThoiGianThu_Tu && p.ThoiGianThu <= _filter.ThoiGianThu_Den) && p.HOCVIEN.CoSoId == _filter.CoSoId
+                             select p).AsEnumerable().Select((obj, index) => new BaoCaoThuTien_ChiTietDTO
+                             {
+                                 Stt = index + 1,
+                                 MaPhieuThu = obj.MaPhieuThu,
+                                 ThoiGianThu = obj.ThoiGianThu,
+                                 SoTien = obj.SoTien,
+                                 TenNguoiThu = obj.CreatedBy,
+                                 MaPhieuGhiDanh = obj.PHIEUGHIDANH.MaPhieuGhiDanh,
+                                 MaHocVien = obj.HOCVIEN.MaHocVien,
+                                 TenHocVien = obj.HOCVIEN.TenHocVien,
+                                 GioiTinh = obj.HOCVIEN.GioiTinh,
+                                 NgaySinh = obj.HOCVIEN.NgaySinh,
+                                 GhiChu = obj.GhiChu
+                             });
+                return query.ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        public static List<BaoCaoThuTien_TongHopDTO> SelectBaoCaoThuTienTongHop(PhieuThuFilter _filter)
+        {
+            try
+            {
+                var query = (from p in GlobalSettings.Database.PHIEUTHUs
+                             where (p.ThoiGianThu >= _filter.ThoiGianThu_Tu && p.ThoiGianThu <= _filter.ThoiGianThu_Den) && p.HOCVIEN.CoSoId == _filter.CoSoId
+                             group p by new
+                             {
+                                 p.ThoiGianThu,
+                                 p.CreatedBy,
+                             } into phieuthu
+                             select new BaoCaoThuTien_TongHopDTO
+                             {
+                                 ThoiGianThu = phieuthu.Key.ThoiGianThu,
+                                 TenNguoiThu = phieuthu.Key.CreatedBy,
+                                 SoTien = phieuthu.Sum(o => o.SoTien),
+                             });
+                return query.ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+
 
     }
 }

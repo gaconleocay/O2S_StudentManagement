@@ -12,13 +12,13 @@ namespace O2S_QuanLyHocVien.Popups
 {
     public partial class frmGiangVienEdit : Form
     {
-        private GIANGVIEN gv;
+        private GIANGVIEN GiangVien_Select { get; set; }
         private bool isInsert;
 
         public frmGiangVienEdit(GIANGVIEN gv)
         {
             InitializeComponent();
-            this.gv = gv;
+            this.GiangVien_Select = gv;
             isInsert = gv == null;
         }
 
@@ -41,8 +41,9 @@ namespace O2S_QuanLyHocVien.Popups
                 txtSDT.Text = gv.Sdt;
                 txtEmail.Text = gv.Email;
                 txtTenDangNhap.Text = gv.TAIKHOAN.TenDangNhap;
-                txtMatKhau.Text = gv.TAIKHOAN.MatKhau;
+                txtMatKhau.Text =Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt( gv.TAIKHOAN.MatKhau,true);
                 txtTenDangNhap.Enabled = false;
+                txtMatKhau.Enabled = false;
             }
         }
 
@@ -54,13 +55,13 @@ namespace O2S_QuanLyHocVien.Popups
         {
             return new GIANGVIEN()
             {
-                GiangVienId = Common.TypeConvert.TypeConvertParse.ToInt32(txtMaGV.Text),
+                GiangVienId = this.GiangVien_Select != null ? this.GiangVien_Select.GiangVienId : 0,
                 TenGiangVien = txtTenGV.Text,
                 GioiTinh = cboGioiTinh.Text,
                 Sdt = txtSDT.Text,
                 Email = txtEmail.Text,
                 //TenDangNhap = txtTenDangNhap.Text,
-                CoSoId=GlobalSettings.CoSoId
+                CoSoId = GlobalSettings.CoSoId
             };
         }
 
@@ -90,7 +91,7 @@ namespace O2S_QuanLyHocVien.Popups
 
         private void frmGiangVienEdit_Load(object sender, EventArgs e)
         {
-            LoadUI(gv);
+            LoadUI(GiangVien_Select);
         }
 
         private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)

@@ -17,6 +17,23 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class GiangDayLogic
     {
+        public static List<GIANGDAY> SelectTheoGiangVien(int _giangVienId)
+        {
+            try
+            {
+                //List<GiangDay_PlusDTO> _result = null;
+                var query = (from p in GlobalSettings.Database.GIANGDAYs
+                             where p.GiangVienId== _giangVienId
+                             select  p);
+                return query.ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
         public static List<GiangDay_PlusDTO> Select(GiangDayFilter _filter)
         {
             try

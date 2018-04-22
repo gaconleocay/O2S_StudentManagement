@@ -17,6 +17,7 @@ using O2S_QuanLyHocVien.BUS;
 using DevExpress.XtraTab;
 using O2S_QuanLyHocVien.CauHinh;
 using O2S_QuanLyHocVien.ChucNang;
+using O2S_QuanLyHocVien.BaoCao;
 
 namespace O2S_QuanLyHocVien
 {
@@ -137,34 +138,6 @@ namespace O2S_QuanLyHocVien
             }
         }
 
-        //Bao cao
-        private void btnBC_HocVienGhiDanh_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            try
-            {
-                frmBaoCaoHocVienGhiDanh frmControlActive = new frmBaoCaoHocVienGhiDanh() { Dock = DockStyle.Fill, TopLevel = false };
-                TabControlProcess.TabCreating(xtraTabControl_Home, "frmBaoCaoHocVienGhiDanh", "Báo cáo học viên ghi danh", "Báo cáo học viên ghi danh", frmControlActive);
-                frmControlActive.Show();
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Warn(ex);
-            }
-        }
-
-        private void btnBC_TiepNhanHocVien_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            try
-            {
-                frmBaoCaoTiepNhanHocVien frmControlActive = new frmBaoCaoTiepNhanHocVien() { Dock = DockStyle.Fill, TopLevel = false };
-                TabControlProcess.TabCreating(xtraTabControl_Home, "frmBaoCaoTiepNhanHocVien", "Báo cáo tiếp nhận học viên", "Báo cáo tiếp nhận học viên", frmControlActive);
-                frmControlActive.Show();
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Warn(ex);
-            }
-        }
 
         #endregion
 
@@ -253,34 +226,7 @@ namespace O2S_QuanLyHocVien
             }
         }
 
-        //Bao cao 
-        private void btnBC_ThongKeTheoDoiDiem_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            try
-            {
-                frmBCThongKeTheoDoiDiem frmControlActive = new frmBCThongKeTheoDoiDiem() { Dock = DockStyle.Fill, TopLevel = false };
-                TabControlProcess.TabCreating(xtraTabControl_Home, "frmThongKeDiemTheoLop", "Thống kê theo dõi điểm", "Thống kê theo dõi điểm", frmControlActive);
-                frmControlActive.Show();
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Warn(ex);
-            }
-        }
 
-        private void btnBC_ThongKeNoHocPhi_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            try
-            {
-                frmBCHocVienNoHocPhi frmControlActive = new frmBCHocVienNoHocPhi() { Dock = DockStyle.Fill, TopLevel = false };
-                TabControlProcess.TabCreating(xtraTabControl_Home, "frmBCHocVienNoHocPhi", "Thống kê học viên nợ học phí", "Thống kê học viên nợ học phí", frmControlActive);
-                frmControlActive.Show();
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Warn(ex);
-            }
-        }
         #endregion
 
         #region QL hoc vien
@@ -297,7 +243,19 @@ namespace O2S_QuanLyHocVien
                 Common.Logging.LogSystem.Warn(ex);
             }
         }
-
+        private void btnQuanLyHocVien_TiemNang_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmQuanLyHocVienTiemNang frmControlActive = new frmQuanLyHocVienTiemNang() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmQuanLyHocVienTiemNang", "Quản lý học viên tiềm năng", "Quản lý học viên tiềm năng", frmControlActive);
+                frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
         private void btnQuanLyNhanVien_ItemClick(object sender, ItemClickEventArgs e)
         {
             try
@@ -339,6 +297,7 @@ namespace O2S_QuanLyHocVien
                 Common.Logging.LogSystem.Warn(ex);
             }
         }
+
 
         #endregion
 
@@ -517,6 +476,92 @@ namespace O2S_QuanLyHocVien
                 Common.Logging.LogSystem.Warn(ex);
             }
         }
+
+
+        #endregion
+
+        #region Bao cao
+        private void btnBC_HocVienGhiDanh_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmBaoCaoHocVienGhiDanh frmControlActive = new frmBaoCaoHocVienGhiDanh() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmBaoCaoHocVienGhiDanh", "Báo cáo học viên ghi danh", "Báo cáo học viên ghi danh", frmControlActive);
+                frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        private void btnBC_TiepNhanHocVien_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmBaoCaoTiepNhanHocVien frmControlActive = new frmBaoCaoTiepNhanHocVien() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmBaoCaoTiepNhanHocVien", "Báo cáo tiếp nhận học viên", "Báo cáo tiếp nhận học viên", frmControlActive);
+                frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        private void btnBC_ThongKeTheoDoiDiem_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmBCThongKeTheoDoiDiem frmControlActive = new frmBCThongKeTheoDoiDiem() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmThongKeDiemTheoLop", "Thống kê theo dõi điểm", "Thống kê theo dõi điểm", frmControlActive);
+                frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        private void btnBC_ThongKeNoHocPhi_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmBCHocVienNoHocPhi frmControlActive = new frmBCHocVienNoHocPhi() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmBCHocVienNoHocPhi", "Thống kê học viên nợ học phí", "Thống kê học viên nợ học phí", frmControlActive);
+                frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        private void btnBC_ThuTienChiTiet_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmBaoCaoThuTien_ChiTiet frmControlActive = new frmBaoCaoThuTien_ChiTiet() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmBaoCaoThuTien_ChiTiet", "Báo cáo thu tiền chi tiết", "Báo cáo thu tiền chi tiết", frmControlActive);
+                frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        private void btnBC_ThuTienTongHop_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmBaoCaoThuTien_TongHop frmControlActive = new frmBaoCaoThuTien_TongHop() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmBaoCaoThuTien_TongHop", "Báo cáo thu tiền tổng hợp", "Báo cáo thu tiền tổng hợp", frmControlActive);
+                frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
 
 
         #endregion

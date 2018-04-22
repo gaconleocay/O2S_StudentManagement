@@ -53,7 +53,7 @@ namespace O2S_QuanLyHocVien.Popups
                 if (hv.TaiKhoanId != null && hv.TaiKhoanId != 0)
                 {
                     txtTenDangNhap.Text = hv.TAIKHOAN.TenDangNhap;
-                    txtMatKhau.Text = hv.TAIKHOAN.MatKhau;
+                    txtMatKhau.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(hv.TAIKHOAN.MatKhau, true);
                 }
                 else
                     txtTenDangNhap.Text = txtMatKhau.Text = string.Empty;

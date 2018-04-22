@@ -469,21 +469,21 @@
         ECCmakW4mPgsJ3gn0OtXt2E5FDy7YDbBR4+crsQEGgb/XYEvOp9ZSyiH42cAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="btnQuanLyHocVien.LargeGlyph" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnQuanLyHocVien_ChinhThuc.LargeGlyph" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        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
+        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
+        23l/D+Fgywn7N2RwAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btnQuanLyNhanVien.LargeGlyph" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -611,6 +611,20 @@
         tOpcq97nwtigyfkewKMAfML5Mvtz8bZlb4iAVtirPXahe4+OHsVMHw76FerqbyNV5rq5jV5nbYC1dwRw
         IIFIb1C25sDwBs6rgPyKojNun2h5d+xz1S32Jj1grqfhDQT3M0UuIxwGAJvA6TvR7TPeZU1gBd3c4++S
         3iObWKOWhIDp570AwRZEFcb6L7R9Ojo5RV5F9SkYUgGJNLO/DI8AbXYEGAV8vXYAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnQuanLyHocVien_TiemNang.LargeGlyph" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAHNSURBVEhL7VSxSgNBEL1CxFosxMIiiKQQC7GU4wL5AAvxCyxuG/EDxObwAywsgkUKERGrfIBF
+        CguLFJIiRRB3sbISCankiG929y6zSyIHa5nAsLN7M/PeTt5sFC1+IR1IhNxoCHUKu4G1rL8WUrPMbQhZ
+        a6RqAJug8IStfQBvBoNY1qa4Z4lQV+EAqRyiEJhLbYWfmH0vHECo94K5Ls4MIP1/AJDDsiixdgFeggHA
+        8nVei5JUPYcDCPUwv0WqzQGgsCXYqjahViqBI/gQwbmR6LRFuFmOfdMBEGoHcR/WzqoBgAmK9WbcogsA
+        hyVi9pgQLqoCRAA4QvKPGTJIldgL5bCnYgTARPA3AIpRwi5YXmMd2KJaRdZvmaIaPEN8RkPJbtBl5+fO
+        bZC0j8BOUZTrv/DxrWNZ35dnBG5lTCvzR5FhLLeB2oaNp9o3bdFmW2T3JQBumds/3YjBCoKmnc4h528C
+        aMI+HbV4g+W9RRoAyXU8ejFAYhQ7Ybe9wz4BmRh5B9TvN2dK+cTO9p90cW2yjtxlT0WXXt/VV/kU8zeH
+        t8VpEVQl1IjZlqeizAe4BZNHBGkDM+Pzlfnmu9RxNnYd+bXiHHnHleZgEVR04Bd0nj64RwqRKgAAAABJ
+        RU5ErkJggg==
 </value>
   </data>
   <metadata name="timerClock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

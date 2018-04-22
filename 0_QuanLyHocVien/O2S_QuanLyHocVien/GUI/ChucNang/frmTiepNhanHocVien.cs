@@ -205,7 +205,7 @@ namespace O2S_QuanLyHocVien.Pages
             //ngay sinh
             DateTime _ngaysinh = DateTime.ParseExact(dateNgaySinh.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             int _tuoi = DateTime.Now.Year - _ngaysinh.Year;
-            if (_tuoi < 1)
+            if (_tuoi < 3)
             {
                 throw new ArgumentException("Ngày sinh không đúng");
             }

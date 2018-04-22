@@ -12,6 +12,8 @@ using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
 using O2S_QuanLyHocVien.BusinessLogic;
+using System.Transactions;
+using O2S_QuanLyHocVien.BusinessLogic.Logic;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
@@ -64,11 +66,11 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                              });
                 if (_filter.GiangVienId != null && _filter.GiangVienId != 0)
                 {
-                   query = query.Where(o => o.GiangVienId == _filter.GiangVienId).ToList();
+                    query = query.Where(o => o.GiangVienId == _filter.GiangVienId).ToList();
                 }
                 if (_filter.CoSoId != null && _filter.CoSoId != 0)
                 {
-                   query = query.Where(o => o.CoSoId == _filter.CoSoId).ToList();
+                    query = query.Where(o => o.CoSoId == _filter.CoSoId).ToList();
                 }
                 return query.ToList();
             }
@@ -105,12 +107,15 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             try
             {
                 taiKhoan.IsRemove = 0;
+                taiKhoan.MatKhau = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(taiKhoan.MatKhau,true);
                 Database.TAIKHOANs.InsertOnSubmit(taiKhoan);
                 Database.SubmitChanges();
 
                 _giangvien.TaiKhoanId = taiKhoan.TaiKhoanId;
                 _giangvien.IsRemove = 0;
                 Database.GIANGVIENs.InsertOnSubmit(_giangvien);
+                Database.SubmitChanges();
+                _giangvien.MaGiangVien = string.Format("{0}{1:D5}", "GV", _giangvien.GiangVienId);
                 Database.SubmitChanges();
                 return true;
             }
@@ -145,14 +150,48 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
-        public static bool Delete(int _khoahocId)
+        public static bool Delete(int _GiangVienId)
         {
             try
             {
-                var temp = SelectSingle(_khoahocId);
-                Database.GIANGVIENs.DeleteOnSubmit(temp);
-                Database.SubmitChanges();
-                return true;
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    //kiem tra neu giang vien: co GIANGDAY + XEPLICHHOC thi khong cho xoa
+                    List<GIANGDAY> _lstGiangDay = GiangDayLogic.SelectTheoGiangVien(_GiangVienId);
+                    if (_lstGiangDay != null && _lstGiangDay.Count > 0)
+                    {
+                        Database.GIANGDAYs.DeleteAllOnSubmit(_lstGiangDay);
+                        Database.SubmitChanges();
+                    }
+
+                    XepLichHocFilter _filter_xlh = new XepLichHocFilter();
+                    _filter_xlh.GiaoVien_ChinhId = _GiangVienId;
+                    _filter_xlh.GiaoVien_TroGiangId = _GiangVienId;
+                    List<XEPLICHHOC> _lstXepLichHoc = XepLichHocLogic.SelectTheoGiangVien(_filter_xlh);
+                    if (_lstXepLichHoc != null && _lstXepLichHoc.Count > 0)
+                    {
+                        Database.XEPLICHHOCs.DeleteAllOnSubmit(_lstXepLichHoc);
+                        Database.SubmitChanges();
+                    }
+                    //xoa GIANGVIEN
+                    var temp = SelectSingle(_GiangVienId);
+                    Database.GIANGVIENs.DeleteOnSubmit(temp);
+                    Database.SubmitChanges();
+
+                    //Xoa PHANQUYENTAIKHOAN
+                    List<PHANQUYENTAIKHOAN> _lstpqtk = PhanQuyenTaiKhoanLogic.SelectTheoTaiKhoan(temp.TaiKhoanId ?? 0);
+                    if (_lstpqtk != null)
+                    {
+                        Database.PHANQUYENTAIKHOANs.DeleteAllOnSubmit(_lstpqtk);
+                        Database.SubmitChanges();
+                    }
+                    TAIKHOAN _taikhoan = TaiKhoanLogic.SelectSingle(temp.TaiKhoanId ?? 0);
+                    Database.TAIKHOANs.DeleteOnSubmit(_taikhoan);
+                    Database.SubmitChanges();
+
+                    ts.Complete();
+                    return true;
+                }
             }
             catch (Exception ex)
             {

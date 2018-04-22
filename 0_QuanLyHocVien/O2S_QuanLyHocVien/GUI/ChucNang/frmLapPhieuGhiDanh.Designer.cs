@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLapPhieuGhiDanh));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject13 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject14 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject17 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject18 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject19 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject20 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject21 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject22 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject23 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject24 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -105,6 +105,9 @@
             this.panel16 = new System.Windows.Forms.Panel();
             this.gridControlDSPhieuGhiDanh = new DevExpress.XtraGrid.GridControl();
             this.gridViewDSPhieuGhiDanh = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemButton_XoaPGD = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.clm_PhieuGhiDanh_Stt = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -124,9 +127,9 @@
             this.lblTongCongPhieu = new System.Windows.Forms.Label();
             this.panel14 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
-            this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemButton_XoaPGD = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.txtLyDoMienGiam = new DevExpress.XtraEditors.TextEdit();
+            this.label11 = new System.Windows.Forms.Label();
+            this.gridColumn28 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel13.SuspendLayout();
@@ -156,9 +159,10 @@
             this.panel16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlDSPhieuGhiDanh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewDSPhieuGhiDanh)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_XoaPGD)).BeginInit();
             this.panel15.SuspendLayout();
             this.panel14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_XoaPGD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLyDoMienGiam.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -503,9 +507,9 @@
             this.panel9.Controls.Add(this.gridControlKhoanKhac);
             this.panel9.Controls.Add(this.panel10);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(0, 147);
+            this.panel9.Location = new System.Drawing.Point(0, 143);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(406, 485);
+            this.panel9.Size = new System.Drawing.Size(406, 489);
             this.panel9.TabIndex = 39;
             // 
             // gridControlKhoanKhac
@@ -517,7 +521,7 @@
             this.gridControlKhoanKhac.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButton_them,
             this.repositoryItemButton_Xoa});
-            this.gridControlKhoanKhac.Size = new System.Drawing.Size(406, 344);
+            this.gridControlKhoanKhac.Size = new System.Drawing.Size(406, 301);
             this.gridControlKhoanKhac.TabIndex = 39;
             this.gridControlKhoanKhac.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewKhoanKhac});
@@ -565,7 +569,7 @@
             // 
             this.repositoryItemButton_them.AutoHeight = false;
             this.repositoryItemButton_them.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButton_them.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject13, serializableAppearanceObject14, serializableAppearanceObject15, serializableAppearanceObject16, "Thêm", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButton_them.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "Thêm", null, null, true)});
             this.repositoryItemButton_them.Name = "repositoryItemButton_them";
             this.repositoryItemButton_them.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.repositoryItemButton_them.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButton_them_ButtonClick);
@@ -585,7 +589,7 @@
             // 
             this.repositoryItemButton_Xoa.AutoHeight = false;
             this.repositoryItemButton_Xoa.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButton_Xoa.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject17, serializableAppearanceObject18, serializableAppearanceObject19, serializableAppearanceObject20, "Xóa", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButton_Xoa.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "Xóa", null, null, true)});
             this.repositoryItemButton_Xoa.Name = "repositoryItemButton_Xoa";
             this.repositoryItemButton_Xoa.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.repositoryItemButton_Xoa.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButton_Xoa_ButtonClick);
@@ -630,6 +634,8 @@
             // 
             // panel10
             // 
+            this.panel10.Controls.Add(this.txtLyDoMienGiam);
+            this.panel10.Controls.Add(this.label11);
             this.panel10.Controls.Add(this.numMienGiam_Tien);
             this.panel10.Controls.Add(this.numDaDong);
             this.panel10.Controls.Add(this.numMienGiam_PTram);
@@ -641,9 +647,9 @@
             this.panel10.Controls.Add(this.label10);
             this.panel10.Controls.Add(this.label13);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel10.Location = new System.Drawing.Point(0, 344);
+            this.panel10.Location = new System.Drawing.Point(0, 301);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(406, 141);
+            this.panel10.Size = new System.Drawing.Size(406, 188);
             this.panel10.TabIndex = 38;
             // 
             // numMienGiam_Tien
@@ -651,13 +657,13 @@
             this.numMienGiam_Tien.EnterMoveNextControl = true;
             this.numMienGiam_Tien.Location = new System.Drawing.Point(264, 68);
             this.numMienGiam_Tien.Name = "numMienGiam_Tien";
-            this.numMienGiam_Tien.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numMienGiam_Tien.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numMienGiam_Tien.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
             this.numMienGiam_Tien.Properties.Appearance.Options.UseFont = true;
             this.numMienGiam_Tien.Properties.Appearance.Options.UseForeColor = true;
             this.numMienGiam_Tien.Properties.Appearance.Options.UseTextOptions = true;
             this.numMienGiam_Tien.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.numMienGiam_Tien.Size = new System.Drawing.Size(136, 26);
+            this.numMienGiam_Tien.Size = new System.Drawing.Size(136, 22);
             this.numMienGiam_Tien.TabIndex = 50;
             this.numMienGiam_Tien.EditValueChanged += new System.EventHandler(this.numMienGiam_Tien_TextChanged);
             this.numMienGiam_Tien.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numDaDong_KeyPress);
@@ -667,22 +673,22 @@
             this.numDaDong.EnterMoveNextControl = true;
             this.numDaDong.Location = new System.Drawing.Point(100, 38);
             this.numDaDong.Name = "numDaDong";
-            this.numDaDong.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numDaDong.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numDaDong.Properties.Appearance.Options.UseFont = true;
             this.numDaDong.Properties.Appearance.Options.UseTextOptions = true;
             this.numDaDong.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.numDaDong.Size = new System.Drawing.Size(300, 26);
+            this.numDaDong.Size = new System.Drawing.Size(300, 22);
             this.numDaDong.TabIndex = 49;
             this.numDaDong.EditValueChanged += new System.EventHandler(this.numDaDong_TextChanged);
             this.numDaDong.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numDaDong_KeyPress);
             // 
             // numMienGiam_PTram
             // 
-            this.numMienGiam_PTram.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numMienGiam_PTram.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numMienGiam_PTram.ForeColor = System.Drawing.Color.Blue;
             this.numMienGiam_PTram.Location = new System.Drawing.Point(100, 69);
             this.numMienGiam_PTram.Name = "numMienGiam_PTram";
-            this.numMienGiam_PTram.Size = new System.Drawing.Size(73, 25);
+            this.numMienGiam_PTram.Size = new System.Drawing.Size(73, 23);
             this.numMienGiam_PTram.TabIndex = 43;
             this.numMienGiam_PTram.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numMienGiam_PTram.ValueChanged += new System.EventHandler(this.numMienGiam_PTram_ValueChanged);
@@ -709,11 +715,11 @@
             // 
             this.numTongTien.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.numTongTien.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numTongTien.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numTongTien.Location = new System.Drawing.Point(100, 7);
             this.numTongTien.Name = "numTongTien";
             this.numTongTien.ReadOnly = true;
-            this.numTongTien.Size = new System.Drawing.Size(300, 26);
+            this.numTongTien.Size = new System.Drawing.Size(300, 23);
             this.numTongTien.TabIndex = 37;
             this.numTongTien.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numTongTien.TextChanged += new System.EventHandler(this.numTongTien_TextChanged);
@@ -722,19 +728,19 @@
             // 
             this.numConNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.numConNo.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold);
+            this.numConNo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numConNo.ForeColor = System.Drawing.Color.Red;
-            this.numConNo.Location = new System.Drawing.Point(100, 99);
+            this.numConNo.Location = new System.Drawing.Point(100, 126);
             this.numConNo.Name = "numConNo";
             this.numConNo.ReadOnly = true;
-            this.numConNo.Size = new System.Drawing.Size(300, 26);
+            this.numConNo.Size = new System.Drawing.Size(300, 23);
             this.numConNo.TabIndex = 32;
             this.numConNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 108);
+            this.label12.Location = new System.Drawing.Point(6, 135);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(49, 15);
             this.label12.TabIndex = 27;
@@ -773,33 +779,33 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(406, 147);
+            this.panel8.Size = new System.Drawing.Size(406, 143);
             this.panel8.TabIndex = 38;
             // 
             // lblTenHocVien
             // 
-            this.lblTenHocVien.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTenHocVien.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTenHocVien.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblTenHocVien.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblTenHocVien.Location = new System.Drawing.Point(100, 32);
+            this.lblTenHocVien.Location = new System.Drawing.Point(100, 30);
             this.lblTenHocVien.Name = "lblTenHocVien";
-            this.lblTenHocVien.Size = new System.Drawing.Size(304, 14);
+            this.lblTenHocVien.Size = new System.Drawing.Size(304, 20);
             this.lblTenHocVien.TabIndex = 48;
             // 
             // lblMaHocVien
             // 
-            this.lblMaHocVien.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaHocVien.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaHocVien.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblMaHocVien.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblMaHocVien.Location = new System.Drawing.Point(100, 6);
+            this.lblMaHocVien.Location = new System.Drawing.Point(100, 4);
             this.lblMaHocVien.Name = "lblMaHocVien";
-            this.lblMaHocVien.Size = new System.Drawing.Size(300, 14);
+            this.lblMaHocVien.Size = new System.Drawing.Size(300, 20);
             this.lblMaHocVien.TabIndex = 47;
             // 
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl2.Location = new System.Drawing.Point(6, 32);
+            this.labelControl2.Location = new System.Drawing.Point(6, 33);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(76, 14);
             this.labelControl2.TabIndex = 46;
@@ -808,7 +814,7 @@
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl1.Location = new System.Drawing.Point(6, 6);
+            this.labelControl1.Location = new System.Drawing.Point(6, 7);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(69, 14);
             this.labelControl1.TabIndex = 45;
@@ -853,11 +859,11 @@
             this.cboKhoaHoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboKhoaHoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboKhoaHoc.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboKhoaHoc.FormattingEnabled = true;
             this.cboKhoaHoc.Location = new System.Drawing.Point(100, 84);
             this.cboKhoaHoc.Name = "cboKhoaHoc";
-            this.cboKhoaHoc.Size = new System.Drawing.Size(300, 25);
+            this.cboKhoaHoc.Size = new System.Drawing.Size(300, 24);
             this.cboKhoaHoc.TabIndex = 17;
             this.cboKhoaHoc.SelectedValueChanged += new System.EventHandler(this.cboKhoaHoc_SelectedValueChanged);
             // 
@@ -874,19 +880,19 @@
             // 
             this.numHocPhi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.numHocPhi.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numHocPhi.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numHocPhi.ForeColor = System.Drawing.Color.Blue;
-            this.numHocPhi.Location = new System.Drawing.Point(100, 115);
+            this.numHocPhi.Location = new System.Drawing.Point(100, 114);
             this.numHocPhi.Name = "numHocPhi";
             this.numHocPhi.ReadOnly = true;
-            this.numHocPhi.Size = new System.Drawing.Size(300, 27);
+            this.numHocPhi.Size = new System.Drawing.Size(300, 23);
             this.numHocPhi.TabIndex = 33;
             this.numHocPhi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 122);
+            this.label6.Location = new System.Drawing.Point(3, 121);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 15);
             this.label6.TabIndex = 21;
@@ -1006,6 +1012,7 @@
             this.gridColumn21,
             this.gridColumn22,
             this.gridColumn23,
+            this.gridColumn28,
             this.gridColumn24,
             this.gridColumn25});
             this.gridViewDSPhieuGhiDanh.FooterPanelHeight = 25;
@@ -1024,6 +1031,33 @@
             this.gridViewDSPhieuGhiDanh.ViewCaptionHeight = 25;
             this.gridViewDSPhieuGhiDanh.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridViewDSPhieuGhiDanh_CustomDrawCell);
             this.gridViewDSPhieuGhiDanh.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewDSHocVien_RowCellStyle);
+            // 
+            // gridColumn26
+            // 
+            this.gridColumn26.Caption = "gridColumn26";
+            this.gridColumn26.ColumnEdit = this.repositoryItemButton_XoaPGD;
+            this.gridColumn26.FieldName = "gridColumn26";
+            this.gridColumn26.Name = "gridColumn26";
+            this.gridColumn26.OptionsColumn.FixedWidth = true;
+            this.gridColumn26.OptionsColumn.ShowCaption = false;
+            this.gridColumn26.UnboundType = DevExpress.Data.UnboundColumnType.Object;
+            this.gridColumn26.Visible = true;
+            this.gridColumn26.VisibleIndex = 0;
+            this.gridColumn26.Width = 35;
+            // 
+            // repositoryItemButton_XoaPGD
+            // 
+            this.repositoryItemButton_XoaPGD.AutoHeight = false;
+            this.repositoryItemButton_XoaPGD.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButton_XoaPGD.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "Xóa", null, null, true)});
+            this.repositoryItemButton_XoaPGD.Name = "repositoryItemButton_XoaPGD";
+            this.repositoryItemButton_XoaPGD.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.repositoryItemButton_XoaPGD.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButton_XoaPGD_ButtonClick);
+            // 
+            // gridColumn27
+            // 
+            this.gridColumn27.Caption = "PhieuGhiDanhId";
+            this.gridColumn27.Name = "gridColumn27";
             // 
             // clm_PhieuGhiDanh_Stt
             // 
@@ -1109,7 +1143,7 @@
             this.gridColumn15.OptionsColumn.AllowEdit = false;
             this.gridColumn15.OptionsColumn.ReadOnly = true;
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 12;
+            this.gridColumn15.VisibleIndex = 13;
             this.gridColumn15.Width = 99;
             // 
             // gridColumn16
@@ -1128,7 +1162,7 @@
             this.gridColumn16.OptionsColumn.AllowEdit = false;
             this.gridColumn16.OptionsColumn.ReadOnly = true;
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 13;
+            this.gridColumn16.VisibleIndex = 14;
             this.gridColumn16.Width = 60;
             // 
             // gridColumn17
@@ -1186,7 +1220,7 @@
             this.gridColumn19.Name = "gridColumn19";
             this.gridColumn19.OptionsColumn.AllowEdit = false;
             this.gridColumn19.Visible = true;
-            this.gridColumn19.VisibleIndex = 11;
+            this.gridColumn19.VisibleIndex = 12;
             this.gridColumn19.Width = 250;
             // 
             // gridColumn20
@@ -1350,32 +1384,44 @@
             this.label14.TabIndex = 6;
             this.label14.Text = "Danh sách các phiếu ghi danh";
             // 
-            // gridColumn26
+            // txtLyDoMienGiam
             // 
-            this.gridColumn26.Caption = "gridColumn26";
-            this.gridColumn26.ColumnEdit = this.repositoryItemButton_XoaPGD;
-            this.gridColumn26.FieldName = "gridColumn26";
-            this.gridColumn26.Name = "gridColumn26";
-            this.gridColumn26.OptionsColumn.FixedWidth = true;
-            this.gridColumn26.OptionsColumn.ShowCaption = false;
-            this.gridColumn26.UnboundType = DevExpress.Data.UnboundColumnType.Object;
-            this.gridColumn26.Visible = true;
-            this.gridColumn26.VisibleIndex = 0;
-            this.gridColumn26.Width = 35;
+            this.txtLyDoMienGiam.EnterMoveNextControl = true;
+            this.txtLyDoMienGiam.Location = new System.Drawing.Point(100, 98);
+            this.txtLyDoMienGiam.Name = "txtLyDoMienGiam";
+            this.txtLyDoMienGiam.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLyDoMienGiam.Properties.Appearance.Options.UseFont = true;
+            this.txtLyDoMienGiam.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtLyDoMienGiam.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtLyDoMienGiam.Size = new System.Drawing.Size(300, 22);
+            this.txtLyDoMienGiam.TabIndex = 52;
             // 
-            // repositoryItemButton_XoaPGD
+            // label11
             // 
-            this.repositoryItemButton_XoaPGD.AutoHeight = false;
-            this.repositoryItemButton_XoaPGD.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButton_XoaPGD.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject21, serializableAppearanceObject22, serializableAppearanceObject23, serializableAppearanceObject24, "Xóa", null, null, true)});
-            this.repositoryItemButton_XoaPGD.Name = "repositoryItemButton_XoaPGD";
-            this.repositoryItemButton_XoaPGD.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            this.repositoryItemButton_XoaPGD.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButton_XoaPGD_ButtonClick);
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 102);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(99, 15);
+            this.label11.TabIndex = 51;
+            this.label11.Text = "Lý do miễn giảm:";
             // 
-            // gridColumn27
+            // gridColumn28
             // 
-            this.gridColumn27.Caption = "PhieuGhiDanhId";
-            this.gridColumn27.Name = "gridColumn27";
+            this.gridColumn28.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn28.AppearanceCell.Options.UseFont = true;
+            this.gridColumn28.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn28.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn28.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn28.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn28.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn28.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn28.Caption = "Lý do miễn giảm";
+            this.gridColumn28.FieldName = "LyDoMienGiam";
+            this.gridColumn28.Name = "gridColumn28";
+            this.gridColumn28.OptionsColumn.AllowEdit = false;
+            this.gridColumn28.Visible = true;
+            this.gridColumn28.VisibleIndex = 11;
+            this.gridColumn28.Width = 228;
             // 
             // frmLapPhieuGhiDanh
             // 
@@ -1432,11 +1478,12 @@
             this.panel16.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlDSPhieuGhiDanh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewDSPhieuGhiDanh)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_XoaPGD)).EndInit();
             this.panel15.ResumeLayout(false);
             this.panel15.PerformLayout();
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_XoaPGD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLyDoMienGiam.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1529,5 +1576,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn26;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButton_XoaPGD;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn27;
+        public DevExpress.XtraEditors.TextEdit txtLyDoMienGiam;
+        private System.Windows.Forms.Label label11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn28;
     }
 }

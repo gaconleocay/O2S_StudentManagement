@@ -36,12 +36,13 @@ namespace O2S_QuanLyHocVien
                     List<CHUCNANG> _lstChucNang_QLHocVien = _lstChucNang.Where(o => o.TabMenuId == 4).ToList();
                     List<CHUCNANG> _lstChucNang_DanhMuc = _lstChucNang.Where(o => o.TabMenuId == 5).ToList();
                     List<CHUCNANG> _lstChucNang_HeThong = _lstChucNang.Where(o => o.TabMenuId == 6).ToList();
+                    List<CHUCNANG> _lstChucNang_BaoCao = _lstChucNang.Where(o => o.TabMenuId == 7).ToList();
                     //
                     if (_lstChucNang_TrangChu != null && _lstChucNang_TrangChu.Count > 0)
                     {
                         ribbonPage_TrangChu.Visible = true;
-                        //ribbonPage_TrangChu_CN.Visible = true;
-                        //ribbonPage_TrangChu_TTCN.Visible = true;
+                        ribbonPage_TrangChu_CN.Visible = true;
+                        ribbonPage_TrangChu_TTCN.Visible = true;
                         //Nut chuc nang
                         btnBangDiemCaNhan.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_09");
                         btnHocPhiCaNhan.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_10");
@@ -56,8 +57,7 @@ namespace O2S_QuanLyHocVien
                         //
                         btnTiepNhanHocVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_01");
                         btnLapPhieuGhiDanh.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_02");
-                        btnBC_TiepNhanHocVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("REPORT_01");
-                        btnBC_HocVienGhiDanh.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("REPORT_02");
+         
 
                     }
                     if (_lstChucNang_QLLopHoc != null && _lstChucNang_QLLopHoc.Count > 0)
@@ -73,8 +73,7 @@ namespace O2S_QuanLyHocVien
                         btnLichDayGiangVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_17");
                         btnBangDiemDanhHocVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_18");
 
-                        btnBC_ThongKeTheoDoiDiem.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("REPORT_03");
-                        btnBC_ThongKeNoHocPhi.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("REPORT_04");
+                
 
                     }
                     if (_lstChucNang_QLHocVien != null && _lstChucNang_QLHocVien.Count > 0)
@@ -83,7 +82,8 @@ namespace O2S_QuanLyHocVien
                         //ribbonPage_QLHocVien_NV.Visible = true;
                         //ribbonPage_QLHocVien_TC.Visible = true;
                         //
-                        btnQuanLyHocVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_05");
+                        btnQuanLyHocVien_ChinhThuc.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_05");
+                        btnQuanLyHocVien_TiemNang.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_19");
                         btnQuanLyNhanVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_06");
                         btnQuanLyGiangVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_07");
                         btnQuanLyHocPhi.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_08");
@@ -111,6 +111,19 @@ namespace O2S_QuanLyHocVien
                         btnQuanLyCoSoTrungTam.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_04");
                         btnDangKyBanQuyen.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_05");
                     }
+                    if (_lstChucNang_BaoCao != null && _lstChucNang_BaoCao.Count > 0)
+                    {
+                        ribbonPage_BaoCao.Visible = true;
+                        //ribbonPage_BC_TiepNhan.Visible = true;
+                        //ribbonPage_BC_QLLH.Visible = true;
+                        //
+                        btnBC_TiepNhanHocVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("REPORT_01");
+                        btnBC_HocVienGhiDanh.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("REPORT_02");
+                        btnBC_ThongKeTheoDoiDiem.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("REPORT_03");
+                        btnBC_ThongKeNoHocPhi.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("REPORT_04");
+                        btnBC_ThuTienChiTiet.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("REPORT_05");
+                        btnBC_ThuTienTongHop.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("REPORT_06");
+                    }
                 }
             }
             catch (Exception ex)
@@ -124,8 +137,8 @@ namespace O2S_QuanLyHocVien
             try
             {
                 //ribbonPage_TrangChu.Visible = enabledisable;
-                ribbonPage_TrangChu_CN.Visible = enabledisable;
-                ribbonPage_TrangChu_TTCN.Visible = enabledisable;
+                //ribbonPage_TrangChu_CN.Visible = enabledisable;
+               // ribbonPage_TrangChu_TTCN.Visible = enabledisable;
 
                 ribbonPage_TiepNhan.Visible = enabledisable;
                 // ribbonPage_TiepNhan_TNHV.Visible = enabledisable;
@@ -145,6 +158,10 @@ namespace O2S_QuanLyHocVien
                 ribbonPage_HeThong.Visible = enabledisable;
                 //ribbonPage_HeThong_QLHT.Visible = enabledisable;
                 //ribbonPage_HeThong_DKBQ.Visible = enabledisable;
+
+                ribbonPage_BaoCao.Visible = enabledisable;
+                //ribbonPage_BC_TiepNhan.Visible = enabledisable;
+                //ribbonPage_BC_QLLH.Visible = enabledisable;
             }
             catch (Exception ex)
             {
@@ -163,6 +180,7 @@ namespace O2S_QuanLyHocVien
                 ribbonPage_DanhMuc.Visible = false;
                 ribbonPage_HeThong.Visible = true;
                 ribbonPage_HeThong_QLHT.Visible = false;
+                ribbonPage_BaoCao.Visible = false;
                 btnDangKyBanQuyen.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_05");
             }
             catch (Exception ex)

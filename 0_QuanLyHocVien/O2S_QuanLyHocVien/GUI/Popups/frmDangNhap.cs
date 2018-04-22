@@ -103,6 +103,10 @@ namespace O2S_QuanLyHocVien.Popups
                     txtTenDangNhap.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["LoginUser"].ToString(), true);
                     txtMatKhau.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["LoginPassword"].ToString(), true);
                 }
+                else
+                { txtTenDangNhap.Text = string.Empty;
+                    txtMatKhau.Text = string.Empty;
+                }
 
                 lblNotification.Text = string.Empty;
             }
@@ -207,11 +211,11 @@ namespace O2S_QuanLyHocVien.Popups
                 {
                     if (TaiKhoanLogic.IsValid(txtTenDangNhap.Text, txtMatKhau.Text))
                     {
-                        TAIKHOAN tk = TaiKhoanLogic.Select(txtTenDangNhap.Text);
-                        GlobalSettings.UserID = TaiKhoanLogic.FullUserID(tk);
+                        TAIKHOAN _taikhoan = TaiKhoanLogic.Select(txtTenDangNhap.Text);
+                        GlobalSettings.UserID = _taikhoan.TaiKhoanId;//TaiKhoanLogic.FullUserID(_taikhoan);
                         GlobalSettings.UserCode = txtTenDangNhap.Text.Trim().ToLower();
-                        GlobalSettings.UserName = TaiKhoanLogic.FullUserName(tk);
-                        GlobalSettings.UserType = (UserType)TaiKhoanLogic.FullUserType(tk);
+                        GlobalSettings.UserName = TaiKhoanLogic.FullUserName(_taikhoan);
+                        GlobalSettings.UserType = (UserType)TaiKhoanLogic.FullUserType(_taikhoan);
 
                         //Settings.Default.Login_UserName = txtTenDangNhap.Text;
                         //Settings.Default.Login_Password = txtMatKhau.Text;
@@ -241,7 +245,7 @@ namespace O2S_QuanLyHocVien.Popups
             {
                 //GlobalSettings.SessionLstPhanQuyenNguoiDung = Base.CheckPermission.GetListPhanQuyenNguoiDung();
                 LayCoSoTrungTam();
-
+                LuuLaiThongTinDangNhap();
                 frmMainHome frmChon = new frmMainHome();
                 frmChon.Show();
                 this.Visible = false;

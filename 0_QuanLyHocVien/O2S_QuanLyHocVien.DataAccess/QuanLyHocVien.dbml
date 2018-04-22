@@ -220,6 +220,7 @@
       <Column Name="TaiKhoanId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="HOCVIEN_BANGDIEM" Member="BANGDIEMs" ThisKey="HocVienId" OtherKey="HocVienId" Type="BANGDIEM" />
       <Association Name="HOCVIEN_HOCPHIHOCVIEN" Member="HOCPHIHOCVIENs" ThisKey="HocVienId" OtherKey="HocVienId" Type="HOCPHIHOCVIEN" />
+      <Association Name="HOCVIEN_LICHSUTUVAN" Member="LICHSUTUVANs" ThisKey="HocVienId" OtherKey="HocVienId" Type="LICHSUTUVAN" />
       <Association Name="HOCVIEN_PHIEUGHIDANH" Member="PHIEUGHIDANHs" ThisKey="HocVienId" OtherKey="HocVienId" Type="PHIEUGHIDANH" />
       <Association Name="HOCVIEN_PHIEUTHU" Member="PHIEUTHUs" ThisKey="HocVienId" OtherKey="HocVienId" Type="PHIEUTHU" />
       <Association Name="COSOTRUNGTAM_HOCVIEN" Member="COSOTRUNGTAM" ThisKey="CoSoId" OtherKey="CoSoId" Type="COSOTRUNGTAM" IsForeignKey="true" />
@@ -267,6 +268,25 @@
       <Column Name="LicenseId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="DataKey" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="LicenseKey" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LICHSUTUVAN" Member="LICHSUTUVANs">
+    <Type Name="LICHSUTUVAN">
+      <Column Name="LichSuTuVanId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HocVienId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NguoiTuVan" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NoiDungTuVan" Type="System.String" DbType="NVarChar(3000)" CanBeNull="true" />
+      <Column Name="KetQuaTuVan" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="NgayTuVan" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="HOCVIEN_LICHSUTUVAN" Member="HOCVIEN" ThisKey="HocVienId" OtherKey="HocVienId" Type="HOCVIEN" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.LOAIHOCVIEN" Member="LOAIHOCVIENs">
@@ -411,6 +431,7 @@
       <Column Name="DaDong" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="MienGiam_PhanTram" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MienGiam_Tien" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="LyDoMienGiam" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ConNo" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="NhanVienId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />

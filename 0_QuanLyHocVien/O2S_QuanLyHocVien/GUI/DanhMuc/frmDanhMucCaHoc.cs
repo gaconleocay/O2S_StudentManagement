@@ -88,7 +88,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             return new CAHOC()
             {
-                CaHocId = this.CaHocSelect.CaHocId,
+                CaHocId = this.CaHocSelect!=null? this.CaHocSelect.CaHocId:0,
                 CoSoId = GlobalSettings.CoSoId,
                 MaCaHoc = txtMaCaHoc.Text,
                 TenCaHoc = txtTenCaHoc.Text,
@@ -155,7 +155,7 @@ namespace O2S_QuanLyHocVien.Pages
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     var rowHandle = gridViewCaHoc.FocusedRowHandle;
-                    int _caHocId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewCaHoc.GetRowCellValue(rowHandle, "KhoaHocId").ToString());
+                    int _caHocId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewCaHoc.GetRowCellValue(rowHandle, "CaHocId").ToString());
                     if (CaHocLogic.Delete(_caHocId))
                     {
                         Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);

@@ -56,7 +56,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                              {
                                  XepLichHocId = p.XepLichHocId,
                                  CoSoId = p.CoSoId,
-                                 KhoaHocId=p.KhoaHocId,
+                                 KhoaHocId = p.KhoaHocId,
                                  LopHocId = p.LopHocId,
                                  TenLopHoc = p.TenLopHoc,
                                  ThoiGianHoc = p.ThoiGianHoc,
@@ -69,7 +69,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  TenGiaoVien_TroGiang = p.TenGiaoVien_TroGiang,
                                  TienGiaoVien_TroGiang = p.TienGiaoVien_TroGiang,
                                  GhiChu = p.GhiChu,
-                                 IsLock=p.IsLock,
+                                 IsLock = p.IsLock,
                                  IsRemove = p.IsRemove,
                                  CreatedDate = p.CreatedDate,
                                  CreatedBy = p.CreatedBy,
@@ -92,6 +92,20 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     query = query.Where(o => o.IsRemove == _filter.IsRemove).ToList();
                 }
                 return query.ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        public static List<XEPLICHHOC> SelectTheoGiangVien(XepLichHocFilter _filter)
+        {
+            try
+            {
+                return (from p in GlobalSettings.Database.XEPLICHHOCs
+                        where p.GiaoVien_ChinhId == _filter.GiaoVien_ChinhId || p.GiaoVien_TroGiangId == _filter.GiaoVien_TroGiangId
+                        select p).ToList();
             }
             catch (System.Exception ex)
             {
