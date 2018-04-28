@@ -13,6 +13,8 @@ C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Deb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Templates\BC06_BaoCaoThuTien_TongHop.xlsx
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Templates\FUN_QuanLyHocVien_ChinhThuc.xlsx
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Templates\FUN_QuanLyHocVien_TiemNang.xlsx
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Templates\BienLaiThuTien_NopTien_ThuThem.xlsx
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Templates\BC_QuanLyThuChi_ChiTiet.xlsx
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Templates\BienLaiThuTien_NopTien.xlsx
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_QuanLyHocVien.exe.config
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_QuanLyHocVien.exe
@@ -36,6 +38,8 @@ C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Deb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Microsoft.ReportViewer.WinForms.DLL
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Microsoft.SqlServer.Types.dll
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_Common.dll
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_License.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_QuanLyHocVien.BusinessLogic.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_QuanLyHocVien.DataAccess.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\System.ComponentModel.DataAnnotations.dll
@@ -62,6 +66,9 @@ C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Deb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.XtraNavBar.v15.2.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.XtraCharts.v15.2.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.DataAccess.v15.2.UI.dll
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Newtonsoft.Json.dll
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\FlexCel.dll
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\EntityFramework.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.Xpo.v15.2.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.CodeParser.v15.2.dll
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.Pdf.v15.2.Core.dll
@@ -78,6 +85,8 @@ C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Deb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.XtraGrid.v15.2.xml
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.XtraPrinting.v15.2.xml
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.XtraSpreadsheet.v15.2.xml
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_Common.pdb
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_License.pdb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.Office.v15.2.Core.xml
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.DataAccess.v15.2.xml
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.Sparkline.v15.2.Core.xml
@@ -89,6 +98,7 @@ C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Deb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.XtraNavBar.v15.2.xml
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.XtraCharts.v15.2.xml
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.DataAccess.v15.2.UI.xml
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Newtonsoft.Json.xml
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.Xpo.v15.2.xml
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.Pdf.v15.2.Core.xml
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\DevExpress.Pdf.v15.2.Drawing.xml
@@ -194,6 +204,10 @@ C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Deb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.Pages.frmBCThongKeTheoDoiDiem.resources
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.Pages.frmBangDiemCaNhan.resources
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.ChucNang.frmBangDiemDanhHocVien.resources
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.ChucNang.frmQuanLyThuChi.resources
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.ChucNang.frmQuanLyGiangVien.resources
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.ChucNang.frmQuanLyNhanVien.resources
+C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.Popups.frmPopUpHuyPhieuThuTien.resources
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.PhieuGhiDanh.frmPopUpXoaPhieuGhiDanh.resources
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.ChucNang.frmLichDayCuaGiangVien.resources
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.ChucNang.frmLichHocTheoLopHoc.resources
@@ -242,17 +256,3 @@ C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Deb
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\RdlCompile.compiled
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.exe
 C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.pdb
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.Popups.frmPopUpHuyPhieuThuTien.resources
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.ChucNang.frmQuanLyNhanVien.resources
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.ChucNang.frmQuanLyGiangVien.resources
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Templates\BienLaiThuTien_NopTien_ThuThem.xlsx
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\obj\Debug\O2S_QuanLyHocVien.ChucNang.frmQuanLyThuChi.resources
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Templates\BC_QuanLyThuChi_ChiTiet.xlsx
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Newtonsoft.Json.dll
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_License.pdb
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\Newtonsoft.Json.xml
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_Common.dll
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_License.dll
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\FlexCel.dll
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\EntityFramework.dll
-C:\PROJECT\O2S_StudentManagement\trunk\0_QuanLyHocVien\O2S_QuanLyHocVien\bin\Debug\O2S_Common.pdb

@@ -89,11 +89,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="O2S_Common">
-      <HintPath>..\..\..\..\1_Library\O2S_Common.dll</HintPath>
+      <HintPath>..\..\..\..\1_Library\Lib_Debug\O2S_Common.dll</HintPath>
     </Reference>
     <Reference Include="O2S_License, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\1_Library\O2S_License.dll</HintPath>
+      <HintPath>..\..\..\..\1_Library\Lib_Debug\O2S_License.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>

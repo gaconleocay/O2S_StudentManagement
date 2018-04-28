@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="O2S_Common">
-      <HintPath>..\..\..\..\1_Library\O2S_Common.dll</HintPath>
+      <HintPath>..\..\..\..\1_Library\Lib_Debug\O2S_Common.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>
