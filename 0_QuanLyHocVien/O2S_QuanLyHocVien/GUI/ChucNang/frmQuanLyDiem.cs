@@ -84,7 +84,7 @@ namespace O2S_QuanLyHocVien.Pages
                 {
                     thLop = new Thread(() =>
                     {
-                        object source = LopHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(txtMaLop.Text));
+                        object source = LopHocLogic.SelectSingle(O2S_Common.TypeConvert.Parse.ToInt32(txtMaLop.Text));
 
                         gridLop.Invoke((MethodInvoker)delegate
                         {
@@ -126,7 +126,7 @@ namespace O2S_QuanLyHocVien.Pages
                 thHocVien = new Thread(() =>
                 {
                     thLop.Join();
-                    object source = BangDiemLogic.SelectDSHV_Lop(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
+                    object source = BangDiemLogic.SelectDSHV_Lop(O2S_Common.TypeConvert.Parse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
 
                     gridDSHV.Invoke((MethodInvoker)delegate
                     {
@@ -161,8 +161,8 @@ namespace O2S_QuanLyHocVien.Pages
 
                         gridLop.Invoke((MethodInvoker)delegate
                         {
-                            LoadPanelDiem(Common.TypeConvert.TypeConvertParse.ToInt32(gridDSHV.SelectedRows[0].Cells["clmHocVienId"].Value.ToString()),
-                                        Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
+                            LoadPanelDiem(O2S_Common.TypeConvert.Parse.ToInt32(gridDSHV.SelectedRows[0].Cells["clmHocVienId"].Value.ToString()),
+                                        O2S_Common.TypeConvert.Parse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
                         });
                     });
 
@@ -171,7 +171,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 

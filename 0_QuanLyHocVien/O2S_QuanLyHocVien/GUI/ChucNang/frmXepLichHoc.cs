@@ -21,6 +21,8 @@ using O2S_QuanLyHocVien.BusinessLogic.Models;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using System.Linq;
+using DevExpress.Utils.Menu;
+using DevExpress.XtraGrid.Columns;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -46,7 +48,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadKhoaHoc()
@@ -68,14 +70,14 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadLopCuaKhoaHoc()
         {
             try
             {
-                int _khoahocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
+                int _khoahocId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
                 if (_khoahocId != 0)
                 {
                     LopHocFilter _filter = new LopHocFilter();
@@ -90,7 +92,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -129,7 +131,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         private void LoadCaHoc()
@@ -146,7 +148,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadGiangVien()
@@ -189,7 +191,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -199,8 +201,8 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                this.KhoaHocId_Select = Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
-                this.LopHocId_Select = Common.TypeConvert.TypeConvertParse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                this.KhoaHocId_Select = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
+                this.LopHocId_Select = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
                 if (this.LopHocId_Select != 0)
                 {
                     LoadCaHoc();
@@ -212,7 +214,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -233,8 +235,8 @@ namespace O2S_QuanLyHocVien.Pages
 
                             ValidateLuu(item);
                             CAHOC _cahoc = CaHocLogic.SelectSingle(item.CaHocId ?? 0);
-                            GIANGVIEN _gv_chinh = GiangVienLogic.SelectSingle(item.GiaoVien_ChinhId ?? 0);
-                            GIANGVIEN _gv_trogiang = GiangVienLogic.SelectSingle(item.GiaoVien_TroGiangId ?? 0);
+                            GIANGVIEN _gv_chinh = GiangVienLogic.SelectSigleTheoKhoaKhoa(item.GiaoVien_ChinhId ?? 0);
+                            GIANGVIEN _gv_trogiang = GiangVienLogic.SelectSigleTheoKhoaKhoa(item.GiaoVien_TroGiangId ?? 0);
                             XEPLICHHOC _xeplich = new XEPLICHHOC()
                             {
                                 CoSoId = GlobalSettings.CoSoId,
@@ -282,7 +284,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void repositoryItemButton_Xoa_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -292,7 +294,7 @@ namespace O2S_QuanLyHocVien.Pages
                 if (gridViewLichHoc.RowCount > 1)
                 {
                     var rowHandle = gridViewLichHoc.FocusedRowHandle;
-                    int _stt = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewLichHoc.GetRowCellValue(rowHandle, "Stt").ToString());
+                    int _stt = O2S_Common.TypeConvert.Parse.ToInt32(gridViewLichHoc.GetRowCellValue(rowHandle, "Stt").ToString());
                     XepLichHoc_PlusDTO _delete = this.lstLichHoc.Where(o => o.Stt == _stt).FirstOrDefault();
                     this.lstLichHoc.Remove(_delete);
                     gridControlLichHoc.DataSource = null;
@@ -301,7 +303,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -322,7 +324,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -335,6 +337,75 @@ namespace O2S_QuanLyHocVien.Pages
             if (_xeplich.GiaoVien_ChinhId == null || _xeplich.GiaoVien_ChinhId == 0)
                 throw new ArgumentException("Giảng viên dạy chính không được trống");
         }
+
+        private void btnKhoaLichHoc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Bạn sẵn sàng lên lịch học?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    List<XEPLICHHOC> _lstLichHoc = XepLichHocLogic.SelectTheoLopHoc(this.LopHocId_Select);
+                    if (XepLichHocLogic.UpdateKhoaLichHoc(_lstLichHoc))
+                    {
+                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                        frmthongbao.Show();
+                        btnTimKiem_Click(null, null);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        private void gridViewLichHoc_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            try
+            {
+                if (e.MenuType == GridMenuType.Row)
+                {
+                    e.Menu.Items.Clear();
+                    var rowHandle = gridViewLichHoc.FocusedRowHandle;
+                    int _XepLichHocId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewLichHoc.GetRowCellValue(rowHandle, "XepLichHocId").ToString());
+                    XEPLICHHOC _lichhoc = XepLichHocLogic.SelectSingle(_XepLichHocId);
+                    if (_lichhoc != null && _lichhoc.IsLock == true)
+                    {
+                        DXMenuItem item_sualich = new DXMenuItem("Sửa lịch học");
+                        item_sualich.Image = imMenu.Images[0];
+                        item_sualich.Click += new EventHandler(repositoryItemButton_SuaLichHoc_Click);
+                        e.Menu.Items.Add(item_sualich);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        private void repositoryItemButton_SuaLichHoc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var rowHandle = gridViewLichHoc.FocusedRowHandle;
+                int _XepLichHocId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewLichHoc.GetRowCellValue(rowHandle, "XepLichHocId").ToString());
+                //
+                foreach (var item in this.lstLichHoc)
+                {
+                    if (item.XepLichHocId == _XepLichHocId)
+                    {
+                        item.IsEdit = true;
+                    }
+                }
+                //  gridControlLichHoc.DataSource = this.lstLichHoc;
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+
 
         #endregion
 
@@ -352,24 +423,10 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
-        private void gridViewDSHocVien_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
-        {
-            try
-            {
-                //if (e.Column == clm_PhieuGhiDanh_Stt)
-                //{
-                //    e.DisplayText = Convert.ToString(e.RowHandle + 1);
-                //}
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Warn(ex);
-            }
-        }
         private void cboKhoaHoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadLopCuaKhoaHoc();
@@ -377,7 +434,53 @@ namespace O2S_QuanLyHocVien.Pages
 
 
 
+
+
         #endregion
+
+        private void gridViewLichHoc_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+
+                if (IsLookLichHoc(view, view.FocusedRowHandle)) //view.FocusedColumn.FieldName == "IsLock" &&
+                    e.Cancel = true;
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        private bool IsLookLichHoc(GridView view, int row)
+        {
+            bool result = false;
+            try
+            {
+                GridColumn col = view.Columns["XepLichHocId"];
+                int _XepLichHocId = O2S_Common.TypeConvert.Parse.ToInt32(view.GetRowCellValue(row, col).ToString());
+                //kiem tra trong DB xem da khoa hay khong
+                XEPLICHHOC _lichhoc = XepLichHocLogic.SelectSingle(_XepLichHocId);
+                if (_lichhoc != null && _lichhoc.IsLock == true)
+                {
+                    result = true;
+                }
+                foreach (var item in this.lstLichHoc)
+                {
+                    if (item.XepLichHocId == _XepLichHocId && item.IsEdit == true)
+                    {
+                        result = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+            return result;
+        }
+
+
 
 
     }

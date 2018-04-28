@@ -32,29 +32,27 @@ namespace O2S_QuanLyHocVien.CauHinh
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
-
         private void LoadKetNoiDatabase()
         {
             try
             {
                 cboKieuXacThuc.Items.AddRange(new string[]
                 {
-                "Xác thực của Windows",
                 "Xác thực của SQL Server"
                 });
-                cboKieuXacThuc.SelectedIndex = 1;
+                cboKieuXacThuc.SelectedIndex = 0;
                 //load temp
-                txtTenDangNhap.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
-                txtMatKhau.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
-                txtTenServer.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
-                cboDatabase.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
+                txtTenDangNhap.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
+                txtMatKhau.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
+                txtTenServer.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
+                cboDatabase.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void KiemTraTonTaiVaInsertLinkVersion()
@@ -75,7 +73,7 @@ namespace O2S_QuanLyHocVien.CauHinh
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadCauHinhUpdateVersion()
@@ -90,11 +88,10 @@ namespace O2S_QuanLyHocVien.CauHinh
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
-
 
         #region Events
 
@@ -123,7 +120,6 @@ namespace O2S_QuanLyHocVien.CauHinh
 
                 MessageBox.Show("Kết nối thành công!" + Environment.NewLine + "Vui lòng chọn cơ sở dữ liệu trong danh sách bên dưới.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cboDatabase.Enabled = true;
-                btnLuuThongTin.Enabled = true;
             }
             catch (ArgumentException ex)
             {
@@ -156,27 +152,31 @@ namespace O2S_QuanLyHocVien.CauHinh
             //GlobalSettings.SaveDatabaseConnection();
 
             LuuLaiCauHinhFileConfig();
-
-            MessageBox.Show("Đã lưu cài đặt kết nối cơ sở dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            DialogResult = DialogResult.OK;
-            Close();
+            //luu lai duong dan cap nhat CDSL
+            VERSION _version = VersionLogic.Select();
+            _version.AppLink = txtUpdateVersionLink.Text;
+            if (VersionLogic.Update(_version))
+            {
+                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
+                frmthongbao.Show();
+            }
         }
         private void LuuLaiCauHinhFileConfig()
         {
             try
             {
                 Configuration _config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                _config.AppSettings.Settings["ServerHost"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtTenServer.Text.Trim(), true);
-                _config.AppSettings.Settings["Username"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtTenDangNhap.Text.Trim(), true);
-                _config.AppSettings.Settings["Password"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtMatKhau.Text.Trim(), true);
-                _config.AppSettings.Settings["Database"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(cboDatabase.Text, true);
+                _config.AppSettings.Settings["ServerHost"].Value = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(txtTenServer.Text.Trim(), true);
+                _config.AppSettings.Settings["Username"].Value = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(txtTenDangNhap.Text.Trim(), true);
+                _config.AppSettings.Settings["Password"].Value = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(txtMatKhau.Text.Trim(), true);
+                _config.AppSettings.Settings["Database"].Value = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(cboDatabase.Text, true);
 
                 _config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 

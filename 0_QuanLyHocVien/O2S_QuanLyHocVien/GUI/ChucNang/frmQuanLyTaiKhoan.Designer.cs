@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanLyTaiKhoan));
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
             DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
             this.checker = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheck = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -208,7 +208,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1100, 87);
+            this.panel2.Size = new System.Drawing.Size(1100, 95);
             this.panel2.TabIndex = 8;
             // 
             // panel5
@@ -223,7 +223,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 46);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1100, 41);
+            this.panel5.Size = new System.Drawing.Size(1100, 49);
             this.panel5.TabIndex = 1;
             // 
             // label2
@@ -293,6 +293,7 @@
             // 
             // panel4
             // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.btnTimKiem);
             this.panel4.Controls.Add(this.cboLoaiTaiKhoan);
             this.panel4.Controls.Add(this.label9);
@@ -357,9 +358,9 @@
             // 
             this.panel3.Controls.Add(this.splitContainerControl1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 111);
+            this.panel3.Location = new System.Drawing.Point(0, 119);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1100, 589);
+            this.panel3.Size = new System.Drawing.Size(1100, 581);
             this.panel3.TabIndex = 9;
             // 
             // splitContainerControl1
@@ -371,7 +372,7 @@
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.xtraTabControl1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1100, 589);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1100, 581);
             this.splitContainerControl1.SplitterPosition = 449;
             this.splitContainerControl1.TabIndex = 0;
             this.splitContainerControl1.Text = "splitContainerControl1";
@@ -382,7 +383,7 @@
             this.gridControlTaiKhoan.Location = new System.Drawing.Point(0, 0);
             this.gridControlTaiKhoan.MainView = this.gridViewTaiKhoan;
             this.gridControlTaiKhoan.Name = "gridControlTaiKhoan";
-            this.gridControlTaiKhoan.Size = new System.Drawing.Size(449, 589);
+            this.gridControlTaiKhoan.Size = new System.Drawing.Size(449, 581);
             this.gridControlTaiKhoan.TabIndex = 46;
             this.gridControlTaiKhoan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewTaiKhoan});
@@ -500,7 +501,7 @@
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.TabChucNang;
-            this.xtraTabControl1.Size = new System.Drawing.Size(646, 589);
+            this.xtraTabControl1.Size = new System.Drawing.Size(646, 581);
             this.xtraTabControl1.TabIndex = 1;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.TabChucNang,
@@ -511,7 +512,7 @@
             // 
             this.TabChucNang.Controls.Add(this.gridControlChucNang);
             this.TabChucNang.Name = "TabChucNang";
-            this.TabChucNang.Size = new System.Drawing.Size(640, 561);
+            this.TabChucNang.Size = new System.Drawing.Size(640, 553);
             this.TabChucNang.Text = "Chức năng";
             // 
             // gridControlChucNang
@@ -528,7 +529,7 @@
             this.repositoryItemCheck_Xoa,
             this.repositoryItemCheck_In,
             this.repositoryItemCheck_XuatFile});
-            this.gridControlChucNang.Size = new System.Drawing.Size(640, 561);
+            this.gridControlChucNang.Size = new System.Drawing.Size(640, 553);
             this.gridControlChucNang.TabIndex = 2;
             this.gridControlChucNang.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewChucNang});
@@ -547,11 +548,11 @@
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn6});
-            gridFormatRule1.Column = this.checker;
-            gridFormatRule1.ColumnApplyTo = this.checker;
-            gridFormatRule1.Name = "Format0";
-            gridFormatRule1.Rule = null;
-            this.gridViewChucNang.FormatRules.Add(gridFormatRule1);
+            gridFormatRule3.Column = this.checker;
+            gridFormatRule3.ColumnApplyTo = this.checker;
+            gridFormatRule3.Name = "Format0";
+            gridFormatRule3.Rule = null;
+            this.gridViewChucNang.FormatRules.Add(gridFormatRule3);
             this.gridViewChucNang.GridControl = this.gridControlChucNang;
             this.gridViewChucNang.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.None, null, this.chucnangid, "")});
@@ -635,8 +636,6 @@
             this.gridColumn1.FieldName = "Them";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 3;
             // 
             // repositoryItemCheck_Them
             // 
@@ -661,8 +660,6 @@
             this.gridColumn2.FieldName = "Sua";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 4;
             // 
             // repositoryItemCheck_Sua
             // 
@@ -686,8 +683,6 @@
             this.gridColumn3.ColumnEdit = this.repositoryItemCheck_Xoa;
             this.gridColumn3.FieldName = "Xoa";
             this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 5;
             // 
             // repositoryItemCheck_Xoa
             // 
@@ -711,8 +706,6 @@
             this.gridColumn4.ColumnEdit = this.repositoryItemCheck_In;
             this.gridColumn4.FieldName = "InAn";
             this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 6;
             // 
             // repositoryItemCheck_In
             // 
@@ -736,8 +729,6 @@
             this.gridColumn5.ColumnEdit = this.repositoryItemCheck_XuatFile;
             this.gridColumn5.FieldName = "XuatFile";
             this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 7;
             // 
             // repositoryItemCheck_XuatFile
             // 
@@ -760,7 +751,7 @@
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.OptionsColumn.AllowEdit = false;
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 8;
+            this.gridColumn6.VisibleIndex = 3;
             this.gridColumn6.Width = 240;
             // 
             // TabBaoCao
@@ -803,11 +794,11 @@
             this.gridColumn18,
             this.gridColumn19,
             this.gridColumn20});
-            gridFormatRule2.Column = this.gridColumn10;
-            gridFormatRule2.ColumnApplyTo = this.gridColumn10;
-            gridFormatRule2.Name = "Format0";
-            gridFormatRule2.Rule = null;
-            this.gridViewBaoCao.FormatRules.Add(gridFormatRule2);
+            gridFormatRule1.Column = this.gridColumn10;
+            gridFormatRule1.ColumnApplyTo = this.gridColumn10;
+            gridFormatRule1.Name = "Format0";
+            gridFormatRule1.Rule = null;
+            this.gridViewBaoCao.FormatRules.Add(gridFormatRule1);
             this.gridViewBaoCao.GridControl = this.gridControlBaoCao;
             this.gridViewBaoCao.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.None, null, this.gridColumn11, "")});
@@ -959,8 +950,6 @@
             this.gridColumn18.ColumnEdit = this.repositoryItemCheckEdit5;
             this.gridColumn18.FieldName = "InAn";
             this.gridColumn18.Name = "gridColumn18";
-            this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 3;
             // 
             // repositoryItemCheckEdit5
             // 
@@ -984,8 +973,6 @@
             this.gridColumn19.ColumnEdit = this.repositoryItemCheckEdit6;
             this.gridColumn19.FieldName = "XuatFile";
             this.gridColumn19.Name = "gridColumn19";
-            this.gridColumn19.Visible = true;
-            this.gridColumn19.VisibleIndex = 4;
             // 
             // repositoryItemCheckEdit6
             // 
@@ -1008,7 +995,7 @@
             this.gridColumn20.Name = "gridColumn20";
             this.gridColumn20.OptionsColumn.AllowEdit = false;
             this.gridColumn20.Visible = true;
-            this.gridColumn20.VisibleIndex = 5;
+            this.gridColumn20.VisibleIndex = 3;
             this.gridColumn20.Width = 240;
             // 
             // frmQuanLyTaiKhoan

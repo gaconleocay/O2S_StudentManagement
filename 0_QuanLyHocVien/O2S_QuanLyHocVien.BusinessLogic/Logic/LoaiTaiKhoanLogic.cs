@@ -7,6 +7,13 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Logic
 {
     public static class LoaiTaiKhoanLogic
     {
+        public static LOAITAIKHOAN Select(int _loaitaikhoanId)
+        {
+            return (from p in Database.LOAITAIKHOANs
+                    where p.LoaiTaiKhoanId == _loaitaikhoanId
+                    select p).FirstOrDefault();
+        }
+
         public static List<LOAITAIKHOAN> SelectAll()
         {
             GlobalSettings.NewDatacontexDatabase();

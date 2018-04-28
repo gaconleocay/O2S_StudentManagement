@@ -10,10 +10,10 @@ namespace O2S_QuanLyHocVien.DAL
     public class ConnectDatabase
     {
         #region Khai bao
-        private string serverhost_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
-        private string serveruser_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
-        private string serverpass_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
-        private string serverdb_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
+        private string serverhost_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
+        private string serveruser_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
+        private string serverpass_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
+        private string serverdb_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
 
         private SqlConnection conn_SM;
         private bool kiemtraketnoi = false;
@@ -38,7 +38,7 @@ namespace O2S_QuanLyHocVien.DAL
             catch (Exception ex)
             {
                 kiemtraketnoi = false;
-                Common.Logging.LogSystem.Error("Loi ket noi den CSDL: " + ex.ToString());
+                O2S_Common.Logging.LogSystem.Error("Loi ket noi den CSDL: " + ex.ToString());
             }
         }
         public void Disconnect()
@@ -53,7 +53,7 @@ namespace O2S_QuanLyHocVien.DAL
             catch (Exception ex)
             {
                 kiemtraketnoi = false;
-                Common.Logging.LogSystem.Error("Loi dong ket noi den CSDL: " + ex.ToString());
+                O2S_Common.Logging.LogSystem.Error("Loi dong ket noi den CSDL: " + ex.ToString());
             }
         }
         public DataTable GetDataTable(string sql)
@@ -72,7 +72,7 @@ namespace O2S_QuanLyHocVien.DAL
             catch (Exception ex)
             {
                 MessageBox.Show("Có lỗi dữ liệu đầu vào" + ex.ToString(), "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Common.Logging.LogSystem.Error("Loi getDataTable: " + ex.ToString());
+                O2S_Common.Logging.LogSystem.Error("Loi getDataTable: " + ex.ToString());
             }
             return dt;
         }
@@ -92,7 +92,7 @@ namespace O2S_QuanLyHocVien.DAL
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error("Loi ExecuteNonQuery: " + ex.ToString());
+                O2S_Common.Logging.LogSystem.Error("Loi ExecuteNonQuery: " + ex.ToString());
             }
             return result;
         }

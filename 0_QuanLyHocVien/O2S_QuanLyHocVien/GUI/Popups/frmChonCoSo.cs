@@ -37,7 +37,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         #endregion
@@ -50,7 +50,7 @@ namespace O2S_QuanLyHocVien.Popups
                 if (string.IsNullOrWhiteSpace(cboCoSo.Text))
                     throw new ArgumentException("Cơ sở không được trống");
 
-                GlobalSettings.CoSoId = Common.TypeConvert.TypeConvertParse.ToInt32(cboCoSo.SelectedValue.ToString());
+                GlobalSettings.CoSoId = O2S_Common.TypeConvert.Parse.ToInt32(cboCoSo.SelectedValue.ToString());
 
                 COSOTRUNGTAM _coso = CoSoTrungTamLogic.Select(GlobalSettings.CoSoId);
                 GlobalSettings.CoSo_Ten = _coso.TenCoSo;
@@ -67,7 +67,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 

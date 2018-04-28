@@ -41,7 +41,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadKhoaHoc()
@@ -57,7 +57,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadLopCuaKhoaHoc()
@@ -66,14 +66,14 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 LopHocFilter _filter = new LopHocFilter();
                 _filter.CoSoId = GlobalSettings.CoSoId;
-                _filter.KhoaHocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
+                _filter.KhoaHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
                 cboLopHoc.DataSource = LopHocLogic.Select(_filter);
                 cboLopHoc.DisplayMember = "TenLopHoc";
                 cboLopHoc.ValueMember = "LopHocId";
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -87,7 +87,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (cboLopHoc.SelectedValue != null)
                 {
-                    int _lophocid = Common.TypeConvert.TypeConvertParse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                    int _lophocid = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
                     this.lstBangDiem = BangDiemLogic.SelectTheoDoiBangDiemLop(_lophocid);
           
                     if (this.lstBangDiem != null && this.lstBangDiem.Count > 0)
@@ -111,7 +111,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             SplashScreenManager.CloseForm();
         }
@@ -134,12 +134,12 @@ namespace O2S_QuanLyHocVien.Pages
                 thongTinThem.Add(reportitem);
 
                 string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
-                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstBangDiem);
+                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstBangDiem);
                 Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             SplashScreenManager.CloseForm();
         }
@@ -160,13 +160,13 @@ namespace O2S_QuanLyHocVien.Pages
                 thongTinThem.Add(reportitem);
 
                 string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
-                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstBangDiem);
+                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstBangDiem);
                 Utilities.Common.Excel.ExcelExport export = new Utilities.Common.Excel.ExcelExport();
                 export.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -186,24 +186,10 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
-        private void gridViewDSHocVien_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
-        {
-            try
-            {
-                if (e.Column == clm_PhieuGhiDanh_Stt)
-                {
-                    e.DisplayText = Convert.ToString(e.RowHandle + 1);
-                }
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Warn(ex);
-            }
-        }
         private void cboKhoaHoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadLopCuaKhoaHoc();
@@ -233,7 +219,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
     }

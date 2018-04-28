@@ -37,11 +37,11 @@ namespace O2S_QuanLyHocVien
                 SkinManager.EnableFormSkins();
                 UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
 
-                Common.Logging.LogSystem.Info("Application_Start. Time=" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss:fff"));
+                O2S_Common.Logging.LogSystem.Info("Application_Start. Time=" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss:fff"));
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             // Application.Run(new frmMain());
             Application.Run(new Popups.frmDangNhap());

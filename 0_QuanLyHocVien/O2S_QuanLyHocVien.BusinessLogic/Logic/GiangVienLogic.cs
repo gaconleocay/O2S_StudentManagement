@@ -19,7 +19,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class GiangVienLogic
     {
-        public static GIANGVIEN SelectSingle(int _khoahocId)
+        public static GIANGVIEN SelectSigleTheoKhoaKhoa(int _khoahocId)
         {
             try
             {
@@ -30,15 +30,15 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
         public static List<GiangVien_PlusDTO> Select(GiangVienFilter _filter)
         {
+            //GlobalSettings.NewDatacontexDatabase();
             try
             {
-                //List<GiangVien_PlusDTO> _result = null;
                 var query = (from p in GlobalSettings.Database.GIANGVIENs
                              select p).AsEnumerable().Select((obj, index) => new GiangVien_PlusDTO
                              {
@@ -51,10 +51,12 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  GioiTinh = obj.GioiTinh,
                                  Sdt = obj.Sdt,
                                  Email = obj.Email,
+                                 NgayBatDauLamViec=obj.NgayBatDauLamViec,
                                  TaiKhoanId = obj.TaiKhoanId,
                                  TenDangNhap = obj.TAIKHOAN.TenDangNhap,
                                  NgaySinh = obj.NgaySinh,
                                  DiaChi = obj.DiaChi,
+                                 GhiChu=obj.GhiChu,
                                  IsRemove = obj.IsRemove,
                                  CreatedDate = obj.CreatedDate,
                                  CreatedBy = obj.CreatedBy,
@@ -72,64 +74,56 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 {
                     query = query.Where(o => o.CoSoId == _filter.CoSoId).ToList();
                 }
+                if (_filter.NgayBatDauLamViec_Tu != null && _filter.NgayBatDauLamViec_Den != null)
+                {
+                    query = query.Where(o => o.NgayBatDauLamViec >= _filter.NgayBatDauLamViec_Tu && o.NgayBatDauLamViec <= _filter.NgayBatDauLamViec_Den).ToList();
+                }
                 return query.ToList();
             }
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
-
-        public static bool Insert(GIANGVIEN _khoahoc, ref int _khoaHocId)
+        public static bool InsertAndTaiKhoan(GIANGVIEN _giangvien, TAIKHOAN taiKhoan)
         {
             try
             {
-                _khoahoc.CreatedDate = DateTime.Now;
-                _khoahoc.CreatedBy = GlobalSettings.UserCode;
-                _khoahoc.CreatedLog = GlobalSettings.SessionMyIP;
-                _khoahoc.IsRemove = 0;
-                Database.GIANGVIENs.InsertOnSubmit(_khoahoc);
-                Database.SubmitChanges();
-                _khoaHocId = _khoahoc.GiangVienId;
-                _khoahoc.MaGiangVien = string.Format("{0}{1:D5}", "GV", _khoaHocId);
-                Database.SubmitChanges();
-                return true;
-            }
-            catch (System.Exception ex)
-            {
-                return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
-            }
-        }
-        public static bool Insert(GIANGVIEN _giangvien, TAIKHOAN taiKhoan)
-        {
-            try
-            {
-                taiKhoan.IsRemove = 0;
-                taiKhoan.MatKhau = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(taiKhoan.MatKhau,true);
-                Database.TAIKHOANs.InsertOnSubmit(taiKhoan);
-                Database.SubmitChanges();
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    taiKhoan.LOAITAIKHOAN = LoaiTaiKhoanLogic.Select(taiKhoan.LoaiTaiKhoanId ?? 0);
+                    taiKhoan.TenDangNhap = taiKhoan.TenDangNhap.ToLower();
+                    taiKhoan.IsRemove = 0;
+                    taiKhoan.MatKhau = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(taiKhoan.MatKhau, true);
+                    Database.TAIKHOANs.InsertOnSubmit(taiKhoan);
+                    Database.SubmitChanges();
 
-                _giangvien.TaiKhoanId = taiKhoan.TaiKhoanId;
-                _giangvien.IsRemove = 0;
-                Database.GIANGVIENs.InsertOnSubmit(_giangvien);
-                Database.SubmitChanges();
-                _giangvien.MaGiangVien = string.Format("{0}{1:D5}", "GV", _giangvien.GiangVienId);
-                Database.SubmitChanges();
-                return true;
+                    _giangvien.CreatedDate = DateTime.Now;
+                    _giangvien.CreatedBy = GlobalSettings.UserCode;
+                    _giangvien.CreatedLog = GlobalSettings.SessionMyIP;
+                    _giangvien.IsRemove = 0;
+                    _giangvien.TaiKhoanId = taiKhoan.TaiKhoanId;
+                    Database.GIANGVIENs.InsertOnSubmit(_giangvien);
+                    Database.SubmitChanges();
+                    _giangvien.MaGiangVien = string.Format("{0}{1:D5}", "GV", _giangvien.GiangVienId);
+                    Database.SubmitChanges();
+                    ts.Complete();
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
+
         public static bool Update(GIANGVIEN _hocVien, TAIKHOAN taiKhoan = null)
         {
             try
             {
-                var hocVienCu = SelectSingle(_hocVien.GiangVienId);
+                var hocVienCu = SelectSigleTheoKhoaKhoa(_hocVien.GiangVienId);
 
                 hocVienCu.TenGiangVien = _hocVien.TenGiangVien;
                 hocVienCu.GioiTinh = _hocVien.GioiTinh;
@@ -137,16 +131,22 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 hocVienCu.Email = _hocVien.Email;
                 hocVienCu.NgaySinh = _hocVien.NgaySinh;
                 hocVienCu.DiaChi = _hocVien.DiaChi;
+                hocVienCu.NgayBatDauLamViec = _hocVien.NgayBatDauLamViec;
+                hocVienCu.GhiChu = _hocVien.GhiChu;
                 hocVienCu.ModifiedDate = DateTime.Now;
                 hocVienCu.ModifiedBy = GlobalSettings.UserCode;
                 hocVienCu.ModifiedLog = GlobalSettings.SessionMyIP;
                 Database.SubmitChanges();
+                if (taiKhoan != null)
+                {
+                    TaiKhoanLogic.Update(taiKhoan);
+                }
                 return true;
             }
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -174,7 +174,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                         Database.SubmitChanges();
                     }
                     //xoa GIANGVIEN
-                    var temp = SelectSingle(_GiangVienId);
+                    var temp = SelectSigleTheoKhoaKhoa(_GiangVienId);
                     Database.GIANGVIENs.DeleteOnSubmit(temp);
                     Database.SubmitChanges();
 
@@ -196,7 +196,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
     }

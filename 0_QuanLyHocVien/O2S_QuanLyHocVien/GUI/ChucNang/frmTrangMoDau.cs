@@ -42,7 +42,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 

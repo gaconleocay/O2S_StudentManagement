@@ -30,7 +30,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -80,7 +80,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 

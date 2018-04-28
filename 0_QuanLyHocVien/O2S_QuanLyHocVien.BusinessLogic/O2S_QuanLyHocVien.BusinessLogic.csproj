@@ -36,6 +36,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="O2S_Common">
+      <HintPath>..\..\..\..\1_Library\O2S_Common.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
@@ -76,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filter\CaHocFilter.cs" />
+    <Compile Include="Filter\HoaDonThuChiFilter.cs" />
     <Compile Include="Filter\PhieuGhiDanhFilter.cs" />
     <Compile Include="Filter\HocPhiHocVienFilter.cs" />
     <Compile Include="Filter\TaiKhoanFilter.cs" />
@@ -86,6 +90,8 @@
     <Compile Include="Logic\ChucNangLogic.cs" />
     <Compile Include="Logic\CaHocLogic.cs" />
     <Compile Include="Logic\LichSuTuVanLogic.cs" />
+    <Compile Include="Logic\LoaiChungTuLogic.cs" />
+    <Compile Include="Logic\HoaDonThuChiLogic.cs" />
     <Compile Include="Logic\XepLichHocLogic.cs" />
     <Compile Include="Logic\LoaiTaiKhoanLogic.cs" />
     <Compile Include="Logic\PhanQuyenTaiKhoanLogic.cs" />
@@ -106,6 +112,7 @@
     <Compile Include="Model\BaoCaoThuTien_TongHopDTO.cs" />
     <Compile Include="Model\BaoCaoThuTien_ChiTietDTO.cs" />
     <Compile Include="Model\GiangDay_PlusDTO.cs" />
+    <Compile Include="Model\HoaDonThuChi_PlusDTO.cs" />
     <Compile Include="Model\LichSuTuVan_PlusDTO.cs" />
     <Compile Include="Model\PhanQuyenTaiKhoan_PlusDTO.cs" />
     <Compile Include="Model\QuanLyHocVienDTO.cs" />
@@ -149,10 +156,6 @@
     <Compile Include="Logic\TaiKhoanLogic.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\O2S_QuanLyHocVien.Common\O2S_QuanLyHocVien.Common.csproj">
-      <Project>{6c338723-1358-4581-9d20-d14a18b5e3b8}</Project>
-      <Name>O2S_QuanLyHocVien.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\O2S_QuanLyHocVien.DataAccess\O2S_QuanLyHocVien.DataAccess.csproj">
       <Project>{31127f93-2cd8-4dd4-9653-bc4ae82bc8ea}</Project>
       <Name>O2S_QuanLyHocVien.DataAccess</Name>

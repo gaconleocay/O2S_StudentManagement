@@ -37,7 +37,7 @@ namespace O2S_QuanLyHocVien.Base
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn("Ma hoa chuoi theo nhieu dinh dang " + ex.ToString());
+                O2S_Common.Logging.LogSystem.Warn("Ma hoa chuoi theo nhieu dinh dang " + ex.ToString());
             }
             return encodeText;
         }

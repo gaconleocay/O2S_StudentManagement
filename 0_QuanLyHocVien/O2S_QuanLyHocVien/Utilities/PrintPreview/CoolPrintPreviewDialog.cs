@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
-using O2S_QuanLyHocVien.Common;
 
 namespace O2S_QuanLyHocVien.Utilities.PrintPreview
 {
@@ -361,13 +360,13 @@ namespace O2S_QuanLyHocVien.Utilities.PrintPreview
         {
             try
             {
-                double str = O2S_QuanLyHocVien.Common.TypeConvert.TypeConvertParse.ToDouble(_Zoom.EditValue.ToString());
+                double str = O2S_Common.TypeConvert.Parse.ToDouble(_Zoom.EditValue.ToString());
                 _preview.Zoom = str;
                 _ZoomLable.Caption = (str * 100).ToString() + "%";
             }
             catch (Exception ex)
             {
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -379,7 +378,7 @@ namespace O2S_QuanLyHocVien.Utilities.PrintPreview
             }
             catch (Exception ex)
             {
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 

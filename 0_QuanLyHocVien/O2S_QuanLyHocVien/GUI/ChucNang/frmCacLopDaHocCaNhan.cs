@@ -54,7 +54,7 @@ namespace O2S_QuanLyHocVien.Pages
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             gridLop.DataSource = BangDiemLogic.SelectDSLop(GlobalSettings.UserID, rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateTuNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null,
-                rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateDenNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null, rdKhoaHoc.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString()) : 0);
+                rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateDenNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null, rdKhoaHoc.Checked ? O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString()) : 0);
 
             gridLop_Click(sender, e);
         }
@@ -75,7 +75,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                var temp = BangDiemLogic.SelectDetail(GlobalSettings.UserID, Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
+                var temp = BangDiemLogic.SelectDetail(GlobalSettings.UserID, O2S_Common.TypeConvert.Parse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
                 lblTenLop.Text = temp.TenLopHoc;
                 lblMaLop.Text = temp.LopHocId.ToString();
                 lblTenKhoaHoc.Text = temp.TenKhoaHoc;

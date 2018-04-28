@@ -88,7 +88,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             GiangDayFilter _filter = new GiangDayFilter();
             _filter.GiangVienId = GlobalSettings.UserID;
-            _filter.KhoaHocId = rdKhoaHoc.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString()) : 0;
+            _filter.KhoaHocId = rdKhoaHoc.Checked ? O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString()) : 0;
             _filter.NgayBatDau = rdKhoangThoiGian.Checked ? (DateTime?)dateTuNgay.Value : null;
             _filter.NgayKetThuc = rdKhoangThoiGian.Checked ? (DateTime?)dateDenNgay.Value : null;
             gridKetQuaTimKiem.DataSource = GiangDayLogic.Select(_filter);
@@ -99,7 +99,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                LoadUI(LopHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridKetQuaTimKiem.SelectedRows[0].Cells["clmLopHocId"].Value.ToString())));
+                LoadUI(LopHocLogic.SelectSingle(O2S_Common.TypeConvert.Parse.ToInt32(gridKetQuaTimKiem.SelectedRows[0].Cells["clmLopHocId"].Value.ToString())));
             }
             catch
             {

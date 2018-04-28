@@ -67,10 +67,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             bool result = false;
             try
             {
-                string serverhost_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
-                string serveruser_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
-                string serverpass_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
-                string serverdb_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
+                string serverhost_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
+                string serveruser_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
+                string serverpass_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
+                string serverdb_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
                 ServerName = serverhost_SM;
                 ServerCatalog = serverdb_SM;
                 string ConnectionString = "Data Source = " + serverhost_SM + "; Initial Catalog = " + serverdb_SM + ";Persist Security Info=True;User ID=" + serveruser_SM + ";Password=" + serverpass_SM;
@@ -93,7 +93,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error("Loi khi Ket noi CSDL" + ex.ToString());
+                O2S_Common.Logging.LogSystem.Error("Loi khi Ket noi CSDL" + ex.ToString());
             }
             return result;
         }
@@ -103,10 +103,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             bool result = false;
             try
             {
-                string serverhost_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
-                string serveruser_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
-                string serverpass_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
-                string serverdb_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
+                string serverhost_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
+                string serveruser_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
+                string serverpass_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
+                string serverdb_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
                 ServerName = serverhost_SM;
                 ServerCatalog = serverdb_SM;
                 string ConnectionString = "Data Source = " + serverhost_SM + "; Initial Catalog = " + serverdb_SM + ";Persist Security Info=True;User ID=" + serveruser_SM + ";Password=" + serverpass_SM;
@@ -122,7 +122,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error("Loi new Datacontext" + ex.ToString());
+                O2S_Common.Logging.LogSystem.Error("Loi new Datacontext" + ex.ToString());
             }
             return result;
         }

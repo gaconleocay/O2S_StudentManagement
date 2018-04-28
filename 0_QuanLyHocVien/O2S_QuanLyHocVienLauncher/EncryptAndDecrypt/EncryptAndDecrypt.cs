@@ -46,7 +46,7 @@ namespace O2S_QuanLyHocVienLauncher.EncryptAndDecrypt
             catch (Exception ex)
             {
                 return "";
-               //Common.Logging.LogSystem.Warn("Ham ma hoa " + ex.ToString());
+               //O2S_Common.Logging.LogSystem.Warn("Ham ma hoa " + ex.ToString());
             }
         }
         /// <summary>
@@ -88,7 +88,7 @@ namespace O2S_QuanLyHocVienLauncher.EncryptAndDecrypt
             catch (Exception ex)
             {
                 return "";
-                //O2S_QuanLyHocVien.Common.Logging.LogSystem.Warn("Ham giai ma " + ex.ToString());
+                //O2S_Common.Logging.LogSystem.Warn("Ham giai ma " + ex.ToString());
             }
         }
         public static string CalculateMD5Hash(string input)

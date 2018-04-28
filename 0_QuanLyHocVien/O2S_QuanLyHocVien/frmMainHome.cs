@@ -48,7 +48,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -74,7 +74,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void HienThiThongTinVePhanMem_Version()
@@ -89,7 +89,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -108,7 +108,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -134,7 +134,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void item_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -150,7 +150,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -174,7 +174,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -195,7 +195,7 @@ namespace O2S_QuanLyHocVien
         //    }
         //    catch (Exception ex)
         //    {
-        //        Common.Logging.LogSystem.Warn(ex);
+        //        O2S_Common.Logging.LogSystem.Warn(ex);
         //    }
         //}
         #endregion
@@ -214,7 +214,7 @@ namespace O2S_QuanLyHocVien
         //    }
         //    catch (Exception ex)
         //    {
-        //        Common.Logging.LogSystem.Warn(ex);
+        //        O2S_Common.Logging.LogSystem.Warn(ex);
         //    }
         //}
         // Hiển thị thời gian ngày tháng
@@ -246,9 +246,10 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
+
 
 
 

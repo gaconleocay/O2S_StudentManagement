@@ -140,7 +140,6 @@
             this.gridViewDSPhieuGhiDanh.OptionsView.ShowIndicator = false;
             this.gridViewDSPhieuGhiDanh.RowHeight = 25;
             this.gridViewDSPhieuGhiDanh.ViewCaptionHeight = 25;
-            this.gridViewDSPhieuGhiDanh.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridViewDSHocVien_CustomDrawCell);
             this.gridViewDSPhieuGhiDanh.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewDSHocVien_RowCellStyle);
             // 
             // clm_PhieuGhiDanh_Stt

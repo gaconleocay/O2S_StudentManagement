@@ -77,7 +77,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             return new COSOTRUNGTAM()
             {
-                CoSoId = Common.TypeConvert.TypeConvertParse.ToInt32(txtMaCoSo.Text),
+                CoSoId = O2S_Common.TypeConvert.Parse.ToInt32(txtMaCoSo.Text),
                 TenCoSo = txtTenCoSo.Text,
                 DiaChi = txtDiaChi.Text,
                 Sdt=txtDienThoai.Text,
@@ -123,7 +123,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             try
             {
-                LoadUI(CoSoTrungTamLogic.Select(Common.TypeConvert.TypeConvertParse.ToInt32(gridKH.SelectedRows[0].Cells["clmCoSoId"].Value.ToString())));
+                LoadUI(CoSoTrungTamLogic.Select(O2S_Common.TypeConvert.Parse.ToInt32(gridKH.SelectedRows[0].Cells["clmCoSoId"].Value.ToString())));
             }
             catch
             {
@@ -156,7 +156,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    CoSoTrungTamLogic.Delete(Common.TypeConvert.TypeConvertParse.ToInt32(gridKH.SelectedRows[0].Cells["clmCoSoId"].Value.ToString()));
+                    CoSoTrungTamLogic.Delete(O2S_Common.TypeConvert.Parse.ToInt32(gridKH.SelectedRows[0].Cells["clmCoSoId"].Value.ToString()));
 
                     MessageBox.Show("Xóa cơ sở thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadGridKhoaHoc();
@@ -211,7 +211,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 

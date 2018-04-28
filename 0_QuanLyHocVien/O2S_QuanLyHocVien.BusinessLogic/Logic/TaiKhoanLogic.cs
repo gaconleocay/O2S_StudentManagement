@@ -24,7 +24,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static TAIKHOAN Select(string tenDangNhap)
         {
             return (from p in Database.TAIKHOANs
-                    where p.TenDangNhap == tenDangNhap
+                    where p.TenDangNhap.ToLower() == tenDangNhap.ToLower()
                     select p).FirstOrDefault();
         }
 
@@ -175,7 +175,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -195,7 +195,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
             catch (System.Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -204,10 +204,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             try
             {
                 var temp = (from p in Database.TAIKHOANs
-                            where p.TenDangNhap == tk.TenDangNhap
+                            where p.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
                             select p).FirstOrDefault();
 
-                temp.MatKhau = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(tk.MatKhau, true);
+                temp.MatKhau = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(tk.MatKhau, true);
                 temp.IsRemove = tk.IsRemove;
                 Database.SubmitChanges();
                 return true;
@@ -215,7 +215,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return false;
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
 
         }
@@ -246,19 +246,19 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static UserType? FullUserType(TAIKHOAN tk)
         {
             var a = (from p in Database.NHANVIENs
-                     where p.TAIKHOAN.TenDangNhap == tk.TenDangNhap
+                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
                      select p).SingleOrDefault();
             if (a != null)
                 return UserType.NhanVien;
 
             var b = (from p in Database.HOCVIENs
-                     where p.TAIKHOAN.TenDangNhap == tk.TenDangNhap
+                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
                      select p).SingleOrDefault();
             if (b != null)
                 return UserType.HocVien;
 
             var c = (from p in Database.GIANGVIENs
-                     where p.TAIKHOAN.TenDangNhap == tk.TenDangNhap
+                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
                      select p).SingleOrDefault();
             if (c != null)
                 return UserType.GiangVien;
@@ -268,19 +268,19 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static string FullUserName(TAIKHOAN tk)
         {
             var a = (from p in Database.NHANVIENs
-                     where p.TAIKHOAN.TenDangNhap == tk.TenDangNhap
+                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
                      select p).SingleOrDefault();
             if (a != null)
                 return a.TenNhanVien;
 
             var b = (from p in Database.HOCVIENs
-                     where p.TAIKHOAN.TenDangNhap == tk.TenDangNhap
+                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
                      select p).SingleOrDefault();
             if (b != null)
                 return b.TenHocVien;
 
             var c = (from p in Database.GIANGVIENs
-                     where p.TAIKHOAN.TenDangNhap == tk.TenDangNhap
+                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
                      select p).SingleOrDefault();
             if (c != null)
                 return c.TenGiangVien;
@@ -291,7 +291,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             try
             {
-                return Select(userName).MatKhau == Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(password, true);
+                return Select(userName).MatKhau == O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(password, true);
             }
             catch
             {

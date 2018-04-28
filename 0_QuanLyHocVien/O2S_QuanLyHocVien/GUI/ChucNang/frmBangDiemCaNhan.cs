@@ -40,7 +40,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -113,11 +113,11 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 if (isLoaded)
-                    LoadBangDiem(GlobalSettings.UserID, Common.TypeConvert.TypeConvertParse.ToInt32(cboLop.SelectedValue.ToString()));
+                    LoadBangDiem(GlobalSettings.UserID, O2S_Common.TypeConvert.Parse.ToInt32(cboLop.SelectedValue.ToString()));
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 

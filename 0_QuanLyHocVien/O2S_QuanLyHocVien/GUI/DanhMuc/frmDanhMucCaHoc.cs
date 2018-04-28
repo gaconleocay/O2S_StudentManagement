@@ -51,7 +51,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -115,7 +115,7 @@ namespace O2S_QuanLyHocVien.Pages
                 if (gridViewCaHoc.RowCount > 0)
                 {
                     var rowHandle = gridViewCaHoc.FocusedRowHandle;
-                    int _caHocId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewCaHoc.GetRowCellValue(rowHandle, "CaHocId").ToString());
+                    int _caHocId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewCaHoc.GetRowCellValue(rowHandle, "CaHocId").ToString());
 
                     this.CaHocSelect = CaHocLogic.SelectSingle(_caHocId);
                     if (this.CaHocSelect != null)
@@ -127,7 +127,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -155,7 +155,7 @@ namespace O2S_QuanLyHocVien.Pages
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     var rowHandle = gridViewCaHoc.FocusedRowHandle;
-                    int _caHocId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewCaHoc.GetRowCellValue(rowHandle, "CaHocId").ToString());
+                    int _caHocId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewCaHoc.GetRowCellValue(rowHandle, "CaHocId").ToString());
                     if (CaHocLogic.Delete(_caHocId))
                     {
                         Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
@@ -166,7 +166,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -205,7 +205,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         #endregion
@@ -225,7 +225,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void gridViewKhoaHoc_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
@@ -239,7 +239,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 

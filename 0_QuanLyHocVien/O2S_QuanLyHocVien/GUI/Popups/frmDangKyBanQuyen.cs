@@ -36,7 +36,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -57,7 +57,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadFormTaoLicense()
@@ -79,7 +79,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -103,7 +103,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
 
         }
@@ -128,7 +128,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnLicenseCopy_Click(object sender, EventArgs e)
@@ -140,7 +140,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -164,12 +164,12 @@ namespace O2S_QuanLyHocVien.Popups
                         string datedenngay = DateTime.ParseExact(dtTaoLicenseKeyDenNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
                         MaDatabaseVaThoiGianSuDung = KeyTrongPhanMem.SaltEncrypt + "$" + txtTaoLicenseMaMay.Text + "$" + datetungay + "$" + datedenngay;
                     }
-                    txtTaoLicenseMaKichHoat.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(MaDatabaseVaThoiGianSuDung, true);
+                    txtTaoLicenseMaKichHoat.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(MaDatabaseVaThoiGianSuDung, true);
                 }
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnTaoLicenseCopy_Click(object sender, EventArgs e)
@@ -181,7 +181,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void txtTaoLicensePassword_KeyDown(object sender, KeyEventArgs e)
@@ -199,7 +199,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -224,7 +224,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 

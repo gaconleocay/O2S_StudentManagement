@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using O2S_QuanLyHocVien.Common;
 using System.Configuration;
 using O2S_License.PasswordKey;
 using O2S_QuanLyHocVien.BusinessLogic;
@@ -29,7 +28,7 @@ namespace O2S_QuanLyHocVien.Base
                 if (license_keydb != null)
                 {
                     //Giai ma
-                    string makichhoat_giaima = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(license_keydb, true);
+                    string makichhoat_giaima = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(license_keydb, true);
                     //Tach ma kich hoat:
                     string mamay_keykichhoat = "";
                     string mabanquyenkhongthoihan = "";
@@ -41,12 +40,12 @@ namespace O2S_QuanLyHocVien.Base
                         DataView dtdatetime = new DataView(condb.GetDataTable(sql_dateDB));
                         if (dtdatetime != null && dtdatetime.Count > 0)
                         {
-                            datetimenow = Common.TypeConvert.TypeConvertParse.ToInt64(dtdatetime[0]["yyyyMMdd"].ToString());
+                            datetimenow = O2S_Common.TypeConvert.Parse.ToInt64(dtdatetime[0]["yyyyMMdd"].ToString());
                         }
                     }
                     catch (Exception ex)
                     {
-                        Common.Logging.LogSystem.Error(ex);
+                        O2S_Common.Logging.LogSystem.Error(ex);
                     }
 
                     if (!String.IsNullOrEmpty(makichhoat_giaima))
@@ -78,7 +77,7 @@ namespace O2S_QuanLyHocVien.Base
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn("Kiem tra license " + ex.ToString());
+                O2S_Common.Logging.LogSystem.Warn("Kiem tra license " + ex.ToString());
             }
         }
 
@@ -87,7 +86,7 @@ namespace O2S_QuanLyHocVien.Base
             string MaDatabase = "";
             try
             {
-                string serveruser_SM = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
+                string serveruser_SM = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
 
                 string sqlLayMaDatabase = "select service_broker_guid from sys.databases where name='" + serveruser_SM + "';";
                 DataView dataMaDB = new DataView(condb.GetDataTable(sqlLayMaDatabase));
@@ -98,7 +97,7 @@ namespace O2S_QuanLyHocVien.Base
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn("Lay thong tin ma database " + ex.ToString());
+                O2S_Common.Logging.LogSystem.Warn("Lay thong tin ma database " + ex.ToString());
             }
             return MaDatabase;
         }
@@ -109,7 +108,7 @@ namespace O2S_QuanLyHocVien.Base
             try
             {
                 //Giai ma
-                string makichhoat_giaima = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(makichhoat_mahoa, true);
+                string makichhoat_giaima = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(makichhoat_mahoa, true);
                 //Tach ma kich hoat:
                 string mamay_keykichhoat = "";
                 long thoigianTu = 0;
@@ -156,7 +155,7 @@ namespace O2S_QuanLyHocVien.Base
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn("Kiem tra license " + ex.ToString());
+                O2S_Common.Logging.LogSystem.Warn("Kiem tra license " + ex.ToString());
             }
             return thoiGianSuDung;
         }

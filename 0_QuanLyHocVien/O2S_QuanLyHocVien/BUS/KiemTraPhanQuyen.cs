@@ -34,7 +34,7 @@ namespace O2S_QuanLyHocVien.BUS
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             return result;
         }
@@ -90,7 +90,7 @@ namespace O2S_QuanLyHocVien.BUS
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             return result;
         }

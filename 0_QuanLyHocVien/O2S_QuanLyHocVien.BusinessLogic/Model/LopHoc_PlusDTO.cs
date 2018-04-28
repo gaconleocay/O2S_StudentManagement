@@ -13,6 +13,5 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Model
         public string TenCoSoTrungTam { get; set; }
         public string TenKhoaHoc { get; set; }
 
-
     }
 }

@@ -33,7 +33,7 @@ namespace O2S_QuanLyHocVien
                     List<CHUCNANG> _lstChucNang_TrangChu = _lstChucNang.Where(o => o.TabMenuId == 1).ToList();
                     List<CHUCNANG> _lstChucNang_TiepNhan = _lstChucNang.Where(o => o.TabMenuId == 2).ToList();
                     List<CHUCNANG> _lstChucNang_QLLopHoc = _lstChucNang.Where(o => o.TabMenuId == 3).ToList();
-                    List<CHUCNANG> _lstChucNang_QLHocVien = _lstChucNang.Where(o => o.TabMenuId == 4).ToList();
+                    List<CHUCNANG> _lstChucNang_QLTrungTam = _lstChucNang.Where(o => o.TabMenuId == 4).ToList();
                     List<CHUCNANG> _lstChucNang_DanhMuc = _lstChucNang.Where(o => o.TabMenuId == 5).ToList();
                     List<CHUCNANG> _lstChucNang_HeThong = _lstChucNang.Where(o => o.TabMenuId == 6).ToList();
                     List<CHUCNANG> _lstChucNang_BaoCao = _lstChucNang.Where(o => o.TabMenuId == 7).ToList();
@@ -76,9 +76,9 @@ namespace O2S_QuanLyHocVien
                 
 
                     }
-                    if (_lstChucNang_QLHocVien != null && _lstChucNang_QLHocVien.Count > 0)
+                    if (_lstChucNang_QLTrungTam != null && _lstChucNang_QLTrungTam.Count > 0)
                     {
-                        ribbonPage_QLHocVien.Visible = true;
+                        ribbonPage_QLTrungTam.Visible = true;
                         //ribbonPage_QLHocVien_NV.Visible = true;
                         //ribbonPage_QLHocVien_TC.Visible = true;
                         //
@@ -87,6 +87,7 @@ namespace O2S_QuanLyHocVien
                         btnQuanLyNhanVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_06");
                         btnQuanLyGiangVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_07");
                         btnQuanLyHocPhi.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_08");
+                        btnQuanLyThuChi.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_20");
 
                     }
                     if (_lstChucNang_DanhMuc != null && _lstChucNang_DanhMuc.Count > 0)
@@ -128,7 +129,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -148,7 +149,7 @@ namespace O2S_QuanLyHocVien
                 //ribbonPage_QLLopHoc_LH.Visible = enabledisable;
                 //ribbonPage_QLLopHoc_BC.Visible = enabledisable;
 
-                ribbonPage_QLHocVien.Visible = enabledisable;
+                ribbonPage_QLTrungTam.Visible = enabledisable;
                 // ribbonPage_QLHocVien_NV.Visible = enabledisable;
                 //ribbonPage_QLHocVien_TC.Visible = enabledisable;
 
@@ -165,7 +166,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -176,7 +177,7 @@ namespace O2S_QuanLyHocVien
                 ribbonPage_TrangChu.Visible = false;
                 ribbonPage_TiepNhan.Visible = false;
                 ribbonPage_QLLopHoc.Visible = false;
-                ribbonPage_QLHocVien.Visible = false;
+                ribbonPage_QLTrungTam.Visible = false;
                 ribbonPage_DanhMuc.Visible = false;
                 ribbonPage_HeThong.Visible = true;
                 ribbonPage_HeThong_QLHT.Visible = false;
@@ -185,7 +186,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 

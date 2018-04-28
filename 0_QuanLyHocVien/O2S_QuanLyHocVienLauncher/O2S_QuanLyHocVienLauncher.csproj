@@ -60,6 +60,10 @@
     <Reference Include="log4net">
       <HintPath>..\Library\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="O2S_License, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\1_Library\O2S_License.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -104,10 +108,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\O2S_License\O2S_License.csproj">
-      <Project>{f702a0ce-ce71-4f28-a1ea-2710d1778a43}</Project>
-      <Name>O2S_License</Name>
-    </ProjectReference>
     <ProjectReference Include="..\O2S_QuanLyHocVien.BusinessLogic\O2S_QuanLyHocVien.BusinessLogic.csproj">
       <Project>{f4cc2ba6-93db-40a9-b91b-b3ea682a4cfb}</Project>
       <Name>O2S_QuanLyHocVien.BusinessLogic</Name>

@@ -45,7 +45,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadDuLieuLoaiHV()
@@ -86,45 +86,184 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
-        private void LoadPanelControl(HOCVIEN hv = null)
+        private void LoadPanelControl(HOCVIEN _hocvien = null)
         {
             try
             {
-                if (hv == null)
+                if (_hocvien == null)
                 {
                     ResetPanelControl();
                     cboLoaiHV_SelectedValueChanged(null, null);
                 }
                 else
                 {
-                    txtMaHV.Text = hv.MaHocVien;
-                    txtHoTen.Text = hv.TenHocVien;
-                    dateNgaySinh.Value = (DateTime)hv.NgaySinh;
-                    cboGioiTinh.Text = hv.GioiTinh;
-                    txtDiaChi.Text = hv.DiaChi;
-                    txtSDT.Text = hv.Sdt;
-                    txtEmail.Text = hv.Email;
-                    txtSDTBo.Text = hv.SdtBo;
-                    txtEmailBo.Text = hv.EmailBo;
-                    txtSDTMe.Text = hv.SdtMe;
-                    txtEmailMe.Text = hv.EmailMe;
-                    txtNguoiTuVan.Text = hv.TenNguoiTuVan;
-                    txtGhiChu.Text = hv.GhiChu;
-                    cboLoaiHV.SelectedValue = hv.LoaiHocVienId;
-                    txtTenDangNhap.Text = hv.TAIKHOAN.IsRemove != 1 ? hv.TAIKHOAN.TenDangNhap : string.Empty;
-                    txtMatKhau.Text = hv.TAIKHOAN.IsRemove != 1 ? hv.TAIKHOAN.MatKhau : string.Empty;
+                    txtMaHV.Text = _hocvien.MaHocVien;
+                    txtHoTen.Text = _hocvien.TenHocVien;
+                    dateNgaySinh.Value = (DateTime)_hocvien.NgaySinh;
+                    cboGioiTinh.Text = _hocvien.GioiTinh;
+                    txtDiaChi.Text = _hocvien.DiaChi;
+                    txtSDT.Text = _hocvien.Sdt;
+                    txtEmail.Text = _hocvien.Email;
+                    txtSDTBo.Text = _hocvien.SdtBo;
+                    txtEmailBo.Text = _hocvien.EmailBo;
+                    txtSDTMe.Text = _hocvien.SdtMe;
+                    txtEmailMe.Text = _hocvien.EmailMe;
+                    txtNguoiTuVan.Text = _hocvien.TenNguoiTuVan;
+                    txtGhiChu.Text = _hocvien.GhiChu;
+                    cboLoaiHV.SelectedValue = _hocvien.LoaiHocVienId;
+                    txtTenDangNhap.Text = _hocvien.TAIKHOAN.IsRemove != 1 ? _hocvien.TAIKHOAN.TenDangNhap : string.Empty;
+                    txtMatKhau.Text = _hocvien.TAIKHOAN.IsRemove != 1 ? O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(_hocvien.TAIKHOAN.MatKhau, true) : string.Empty;
                 }
             }
             catch (Exception ex)
             {
                 ResetPanelControl();
                 LockAndUnlockPanelControl(false);
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
+        #endregion
+
+        #region Events
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadDanhSachHocVien();
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            LockAndUnlockPanelControl(true);
+            isInsert = true;
+            LoadPanelControl();
+        }
+
+        private void btnLuuThongTin_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ValidateLuu();
+
+                if (isInsert)
+                {
+                    int _hocvienId = 0;
+                    if (HocVienLogic.Insert(LoadHocVien(), new TAIKHOAN()
+                    {
+                        TenDangNhap = txtTenDangNhap.Text,
+                        MatKhau = txtMatKhau.Text,
+                        LoaiTaiKhoanId = KeySetting.LOAITAIKHOAN_HocVien,
+                    }, ref _hocvienId))
+                    {
+                        LoadDanhSachHocVien();
+                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THANH_CONG);
+                        frmthongbao.Show();
+                        LockAndUnlockPanelControl(false);
+                    }
+                }
+                else
+                {
+                    if (HocVienLogic.Update(LoadHocVien(), new TAIKHOAN()
+                    {
+                        TenDangNhap = txtTenDangNhap.Text,
+                        MatKhau = txtMatKhau.Text,
+                    }))
+                    {
+                        LoadDanhSachHocVien();
+                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                        frmthongbao.Show();
+                        LockAndUnlockPanelControl(false);
+                    }
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
+                frmthongbao.Show();
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+        private void gridViewDSHocVien_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var rowHandle = gridViewDSHocVien.FocusedRowHandle;
+                this.hocvienId_Select = O2S_Common.TypeConvert.Parse.ToInt32(gridViewDSHocVien.GetRowCellValue(rowHandle, "HocVienId").ToString());
+                HOCVIEN hocVien = HocVienLogic.SelectSingle(this.hocvienId_Select);
+                LoadPanelControl(hocVien);
+                LockAndUnlockPanelControl(false);
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+        private void btnHuyBo_Click(object sender, EventArgs e)
+        {
+            LockAndUnlockPanelControl(false);
+            gridViewDSHocVien_Click(sender, e);
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            LockAndUnlockPanelControl(true);
+            isInsert = false;
+            cboLoaiHV_SelectedValueChanged(null, null);
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Validate xoa du lieu
+                ValidateXoaHocVien(this.hocvienId_Select);
+                if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (HocVienLogic.Delete(this.hocvienId_Select))
+                    {
+                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
+                        frmthongbao.Show();
+                        LoadDanhSachHocVien();
+                        ResetPanelControl();
+                    }
+                    else
+                    {
+                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THAO_TAC_THAT_BAI);
+                        frmthongbao.Show();
+                    }
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
+                frmthongbao.Show();
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+        private void gridViewDSHocVien_DoubleClick(object sender, EventArgs e)
+        {
+            btnSua_Click(sender, e);
+        }
+
         #endregion
 
         #region Process
@@ -210,133 +349,19 @@ namespace O2S_QuanLyHocVien.Pages
                 throw new ArgumentException("Ngày sinh không đúng");
             }
         }
-        #endregion
-
-        #region Events
-        private void btnTimKiem_Click(object sender, EventArgs e)
+        private void ValidateXoaHocVien(int _hocvienId)
         {
-            try
+            //hv khong cho xoa: da lap phieu ghi danh
+            PhieuGhiDanhFilter _filter = new PhieuGhiDanhFilter()
             {
-                LoadDanhSachHocVien();
-            }
-            catch (Exception ex)
+                HocVienId = _hocvienId,
+            };
+            List<PhieuGhiDanh_PlusDTO> _lstphieugd = PhieuGhiDanhLogic.Select(_filter);
+            if (_lstphieugd != null && _lstphieugd.Count > 0)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                throw new ArgumentException("Học viên đã lập phiếu ghi danh nên không thể xóa được.");
             }
         }
-
-        private void btnThem_Click(object sender, EventArgs e)
-        {
-            LockAndUnlockPanelControl(true);
-            isInsert = true;
-            LoadPanelControl();
-        }
-
-        private void btnLuuThongTin_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ValidateLuu();
-
-                if (isInsert)
-                {
-                    int _hocvienId = 0;
-                    if (HocVienLogic.Insert(LoadHocVien(), new TAIKHOAN()
-                    {
-                        TenDangNhap = txtTenDangNhap.Text,
-                        MatKhau = txtMatKhau.Text,
-                    }, ref _hocvienId))
-                    {
-                        LoadDanhSachHocVien();
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THANH_CONG);
-                        frmthongbao.Show();
-                        LockAndUnlockPanelControl(false);
-                    }
-                }
-                else
-                {
-                    if (HocVienLogic.Update(LoadHocVien(), new TAIKHOAN()
-                    {
-                        TenDangNhap = txtTenDangNhap.Text,
-                        MatKhau = txtMatKhau.Text,
-                    }))
-                    {
-                        LoadDanhSachHocVien();
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
-                        frmthongbao.Show();
-                        LockAndUnlockPanelControl(false);
-                    }
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (Exception ex)
-            {
-                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
-                frmthongbao.Show();
-                Common.Logging.LogSystem.Error(ex);
-            }
-        }
-
-        private void gridViewDSHocVien_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var rowHandle = gridViewDSHocVien.FocusedRowHandle;
-                this.hocvienId_Select = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewDSHocVien.GetRowCellValue(rowHandle, "HocVienId").ToString());
-                HOCVIEN hocVien = HocVienLogic.SelectSingle(this.hocvienId_Select);
-                LoadPanelControl(hocVien);
-                LockAndUnlockPanelControl(false);
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Error(ex);
-            }
-        }
-
-        private void btnHuyBo_Click(object sender, EventArgs e)
-        {
-            LockAndUnlockPanelControl(false);
-            gridViewDSHocVien_Click(sender, e);
-        }
-
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-            LockAndUnlockPanelControl(true);
-            isInsert = false;
-            cboLoaiHV_SelectedValueChanged(null, null);
-        }
-
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    if (HocVienLogic.Delete(this.hocvienId_Select))
-                    {
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
-                        frmthongbao.Show();
-                        LoadDanhSachHocVien();
-                        ResetPanelControl();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
-                frmthongbao.Show();
-                Common.Logging.LogSystem.Error(ex);
-            }
-        }
-
-        private void gridViewDSHocVien_DoubleClick(object sender, EventArgs e)
-        {
-            btnSua_Click(sender, e);
-        }
-
         #endregion
 
         #region Custom
@@ -369,7 +394,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -384,7 +409,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -410,7 +435,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void txtEmailBo_TextChanged(object sender, EventArgs e)
@@ -435,7 +460,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -461,7 +486,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 

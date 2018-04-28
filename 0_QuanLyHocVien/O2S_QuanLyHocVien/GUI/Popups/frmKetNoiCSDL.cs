@@ -31,10 +31,10 @@ namespace O2S_QuanLyHocVien.Popups
             cboKieuXacThuc.SelectedIndex = 1;
 
             //load temp
-            txtTenDangNhap.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
-            txtMatKhau.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
-            txtTenServer.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
-            cboDatabase.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
+            txtTenDangNhap.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Username"].ToString().Trim(), true);
+            txtMatKhau.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Password"].ToString().Trim(), true);
+            txtTenServer.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["ServerHost"].ToString().Trim() ?? "", true);
+            cboDatabase.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["Database"].ToString().Trim(), true);
         }
 
         #endregion
@@ -110,17 +110,17 @@ namespace O2S_QuanLyHocVien.Popups
             try
             {
                 Configuration _config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                _config.AppSettings.Settings["ServerHost"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtTenServer.Text.Trim(), true);
-                _config.AppSettings.Settings["Username"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtTenDangNhap.Text.Trim(), true);
-                _config.AppSettings.Settings["Password"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtMatKhau.Text.Trim(), true);
-                _config.AppSettings.Settings["Database"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(cboDatabase.Text, true);
+                _config.AppSettings.Settings["ServerHost"].Value = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(txtTenServer.Text.Trim(), true);
+                _config.AppSettings.Settings["Username"].Value = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(txtTenDangNhap.Text.Trim(), true);
+                _config.AppSettings.Settings["Password"].Value = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(txtMatKhau.Text.Trim(), true);
+                _config.AppSettings.Settings["Database"].Value = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(cboDatabase.Text, true);
 
                 _config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 

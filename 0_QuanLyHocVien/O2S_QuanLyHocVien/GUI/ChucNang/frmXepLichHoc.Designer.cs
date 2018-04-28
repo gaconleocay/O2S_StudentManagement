@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmXepLichHoc));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -65,7 +66,7 @@
             this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn_IsLock = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -74,6 +75,7 @@
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnKhoaLichHoc = new System.Windows.Forms.Button();
             this.btnLuuLai = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnTimKiem = new System.Windows.Forms.Button();
@@ -84,6 +86,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.imMenu = new DevExpress.Utils.ImageCollection(this.components);
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlLichHoc)).BeginInit();
@@ -99,6 +102,7 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -158,7 +162,7 @@
             this.gridColumn8,
             this.gridColumn9,
             this.gridColumn10,
-            this.gridColumn14,
+            this.gridColumn_IsLock,
             this.gridColumn11,
             this.gridColumn12,
             this.gridColumn13,
@@ -177,6 +181,8 @@
             this.gridViewLichHoc.RowHeight = 25;
             this.gridViewLichHoc.ViewCaptionHeight = 25;
             this.gridViewLichHoc.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewDSHocVien_RowCellStyle);
+            this.gridViewLichHoc.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gridViewLichHoc_PopupMenuShowing);
+            this.gridViewLichHoc.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.gridViewLichHoc_ShowingEditor);
             // 
             // gridColumn6
             // 
@@ -510,22 +516,22 @@
             this.gridColumn10.VisibleIndex = 9;
             this.gridColumn10.Width = 350;
             // 
-            // gridColumn14
+            // gridColumn_IsLock
             // 
-            this.gridColumn14.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.gridColumn14.AppearanceCell.Options.UseFont = true;
-            this.gridColumn14.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.gridColumn14.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.gridColumn14.AppearanceHeader.Options.UseFont = true;
-            this.gridColumn14.AppearanceHeader.Options.UseForeColor = true;
-            this.gridColumn14.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn14.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn14.Caption = "Trạng thái khóa";
-            this.gridColumn14.FieldName = "IsLock";
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 8;
-            this.gridColumn14.Width = 100;
+            this.gridColumn_IsLock.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn_IsLock.AppearanceCell.Options.UseFont = true;
+            this.gridColumn_IsLock.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn_IsLock.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn_IsLock.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn_IsLock.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn_IsLock.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn_IsLock.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn_IsLock.Caption = "Trạng thái khóa";
+            this.gridColumn_IsLock.FieldName = "IsLock";
+            this.gridColumn_IsLock.Name = "gridColumn_IsLock";
+            this.gridColumn_IsLock.Visible = true;
+            this.gridColumn_IsLock.VisibleIndex = 8;
+            this.gridColumn_IsLock.Width = 100;
             // 
             // gridColumn11
             // 
@@ -625,12 +631,31 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnKhoaLichHoc);
             this.panel4.Controls.Add(this.btnLuuLai);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 622);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1100, 54);
             this.panel4.TabIndex = 1;
+            // 
+            // btnKhoaLichHoc
+            // 
+            this.btnKhoaLichHoc.BackColor = System.Drawing.Color.Silver;
+            this.btnKhoaLichHoc.FlatAppearance.BorderSize = 0;
+            this.btnKhoaLichHoc.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btnKhoaLichHoc.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnKhoaLichHoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnKhoaLichHoc.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnKhoaLichHoc.Image = ((System.Drawing.Image)(resources.GetObject("btnKhoaLichHoc.Image")));
+            this.btnKhoaLichHoc.Location = new System.Drawing.Point(547, 8);
+            this.btnKhoaLichHoc.Name = "btnKhoaLichHoc";
+            this.btnKhoaLichHoc.Size = new System.Drawing.Size(140, 34);
+            this.btnKhoaLichHoc.TabIndex = 72;
+            this.btnKhoaLichHoc.Text = "Lên lịch học";
+            this.btnKhoaLichHoc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnKhoaLichHoc.UseVisualStyleBackColor = false;
+            this.btnKhoaLichHoc.Click += new System.EventHandler(this.btnKhoaLichHoc_Click);
             // 
             // btnLuuLai
             // 
@@ -641,7 +666,7 @@
             this.btnLuuLai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLuuLai.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLuuLai.Image = global::O2S_QuanLyHocVien.Properties.Resources.save_16x16;
-            this.btnLuuLai.Location = new System.Drawing.Point(479, 10);
+            this.btnLuuLai.Location = new System.Drawing.Point(410, 8);
             this.btnLuuLai.Name = "btnLuuLai";
             this.btnLuuLai.Size = new System.Drawing.Size(120, 34);
             this.btnLuuLai.TabIndex = 71;
@@ -750,6 +775,11 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "XẾP LỊCH HỌC";
             // 
+            // imMenu
+            // 
+            this.imMenu.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imMenu.ImageStream")));
+            this.imMenu.Images.SetKeyName(0, "edit-11-16.png");
+            // 
             // frmXepLichHoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -781,6 +811,7 @@
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imMenu)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -813,7 +844,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn_IsLock;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
@@ -834,5 +865,7 @@
         private System.Windows.Forms.Button btnLuuLai;
         private System.Windows.Forms.ComboBox cboKhoaHoc;
         private System.Windows.Forms.Button btnTimKiem;
+        private System.Windows.Forms.Button btnKhoaLichHoc;
+        private DevExpress.Utils.ImageCollection imMenu;
     }
 }

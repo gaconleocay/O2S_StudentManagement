@@ -28,7 +28,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -101,7 +101,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static List<QuanLyHocVienDTO> SelectQuanLyHocVien(HocVienFilter _filter)
@@ -188,7 +188,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -219,7 +219,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -239,7 +239,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 {
                     taiKhoan.IsRemove = 0;
                 }
-                taiKhoan.MatKhau = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(taiKhoan.MatKhau, true);
+                taiKhoan.LOAITAIKHOAN = Logic.LoaiTaiKhoanLogic.Select(taiKhoan.LoaiTaiKhoanId ?? 0);
+                taiKhoan.TenDangNhap = taiKhoan.TenDangNhap;
+                taiKhoan.MatKhau = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(taiKhoan.MatKhau, true);
                 Database.TAIKHOANs.InsertOnSubmit(taiKhoan);
                 Database.HOCVIENs.InsertOnSubmit(_hocVien);
                 Database.SubmitChanges();
@@ -251,14 +253,14 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
                 TAIKHOAN _tkUpdate = TaiKhoanLogic.SelectSingle(taiKhoan.TaiKhoanId);
                 _tkUpdate.TenDangNhap = _hocVien.MaHocVien;
-                _tkUpdate.MatKhau = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(_hocVien.MaHocVien,true);
+                _tkUpdate.MatKhau = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(_hocVien.MaHocVien,true);
                 Database.SubmitChanges();
                 return true;
             }
             catch (System.Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -289,7 +291,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 //update tai khoan
                 TAIKHOAN _tk = TaiKhoanLogic.SelectSingle(hocVienCu.TaiKhoanId ?? 0);
                 //_tk.TenDangNhap = taiKhoan.TenDangNhap;
-                _tk.MatKhau =Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt( taiKhoan.MatKhau,true);
+                _tk.MatKhau =O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt( taiKhoan.MatKhau,true);
                 if (_hocVien.LoaiHocVienId == KeySetting.LOAIHOCVIEN_CHINHTHUC)//chinh thuc
                 {
                     _tk.IsRemove = 0;
@@ -304,7 +306,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -325,7 +327,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 

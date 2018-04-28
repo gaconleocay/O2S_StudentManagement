@@ -39,7 +39,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -66,7 +66,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             SplashScreenManager.CloseForm();
         }
@@ -89,12 +89,12 @@ namespace O2S_QuanLyHocVien.Pages
                 thongTinThem.Add(reportitem);
 
                 string fileTemplatePath = "BC02_HocVienGhiDanh.xlsx";
-                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this._lstPhieuGhiDanh);
+                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this._lstPhieuGhiDanh);
                 Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             SplashScreenManager.CloseForm();
         }
@@ -115,13 +115,13 @@ namespace O2S_QuanLyHocVien.Pages
                 thongTinThem.Add(reportitem);
 
                 string fileTemplatePath = "BC02_HocVienGhiDanh.xlsx";
-                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this._lstPhieuGhiDanh);
+                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this._lstPhieuGhiDanh);
                 Utilities.Common.Excel.ExcelExport export = new Utilities.Common.Excel.ExcelExport();
                 export.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -141,7 +141,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -156,7 +156,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 

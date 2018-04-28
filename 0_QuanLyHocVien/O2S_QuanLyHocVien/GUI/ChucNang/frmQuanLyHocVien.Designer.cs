@@ -327,7 +327,6 @@
             this.gridViewDSHocVien.OptionsView.ShowIndicator = false;
             this.gridViewDSHocVien.RowHeight = 25;
             this.gridViewDSHocVien.ViewCaptionHeight = 25;
-            this.gridViewDSHocVien.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridViewDSHocVien_CustomDrawCell);
             this.gridViewDSHocVien.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewDSHocVien_RowCellStyle);
             // 
             // clm_HocVien_Stt

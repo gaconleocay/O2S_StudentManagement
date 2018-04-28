@@ -45,7 +45,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         public void LoadDSHVChuaCoLop()
@@ -58,7 +58,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadKhoaHoc()
@@ -74,20 +74,20 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadLopTrongCuaKhoaHoc()
         {
             try
             {
-                cboLopHoc.DataSource = LopHocLogic.DanhSachLopTrong(Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString()));
+                cboLopHoc.DataSource = LopHocLogic.DanhSachLopTrong(O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString()));
                 cboLopHoc.DisplayMember = "TenLopHoc";
                 cboLopHoc.ValueMember = "LopHocId";
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         public void LoadDSHVLopChuaDu()
@@ -96,7 +96,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (cboLopHoc.SelectedValue != null)
                 {
-                    int _lophocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                    int _lophocId = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
                     this.dsXepLopHocVien = BangDiemLogic.SelectDSHV_Lop(_lophocId);
                     gridControlHV_XepLop.DataSource = this.dsXepLopHocVien;
                 }
@@ -108,7 +108,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -123,7 +123,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnThemVaoLop_Click(object sender, EventArgs e)
@@ -137,7 +137,7 @@ namespace O2S_QuanLyHocVien.Pages
                         "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                         var rowHandle = gridViewHV_ChuaXepLop.FocusedRowHandle;
-                        int _phieughidanhId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewHV_ChuaXepLop.GetRowCellValue(rowHandle, "PhieuGhiDanhId").ToString());
+                        int _phieughidanhId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewHV_ChuaXepLop.GetRowCellValue(rowHandle, "PhieuGhiDanhId").ToString());
                         PHIEUGHIDANH _phieuGD = PhieuGhiDanhLogic.SelectSingle(_phieughidanhId);
 
                         XepLopDTO _hocvienLop = new XepLopDTO();
@@ -170,7 +170,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnBoKhoiLop_Click(object sender, EventArgs e)
@@ -180,7 +180,7 @@ namespace O2S_QuanLyHocVien.Pages
                 if (gridViewHV_XepLop.RowCount > 0)
                 {
                     var rowHandle = gridViewHV_XepLop.FocusedRowHandle;
-                    int _phieughidanhId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewHV_XepLop.GetRowCellValue(rowHandle, "PhieuGhiDanhId").ToString());
+                    int _phieughidanhId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewHV_XepLop.GetRowCellValue(rowHandle, "PhieuGhiDanhId").ToString());
 
                     XepLopDTO _xeplopXoa = this.dsXepLopHocVien.Where(o => o.PhieuGhiDanhId == _phieughidanhId).FirstOrDefault();
 
@@ -195,7 +195,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnLuuLop_Click(object sender, EventArgs e)
@@ -203,7 +203,7 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 //insert + Xoa tai BANGDIEM 
-                int _LopHocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                int _LopHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
                 foreach (var item in this.dsXepLopHocVien)
                 {
                     //kiem tra ton tai hay khong
@@ -252,7 +252,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
                 frmthongbao.Show();
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -281,7 +281,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void gridViewHV_ChuaXepLop_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
@@ -295,7 +295,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void gridViewHV_XepLop_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
@@ -309,7 +309,7 @@ namespace O2S_QuanLyHocVien.Pages
             //}
             //catch (Exception ex)
             //{
-            //    Common.Logging.LogSystem.Warn(ex);
+            //    O2S_Common.Logging.LogSystem.Warn(ex);
             //}
         }
 
@@ -338,17 +338,17 @@ namespace O2S_QuanLyHocVien.Pages
                     };
                     thongTinThem.Add(_item_tenlophoc);
 
-                    int _lophocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                    int _lophocId = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
                     List<XepLopDTO> _lstXepLop = BangDiemLogic.SelectDSHV_Lop(_lophocId);
 
                     string fileTemplatePath = "FUN_XepLop_DanhSachLopHoc.xlsx";
-                    DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(_lstXepLop);
+                    DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(_lstXepLop);
                     Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
                 }
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             SplashScreenManager.CloseForm();
         }

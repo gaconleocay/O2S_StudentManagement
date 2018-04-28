@@ -12,5 +12,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Model
         public int? Stt { get; set; }
         public string TenCoSoTrungTam { get; set; }
         public string ThoiGianHoc_Long { get; set; }
+        public bool? IsEdit { get; set; }
     }
 }

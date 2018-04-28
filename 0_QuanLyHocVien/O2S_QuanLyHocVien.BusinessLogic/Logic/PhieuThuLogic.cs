@@ -12,7 +12,7 @@ using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
 using O2S_QuanLyHocVien.BusinessLogic;
-
+using System.Transactions;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
@@ -29,7 +29,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -52,7 +52,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  SoTien = obj.SoTien,
                                  ThoiGianThu = obj.ThoiGianThu,
                                  GhiChu = obj.GhiChu,
-                                 IsRemove = obj.IsRemove,
+                                 IsRemove = obj.IsRemove ?? 0,
+                                 LyDoHuy = obj.LyDoHuy,
+                                 NguoiHuy = obj.NguoiHuy,
+                                 ThoiGianHuy = obj.ThoiGianHuy,
                                  CreatedDate = obj.CreatedDate,
                                  CreatedBy = obj.CreatedBy,
                                  CreatedLog = obj.CreatedLog,
@@ -78,7 +81,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static List<PHIEUTHU> SelectTheoPhieuGhiDanh(int _PhieuGhiDanhId)
@@ -105,18 +108,20 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
-        public static bool Update(PHIEUTHU _phieuthu, TAIKHOAN taiKhoan = null)
+        public static bool Update(PHIEUTHU _phieuthu)
         {
             try
             {
                 var phieuthuCu = SelectSingle(_phieuthu.PhieuThuId);
 
-                phieuthuCu.HocVienId = _phieuthu.HocVienId;
-                phieuthuCu.PhieuGhiDanhId = _phieuthu.PhieuGhiDanhId;
+                phieuthuCu.IsRemove = _phieuthu.IsRemove;
+                phieuthuCu.LyDoHuy = _phieuthu.LyDoHuy;
+                phieuthuCu.NguoiHuy = _phieuthu.NguoiHuy;
+                phieuthuCu.ThoiGianHuy = _phieuthu.ThoiGianHuy;
                 phieuthuCu.ModifiedDate = DateTime.Now;
                 phieuthuCu.ModifiedBy = GlobalSettings.UserCode;
                 phieuthuCu.ModifiedLog = GlobalSettings.SessionMyIP;
@@ -126,7 +131,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -142,7 +147,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static bool DeleteTheoPhieuGhiDanh(int _PhieuGhiDanhId)
@@ -157,10 +162,41 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
+        public static bool HuyPhieuThuTien(PHIEUTHU _phieuthu)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    var phieuthuCu = SelectSingle(_phieuthu.PhieuThuId);
+                    phieuthuCu.IsRemove = _phieuthu.IsRemove;
+                    phieuthuCu.LyDoHuy = _phieuthu.LyDoHuy;
+                    phieuthuCu.NguoiHuy = _phieuthu.NguoiHuy;
+                    phieuthuCu.ThoiGianHuy = _phieuthu.ThoiGianHuy;
+                    phieuthuCu.ModifiedDate = DateTime.Now;
+                    phieuthuCu.ModifiedBy = GlobalSettings.UserCode;
+                    phieuthuCu.ModifiedLog = GlobalSettings.SessionMyIP;
+                    Database.SubmitChanges();
+                    //update PHIEUGHIDANH
+                    PHIEUGHIDANH _pgdanh = PhieuGhiDanhLogic.SelectSingle(_phieuthu.PhieuGhiDanhId ?? 0);
+                    _pgdanh.DaDong = _pgdanh.DaDong - _phieuthu.SoTien;
+                    _pgdanh.ConNo = _pgdanh.ConNo + _phieuthu.SoTien;
+                    _pgdanh.ModifiedDate = DateTime.Now;
+                    _pgdanh.ModifiedBy = GlobalSettings.UserCode;
+                    _pgdanh.ModifiedLog = GlobalSettings.SessionMyIP;
+                    ts.Complete();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public static List<BaoCaoThuTien_ChiTietDTO> SelectBaoCaoThuTienChiTiet(PhieuThuFilter _filter)
         {
             try
@@ -186,7 +222,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static List<BaoCaoThuTien_TongHopDTO> SelectBaoCaoThuTienTongHop(PhieuThuFilter _filter)
@@ -211,7 +247,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 

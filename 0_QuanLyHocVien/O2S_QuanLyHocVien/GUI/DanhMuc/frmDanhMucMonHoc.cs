@@ -73,9 +73,9 @@ namespace O2S_QuanLyHocVien.Pages
         {
             return new MONHOC()
             {
-                MonHocId = Common.TypeConvert.TypeConvertParse.ToInt32(txtMaMonHoc.Text),
+                MonHocId = O2S_Common.TypeConvert.Parse.ToInt32(txtMaMonHoc.Text),
                 TenMonHoc = txtTenMonHoc.Text,
-                DiemToiDa = Common.TypeConvert.TypeConvertParse.ToDecimal(numDiemToiDa.Text),
+                DiemToiDa = O2S_Common.TypeConvert.Parse.ToDecimal(numDiemToiDa.Text),
             };
         }
         public void LoadGridMonHoc()
@@ -120,7 +120,7 @@ namespace O2S_QuanLyHocVien.Pages
 
             try
             {
-                LoadUI(MonHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridKH.SelectedRows[0].Cells["clmMonHocId"].Value.ToString())));
+                LoadUI(MonHocLogic.SelectSingle(O2S_Common.TypeConvert.Parse.ToInt32(gridKH.SelectedRows[0].Cells["clmMonHocId"].Value.ToString())));
             }
             catch
             {
@@ -153,7 +153,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    MonHocLogic.Delete(Common.TypeConvert.TypeConvertParse.ToInt32(gridKH.SelectedRows[0].Cells["clmMonHocId"].Value.ToString()));
+                    MonHocLogic.Delete(O2S_Common.TypeConvert.Parse.ToInt32(gridKH.SelectedRows[0].Cells["clmMonHocId"].Value.ToString()));
 
                     MessageBox.Show("Xóa môn học thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadGridMonHoc();

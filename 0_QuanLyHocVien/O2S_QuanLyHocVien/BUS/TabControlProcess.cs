@@ -29,7 +29,7 @@ namespace O2S_QuanLyHocVien.BUS
         //    }
         //    catch (Exception ex)
         //    {
-        //        Common.Logging.LogSystem.Warn(ex);
+        //        O2S_Common.Logging.LogSystem.Warn(ex);
         //    }
         //}
 
@@ -56,7 +56,7 @@ namespace O2S_QuanLyHocVien.BUS
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -95,7 +95,7 @@ namespace O2S_QuanLyHocVien.BUS
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -128,7 +128,7 @@ namespace O2S_QuanLyHocVien.BUS
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -153,7 +153,7 @@ namespace O2S_QuanLyHocVien.BUS
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
             return result;
         }
@@ -177,7 +177,7 @@ namespace O2S_QuanLyHocVien.BUS
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -200,7 +200,7 @@ namespace O2S_QuanLyHocVien.BUS
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             return ucResult;
         }

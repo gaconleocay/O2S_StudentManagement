@@ -68,8 +68,8 @@ namespace O2S_QuanLyHocVien.Pages
                 ValidateSearch();
                 LopHocFilter _filter = new LopHocFilter();
                 _filter.CoSoId = GlobalSettings.CoSoId;
-                _filter.LopHocId = chkMaLop.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(txtMaLop.Text) : 0;
-                _filter.KhoaHocId = chkKhoa.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoa.SelectedValue.ToString()) : 0;
+                _filter.LopHocId = chkMaLop.Checked ? O2S_Common.TypeConvert.Parse.ToInt32(txtMaLop.Text) : 0;
+                _filter.KhoaHocId = chkKhoa.Checked ? O2S_Common.TypeConvert.Parse.ToInt32(cboKhoa.SelectedValue.ToString()) : 0;
                 _filter.DangMo = chkTinhTrang.Checked ? (bool?)rdMo.Checked : null;
 
                 gridLop.DataSource = LopHocLogic.Select(_filter);
@@ -129,7 +129,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                LOPHOC lop = LopHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
+                LOPHOC lop = LopHocLogic.SelectSingle(O2S_Common.TypeConvert.Parse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
 
                 lblTenLop.Text = lop.TenLopHoc;
                 lblMaLop.Text = lop.MaLopHoc;
@@ -148,7 +148,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            frmLopHocEdit frm = new frmLopHocEdit(LopHocLogic.SelectSingle(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString())));
+            frmLopHocEdit frm = new frmLopHocEdit(LopHocLogic.SelectSingle(O2S_Common.TypeConvert.Parse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString())));
             frm.Text = "Cập nhật thông tin lớp";
             frm.ShowDialog();
 
@@ -161,7 +161,7 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    LopHocLogic.Delete(Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
+                    LopHocLogic.Delete(O2S_Common.TypeConvert.Parse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
 
                     MessageBox.Show("Xóa lớp thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

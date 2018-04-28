@@ -56,12 +56,12 @@ namespace O2S_QuanLyHocVien.Popups
         {
             return new LOPHOC()
             {
-                LopHocId = Common.TypeConvert.TypeConvertParse.ToInt32(txtMaLop.Text),
+                LopHocId = O2S_Common.TypeConvert.Parse.ToInt32(txtMaLop.Text),
                 TenLopHoc = txtTenLop.Text,
                 NgayBatDau = DateTime.ParseExact(dateNgayBD.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 NgayKetThuc = DateTime.ParseExact(dateNgayKT.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 SiSo = lh == null ? 0 : lh.SiSo,
-                KhoaHocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoa.SelectedValue.ToString()),
+                KhoaHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoa.SelectedValue.ToString()),
                 DangMo = rdMo.Checked,
                 CoSoId = GlobalSettings.CoSoId
             };

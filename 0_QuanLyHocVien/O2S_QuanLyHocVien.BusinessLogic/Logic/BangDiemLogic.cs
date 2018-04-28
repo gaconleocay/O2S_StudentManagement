@@ -59,7 +59,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return null;
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -80,7 +80,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return null;
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static List<BANGDIEM> SelectTheoLopHoc(int _lophocId)
@@ -94,7 +94,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return null;
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -127,7 +127,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -203,7 +203,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return null;
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -237,7 +237,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -336,7 +336,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
     }

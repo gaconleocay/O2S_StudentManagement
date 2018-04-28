@@ -12,6 +12,7 @@ using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
 using O2S_QuanLyHocVien.BusinessLogic;
+using System.Transactions;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
@@ -28,7 +29,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static List<XEPLICHHOC> SelectTheoLopHoc(int _lophocid)
@@ -42,7 +43,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -96,7 +97,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static List<XEPLICHHOC> SelectTheoGiangVien(XepLichHocFilter _filter)
@@ -110,7 +111,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -119,7 +120,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             try
             {
                 var query = (from obj in GlobalSettings.Database.XEPLICHHOCs
-                             where (obj.LopHocId == _filter.LopHocId)
+                             where (obj.LopHocId == _filter.LopHocId && obj.IsLock == true)
                              select new XepLichHoc_PlusDTO
                              {
                                  ThoiGianHoc = obj.ThoiGianHoc,
@@ -131,7 +132,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -151,7 +152,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static bool InsertMultiRow(List<XEPLICHHOC> _lstxeplichhoc)
@@ -172,7 +173,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -202,10 +203,34 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
+        public static bool UpdateKhoaLichHoc(List<XEPLICHHOC> _lstLichHoc)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    foreach (var item in _lstLichHoc)
+                    {
+                        item.IsLock = true;
+                        item.ModifiedDate = DateTime.Now;
+                        item.ModifiedBy = GlobalSettings.UserCode;
+                        item.ModifiedLog = GlobalSettings.SessionMyIP;
+                        Database.SubmitChanges();
+                    }
+                    ts.Complete();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
         public static bool Delete(int _xeplichhocId)
         {
             try
@@ -218,7 +243,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static bool DeleteTheoLopHoc(int _lophocId)
@@ -233,7 +258,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 

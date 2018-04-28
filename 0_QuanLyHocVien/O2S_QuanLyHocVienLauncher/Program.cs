@@ -54,7 +54,7 @@ namespace O2S_QuanLyHocVienLauncher
             }
             catch (Exception ex)
             {
-               // O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+               // O2S_Common.Logging.LogSystem.Error(ex);
                 System.Diagnostics.Process.Start(@"O2S_QuanLyHocVien.exe");
                 Application.Exit();
             }
@@ -87,7 +87,7 @@ namespace O2S_QuanLyHocVienLauncher
             catch (Exception ex)
             {
                 result = true;
-               // O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+               // O2S_Common.Logging.LogSystem.Error(ex);
             }
             return result;
         }
@@ -103,7 +103,7 @@ namespace O2S_QuanLyHocVienLauncher
             }
             catch (Exception ex)
             {
-               // O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+               // O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         private static void CopyFolder_CheckSum(string SourceFolder, string DestFolder)
@@ -127,7 +127,7 @@ namespace O2S_QuanLyHocVienLauncher
                 catch (Exception ex)
                 {
                     //File.Copy(file, dest, true);
-                   // O2S_QuanLyHocVien.Common.Logging.LogSystem.Error("Loi copy file "+ ex.ToString());
+                   // O2S_Common.Logging.LogSystem.Error("Loi copy file "+ ex.ToString());
                     continue;
                 }
             }

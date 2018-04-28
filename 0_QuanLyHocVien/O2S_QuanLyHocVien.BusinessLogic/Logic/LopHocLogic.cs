@@ -28,7 +28,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -82,7 +82,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static List<LopHoc_PlusDTO> SelectGroupTheoLopHoc(LopHocFilter _filter)
@@ -90,7 +90,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             try
             {
                 var query = (from obj in GlobalSettings.Database.XEPLICHHOCs
-                             where (obj.KhoaHocId == _filter.KhoaHocId && (obj.GiaoVien_ChinhId == _filter.GiangVienId || obj.GiaoVien_TroGiangId == _filter.GiangVienId))
+                             where (obj.KhoaHocId == _filter.KhoaHocId && (obj.GiaoVien_ChinhId == _filter.GiangVienId || obj.GiaoVien_TroGiangId == _filter.GiangVienId) && obj.IsLock==true)
                              select new LopHoc_PlusDTO
                              {
                                  LopHocId = obj.LopHocId ?? 0,
@@ -102,7 +102,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -124,7 +124,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -149,7 +149,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -165,7 +165,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 

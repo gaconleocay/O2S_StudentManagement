@@ -39,7 +39,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -74,7 +74,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -98,24 +98,10 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
-        private void gridViewDSHocVien_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
-        {
-            try
-            {
-                if (e.Column == clm_HocVien_Stt)
-                {
-                    e.DisplayText = Convert.ToString(e.RowHandle + 1);
-                }
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Warn(ex);
-            }
-        }
 
 
         #endregion
@@ -139,12 +125,12 @@ namespace O2S_QuanLyHocVien.Pages
                 thongTinThem.Add(reportitem);
 
                 string fileTemplatePath = "FUN_QuanLyHocVien_ChinhThuc.xlsx";
-                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstHocVien);
+                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHocVien);
                 Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             SplashScreenManager.CloseForm();
         }
@@ -165,13 +151,13 @@ namespace O2S_QuanLyHocVien.Pages
                 thongTinThem.Add(reportitem);
 
                 string fileTemplatePath = "FUN_QuanLyHocVien_ChinhThuc.xlsx";
-                DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstHocVien);
+                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHocVien);
                 Utilities.Common.Excel.ExcelExport export = new Utilities.Common.Excel.ExcelExport();
                 export.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 

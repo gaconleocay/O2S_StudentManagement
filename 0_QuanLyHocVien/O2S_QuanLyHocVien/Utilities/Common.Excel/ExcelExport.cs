@@ -57,7 +57,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Excel
             }
             catch (Exception ex)
             {
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             return orderTable;
         }
@@ -135,7 +135,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Excel
             }
             catch (Exception ex)
             {
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
                 MessageBox.Show("Export dữ liệu thất bại!", "Thông báo !", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -183,7 +183,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Excel
                 }
                 catch (Exception ex)
                 {
-                    O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                    O2S_Common.Logging.LogSystem.Error(ex);
                     MessageBox.Show("Export dữ liệu thất bại!", "Thông báo !", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -231,7 +231,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Excel
             }
             catch (Exception ex)
             {
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             return result;
         }
@@ -271,7 +271,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Excel
             }
             catch (Exception ex)
             {
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             return result;
         }

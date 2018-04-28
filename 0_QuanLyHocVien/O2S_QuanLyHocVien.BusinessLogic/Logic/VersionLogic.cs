@@ -38,24 +38,33 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
 
-        public static void Update(VERSION _version)
+        public static bool Update(VERSION _version)
         {
-            var temp = (from p in Database.VERSIONs
-                        select p).Single();
+            try
+            {
+                var temp = (from p in Database.VERSIONs
+                            select p).Single();
 
-            temp.AppVersion = _version.AppVersion;
-            temp.AppLink = _version.AppLink;
-            //temp.AppResults = _version.AppResults;
-            temp.AppMD5Hash = _version.AppMD5Hash;
-            temp.SqlVersion = _version.SqlVersion;
-            //temp.SqlResults = _version.SqlResults;
+                temp.AppVersion = _version.AppVersion;
+                temp.AppLink = _version.AppLink;
+                //temp.AppResults = _version.AppResults;
+                temp.AppMD5Hash = _version.AppMD5Hash;
+                temp.SqlVersion = _version.SqlVersion;
+                temp.SqlResults = _version.SqlResults;
 
-            Database.SubmitChanges();
+                Database.SubmitChanges();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+            }
+
         }
 
     }

@@ -32,7 +32,7 @@ namespace O2S_QuanLyHocVienLauncher
             catch (Exception ex)
             {
                 kiemtraketnoi = false;
-                //Common.Logging.LogSystem.Error("Loi ket noi den CSDL: " + ex.ToString());
+                //O2S_Common.Logging.LogSystem.Error("Loi ket noi den CSDL: " + ex.ToString());
             }
         }
         public void Disconnect()
@@ -65,7 +65,7 @@ namespace O2S_QuanLyHocVienLauncher
             catch (Exception ex)
             {
                 //MessageBox.Show("Có lỗi dữ liệu đầu vào" + ex.ToString(), "Thông báo!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //Common.Logging.LogSystem.Error("Loi getDataTable: " + ex.ToString());
+                //O2S_Common.Logging.LogSystem.Error("Loi getDataTable: " + ex.ToString());
             }
             return dt;
         }
@@ -85,7 +85,7 @@ namespace O2S_QuanLyHocVienLauncher
             }
             catch (Exception ex)
             {
-                //Common.Logging.LogSystem.Error("Loi ExecuteNonQuery: " + ex.ToString());
+                //O2S_Common.Logging.LogSystem.Error("Loi ExecuteNonQuery: " + ex.ToString());
             }
             return result;
         }

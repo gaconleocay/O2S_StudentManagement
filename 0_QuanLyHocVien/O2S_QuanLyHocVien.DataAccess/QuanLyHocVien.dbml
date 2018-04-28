@@ -150,9 +150,11 @@
       <Column Name="GioiTinh" Type="System.String" DbType="NVarChar(3)" CanBeNull="true" />
       <Column Name="Sdt" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Column Name="Email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="NgayBatDauLamViec" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="TaiKhoanId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="NgaySinh" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="DiaChi" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
       <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -167,11 +169,32 @@
       <Association Name="TAIKHOAN_GIANGVIEN" Member="TAIKHOAN" ThisKey="TaiKhoanId" OtherKey="TaiKhoanId" Type="TAIKHOAN" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.HOADONTHUCHI" Member="HOADONTHUCHIs">
+    <Type Name="HOADONTHUCHI">
+      <Column Name="HoaDonThuChiId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SoHoaDon" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="LoaiChungTuId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ThoiGianLap" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TenNguoiLap" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="SoTien" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="LOAICHUNGTU_HOADONTHUCHI" Member="LOAICHUNGTU" ThisKey="LoaiChungTuId" OtherKey="LoaiChungTuId" Type="LOAICHUNGTU" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.HOCPHIHOCVIEN" Member="HOCPHIHOCVIENs">
     <Type Name="HOCPHIHOCVIEN">
       <Column Name="HocPhiHocVienId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PhieuGhiDanhId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="HocVienId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Stt" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="DmDichVuId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TenDichVu" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
       <Column Name="SoTien" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
@@ -289,6 +312,21 @@
       <Association Name="HOCVIEN_LICHSUTUVAN" Member="HOCVIEN" ThisKey="HocVienId" OtherKey="HocVienId" Type="HOCVIEN" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.LOAICHUNGTU" Member="LOAICHUNGTUs">
+    <Type Name="LOAICHUNGTU">
+      <Column Name="LoaiChungTuId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaLoaiChungTu" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TenLoaiChungTu" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ModifiedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="LOAICHUNGTU_HOADONTHUCHI" Member="HOADONTHUCHIs" ThisKey="LoaiChungTuId" OtherKey="LoaiChungTuId" Type="HOADONTHUCHI" />
+    </Type>
+  </Table>
   <Table Name="dbo.LOAIHOCVIEN" Member="LOAIHOCVIENs">
     <Type Name="LOAIHOCVIEN">
       <Column Name="LoaiHocVienId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -380,13 +418,16 @@
     <Type Name="NHANVIEN">
       <Column Name="NhanVienId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="LoaiNhanVienId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TaiKhoanId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MaNhanVien" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="TenNhanVien" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="GioiTinh" Type="System.String" DbType="NVarChar(3)" CanBeNull="true" />
       <Column Name="Sdt" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
       <Column Name="Email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="TaiKhoanId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NgaySinh" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="DiaChi" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="NgayBatDauLamViec" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
       <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -463,6 +504,9 @@
       <Column Name="SoTien" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="GhiChu" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
       <Column Name="IsRemove" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LyDoHuy" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="NguoiHuy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ThoiGianHuy" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="CreatedLog" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />

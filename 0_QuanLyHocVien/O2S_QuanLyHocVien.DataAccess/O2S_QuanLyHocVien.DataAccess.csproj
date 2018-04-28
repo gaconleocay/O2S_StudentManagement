@@ -33,6 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="O2S_Common">
+      <HintPath>..\..\..\..\1_Library\O2S_Common.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
@@ -94,12 +97,6 @@
     <None Include="QuanLyHocVien.dbml.layout">
       <DependentUpon>QuanLyHocVien.dbml</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\O2S_QuanLyHocVien.Common\O2S_QuanLyHocVien.Common.csproj">
-      <Project>{6c338723-1358-4581-9d20-d14a18b5e3b8}</Project>
-      <Name>O2S_QuanLyHocVien.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

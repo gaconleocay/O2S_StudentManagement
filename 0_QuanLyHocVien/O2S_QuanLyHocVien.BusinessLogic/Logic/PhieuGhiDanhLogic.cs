@@ -116,7 +116,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             return (from p in Database.PHIEUGHIDANHs
                     where p.PhieuGhiDanhId == _PhieuGhiDanhId && p.IsRemove!=1
-                    select p).Single();
+                    select p).FirstOrDefault();
         }
         public static List<PhieuGhiDanh_PlusDTO> Select(PhieuGhiDanhFilter _filter)
         {
@@ -178,7 +178,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static List<QLHocPhi_PlusDTO> SelectQLHocPhi(PhieuGhiDanhFilter _filter)
@@ -239,7 +239,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -270,7 +270,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         }
 
-        public static bool InsertPGDFull(PHIEUGHIDANH _phieughidanh, PHIEUTHU _phieuthu, List<HOCPHIHOCVIEN> _lsthphv, ref int _PhieuGhiDanhId)
+        public static bool InsertPGDFull(PHIEUGHIDANH _phieughidanh, PHIEUTHU _phieuthu, List<HOCPHIHOCVIEN> _lsthphv, ref int _PhieuGhiDanhId, ref int _PhieuThuId)
         {
             try
             {
@@ -297,6 +297,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                         _phieuthu.IsRemove = 0;
                         Database.PHIEUTHUs.InsertOnSubmit(_phieuthu);
                         Database.SubmitChanges();
+                        _PhieuThuId = _phieuthu.PhieuThuId;
                         _phieuthu.MaPhieuThu = string.Format("{0}{1:D5}", "PT", _phieuthu.PhieuThuId);
                         Database.SubmitChanges();
                     }
@@ -323,7 +324,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             {
                 return false;
             }
-
         }
 
         public static bool InsertQLHocPhi(PHIEUGHIDANH _phieughidanh, PHIEUTHU _phieuthu, ref int _PhieuThuId)
@@ -398,21 +398,24 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     if (_lstHPHV != null && _lstHPHV.Count > 0)
                     {
                         Database.HOCPHIHOCVIENs.DeleteAllOnSubmit(_lstHPHV);
-                        Database.SubmitChanges();
+                        //Database.SubmitChanges();
                     }
                     //Xoa bang PHIEUTHU;
                     List<PHIEUTHU> _lstPhieuThu = PhieuThuLogic.SelectTheoPhieuGhiDanh(_phieuGD.PhieuGhiDanhId);
                     if (_lstPhieuThu != null && _lstPhieuThu.Count > 0)
                     {
                         Database.PHIEUTHUs.DeleteAllOnSubmit(_lstPhieuThu);
-                        Database.SubmitChanges();
+                       // Database.SubmitChanges();
                     }
                     //update=Xoa bang PHIEUGHIDANH
-                    PHIEUGHIDANH _phieuGDUpdate = SelectSingle(_phieuGD.PhieuGhiDanhId);
-                    _phieuGDUpdate.IsRemove = _phieuGD.IsRemove;
-                    _phieuGDUpdate.LyDoXoa = _phieuGD.LyDoXoa;
-                    _phieuGDUpdate.NguoiXoa = _phieuGD.NguoiXoa;
-                    Database.SubmitChanges();
+                    //PHIEUGHIDANH _phieuGDUpdate = SelectSingle(_phieuGD.PhieuGhiDanhId);
+                    _phieuGD.IsRemove = _phieuGD.IsRemove;
+                    _phieuGD.LyDoXoa = _phieuGD.LyDoXoa;
+                    _phieuGD.NguoiXoa = _phieuGD.NguoiXoa;
+                    _phieuGD.ModifiedDate = DateTime.Now;
+                    _phieuGD.ModifiedBy = GlobalSettings.UserCode;
+                    _phieuGD.ModifiedLog = GlobalSettings.SessionMyIP;
+                    //Database.SubmitChanges();
                     //cap nhat bang HOCVIEN va bang tai khoan: kiem tra HV hoc khoa nao ko? neu khong thi update
                     PhieuGhiDanhFilter _filter = new PhieuGhiDanhFilter();
                     _filter.HocVienId = _phieuGD.HocVienId;
@@ -425,9 +428,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
                         TAIKHOAN _taikhoan = TaiKhoanLogic.Select(_hocvien.TAIKHOAN.TenDangNhap);
                         _taikhoan.IsRemove = 1;
-                        Database.SubmitChanges();
+                        //Database.SubmitChanges();
                     }
                     //
+                    Database.SubmitChanges();
                     ts.Complete();
                     return true; 
                 }

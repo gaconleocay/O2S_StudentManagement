@@ -46,7 +46,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         private void LoadDuLieuChuongTrinh()
@@ -70,7 +70,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         private void KiemTraInsertMayTram()
@@ -83,13 +83,13 @@ namespace O2S_QuanLyHocVien.Popups
                 {
                     LICENSE _insert = new LICENSE();
                     _insert.DataKey = GlobalSettings.MaDatabase;
-                    _insert.LicenseKey = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt("", true);
+                    _insert.LicenseKey = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt("", true);
                     LicenseLogic.Insert(_insert);
                 }
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         private void LoadDefaultValue()
@@ -100,8 +100,8 @@ namespace O2S_QuanLyHocVien.Popups
 
                 if (chkSave.Checked)
                 {
-                    txtTenDangNhap.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["LoginUser"].ToString(), true);
-                    txtMatKhau.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["LoginPassword"].ToString(), true);
+                    txtTenDangNhap.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["LoginUser"].ToString(), true);
+                    txtMatKhau.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["LoginPassword"].ToString(), true);
                 }
                 else
                 { txtTenDangNhap.Text = string.Empty;
@@ -112,7 +112,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -129,7 +129,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         private static void CopyFolder_CheckSum(string SourceFolder, string DestFolder)
@@ -146,7 +146,7 @@ namespace O2S_QuanLyHocVien.Popups
                     if (name.Contains("O2S_QuanLyHocVienLauncher"))
                     {
                         //Check file
-                        if (Common.Checksum.GetFileCheckSum.GetMD5HashFromFile(file) != Common.Checksum.GetFileCheckSum.GetMD5HashFromFile(dest))
+                        if (O2S_Common.Checksum.GetFileCheckSum.GetMD5HashFromFile(file) != O2S_Common.Checksum.GetFileCheckSum.GetMD5HashFromFile(dest))
                         {
                             File.Copy(file, dest, true);
                         }
@@ -155,7 +155,7 @@ namespace O2S_QuanLyHocVien.Popups
                 catch (Exception ex)
                 {
                     continue;
-                    Common.Logging.LogSystem.Error("Lỗi copy file check_sum" + ex.ToString());
+                    O2S_Common.Logging.LogSystem.Error("Lỗi copy file check_sum" + ex.ToString());
                 }
             }
 
@@ -232,7 +232,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -252,7 +252,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         private void LayCoSoTrungTam()
@@ -283,7 +283,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         private void LuuLaiThongTinDangNhap()
@@ -295,8 +295,8 @@ namespace O2S_QuanLyHocVien.Popups
                 {
                     Configuration _config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                     _config.AppSettings.Settings["checkEditNhoPass"].Value = Convert.ToString(chkSave.Checked);
-                    _config.AppSettings.Settings["LoginUser"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtTenDangNhap.Text.Trim(), true);
-                    _config.AppSettings.Settings["LoginPassword"].Value = Common.EncryptAndDecrypt.EncryptAndDecrypt.Encrypt(txtMatKhau.Text.Trim(), true);
+                    _config.AppSettings.Settings["LoginUser"].Value = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(txtTenDangNhap.Text.Trim(), true);
+                    _config.AppSettings.Settings["LoginPassword"].Value = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(txtMatKhau.Text.Trim(), true);
                     _config.Save(ConfigurationSaveMode.Modified);
 
                     ConfigurationManager.RefreshSection("appSettings");
@@ -314,7 +314,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -332,7 +332,7 @@ namespace O2S_QuanLyHocVien.Popups
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
     }

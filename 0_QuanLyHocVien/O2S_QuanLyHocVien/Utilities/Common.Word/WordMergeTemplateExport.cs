@@ -48,7 +48,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Word
             }
             catch (Exception ex)
             {
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
             return doc;
         }
@@ -70,7 +70,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Word
             }
             catch (Exception ex)
             {
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
             return doc;
         }
@@ -93,7 +93,7 @@ namespace O2S_QuanLyHocVien.Utilities.Common.Word
             }
             catch (Exception ex)
             {
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
             return result;
         }

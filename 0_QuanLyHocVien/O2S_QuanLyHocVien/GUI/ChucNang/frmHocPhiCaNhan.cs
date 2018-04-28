@@ -60,7 +60,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             gridLop.DataSource = BangDiemLogic.SelectDSLop(GlobalSettings.UserID, rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateTuNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null,
                 rdKhoangThoiGian.Checked ? (DateTime?)DateTime.ParseExact(dateDenNgay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture) : null,
-                rdKhoaHoc.Checked ? Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString()) : 0);
+                rdKhoaHoc.Checked ? O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString()) : 0);
 
             gridLop_Click(sender, e);
         }
@@ -76,7 +76,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                var f = BangDiemLogic.Select(GlobalSettings.UserID, Common.TypeConvert.TypeConvertParse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
+                var f = BangDiemLogic.Select(GlobalSettings.UserID, O2S_Common.TypeConvert.Parse.ToInt32(gridLop.SelectedRows[0].Cells["clmLopHocId"].Value.ToString()));
                 lblTenLop.Text = f.LOPHOC.TenLopHoc;
                 lblMaLop.Text = f.LopHocId.ToString();
                 lblTenKhoaHoc.Text = f.LOPHOC.KHOAHOC.TenKhoaHoc;

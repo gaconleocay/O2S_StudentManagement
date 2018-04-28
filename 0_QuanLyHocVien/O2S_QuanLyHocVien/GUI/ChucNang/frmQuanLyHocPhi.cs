@@ -17,6 +17,8 @@ using System.Drawing;
 using DevExpress.XtraSplashScreen;
 using O2S_QuanLyHocVien.BusinessLogic.Models;
 using System.Data;
+using O2S_QuanLyHocVien.Popups;
+using System.Linq;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -44,7 +46,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadDanhSachHocVien()
@@ -69,10 +71,11 @@ namespace O2S_QuanLyHocVien.Pages
                 lblHocPhi.Text = String.Empty;
                 lblDaDong.Text = String.Empty;
                 lblConNo.Text = String.Empty;
+                lblMienGiam_Tien.Text = string.Empty;
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -83,24 +86,38 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 var rowHandle = gridViewDSHocVien.FocusedRowHandle;
-                this.HocVienId_Select = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewDSHocVien.GetRowCellValue(rowHandle, "HocVienId").ToString());
-                this.PhieuGhiDanhId_Select = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewDSHocVien.GetRowCellValue(rowHandle, "PhieuGhiDanhId").ToString());
-                lblMaHocVien.Text = gridViewDSHocVien.GetRowCellValue(rowHandle, "MaHocVien").ToString();
-                lblTenHocVien.Text = gridViewDSHocVien.GetRowCellValue(rowHandle, "TenHocVien").ToString();
-                lblHocPhi.Text = Common.Number.NumberConvert.NumberToString(Common.TypeConvert.TypeConvertParse.ToDecimal(gridViewDSHocVien.GetRowCellValue(rowHandle, "TongTien").ToString()), 0);
-                lblDaDong.Text = Common.Number.NumberConvert.NumberToString(Common.TypeConvert.TypeConvertParse.ToDecimal(gridViewDSHocVien.GetRowCellValue(rowHandle, "DaDong").ToString()), 0);
-                lblConNo.Text = Common.Number.NumberConvert.NumberToString(Common.TypeConvert.TypeConvertParse.ToDecimal(gridViewDSHocVien.GetRowCellValue(rowHandle, "ConNo").ToString()), 0);
-                numNopThem.Text = "0";
+                this.HocVienId_Select = O2S_Common.TypeConvert.Parse.ToInt32(gridViewDSHocVien.GetRowCellValue(rowHandle, "HocVienId").ToString());
+                this.PhieuGhiDanhId_Select = O2S_Common.TypeConvert.Parse.ToInt32(gridViewDSHocVien.GetRowCellValue(rowHandle, "PhieuGhiDanhId").ToString());
+
+                PHIEUGHIDANH _phieugd = PhieuGhiDanhLogic.SelectSingle(this.PhieuGhiDanhId_Select);
+
+                lblMaHocVien.Text = _phieugd.HOCVIEN.MaHocVien;
+                lblTenHocVien.Text = _phieugd.HOCVIEN.TenHocVien;
+                lblHocPhi.Text = O2S_Common.Number.Convert.NumberToString(O2S_Common.TypeConvert.Parse.ToDecimal(_phieugd.TongTien.ToString()), 0);
+                lblDaDong.Text = O2S_Common.Number.Convert.NumberToString(O2S_Common.TypeConvert.Parse.ToDecimal(_phieugd.DaDong.ToString()), 0);
+                lblConNo.Text = O2S_Common.Number.Convert.NumberToString(O2S_Common.TypeConvert.Parse.ToDecimal(_phieugd.ConNo.ToString()), 0);
+                lblMienGiam_Tien.Text = O2S_Common.Number.Convert.NumberToString(O2S_Common.TypeConvert.Parse.ToDecimal(_phieugd.MienGiam_Tien.ToString()), 0);
+                numNopThem.Text = _phieugd.ConNo.ToString();
                 //Load danh sach phieu thu
                 PhieuThuFilter _filter = new PhieuThuFilter();
                 _filter.HocVienId = this.HocVienId_Select;
                 _filter.PhieuGhiDanhId = this.PhieuGhiDanhId_Select;
                 LoadDanhSachPhieuThu(_filter);
                 btnInBienLai.Enabled = false;
+                if (_phieugd.ConNo == 0)
+                {
+                    btnLuuLai.Enabled = false;
+                    numNopThem.ReadOnly = true;
+                }
+                else
+                {
+                    btnLuuLai.Enabled = true;
+                    numNopThem.ReadOnly = false;
+                }
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         private void LoadDanhSachPhieuThu(PhieuThuFilter _filter)
@@ -111,7 +128,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -119,11 +136,14 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
+                this.HocVienId_Select = 0;
+                this.PhieuGhiDanhId_Select = 0;
+                this.PhieuThu_Insert = 0;
                 LoadDanhSachHocVien();
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -131,24 +151,28 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
+                ValidateLuu();
                 //Update PHIEUGHIDANH
                 PHIEUGHIDANH _phieughidanh = PhieuGhiDanhLogic.SelectSingle(this.PhieuGhiDanhId_Select);
-                _phieughidanh.DaDong = _phieughidanh.DaDong + Common.TypeConvert.TypeConvertParse.ToDecimal(numNopThem.Text);
-                _phieughidanh.ConNo = _phieughidanh.TongTien - _phieughidanh.DaDong;
+                _phieughidanh.DaDong = _phieughidanh.DaDong + O2S_Common.TypeConvert.Parse.ToDecimal(numNopThem.Text);
 
+                decimal _mienggiam = _phieughidanh.MienGiam_Tien ?? 0;
+                _phieughidanh.ConNo = _phieughidanh.TongTien - _phieughidanh.DaDong - _mienggiam;
                 //Insert Phieu Thu
                 var rowHandle = gridViewDSHocVien.FocusedRowHandle;
                 PHIEUTHU _phieuthu = new PHIEUTHU();
                 _phieuthu.PhieuGhiDanhId = this.PhieuGhiDanhId_Select;
                 _phieuthu.HocVienId = this.HocVienId_Select;
                 _phieuthu.ThoiGianThu = DateTime.Now;
-                _phieuthu.SoTien = Common.TypeConvert.TypeConvertParse.ToDecimal(numNopThem.Text);
-                _phieuthu.GhiChu = gridViewDSHocVien.GetRowCellValue(rowHandle, "TenKhoaHoc").ToString();
+                _phieuthu.SoTien = O2S_Common.TypeConvert.Parse.ToDecimal(numNopThem.Text);
+                _phieuthu.GhiChu = "";//gridViewDSHocVien.GetRowCellValue(rowHandle, "TenKhoaHoc").ToString();
                 if (PhieuGhiDanhLogic.InsertQLHocPhi(_phieughidanh, _phieuthu, ref this.PhieuThu_Insert))
                 {
                     Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.LUU_THANH_CONG);
                     frmthongbao.Show();
-                    //LoadDanhSachHocVien();
+                    //
+                    LoadDanhSachHocVien();
+                    gridViewDSHocVien_Click(null, null);
 
                     PhieuThuFilter _filter = new PhieuThuFilter();
                     _filter.HocVienId = this.HocVienId_Select;
@@ -158,9 +182,13 @@ namespace O2S_QuanLyHocVien.Pages
                     btnInBienLai.Enabled = true;
                 }
             }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -176,7 +204,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -185,14 +213,40 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 var rowHandle = gridViewPhieuThu.FocusedRowHandle;
-                int _PhieuThuId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewPhieuThu.GetRowCellValue(rowHandle, "PhieuThuId").ToString());
+                int _PhieuThuId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewPhieuThu.GetRowCellValue(rowHandle, "PhieuThuId").ToString());
 
                 PHIEUTHU _phieuthu = PhieuThuLogic.SelectSingle(_PhieuThuId);
                 InBienLaiThuTien(_phieuthu);
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+        private void repositoryItemButton_Huy_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var rowHandle = gridViewPhieuThu.FocusedRowHandle;
+                if (gridViewPhieuThu.GetRowCellValue(rowHandle, "IsRemove").ToString() != "1")
+                {
+                    int _PhieuThuId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewPhieuThu.GetRowCellValue(rowHandle, "PhieuThuId").ToString());
+                    frmPopUpHuyPhieuThuTien _frm = new frmPopUpHuyPhieuThuTien(_PhieuThuId);
+                    _frm.ShowDialog();
+                    //
+                    LoadDanhSachHocVien();
+                    gridViewDSHocVien_Click(null, null);
+
+                    PhieuThuFilter _filter = new PhieuThuFilter();
+                    _filter.HocVienId = this.HocVienId_Select;
+                    _filter.PhieuGhiDanhId = this.PhieuGhiDanhId_Select;
+                    LoadDanhSachPhieuThu(_filter);
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         #endregion
@@ -211,23 +265,42 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
-        private void numNop_KeyPress(object sender, KeyPressEventArgs e)
+        private void numNopThem_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
         }
-
+        private void numNopThem_EditValueChanged(object sender, EventArgs e)
+        {
+            numNopThem.Text = O2S_Common.Number.Convert.NumberToString(O2S_Common.TypeConvert.Parse.ToDecimal(numNopThem.Text), 0);
+        }
+        private void gridViewPhieuThu_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
+        {
+            try
+            {
+                // hien thi mau do khi benh an co loi
+                if (gridViewPhieuThu.GetRowCellValue(e.RowHandle, "IsRemove").ToString() == "1")
+                {
+                    e.Appearance.ForeColor = Color.Gray;
+                    e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Strikeout);
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
         #endregion
 
         #region Process
         public void ValidateLuu()
         {
-            if (Common.TypeConvert.TypeConvertParse.ToDecimal(numNopThem.Text) == 0)
+            if (O2S_Common.TypeConvert.Parse.ToDecimal(numNopThem.Text) == 0)
                 throw new ArgumentException("Số tiền nộp phải lớn hơn 0");
         }
         private void InBienLaiThuTien(PHIEUTHU _phieuthu)
@@ -236,8 +309,16 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
 
+                PHIEUGHIDANH _phieughidanh = PhieuGhiDanhLogic.SelectSingle(_phieuthu.PhieuGhiDanhId ?? 0);
+
+
                 var rowHandle = gridViewDSHocVien.FocusedRowHandle;
                 List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
+
+                reportExcelDTO item_MAPHIEUTHU = new reportExcelDTO();
+                item_MAPHIEUTHU.name = "MAPHIEUTHU";
+                item_MAPHIEUTHU.value = _phieuthu.MaPhieuThu;
+                thongTinThem.Add(item_MAPHIEUTHU);
 
                 reportExcelDTO item_MAHOCVIEN = new reportExcelDTO();
                 item_MAHOCVIEN.name = "MAHOCVIEN";
@@ -259,43 +340,101 @@ namespace O2S_QuanLyHocVien.Pages
                 item_KHOAHOC.value = gridViewDSHocVien.GetRowCellValue(rowHandle, "TenKhoaHoc").ToString();
                 thongTinThem.Add(item_KHOAHOC);
 
+                DateTime _namsinh = O2S_Common.TypeConvert.Parse.ToDateTime(gridViewDSHocVien.GetRowCellValue(rowHandle, "NgaySinh").ToString());
                 reportExcelDTO item_NAMSINH = new reportExcelDTO();
                 item_NAMSINH.name = "NAMSINH";
-                item_NAMSINH.value = gridViewDSHocVien.GetRowCellValue(rowHandle, "NgaySinh").ToString();
+                item_NAMSINH.value = _namsinh.ToString("dd/MM/yyyy");
                 thongTinThem.Add(item_NAMSINH);
 
                 reportExcelDTO item_LOPHOC = new reportExcelDTO();
                 item_LOPHOC.name = "LOPHOC";
                 item_LOPHOC.value = gridViewDSHocVien.GetRowCellValue(rowHandle, "TenLopHoc").ToString();
                 thongTinThem.Add(item_LOPHOC);
+                //
+                reportExcelDTO item_TONGTIEN = new reportExcelDTO()
+                {
+                    name = "TONGTIEN",
+                    value = O2S_Common.Number.Convert.NumberToString(_phieughidanh.TongTien ?? 0, 0) + " đ",
+                };
+                thongTinThem.Add(item_TONGTIEN);
 
-                //reportExcelDTO item_sotienchu = new reportExcelDTO();
-                //item_sotienchu.name = "SOTIENBANGCHU";
-                //item_sotienchu.value = Common.String.StringConvert.CurrencyToVneseString(numNopThem.Text.Replace(".", ""));
-                //thongTinThem.Add(item_sotienchu);
+                reportExcelDTO item_MIENGIAM_TIEN = new reportExcelDTO()
+                {
+                    name = "MIENGIAM_TIEN",
+                    value = O2S_Common.Number.Convert.NumberToString(_phieughidanh.MienGiam_Tien ?? 0, 0) + " đ",
+                };
+                thongTinThem.Add(item_MIENGIAM_TIEN);
+
+                reportExcelDTO item_CONNO = new reportExcelDTO()
+                {
+                    name = "CONNO",
+                    value = O2S_Common.Number.Convert.NumberToString(_phieughidanh.ConNo ?? 0, 0) + " đ",
+                };
+                thongTinThem.Add(item_CONNO);
+
+                reportExcelDTO item_SOTIEN = new reportExcelDTO()
+                {
+                    name = "SOTIEN",
+                    value = O2S_Common.Number.Convert.NumberToString(_phieuthu.SoTien ?? 0, 0) + " đ",
+                };
+                thongTinThem.Add(item_SOTIEN);
+
+                reportExcelDTO item_sotienchu = new reportExcelDTO();
+                item_sotienchu.name = "SOTIENBANGCHU";
+                item_sotienchu.value = O2S_Common.Strings.Convert.CurrencyToVneseString(O2S_Common.Number.Convert.NumberToNumberRoundAuto(_phieuthu.SoTien ?? 0, 0).ToString());
+                thongTinThem.Add(item_sotienchu);
+
+                //
+                string fileTemplatePath = "BienLaiThuTien_NopTien_ThuThem.xlsx";
 
                 DataTable dataExport = new DataTable();
                 dataExport.Columns.Add("STT", typeof(string));
                 dataExport.Columns.Add("KHOANTHU", typeof(string));
                 dataExport.Columns.Add("SOTIEN", typeof(string));
                 dataExport.Columns.Add("GHICHU", typeof(string));
-                DataRow newRow = dataExport.NewRow();
-                newRow["STT"] = "1";
-                newRow["KHOANTHU"] = _phieuthu.PHIEUGHIDANH.KHOAHOC.TenKhoaHoc;
-                //gridViewDSHocVien.GetRowCellValue(rowHandle, "TenKhoaHoc").ToString();
-                newRow["SOTIEN"] = Common.Number.NumberConvert.NumberToString(_phieuthu.SoTien ?? 0, 0);
-                //Common.Number.NumberConvert.NumberToString(Common.TypeConvert.TypeConvertParse.ToDecimal(numNopThem.Text), 0);
-                newRow["GHICHU"] = _phieuthu.GhiChu;
-                dataExport.Rows.Add(newRow);
+                HocPhiHocVienFilter _filter = new HocPhiHocVienFilter()
+                {
+                    PhieuThuId = _phieuthu.PhieuThuId,
+                    HocVienId = this.HocVienId_Select,
+                };
+                List<HocPhiHocVien_PlusDTO> _lsthocPhiHV = HocPhiHocVienLogic.Select(_filter);
+                if (_lsthocPhiHV != null && _lsthocPhiHV.Count > 0)
+                {
+                    fileTemplatePath = "BienLaiThuTien_NopTien.xlsx";
+                    _lsthocPhiHV.OrderBy(o => o.Stt).ToList();
+                    for (int i = 0; i < _lsthocPhiHV.Count; i++)
+                    {
+                        DataRow newRow_khac = dataExport.NewRow();
+                        newRow_khac["STT"] = _lsthocPhiHV[i].Stt;
+                        newRow_khac["KHOANTHU"] = _lsthocPhiHV[i].TenDichVu == null ? "" : _lsthocPhiHV[i].TenDichVu;
+                        newRow_khac["SOTIEN"] = O2S_Common.Number.Convert.NumberToString(O2S_Common.TypeConvert.Parse.ToDecimal(_lsthocPhiHV[i].SoTien.ToString()), 0);
+                        newRow_khac["GHICHU"] = _lsthocPhiHV[i].GhiChu == null ? "" : _lsthocPhiHV[i].GhiChu;
+                        dataExport.Rows.Add(newRow_khac);
+                    }
+                }
+                else // thu them
+                {
+                    //DataRow newRow = dataExport.NewRow();
+                    //newRow["STT"] = "1";
+                    //newRow["KHOANTHU"] = _phieuthu.PHIEUGHIDANH.KHOAHOC.TenKhoaHoc;
+                    ////gridViewDSHocVien.GetRowCellValue(rowHandle, "TenKhoaHoc").ToString();
+                    //newRow["SOTIEN"] = O2S_Common.Number.Convert.NumberToString(_phieuthu.SoTien ?? 0, 0);
+                    ////O2S_Common.Number.Convert.NumberToString(O2S_Common.TypeConvert.Parse.ToDecimal(numNopThem.Text), 0);
+                    //newRow["GHICHU"] = "Thu thêm tiền còn nợ"; //_phieuthu.GhiChu;
+                    //dataExport.Rows.Add(newRow);
+                }
 
-                string fileTemplatePath = "BienLaiThuTien_NopTien.xlsx"; Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
+                Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             SplashScreenManager.CloseForm();
         }
+
+
+
 
 
 

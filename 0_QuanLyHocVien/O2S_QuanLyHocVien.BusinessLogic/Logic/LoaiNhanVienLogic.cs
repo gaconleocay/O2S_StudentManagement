@@ -12,10 +12,12 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class LoaiNhanVienLogic
     {
-        /// <summary>
-        /// Chọn tất cả loại nhân viên
-        /// </summary>
-        /// <returns></returns>
+        public static LOAINHANVIEN Select(int _loainhanvienId)
+        {
+            return (from p in Database.LOAINHANVIENs
+                    where p.LoaiNhanVienId == _loainhanvienId
+                    select p).FirstOrDefault();
+        }
         public static List<LOAINHANVIEN> SelectAll()
         {
             return (from p in Database.LOAINHANVIENs

@@ -34,7 +34,7 @@ namespace O2S_QuanLyHocVien.Popups
         {
             try
             {
-                if (txtMatKhauCu.Text ==Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt( currentUser.MatKhau,true))
+                if (txtMatKhauCu.Text ==O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt( currentUser.MatKhau,true))
                 {
                     if (!string.IsNullOrEmpty(txtMatKhauMoi.Text) && txtMatKhauMoi.Text == txtMatKhauMoiAgain.Text)
                     {

@@ -23,12 +23,12 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             {
                 return (from p in GlobalSettings.Database.KHOAHOCs
                         where p.KhoaHocId == _khoahocId
-                        select p).Single();
+                        select p).FirstOrDefault();
             }
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -47,7 +47,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  MaKhoaHoc = obj.MaKhoaHoc,
                                  TenKhoaHoc = obj.TenKhoaHoc,
                                  HocPhi = obj.HocPhi,
-                                 SoTietHoc=obj.SoTietHoc,
+                                 SoTietHoc = obj.SoTietHoc,
+                                 IsLock = obj.IsLock,
                                  IsRemove = obj.IsRemove,
                                  TrangThai_Ten = obj.IsRemove == 1 ? "Đã khóa" : "",
                                  CreatedDate = obj.CreatedDate,
@@ -78,7 +79,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return null;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -100,7 +101,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -112,6 +113,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
                 hocVienCu.TenKhoaHoc = _hocVien.TenKhoaHoc;
                 hocVienCu.HocPhi = _hocVien.HocPhi;
+                hocVienCu.IsLock = _hocVien.IsLock;
                 hocVienCu.IsRemove = _hocVien.IsRemove;
                 hocVienCu.ModifiedDate = DateTime.Now;
                 hocVienCu.ModifiedBy = GlobalSettings.UserCode;
@@ -122,7 +124,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -142,7 +144,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
-                O2S_QuanLyHocVien.Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 

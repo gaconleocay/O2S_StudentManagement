@@ -40,7 +40,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadLoaiTaiKhoan()
@@ -54,7 +54,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadDanhSachTaiKhoan()
@@ -62,13 +62,13 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 TaiKhoanFilter _filter = new TaiKhoanFilter();
-                _filter.LoaiTaiKhoanId = Common.TypeConvert.TypeConvertParse.ToInt32(cboLoaiTaiKhoan.SelectedValue.ToString());
+                _filter.LoaiTaiKhoanId = O2S_Common.TypeConvert.Parse.ToInt32(cboLoaiTaiKhoan.SelectedValue.ToString());
                 List<TaiKhoan_PlusDTO> _lstTaiKhoan = TaiKhoanLogic.SelectFilter(_filter);
                 gridControlTaiKhoan.DataSource = _lstTaiKhoan;
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         private void LoadChucNangVaBaoCao()
@@ -84,7 +84,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         #endregion
@@ -98,7 +98,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void gridViewTaiKhoan_Click(object sender, EventArgs e)
@@ -108,12 +108,12 @@ namespace O2S_QuanLyHocVien.Pages
                 if (gridViewTaiKhoan.RowCount > 0)
                 {
                     var rowHandle = gridViewTaiKhoan.FocusedRowHandle;
-                    int _taikhoanId = Common.TypeConvert.TypeConvertParse.ToInt32(gridViewTaiKhoan.GetRowCellValue(rowHandle, "TaiKhoanId").ToString());
+                    int _taikhoanId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewTaiKhoan.GetRowCellValue(rowHandle, "TaiKhoanId").ToString());
 
                     //hien thi tai khoan hien tai len form
                     this.TaiKhoan_Select = TaiKhoanLogic.SelectSingle(_taikhoanId);
                     txtTenDangNhap.Text = this.TaiKhoan_Select.TenDangNhap;
-                    txtMatKhau.Text = Common.EncryptAndDecrypt.EncryptAndDecrypt.Decrypt(this.TaiKhoan_Select.MatKhau, true);
+                    txtMatKhau.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(this.TaiKhoan_Select.MatKhau, true);
 
                     LoadPhanQuyenTheoTaiKhoan(_taikhoanId);
                 }
@@ -124,7 +124,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadPhanQuyenTheoTaiKhoan(int _taikhoanId)
@@ -145,7 +145,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -209,7 +209,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -233,23 +233,9 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
-        //private void gridViewTaiKhoan_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (e.Column == clm_TaiKhoan_Stt)
-        //        {
-        //            e.DisplayText = Convert.ToString(e.RowHandle + 1);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Common.Logging.LogSystem.Warn(ex);
-        //    }
-        //}
 
         private void gridViewBaoCao_CustomDrawRowIndicator(object sender, RowIndicatorCustomDrawEventArgs e)
         {
@@ -260,7 +246,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 

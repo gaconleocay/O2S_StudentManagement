@@ -45,7 +45,7 @@ namespace O2S_QuanLyHocVien.ChucNang
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadKhoaHoc()
@@ -61,7 +61,7 @@ namespace O2S_QuanLyHocVien.ChucNang
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void LoadGiangVien()
@@ -77,7 +77,7 @@ namespace O2S_QuanLyHocVien.ChucNang
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -90,8 +90,8 @@ namespace O2S_QuanLyHocVien.ChucNang
             {
                 DataGridView_ResetLaiCot();
 
-                int _KhoaHocId = Common.TypeConvert.TypeConvertParse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
-                int _GiangVienId = Common.TypeConvert.TypeConvertParse.ToInt32(cboGiangVien.SelectedValue.ToString());
+                int _KhoaHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
+                int _GiangVienId = O2S_Common.TypeConvert.Parse.ToInt32(cboGiangVien.SelectedValue.ToString());
 
                 if (_KhoaHocId != 0 && _GiangVienId != 0)
                 {
@@ -113,7 +113,7 @@ namespace O2S_QuanLyHocVien.ChucNang
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             SplashScreenManager.CloseForm();
         }
@@ -136,12 +136,12 @@ namespace O2S_QuanLyHocVien.ChucNang
                 //thongTinThem.Add(reportitem);
 
                 //string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
-                //DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstBangDiem);
+                //DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstBangDiem);
                 //Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
             SplashScreenManager.CloseForm();
         }
@@ -160,13 +160,13 @@ namespace O2S_QuanLyHocVien.ChucNang
                 //thongTinThem.Add(reportitem);
 
                 //string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
-                //DataTable _databaocao = Common.DataTables.ConvertDataTable.ListToDataTable(this.lstBangDiem);
+                //DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstBangDiem);
                 //Utilities.Common.Excel.ExcelExport export = new Utilities.Common.Excel.ExcelExport();
                 //export.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -247,7 +247,7 @@ namespace O2S_QuanLyHocVien.ChucNang
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void TaoCot_DataGridView(List<LopHoc_PlusDTO> _lstLopHoc)
@@ -311,7 +311,7 @@ namespace O2S_QuanLyHocVien.ChucNang
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         private void LayDuLieuLenGridView(List<LopHoc_PlusDTO> _lstLopHoc, int _GiangVienId, int _KhoaHocId)
@@ -321,16 +321,16 @@ namespace O2S_QuanLyHocVien.ChucNang
                 string _sqlDSLopHoc = "";
                 foreach (var item_lh in _lstLopHoc)
                 {
-                    _sqlDSLopHoc += @", STUFF((SELECT '; ' + (case when t2.LopHocId=" + item_lh.LopHocId + " then t2.TenCaHocFull end) from XEPLICHHOC t2 where t1.ThoiGianHoc = t2.ThoiGianHoc order by t2.TenCaHocFull FOR XML PATH(''), TYPE).value('.','NVARCHAR(MAX)'),1,LEN('; '),'') as TenCaHocFull_" + item_lh.LopHocId + ", STUFF((SELECT '; ' + (case when t2.LopHocId = " + item_lh.LopHocId + " and t2.GiaoVien_ChinhId = " + _GiangVienId + " then N'Dạy chính' end) from XEPLICHHOC t2 where t1.ThoiGianHoc = t2.ThoiGianHoc order by t2.TenCaHocFull FOR XML PATH(''), TYPE).value('.','NVARCHAR(MAX)'),1,LEN('; '),'') as GhiChu_" + item_lh.LopHocId + "";
+                    _sqlDSLopHoc += @", STUFF((SELECT '; ' + (case when t2.LopHocId=" + item_lh.LopHocId + " then t2.TenCaHocFull end) from XEPLICHHOC t2 where t1.ThoiGianHoc = t2.ThoiGianHoc and t2.IsLock='True' order by t2.TenCaHocFull FOR XML PATH(''), TYPE).value('.','NVARCHAR(MAX)'),1,LEN('; '),'') as TenCaHocFull_" + item_lh.LopHocId + ", STUFF((SELECT '; ' + (case when t2.LopHocId = " + item_lh.LopHocId + " and t2.GiaoVien_ChinhId = " + _GiangVienId + " then N'Dạy chính' end) from XEPLICHHOC t2 where t1.ThoiGianHoc = t2.ThoiGianHoc and t2.IsLock='True' order by t2.TenCaHocFull FOR XML PATH(''), TYPE).value('.','NVARCHAR(MAX)'),1,LEN('; '),'') as GhiChu_" + item_lh.LopHocId + "";
                 }
 
-                string _sqlSelect = @"SELECT row_number () over (order by t1.ThoiGianHoc) as stt, t1.ThoiGianHoc, t1.ThoiGianHoc_Full" + _sqlDSLopHoc + " FROM XEPLICHHOC t1 WHERE t1.KhoaHocId=" + _KhoaHocId + " and (t1.GiaoVien_ChinhId=" + _GiangVienId + " or t1.GiaoVien_TroGiangId=" + _GiangVienId + ") GROUP BY ThoiGianHoc,ThoiGianHoc_Full;";
+                string _sqlSelect = @"SELECT row_number () over (order by t1.ThoiGianHoc) as stt, t1.ThoiGianHoc, t1.ThoiGianHoc_Full" + _sqlDSLopHoc + " FROM XEPLICHHOC t1 WHERE t1.KhoaHocId=" + _KhoaHocId + " and (t1.GiaoVien_ChinhId=" + _GiangVienId + " or t1.GiaoVien_TroGiangId=" + _GiangVienId + ")  and IsLock='True' GROUP BY ThoiGianHoc,ThoiGianHoc_Full;";
                 DataTable _dataBaoCao = condb.GetDataTable(_sqlSelect);
                 gridControlDataBC.DataSource = _dataBaoCao;
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         #endregion
@@ -349,24 +349,10 @@ namespace O2S_QuanLyHocVien.ChucNang
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
-        private void gridViewDSHocVien_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
-        {
-            try
-            {
-                //if (e.Column == clm_PhieuGhiDanh_Stt)
-                //{
-                //    e.DisplayText = Convert.ToString(e.RowHandle + 1);
-                //}
-            }
-            catch (Exception ex)
-            {
-                Common.Logging.LogSystem.Warn(ex);
-            }
-        }
 
 
         #endregion

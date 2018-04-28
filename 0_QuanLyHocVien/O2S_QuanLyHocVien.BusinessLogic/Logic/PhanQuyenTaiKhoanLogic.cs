@@ -60,7 +60,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Logic
         //    catch (System.Exception ex)
         //    {
         //        return null;
-        //        Common.Logging.LogSystem.Error(ex);
+        //        O2S_Common.Logging.LogSystem.Error(ex);
         //    }
         //}
         public static PHANQUYENTAIKHOAN SelectTheoMaChucNang(string _machucnang)
@@ -75,7 +75,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Logic
             catch (System.Exception ex)
             {
                 return null;
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static void Insert(PHANQUYENTAIKHOAN bd)
@@ -100,7 +100,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Logic
             catch (System.Exception ex)
             {
                 return false;
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
 
         }
@@ -134,7 +134,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Logic
             catch (System.Exception ex)
             {
                 return false;
-                Common.Logging.LogSystem.Error(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
     }

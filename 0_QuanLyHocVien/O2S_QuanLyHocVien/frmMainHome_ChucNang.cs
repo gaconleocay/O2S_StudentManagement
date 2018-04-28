@@ -41,7 +41,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnBangDiemCaNhan_ItemClick(object sender, ItemClickEventArgs e)
@@ -54,7 +54,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnHocPhiCaNhan_ItemClick(object sender, ItemClickEventArgs e)
@@ -67,7 +67,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnCacLopDaHoc_ItemClick(object sender, ItemClickEventArgs e)
@@ -80,7 +80,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnDoiMatKhau_ItemClick(object sender, ItemClickEventArgs e)
@@ -92,7 +92,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnThayDoiThongTinCaNhan_ItemClick(object sender, ItemClickEventArgs e)
@@ -105,7 +105,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -121,7 +121,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnLapPhieuGhiDanh_ItemClick(object sender, ItemClickEventArgs e)
@@ -134,7 +134,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -152,7 +152,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -166,7 +166,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -180,7 +180,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -194,7 +194,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -208,7 +208,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -222,14 +222,14 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
 
         #endregion
 
-        #region QL hoc vien
+        #region QL trung tam
         private void btnQuanLyHocVien_ItemClick(object sender, ItemClickEventArgs e)
         {
             try
@@ -240,7 +240,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnQuanLyHocVien_TiemNang_ItemClick(object sender, ItemClickEventArgs e)
@@ -253,7 +253,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnQuanLyNhanVien_ItemClick(object sender, ItemClickEventArgs e)
@@ -266,7 +266,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -280,7 +280,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -294,10 +294,22 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
-
+        private void btnQuanLyThuChi_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmQuanLyThuChi frmControlActive = new frmQuanLyThuChi() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmQuanLyThuChi", "Quản lý thu chi", "Quản lý thu chi", frmControlActive);
+                frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
 
         #endregion
 
@@ -313,7 +325,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -327,7 +339,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -341,7 +353,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnDMCaHoc_ItemClick(object sender, ItemClickEventArgs e)
@@ -354,7 +366,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -370,7 +382,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -383,7 +395,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -396,7 +408,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -409,7 +421,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -423,7 +435,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnDangKyBanQuyen_ItemClick(object sender, ItemClickEventArgs e)
@@ -435,7 +447,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -455,7 +467,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         #endregion
@@ -473,7 +485,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -491,7 +503,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -505,7 +517,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
@@ -519,7 +531,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnBC_ThongKeNoHocPhi_ItemClick(object sender, ItemClickEventArgs e)
@@ -532,7 +544,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnBC_ThuTienChiTiet_ItemClick(object sender, ItemClickEventArgs e)
@@ -545,7 +557,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
         private void btnBC_ThuTienTongHop_ItemClick(object sender, ItemClickEventArgs e)
@@ -558,7 +570,7 @@ namespace O2S_QuanLyHocVien
             }
             catch (Exception ex)
             {
-                Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
