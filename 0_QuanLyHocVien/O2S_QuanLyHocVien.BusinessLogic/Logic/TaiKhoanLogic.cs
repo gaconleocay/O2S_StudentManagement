@@ -17,15 +17,31 @@ namespace O2S_QuanLyHocVien.BusinessLogic
     {
         public static TAIKHOAN SelectSingle(int _taikhoanId)
         {
-            return (from p in Database.TAIKHOANs
-                    where p.TaiKhoanId == _taikhoanId
-                    select p).FirstOrDefault();
+            try
+            {
+                return (from p in Database.TAIKHOANs
+                        where p.TaiKhoanId == _taikhoanId
+                        select p).FirstOrDefault();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
         public static TAIKHOAN Select(string tenDangNhap)
         {
-            return (from p in Database.TAIKHOANs
-                    where p.TenDangNhap.ToLower() == tenDangNhap.ToLower()
-                    select p).FirstOrDefault();
+            try
+            {
+                return (from p in Database.TAIKHOANs
+                        where p.TenDangNhap.ToLower() == tenDangNhap.ToLower()
+                        select p).FirstOrDefault();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static List<TAIKHOAN> SelectAll(string tenDangNhap, UserType? loaiTK)
@@ -63,7 +79,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     if (_filter.LoaiTaiKhoanId == KeySetting.LOAITAIKHOAN_NhanVien)
                     {
                         return (from p in Database.NHANVIENs
-                                where (_filter.TenDangNhap == null ? true : p.TAIKHOAN.TenDangNhap.Contains(_filter.TenDangNhap)) && p.LoaiNhanVienId != KeySetting.LOAINHANVIEN_QuanTri && p.TAIKHOAN.IsRemove ==0
+                                where (_filter.TenDangNhap == null ? true : p.TAIKHOAN.TenDangNhap.Contains(_filter.TenDangNhap)) && p.LoaiNhanVienId != KeySetting.LOAINHANVIEN_QuanTri && p.TAIKHOAN.IsRemove == 0
                                 select new TaiKhoan_PlusDTO
                                 {
                                     TaiKhoanId = p.TAIKHOAN.TaiKhoanId,
@@ -245,46 +261,62 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         public static UserType? FullUserType(TAIKHOAN tk)
         {
-            var a = (from p in Database.NHANVIENs
-                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
-                     select p).SingleOrDefault();
-            if (a != null)
-                return UserType.NhanVien;
+            try
+            {
+                var a = (from p in Database.NHANVIENs
+                         where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
+                         select p).SingleOrDefault();
+                if (a != null)
+                    return UserType.NhanVien;
 
-            var b = (from p in Database.HOCVIENs
-                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
-                     select p).SingleOrDefault();
-            if (b != null)
-                return UserType.HocVien;
+                var b = (from p in Database.HOCVIENs
+                         where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
+                         select p).SingleOrDefault();
+                if (b != null)
+                    return UserType.HocVien;
 
-            var c = (from p in Database.GIANGVIENs
-                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
-                     select p).SingleOrDefault();
-            if (c != null)
-                return UserType.GiangVien;
-            return null;
+                var c = (from p in Database.GIANGVIENs
+                         where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
+                         select p).SingleOrDefault();
+                if (c != null)
+                    return UserType.GiangVien;
+                return null;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static string FullUserName(TAIKHOAN tk)
         {
-            var a = (from p in Database.NHANVIENs
-                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
-                     select p).SingleOrDefault();
-            if (a != null)
-                return a.TenNhanVien;
+            try
+            {
+                var a = (from p in Database.NHANVIENs
+                         where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
+                         select p).SingleOrDefault();
+                if (a != null)
+                    return a.TenNhanVien;
 
-            var b = (from p in Database.HOCVIENs
-                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
-                     select p).SingleOrDefault();
-            if (b != null)
-                return b.TenHocVien;
+                var b = (from p in Database.HOCVIENs
+                         where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
+                         select p).SingleOrDefault();
+                if (b != null)
+                    return b.TenHocVien;
 
-            var c = (from p in Database.GIANGVIENs
-                     where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
-                     select p).SingleOrDefault();
-            if (c != null)
-                return c.TenGiangVien;
-            return null;
+                var c = (from p in Database.GIANGVIENs
+                         where p.TAIKHOAN.TenDangNhap.ToLower() == tk.TenDangNhap.ToLower()
+                         select p).SingleOrDefault();
+                if (c != null)
+                    return c.TenGiangVien;
+                return null;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static bool IsValid(string userName, string password)
@@ -293,11 +325,15 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             {
                 return Select(userName).MatKhau == O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(password, true);
             }
-            catch
+            catch (System.Exception ex)
             {
                 return false;
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
-
         }
+
+
+
+
     }
 }

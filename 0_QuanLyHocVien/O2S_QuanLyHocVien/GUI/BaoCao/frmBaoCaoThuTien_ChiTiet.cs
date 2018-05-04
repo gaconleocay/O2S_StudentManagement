@@ -1,113 +1,77 @@
 ﻿// Quản lý Học viên Trung tâm Anh ngữ
 // Copyright © 2018 OneOne solution co.
-// File "frmO2S_QuanLyHocVien.cs"
+// File "frmBaoCaoHocVienTheoThang.cs"
 // Writing by NhatHM (hongminhnhat15@gmail.com)
 
 using System;
 using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
-using O2S_QuanLyHocVien.DataAccess;
-using O2S_QuanLyHocVien.Popups;
-using System.Globalization;
+using System.Threading;
+using O2S_QuanLyHocVien.Reports;
+using Microsoft.Reporting.WinForms;
+using System.Collections.Generic;
+using System.Data;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
-using System.Collections.Generic;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Drawing;
 using DevExpress.XtraSplashScreen;
+using System.Globalization;
 using O2S_QuanLyHocVien.BusinessLogic.Models;
-using System.Data;
 using O2S_Common.DataObjects;
 
-namespace O2S_QuanLyHocVien.Pages
+namespace O2S_QuanLyHocVien.BaoCao
 {
-    public partial class frmQuanLyHocVien : Form
+    public partial class frmBaoCaoThuTien_ChiTiet : Form
     {
-        private List<QuanLyHocVienDTO> lstHocVien { get; set; }
-        public frmQuanLyHocVien()
+        private List<BaoCaoThuTien_ChiTietDTO> lstPhieuThu { get; set; }
+        public frmBaoCaoThuTien_ChiTiet()
         {
             InitializeComponent();
         }
 
         #region Load
-        private void frmQuanLyHocVien_Load(object sender, EventArgs e)
+        private void frmBaoCaoHocVienTheoThang_Load(object sender, EventArgs e)
         {
             try
             {
-                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.AddMonths(-6).ToString("yyyy-MM-dd") + " 00:00:00");
+                date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00");
                 date_DenNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
-                LayDanhSachHocVien();
             }
             catch (Exception ex)
             {
                 O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
-
         #endregion
 
         #region Events
-        private void LayDanhSachHocVien()
+        private void btnTimKiem_Click(object sender, EventArgs e)
         {
+            SplashScreenManager.ShowForm(typeof(O2S_Common.Utilities.ThongBao.WaitForm_Wait));
             try
             {
-                HocVienFilter _filter = new HocVienFilter();
+                PhieuThuFilter _filter = new PhieuThuFilter();
                 _filter.CoSoId = GlobalSettings.CoSoId;
-                _filter.LoaiHocVienId = KeySetting.LOAIHOCVIEN_CHINHTHUC;
-                _filter.NgayTiepNhan_Tu = date_TuNgay.DateTime;
-                _filter.NgayTiepNhan_Den = date_DenNgay.DateTime;
-
-                this.lstHocVien = HocVienLogic.SelectQuanLyHocVien(_filter);
-
-                if (this.lstHocVien != null && this.lstHocVien.Count > 0)
+                _filter.ThoiGianThu_Tu = date_TuNgay.DateTime;
+                _filter.ThoiGianThu_Den = date_DenNgay.DateTime;
+                this.lstPhieuThu = PhieuThuLogic.SelectBaoCaoThuTienChiTiet(_filter);
+                if (this.lstPhieuThu != null && this.lstPhieuThu.Count > 0)
                 {
-                    for (int i = 0; i < this.lstHocVien.Count; i++)
-                    {
-                        this.lstHocVien[i].Stt = i + 1;
-                    }
-                    gridControlDSHocVien.DataSource = this.lstHocVien;
+                    gridControlDSPhieuGhiDanh.DataSource = this.lstPhieuThu;
                 }
                 else
                 {
-                    gridControlDSHocVien.DataSource = null;
-                }
-                lblTongCong.Text = string.Format("Tổng cộng: {0} học viên", gridViewDSHocVien.RowCount);
-            }
-            catch (Exception ex)
-            {
-                O2S_Common.Logging.LogSystem.Warn(ex);
-            }
-        }
-
-        private void btnTimKiem_Click(object sender, EventArgs e)
-        {
-            LayDanhSachHocVien();
-        }
-        #endregion
-
-        #region Custom
-        private void gridViewDSHocVien_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
-        {
-            try
-            {
-                GridView view = sender as GridView;
-                if (e.RowHandle == view.FocusedRowHandle)
-                {
-                    e.Appearance.BackColor = Color.DodgerBlue;
-                    e.Appearance.ForeColor = Color.White;
+                    gridControlDSPhieuGhiDanh.DataSource = null;
                 }
             }
             catch (Exception ex)
             {
-                O2S_Common.Logging.LogSystem.Warn(ex);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
+            SplashScreenManager.CloseForm();
         }
 
-
-
-        #endregion
-
-        #region In va xuat excel
         private void btnInAn_Click(object sender, EventArgs e)
         {
             try
@@ -125,8 +89,8 @@ namespace O2S_QuanLyHocVien.Pages
                 reportitem.value = tungaydenngay;
                 thongTinThem.Add(reportitem);
 
-                string fileTemplatePath = "FUN_QuanLyHocVien_ChinhThuc.xlsx";
-                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHocVien);
+                string fileTemplatePath = "BC05_BaoCaoThuTien_ChiTiet.xlsx";
+                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstPhieuThu);
                 O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
@@ -151,8 +115,8 @@ namespace O2S_QuanLyHocVien.Pages
                 reportitem.value = tungaydenngay;
                 thongTinThem.Add(reportitem);
 
-                string fileTemplatePath = "FUN_QuanLyHocVien_ChinhThuc.xlsx";
-                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHocVien);
+                string fileTemplatePath = "BC05_BaoCaoThuTien_ChiTiet.xlsx";
+                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstPhieuThu);
                 O2S_Common.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
@@ -163,8 +127,40 @@ namespace O2S_QuanLyHocVien.Pages
 
         #endregion
 
+        #region Custom
+        private void gridViewDSHocVien_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                if (e.RowHandle == view.FocusedRowHandle)
+                {
+                    e.Appearance.BackColor = Color.DodgerBlue;
+                    e.Appearance.ForeColor = Color.White;
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
 
+        private void gridViewDSHocVien_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
+        {
+            try
+            {
+                if (e.Column == gridColumn_stt)
+                {
+                    e.DisplayText = Convert.ToString(e.RowHandle + 1);
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
 
+        #endregion
 
     }
 }

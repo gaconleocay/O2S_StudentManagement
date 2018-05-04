@@ -19,6 +19,7 @@ using DevExpress.XtraSplashScreen;
 using System.Globalization;
 using O2S_QuanLyHocVien.BusinessLogic.Models;
 using System.Linq;
+using O2S_Common.DataObjects;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -48,7 +49,7 @@ namespace O2S_QuanLyHocVien.Pages
         #region Events
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
+            SplashScreenManager.ShowForm(typeof(O2S_Common.Utilities.ThongBao.WaitForm_Wait));
             try
             {
                 PhieuGhiDanhFilter _filter = new PhieuGhiDanhFilter();
@@ -81,7 +82,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
+                SplashScreenManager.ShowForm(typeof(O2S_Common.Utilities.ThongBao.WaitForm_Wait));
 
                 string tungay = DateTime.ParseExact(date_TuNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
                 string denngay = DateTime.ParseExact(date_DenNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("HH:mm dd/MM/yyyy");
@@ -96,7 +97,7 @@ namespace O2S_QuanLyHocVien.Pages
 
                 string fileTemplatePath = "BC04_ThongKeHocVienNoHocPhi.xlsx";
                 DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHVNoHocPhi);
-                Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
+                O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {
@@ -122,8 +123,7 @@ namespace O2S_QuanLyHocVien.Pages
 
                 string fileTemplatePath = "BC04_ThongKeHocVienNoHocPhi.xlsx";
                 DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHVNoHocPhi);
-                Utilities.Common.Excel.ExcelExport export = new Utilities.Common.Excel.ExcelExport();
-                export.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
+                O2S_Common.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {

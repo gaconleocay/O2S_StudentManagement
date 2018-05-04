@@ -10,45 +10,69 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Logic
     {
         public static PHANQUYENTAIKHOAN Select(int _phanQuyenTaiKhoanId)
         {
-            return (from p in Database.PHANQUYENTAIKHOANs
-                    where p.PhanQuyenTaiKhoanId == _phanQuyenTaiKhoanId
-                    select p).Single();
+            try
+            {
+                return (from p in Database.PHANQUYENTAIKHOANs
+                        where p.PhanQuyenTaiKhoanId == _phanQuyenTaiKhoanId
+                        select p).Single();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
         public static List<PHANQUYENTAIKHOAN> SelectTheoTaiKhoan(int _TaiKhoanId)
         {
-            return (from p in Database.PHANQUYENTAIKHOANs
-                    where p.TaiKhoanId == _TaiKhoanId
-                    select p).ToList();
+            try
+            {
+                return (from p in Database.PHANQUYENTAIKHOANs
+                        where p.TaiKhoanId == _TaiKhoanId
+                        select p).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static List<PhanQuyenTaiKhoan_PlusDTO> SelectKieuPhanQuyen(int _TaiKhoanId)
         {
-            var result = (from p in Database.CHUCNANGs
-                          join pq in (from tmp in Database.PHANQUYENTAIKHOANs where tmp.TaiKhoanId == _TaiKhoanId select tmp) on p.ChucNangId equals pq.ChucNangId into phanquyen
-                          from pq1 in phanquyen.DefaultIfEmpty()
-                              //where pq1.TAIKHOAN.TaiKhoanId == _TaiKhoanId
-                          select new PhanQuyenTaiKhoan_PlusDTO
-                          {
-                              IsCheck = pq1 == null ? false : true,
-                              ChucNangId = p.ChucNangId,
-                              MaChucNang = p.MaChucNang,
-                              TenChucNang = p.TenChucNang,
-                              LoaiChucNangId = p.LoaiChucNangId,
-                              TabMenuId = p.TabMenuId,
-                              GhiChu = p.GhiChu,
-                              PhanQuyenTaiKhoanId = pq1 == null ? 0 : pq1.PhanQuyenTaiKhoanId,
-                              TaiKhoanId = pq1 == null ? 0 : pq1.TaiKhoanId,
-                              Them = pq1 == null ? false : (pq1.Them == 1 ? true : false),
-                              Sua = pq1 == null ? false : (pq1.Sua == 1 ? true : false),
-                              Xoa = pq1 == null ? false : (pq1.Xoa == 1 ? true : false),
-                              InAn = pq1 == null ? false : (pq1.InAn == 1 ? true : false),
-                              XuatFile = pq1 == null ? false : (pq1.XuatFile == 1 ? true : false),
+            try
+            {
+                var result = (from p in Database.CHUCNANGs
+                              join pq in (from tmp in Database.PHANQUYENTAIKHOANs where tmp.TaiKhoanId == _TaiKhoanId select tmp) on p.ChucNangId equals pq.ChucNangId into phanquyen
+                              from pq1 in phanquyen.DefaultIfEmpty()
+                                  //where pq1.TAIKHOAN.TaiKhoanId == _TaiKhoanId
+                              select new PhanQuyenTaiKhoan_PlusDTO
+                              {
+                                  IsCheck = pq1 == null ? false : true,
+                                  ChucNangId = p.ChucNangId,
+                                  MaChucNang = p.MaChucNang,
+                                  TenChucNang = p.TenChucNang,
+                                  LoaiChucNangId = p.LoaiChucNangId,
+                                  TabMenuId = p.TabMenuId,
+                                  GhiChu = p.GhiChu,
+                                  PhanQuyenTaiKhoanId = pq1 == null ? 0 : pq1.PhanQuyenTaiKhoanId,
+                                  TaiKhoanId = pq1 == null ? 0 : pq1.TaiKhoanId,
+                                  Them = pq1 == null ? false : (pq1.Them == 1 ? true : false),
+                                  Sua = pq1 == null ? false : (pq1.Sua == 1 ? true : false),
+                                  Xoa = pq1 == null ? false : (pq1.Xoa == 1 ? true : false),
+                                  InAn = pq1 == null ? false : (pq1.InAn == 1 ? true : false),
+                                  XuatFile = pq1 == null ? false : (pq1.XuatFile == 1 ? true : false),
 
-                          }).OrderBy(or => or.MaChucNang).ToList();
+                              }).OrderBy(or => or.MaChucNang).ToList();
 
-            return result;
+                return result;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
-       // public static PHANQUYENTAIKHOAN SelectTheoTenForm(string _TenForm)
+        // public static PHANQUYENTAIKHOAN SelectTheoTenForm(string _TenForm)
         //{
         //    try
         //    {

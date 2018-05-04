@@ -36,6 +36,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="O2S_Common">
       <HintPath>..\..\..\..\1_Library\Lib_Debug\O2S_Common.dll</HintPath>
     </Reference>
@@ -142,7 +146,6 @@
     <Compile Include="Model\classPermission.cs" />
     <Compile Include="Model\classUserDepartment.cs" />
     <Compile Include="Model\OptionDTO.cs" />
-    <Compile Include="Model\reportExcelDTO.cs" />
     <Compile Include="Logic\NhanVienLogic.cs" />
     <Compile Include="Logic\PhieuGhiDanhLogic.cs" />
     <Compile Include="Model\TaiKhoan_PlusDTO.cs" />
@@ -162,7 +165,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

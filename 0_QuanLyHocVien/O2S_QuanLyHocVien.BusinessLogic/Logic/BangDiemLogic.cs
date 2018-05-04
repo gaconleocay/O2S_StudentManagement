@@ -65,9 +65,17 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         public static BANGDIEM Select(int _hocvienId, int _lophocId)
         {
-            return (from p in Database.BANGDIEMs
-                    where p.LopHocId == _lophocId && p.HocVienId == _hocvienId
-                    select p).Single();
+            try
+            {
+                return (from p in Database.BANGDIEMs
+                        where p.LopHocId == _lophocId && p.HocVienId == _hocvienId
+                        select p).Single();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
         public static List<BANGDIEM> SelectTheoPhieuGhiDanh(int _phieughidanhId)
         {
@@ -133,29 +141,45 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         public static object SelectDSLop(int _hocvienId, DateTime? tuNgay = null, DateTime? denNgay = null, int _khoahocId = 0)
         {
-            return (from p in Database.BANGDIEMs
-                    where p.HocVienId == _hocvienId &&
-                        (tuNgay == null ? true : p.LOPHOC.NgayBatDau >= tuNgay) &&
-                        (denNgay == null ? true : p.LOPHOC.NgayKetThuc <= denNgay) &&
-                        (_khoahocId == 0 ? true : p.LOPHOC.KhoaHocId == _khoahocId)
-                    select new
-                    {
-                        LopHocId = p.LopHocId,
-                        TenLopHoc = p.LOPHOC.TenLopHoc,
-                    }).ToList();
+            try
+            {
+                return (from p in Database.BANGDIEMs
+                        where p.HocVienId == _hocvienId &&
+                            (tuNgay == null ? true : p.LOPHOC.NgayBatDau >= tuNgay) &&
+                            (denNgay == null ? true : p.LOPHOC.NgayKetThuc <= denNgay) &&
+                            (_khoahocId == 0 ? true : p.LOPHOC.KhoaHocId == _khoahocId)
+                        select new
+                        {
+                            LopHocId = p.LopHocId,
+                            TenLopHoc = p.LOPHOC.TenLopHoc,
+                        }).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static decimal TongNoCacLop(int _hocvienId)
         {
-            var f = from p in Database.BANGDIEMs
-                    where p.HocVienId == _hocvienId
-                    select p;
+            try
+            {
+                var f = from p in Database.BANGDIEMs
+                        where p.HocVienId == _hocvienId
+                        select p;
 
-            decimal result = 0;
-            foreach (var i in f)
-                result += (decimal)i.PHIEUGHIDANH.ConNo;
+                decimal result = 0;
+                foreach (var i in f)
+                    result += (decimal)i.PHIEUGHIDANH.ConNo;
 
-            return result;
+                return result;
+            }
+            catch (System.Exception ex)
+            {
+                return 0;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static List<BangDiemFullDTO> SelectTheoDoiBangDiemLop(int _lophocId)

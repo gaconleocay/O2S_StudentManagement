@@ -15,23 +15,46 @@ namespace O2S_QuanLyHocVien.BusinessLogic
     {
         public static List<KHOAHOC_MONHOC> SelectTheoKhoaHoc(int _KhoaHocId)
         {
-            return (from p in Database.KHOAHOC_MONHOCs
-                    where p.KhoaHocId == _KhoaHocId
-                    select p).ToList();
+            try
+            {
+                return (from p in Database.KHOAHOC_MONHOCs
+                        where p.KhoaHocId == _KhoaHocId
+                        select p).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
         public static KHOAHOC_MONHOC SelectTheoKhoaHocMonHoc(int _khoahocId, int _monhocId)
         {
-            return (from p in Database.KHOAHOC_MONHOCs
-                    where p.KhoaHocId == _khoahocId && p.MonHocId == _monhocId
-                    select p).FirstOrDefault();
+            try
+            {
+                return (from p in Database.KHOAHOC_MONHOCs
+                        where p.KhoaHocId == _khoahocId && p.MonHocId == _monhocId
+                        select p).FirstOrDefault();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
         public static void Insert(KHOAHOC_MONHOC _khoahoc)
         {
-            //_khoahoc.CreatedDate = DateTime.Now;
-            //_khoahoc.CreatedBy = GlobalSettings.UserCode;
-            //_khoahoc.CreatedLog = GlobalSettings.SessionMyIP;
-            Database.KHOAHOC_MONHOCs.InsertOnSubmit(_khoahoc);
-            Database.SubmitChanges();
+            try
+            {
+                //_khoahoc.CreatedDate = DateTime.Now;
+                //_khoahoc.CreatedBy = GlobalSettings.UserCode;
+                //_khoahoc.CreatedLog = GlobalSettings.SessionMyIP;
+                Database.KHOAHOC_MONHOCs.InsertOnSubmit(_khoahoc);
+                Database.SubmitChanges();
+            }
+            catch (System.Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static void Update(KHOAHOC_MONHOC kh)
@@ -49,12 +72,19 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         public static void DeleteTheoKhoaHoc(int _khoahocId)
         {
-            List<KHOAHOC_MONHOC> khmh = (from p in Database.KHOAHOC_MONHOCs
-                                         where p.KhoaHocId == _khoahocId
-                                         select p).ToList();
-            //xóa khóa học môn học
-            Database.KHOAHOC_MONHOCs.DeleteAllOnSubmit(khmh);
-            Database.SubmitChanges();
+            try
+            {
+                List<KHOAHOC_MONHOC> khmh = (from p in Database.KHOAHOC_MONHOCs
+                                             where p.KhoaHocId == _khoahocId
+                                             select p).ToList();
+                //xóa khóa học môn học
+                Database.KHOAHOC_MONHOCs.DeleteAllOnSubmit(khmh);
+                Database.SubmitChanges();
+            }
+            catch (System.Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
     }

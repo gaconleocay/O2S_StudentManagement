@@ -19,6 +19,7 @@ using O2S_QuanLyHocVien.BusinessLogic.Models;
 using System.Data;
 using O2S_QuanLyHocVien.Popups;
 using System.Linq;
+using O2S_Common.DataObjects;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -168,7 +169,7 @@ namespace O2S_QuanLyHocVien.Pages
                 _phieuthu.GhiChu = "";//gridViewDSHocVien.GetRowCellValue(rowHandle, "TenKhoaHoc").ToString();
                 if (PhieuGhiDanhLogic.InsertQLHocPhi(_phieughidanh, _phieuthu, ref this.PhieuThu_Insert))
                 {
-                    Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.LUU_THANH_CONG);
+                    O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.LUU_THANH_CONG);
                     frmthongbao.Show();
                     //
                     LoadDanhSachHocVien();
@@ -307,7 +308,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
+                SplashScreenManager.ShowForm(typeof(O2S_Common.Utilities.ThongBao.WaitForm_Wait));
 
                 PHIEUGHIDANH _phieughidanh = PhieuGhiDanhLogic.SelectSingle(_phieuthu.PhieuGhiDanhId ?? 0);
 
@@ -424,7 +425,7 @@ namespace O2S_QuanLyHocVien.Pages
                     //dataExport.Rows.Add(newRow);
                 }
 
-                Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
+                O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
             }
             catch (Exception ex)
             {

@@ -90,7 +90,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             try
             {
                 var query = (from obj in GlobalSettings.Database.XEPLICHHOCs
-                             where (obj.KhoaHocId == _filter.KhoaHocId && (obj.GiaoVien_ChinhId == _filter.GiangVienId || obj.GiaoVien_TroGiangId == _filter.GiangVienId) && obj.IsLock==true)
+                             where (obj.KhoaHocId == _filter.KhoaHocId && (obj.GiaoVien_ChinhId == _filter.GiangVienId || obj.GiaoVien_TroGiangId == _filter.GiangVienId) && obj.IsLock == true)
                              select new LopHoc_PlusDTO
                              {
                                  LopHocId = obj.LopHocId ?? 0,
@@ -171,17 +171,25 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         public static object DanhSachLopTrong(int _khoahocId)
         {
-            return (from p in Database.LOPHOCs
-                    where p.KhoaHocId == _khoahocId &&
-                            p.SiSo < (from q in Database.QUYDINHs
-                                      where q.MaQuyDinh == "QD0000"
-                                      select q.GiaTri).Single()
-                    select new
-                    {
-                        LopHocId = p.LopHocId,
-                        MaLopHoc = p.MaLopHoc,
-                        TenLopHoc = p.TenLopHoc
-                    }).ToList();
+            try
+            {
+                return (from p in Database.LOPHOCs
+                        where p.KhoaHocId == _khoahocId &&
+                                p.SiSo < (from q in Database.QUYDINHs
+                                          where q.MaQuyDinh == "QD0000"
+                                          select q.GiaTri).Single()
+                        select new
+                        {
+                            LopHocId = p.LopHocId,
+                            MaLopHoc = p.MaLopHoc,
+                            TenLopHoc = p.TenLopHoc
+                        }).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
     }

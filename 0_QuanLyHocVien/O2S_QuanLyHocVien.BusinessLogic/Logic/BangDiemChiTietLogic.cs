@@ -13,9 +13,17 @@ namespace O2S_QuanLyHocVien.BusinessLogic
     {
         public static BANGDIEMCHITIET Select(int _bangDiemChiTietId)
         {
-            return (from p in Database.BANGDIEMCHITIETs
-                    where p.BangDiemChiTietId == _bangDiemChiTietId
-                    select p).Single();
+            try
+            {
+                return (from p in Database.BANGDIEMCHITIETs
+                        where p.BangDiemChiTietId == _bangDiemChiTietId
+                        select p).Single();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static void Insert(BANGDIEMCHITIET bd)
@@ -27,10 +35,17 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         public static void Update(BANGDIEMCHITIET kh)
         {
-            var khoaHocCu = Select(kh.BangDiemChiTietId);
+            try
+            {
+                var khoaHocCu = Select(kh.BangDiemChiTietId);
 
-            khoaHocCu.Diem = kh.Diem;
-            Database.SubmitChanges();
+                khoaHocCu.Diem = kh.Diem;
+                Database.SubmitChanges();
+            }
+            catch (System.Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static void Delete(int bangDiemId)

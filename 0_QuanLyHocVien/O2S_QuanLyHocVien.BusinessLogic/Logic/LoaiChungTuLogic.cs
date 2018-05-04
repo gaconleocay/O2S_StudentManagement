@@ -10,27 +10,19 @@ using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
-    public static class LoaiNhanVienLogic
+    public static class LoaiChungTuLogic
     {
-        public static LOAINHANVIEN Select(int _loainhanvienId)
+        public static LOAICHUNGTU Select(int _loaichungtuId)
         {
-            try
-            {
-                return (from p in Database.LOAINHANVIENs
-                        where p.LoaiNhanVienId == _loainhanvienId
-                        select p).FirstOrDefault();
-            }
-            catch (System.Exception ex)
-            {
-                return null;
-                O2S_Common.Logging.LogSystem.Error(ex);
-            }
+            return (from p in Database.LOAICHUNGTUs
+                    where p.LoaiChungTuId == _loaichungtuId
+                    select p).FirstOrDefault();
         }
-        public static List<LOAINHANVIEN> SelectAll()
+        public static List<LOAICHUNGTU> SelectAll()
         {
             try
             {
-                return (from p in Database.LOAINHANVIENs
+                return (from p in Database.LOAICHUNGTUs
                         select p).ToList();
             }
             catch (System.Exception ex)

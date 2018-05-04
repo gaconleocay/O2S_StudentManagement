@@ -223,7 +223,7 @@ namespace O2S_QuanLyHocVien.ChucNang
                     if (NhanVienLogic.InsertAndTaiKhoan(LoadNhanVien(), LoadTaiKhoan()))
                     {
                         LoadDanhSachNhanVien();
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THANH_CONG);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THANH_CONG);
                         frmthongbao.Show();
                         LockAndUnlockPanelControl(false);
                     }
@@ -233,7 +233,7 @@ namespace O2S_QuanLyHocVien.ChucNang
                     if (NhanVienLogic.Update(LoadNhanVien(), LoadTaiKhoan()))
                     {
                         LoadDanhSachNhanVien();
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                         frmthongbao.Show();
                         LockAndUnlockPanelControl(false);
                     }
@@ -245,7 +245,7 @@ namespace O2S_QuanLyHocVien.ChucNang
             }
             catch (Exception ex)
             {
-                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
+                O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
                 frmthongbao.Show();
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
@@ -287,7 +287,7 @@ namespace O2S_QuanLyHocVien.ChucNang
                 {
                     if (NhanVienLogic.Delete(this.nhanvienId_Select))
                     {
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
                         frmthongbao.Show();
                         LoadDanhSachNhanVien();
                         ResetPanelControl();
@@ -296,7 +296,7 @@ namespace O2S_QuanLyHocVien.ChucNang
             }
             catch (Exception ex)
             {
-                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
+                O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
                 frmthongbao.Show();
                 O2S_Common.Logging.LogSystem.Error(ex);
             }

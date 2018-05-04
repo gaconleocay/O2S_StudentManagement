@@ -197,12 +197,12 @@ namespace O2S_QuanLyHocVien.Pages
 
                     if (TaiKhoanLogic.Update(this.TaiKhoan_Select) && PhanQuyenTaiKhoanLogic.DeleteAndInsert(_lstPQ_TK_All, this.TaiKhoan_Select.TaiKhoanId))
                     {
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                         frmthongbao.Show();
                     }
                     else
                     {
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
                         frmthongbao.Show();
                     }
                 }

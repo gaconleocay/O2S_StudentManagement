@@ -86,9 +86,17 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         }
         public static List<PHIEUTHU> SelectTheoPhieuGhiDanh(int _PhieuGhiDanhId)
         {
-            return (from p in Database.PHIEUTHUs
-                    where p.PhieuGhiDanhId == _PhieuGhiDanhId
-                    select p).ToList();
+            try
+            {
+                return (from p in Database.PHIEUTHUs
+                        where p.PhieuGhiDanhId == _PhieuGhiDanhId
+                        select p).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
         public static bool Insert(PHIEUTHU _phieuthu, ref int _phieuthuId)
         {
@@ -192,9 +200,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     return true;
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 return false;
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         public static List<BaoCaoThuTien_ChiTietDTO> SelectBaoCaoThuTienChiTiet(PhieuThuFilter _filter)

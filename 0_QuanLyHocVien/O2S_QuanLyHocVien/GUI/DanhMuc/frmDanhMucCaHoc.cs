@@ -158,7 +158,7 @@ namespace O2S_QuanLyHocVien.Pages
                     int _caHocId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewCaHoc.GetRowCellValue(rowHandle, "CaHocId").ToString());
                     if (CaHocLogic.Delete(_caHocId))
                     {
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
                         frmthongbao.Show();
                         LoadGridCaHoc();
                     }
@@ -179,12 +179,12 @@ namespace O2S_QuanLyHocVien.Pages
                     int _khoaHocId = 0;
                     if (CaHocLogic.Insert(LoadCaHoc(), ref _khoaHocId))
                     {
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THANH_CONG);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THANH_CONG);
                         frmthongbao.Show();
                     }
                     else
                     {
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THAT_BAI);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THAT_BAI);
                         frmthongbao.Show();
                     }
                 }
@@ -192,12 +192,12 @@ namespace O2S_QuanLyHocVien.Pages
                 {
                     if (CaHocLogic.Update(LoadCaHoc()))
                     {
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                         frmthongbao.Show();
                     }
                     else
                     {
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
                         frmthongbao.Show();
                     }
                 }

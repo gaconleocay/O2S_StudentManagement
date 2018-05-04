@@ -63,6 +63,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (System.Exception ex)
             {
                 return false;
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
 
         }

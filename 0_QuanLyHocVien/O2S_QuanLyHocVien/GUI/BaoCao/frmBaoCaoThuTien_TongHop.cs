@@ -18,15 +18,16 @@ using System.Drawing;
 using DevExpress.XtraSplashScreen;
 using System.Globalization;
 using O2S_QuanLyHocVien.BusinessLogic.Models;
-using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_Common.DataObjects;
 
-namespace O2S_QuanLyHocVien.Pages
+namespace O2S_QuanLyHocVien.BaoCao
 {
-    public partial class frmBCThongKeTheoDoiDiem : Form
+    public partial class frmBaoCaoThuTien_TongHop : Form
     {
-        private List<BangDiemFullDTO> lstBangDiem { get; set; }
-        public frmBCThongKeTheoDoiDiem()
+        private DataTable dataPhieuThuTH { get; set; }
+        private DAL.ConnectDatabase condb = new DAL.ConnectDatabase();
+
+        public frmBaoCaoThuTien_TongHop()
         {
             InitializeComponent();
         }
@@ -38,46 +39,12 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 date_TuNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00");
                 date_DenNgay.DateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
-                LoadKhoaHoc();
             }
             catch (Exception ex)
             {
                 O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
-        private void LoadKhoaHoc()
-        {
-            try
-            {
-                KhoaHocFilter _filter = new KhoaHocFilter();
-                _filter.CoSoId = GlobalSettings.CoSoId;
-                _filter.IsRemove = 0;
-                cboKhoaHoc.DataSource = KhoaHocLogic.Select(_filter);
-                cboKhoaHoc.DisplayMember = "TenKhoaHoc";
-                cboKhoaHoc.ValueMember = "KhoaHocId";
-            }
-            catch (Exception ex)
-            {
-                O2S_Common.Logging.LogSystem.Warn(ex);
-            }
-        }
-        private void LoadLopCuaKhoaHoc()
-        {
-            try
-            {
-                LopHocFilter _filter = new LopHocFilter();
-                _filter.CoSoId = GlobalSettings.CoSoId;
-                _filter.KhoaHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
-                cboLopHoc.DataSource = LopHocLogic.Select(_filter);
-                cboLopHoc.DisplayMember = "TenLopHoc";
-                cboLopHoc.ValueMember = "LopHocId";
-            }
-            catch (Exception ex)
-            {
-                O2S_Common.Logging.LogSystem.Warn(ex);
-            }
-        }
-
         #endregion
 
         #region Events
@@ -86,28 +53,25 @@ namespace O2S_QuanLyHocVien.Pages
             SplashScreenManager.ShowForm(typeof(O2S_Common.Utilities.ThongBao.WaitForm_Wait));
             try
             {
-                if (cboLopHoc.SelectedValue != null)
-                {
-                    int _lophocid = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
-                    this.lstBangDiem = BangDiemLogic.SelectTheoDoiBangDiemLop(_lophocid);
 
-                    if (this.lstBangDiem != null && this.lstBangDiem.Count > 0)
-                    {
-                        for (int i = 0; i < this.lstBangDiem.Count; i++)
-                        {
-                            this.lstBangDiem[i].Stt = i + 1;
-                        }
-                        gridControlDSPhieuGhiDanh.DataSource = this.lstBangDiem;
-                    }
-                    else
-                    {
-                        gridControlDSPhieuGhiDanh.DataSource = null;
-                    }
+                string datetungay = DateTime.ParseExact(date_TuNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
+                string datedenngay = DateTime.ParseExact(date_DenNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
+
+                string _SQLselect = @"SELECT 
+	                row_number () over (order by FORMAT(ThoiGianThu,'dd/MM/yyyy')) as stt,
+	                FORMAT(ThoiGianThu,'dd/MM/yyyy') as ThoiGianThu,
+	                CreatedBy as TenNguoiThu,
+	                sum(SoTien) as SoTien
+                FROM PHIEUTHU
+                WHERE ThoiGianThu between '" + datetungay + "' and '" + datedenngay + "' GROUP BY FORMAT(ThoiGianThu, 'dd/MM/yyyy'),CreatedBy;";
+                this.dataPhieuThuTH = condb.GetDataTable(_SQLselect);
+                if (this.dataPhieuThuTH != null && this.dataPhieuThuTH.Rows.Count > 0)
+                {
+                    gridControlDSPhieuGhiDanh.DataSource = this.dataPhieuThuTH;
                 }
                 else
                 {
-                    O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.VUI_LONG_NHAP_DAY_DU_THONG_TIN);
-                    frmthongbao.Show();
+                    gridControlDSPhieuGhiDanh.DataSource = null;
                 }
             }
             catch (Exception ex)
@@ -134,9 +98,8 @@ namespace O2S_QuanLyHocVien.Pages
                 reportitem.value = tungaydenngay;
                 thongTinThem.Add(reportitem);
 
-                string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
-                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstBangDiem);
-                O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
+                string fileTemplatePath = "BC06_BaoCaoThuTien_TongHop.xlsx";
+                O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, this.dataPhieuThuTH);
             }
             catch (Exception ex)
             {
@@ -160,9 +123,8 @@ namespace O2S_QuanLyHocVien.Pages
                 reportitem.value = tungaydenngay;
                 thongTinThem.Add(reportitem);
 
-                string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
-                DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstBangDiem);
-                O2S_Common.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
+                string fileTemplatePath = "BC06_BaoCaoThuTien_TongHop.xlsx";
+                O2S_Common.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, this.dataPhieuThuTH);
             }
             catch (Exception ex)
             {
@@ -190,37 +152,22 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
 
-        private void cboKhoaHoc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadLopCuaKhoaHoc();
-        }
-
-        #endregion
-
-        private void gridControlDSPhieuGhiDanh_ViewRegistered(object sender, DevExpress.XtraGrid.ViewOperationEventArgs e)
+        private void gridViewDSHocVien_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
             try
             {
-                (e.View as GridView).ColumnPanelRowHeight = 25;
-                (e.View as GridView).RowHeight = 25;
-                (e.View as GridView).OptionsView.ShowIndicator = false;
-
-                (e.View as GridView).Columns["BangDiemChiTietId"].Visible = false;
-                (e.View as GridView).Columns["BangDiemId"].Visible = false;
-                (e.View as GridView).Columns["MonHocId"].Visible = false;
-                //        
-                (e.View as GridView).Columns["MaMonHoc"].Width = 80;
-                (e.View as GridView).Columns["TenMonHoc"].Width = 150;
-                (e.View as GridView).Columns["Diem"].Width = 80;
-                //                 
-                (e.View as GridView).Columns["MaMonHoc"].OptionsColumn.AllowEdit = false;
-                (e.View as GridView).Columns["TenMonHoc"].OptionsColumn.AllowEdit = false;
-                (e.View as GridView).Columns["Diem"].OptionsColumn.AllowEdit = false;
+                if (e.Column == gridColumn_stt)
+                {
+                    e.DisplayText = Convert.ToString(e.RowHandle + 1);
+                }
             }
             catch (Exception ex)
             {
                 O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
+
+        #endregion
+
     }
 }

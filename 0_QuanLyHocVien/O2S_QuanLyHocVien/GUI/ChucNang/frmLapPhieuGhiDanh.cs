@@ -22,6 +22,7 @@ using DevExpress.XtraSplashScreen;
 using O2S_QuanLyHocVien.BusinessLogic.Models;
 using System.Data;
 using O2S_QuanLyHocVien.PhieuGhiDanh;
+using O2S_Common.DataObjects;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -210,6 +211,11 @@ namespace O2S_QuanLyHocVien.Pages
                         InBienLaiThuTien_Process(this.PhieuThuId);
                     }
                 }
+                else
+                {
+                    O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THAT_BAI);
+                    frmthongbao.Show();
+                }
 
             }
             catch (ArgumentException ex)
@@ -230,7 +236,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
+                SplashScreenManager.ShowForm(typeof(O2S_Common.Utilities.ThongBao.WaitForm_Wait));
 
                 HOCVIEN _hocvien = HocVienLogic.SelectSingle(this.HocVienId_Select);
                 PHIEUTHU _phieuthu = PhieuThuLogic.SelectSingle(_phieuthuId);
@@ -339,7 +345,7 @@ namespace O2S_QuanLyHocVien.Pages
                     }
                 }
 
-                string fileTemplatePath = "BienLaiThuTien_NopTien.xlsx"; Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
+                string fileTemplatePath = "BienLaiThuTien_NopTien.xlsx"; O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
             }
             catch (Exception ex)
             {

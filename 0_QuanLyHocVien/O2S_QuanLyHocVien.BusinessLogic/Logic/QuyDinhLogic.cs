@@ -20,8 +20,16 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <returns></returns>
         public static List<QUYDINH> SelectAll()
         {
-            return (from p in Database.QUYDINHs
-                    select p).ToList();
+            try
+            {
+                return (from p in Database.QUYDINHs
+                        select p).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         /// <summary>
@@ -31,9 +39,17 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <returns></returns>
         public static QUYDINH Select(string _MaQuyDinh)
         {
-            return (from p in Database.QUYDINHs
-                    where p.MaQuyDinh == _MaQuyDinh
-                    select p).Single();
+            try
+            {
+                return (from p in Database.QUYDINHs
+                        where p.MaQuyDinh == _MaQuyDinh
+                        select p).Single();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         /// <summary>
@@ -42,10 +58,17 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// <param name="qd">Quy định cần cập nhật</param>
         public static void Update(QUYDINH qd)
         {
-            var qdCu = Select(qd.MaQuyDinh);
-            qdCu.GiaTri = qd.GiaTri;
+            try
+            {
+                var qdCu = Select(qd.MaQuyDinh);
+                qdCu.GiaTri = qd.GiaTri;
 
-            Database.SubmitChanges();
+                Database.SubmitChanges();
+            }
+            catch (System.Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
     }
 }

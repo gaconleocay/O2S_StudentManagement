@@ -15,18 +15,34 @@ namespace O2S_QuanLyHocVien.BusinessLogic
     {
         public static LOAIHOCVIEN Select(int _loaihocvienId)
         {
-            var result = (from p in GlobalSettings.Database.LOAIHOCVIENs
-                         where p.LoaiHocVienId== _loaihocvienId
-                         select p);
+            try
+            {
+                var result = (from p in GlobalSettings.Database.LOAIHOCVIENs
+                              where p.LoaiHocVienId == _loaihocvienId
+                              select p);
 
-            return result.FirstOrDefault();
+                return result.FirstOrDefault();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
         public static List<LOAIHOCVIEN> SelectAll()
         {
-            var result = from p in GlobalSettings.Database.LOAIHOCVIENs
-                         select p;
+            try
+            {
+                var result = from p in GlobalSettings.Database.LOAIHOCVIENs
+                             select p;
 
-            return result.ToList();
+                return result.ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
     }
 }

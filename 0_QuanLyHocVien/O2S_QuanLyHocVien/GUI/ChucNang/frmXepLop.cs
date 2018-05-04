@@ -18,6 +18,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
 using O2S_QuanLyHocVien.BusinessLogic.Models;
 using System.Data;
+using O2S_Common.DataObjects;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -245,12 +246,12 @@ namespace O2S_QuanLyHocVien.Pages
                     DangMo = _lophoc.DangMo
                 });
 
-                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                 frmthongbao.Show();
             }
             catch (Exception ex)
             {
-                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
+                O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
                 frmthongbao.Show();
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
@@ -321,7 +322,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                SplashScreenManager.ShowForm(typeof(Utilities.ThongBao.WaitForm1));
+                SplashScreenManager.ShowForm(typeof(O2S_Common.Utilities.ThongBao.WaitForm_Wait));
                 if (cboLopHoc.SelectedValue != null)
                 {
                     List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
@@ -343,7 +344,7 @@ namespace O2S_QuanLyHocVien.Pages
 
                     string fileTemplatePath = "FUN_XepLop_DanhSachLopHoc.xlsx";
                     DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(_lstXepLop);
-                    Utilities.PrintPreview.PrintPreview_ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
+                    O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
                 }
             }
             catch (Exception ex)

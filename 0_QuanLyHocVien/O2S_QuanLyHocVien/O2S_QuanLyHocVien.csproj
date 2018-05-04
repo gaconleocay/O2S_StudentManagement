@@ -444,47 +444,6 @@
     <Compile Include="Reports\frmReport.Designer.cs">
       <DependentUpon>frmReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Common.Excel\ExcelExport.cs" />
-    <Compile Include="Utilities\Common.Word\WordMergeTemplateExport.cs" />
-    <Compile Include="Utilities\Common.Word\WordOpenFile.cs" />
-    <Compile Include="Utilities\GridView\GridExtensions.cs" />
-    <Compile Include="Utilities\GUIGridView\Util_GUIGridView.cs" />
-    <Compile Include="Utilities\PrintPreview\CoolPrintPreviewControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Utilities\PrintPreview\CoolPrintPreviewDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Utilities\PrintPreview\CoolPrintPreviewDialog.designer.cs">
-      <DependentUpon>CoolPrintPreviewDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utilities\PrintPreview\frmDevPrintPreviewDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Utilities\PrintPreview\frmDevPrintPreviewDialog.Designer.cs">
-      <DependentUpon>frmDevPrintPreviewDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utilities\PrintPreview\PageImageList.cs" />
-    <Compile Include="Utilities\PrintPreview\PrintPreview_ExcelFileTemplate.cs" />
-    <Compile Include="Utilities\PrintPreview\PrintRibbonControllerResources.Designer.cs" />
-    <Compile Include="Utilities\ThongBao\frmThongBao.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Utilities\ThongBao\frmThongBao.Designer.cs">
-      <DependentUpon>frmThongBao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utilities\ThongBao\SplashScreen1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Utilities\ThongBao\SplashScreen1.Designer.cs">
-      <DependentUpon>SplashScreen1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utilities\ThongBao\WaitForm1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Utilities\ThongBao\WaitForm1.Designer.cs">
-      <DependentUpon>WaitForm1.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="GUI\BaoCao\frmBaoCaoThuTien_TongHop.resx">
       <DependentUpon>frmBaoCaoThuTien_TongHop.cs</DependentUpon>
     </EmbeddedResource>
@@ -656,22 +615,6 @@
     <Content Include="Reports\rptInBangDiem.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Utilities\PrintPreview\CoolPrintPreviewDialog.resx">
-      <DependentUpon>CoolPrintPreviewDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\PrintPreview\frmDevPrintPreviewDialog.resx">
-      <DependentUpon>frmDevPrintPreviewDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\PrintPreview\PrintRibbonControllerResources.resx" />
-    <EmbeddedResource Include="Utilities\ThongBao\frmThongBao.resx">
-      <DependentUpon>frmThongBao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\ThongBao\SplashScreen1.resx">
-      <DependentUpon>SplashScreen1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\ThongBao\WaitForm1.resx">
-      <DependentUpon>WaitForm1.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>

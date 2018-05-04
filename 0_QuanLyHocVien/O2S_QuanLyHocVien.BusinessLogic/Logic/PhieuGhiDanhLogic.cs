@@ -12,6 +12,7 @@ using O2S_QuanLyHocVien.DataAccess;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
 using System.Transactions;
+using log4net;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
@@ -35,11 +36,12 @@ namespace O2S_QuanLyHocVien.BusinessLogic
     }
     public static class PhieuGhiDanhLogic
     {
+        //private static readonly ILog logFile = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static object SelectAll()
         {
             return (from p in Database.PHIEUGHIDANHs
                     join hv in Database.HOCVIENs on p.HocVienId equals hv.HocVienId
-                    where p.IsRemove!=1
+                    where p.IsRemove != 1
                     select new
                     {
                         PhieuGhiDanhId = p.PhieuGhiDanhId,
@@ -53,31 +55,39 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         public static object SelectTheoCoSo()
         {
-            return (from p in Database.PHIEUGHIDANHs
-                    join hv in Database.HOCVIENs on p.HocVienId equals hv.HocVienId
-                    where (hv.CoSoId == GlobalSettings.CoSoId) && p.IsRemove!=1
-                    select new
-                    {
-                        CoSoId = hv.CoSoId,
-                        PhieuGhiDanhId = p.PhieuGhiDanhId,
-                        HocVienId = p.HocVienId,
-                        MaHocVien = hv.MaHocVien,
-                        TenHocVien = hv.TenHocVien,
-                        NgaySinh = hv.NgaySinh,
-                        GioiTinh = hv.GioiTinh,
-                        KhoaHocId = p.KhoaHocId,
-                        TenKhoaHoc = p.KHOAHOC.TenKhoaHoc,
-                        MaPhieuGhiDanh = p.MaPhieuGhiDanh,
-                        NgayGhiDanh = p.NgayGhiDanh,
-                        TongTien = p.TongTien,
-                        DaDong = p.DaDong,
-                        MienGiam_PhanTram = p.MienGiam_PhanTram,
-                        MienGiam_Tien = p.MienGiam_Tien,
-                        LyDoMienGiam=p.LyDoMienGiam,
-                        ConNo = p.ConNo,
-                        IsRemove = p.IsRemove,
-                        NhanVienId = p.NhanVienId,
-                    }).ToList();
+            try
+            {
+                return (from p in Database.PHIEUGHIDANHs
+                        join hv in Database.HOCVIENs on p.HocVienId equals hv.HocVienId
+                        where (hv.CoSoId == GlobalSettings.CoSoId) && p.IsRemove != 1
+                        select new
+                        {
+                            CoSoId = hv.CoSoId,
+                            PhieuGhiDanhId = p.PhieuGhiDanhId,
+                            HocVienId = p.HocVienId,
+                            MaHocVien = hv.MaHocVien,
+                            TenHocVien = hv.TenHocVien,
+                            NgaySinh = hv.NgaySinh,
+                            GioiTinh = hv.GioiTinh,
+                            KhoaHocId = p.KhoaHocId,
+                            TenKhoaHoc = p.KHOAHOC.TenKhoaHoc,
+                            MaPhieuGhiDanh = p.MaPhieuGhiDanh,
+                            NgayGhiDanh = p.NgayGhiDanh,
+                            TongTien = p.TongTien,
+                            DaDong = p.DaDong,
+                            MienGiam_PhanTram = p.MienGiam_PhanTram,
+                            MienGiam_Tien = p.MienGiam_Tien,
+                            LyDoMienGiam = p.LyDoMienGiam,
+                            ConNo = p.ConNo,
+                            IsRemove = p.IsRemove,
+                            NhanVienId = p.NhanVienId,
+                        }).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
         public static IQueryable<BaoCaoHocVienGhiDanh> BaoCaoHocVienGhiDanhTheoThang(int month, int year)
@@ -86,7 +96,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                    join hv in Database.HOCVIENs on p.HocVienId equals hv.HocVienId
                    join kh in Database.KHOAHOCs on p.KhoaHocId equals kh.KhoaHocId
                    where (p.NgayGhiDanh.Value.Month == month) &&
-                         (p.NgayGhiDanh.Value.Year == year) && p.IsRemove!=1
+                         (p.NgayGhiDanh.Value.Year == year) && p.IsRemove != 1
                    select new BaoCaoHocVienGhiDanh()
                    {
                        HocVienId = p.HocVienId ?? 0,
@@ -101,7 +111,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             return (from p in Database.PHIEUGHIDANHs
                     join hv in Database.HOCVIENs on p.HocVienId equals hv.HocVienId
                     join kh in Database.KHOAHOCs on p.KhoaHocId equals kh.KhoaHocId
-                    where p.ConNo > 0 && p.IsRemove!=1
+                    where p.ConNo > 0 && p.IsRemove != 1
                     select new BaoCaoHocVienNo()
                     {
                         HocVienId = p.HocVienId,
@@ -114,9 +124,17 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
         public static PHIEUGHIDANH SelectSingle(int _PhieuGhiDanhId)
         {
-            return (from p in Database.PHIEUGHIDANHs
-                    where p.PhieuGhiDanhId == _PhieuGhiDanhId && p.IsRemove!=1
-                    select p).FirstOrDefault();
+            try
+            {
+                return (from p in Database.PHIEUGHIDANHs
+                        where p.PhieuGhiDanhId == _PhieuGhiDanhId && p.IsRemove != 1
+                        select p).FirstOrDefault();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
         public static List<PhieuGhiDanh_PlusDTO> Select(PhieuGhiDanhFilter _filter)
         {
@@ -186,7 +204,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             try
             {
                 var query = (from p in GlobalSettings.Database.PHIEUGHIDANHs
-                             where p.IsRemove!=1
+                             where p.IsRemove != 1
                              select p).AsEnumerable().Select((obj, index) => new QLHocPhi_PlusDTO
                              {
                                  Stt = index + 1,
@@ -205,9 +223,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  NgayGhiDanh = obj.NgayGhiDanh,
                                  TongTien = obj.TongTien,
                                  DaDong = obj.DaDong,
-                                 MienGiam_PhanTram=obj.MienGiam_PhanTram,
-                                 MienGiam_Tien=obj.MienGiam_Tien,
-                                 LyDoMienGiam=obj.LyDoMienGiam,
+                                 MienGiam_PhanTram = obj.MienGiam_PhanTram,
+                                 MienGiam_Tien = obj.MienGiam_Tien,
+                                 LyDoMienGiam = obj.LyDoMienGiam,
                                  ConNo = obj.ConNo,
                                  IsRemove = obj.IsRemove,
                                  NhanVienId = obj.NhanVienId,
@@ -274,6 +292,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             try
             {
+                O2S_Common.Logging.LogSystem.Error("Luu log InsertPGDFull");
                 using (TransactionScope ts = new TransactionScope())
                 {
                     //Phieu ghi danh
@@ -322,6 +341,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
             catch (Exception ex)
             {
+                O2S_Common.Logging.LogSystem.Error(ex);
                 return false;
             }
         }
@@ -359,11 +379,11 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     return true;
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 return false;
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
-
         }
 
         public static bool Update(PHIEUGHIDANH ph)
@@ -380,11 +400,11 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 Database.SubmitChanges();
                 return true;
             }
-            catch (Exception)
+            catch (System.Exception ex)
             {
                 return false;
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
-
         }
 
         public static bool XoaPhieuGhiDanh(PHIEUGHIDANH _phieuGD)
@@ -405,7 +425,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     if (_lstPhieuThu != null && _lstPhieuThu.Count > 0)
                     {
                         Database.PHIEUTHUs.DeleteAllOnSubmit(_lstPhieuThu);
-                       // Database.SubmitChanges();
+                        // Database.SubmitChanges();
                     }
                     //update=Xoa bang PHIEUGHIDANH
                     //PHIEUGHIDANH _phieuGDUpdate = SelectSingle(_phieuGD.PhieuGhiDanhId);
@@ -433,12 +453,13 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     //
                     Database.SubmitChanges();
                     ts.Complete();
-                    return true; 
+                    return true;
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 return false;
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 

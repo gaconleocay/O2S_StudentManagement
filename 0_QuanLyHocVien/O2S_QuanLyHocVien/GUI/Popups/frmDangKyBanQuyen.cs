@@ -96,7 +96,7 @@ namespace O2S_QuanLyHocVien.Popups
                 }
                 else
                 {
-                    Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao("Chưa nhập mã kích hoạt!");
+                    O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao("Chưa nhập mã kích hoạt!");
                     frmthongbao.Show();
                     lblThoiGianSuDung.Text = "none";
                 }
@@ -117,12 +117,12 @@ namespace O2S_QuanLyHocVien.Popups
                 try
                 {
                     LicenseLogic.Update(_license);
-                    Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao("Lưu mã kích hoạt thành công!");
+                    O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao("Lưu mã kích hoạt thành công!");
                     frmthongbao.Show();
                 }
                 catch (Exception)
                 {
-                    Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
+                    O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
                     frmthongbao.Show();
                 }
             }
@@ -191,7 +191,7 @@ namespace O2S_QuanLyHocVien.Popups
                 if (e.KeyCode == Keys.Enter)
                 {
                     //Kiem tra pass dung hay sai?
-                    if (txtTaoLicensePassword.Text.Trim() == KeyTrongPhanMem.LayLicense_key && GlobalSettings.UserCode ==KeyTrongPhanMem.AdminUser_key)
+                    if (txtTaoLicensePassword.Text.Trim() == KeyTrongPhanMem.LayLicense_key && GlobalSettings.UserCode == KeyTrongPhanMem.AdminUser_key)
                     {
                         btnTaoLicenseTao.Enabled = true;
                     }

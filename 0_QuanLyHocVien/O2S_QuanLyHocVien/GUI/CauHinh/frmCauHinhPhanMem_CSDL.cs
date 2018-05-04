@@ -157,7 +157,7 @@ namespace O2S_QuanLyHocVien.CauHinh
             _version.AppLink = txtUpdateVersionLink.Text;
             if (VersionLogic.Update(_version))
             {
-                Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
+                O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
                 frmthongbao.Show();
             }
         }

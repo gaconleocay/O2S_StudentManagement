@@ -261,19 +261,19 @@ namespace O2S_QuanLyHocVien.Pages
                         if (XepLichHocLogic.InsertMultiRow(_lstInsert))
                         {
                             //Thread.Sleep(2500);
-                            Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                            O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                             frmthongbao.Show();
                             LoadLichHocCuaLopHoc(this.LopHocId_Select);
                         }
                         else
                         {
-                            Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
+                            O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
                             frmthongbao.Show();
                         }
                     }
                     else
                     {
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
                         frmthongbao.Show();
                     }
                 }
@@ -347,7 +347,7 @@ namespace O2S_QuanLyHocVien.Pages
                     List<XEPLICHHOC> _lstLichHoc = XepLichHocLogic.SelectTheoLopHoc(this.LopHocId_Select);
                     if (XepLichHocLogic.UpdateKhoaLichHoc(_lstLichHoc))
                     {
-                        Utilities.ThongBao.frmThongBao frmthongbao = new Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                         frmthongbao.Show();
                         btnTimKiem_Click(null, null);
                     }
