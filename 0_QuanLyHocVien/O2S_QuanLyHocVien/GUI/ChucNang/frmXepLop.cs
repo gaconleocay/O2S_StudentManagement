@@ -39,23 +39,10 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                LoadDSHVChuaCoLop();
                 LoadKhoaHoc();
                 LoadLopTrongCuaKhoaHoc();
+                LoadDSHVChuaCoLop();
                 LoadDSHVLopChuaDu();
-            }
-            catch (Exception ex)
-            {
-                O2S_Common.Logging.LogSystem.Warn(ex);
-            }
-        }
-        public void LoadDSHVChuaCoLop()
-        {
-            try
-            {
-                this.dsChuaCoLop = HocVienLogic.DanhSachHocVienChuaXepLop(GlobalSettings.CoSoId);
-                gridControlHV_ChuaXepLop.DataSource = this.dsChuaCoLop;
-                lblTongCongHV.Text = string.Format("Tổng cộng: {0} học viên", this.dsChuaCoLop.Count);
             }
             catch (Exception ex)
             {
@@ -91,6 +78,20 @@ namespace O2S_QuanLyHocVien.Pages
                 O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
+        public void LoadDSHVChuaCoLop()
+        {
+            try
+            {
+                int _lopHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
+                this.dsChuaCoLop = HocVienLogic.HocVienChuaXepLopTheoKhoaHoc(_lopHocId);
+                gridControlHV_ChuaXepLop.DataSource = this.dsChuaCoLop;
+                lblTongCongHV.Text = string.Format("Tổng cộng: {0} học viên", this.dsChuaCoLop.Count);
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
         public void LoadDSHVLopChuaDu()
         {
             try
@@ -120,7 +121,9 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                frmXepLop_Load(null, null);
+                LoadLopTrongCuaKhoaHoc();
+                LoadDSHVChuaCoLop();
+                LoadDSHVLopChuaDu();
             }
             catch (Exception ex)
             {
@@ -241,9 +244,10 @@ namespace O2S_QuanLyHocVien.Pages
                     TenLopHoc = _lophoc.TenLopHoc,
                     NgayBatDau = _lophoc.NgayBatDau,
                     NgayKetThuc = _lophoc.NgayKetThuc,
+                    SiSoToiDa=_lophoc.SiSoToiDa,
                     SiSo = this.dsXepLopHocVien.Count,
                     KhoaHocId = _lophoc.KhoaHocId,
-                    DangMo = _lophoc.DangMo
+                    IsLock = _lophoc.IsLock
                 });
 
                 O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
@@ -268,6 +272,8 @@ namespace O2S_QuanLyHocVien.Pages
         private void cboKhoa_SelectedValueChanged(object sender, EventArgs e)
         {
             LoadLopTrongCuaKhoaHoc();
+            LoadDSHVChuaCoLop();
+            LoadDSHVLopChuaDu();
         }
         private void gridViewHV_ChuaXepLop_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
@@ -344,7 +350,7 @@ namespace O2S_QuanLyHocVien.Pages
 
                     string fileTemplatePath = "FUN_XepLop_DanhSachLopHoc.xlsx";
                     DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(_lstXepLop);
-                    O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
+                    Utilities.Prints.PrintPreview.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
                 }
             }
             catch (Exception ex)

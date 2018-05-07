@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -41,10 +39,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtMaMonHoc = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.gridKH = new System.Windows.Forms.DataGridView();
-            this.clmMonHocId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenMonHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmDiemToiDa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gridControlMonHoc = new DevExpress.XtraGrid.GridControl();
+            this.gridViewMonHoc = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmKH_stt = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblTongCong = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -56,7 +60,9 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridKH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlMonHoc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewMonHoc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -104,7 +110,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
-            this.splitContainer1.Panel2.Controls.Add(this.gridKH);
+            this.splitContainer1.Panel2.Controls.Add(this.gridControlMonHoc);
             this.splitContainer1.Panel2.Controls.Add(this.panel3);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Size = new System.Drawing.Size(1086, 516);
@@ -126,7 +132,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 97);
+            this.label4.Location = new System.Drawing.Point(28, 97);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 15);
             this.label4.TabIndex = 19;
@@ -194,7 +200,6 @@
             // 
             this.txtMaMonHoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMaMonHoc.Enabled = false;
             this.txtMaMonHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtMaMonHoc.Location = new System.Drawing.Point(106, 12);
             this.txtMaMonHoc.Name = "txtMaMonHoc";
@@ -205,63 +210,174 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 17);
+            this.label2.Location = new System.Drawing.Point(21, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 15);
             this.label2.TabIndex = 0;
             this.label2.Text = "Mã môn học:";
             // 
-            // gridKH
+            // gridControlMonHoc
             // 
-            this.gridKH.AllowUserToAddRows = false;
-            this.gridKH.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridKH.BackgroundColor = System.Drawing.Color.White;
-            this.gridKH.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gridKH.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmMonHocId,
-            this.clmTenMonHoc,
-            this.clmDiemToiDa});
-            this.gridKH.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gridKH.Location = new System.Drawing.Point(12, 37);
-            this.gridKH.MultiSelect = false;
-            this.gridKH.Name = "gridKH";
-            this.gridKH.RowHeadersVisible = false;
-            this.gridKH.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridKH.Size = new System.Drawing.Size(704, 441);
-            this.gridKH.TabIndex = 1;
-            this.gridKH.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.gridKH_RowsAdded);
-            this.gridKH.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridKH_RowsRemoved);
-            this.gridKH.Click += new System.EventHandler(this.gridKH_Click);
-            this.gridKH.DoubleClick += new System.EventHandler(this.gridKH_DoubleClick);
+            this.gridControlMonHoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlMonHoc.Location = new System.Drawing.Point(0, 37);
+            this.gridControlMonHoc.MainView = this.gridViewMonHoc;
+            this.gridControlMonHoc.Name = "gridControlMonHoc";
+            this.gridControlMonHoc.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemCheckEdit2});
+            this.gridControlMonHoc.Size = new System.Drawing.Size(728, 449);
+            this.gridControlMonHoc.TabIndex = 26;
+            this.gridControlMonHoc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewMonHoc});
             // 
-            // clmMonHocId
+            // gridViewMonHoc
             // 
-            this.clmMonHocId.DataPropertyName = "MonHocId";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmMonHocId.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmMonHocId.FillWeight = 7.383478F;
-            this.clmMonHocId.HeaderText = "Mã môn học";
-            this.clmMonHocId.Name = "clmMonHocId";
-            this.clmMonHocId.Width = 80;
+            this.gridViewMonHoc.ColumnPanelRowHeight = 25;
+            this.gridViewMonHoc.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn10,
+            this.clmKH_stt,
+            this.gridColumn7,
+            this.gridColumn8,
+            this.gridColumn9,
+            this.gridColumn11,
+            this.gridColumn6});
+            this.gridViewMonHoc.GridControl = this.gridControlMonHoc;
+            this.gridViewMonHoc.Name = "gridViewMonHoc";
+            this.gridViewMonHoc.OptionsDetail.EnableMasterViewMode = false;
+            this.gridViewMonHoc.OptionsDetail.SmartDetailExpand = false;
+            this.gridViewMonHoc.OptionsFind.AlwaysVisible = true;
+            this.gridViewMonHoc.OptionsFind.FindNullPrompt = "Từ khóa tìm kiếm...";
+            this.gridViewMonHoc.OptionsView.ColumnAutoWidth = false;
+            this.gridViewMonHoc.OptionsView.EnableAppearanceEvenRow = true;
+            this.gridViewMonHoc.OptionsView.ShowGroupPanel = false;
+            this.gridViewMonHoc.OptionsView.ShowIndicator = false;
+            this.gridViewMonHoc.RowHeight = 25;
+            this.gridViewMonHoc.ViewCaptionHeight = 25;
+            this.gridViewMonHoc.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridViewKhoaHoc_CustomDrawCell);
+            this.gridViewMonHoc.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewDSMonHoc_RowCellStyle);
+            this.gridViewMonHoc.Click += new System.EventHandler(this.gridViewMonHoc_Click);
+            this.gridViewMonHoc.DoubleClick += new System.EventHandler(this.gridViewMonHoc_DoubleClick);
             // 
-            // clmTenMonHoc
+            // gridColumn10
             // 
-            this.clmTenMonHoc.DataPropertyName = "TenMonHoc";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
-            this.clmTenMonHoc.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clmTenMonHoc.FillWeight = 8.860174F;
-            this.clmTenMonHoc.HeaderText = "Tên môn học";
-            this.clmTenMonHoc.Name = "clmTenMonHoc";
-            this.clmTenMonHoc.Width = 200;
+            this.gridColumn10.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn10.AppearanceCell.Options.UseFont = true;
+            this.gridColumn10.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn10.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn10.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn10.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn10.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn10.Caption = "MonHocId";
+            this.gridColumn10.FieldName = "MonHocId";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.OptionsColumn.AllowEdit = false;
             // 
-            // clmDiemToiDa
+            // clmKH_stt
             // 
-            this.clmDiemToiDa.DataPropertyName = "DiemToiDa";
-            this.clmDiemToiDa.FillWeight = 303.7563F;
-            this.clmDiemToiDa.HeaderText = "Điểm tối đa";
-            this.clmDiemToiDa.Name = "clmDiemToiDa";
+            this.clmKH_stt.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.clmKH_stt.AppearanceCell.Options.UseFont = true;
+            this.clmKH_stt.AppearanceCell.Options.UseTextOptions = true;
+            this.clmKH_stt.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.clmKH_stt.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.clmKH_stt.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.clmKH_stt.AppearanceHeader.Options.UseFont = true;
+            this.clmKH_stt.AppearanceHeader.Options.UseForeColor = true;
+            this.clmKH_stt.AppearanceHeader.Options.UseTextOptions = true;
+            this.clmKH_stt.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.clmKH_stt.Caption = "STT";
+            this.clmKH_stt.FieldName = "Stt";
+            this.clmKH_stt.Name = "clmKH_stt";
+            this.clmKH_stt.OptionsColumn.AllowEdit = false;
+            this.clmKH_stt.Visible = true;
+            this.clmKH_stt.VisibleIndex = 0;
+            this.clmKH_stt.Width = 35;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn7.AppearanceCell.Options.UseFont = true;
+            this.gridColumn7.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn7.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn7.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn7.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn7.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn7.Caption = "Mã môn học";
+            this.gridColumn7.FieldName = "MaMonHoc";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.OptionsColumn.AllowEdit = false;
+            this.gridColumn7.OptionsColumn.ReadOnly = true;
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 1;
+            this.gridColumn7.Width = 100;
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn8.AppearanceCell.Options.UseFont = true;
+            this.gridColumn8.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn8.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn8.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn8.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn8.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn8.Caption = "Tên môn học";
+            this.gridColumn8.FieldName = "TenMonHoc";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.OptionsColumn.AllowEdit = false;
+            this.gridColumn8.OptionsColumn.ReadOnly = true;
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 2;
+            this.gridColumn8.Width = 330;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn9.AppearanceCell.Options.UseFont = true;
+            this.gridColumn9.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn9.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.gridColumn9.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn9.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn9.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn9.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn9.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn9.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn9.Caption = "Điểm tối đa";
+            this.gridColumn9.FieldName = "DiemToiDa";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.OptionsColumn.AllowEdit = false;
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 3;
+            this.gridColumn9.Width = 147;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "IsRemove";
+            this.gridColumn11.FieldName = "IsRemove";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn6.AppearanceCell.Options.UseFont = true;
+            this.gridColumn6.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn6.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn6.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn6.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn6.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn6.Caption = "Trạng thái";
+            this.gridColumn6.FieldName = "IsLock";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.OptionsColumn.AllowEdit = false;
+            this.gridColumn6.Width = 150;
+            // 
+            // repositoryItemCheckEdit2
+            // 
+            this.repositoryItemCheckEdit2.AutoHeight = false;
+            this.repositoryItemCheckEdit2.Name = "repositoryItemCheckEdit2";
+            this.repositoryItemCheckEdit2.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             // 
             // panel3
             // 
@@ -346,7 +462,7 @@
             this.btnThem.UseVisualStyleBackColor = false;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
-            // frmQuanLyMonHoc
+            // frmDanhMucMonHoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -357,7 +473,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(48)))), ((int)(((byte)(70)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmQuanLyMonHoc";
+            this.Name = "frmDanhMucMonHoc";
             this.Text = "Quản lý môn học";
             this.Load += new System.EventHandler(this.frmQuanLyMonHoc_Load);
             this.panel1.ResumeLayout(false);
@@ -367,7 +483,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridKH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlMonHoc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewMonHoc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -386,7 +504,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMaMonHoc;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView gridKH;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblTongCong;
         private System.Windows.Forms.Panel panel2;
@@ -395,8 +512,15 @@
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.TextBox numDiemToiDa;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmMonHocId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTenMonHoc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmDiemToiDa;
+        private DevExpress.XtraGrid.GridControl gridControlMonHoc;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewMonHoc;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
+        private DevExpress.XtraGrid.Columns.GridColumn clmKH_stt;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
     }
 }

@@ -32,5 +32,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Model
         public string TrangThai_Ten { get; set; }
         [Display(Name = "Bảng điểm chi tiết")]
         public List<BangDiemChiTietDTO> BangDiemChiTiets { get; set; }
+        public bool? IsLock { get; internal set; }
     }
 }

@@ -425,7 +425,7 @@ namespace O2S_QuanLyHocVien.Pages
                     //dataExport.Rows.Add(newRow);
                 }
 
-                O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
+                Utilities.Prints.PrintPreview.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
             }
             catch (Exception ex)
             {

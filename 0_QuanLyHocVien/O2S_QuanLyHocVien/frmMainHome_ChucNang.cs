@@ -18,6 +18,7 @@ using DevExpress.XtraTab;
 using O2S_QuanLyHocVien.CauHinh;
 using O2S_QuanLyHocVien.ChucNang;
 using O2S_QuanLyHocVien.BaoCao;
+using O2S_QuanLyHocVien.DanhMuc;
 
 namespace O2S_QuanLyHocVien
 {
@@ -314,7 +315,6 @@ namespace O2S_QuanLyHocVien
         #endregion
 
         #region Danh muc
-
         private void btnDmKhoaHoc_ItemClick(object sender, ItemClickEventArgs e)
         {
             try
@@ -369,6 +369,23 @@ namespace O2S_QuanLyHocVien
                 O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
+
+        private void btnDMPhongHoc_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmDanhMucPhongHoc frmControlActive = new frmDanhMucPhongHoc() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmDanhMucPhongHoc", "Danh mục phòng học", "Danh mục phòng học", frmControlActive);
+                frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+
+
         #endregion
 
         #region He thong

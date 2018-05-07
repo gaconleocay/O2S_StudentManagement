@@ -528,7 +528,7 @@ namespace O2S_QuanLyHocVien.ChucNang
 
                     string fileTemplatePath = "BC_QuanLyThuChi_ChiTiet.xlsx";
                     DataTable _dataBC = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHoaDonThuChi);
-                    O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _dataBC);
+                    Utilities.Prints.PrintPreview.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _dataBC);
 
                 }
                 catch (Exception ex)
@@ -567,7 +567,7 @@ namespace O2S_QuanLyHocVien.ChucNang
 
                     string fileTemplatePath = "BC_QuanLyThuChi_TongHop.xlsx";
                     DataTable _dataBC = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHoaDonThuChi);
-                    O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _dataBC);
+                    Utilities.Prints.PrintPreview.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _dataBC);
 
                 }
                 catch (Exception ex)

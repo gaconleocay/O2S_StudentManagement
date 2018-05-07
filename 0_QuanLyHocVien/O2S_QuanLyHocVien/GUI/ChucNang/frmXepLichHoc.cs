@@ -151,6 +151,23 @@ namespace O2S_QuanLyHocVien.Pages
                 O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
+        private void LoadPhongHoc()
+        {
+            try
+            {
+                PhongHocFilter _filter = new PhongHocFilter();
+                _filter.CoSoId = GlobalSettings.CoSoId;
+                _filter.IsRemove = 0;
+                List<PHONGHOC> dataPhongHoc = PhongHocLogic.Select(_filter);
+                repositoryItemGrid_PhongHoc.DataSource = dataPhongHoc;
+                repositoryItemGrid_PhongHoc.DisplayMember = "TenPhongHoc";
+                repositoryItemGrid_PhongHoc.ValueMember = "PhongHocId";
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
         private void LoadGiangVien()
         {
             try
@@ -206,6 +223,7 @@ namespace O2S_QuanLyHocVien.Pages
                 if (this.LopHocId_Select != 0)
                 {
                     LoadCaHoc();
+                    LoadPhongHoc();
                     LoadGiangVien();
                     LoadLichHocCuaLopHoc(this.LopHocId_Select);
                 }
@@ -235,6 +253,7 @@ namespace O2S_QuanLyHocVien.Pages
 
                             ValidateLuu(item);
                             CAHOC _cahoc = CaHocLogic.SelectSingle(item.CaHocId ?? 0);
+                            PHONGHOC _phonghoc = PhongHocLogic.SelectSingle(item.PhongHocId ?? 0);
                             GIANGVIEN _gv_chinh = GiangVienLogic.SelectSigleTheoKhoaKhoa(item.GiaoVien_ChinhId ?? 0);
                             GIANGVIEN _gv_trogiang = GiangVienLogic.SelectSigleTheoKhoaKhoa(item.GiaoVien_TroGiangId ?? 0);
                             XEPLICHHOC _xeplich = new XEPLICHHOC()
@@ -247,6 +266,8 @@ namespace O2S_QuanLyHocVien.Pages
                                 ThoiGianHoc_Full = day_tiengViet + " - " + item.ThoiGianHoc.ToString("dd/MM/yyyy"),
                                 CaHocId = item.CaHocId,
                                 TenCaHocFull = _cahoc != null ? _cahoc.TenCaHocFull : "",
+                                PhongHocId = item.PhongHocId,
+                                TenPhongHoc = _phonghoc != null ? _phonghoc.TenPhongHoc : "",
                                 GiaoVien_ChinhId = item.GiaoVien_ChinhId,
                                 TenGiaoVien_Chinh = _gv_chinh != null ? _gv_chinh.TenGiangVien : "",
                                 TienGiaoVien_Chinh = item.TienGiaoVien_Chinh,
@@ -261,19 +282,19 @@ namespace O2S_QuanLyHocVien.Pages
                         if (XepLichHocLogic.InsertMultiRow(_lstInsert))
                         {
                             //Thread.Sleep(2500);
-                            O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                            O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                             frmthongbao.Show();
                             LoadLichHocCuaLopHoc(this.LopHocId_Select);
                         }
                         else
                         {
-                            O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
+                            O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
                             frmthongbao.Show();
                         }
                     }
                     else
                     {
-                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
                         frmthongbao.Show();
                     }
                 }
@@ -347,7 +368,7 @@ namespace O2S_QuanLyHocVien.Pages
                     List<XEPLICHHOC> _lstLichHoc = XepLichHocLogic.SelectTheoLopHoc(this.LopHocId_Select);
                     if (XepLichHocLogic.UpdateKhoaLichHoc(_lstLichHoc))
                     {
-                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                         frmthongbao.Show();
                         btnTimKiem_Click(null, null);
                     }
@@ -438,6 +459,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         #endregion
 
+        #region Process
         private void gridViewLichHoc_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
@@ -480,7 +502,7 @@ namespace O2S_QuanLyHocVien.Pages
             return result;
         }
 
-
+        #endregion
 
 
     }

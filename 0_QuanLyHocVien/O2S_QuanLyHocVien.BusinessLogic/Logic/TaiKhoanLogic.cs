@@ -29,7 +29,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
-        public static TAIKHOAN Select(string tenDangNhap)
+        public static TAIKHOAN SelectTheoTenDangNhap(string tenDangNhap)
         {
             try
             {
@@ -323,7 +323,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             try
             {
-                return Select(userName).MatKhau == O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(password, true);
+                return SelectTheoTenDangNhap(userName).MatKhau == O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(password, true);
             }
             catch (System.Exception ex)
             {

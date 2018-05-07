@@ -23,7 +23,7 @@ namespace O2S_QuanLyHocVien.ChucNang
 {
     public partial class frmQuanLyHocVienTiemNang : Form
     {
-        private List<QuanLyHocVienDTO> lstHocVien { get; set; }
+        private List<HocVien_PlusDTO> lstHocVien { get; set; }
         public frmQuanLyHocVienTiemNang()
         {
             InitializeComponent();
@@ -57,7 +57,7 @@ namespace O2S_QuanLyHocVien.ChucNang
                 _filter.NgayTiepNhan_Tu = date_TuNgay.DateTime;
                 _filter.NgayTiepNhan_Den = date_DenNgay.DateTime;
 
-                this.lstHocVien = HocVienLogic.SelectQuanLyHocVien(_filter);
+                this.lstHocVien = HocVienLogic.Select(_filter);
 
                 if (this.lstHocVien != null && this.lstHocVien.Count > 0)
                 {
@@ -181,7 +181,7 @@ namespace O2S_QuanLyHocVien.ChucNang
 
                 string fileTemplatePath = "FUN_QuanLyHocVien_TiemNang.xlsx";
                 DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHocVien);
-                O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
+                Utilities.Prints.PrintPreview.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {

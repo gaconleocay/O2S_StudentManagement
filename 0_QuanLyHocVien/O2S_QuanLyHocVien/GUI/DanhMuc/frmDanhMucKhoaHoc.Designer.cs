@@ -345,7 +345,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 161);
+            this.label5.Location = new System.Drawing.Point(12, 161);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(95, 15);
             this.label5.TabIndex = 49;
@@ -469,7 +469,6 @@
             // 
             this.txtMaKhoaHoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMaKhoaHoc.Enabled = false;
             this.txtMaKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtMaKhoaHoc.Location = new System.Drawing.Point(116, 63);
             this.txtMaKhoaHoc.Name = "txtMaKhoaHoc";
@@ -490,7 +489,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 68);
+            this.label2.Location = new System.Drawing.Point(28, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 15);
             this.label2.TabIndex = 0;
@@ -499,7 +498,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 99);
+            this.label3.Location = new System.Drawing.Point(25, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 15);
             this.label3.TabIndex = 2;
@@ -518,7 +517,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 130);
+            this.label4.Location = new System.Drawing.Point(55, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 15);
             this.label4.TabIndex = 19;
@@ -571,6 +570,8 @@
             this.gridViewKhoaHoc.Name = "gridViewKhoaHoc";
             this.gridViewKhoaHoc.OptionsDetail.EnableMasterViewMode = false;
             this.gridViewKhoaHoc.OptionsDetail.SmartDetailExpand = false;
+            this.gridViewKhoaHoc.OptionsFind.AlwaysVisible = true;
+            this.gridViewKhoaHoc.OptionsFind.FindNullPrompt = "Từ khóa tìm kiếm...";
             this.gridViewKhoaHoc.OptionsView.ColumnAutoWidth = false;
             this.gridViewKhoaHoc.OptionsView.EnableAppearanceEvenRow = true;
             this.gridViewKhoaHoc.OptionsView.ShowGroupPanel = false;
@@ -597,6 +598,7 @@
             this.clmKH_stt.Caption = "STT";
             this.clmKH_stt.FieldName = "Stt";
             this.clmKH_stt.Name = "clmKH_stt";
+            this.clmKH_stt.OptionsColumn.AllowEdit = false;
             this.clmKH_stt.Visible = true;
             this.clmKH_stt.VisibleIndex = 0;
             this.clmKH_stt.Width = 35;
@@ -614,6 +616,7 @@
             this.gridColumn7.Caption = "Mã khóa học";
             this.gridColumn7.FieldName = "MaKhoaHoc";
             this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.OptionsColumn.AllowEdit = false;
             this.gridColumn7.OptionsColumn.ReadOnly = true;
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 1;
@@ -673,12 +676,14 @@
             this.gridColumn10.Caption = "KhoaHocId";
             this.gridColumn10.FieldName = "KhoaHocId";
             this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.OptionsColumn.AllowEdit = false;
             // 
             // gridColumn11
             // 
             this.gridColumn11.Caption = "IsRemove";
             this.gridColumn11.FieldName = "IsRemove";
             this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.OptionsColumn.AllowEdit = false;
             // 
             // gridColumn12
             // 

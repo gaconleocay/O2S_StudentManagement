@@ -85,7 +85,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 monhoccu.TenCaHocFull = _hocVien.TenCaHocFull;
                 monhoccu.ThoiGianTu = _hocVien.ThoiGianTu;
                 monhoccu.ThoiGianDen = _hocVien.ThoiGianDen;
-                monhoccu.DangSuDung = _hocVien.DangSuDung;
+                monhoccu.IsLock = _hocVien.IsLock;
                 monhoccu.ModifiedDate = DateTime.Now;
                 monhoccu.ModifiedBy = GlobalSettings.UserCode;
                 monhoccu.ModifiedLog = GlobalSettings.SessionMyIP;

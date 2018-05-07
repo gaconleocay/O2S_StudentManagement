@@ -103,7 +103,7 @@
             // 
             // gridViewDSPhieuGhiDanh
             // 
-            this.gridViewDSPhieuGhiDanh.Appearance.FooterPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridViewDSPhieuGhiDanh.Appearance.FooterPanel.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.gridViewDSPhieuGhiDanh.Appearance.FooterPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.gridViewDSPhieuGhiDanh.Appearance.FooterPanel.Options.UseFont = true;
             this.gridViewDSPhieuGhiDanh.Appearance.FooterPanel.Options.UseForeColor = true;
@@ -315,7 +315,7 @@
             this.gridColumn2.AppearanceHeader.Options.UseForeColor = true;
             this.gridColumn2.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn2.Caption = "Tổng tiền";
+            this.gridColumn2.Caption = "Học phí";
             this.gridColumn2.DisplayFormat.FormatString = "#,##0";
             this.gridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.gridColumn2.FieldName = "TongTien";
@@ -337,7 +337,7 @@
             this.gridColumn3.AppearanceHeader.Options.UseForeColor = true;
             this.gridColumn3.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn3.Caption = "Đã đóng";
+            this.gridColumn3.Caption = "Thực đóng";
             this.gridColumn3.DisplayFormat.FormatString = "#,##0";
             this.gridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.gridColumn3.FieldName = "DaDong";
@@ -346,7 +346,7 @@
             this.gridColumn3.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "DaDong", "{0:#,##0}")});
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 9;
+            this.gridColumn3.VisibleIndex = 12;
             this.gridColumn3.Width = 125;
             // 
             // gridColumn5
@@ -366,7 +366,7 @@
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.OptionsColumn.AllowEdit = false;
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 10;
+            this.gridColumn5.VisibleIndex = 9;
             this.gridColumn5.Width = 125;
             // 
             // gridColumn6
@@ -388,7 +388,7 @@
             this.gridColumn6.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "MienGiam_Tien", "{0:#,##0}")});
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 11;
+            this.gridColumn6.VisibleIndex = 10;
             this.gridColumn6.Width = 125;
             // 
             // gridColumn7
@@ -410,7 +410,7 @@
             this.gridColumn7.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "ConNo", "{0:#,##0}")});
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 12;
+            this.gridColumn7.VisibleIndex = 11;
             this.gridColumn7.Width = 125;
             // 
             // gridColumn13

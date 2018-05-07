@@ -57,6 +57,7 @@ namespace O2S_QuanLyHocVien.Pages
                 LoadPhieuGhiDanh();
                 LoadKhoanKhacMacDinh();
                 LoadDanhSachHocVien();
+                btnLuuPhieu.Enabled = false;
                 btnInBienLai.Enabled = false;
             }
             catch (Exception ex)
@@ -179,20 +180,26 @@ namespace O2S_QuanLyHocVien.Pages
                     //tien khoan Khac
                     if (gridViewKhoanKhac.RowCount > 0)
                     {
+                        int _stt_thuthem = 2;
                         for (int i = 0; i < gridViewKhoanKhac.RowCount; i++)
                         {
-                            HOCPHIHOCVIEN _hphv_khac = new HOCPHIHOCVIEN()
+                            object _noidungkt = gridViewKhoanKhac.GetRowCellValue(i, "noidung");
+                            if (_noidungkt != null)
                             {
-                                Stt = i + 2,
-                                HocVienId = this.HocVienId_Select,
-                                DmDichVuId = 0,
-                                TenDichVu = gridViewKhoanKhac.GetRowCellValue(i, "noidung") == null ? "" : gridViewKhoanKhac.GetRowCellValue(i, "noidung").ToString(),
-                                SoTien = O2S_Common.TypeConvert.Parse.ToDecimal(gridViewKhoanKhac.GetRowCellValue(i, "sotien").ToString()),
-                                SoLuong = 1,
-                                //PhieuThuId = _phieuthuId,
-                                GhiChu = gridViewKhoanKhac.GetRowCellValue(i, "ghichu") == null ? "" : gridViewKhoanKhac.GetRowCellValue(i, "ghichu").ToString(),
-                            };
-                            _lsthphv.Add(_hphv_khac);
+                                HOCPHIHOCVIEN _hphv_khac = new HOCPHIHOCVIEN()
+                                {
+                                    Stt = _stt_thuthem,
+                                    HocVienId = this.HocVienId_Select,
+                                    DmDichVuId = 0,
+                                    TenDichVu = gridViewKhoanKhac.GetRowCellValue(i, "noidung") == null ? "" : gridViewKhoanKhac.GetRowCellValue(i, "noidung").ToString(),
+                                    SoTien = O2S_Common.TypeConvert.Parse.ToDecimal(gridViewKhoanKhac.GetRowCellValue(i, "sotien").ToString()),
+                                    SoLuong = 1,
+                                    //PhieuThuId = _phieuthuId,
+                                    GhiChu = gridViewKhoanKhac.GetRowCellValue(i, "ghichu") == null ? "" : gridViewKhoanKhac.GetRowCellValue(i, "ghichu").ToString(),
+                                };
+                                _lsthphv.Add(_hphv_khac);
+                                _stt_thuthem += 1;
+                            }
                         }
                     }
                 }
@@ -204,6 +211,7 @@ namespace O2S_QuanLyHocVien.Pages
                  _hv.TenHocVien, Environment.NewLine, _hv.MaHocVien, Environment.NewLine, _hv.MaHocVien),
                  "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     isSave = true;
+                    btnLuuPhieu.Enabled = false;
                     btnInBienLai.Enabled = true;
                     LoadPhieuGhiDanh();
                     if (MessageBox.Show("Bạn có muốn in phiếu ghi danh vừa lưu?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -213,7 +221,7 @@ namespace O2S_QuanLyHocVien.Pages
                 }
                 else
                 {
-                    O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THAT_BAI);
+                    O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THAT_BAI);
                     frmthongbao.Show();
                 }
 
@@ -345,7 +353,8 @@ namespace O2S_QuanLyHocVien.Pages
                     }
                 }
 
-                string fileTemplatePath = "BienLaiThuTien_NopTien.xlsx"; O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
+                string fileTemplatePath = "BienLaiThuTien_NopTien.xlsx";
+                Utilities.Prints.PrintPreview.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
             }
             catch (Exception ex)
             {
@@ -368,9 +377,12 @@ namespace O2S_QuanLyHocVien.Pages
 
                     lblTenHocVien.Text = gridViewDSHocVien.GetRowCellValue(rowHandle, "TenHocVien").ToString();
                     dateNgayGhiDanh.DateTime = DateTime.Now;
+
+                    numTongTien.Text = numHocPhi.Text;
                     numDaDong.Text = "0";
                     numMienGiam_PTram.Value = 0;
                     numMienGiam_Tien.Text = "0";
+                    btnLuuPhieu.Enabled = true;
                     btnInBienLai.Enabled = false;
                 }
             }
@@ -420,7 +432,7 @@ namespace O2S_QuanLyHocVien.Pages
         {
             try
             {
-                if (gridViewDSPhieuGhiDanh.RowCount > 1)
+                if (gridViewDSPhieuGhiDanh.RowCount > 0)
                 {
                     var rowHandle = gridViewDSPhieuGhiDanh.FocusedRowHandle;
                     int _PhieuGhiDanhId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewDSPhieuGhiDanh.GetRowCellValue(rowHandle, "PhieuGhiDanhId").ToString());
@@ -481,6 +493,7 @@ namespace O2S_QuanLyHocVien.Pages
                 numMienGiam_Tien.Text = "0";
                 txtLyDoMienGiam.Text = string.Empty;
                 LoadKhoanKhacMacDinh();
+                btnLuuPhieu.Enabled = false;
                 btnInBienLai.Enabled = false;
             }
             catch (Exception ex)

@@ -33,6 +33,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtDienThoai = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.picLogoCoSo = new DevExpress.XtraEditors.PictureEdit();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,6 +49,11 @@
             this.txtMaCoSo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gridKH = new System.Windows.Forms.DataGridView();
+            this.clmCoSoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTenCoSo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmSdt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblTongCong = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -52,15 +61,6 @@
             this.btnSua = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtDienThoai = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.clmCoSoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTenCoSo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmSdt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -129,6 +129,44 @@
             this.splitContainer1.SplitterDistance = 354;
             this.splitContainer1.TabIndex = 6;
             // 
+            // txtEmail
+            // 
+            this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtEmail.Location = new System.Drawing.Point(92, 136);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(248, 25);
+            this.txtEmail.TabIndex = 25;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(44, 141);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(39, 15);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Email:";
+            // 
+            // txtDienThoai
+            // 
+            this.txtDienThoai.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDienThoai.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtDienThoai.Location = new System.Drawing.Point(92, 105);
+            this.txtDienThoai.Name = "txtDienThoai";
+            this.txtDienThoai.Size = new System.Drawing.Size(248, 25);
+            this.txtDienThoai.TabIndex = 23;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(19, 110);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(64, 15);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "Điện thoại:";
+            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Silver;
@@ -158,7 +196,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 173);
+            this.label5.Location = new System.Drawing.Point(15, 173);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 15);
             this.label5.TabIndex = 20;
@@ -177,7 +215,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 79);
+            this.label4.Location = new System.Drawing.Point(37, 79);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 15);
             this.label4.TabIndex = 19;
@@ -235,7 +273,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 48);
+            this.label3.Location = new System.Drawing.Point(22, 48);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 15);
             this.label3.TabIndex = 2;
@@ -245,7 +283,6 @@
             // 
             this.txtMaCoSo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMaCoSo.Enabled = false;
             this.txtMaCoSo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtMaCoSo.Location = new System.Drawing.Point(92, 12);
             this.txtMaCoSo.Name = "txtMaCoSo";
@@ -256,7 +293,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 17);
+            this.label2.Location = new System.Drawing.Point(28, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 15);
             this.label2.TabIndex = 0;
@@ -288,6 +325,48 @@
             this.gridKH.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.gridKH_RowsRemoved);
             this.gridKH.Click += new System.EventHandler(this.gridKH_Click);
             this.gridKH.DoubleClick += new System.EventHandler(this.gridKH_DoubleClick);
+            // 
+            // clmCoSoId
+            // 
+            this.clmCoSoId.DataPropertyName = "CoSoId";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
+            this.clmCoSoId.DefaultCellStyle = dataGridViewCellStyle1;
+            this.clmCoSoId.FillWeight = 7.383478F;
+            this.clmCoSoId.HeaderText = "Mã cơ sở";
+            this.clmCoSoId.Name = "clmCoSoId";
+            this.clmCoSoId.Width = 80;
+            // 
+            // clmTenCoSo
+            // 
+            this.clmTenCoSo.DataPropertyName = "TenCoSo";
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
+            this.clmTenCoSo.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clmTenCoSo.FillWeight = 8.860174F;
+            this.clmTenCoSo.HeaderText = "Tên cơ sở";
+            this.clmTenCoSo.Name = "clmTenCoSo";
+            this.clmTenCoSo.Width = 250;
+            // 
+            // clmDiaChi
+            // 
+            this.clmDiaChi.DataPropertyName = "DiaChi";
+            this.clmDiaChi.FillWeight = 303.7563F;
+            this.clmDiaChi.HeaderText = "Địa chỉ";
+            this.clmDiaChi.Name = "clmDiaChi";
+            this.clmDiaChi.Width = 665;
+            // 
+            // clmSdt
+            // 
+            this.clmSdt.DataPropertyName = "Sdt";
+            this.clmSdt.HeaderText = "Số điện thoại";
+            this.clmSdt.Name = "clmSdt";
+            this.clmSdt.Width = 150;
+            // 
+            // clmEmail
+            // 
+            this.clmEmail.DataPropertyName = "Email";
+            this.clmEmail.HeaderText = "Email";
+            this.clmEmail.Name = "clmEmail";
+            this.clmEmail.Width = 180;
             // 
             // panel3
             // 
@@ -375,86 +454,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // txtDienThoai
-            // 
-            this.txtDienThoai.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDienThoai.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtDienThoai.Location = new System.Drawing.Point(92, 105);
-            this.txtDienThoai.Name = "txtDienThoai";
-            this.txtDienThoai.Size = new System.Drawing.Size(248, 25);
-            this.txtDienThoai.TabIndex = 23;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 110);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 15);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "Điện thoại:";
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtEmail.Location = new System.Drawing.Point(92, 136);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(248, 25);
-            this.txtEmail.TabIndex = 25;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 141);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(39, 15);
-            this.label7.TabIndex = 26;
-            this.label7.Text = "Email:";
-            // 
-            // clmCoSoId
-            // 
-            this.clmCoSoId.DataPropertyName = "CoSoId";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue;
-            this.clmCoSoId.DefaultCellStyle = dataGridViewCellStyle1;
-            this.clmCoSoId.FillWeight = 7.383478F;
-            this.clmCoSoId.HeaderText = "Mã cơ sở";
-            this.clmCoSoId.Name = "clmCoSoId";
-            this.clmCoSoId.Width = 80;
-            // 
-            // clmTenCoSo
-            // 
-            this.clmTenCoSo.DataPropertyName = "TenCoSo";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
-            this.clmTenCoSo.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clmTenCoSo.FillWeight = 8.860174F;
-            this.clmTenCoSo.HeaderText = "Tên cơ sở";
-            this.clmTenCoSo.Name = "clmTenCoSo";
-            this.clmTenCoSo.Width = 250;
-            // 
-            // clmDiaChi
-            // 
-            this.clmDiaChi.DataPropertyName = "DiaChi";
-            this.clmDiaChi.FillWeight = 303.7563F;
-            this.clmDiaChi.HeaderText = "Địa chỉ";
-            this.clmDiaChi.Name = "clmDiaChi";
-            this.clmDiaChi.Width = 665;
-            // 
-            // clmSdt
-            // 
-            this.clmSdt.DataPropertyName = "Sdt";
-            this.clmSdt.HeaderText = "Số điện thoại";
-            this.clmSdt.Name = "clmSdt";
-            this.clmSdt.Width = 150;
-            // 
-            // clmEmail
-            // 
-            this.clmEmail.DataPropertyName = "Email";
-            this.clmEmail.HeaderText = "Email";
-            this.clmEmail.Name = "clmEmail";
-            this.clmEmail.Width = 180;
             // 
             // frmDanhMucCoSoTrungTam
             // 

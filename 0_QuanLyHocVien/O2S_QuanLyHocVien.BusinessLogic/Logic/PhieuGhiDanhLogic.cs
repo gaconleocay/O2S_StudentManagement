@@ -90,38 +90,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
-        public static IQueryable<BaoCaoHocVienGhiDanh> BaoCaoHocVienGhiDanhTheoThang(int month, int year)
-        {
-            return from p in Database.PHIEUGHIDANHs
-                   join hv in Database.HOCVIENs on p.HocVienId equals hv.HocVienId
-                   join kh in Database.KHOAHOCs on p.KhoaHocId equals kh.KhoaHocId
-                   where (p.NgayGhiDanh.Value.Month == month) &&
-                         (p.NgayGhiDanh.Value.Year == year) && p.IsRemove != 1
-                   select new BaoCaoHocVienGhiDanh()
-                   {
-                       HocVienId = p.HocVienId ?? 0,
-                       TenHocVien = hv.TenHocVien,
-                       GioiTinh = hv.GioiTinh,
-                       NgayGhiDanh = p.NgayGhiDanh,
-                       TenKhoaHoc = kh.TenKhoaHoc
-                   };
-        }
-        public static IQueryable<BaoCaoHocVienNo> ThongKeDanhSachNoHocPhi()
-        {
-            return (from p in Database.PHIEUGHIDANHs
-                    join hv in Database.HOCVIENs on p.HocVienId equals hv.HocVienId
-                    join kh in Database.KHOAHOCs on p.KhoaHocId equals kh.KhoaHocId
-                    where p.ConNo > 0 && p.IsRemove != 1
-                    select new BaoCaoHocVienNo()
-                    {
-                        HocVienId = p.HocVienId,
-                        TenHocVien = hv.TenHocVien,
-                        GioiTinh = hv.GioiTinh,
-                        TenKhoaHoc = kh.TenKhoaHoc,
-                        ConNo = p.ConNo
-                    });
-        }
-
         public static PHIEUGHIDANH SelectSingle(int _PhieuGhiDanhId)
         {
             try
@@ -335,6 +303,14 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                             Database.SubmitChanges();
                         }
                     }
+                    //Update HOCVIEN = Hoc vien chinh thuc
+                    HOCVIEN _hocvien = HocVienLogic.SelectSingle(_phieughidanh.HocVienId ?? 0);
+                    _hocvien.LOAIHOCVIEN = LoaiHocVienLogic.Select(KeySetting.LOAIHOCVIEN_CHINHTHUC);
+                    //Database.SubmitChanges();
+                    //Update TAIKHOAN = được sử dụng
+                    TAIKHOAN _taikhoan = TaiKhoanLogic.SelectTheoTenDangNhap(_hocvien.MaHocVien);
+                    _taikhoan.IsRemove = 0;
+                    Database.SubmitChanges();
                     ts.Complete();
                     return true;
                 }
@@ -436,17 +412,17 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                     _phieuGD.ModifiedBy = GlobalSettings.UserCode;
                     _phieuGD.ModifiedLog = GlobalSettings.SessionMyIP;
                     //Database.SubmitChanges();
-                    //cap nhat bang HOCVIEN va bang tai khoan: kiem tra HV hoc khoa nao ko? neu khong thi update
+                    //cap nhat bang HOCVIEN va bang tai khoan: kiem tra HV hoc khoa nao ko? neu=1 thi update
                     PhieuGhiDanhFilter _filter = new PhieuGhiDanhFilter();
                     _filter.HocVienId = _phieuGD.HocVienId;
                     List<PhieuGhiDanh_PlusDTO> _PGD_Kiemtra = PhieuGhiDanhLogic.Select(_filter);
-                    if (_PGD_Kiemtra == null || _PGD_Kiemtra.Count == 0)
+                    if (_PGD_Kiemtra == null || _PGD_Kiemtra.Count <= 1)
                     {
                         HOCVIEN _hocvien = HocVienLogic.SelectSingle(_phieuGD.HocVienId ?? 0);
                         _hocvien.LOAIHOCVIEN = LoaiHocVienLogic.Select(KeySetting.LOAIHOCVIEN_TIEMNANG);
                         Database.SubmitChanges();
 
-                        TAIKHOAN _taikhoan = TaiKhoanLogic.Select(_hocvien.TAIKHOAN.TenDangNhap);
+                        TAIKHOAN _taikhoan = TaiKhoanLogic.SelectTheoTenDangNhap(_hocvien.TAIKHOAN.TenDangNhap);
                         _taikhoan.IsRemove = 1;
                         //Database.SubmitChanges();
                     }
@@ -463,6 +439,20 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
+        public static List<PHIEUGHIDANH> SelectTheoHocVien(int _hocVienId)
+        {
+            try
+            {
+                return (from p in Database.PHIEUGHIDANHs
+                        where p.HocVienId == _hocVienId
+                        select p).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
 
     }
 }

@@ -9,6 +9,8 @@ using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using System;
 using System.Collections.Generic;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
+using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using System.Transactions;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
@@ -38,7 +40,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                             NgayBatDau = p.LOPHOC.NgayBatDau,
                             NgayKetThuc = p.LOPHOC.NgayKetThuc,
                             SiSo = p.LOPHOC.SiSo,
-                            DangMo = p.LOPHOC.DangMo,
+                            DangMo = p.LOPHOC.IsLock,
                             DiemTrungBinh = p.DiemTrungBinh,
                             TrangThai = p.TrangThai,
                             TrangThai_Ten = p.TrangThai == 0 ? "xếp lớp" : p.TrangThai == 1 ? "đang học" : p.TrangThai == 3 ? "có điểm" : p.TrangThai == 99 ? "kết thúc" : "",
@@ -129,6 +131,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                   KhoaHocId = obj.KhoaHocId,
                                   MaKhoaHoc = obj.KHOAHOC.MaKhoaHoc,
                                   TenKhoaHoc = obj.KHOAHOC.TenKhoaHoc,
+                                  LopHocId = obj.LopHocId,
+                                  MaLopHoc = obj.LOPHOC.MaLopHoc,
+                                  TenLopHoc = obj.LOPHOC.TenLopHoc,
                               });
                 return querry.ToList();
             }
@@ -206,7 +211,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                             NgayBatDau = p.LOPHOC.NgayBatDau,
                             NgayKetThuc = p.LOPHOC.NgayKetThuc,
                             SiSo = p.LOPHOC.SiSo,
-                            DangMo = p.LOPHOC.DangMo,
+                            DangMo = p.LOPHOC.IsLock,
                             DiemTrungBinh = p.DiemTrungBinh,
                             TrangThai = p.TrangThai,
                             TrangThai_Ten = p.TrangThai == 0 ? "xếp lớp" : p.TrangThai == 1 ? "đang học" : p.TrangThai == 3 ? "có điểm" : p.TrangThai == 99 ? "kết thúc" : "",
@@ -273,74 +278,42 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
             Database.SubmitChanges();
         }
-
-        public static object DanhSachNoHocPhi(int _hocvienId = 0, string TenHocVien = null, string gioiTinh = null, decimal? _from = null, decimal? _to = null)
+        public static bool UpdateFull(BangDiemFullDTO _bdct)
         {
-            return (from p in Database.BANGDIEMs
-                    where p.PHIEUGHIDANH.ConNo > 0 &&
-                          (_hocvienId == 0 ? true : p.HocVienId == _hocvienId) &&
-                          (TenHocVien == null ? true : p.HOCVIEN.TenHocVien.Contains(TenHocVien)) &&
-                          (gioiTinh == null ? true : p.HOCVIEN.GioiTinh == gioiTinh) &&
-                          (_from == null || _to == null ? true : p.PHIEUGHIDANH.ConNo >= _from && p.PHIEUGHIDANH.ConNo <= _to)
-                    select new
-                    {
-                        HocVienId = p.HocVienId,
-                        TenHocVien = p.HOCVIEN.TenHocVien,
-                        GioiTinhHocVien = p.HOCVIEN.GioiTinh,
-                        LopHocId = p.LopHocId,
-                        TenLopHoc = p.LOPHOC.TenLopHoc,
-                        ConNo = p.PHIEUGHIDANH.ConNo,
-                        PhieuGhiDanhId = p.PhieuGhiDanhId
-                    }).ToList();
-        }
-        public static void UpdateFull(BangDiemFullDTO _bdct)
-        {
-            decimal _tongdiem = 0;
-            foreach (var item in _bdct.BangDiemChiTiets)
+            bool result = false;
+            try
             {
-                BANGDIEMCHITIET _chitiet = new BANGDIEMCHITIET();
-                _chitiet.BangDiemChiTietId = (int)item.BangDiemChiTietId;
-                _chitiet.BangDiemId = (int)item.BangDiemId;
-                _chitiet.MonHocId = item.MonHocId;
-                _chitiet.TenMonHoc = item.TenMonHoc;
-                _chitiet.Diem = item.Diem;
-                BangDiemChiTietLogic.Update(_chitiet);
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    decimal _tongdiem = 0;
+                    foreach (var item in _bdct.BangDiemChiTiets)
+                    {
+                        BANGDIEMCHITIET _chitiet = new BANGDIEMCHITIET();
+                        _chitiet.BangDiemChiTietId = (int)item.BangDiemChiTietId;
+                        _chitiet.BangDiemId = (int)item.BangDiemId;
+                        _chitiet.MonHocId = item.MonHocId;
+                        _chitiet.TenMonHoc = item.TenMonHoc;
+                        _chitiet.Diem = item.Diem;
+                        BangDiemChiTietLogic.Update(_chitiet);
 
-                _tongdiem += item.Diem ?? 0;
+                        _tongdiem += item.Diem ?? 0;
+                    }
+                    //Cap nhat BANGDIEM + diem trung binh
+                    var _bangdiemtmp = Select(_bdct.HocVienId ?? 0, _bdct.LopHocId ?? 0);
+                    _bangdiemtmp.DiemTrungBinh = Math.Round(_tongdiem / _bdct.BangDiemChiTiets.Count, 2);
+                    _bangdiemtmp.TrangThai = 3;
+                    Database.SubmitChanges();
+                    ts.Complete();
+                    return true;
+                }
             }
-            //Cap nhat BANGDIEM + diem trung binh
-            var _bangdiemtmp = Select(_bdct.HocVienId ?? 0, _bdct.LopHocId ?? 0);
-            _bangdiemtmp.DiemTrungBinh = Math.Round(_tongdiem / _bdct.BangDiemChiTiets.Count, 2);
-            _bangdiemtmp.TrangThai = 3;
-            Database.SubmitChanges();
+            catch (Exception ex)
+            {
+                return result;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+            return result;
         }
-
-        //public static void InsertFull(BangDiemFull _bangdiemfull)
-        //{
-        //    try
-        //    {
-        //        BANGDIEM _bangdiem = new BANGDIEM();
-        //        _bangdiem.MaHocVien = _bangdiemfull.MaHocVien;
-        //        _bangdiem.MaLop = _bangdiemfull.MaLop;
-        //        _bangdiem.MaPhieu = _bangdiemfull.MaPhieu;
-        //        _bangdiem.CreatedDate = DateTime.Now;
-        //        _bangdiem.CreatedBy = GlobalSettings.UserCode;
-        //        _bangdiem.MaKhoaHoc = _bangdiemfull.MaKhoaHoc;
-        //        _bangdiem.TrangThai = 0; //=0: xep lop; =1: dang hoc; =99:ket thuc
-        //        Database.BANGDIEMs.InsertOnSubmit(_bangdiem);
-        //        Database.SubmitChanges();
-
-        //        foreach (var item in _bangdiemfull.BangDiemChiTiets)
-        //        {
-        //            BANGDIEMCHITIET _chitiet = new BANGDIEMCHITIET();
-
-        //        }
-
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }       
-        //}
 
         public static bool DeleteList(List<BANGDIEM> _lstbangdiem)
         {
@@ -363,5 +336,38 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
+
+        public static List<BANGDIEM> SelectFilter(BangDiemFilter _filter)
+        {
+            try
+            {
+                var query = (from p in Database.BANGDIEMs
+                             where p.IsRemove != 1
+                             select p).ToList();
+                if (_filter.HocVienId != null && _filter.HocVienId != 0)
+                {
+                    query = query.Where(o => o.HocVienId == _filter.HocVienId).ToList();
+                }
+                if (_filter.KhoaHocId != null && _filter.KhoaHocId != 0)
+                {
+                    query = query.Where(o => o.KhoaHocId == _filter.KhoaHocId).ToList();
+                }
+                if (_filter.LopHocId != null && _filter.LopHocId != 0)
+                {
+                    query = query.Where(o => o.LopHocId == _filter.LopHocId).ToList();
+                }
+                if (_filter.PhieuGhiDanhId != null && _filter.PhieuGhiDanhId != 0)
+                {
+                    query = query.Where(o => o.PhieuGhiDanhId == _filter.PhieuGhiDanhId).ToList();
+                }
+                return query;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
     }
 }

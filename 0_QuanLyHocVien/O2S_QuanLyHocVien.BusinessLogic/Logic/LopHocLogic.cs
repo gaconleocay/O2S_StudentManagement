@@ -46,12 +46,13 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  TenLopHoc = obj.TenLopHoc,
                                  NgayBatDau = obj.NgayBatDau,
                                  NgayKetThuc = obj.NgayKetThuc,
+                                 SiSoToiDa=obj.SiSoToiDa,
                                  SiSo = obj.SiSo,
                                  KhoaHocId = obj.KhoaHocId,
                                  TenKhoaHoc = obj.KHOAHOC.TenKhoaHoc,
                                  CoSoId = obj.CoSoId,
                                  TenCoSoTrungTam = obj.COSOTRUNGTAM.TenCoSo,
-                                 DangMo = obj.DangMo,
+                                 IsLock = obj.IsLock,
                                  IsRemove = obj.IsRemove,
                                  CreatedDate = obj.CreatedDate,
                                  CreatedBy = obj.CreatedBy,
@@ -73,9 +74,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 {
                     query = query.Where(o => o.KhoaHocId == _filter.KhoaHocId).ToList();
                 }
-                if (_filter.DangMo != null)
+                if (_filter.IsLock != null)
                 {
-                    query = query.Where(o => o.DangMo == _filter.DangMo).ToList();
+                    query = query.Where(o => o.IsLock == _filter.IsLock).ToList();
                 }
                 return query.ToList();
             }
@@ -137,9 +138,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 hocVienCu.TenLopHoc = _lopHoc.TenLopHoc;
                 hocVienCu.NgayBatDau = _lopHoc.NgayBatDau;
                 hocVienCu.NgayKetThuc = _lopHoc.NgayKetThuc;
+                hocVienCu.SiSoToiDa = _lopHoc.SiSoToiDa;
                 hocVienCu.SiSo = _lopHoc.SiSo;
                 hocVienCu.KhoaHocId = _lopHoc.KhoaHocId;
-                hocVienCu.DangMo = _lopHoc.DangMo;
+                hocVienCu.IsLock = _lopHoc.IsLock;
                 hocVienCu.ModifiedDate = DateTime.Now;
                 hocVienCu.ModifiedBy = GlobalSettings.UserCode;
                 hocVienCu.ModifiedLog = GlobalSettings.SessionMyIP;
@@ -175,9 +177,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             {
                 return (from p in Database.LOPHOCs
                         where p.KhoaHocId == _khoahocId &&
-                                p.SiSo < (from q in Database.QUYDINHs
-                                          where q.MaQuyDinh == "QD0000"
-                                          select q.GiaTri).Single()
+                                p.SiSo < p.SiSoToiDa
                         select new
                         {
                             LopHocId = p.LopHocId,

@@ -8,142 +8,137 @@ using System.Windows.Forms;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_QuanLyHocVien.DataAccess;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
+using DevExpress.XtraGrid.Views.Grid;
+using O2S_QuanLyHocVien.BusinessLogic.Model;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace O2S_QuanLyHocVien.Pages
 {
     public partial class frmDanhMucMonHoc : Form
     {
+        #region Khai bao
         private bool isInsert = false;
+        private MONHOC MonHocSelect { get; set; }
+
+        #endregion
 
         public frmDanhMucMonHoc()
         {
             InitializeComponent();
         }
-
-        /// <summary>
-        /// Khóa điều khiển các control
-        /// </summary>
-        public void LockPanelControl()
+        #region Load
+        private void frmQuanLyMonHoc_Load(object sender, EventArgs e)
         {
-            //txtMaMonHoc.Enabled = false;
-            txtTenMonHoc.Enabled = false;
-            numDiemToiDa.Enabled = false;
-            btnLuuThongTin.Enabled = false;
-            btnHuyBo.Enabled = false;
+            LockAndUnLookPanelControl(false);
+            LoadGridMonHoc();
+        }
+        private void LoadGridMonHoc()
+        {
+            try
+            {
+                MonHocFilter _filter = new MonHocFilter();
+                // _filter.CoSoId = GlobalSettings.CoSoId;
+                List<MonHoc_PlusDTO> _lstMonHoc = MonHocLogic.Select(_filter);
+                if (_lstMonHoc != null && _lstMonHoc.Count > 0)
+                {
+                    gridControlMonHoc.DataSource = _lstMonHoc;
+                }
+                else
+                {
+                    gridControlMonHoc.DataSource = null;
+                }
+                lblTongCong.Text = string.Format("Tổng cộng: {0} môn học", gridViewMonHoc.RowCount);
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        #endregion
+
+        #region Processs
+        private void LockAndUnLookPanelControl(bool _result)
+        {
+            //txtMaMonHoc.Enabled = _result;
+            txtTenMonHoc.ReadOnly = !_result;
+            numDiemToiDa.ReadOnly = !_result;
+            btnLuuThongTin.Enabled = _result;
+            btnHuyBo.Enabled = _result;
         }
 
-        /// <summary>
-        /// Mở khóa điều khiển các control
-        /// </summary>
-        public void UnlockPanelControl()
-        {
-            txtTenMonHoc.Enabled = true;
-            numDiemToiDa.Enabled = true;
-            btnLuuThongTin.Enabled = true;
-            btnHuyBo.Enabled = true;
-        }
-
-        /// <summary>
-        /// Đặt lại giá trị của các control trong panel
-        /// </summary>
-        public void ResetPanelControl()
+        private void ResetPanelControl()
         {
             txtMaMonHoc.Text = string.Empty;
             txtTenMonHoc.Text = string.Empty;
             numDiemToiDa.Text = "0";
         }
-
-        /// <summary>
-        /// Nạp môn học lên giao diện
-        /// </summary>
-        /// <param name="kh">môn học</param>
-        public void LoadUI(MONHOC kh)
+        private void MonHoc_ClickData(MONHOC _phonghoc)
         {
-            txtMaMonHoc.Text = kh.MonHocId.ToString();
-            txtTenMonHoc.Text = kh.TenMonHoc;
-            numDiemToiDa.Text = kh.DiemToiDa.ToString();
-
+            txtMaMonHoc.Text = _phonghoc.MaMonHoc;
+            txtTenMonHoc.Text = _phonghoc.TenMonHoc;
+            numDiemToiDa.Text = _phonghoc.DiemToiDa.ToString();
+            // chkIsLock.Checked = _phonghoc.IsLock ?? false;
         }
 
-        /// <summary>
-        /// Nạp giao diện xuống môn học
-        /// </summary>
-        /// <returns></returns>
-        public MONHOC LoadMonHoc()
+        private MONHOC LoadMonHoc()
         {
             return new MONHOC()
             {
-                MonHocId = O2S_Common.TypeConvert.Parse.ToInt32(txtMaMonHoc.Text),
+                MonHocId = this.MonHocSelect != null ? this.MonHocSelect.MonHocId : 0,
+                //CoSoId = GlobalSettings.CoSoId,
+                MaMonHoc = txtMaMonHoc.Text,
                 TenMonHoc = txtTenMonHoc.Text,
                 DiemToiDa = O2S_Common.TypeConvert.Parse.ToDecimal(numDiemToiDa.Text),
+                // IsLock = chkIsLock.Checked,
             };
         }
-        public void LoadGridMonHoc()
-        {
-            gridKH.DataSource = MonHocLogic.Select(new MonHocFilter());
-        }
+
+        #endregion
 
         #region Events
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            //GlobalPages.QuanLyMonHoc = null;
-        }
-
         private void btnHuyBo_Click(object sender, EventArgs e)
         {
-            gridKH_Click(sender, e);
+            gridViewMonHoc_Click(sender, e);
         }
 
-        private void frmQuanLyMonHoc_Load(object sender, EventArgs e)
+        private void gridViewMonHoc_Click(object sender, EventArgs e)
         {
-            gridKH.AutoGenerateColumns = false;
-
-            LockPanelControl();
-            LoadGridMonHoc();
-            gridKH_Click(sender, e);
-        }
-
-        private void gridKH_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            lblTongCong.Text = string.Format("Tổng cộng: {0} môn học", gridKH.Rows.Count);
-        }
-
-        private void gridKH_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            lblTongCong.Text = string.Format("Tổng cộng: {0} môn học", gridKH.Rows.Count);
-        }
-
-        private void gridKH_Click(object sender, EventArgs e)
-        {
-            LockPanelControl();
-
             try
             {
-                LoadUI(MonHocLogic.SelectSingle(O2S_Common.TypeConvert.Parse.ToInt32(gridKH.SelectedRows[0].Cells["clmMonHocId"].Value.ToString())));
+                if (gridViewMonHoc.RowCount > 0)
+                {
+                    var rowHandle = gridViewMonHoc.FocusedRowHandle;
+                    int _MonHocId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewMonHoc.GetRowCellValue(rowHandle, "MonHocId").ToString());
+
+                    this.MonHocSelect = MonHocLogic.SelectSingle(_MonHocId);
+                    if (this.MonHocSelect != null)
+                    {
+                        MonHoc_ClickData(this.MonHocSelect);
+                        LockAndUnLookPanelControl(false);
+                    }
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                ResetPanelControl();
+                O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            UnlockPanelControl();
+            LockAndUnLookPanelControl(true);
             ResetPanelControl();
-            //txtMaMonHoc.Text = MonHocLogic.AutoGenerateId();
             isInsert = true;
         }
-
-        private void gridKH_DoubleClick(object sender, EventArgs e)
+        private void gridViewMonHoc_DoubleClick(object sender, EventArgs e)
         {
             btnSua_Click(sender, e);
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            UnlockPanelControl();
+            LockAndUnLookPanelControl(true);
             isInsert = false;
         }
 
@@ -153,15 +148,19 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    MonHocLogic.Delete(O2S_Common.TypeConvert.Parse.ToInt32(gridKH.SelectedRows[0].Cells["clmMonHocId"].Value.ToString()));
-
-                    MessageBox.Show("Xóa môn học thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadGridMonHoc();
+                    var rowHandle = gridViewMonHoc.FocusedRowHandle;
+                    int _monHocId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewMonHoc.GetRowCellValue(rowHandle, "MonHocId").ToString());
+                    if (MonHocLogic.Delete(_monHocId))
+                    {
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
+                        frmthongbao.Show();
+                        LoadGridMonHoc();
+                    }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Có lỗi xảy ra", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
 
@@ -171,27 +170,36 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (isInsert)
                 {
-                    int _monHocId = 0;
-                    if (MonHocLogic.Insert(LoadMonHoc(), ref _monHocId))
+                    int _khoaHocId = 0;
+                    if (MonHocLogic.Insert(LoadMonHoc(), ref _khoaHocId))
                     {
-                        MessageBox.Show("Thêm môn học thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THANH_CONG);
+                        frmthongbao.Show();
+                    }
+                    else
+                    {
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THAT_BAI);
+                        frmthongbao.Show();
                     }
                 }
                 else
                 {
-                    MonHocLogic.Update(LoadMonHoc());
-
-                    MessageBox.Show("Sửa môn học thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (MonHocLogic.Update(LoadMonHoc()))
+                    {
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                        frmthongbao.Show();
+                    }
+                    else
+                    {
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
+                        frmthongbao.Show();
+                    }
                 }
                 LoadGridMonHoc();
             }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
         #endregion
@@ -204,8 +212,40 @@ namespace O2S_QuanLyHocVien.Pages
                 e.Handled = true;
             }
         }
-        #endregion
+        private void gridViewDSMonHoc_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                if (e.RowHandle == view.FocusedRowHandle)
+                {
+                    e.Appearance.BackColor = Color.DodgerBlue;
+                    e.Appearance.ForeColor = Color.White;
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+        private void gridViewKhoaHoc_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
+        {
+            try
+            {
+                if (e.Column == clmKH_stt)
+                {
+                    e.DisplayText = Convert.ToString(e.RowHandle + 1);
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
 
+
+
+        #endregion
 
     }
 }

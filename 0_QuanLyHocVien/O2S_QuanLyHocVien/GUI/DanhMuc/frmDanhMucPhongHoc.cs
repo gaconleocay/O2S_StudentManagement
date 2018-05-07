@@ -1,6 +1,6 @@
 ﻿// Quản lý Học viên Trung tâm Anh ngữ
 // Copyright © 2018 OneOne solution co.
-// File "frmQuanLyMonHoc.cs"
+// File "frmQuanLyPhongHoc.cs"
 // Writing by NhatHM (hongminhnhat15@gmail.com)
 
 using System;
@@ -14,40 +14,40 @@ using System.Drawing;
 
 namespace O2S_QuanLyHocVien.Pages
 {
-    public partial class frmDanhMucCaHoc : Form
+    public partial class frmDanhMucPhongHoc : Form
     {
         #region Khai bao
         private bool isInsert = false;
-        private CAHOC CaHocSelect { get; set; }
+        private PHONGHOC PhongHocSelect { get; set; }
 
         #endregion
-        public frmDanhMucCaHoc()
+        public frmDanhMucPhongHoc()
         {
             InitializeComponent();
         }
 
         #region Load
-        private void frmQuanLyMonHoc_Load(object sender, EventArgs e)
+        private void frmQuanLyPhongHoc_Load(object sender, EventArgs e)
         {
             LockAndUnLookPanelControl(false);
-            LoadGridCaHoc();
+            LoadGridPhongHoc();
         }
-        private void LoadGridCaHoc()
+        private void LoadGridPhongHoc()
         {
             try
             {
-                CaHocFilter _filter = new CaHocFilter();
+                PhongHocFilter _filter = new PhongHocFilter();
                 _filter.CoSoId = GlobalSettings.CoSoId;
-                List<CAHOC> _lstCaHoc = CaHocLogic.Select(_filter);
-                if (_lstCaHoc != null && _lstCaHoc.Count > 0)
+                List<PHONGHOC> _lstPhongHoc = PhongHocLogic.Select(_filter);
+                if (_lstPhongHoc != null && _lstPhongHoc.Count > 0)
                 {
-                    gridControlCaHoc.DataSource = _lstCaHoc;
+                    gridControlPhongHoc.DataSource = _lstPhongHoc;
                 }
                 else
                 {
-                    gridControlCaHoc.DataSource = null;
+                    gridControlPhongHoc.DataSource = null;
                 }
-                lblTongCong.Text = string.Format("Tổng cộng: {0} ca/tiết học", gridViewCaHoc.RowCount);
+                lblTongCong.Text = string.Format("Tổng cộng: {0} ca/tiết học", gridViewPhongHoc.RowCount);
             }
             catch (Exception ex)
             {
@@ -59,10 +59,9 @@ namespace O2S_QuanLyHocVien.Pages
         #region Processs
         private void LockAndUnLookPanelControl(bool _result)
         {
-            //txtMaCaHoc.Enabled = _result;
-            txtTenCaHoc.ReadOnly = !_result;
-            timeThoiGianTu.ReadOnly = !_result;
-            timeThoiGianDen.ReadOnly = !_result;
+            //txtMaPhongHoc.Enabled = _result;
+            txtTenPhongHoc.ReadOnly = !_result;
+            txtGhiChu.ReadOnly = !_result;
             chkIsLock.Enabled = _result;
             btnLuuThongTin.Enabled = _result;
             btnHuyBo.Enabled = _result;
@@ -70,33 +69,27 @@ namespace O2S_QuanLyHocVien.Pages
 
         private void ResetPanelControl()
         {
-            txtMaCaHoc.Text = string.Empty;
-            txtTenCaHoc.Text = string.Empty;
-            timeThoiGianTu.Text = "00:00";
-            timeThoiGianDen.Text = "00:00";
+            txtMaPhongHoc.Text = string.Empty;
+            txtTenPhongHoc.Text = string.Empty;
+            txtGhiChu.Text = string.Empty;
         }
-        private void CaHoc_ClickData(CAHOC _cahoc)
+        private void PhongHoc_ClickData(PHONGHOC _phonghoc)
         {
-            txtMaCaHoc.Text = _cahoc.MaCaHoc;
-            txtTenCaHoc.Text = _cahoc.TenCaHoc;
-            timeThoiGianTu.Time = DateTime.Parse(_cahoc.ThoiGianTu.ToString());
-                //DateTime.Now.Add(_cahoc.ThoiGianTu??DateTime.Now.TimeOfDay).TimeOfDay;
-            timeThoiGianDen.Time = DateTime.Parse(_cahoc.ThoiGianDen.ToString());
-            chkIsLock.Checked = _cahoc.IsLock ?? false;
+            txtMaPhongHoc.Text = _phonghoc.MaPhongHoc;
+            txtTenPhongHoc.Text = _phonghoc.TenPhongHoc;
+            txtGhiChu.Text = _phonghoc.GhiChu;
+            chkIsLock.Checked = _phonghoc.IsLock ?? false;
         }
 
-        private CAHOC LoadCaHoc()
+        private PHONGHOC LoadPhongHoc()
         {
-            return new CAHOC()
+            return new PHONGHOC()
             {
-                CaHocId = this.CaHocSelect!=null? this.CaHocSelect.CaHocId:0,
+                PhongHocId = this.PhongHocSelect != null ? this.PhongHocSelect.PhongHocId : 0,
                 CoSoId = GlobalSettings.CoSoId,
-                MaCaHoc = txtMaCaHoc.Text,
-                TenCaHoc = txtTenCaHoc.Text,
-                TenCaHocFull = txtTenCaHoc.Text + " (" + timeThoiGianTu.Time.ToString("HH:mm") + " - " + timeThoiGianDen.Time.ToString("HH:mm") + ")",
-                ThoiGianTu = timeThoiGianTu.Time.TimeOfDay,
-                ThoiGianDen = timeThoiGianDen.Time.TimeOfDay,
-                //GhiChu=txtGhiChu.Text,
+                MaPhongHoc = txtMaPhongHoc.Text,
+                TenPhongHoc = txtTenPhongHoc.Text,
+                GhiChu = txtGhiChu.Text,
                 IsLock = chkIsLock.Checked,
             };
         }
@@ -106,22 +99,22 @@ namespace O2S_QuanLyHocVien.Pages
         #region Events
         private void btnHuyBo_Click(object sender, EventArgs e)
         {
-            gridViewCaHoc_Click(sender, e);
+            gridViewPhongHoc_Click(sender, e);
         }
 
-        private void gridViewCaHoc_Click(object sender, EventArgs e)
+        private void gridViewPhongHoc_Click(object sender, EventArgs e)
         {
             try
             {
-                if (gridViewCaHoc.RowCount > 0)
+                if (gridViewPhongHoc.RowCount > 0)
                 {
-                    var rowHandle = gridViewCaHoc.FocusedRowHandle;
-                    int _caHocId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewCaHoc.GetRowCellValue(rowHandle, "CaHocId").ToString());
+                    var rowHandle = gridViewPhongHoc.FocusedRowHandle;
+                    int _PhongHocId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewPhongHoc.GetRowCellValue(rowHandle, "PhongHocId").ToString());
 
-                    this.CaHocSelect = CaHocLogic.SelectSingle(_caHocId);
-                    if (this.CaHocSelect != null)
+                    this.PhongHocSelect = PhongHocLogic.SelectSingle(_PhongHocId);
+                    if (this.PhongHocSelect != null)
                     {
-                        CaHoc_ClickData(this.CaHocSelect);
+                        PhongHoc_ClickData(this.PhongHocSelect);
                         LockAndUnLookPanelControl(false);
                     }
                 }
@@ -138,7 +131,7 @@ namespace O2S_QuanLyHocVien.Pages
             ResetPanelControl();
             isInsert = true;
         }
-        private void gridViewCaHoc_DoubleClick(object sender, EventArgs e)
+        private void gridViewPhongHoc_DoubleClick(object sender, EventArgs e)
         {
             btnSua_Click(sender, e);
         }
@@ -155,13 +148,13 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (MessageBox.Show("Bạn có muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    var rowHandle = gridViewCaHoc.FocusedRowHandle;
-                    int _caHocId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewCaHoc.GetRowCellValue(rowHandle, "CaHocId").ToString());
-                    if (CaHocLogic.Delete(_caHocId))
+                    var rowHandle = gridViewPhongHoc.FocusedRowHandle;
+                    int _caHocId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewPhongHoc.GetRowCellValue(rowHandle, "PhongHocId").ToString());
+                    if (PhongHocLogic.Delete(_caHocId))
                     {
-                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
                         frmthongbao.Show();
-                        LoadGridCaHoc();
+                        LoadGridPhongHoc();
                     }
                 }
             }
@@ -178,31 +171,31 @@ namespace O2S_QuanLyHocVien.Pages
                 if (isInsert)
                 {
                     int _khoaHocId = 0;
-                    if (CaHocLogic.Insert(LoadCaHoc(), ref _khoaHocId))
+                    if (PhongHocLogic.Insert(LoadPhongHoc(), ref _khoaHocId))
                     {
-                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THANH_CONG);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THANH_CONG);
                         frmthongbao.Show();
                     }
                     else
                     {
-                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THAT_BAI);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THAT_BAI);
                         frmthongbao.Show();
                     }
                 }
                 else
                 {
-                    if (CaHocLogic.Update(LoadCaHoc()))
+                    if (PhongHocLogic.Update(LoadPhongHoc()))
                     {
-                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                         frmthongbao.Show();
                     }
                     else
                     {
-                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
                         frmthongbao.Show();
                     }
                 }
-                LoadGridCaHoc();
+                LoadGridPhongHoc();
             }
             catch (Exception ex)
             {
@@ -213,7 +206,7 @@ namespace O2S_QuanLyHocVien.Pages
 
         #region Custom
 
-        private void gridViewDSMonHoc_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        private void gridViewDSPhongHoc_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
             try
             {

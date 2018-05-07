@@ -182,7 +182,7 @@ namespace O2S_QuanLyHocVien.ChucNang
         }
         private void ValidateTrungTaiKhoan(string _tendangnhap)
         {
-            TAIKHOAN _taikhoan = TaiKhoanLogic.Select(_tendangnhap);
+            TAIKHOAN _taikhoan = TaiKhoanLogic.SelectTheoTenDangNhap(_tendangnhap);
             if (_taikhoan != null)
             {
                 throw new ArgumentException("Tên đăng nhập đã có người sử dụng\nVui lòng lấy tên đăng nhập khác");

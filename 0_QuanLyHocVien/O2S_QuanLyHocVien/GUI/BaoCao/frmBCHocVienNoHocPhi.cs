@@ -97,7 +97,7 @@ namespace O2S_QuanLyHocVien.Pages
 
                 string fileTemplatePath = "BC04_ThongKeHocVienNoHocPhi.xlsx";
                 DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHVNoHocPhi);
-                O2S_Common.Utilities.PrintPreview.ExcelFileTemplate.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
+                Utilities.Prints.PrintPreview.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {

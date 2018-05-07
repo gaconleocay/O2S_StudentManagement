@@ -104,7 +104,8 @@ namespace O2S_QuanLyHocVien.Popups
                     txtMatKhau.Text = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Decrypt(ConfigurationManager.AppSettings["LoginPassword"].ToString(), true);
                 }
                 else
-                { txtTenDangNhap.Text = string.Empty;
+                {
+                    txtTenDangNhap.Text = string.Empty;
                     txtMatKhau.Text = string.Empty;
                 }
 
@@ -211,7 +212,7 @@ namespace O2S_QuanLyHocVien.Popups
                 {
                     if (TaiKhoanLogic.IsValid(txtTenDangNhap.Text, txtMatKhau.Text))
                     {
-                        TAIKHOAN _taikhoan = TaiKhoanLogic.Select(txtTenDangNhap.Text);
+                        TAIKHOAN _taikhoan = TaiKhoanLogic.SelectTheoTenDangNhap(txtTenDangNhap.Text);
                         GlobalSettings.UserID = _taikhoan.TaiKhoanId;//TaiKhoanLogic.FullUserID(_taikhoan);
                         GlobalSettings.UserCode = txtTenDangNhap.Text.Trim().ToLower();
                         GlobalSettings.UserName = TaiKhoanLogic.FullUserName(_taikhoan);
@@ -266,6 +267,9 @@ namespace O2S_QuanLyHocVien.Popups
                     {
                         GlobalSettings.CoSoId = ObjectList[0].CoSoId;
                         GlobalSettings.CoSo_Ten = ObjectList[0].TenCoSo;
+                        GlobalSettings.CoSo_DiaChi = ObjectList[0].DiaChi;
+                        GlobalSettings.CoSo_Sdt = ObjectList[0].Sdt;
+                        GlobalSettings.CoSo_Email = ObjectList[0].Email;
                         if (ObjectList[0].LogoCoSo != null && ObjectList[0].LogoCoSo.Length > 0)
                         {
                             byte[] Empimage = (byte[])(ObjectList[0].LogoCoSo).ToArray();

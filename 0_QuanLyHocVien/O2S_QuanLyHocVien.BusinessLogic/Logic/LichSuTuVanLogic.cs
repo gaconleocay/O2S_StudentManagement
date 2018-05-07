@@ -44,7 +44,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  LichSuTuVanId = obj.LichSuTuVanId,
                                  HocVienId = obj.HocVienId,
                                  MaHocVien = hv.MaHocVien,
-                                 NguoiTuVan= obj.NguoiTuVan,
+                                 NguoiTuVan = obj.NguoiTuVan,
                                  NoiDungTuVan = obj.NoiDungTuVan,
                                  KetQuaTuVan = obj.KetQuaTuVan,
                                  GhiChu = obj.GhiChu,
@@ -121,6 +121,22 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             catch (Exception ex)
             {
                 return false;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+        public static List<LICHSUTUVAN> SelectTheoHocVien(int _hocvienId)
+        {
+            try
+            {
+                var query = (from obj in Database.LICHSUTUVANs
+                             where obj.HocVienId == _hocvienId
+                             select obj);
+                return query.ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
         }

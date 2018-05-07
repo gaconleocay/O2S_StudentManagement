@@ -63,6 +63,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  ThoiGianHoc = p.ThoiGianHoc,
                                  CaHocId = p.CaHocId,
                                  TenCaHocFull = p.TenCaHocFull,
+                                 PhongHocId=p.PhongHocId,
+                                 TenPhongHoc=p.TenPhongHoc,
                                  GiaoVien_ChinhId = p.GiaoVien_ChinhId,
                                  TenGiaoVien_Chinh = p.TenGiaoVien_Chinh,
                                  TienGiaoVien_Chinh = p.TienGiaoVien_Chinh,

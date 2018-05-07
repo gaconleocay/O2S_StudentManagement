@@ -17,7 +17,7 @@ namespace O2S_QuanLyHocVien.Popups
         public frmDoiMatKhau(string userName)
         {
             InitializeComponent();
-            this.currentUser = TaiKhoanLogic.Select(userName);
+            this.currentUser = TaiKhoanLogic.SelectTheoTenDangNhap(userName);
         }
 
         #region Events

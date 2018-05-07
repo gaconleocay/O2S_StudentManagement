@@ -217,6 +217,18 @@
     <Compile Include="GUI\ChucNang\frmQuanLyNhanVien.Designer.cs">
       <DependentUpon>frmQuanLyNhanVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\DanhMuc\frmDanhMucLopHoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\DanhMuc\frmDanhMucLopHoc.Designer.cs">
+      <DependentUpon>frmDanhMucLopHoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\DanhMuc\frmDanhMucPhongHoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\DanhMuc\frmDanhMucPhongHoc.Designer.cs">
+      <DependentUpon>frmDanhMucPhongHoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Popups\frmPopUpHuyPhieuThuTien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -361,12 +373,6 @@
     <Compile Include="GUI\Popups\frmThemTuVanHocVien.Designer.cs">
       <DependentUpon>frmThemTuVanHocVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Popups\frmLopHocEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Popups\frmLopHocEdit.Designer.cs">
-      <DependentUpon>frmLopHocEdit.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Popups\frmQuyDinh.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -425,12 +431,6 @@
     <Compile Include="GUI\DanhMuc\frmDanhMucKhoaHoc.Designer.cs">
       <DependentUpon>frmDanhMucKhoaHoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\DanhMuc\frmDanhMucLopHoc.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\DanhMuc\frmDanhMucLopHoc.Designer.cs">
-      <DependentUpon>frmDanhMucLopHoc.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\dsSource.Designer.cs">
@@ -444,6 +444,7 @@
     <Compile Include="Reports\frmReport.Designer.cs">
       <DependentUpon>frmReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Prints\PrintPreview.cs" />
     <EmbeddedResource Include="GUI\BaoCao\frmBaoCaoThuTien_TongHop.resx">
       <DependentUpon>frmBaoCaoThuTien_TongHop.cs</DependentUpon>
     </EmbeddedResource>
@@ -476,6 +477,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ChucNang\frmQuanLyNhanVien.resx">
       <DependentUpon>frmQuanLyNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\DanhMuc\frmDanhMucLopHoc.resx">
+      <DependentUpon>frmDanhMucLopHoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\DanhMuc\frmDanhMucPhongHoc.resx">
+      <DependentUpon>frmDanhMucPhongHoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Popups\frmPopUpHuyPhieuThuTien.resx">
       <DependentUpon>frmPopUpHuyPhieuThuTien.cs</DependentUpon>
@@ -549,9 +556,6 @@
     <EmbeddedResource Include="GUI\Popups\frmThemTuVanHocVien.resx">
       <DependentUpon>frmThemTuVanHocVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Popups\frmLopHocEdit.resx">
-      <DependentUpon>frmLopHocEdit.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Popups\frmQuyDinh.resx">
       <DependentUpon>frmQuyDinh.cs</DependentUpon>
     </EmbeddedResource>
@@ -578,9 +582,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\DanhMuc\frmDanhMucKhoaHoc.resx">
       <DependentUpon>frmDanhMucKhoaHoc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\DanhMuc\frmDanhMucLopHoc.resx">
-      <DependentUpon>frmDanhMucLopHoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

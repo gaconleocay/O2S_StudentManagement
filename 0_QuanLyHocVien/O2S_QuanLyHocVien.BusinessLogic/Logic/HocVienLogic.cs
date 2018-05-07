@@ -11,6 +11,8 @@ using O2S_QuanLyHocVien.DataAccess;
 using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
+using System.Transactions;
+using O2S_QuanLyHocVien.BusinessLogic.Logic;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
@@ -114,7 +116,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                              from pgd1 in phieu.DefaultIfEmpty()
                              join bd in Database.BANGDIEMs on pgd1.PhieuGhiDanhId equals bd.PhieuGhiDanhId into bangdiem
                              from bd1 in bangdiem.DefaultIfEmpty()
-                             where pgd1.IsRemove!=1
+                             where pgd1.IsRemove != 1
                              select new QuanLyHocVienDTO
                              {
                                  HocVienId = hv.HocVienId,
@@ -192,13 +194,13 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
-        public static List<XepLopDTO> DanhSachHocVienChuaXepLop(int _cosoId)
+        public static List<XepLopDTO> HocVienChuaXepLopTheoKhoaHoc(int _khoahocId)
         {
             try
             {
                 var querry = (from p in Database.PHIEUGHIDANHs
-                              where p.HOCVIEN.CoSoId == _cosoId
-                              && !(from q in Database.BANGDIEMs select q.PhieuGhiDanhId).Contains(p.PhieuGhiDanhId) && p.IsRemove!=1
+                              where p.KhoaHocId == _khoahocId
+                              && !(from q in Database.BANGDIEMs select q.PhieuGhiDanhId).Contains(p.PhieuGhiDanhId) && p.IsRemove != 1
                               select new XepLopDTO()
                               {
                                   HocVienId = p.HocVienId,
@@ -253,7 +255,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
                 TAIKHOAN _tkUpdate = TaiKhoanLogic.SelectSingle(taiKhoan.TaiKhoanId);
                 _tkUpdate.TenDangNhap = _hocVien.MaHocVien;
-                _tkUpdate.MatKhau = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(_hocVien.MaHocVien,true);
+                _tkUpdate.MatKhau = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(_hocVien.MaHocVien, true);
                 Database.SubmitChanges();
                 return true;
             }
@@ -291,7 +293,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 //update tai khoan
                 TAIKHOAN _tk = TaiKhoanLogic.SelectSingle(hocVienCu.TaiKhoanId ?? 0);
                 //_tk.TenDangNhap = taiKhoan.TenDangNhap;
-                _tk.MatKhau =O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt( taiKhoan.MatKhau,true);
+                _tk.MatKhau = O2S_Common.EncryptAndDecrypt.MD5EncryptAndDecrypt.Encrypt(taiKhoan.MatKhau, true);
                 if (_hocVien.LoaiHocVienId == KeySetting.LOAIHOCVIEN_CHINHTHUC)//chinh thuc
                 {
                     _tk.IsRemove = 0;
@@ -310,19 +312,45 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
-        public static bool Delete(int _hocvienId)
+        public static bool Delete(int _hocvienId) //xoa hoc vien
         {
             try
             {
-                var temp = SelectSingle(_hocvienId);
-                int _loaihocvien = temp.LoaiHocVienId ?? 0;
-                int TaiKhoanId = temp.TaiKhoanId ?? 0;
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    //Xoa LICHSUTUVAN
+                    List<LICHSUTUVAN> _lstTuVan = LichSuTuVanLogic.SelectTheoHocVien(_hocvienId);
+                    if (_lstTuVan != null && _lstTuVan.Count > 0)
+                    {
+                        Database.LICHSUTUVANs.DeleteAllOnSubmit(_lstTuVan);
+                    }
+                    //Xoa PHIEUGHIDANH
+                    List<PHIEUGHIDANH> _lstPhieuGD = PhieuGhiDanhLogic.SelectTheoHocVien(_hocvienId);
+                    if (_lstPhieuGD != null && _lstPhieuGD.Count > 0)
+                    {
+                        Database.PHIEUGHIDANHs.DeleteAllOnSubmit(_lstPhieuGD);
+                    }
+                    //XOA HOCVIENs
+                    var temp = SelectSingle(_hocvienId);
+                    //int _loaihocvien = temp.LoaiHocVienId ?? 0;
+                    int _TaiKhoanId = temp.TaiKhoanId ?? 0;
 
-                Database.HOCVIENs.DeleteOnSubmit(temp);
-                Database.SubmitChanges();
-                //if (_loaihocvien == 1)
-                TaiKhoanLogic.Delete(TaiKhoanId);
-                return true;
+                    Database.HOCVIENs.DeleteOnSubmit(temp);
+
+                    //Xoa tai khoan
+                    //Xoa phan quyen tai khoan
+                    List<PHANQUYENTAIKHOAN> _lstPhanQuyen = PhanQuyenTaiKhoanLogic.SelectTheoTaiKhoan(_TaiKhoanId);
+                    Database.PHANQUYENTAIKHOANs.DeleteAllOnSubmit(_lstPhanQuyen);
+                    var temp_TK = (from p in Database.TAIKHOANs
+                                   where p.TaiKhoanId == _TaiKhoanId
+                                   select p).Single();
+
+                    Database.TAIKHOANs.DeleteOnSubmit(temp_TK);
+
+                    Database.SubmitChanges();
+                    ts.Complete();
+                    return true;
+                }
             }
             catch (System.Exception ex)
             {

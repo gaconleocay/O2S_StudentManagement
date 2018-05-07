@@ -23,5 +23,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Model
         public int? KhoaHocId { get; set; }
         public string MaKhoaHoc { get; set; }
         public string TenKhoaHoc { get; set; }
+        public int? LopHocId { get; set; }
+        public string MaLopHoc { get; set; }
+        public string TenLopHoc { get; set; }
     }
 }

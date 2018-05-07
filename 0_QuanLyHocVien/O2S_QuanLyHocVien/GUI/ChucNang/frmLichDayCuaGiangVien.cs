@@ -199,7 +199,7 @@ namespace O2S_QuanLyHocVien.ChucNang
                 gridBand_tgian.Name = "gridBand_tgian";
                 gridBand_tgian.OptionsBand.ShowCaption = false;
                 gridBand_tgian.VisibleIndex = 0;
-                gridBand_tgian.Width = 215;
+                gridBand_tgian.Width = 205;
                 // gridColumn_XepLichHocId
                 gridColumn_XepLichHocId.Caption = "XepLichHocId";
                 gridColumn_XepLichHocId.FieldName = "XepLichHocId";
@@ -242,7 +242,7 @@ namespace O2S_QuanLyHocVien.ChucNang
                 gridColumn_ThoiGianHoc_Full.OptionsColumn.AllowEdit = false;
                 gridColumn_ThoiGianHoc_Full.OptionsColumn.ReadOnly = true;
                 gridColumn_ThoiGianHoc_Full.Visible = true;
-                gridColumn_ThoiGianHoc_Full.Width = 180;
+                gridColumn_ThoiGianHoc_Full.Width = 160;
             }
             catch (Exception ex)
             {
@@ -257,10 +257,11 @@ namespace O2S_QuanLyHocVien.ChucNang
                 {
                     DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandLop_0 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
                     DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnLop_0_ca = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+                    DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnLop_0_phong = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
                     DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnLop_0_ghichu = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
                     //================
                     this.bandedGridViewDataBC.Bands.Add(gridBandLop_0);
-                    this.bandedGridViewDataBC.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { gridColumnLop_0_ca, gridColumnLop_0_ghichu });
+                    this.bandedGridViewDataBC.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { gridColumnLop_0_ca, gridColumnLop_0_phong, gridColumnLop_0_ghichu });
                     //=================
                     gridBandLop_0.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                     gridBandLop_0.AppearanceHeader.Options.UseFont = true;
@@ -268,10 +269,11 @@ namespace O2S_QuanLyHocVien.ChucNang
                     gridBandLop_0.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                     gridBandLop_0.Caption = item_lh.TenLopHoc;
                     gridBandLop_0.Columns.Add(gridColumnLop_0_ca);
+                    gridBandLop_0.Columns.Add(gridColumnLop_0_phong);
                     gridBandLop_0.Columns.Add(gridColumnLop_0_ghichu);
                     gridBandLop_0.Name = item_lh.LopHocId.ToString();
                     gridBandLop_0.VisibleIndex = 1;
-                    gridBandLop_0.Width = 510;
+                    gridBandLop_0.Width = 480;
                     // gridColumnLop_0_ca
                     gridColumnLop_0_ca.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
                     gridColumnLop_0_ca.AppearanceCell.Options.UseFont = true;
@@ -287,7 +289,23 @@ namespace O2S_QuanLyHocVien.ChucNang
                     gridColumnLop_0_ca.OptionsColumn.AllowEdit = false;
                     gridColumnLop_0_ca.OptionsColumn.ReadOnly = true;
                     gridColumnLop_0_ca.Visible = true;
-                    gridColumnLop_0_ca.Width = 220;
+                    gridColumnLop_0_ca.Width = 150;
+                    // gridColumnLop_0_phong
+                    gridColumnLop_0_phong.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+                    gridColumnLop_0_phong.AppearanceCell.Options.UseFont = true;
+                    gridColumnLop_0_phong.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+                    gridColumnLop_0_phong.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+                    gridColumnLop_0_phong.AppearanceHeader.Options.UseFont = true;
+                    gridColumnLop_0_phong.AppearanceHeader.Options.UseForeColor = true;
+                    gridColumnLop_0_phong.AppearanceHeader.Options.UseTextOptions = true;
+                    gridColumnLop_0_phong.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    gridColumnLop_0_phong.Caption = "Phòng học";
+                    gridColumnLop_0_phong.FieldName = "TenPhongHoc_" + item_lh.LopHocId.ToString();
+                    gridColumnLop_0_phong.Name = "gridColumnPhong_" + item_lh.LopHocId.ToString() + "_ca";
+                    gridColumnLop_0_phong.OptionsColumn.AllowEdit = false;
+                    gridColumnLop_0_phong.OptionsColumn.ReadOnly = true;
+                    gridColumnLop_0_phong.Visible = true;
+                    gridColumnLop_0_phong.Width = 150;
                     // 
                     // gridColumnLop_0_gvchinh
                     // 
@@ -320,7 +338,7 @@ namespace O2S_QuanLyHocVien.ChucNang
                 string _sqlDSLopHoc = "";
                 foreach (var item_lh in _lstLopHoc)
                 {
-                    _sqlDSLopHoc += @", STUFF((SELECT '; ' + (case when t2.LopHocId=" + item_lh.LopHocId + " then t2.TenCaHocFull end) from XEPLICHHOC t2 where t1.ThoiGianHoc = t2.ThoiGianHoc and t2.IsLock='True' order by t2.TenCaHocFull FOR XML PATH(''), TYPE).value('.','NVARCHAR(MAX)'),1,LEN('; '),'') as TenCaHocFull_" + item_lh.LopHocId + ", STUFF((SELECT '; ' + (case when t2.LopHocId = " + item_lh.LopHocId + " and t2.GiaoVien_ChinhId = " + _GiangVienId + " then N'Dạy chính' end) from XEPLICHHOC t2 where t1.ThoiGianHoc = t2.ThoiGianHoc and t2.IsLock='True' order by t2.TenCaHocFull FOR XML PATH(''), TYPE).value('.','NVARCHAR(MAX)'),1,LEN('; '),'') as GhiChu_" + item_lh.LopHocId + "";
+                    _sqlDSLopHoc += @", STUFF((SELECT '; ' + (case when t2.LopHocId=" + item_lh.LopHocId + " then t2.TenCaHocFull end) from XEPLICHHOC t2 where t1.ThoiGianHoc = t2.ThoiGianHoc and t2.IsLock='True' order by t2.TenCaHocFull FOR XML PATH(''), TYPE).value('.','NVARCHAR(MAX)'),1,LEN('; '),'') as TenCaHocFull_" + item_lh.LopHocId + ", STUFF((SELECT '; ' + (case when t2.LopHocId=" + item_lh.LopHocId + " then t2.TenPhongHoc end) from XEPLICHHOC t2 where t1.ThoiGianHoc = t2.ThoiGianHoc and t2.IsLock='True' order by t2.TenCaHocFull FOR XML PATH(''), TYPE).value('.','NVARCHAR(MAX)'),1,LEN('; '),'') as TenPhongHoc_" + item_lh.LopHocId + ", STUFF((SELECT '; ' + (case when t2.LopHocId = " + item_lh.LopHocId + " and t2.GiaoVien_ChinhId = " + _GiangVienId + " then N'Dạy chính' end) from XEPLICHHOC t2 where t1.ThoiGianHoc = t2.ThoiGianHoc and t2.IsLock='True' order by t2.TenCaHocFull FOR XML PATH(''), TYPE).value('.','NVARCHAR(MAX)'),1,LEN('; '),'') as GhiChu_" + item_lh.LopHocId + "";
                 }
 
                 string _sqlSelect = @"SELECT row_number () over (order by t1.ThoiGianHoc) as stt, t1.ThoiGianHoc, t1.ThoiGianHoc_Full" + _sqlDSLopHoc + " FROM XEPLICHHOC t1 WHERE t1.KhoaHocId=" + _KhoaHocId + " and (t1.GiaoVien_ChinhId=" + _GiangVienId + " or t1.GiaoVien_TroGiangId=" + _GiangVienId + ")  and IsLock='True' GROUP BY ThoiGianHoc,ThoiGianHoc_Full;";
