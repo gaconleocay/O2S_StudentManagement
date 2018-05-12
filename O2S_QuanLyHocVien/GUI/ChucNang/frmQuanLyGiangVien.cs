@@ -57,6 +57,10 @@ namespace O2S_QuanLyHocVien.ChucNang
                 List<GiangVien_PlusDTO> _lstGiangVien = GiangVienLogic.Select(_filter);
                 if (_lstGiangVien != null && _lstGiangVien.Count > 0)
                 {
+                    for (int i = 0; i < _lstGiangVien.Count; i++)
+                    {
+                        _lstGiangVien[i].Stt = i + 1;
+                    }
                     gridControlDSGiangVien.DataSource = _lstGiangVien;
                     lblTongCong.Text = string.Format("Tổng cộng: {0} giảng viên)", _lstGiangVien.Count);
                 }
@@ -146,6 +150,7 @@ namespace O2S_QuanLyHocVien.ChucNang
                 Email = txtEmail.Text,
                 NgayBatDauLamViec = DateTime.ParseExact(dateNgayBatDauLamViec.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 GhiChu = txtGhiChu.Text,
+                CoSoId=GlobalSettings.CoSoId,
             };
             return _giangvien;
         }

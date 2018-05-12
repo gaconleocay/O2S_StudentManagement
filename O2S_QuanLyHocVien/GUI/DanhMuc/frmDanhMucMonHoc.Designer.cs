@@ -152,7 +152,7 @@
             this.btnHuyBo.Location = new System.Drawing.Point(233, 147);
             this.btnHuyBo.Name = "btnHuyBo";
             this.btnHuyBo.Size = new System.Drawing.Size(107, 34);
-            this.btnHuyBo.TabIndex = 18;
+            this.btnHuyBo.TabIndex = 6;
             this.btnHuyBo.Text = "Hủy bỏ";
             this.btnHuyBo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuyBo.UseVisualStyleBackColor = false;
@@ -171,7 +171,7 @@
             this.btnLuuThongTin.Location = new System.Drawing.Point(106, 147);
             this.btnLuuThongTin.Name = "btnLuuThongTin";
             this.btnLuuThongTin.Size = new System.Drawing.Size(121, 34);
-            this.btnLuuThongTin.TabIndex = 17;
+            this.btnLuuThongTin.TabIndex = 5;
             this.btnLuuThongTin.Text = "Lưu thông tin";
             this.btnLuuThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLuuThongTin.UseVisualStyleBackColor = false;

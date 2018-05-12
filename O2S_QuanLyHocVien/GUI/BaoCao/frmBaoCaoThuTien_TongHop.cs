@@ -124,7 +124,7 @@ namespace O2S_QuanLyHocVien.BaoCao
                 thongTinThem.Add(reportitem);
 
                 string fileTemplatePath = "BC06_BaoCaoThuTien_TongHop.xlsx";
-                O2S_Common.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, this.dataPhieuThuTH);
+                Utilities.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, this.dataPhieuThuTH);
             }
             catch (Exception ex)
             {

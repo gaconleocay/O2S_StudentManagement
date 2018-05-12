@@ -138,13 +138,14 @@
             // 
             // numSiSoToiDa
             // 
+            this.numSiSoToiDa.AcceptsReturn = true;
             this.numSiSoToiDa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.numSiSoToiDa.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.numSiSoToiDa.Location = new System.Drawing.Point(103, 176);
             this.numSiSoToiDa.Name = "numSiSoToiDa";
             this.numSiSoToiDa.Size = new System.Drawing.Size(125, 25);
-            this.numSiSoToiDa.TabIndex = 82;
+            this.numSiSoToiDa.TabIndex = 7;
             this.numSiSoToiDa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numSiSoToiDa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numSiSoToiDa_KeyPress);
             // 
@@ -167,7 +168,7 @@
             this.cboKhoaHoc.Location = new System.Drawing.Point(103, 145);
             this.cboKhoaHoc.Name = "cboKhoaHoc";
             this.cboKhoaHoc.Size = new System.Drawing.Size(238, 25);
-            this.cboKhoaHoc.TabIndex = 81;
+            this.cboKhoaHoc.TabIndex = 6;
             // 
             // label9
             // 
@@ -188,7 +189,7 @@
             this.dateNgayKT.Location = new System.Drawing.Point(103, 114);
             this.dateNgayKT.Name = "dateNgayKT";
             this.dateNgayKT.Size = new System.Drawing.Size(125, 25);
-            this.dateNgayKT.TabIndex = 79;
+            this.dateNgayKT.TabIndex = 5;
             // 
             // label5
             // 
@@ -209,7 +210,7 @@
             this.dateNgayBD.Location = new System.Drawing.Point(103, 83);
             this.dateNgayBD.Name = "dateNgayBD";
             this.dateNgayBD.Size = new System.Drawing.Size(125, 25);
-            this.dateNgayBD.TabIndex = 77;
+            this.dateNgayBD.TabIndex = 4;
             // 
             // label4
             // 
@@ -244,7 +245,7 @@
             this.btnHuyBo.Location = new System.Drawing.Point(221, 348);
             this.btnHuyBo.Name = "btnHuyBo";
             this.btnHuyBo.Size = new System.Drawing.Size(107, 34);
-            this.btnHuyBo.TabIndex = 18;
+            this.btnHuyBo.TabIndex = 9;
             this.btnHuyBo.Text = "Hủy bỏ";
             this.btnHuyBo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuyBo.UseVisualStyleBackColor = false;
@@ -263,7 +264,7 @@
             this.btnLuuThongTin.Location = new System.Drawing.Point(94, 348);
             this.btnLuuThongTin.Name = "btnLuuThongTin";
             this.btnLuuThongTin.Size = new System.Drawing.Size(121, 34);
-            this.btnLuuThongTin.TabIndex = 17;
+            this.btnLuuThongTin.TabIndex = 8;
             this.btnLuuThongTin.Text = "Lưu thông tin";
             this.btnLuuThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLuuThongTin.UseVisualStyleBackColor = false;
@@ -271,6 +272,7 @@
             // 
             // txtTenLopHoc
             // 
+            this.txtTenLopHoc.AcceptsReturn = true;
             this.txtTenLopHoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTenLopHoc.Font = new System.Drawing.Font("Segoe UI", 10F);

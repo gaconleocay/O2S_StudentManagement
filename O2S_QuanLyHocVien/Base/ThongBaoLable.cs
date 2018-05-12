@@ -30,7 +30,8 @@ namespace O2S_QuanLyHocVien.Base
         internal static string XOA_THANH_CONG = "Xóa thành công!";
         internal static string CAP_NHAT_THAT_BAI = "Cập nhật thất bại!";
         internal static string THAO_TAC_THAT_BAI = "Thao tác thất bại!";
-
+        internal static string GUI_MAIL_THANH_CONG = "Gửi mail thành công!";
+        internal static string GUI_MAIL_THAT_BAI = "Gửi mail thất bại!";
 
 
 

@@ -12,6 +12,21 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,13 +66,19 @@
     </Reference>
     <Reference Include="DevExpress.BonusSkins.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v15.2.Drawing, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Spreadsheet.v15.2.Core, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v15.2.Extensions, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraSpreadsheet.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="log4net">
       <HintPath>..\Library\log4net.dll</HintPath>
@@ -199,6 +220,12 @@
     <Compile Include="GUI\ChucNang\frmBangDiemDanhHocVien.Designer.cs">
       <DependentUpon>frmBangDiemDanhHocVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ChucNang\frmQuanLyHocVienChoLop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ChucNang\frmQuanLyHocVienChoLop.Designer.cs">
+      <DependentUpon>frmQuanLyHocVienChoLop.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ChucNang\frmQuanLyThuChi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +249,12 @@
     </Compile>
     <Compile Include="GUI\DanhMuc\frmDanhMucLopHoc.Designer.cs">
       <DependentUpon>frmDanhMucLopHoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\CauHinh\frmCauHinhEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CauHinh\frmCauHinhEmail.Designer.cs">
+      <DependentUpon>frmCauHinhEmail.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\DanhMuc\frmDanhMucPhongHoc.cs">
       <SubType>Form</SubType>
@@ -367,6 +400,12 @@
     <Compile Include="GUI\Popups\frmKetNoiCSDL.Designer.cs">
       <DependentUpon>frmKetNoiCSDL.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Popups\frmHocVienTiemNang_GuiMail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Popups\frmHocVienTiemNang_GuiMail.Designer.cs">
+      <DependentUpon>frmHocVienTiemNang_GuiMail.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Popups\frmThemTuVanHocVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -444,7 +483,9 @@
     <Compile Include="Reports\frmReport.Designer.cs">
       <DependentUpon>frmReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Excel\ExcelExport.cs" />
     <Compile Include="Utilities\Prints\PrintPreview.cs" />
+    <Compile Include="Utilities\ThemThongTinTemplate.cs" />
     <EmbeddedResource Include="GUI\BaoCao\frmBaoCaoThuTien_TongHop.resx">
       <DependentUpon>frmBaoCaoThuTien_TongHop.cs</DependentUpon>
     </EmbeddedResource>
@@ -469,6 +510,9 @@
     <EmbeddedResource Include="GUI\ChucNang\frmBangDiemDanhHocVien.resx">
       <DependentUpon>frmBangDiemDanhHocVien.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ChucNang\frmQuanLyHocVienChoLop.resx">
+      <DependentUpon>frmQuanLyHocVienChoLop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\ChucNang\frmQuanLyThuChi.resx">
       <DependentUpon>frmQuanLyThuChi.cs</DependentUpon>
     </EmbeddedResource>
@@ -480,6 +524,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\DanhMuc\frmDanhMucLopHoc.resx">
       <DependentUpon>frmDanhMucLopHoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CauHinh\frmCauHinhEmail.resx">
+      <DependentUpon>frmCauHinhEmail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\DanhMuc\frmDanhMucPhongHoc.resx">
       <DependentUpon>frmDanhMucPhongHoc.cs</DependentUpon>
@@ -552,6 +599,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Popups\frmKetNoiCSDL.resx">
       <DependentUpon>frmKetNoiCSDL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Popups\frmHocVienTiemNang_GuiMail.resx">
+      <DependentUpon>frmHocVienTiemNang_GuiMail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Popups\frmThemTuVanHocVien.resx">
       <DependentUpon>frmThemTuVanHocVien.cs</DependentUpon>
@@ -829,6 +879,18 @@
     <None Include="Resources\zoom_16x16.png" />
     <None Include="Resources\preview_16x16.png" />
     <None Include="Resources\print_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

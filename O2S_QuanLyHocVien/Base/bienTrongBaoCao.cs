@@ -13,7 +13,9 @@ namespace O2S_QuanLyHocVien.Base
         public static string CURRENTDATETIME = "CURRENTDATETIME";
         public static string TENBAOCAO = "TENBAOCAO";
         public static string CURRENTUSER = "CURRENTUSER";
+        public static string MAKHOAHOC = "MAKHOAHOC";
         public static string TENKHOAHOC = "TENKHOAHOC";
+        public static string MALOPHOC = "MALOPHOC";
         public static string TENLOPHOC = "TENLOPHOC";
 
 

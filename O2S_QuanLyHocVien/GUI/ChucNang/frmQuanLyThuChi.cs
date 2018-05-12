@@ -446,7 +446,7 @@ namespace O2S_QuanLyHocVien.ChucNang
 
                 string fileTemplatePath = "BC_QuanLyThuChi_ChiTiet.xlsx";
                 DataTable _dataBC = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHoaDonThuChi);
-                O2S_Common.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _dataBC);
+                Utilities.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _dataBC);
             }
             catch (Exception ex)
             {
@@ -475,7 +475,7 @@ namespace O2S_QuanLyHocVien.ChucNang
 
                 string fileTemplatePath = "BC_QuanLyThuChi_TongHop.xlsx";
                 DataTable _dataBC = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHoaDonThuChi);
-                O2S_Common.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _dataBC);
+                Utilities.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _dataBC);
             }
             catch (Exception ex)
             {

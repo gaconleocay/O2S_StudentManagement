@@ -76,6 +76,9 @@
             this.btnBC_ThuTienTongHop = new DevExpress.XtraBars.BarButtonItem();
             this.btnQuanLyHocVien_TiemNang = new DevExpress.XtraBars.BarButtonItem();
             this.btnQuanLyThuChi = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDMPhongHoc = new DevExpress.XtraBars.BarButtonItem();
+            this.btnQuanLyHocVien_ChoLop = new DevExpress.XtraBars.BarButtonItem();
+            this.btnQLCauHinhEmail = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage_TrangChu = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage_TrangChu_CN = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -106,7 +109,6 @@
             this.xtraTabControl_Home = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage_TrangChu = new DevExpress.XtraTab.XtraTabPage();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDMPhongHoc = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl_Home)).BeginInit();
             this.xtraTabControl_Home.SuspendLayout();
@@ -162,10 +164,12 @@
             this.btnBC_ThuTienTongHop,
             this.btnQuanLyHocVien_TiemNang,
             this.btnQuanLyThuChi,
-            this.btnDMPhongHoc});
+            this.btnDMPhongHoc,
+            this.btnQuanLyHocVien_ChoLop,
+            this.btnQLCauHinhEmail});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
             this.ribbon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbon.MaxItemId = 13;
+            this.ribbon.MaxItemId = 15;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageHeaderItemLinks.Add(this.btnKhoiDongLai);
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -545,6 +549,30 @@
             this.btnQuanLyThuChi.Name = "btnQuanLyThuChi";
             this.btnQuanLyThuChi.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnQuanLyThuChi_ItemClick);
             // 
+            // btnDMPhongHoc
+            // 
+            this.btnDMPhongHoc.Caption = "Phòng học";
+            this.btnDMPhongHoc.Id = 12;
+            this.btnDMPhongHoc.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnDMPhongHoc.LargeGlyph")));
+            this.btnDMPhongHoc.Name = "btnDMPhongHoc";
+            this.btnDMPhongHoc.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDMPhongHoc_ItemClick);
+            // 
+            // btnQuanLyHocVien_ChoLop
+            // 
+            this.btnQuanLyHocVien_ChoLop.Caption = "Quản lý học viên chờ lớp";
+            this.btnQuanLyHocVien_ChoLop.Id = 13;
+            this.btnQuanLyHocVien_ChoLop.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnQuanLyHocVien_ChoLop.LargeGlyph")));
+            this.btnQuanLyHocVien_ChoLop.Name = "btnQuanLyHocVien_ChoLop";
+            this.btnQuanLyHocVien_ChoLop.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnQuanLyHocVien_ChoLop_ItemClick);
+            // 
+            // btnQLCauHinhEmail
+            // 
+            this.btnQLCauHinhEmail.Caption = "QL cấu hình email";
+            this.btnQLCauHinhEmail.Id = 14;
+            this.btnQLCauHinhEmail.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnQLCauHinhEmail.LargeGlyph")));
+            this.btnQLCauHinhEmail.Name = "btnQLCauHinhEmail";
+            this.btnQLCauHinhEmail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnQLCauHinhEmail_ItemClick);
+            // 
             // ribbonPage_TrangChu
             // 
             this.ribbonPage_TrangChu.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -632,6 +660,7 @@
             this.ribbonPage_QLTT_NV.AllowTextClipping = false;
             this.ribbonPage_QLTT_NV.ItemLinks.Add(this.btnQuanLyHocVien_ChinhThuc);
             this.ribbonPage_QLTT_NV.ItemLinks.Add(this.btnQuanLyHocVien_TiemNang);
+            this.ribbonPage_QLTT_NV.ItemLinks.Add(this.btnQuanLyHocVien_ChoLop);
             this.ribbonPage_QLTT_NV.ItemLinks.Add(this.btnQuanLyNhanVien);
             this.ribbonPage_QLTT_NV.ItemLinks.Add(this.btnQuanLyGiangVien);
             this.ribbonPage_QLTT_NV.Name = "ribbonPage_QLTT_NV";
@@ -661,9 +690,9 @@
             // ribbonPage_DanhMuc_DM
             // 
             this.ribbonPage_DanhMuc_DM.AllowTextClipping = false;
+            this.ribbonPage_DanhMuc_DM.ItemLinks.Add(this.btnDmMonHoc);
             this.ribbonPage_DanhMuc_DM.ItemLinks.Add(this.btnDmKhoaHoc);
             this.ribbonPage_DanhMuc_DM.ItemLinks.Add(this.btnDmLopHoc);
-            this.ribbonPage_DanhMuc_DM.ItemLinks.Add(this.btnDmMonHoc);
             this.ribbonPage_DanhMuc_DM.ItemLinks.Add(this.btnDMCaHoc);
             this.ribbonPage_DanhMuc_DM.ItemLinks.Add(this.btnDMPhongHoc);
             this.ribbonPage_DanhMuc_DM.Name = "ribbonPage_DanhMuc_DM";
@@ -717,6 +746,7 @@
             this.ribbonPage_HeThong_QLHT.ItemLinks.Add(this.btnKetNoiCoSoDuLieu);
             this.ribbonPage_HeThong_QLHT.ItemLinks.Add(this.btnThongTinTrungTam);
             this.ribbonPage_HeThong_QLHT.ItemLinks.Add(this.btnQuanLyCoSoTrungTam);
+            this.ribbonPage_HeThong_QLHT.ItemLinks.Add(this.btnQLCauHinhEmail);
             this.ribbonPage_HeThong_QLHT.Name = "ribbonPage_HeThong_QLHT";
             this.ribbonPage_HeThong_QLHT.Text = "Quản lý hệ thống";
             // 
@@ -797,14 +827,6 @@
             this.barButtonItem1.Glyph = global::O2S_QuanLyHocVien.Properties.Resources.excel_3_16;
             this.barButtonItem1.Id = 8;
             this.barButtonItem1.Name = "barButtonItem1";
-            // 
-            // btnDMPhongHoc
-            // 
-            this.btnDMPhongHoc.Caption = "Phòng học";
-            this.btnDMPhongHoc.Id = 12;
-            this.btnDMPhongHoc.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnDMPhongHoc.LargeGlyph")));
-            this.btnDMPhongHoc.Name = "btnDMPhongHoc";
-            this.btnDMPhongHoc.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDMPhongHoc_ItemClick);
             // 
             // frmMainHome
             // 
@@ -915,5 +937,7 @@
         private DevExpress.XtraBars.BarButtonItem btnQuanLyThuChi;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
         private DevExpress.XtraBars.BarButtonItem btnDMPhongHoc;
+        private DevExpress.XtraBars.BarButtonItem btnQuanLyHocVien_ChoLop;
+        private DevExpress.XtraBars.BarButtonItem btnQLCauHinhEmail;
     }
 }

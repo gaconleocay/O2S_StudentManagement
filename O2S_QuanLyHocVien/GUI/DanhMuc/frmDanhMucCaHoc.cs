@@ -137,6 +137,7 @@ namespace O2S_QuanLyHocVien.Pages
             LockAndUnLookPanelControl(true);
             ResetPanelControl();
             isInsert = true;
+            txtTenCaHoc.Focus();
         }
         private void gridViewCaHoc_DoubleClick(object sender, EventArgs e)
         {

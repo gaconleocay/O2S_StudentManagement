@@ -233,7 +233,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 _hocVien.CreatedBy = GlobalSettings.UserCode;
                 _hocVien.CreatedLog = GlobalSettings.SessionMyIP;
                 _hocVien.IsRemove = 0;
-                if (_hocVien.LoaiHocVienId == KeySetting.LOAIHOCVIEN_TIEMNANG)
+                if (_hocVien.LoaiHocVienId == KeySetting.LOAIHOCVIEN_TIEMNANG || _hocVien.LoaiHocVienId == KeySetting.LOAIHOCVIEN_CHOLOP)
                 {
                     taiKhoan.IsRemove = 1;
                 }

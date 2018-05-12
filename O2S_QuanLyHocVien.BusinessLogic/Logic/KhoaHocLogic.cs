@@ -134,7 +134,16 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             {
                 //Xoa Khoa học_mon hoc truoc
                 var _khoahocMonHoc = KhoaHocMonHocLogic.SelectTheoKhoaHoc(_khoahocId);
-                Database.KHOAHOC_MONHOCs.DeleteAllOnSubmit(_khoahocMonHoc);
+                if (_khoahocMonHoc != null && _khoahocMonHoc.Count > 0)
+                {
+                    Database.KHOAHOC_MONHOCs.DeleteAllOnSubmit(_khoahocMonHoc);
+                }
+                //xoa lop hoc
+                var _lophoc = LopHocLogic.SelectTheoKhoaHoc(_khoahocId);
+                if (_lophoc != null && _lophoc.Count > 0)
+                {
+                    Database.LOPHOCs.DeleteAllOnSubmit(_lophoc);
+                }
                 //xoa khoa hoc
                 var temp = SelectSingle(_khoahocId);
                 Database.KHOAHOCs.DeleteOnSubmit(temp);

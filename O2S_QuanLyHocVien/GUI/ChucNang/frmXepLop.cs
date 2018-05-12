@@ -136,8 +136,11 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 if (gridViewHV_ChuaXepLop.RowCount > 0)
                 {
-                    if (gridViewHV_XepLop.RowCount < GlobalSettings.QuyDinh["QD0000"] ||
-                    MessageBox.Show("Số học viên tối đa của lớp là " + GlobalSettings.QuyDinh["QD0000"] + Environment.NewLine + "Bạn có chắc sẽ thêm?",
+                    int _lophocId = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                    LOPHOC _lophoc = LopHocLogic.SelectSingle(_lophocId);
+
+                    if (gridViewHV_XepLop.RowCount < _lophoc.SiSoToiDa ||
+                    MessageBox.Show("Số học viên tối đa của lớp là " + _lophoc.SiSoToiDa + Environment.NewLine + "Bạn có chắc sẽ thêm?",
                         "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                         var rowHandle = gridViewHV_ChuaXepLop.FocusedRowHandle;
@@ -244,18 +247,18 @@ namespace O2S_QuanLyHocVien.Pages
                     TenLopHoc = _lophoc.TenLopHoc,
                     NgayBatDau = _lophoc.NgayBatDau,
                     NgayKetThuc = _lophoc.NgayKetThuc,
-                    SiSoToiDa=_lophoc.SiSoToiDa,
+                    SiSoToiDa = _lophoc.SiSoToiDa,
                     SiSo = this.dsXepLopHocVien.Count,
                     KhoaHocId = _lophoc.KhoaHocId,
                     IsLock = _lophoc.IsLock
                 });
 
-                O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                 frmthongbao.Show();
             }
             catch (Exception ex)
             {
-                O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
+                O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THAT_BAI);
                 frmthongbao.Show();
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
@@ -332,20 +335,39 @@ namespace O2S_QuanLyHocVien.Pages
                 if (cboLopHoc.SelectedValue != null)
                 {
                     List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
+
+                    //khoa hoc, lop hoc
+                    int _KhoaHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
+                    KHOAHOC _khoahoc = KhoaHocLogic.SelectSingle(_KhoaHocId);
+                    int _lophocId = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                    LOPHOC _lophoc = LopHocLogic.SelectSingle(_lophocId);
+
+                    reportExcelDTO _item_makhoahoc = new reportExcelDTO()
+                    {
+                        name = Base.bienTrongBaoCao.MAKHOAHOC,
+                        value = _khoahoc.MaKhoaHoc,
+                    };
+                    thongTinThem.Add(_item_makhoahoc);
                     reportExcelDTO _item_tenkhoahoc = new reportExcelDTO()
                     {
                         name = Base.bienTrongBaoCao.TENKHOAHOC,
-                        value = cboKhoaHoc.Text,
+                        value = _khoahoc.TenKhoaHoc,
                     };
                     thongTinThem.Add(_item_tenkhoahoc);
+                    //
+                    reportExcelDTO _item_malophoc = new reportExcelDTO()
+                    {
+                        name = Base.bienTrongBaoCao.MALOPHOC,
+                        value = _lophoc.MaLopHoc,
+                    };
+                    thongTinThem.Add(_item_malophoc);
                     reportExcelDTO _item_tenlophoc = new reportExcelDTO()
                     {
                         name = Base.bienTrongBaoCao.TENLOPHOC,
-                        value = cboLopHoc.Text,
+                        value = _lophoc.TenLopHoc,
                     };
                     thongTinThem.Add(_item_tenlophoc);
 
-                    int _lophocId = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
                     List<XepLopDTO> _lstXepLop = BangDiemLogic.SelectDSHV_Lop(_lophocId);
 
                     string fileTemplatePath = "FUN_XepLop_DanhSachLopHoc.xlsx";

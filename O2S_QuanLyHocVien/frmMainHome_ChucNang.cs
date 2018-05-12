@@ -257,6 +257,21 @@ namespace O2S_QuanLyHocVien
                 O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
+
+        private void btnQuanLyHocVien_ChoLop_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmQuanLyHocVienChoLop frmControlActive = new frmQuanLyHocVienChoLop() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmQuanLyHocVienChoLop", "Quản lý học viên chờ lớp", "Quản lý học viên chờ lớp", frmControlActive);
+                frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
         private void btnQuanLyNhanVien_ItemClick(object sender, ItemClickEventArgs e)
         {
             try
@@ -467,6 +482,20 @@ namespace O2S_QuanLyHocVien
                 O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
+        private void btnQLCauHinhEmail_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmCauHinhEmail frmControlActive = new frmCauHinhEmail() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmCauHinhEmail", "Cấu hình email", "Cấu hình email", frmControlActive);
+                frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
         #endregion
 
         #region Tro giup

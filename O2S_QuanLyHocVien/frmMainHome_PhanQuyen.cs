@@ -84,6 +84,7 @@ namespace O2S_QuanLyHocVien
                         //
                         btnQuanLyHocVien_ChinhThuc.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_05");
                         btnQuanLyHocVien_TiemNang.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_19");
+                        btnQuanLyHocVien_ChoLop.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_21");
                         btnQuanLyNhanVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_06");
                         btnQuanLyGiangVien.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_07");
                         btnQuanLyHocPhi.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_08");
@@ -111,6 +112,8 @@ namespace O2S_QuanLyHocVien
                         btnThongTinTrungTam.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_06");
                         btnQuanLyCoSoTrungTam.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_04");
                         btnDangKyBanQuyen.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_05");
+                        btnQLCauHinhEmail.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_07");
+
                     }
                     if (_lstChucNang_BaoCao != null && _lstChucNang_BaoCao.Count > 0)
                     {

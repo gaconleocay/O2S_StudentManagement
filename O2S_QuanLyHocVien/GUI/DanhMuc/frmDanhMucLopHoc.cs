@@ -92,13 +92,20 @@ namespace O2S_QuanLyHocVien.DanhMuc
 
         private void ResetPanelControl()
         {
-            txtMaLopHoc.Text = string.Empty;
-            txtTenLopHoc.Text = string.Empty;
-            dateNgayBD.Value = DateTime.Now;
-            dateNgayKT.Value = DateTime.Now;
-            cboKhoaHoc.SelectedIndex = 1;
-            numSiSoToiDa.Text = "0";
-            chkDaDong.Checked = false;
+            try
+            {
+                txtMaLopHoc.Text = string.Empty;
+                txtTenLopHoc.Text = string.Empty;
+                dateNgayBD.Value = DateTime.Now;
+                dateNgayKT.Value = DateTime.Now;
+                cboKhoaHoc.SelectedIndex = 0;
+                numSiSoToiDa.Text = "0";
+                chkDaDong.Checked = false;
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
         }
         private void LopHoc_ClickData(LOPHOC _phonghoc)
         {
@@ -164,6 +171,7 @@ namespace O2S_QuanLyHocVien.DanhMuc
             LockAndUnLookPanelControl(true);
             ResetPanelControl();
             isInsert = true;
+            txtTenLopHoc.Focus();
         }
         private void gridViewLopHoc_DoubleClick(object sender, EventArgs e)
         {

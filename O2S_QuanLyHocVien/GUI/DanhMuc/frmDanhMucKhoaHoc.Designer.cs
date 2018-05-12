@@ -165,7 +165,7 @@
             this.gridControlDSMonHoc.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
             this.gridControlDSMonHoc.Size = new System.Drawing.Size(501, 299);
-            this.gridControlDSMonHoc.TabIndex = 23;
+            this.gridControlDSMonHoc.TabIndex = 6;
             this.gridControlDSMonHoc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewDSMonHoc});
             // 
@@ -293,7 +293,7 @@
             this.btnLuuThongTin.Location = new System.Drawing.Point(128, 5);
             this.btnLuuThongTin.Name = "btnLuuThongTin";
             this.btnLuuThongTin.Size = new System.Drawing.Size(121, 34);
-            this.btnLuuThongTin.TabIndex = 17;
+            this.btnLuuThongTin.TabIndex = 7;
             this.btnLuuThongTin.Text = "Lưu thông tin";
             this.btnLuuThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLuuThongTin.UseVisualStyleBackColor = false;
@@ -313,7 +313,7 @@
             this.btnHuyBo.Location = new System.Drawing.Point(255, 5);
             this.btnHuyBo.Name = "btnHuyBo";
             this.btnHuyBo.Size = new System.Drawing.Size(107, 34);
-            this.btnHuyBo.TabIndex = 18;
+            this.btnHuyBo.TabIndex = 8;
             this.btnHuyBo.Text = "Hủy bỏ";
             this.btnHuyBo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuyBo.UseVisualStyleBackColor = false;
@@ -365,7 +365,7 @@
             0});
             this.numSoTietHoc.Name = "numSoTietHoc";
             this.numSoTietHoc.Size = new System.Drawing.Size(209, 25);
-            this.numSoTietHoc.TabIndex = 50;
+            this.numSoTietHoc.TabIndex = 5;
             this.numSoTietHoc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // date_DenNgay
@@ -537,7 +537,7 @@
             0});
             this.numHocPhi.Name = "numHocPhi";
             this.numHocPhi.Size = new System.Drawing.Size(209, 25);
-            this.numHocPhi.TabIndex = 20;
+            this.numHocPhi.TabIndex = 4;
             this.numHocPhi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // gridControlKhoaHoc

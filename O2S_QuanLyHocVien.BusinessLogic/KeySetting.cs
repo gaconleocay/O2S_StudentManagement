@@ -10,6 +10,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
     {
         public static int LOAIHOCVIEN_CHINHTHUC = 1;
         public static int LOAIHOCVIEN_TIEMNANG = 2;
+        public static int LOAIHOCVIEN_CHOLOP = 4;
+
 
         public static int LOAINHANVIEN_QuanTri = 1;
         public static int LOAINHANVIEN_NVGhiDanh = 2;

@@ -42,6 +42,9 @@ namespace O2S_QuanLyHocVien.DataAccess
     partial void InsertCAHOC(CAHOC instance);
     partial void UpdateCAHOC(CAHOC instance);
     partial void DeleteCAHOC(CAHOC instance);
+    partial void InsertCAUHINHEMAIL(CAUHINHEMAIL instance);
+    partial void UpdateCAUHINHEMAIL(CAUHINHEMAIL instance);
+    partial void DeleteCAUHINHEMAIL(CAUHINHEMAIL instance);
     partial void InsertCHUCNANG(CHUCNANG instance);
     partial void UpdateCHUCNANG(CHUCNANG instance);
     partial void DeleteCHUCNANG(CHUCNANG instance);
@@ -184,6 +187,14 @@ namespace O2S_QuanLyHocVien.DataAccess
 			get
 			{
 				return this.GetTable<CAHOC>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CAUHINHEMAIL> CAUHINHEMAILs
+		{
+			get
+			{
+				return this.GetTable<CAUHINHEMAIL>();
 			}
 		}
 		
@@ -2606,6 +2617,476 @@ namespace O2S_QuanLyHocVien.DataAccess
 		{
 			this.SendPropertyChanging();
 			entity.CAHOC = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CAUHINHEMAIL")]
+	public partial class CAUHINHEMAIL : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CauHinhEmailId;
+		
+		private System.Nullable<int> _CoSoId;
+		
+		private string _MaEmail;
+		
+		private string _SMTPServer;
+		
+		private System.Nullable<int> _Port;
+		
+		private string _DiaChiEmail;
+		
+		private string _TaiKhoan;
+		
+		private string _MatKhau;
+		
+		private System.Nullable<bool> _XacThucSSL;
+		
+		private System.Nullable<bool> _XacThucTKKhiGui;
+		
+		private System.Nullable<bool> _IsLock;
+		
+		private System.Nullable<int> _IsRemove;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private string _CreatedBy;
+		
+		private string _CreatedLog;
+		
+		private System.Nullable<System.DateTime> _ModifiedDate;
+		
+		private string _ModifiedBy;
+		
+		private string _ModifiedLog;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCauHinhEmailIdChanging(int value);
+    partial void OnCauHinhEmailIdChanged();
+    partial void OnCoSoIdChanging(System.Nullable<int> value);
+    partial void OnCoSoIdChanged();
+    partial void OnMaEmailChanging(string value);
+    partial void OnMaEmailChanged();
+    partial void OnSMTPServerChanging(string value);
+    partial void OnSMTPServerChanged();
+    partial void OnPortChanging(System.Nullable<int> value);
+    partial void OnPortChanged();
+    partial void OnDiaChiEmailChanging(string value);
+    partial void OnDiaChiEmailChanged();
+    partial void OnTaiKhoanChanging(string value);
+    partial void OnTaiKhoanChanged();
+    partial void OnMatKhauChanging(string value);
+    partial void OnMatKhauChanged();
+    partial void OnXacThucSSLChanging(System.Nullable<bool> value);
+    partial void OnXacThucSSLChanged();
+    partial void OnXacThucTKKhiGuiChanging(System.Nullable<bool> value);
+    partial void OnXacThucTKKhiGuiChanged();
+    partial void OnIsLockChanging(System.Nullable<bool> value);
+    partial void OnIsLockChanged();
+    partial void OnIsRemoveChanging(System.Nullable<int> value);
+    partial void OnIsRemoveChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnCreatedByChanging(string value);
+    partial void OnCreatedByChanged();
+    partial void OnCreatedLogChanging(string value);
+    partial void OnCreatedLogChanged();
+    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedDateChanged();
+    partial void OnModifiedByChanging(string value);
+    partial void OnModifiedByChanged();
+    partial void OnModifiedLogChanging(string value);
+    partial void OnModifiedLogChanged();
+    #endregion
+		
+		public CAUHINHEMAIL()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CauHinhEmailId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CauHinhEmailId
+		{
+			get
+			{
+				return this._CauHinhEmailId;
+			}
+			set
+			{
+				if ((this._CauHinhEmailId != value))
+				{
+					this.OnCauHinhEmailIdChanging(value);
+					this.SendPropertyChanging();
+					this._CauHinhEmailId = value;
+					this.SendPropertyChanged("CauHinhEmailId");
+					this.OnCauHinhEmailIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CoSoId", DbType="Int")]
+		public System.Nullable<int> CoSoId
+		{
+			get
+			{
+				return this._CoSoId;
+			}
+			set
+			{
+				if ((this._CoSoId != value))
+				{
+					this.OnCoSoIdChanging(value);
+					this.SendPropertyChanging();
+					this._CoSoId = value;
+					this.SendPropertyChanged("CoSoId");
+					this.OnCoSoIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaEmail", DbType="VarChar(50)")]
+		public string MaEmail
+		{
+			get
+			{
+				return this._MaEmail;
+			}
+			set
+			{
+				if ((this._MaEmail != value))
+				{
+					this.OnMaEmailChanging(value);
+					this.SendPropertyChanging();
+					this._MaEmail = value;
+					this.SendPropertyChanged("MaEmail");
+					this.OnMaEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SMTPServer", DbType="VarChar(250)")]
+		public string SMTPServer
+		{
+			get
+			{
+				return this._SMTPServer;
+			}
+			set
+			{
+				if ((this._SMTPServer != value))
+				{
+					this.OnSMTPServerChanging(value);
+					this.SendPropertyChanging();
+					this._SMTPServer = value;
+					this.SendPropertyChanged("SMTPServer");
+					this.OnSMTPServerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Port", DbType="Int")]
+		public System.Nullable<int> Port
+		{
+			get
+			{
+				return this._Port;
+			}
+			set
+			{
+				if ((this._Port != value))
+				{
+					this.OnPortChanging(value);
+					this.SendPropertyChanging();
+					this._Port = value;
+					this.SendPropertyChanged("Port");
+					this.OnPortChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiaChiEmail", DbType="VarChar(250)")]
+		public string DiaChiEmail
+		{
+			get
+			{
+				return this._DiaChiEmail;
+			}
+			set
+			{
+				if ((this._DiaChiEmail != value))
+				{
+					this.OnDiaChiEmailChanging(value);
+					this.SendPropertyChanging();
+					this._DiaChiEmail = value;
+					this.SendPropertyChanged("DiaChiEmail");
+					this.OnDiaChiEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaiKhoan", DbType="VarChar(250)")]
+		public string TaiKhoan
+		{
+			get
+			{
+				return this._TaiKhoan;
+			}
+			set
+			{
+				if ((this._TaiKhoan != value))
+				{
+					this.OnTaiKhoanChanging(value);
+					this.SendPropertyChanging();
+					this._TaiKhoan = value;
+					this.SendPropertyChanged("TaiKhoan");
+					this.OnTaiKhoanChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MatKhau", DbType="VarChar(250)")]
+		public string MatKhau
+		{
+			get
+			{
+				return this._MatKhau;
+			}
+			set
+			{
+				if ((this._MatKhau != value))
+				{
+					this.OnMatKhauChanging(value);
+					this.SendPropertyChanging();
+					this._MatKhau = value;
+					this.SendPropertyChanged("MatKhau");
+					this.OnMatKhauChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XacThucSSL", DbType="Bit")]
+		public System.Nullable<bool> XacThucSSL
+		{
+			get
+			{
+				return this._XacThucSSL;
+			}
+			set
+			{
+				if ((this._XacThucSSL != value))
+				{
+					this.OnXacThucSSLChanging(value);
+					this.SendPropertyChanging();
+					this._XacThucSSL = value;
+					this.SendPropertyChanged("XacThucSSL");
+					this.OnXacThucSSLChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XacThucTKKhiGui", DbType="Bit")]
+		public System.Nullable<bool> XacThucTKKhiGui
+		{
+			get
+			{
+				return this._XacThucTKKhiGui;
+			}
+			set
+			{
+				if ((this._XacThucTKKhiGui != value))
+				{
+					this.OnXacThucTKKhiGuiChanging(value);
+					this.SendPropertyChanging();
+					this._XacThucTKKhiGui = value;
+					this.SendPropertyChanged("XacThucTKKhiGui");
+					this.OnXacThucTKKhiGuiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLock", DbType="Bit")]
+		public System.Nullable<bool> IsLock
+		{
+			get
+			{
+				return this._IsLock;
+			}
+			set
+			{
+				if ((this._IsLock != value))
+				{
+					this.OnIsLockChanging(value);
+					this.SendPropertyChanging();
+					this._IsLock = value;
+					this.SendPropertyChanged("IsLock");
+					this.OnIsLockChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsRemove", DbType="Int")]
+		public System.Nullable<int> IsRemove
+		{
+			get
+			{
+				return this._IsRemove;
+			}
+			set
+			{
+				if ((this._IsRemove != value))
+				{
+					this.OnIsRemoveChanging(value);
+					this.SendPropertyChanging();
+					this._IsRemove = value;
+					this.SendPropertyChanged("IsRemove");
+					this.OnIsRemoveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="NVarChar(255)")]
+		public string CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedLog", DbType="NVarChar(255)")]
+		public string CreatedLog
+		{
+			get
+			{
+				return this._CreatedLog;
+			}
+			set
+			{
+				if ((this._CreatedLog != value))
+				{
+					this.OnCreatedLogChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedLog = value;
+					this.SendPropertyChanged("CreatedLog");
+					this.OnCreatedLogChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedBy", DbType="NVarChar(255)")]
+		public string ModifiedBy
+		{
+			get
+			{
+				return this._ModifiedBy;
+			}
+			set
+			{
+				if ((this._ModifiedBy != value))
+				{
+					this.OnModifiedByChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedBy = value;
+					this.SendPropertyChanged("ModifiedBy");
+					this.OnModifiedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedLog", DbType="NVarChar(255)")]
+		public string ModifiedLog
+		{
+			get
+			{
+				return this._ModifiedLog;
+			}
+			set
+			{
+				if ((this._ModifiedLog != value))
+				{
+					this.OnModifiedLogChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedLog = value;
+					this.SendPropertyChanged("ModifiedLog");
+					this.OnModifiedLogChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	

@@ -227,6 +227,7 @@ namespace O2S_QuanLyHocVien.Pages
             LockPanelControl(true);
             ResetPanelControl();
             isInsert = true;
+            txtTenKhoaHoc.Focus();
         }
 
         private void gridViewKhoaHoc_DoubleClick(object sender, EventArgs e)

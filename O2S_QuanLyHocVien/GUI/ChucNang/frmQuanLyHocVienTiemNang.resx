@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="repositoryItemButton_Guimail.Buttons" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAFGSURBVDhPjZMxSwNBEIVDELEKIsFKLKxELEIKCztBrCxEgkUIKSWCdUgbRCz8DeIvCSLWEoKI
+        WAULSWkhEkSCfu94G09dkzv42GPmzdu53blcLvJsHT3lYRtacAwrMV00hngDevAJfXiBEVzAwkQjBA14
+        hw6sS8w6A1UY2LD0x4SEhCfeVWv+t4jYIlzBK+yO8y4+d5uHk1pEMwuX8KFuEy0vZw7UshyUN2y727YM
+        1NKN3LMYeNM59F3VyuANrk1xmgm6orXadCiDIRzAPuj61mATdC5pFFu1RlrVfBu4tTLBe3iwYI9VSKyY
+        cmVrK2mDioPLBB+DKP05xEo2WYoZaIcC3MLOf+dATuMtzTz86KBOQNNXz3CItaANn6BbeIbWtOKQR9sE
+        jXZyiJoD/Sx3oFsQuuMYIS+tapI50A90ajSVWQj6xhdkyUk+3FHQAAAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>

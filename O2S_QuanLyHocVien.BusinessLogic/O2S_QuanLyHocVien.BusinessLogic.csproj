@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filter\BangDiemFilter.cs" />
+    <Compile Include="Filter\CauHinhEmailFilter.cs" />
     <Compile Include="Filter\PhongHocFilter.cs" />
     <Compile Include="Filter\CaHocFilter.cs" />
     <Compile Include="Filter\HoaDonThuChiFilter.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Filter\XepLichHocFilter.cs" />
     <Compile Include="KeySetting.cs" />
     <Compile Include="Logic\BangDiemLogic.cs" />
+    <Compile Include="Logic\CauHinhEmailLogic.cs" />
     <Compile Include="Logic\PhongHocLogic.cs" />
     <Compile Include="Logic\HocPhiHocVienLogic.cs" />
     <Compile Include="Logic\ChucNangLogic.cs" />

@@ -46,7 +46,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  TenLopHoc = obj.TenLopHoc,
                                  NgayBatDau = obj.NgayBatDau,
                                  NgayKetThuc = obj.NgayKetThuc,
-                                 SiSoToiDa=obj.SiSoToiDa,
+                                 SiSoToiDa = obj.SiSoToiDa,
                                  SiSo = obj.SiSo,
                                  KhoaHocId = obj.KhoaHocId,
                                  TenKhoaHoc = obj.KHOAHOC.TenKhoaHoc,
@@ -184,6 +184,21 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                             MaLopHoc = p.MaLopHoc,
                             TenLopHoc = p.TenLopHoc
                         }).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+        public static List<LOPHOC> SelectTheoKhoaHoc(int _khoahocId)
+        {
+            try
+            {
+                return (from p in GlobalSettings.Database.LOPHOCs
+                        where p.KhoaHocId == _khoahocId
+                        select p).ToList();
             }
             catch (System.Exception ex)
             {

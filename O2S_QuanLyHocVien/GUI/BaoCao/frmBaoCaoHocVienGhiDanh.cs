@@ -118,7 +118,7 @@ namespace O2S_QuanLyHocVien.Pages
                 string fileTemplatePath = "BC02_HocVienGhiDanh.xlsx";
                 DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this._lstPhieuGhiDanh);
 
-                O2S_Common.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
+                Utilities.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {

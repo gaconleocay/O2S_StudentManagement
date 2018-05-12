@@ -143,7 +143,7 @@
             this.timeThoiGianDen.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.timeThoiGianDen.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
             this.timeThoiGianDen.Size = new System.Drawing.Size(216, 24);
-            this.timeThoiGianDen.TabIndex = 30;
+            this.timeThoiGianDen.TabIndex = 5;
             // 
             // timeThoiGianTu
             // 
@@ -160,7 +160,7 @@
             this.timeThoiGianTu.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.timeThoiGianTu.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
             this.timeThoiGianTu.Size = new System.Drawing.Size(216, 24);
-            this.timeThoiGianTu.TabIndex = 29;
+            this.timeThoiGianTu.TabIndex = 4;
             // 
             // label5
             // 
@@ -204,7 +204,7 @@
             this.btnHuyBo.Location = new System.Drawing.Point(221, 348);
             this.btnHuyBo.Name = "btnHuyBo";
             this.btnHuyBo.Size = new System.Drawing.Size(107, 34);
-            this.btnHuyBo.TabIndex = 18;
+            this.btnHuyBo.TabIndex = 7;
             this.btnHuyBo.Text = "Hủy bỏ";
             this.btnHuyBo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHuyBo.UseVisualStyleBackColor = false;
@@ -223,7 +223,7 @@
             this.btnLuuThongTin.Location = new System.Drawing.Point(94, 348);
             this.btnLuuThongTin.Name = "btnLuuThongTin";
             this.btnLuuThongTin.Size = new System.Drawing.Size(121, 34);
-            this.btnLuuThongTin.TabIndex = 17;
+            this.btnLuuThongTin.TabIndex = 6;
             this.btnLuuThongTin.Text = "Lưu thông tin";
             this.btnLuuThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLuuThongTin.UseVisualStyleBackColor = false;

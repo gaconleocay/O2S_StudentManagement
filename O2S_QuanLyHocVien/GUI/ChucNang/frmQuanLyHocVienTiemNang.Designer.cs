@@ -32,6 +32,11 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanLyHocVienTiemNang));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel2 = new System.Windows.Forms.Panel();
             this.date_DenNgay = new DevExpress.XtraEditors.DateEdit();
             this.btnXuatExcel = new System.Windows.Forms.Button();
@@ -79,6 +84,8 @@
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemButton_Guimail = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.date_DenNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.date_DenNgay.Properties)).BeginInit();
@@ -97,6 +104,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewLSTuVan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemo_NoiDung)).BeginInit();
             this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_Guimail)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -246,7 +254,8 @@
             this.gridControlDSHocVien.MainView = this.gridViewDSHocVien;
             this.gridControlDSHocVien.Name = "gridControlDSHocVien";
             this.gridControlDSHocVien.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemButton_TuVan});
+            this.repositoryItemButton_TuVan,
+            this.repositoryItemButton_Guimail});
             this.gridControlDSHocVien.Size = new System.Drawing.Size(1100, 395);
             this.gridControlDSHocVien.TabIndex = 45;
             this.gridControlDSHocVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -261,6 +270,7 @@
             this.gridViewDSHocVien.ColumnPanelRowHeight = 25;
             this.gridViewDSHocVien.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn33,
+            this.gridColumn20,
             this.clm_HocVien_Stt,
             this.gridColumn12,
             this.gridColumn8,
@@ -311,6 +321,7 @@
             this.gridColumn33.Name = "gridColumn33";
             this.gridColumn33.OptionsColumn.FixedWidth = true;
             this.gridColumn33.OptionsColumn.ShowCaption = false;
+            this.gridColumn33.ToolTip = "Tư vấn";
             this.gridColumn33.UnboundType = DevExpress.Data.UnboundColumnType.Object;
             this.gridColumn33.Visible = true;
             this.gridColumn33.VisibleIndex = 0;
@@ -343,7 +354,7 @@
             this.clm_HocVien_Stt.OptionsColumn.AllowEdit = false;
             this.clm_HocVien_Stt.OptionsColumn.ReadOnly = true;
             this.clm_HocVien_Stt.Visible = true;
-            this.clm_HocVien_Stt.VisibleIndex = 1;
+            this.clm_HocVien_Stt.VisibleIndex = 2;
             this.clm_HocVien_Stt.Width = 45;
             // 
             // gridColumn12
@@ -367,7 +378,7 @@
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.OptionsColumn.ReadOnly = true;
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 2;
+            this.gridColumn8.VisibleIndex = 3;
             this.gridColumn8.Width = 80;
             // 
             // gridColumn9
@@ -386,7 +397,7 @@
             this.gridColumn9.OptionsColumn.AllowEdit = false;
             this.gridColumn9.OptionsColumn.ReadOnly = true;
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 3;
+            this.gridColumn9.VisibleIndex = 4;
             this.gridColumn9.Width = 150;
             // 
             // gridColumn10
@@ -409,7 +420,7 @@
             this.gridColumn10.OptionsColumn.AllowEdit = false;
             this.gridColumn10.OptionsColumn.ReadOnly = true;
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 4;
+            this.gridColumn10.VisibleIndex = 5;
             this.gridColumn10.Width = 80;
             // 
             // gridColumn11
@@ -428,7 +439,7 @@
             this.gridColumn11.OptionsColumn.AllowEdit = false;
             this.gridColumn11.OptionsColumn.ReadOnly = true;
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 5;
+            this.gridColumn11.VisibleIndex = 6;
             this.gridColumn11.Width = 60;
             // 
             // gridColumn4
@@ -450,7 +461,7 @@
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.OptionsColumn.AllowEdit = false;
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 6;
+            this.gridColumn4.VisibleIndex = 7;
             this.gridColumn4.Width = 125;
             // 
             // gridColumn14
@@ -468,7 +479,7 @@
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.OptionsColumn.AllowEdit = false;
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 7;
+            this.gridColumn14.VisibleIndex = 8;
             this.gridColumn14.Width = 150;
             // 
             // gridColumn1
@@ -486,7 +497,7 @@
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 8;
+            this.gridColumn1.VisibleIndex = 9;
             this.gridColumn1.Width = 250;
             // 
             // gridColumn2
@@ -504,7 +515,7 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsColumn.AllowEdit = false;
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 9;
+            this.gridColumn2.VisibleIndex = 10;
             this.gridColumn2.Width = 150;
             // 
             // gridColumn3
@@ -522,7 +533,7 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 10;
+            this.gridColumn3.VisibleIndex = 11;
             this.gridColumn3.Width = 150;
             // 
             // gridColumn5
@@ -540,7 +551,7 @@
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.OptionsColumn.AllowEdit = false;
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 11;
+            this.gridColumn5.VisibleIndex = 12;
             this.gridColumn5.Width = 150;
             // 
             // gridColumn6
@@ -558,7 +569,7 @@
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.OptionsColumn.AllowEdit = false;
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 12;
+            this.gridColumn6.VisibleIndex = 13;
             this.gridColumn6.Width = 150;
             // 
             // gridColumn7
@@ -576,7 +587,7 @@
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.OptionsColumn.AllowEdit = false;
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 13;
+            this.gridColumn7.VisibleIndex = 14;
             this.gridColumn7.Width = 150;
             // 
             // gridColumn13
@@ -594,7 +605,7 @@
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.OptionsColumn.AllowEdit = false;
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 14;
+            this.gridColumn13.VisibleIndex = 15;
             this.gridColumn13.Width = 150;
             // 
             // label1
@@ -887,6 +898,30 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "LỊCH SỬ TƯ VẤN";
             // 
+            // gridColumn20
+            // 
+            this.gridColumn20.Caption = "Gui email";
+            this.gridColumn20.ColumnEdit = this.repositoryItemButton_Guimail;
+            this.gridColumn20.FieldName = "gridColumn20";
+            this.gridColumn20.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            this.gridColumn20.Name = "gridColumn20";
+            this.gridColumn20.OptionsColumn.FixedWidth = true;
+            this.gridColumn20.OptionsColumn.ShowCaption = false;
+            this.gridColumn20.ToolTip = "Gửi email";
+            this.gridColumn20.UnboundType = DevExpress.Data.UnboundColumnType.Object;
+            this.gridColumn20.Visible = true;
+            this.gridColumn20.VisibleIndex = 1;
+            this.gridColumn20.Width = 35;
+            // 
+            // repositoryItemButton_Guimail
+            // 
+            this.repositoryItemButton_Guimail.AutoHeight = false;
+            this.repositoryItemButton_Guimail.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButton_Guimail.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "Gửi email", null, null, true)});
+            this.repositoryItemButton_Guimail.Name = "repositoryItemButton_Guimail";
+            this.repositoryItemButton_Guimail.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.repositoryItemButton_Guimail.Click += new System.EventHandler(this.repositoryItemButton_Guimail_Click);
+            // 
             // frmQuanLyHocVienTiemNang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -922,6 +957,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemo_NoiDung)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_Guimail)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -974,5 +1010,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemo_NoiDung;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn20;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButton_Guimail;
     }
 }

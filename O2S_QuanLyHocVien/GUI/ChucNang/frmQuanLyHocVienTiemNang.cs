@@ -138,6 +138,25 @@ namespace O2S_QuanLyHocVien.ChucNang
                 O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
+
+        private void repositoryItemButton_Guimail_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (gridViewDSHocVien.RowCount > 0)
+                {
+                    var rowHandle = gridViewDSHocVien.FocusedRowHandle;
+                    int _HocVienId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewDSHocVien.GetRowCellValue(rowHandle, "HocVienId").ToString());
+                    frmHocVienTiemNang_GuiMail _frm = new frmHocVienTiemNang_GuiMail(_HocVienId);
+                    _frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
         #endregion
 
         #region Custom
@@ -207,7 +226,7 @@ namespace O2S_QuanLyHocVien.ChucNang
 
                 string fileTemplatePath = "FUN_QuanLyHocVien_TiemNang.xlsx";
                 DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstHocVien);
-                O2S_Common.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
+                Utilities.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {
@@ -220,7 +239,9 @@ namespace O2S_QuanLyHocVien.ChucNang
 
 
 
+
         #endregion
+
 
 
     }

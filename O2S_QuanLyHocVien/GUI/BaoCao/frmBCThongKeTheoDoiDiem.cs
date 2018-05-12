@@ -20,6 +20,7 @@ using System.Globalization;
 using O2S_QuanLyHocVien.BusinessLogic.Models;
 using O2S_QuanLyHocVien.BusinessLogic;
 using O2S_Common.DataObjects;
+using O2S_QuanLyHocVien.DataAccess;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -134,6 +135,38 @@ namespace O2S_QuanLyHocVien.Pages
                 reportitem.value = tungaydenngay;
                 thongTinThem.Add(reportitem);
 
+                //khoa hoc, lop hoc
+               int _KhoaHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
+                KHOAHOC _khoahoc = KhoaHocLogic.SelectSingle(_KhoaHocId);
+                int _lophocId = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                LOPHOC _lophoc = LopHocLogic.SelectSingle(_lophocId);
+
+                reportExcelDTO _item_makhoahoc = new reportExcelDTO()
+                {
+                    name = Base.bienTrongBaoCao.MAKHOAHOC,
+                    value= _khoahoc.MaKhoaHoc,
+                };
+                thongTinThem.Add(_item_makhoahoc);
+                reportExcelDTO _item_tenkhoahoc = new reportExcelDTO()
+                {
+                    name = Base.bienTrongBaoCao.TENKHOAHOC,
+                    value = _khoahoc.TenKhoaHoc,
+                };
+                thongTinThem.Add(_item_tenkhoahoc);
+                //
+                reportExcelDTO _item_malophoc = new reportExcelDTO()
+                {
+                    name = Base.bienTrongBaoCao.MALOPHOC,
+                    value = _lophoc.MaLopHoc,
+                };
+                thongTinThem.Add(_item_malophoc);
+                reportExcelDTO _item_tenlophoc = new reportExcelDTO()
+                {
+                    name = Base.bienTrongBaoCao.TENLOPHOC,
+                    value = _lophoc.TenLopHoc,
+                };
+                thongTinThem.Add(_item_tenlophoc);
+
                 string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
                 DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstBangDiem);
                 Utilities.Prints.PrintPreview.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
@@ -159,10 +192,41 @@ namespace O2S_QuanLyHocVien.Pages
                 reportitem.name = Base.bienTrongBaoCao.THOIGIANBAOCAO;
                 reportitem.value = tungaydenngay;
                 thongTinThem.Add(reportitem);
+                //khoa hoc, lop hoc
+                int _KhoaHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
+                KHOAHOC _khoahoc = KhoaHocLogic.SelectSingle(_KhoaHocId);
+                int _lophocId = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                LOPHOC _lophoc = LopHocLogic.SelectSingle(_lophocId);
+
+                reportExcelDTO _item_makhoahoc = new reportExcelDTO()
+                {
+                    name = Base.bienTrongBaoCao.MAKHOAHOC,
+                    value = _khoahoc.MaKhoaHoc,
+                };
+                thongTinThem.Add(_item_makhoahoc);
+                reportExcelDTO _item_tenkhoahoc = new reportExcelDTO()
+                {
+                    name = Base.bienTrongBaoCao.TENKHOAHOC,
+                    value = _khoahoc.TenKhoaHoc,
+                };
+                thongTinThem.Add(_item_tenkhoahoc);
+                //
+                reportExcelDTO _item_malophoc = new reportExcelDTO()
+                {
+                    name = Base.bienTrongBaoCao.MALOPHOC,
+                    value = _lophoc.MaLopHoc,
+                };
+                thongTinThem.Add(_item_malophoc);
+                reportExcelDTO _item_tenlophoc = new reportExcelDTO()
+                {
+                    name = Base.bienTrongBaoCao.TENLOPHOC,
+                    value = _lophoc.TenLopHoc,
+                };
+                thongTinThem.Add(_item_tenlophoc);
 
                 string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
                 DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstBangDiem);
-                O2S_Common.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
+                Utilities.Excel.ExcelExport.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);
             }
             catch (Exception ex)
             {

@@ -148,7 +148,7 @@ namespace O2S_QuanLyHocVien.ChucNang
                 //reportitem.value = tungaydenngay;
                 //thongTinThem.Add(reportitem);
 
-                //string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
+                //string fileTemplatePath = "hfghfhghf.xlsx";
                 //DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstBangDiem);
                 //O2S_Common.Utilities.PrintPreview.ExcelFileTemplateShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, _databaocao);
             }
@@ -163,7 +163,7 @@ namespace O2S_QuanLyHocVien.ChucNang
         {
             try
             {
-                O2S_Common.Excel.ExcelExport.ExportDataGridViewToFile(gridControlDataBC, bandedGridViewDataBC);
+                Utilities.Excel.ExcelExport.ExportDataGridViewToFile(gridControlDataBC, bandedGridViewDataBC);
 
                 //List<reportExcelDTO> thongTinThem = new List<reportExcelDTO>();
                 //reportExcelDTO reportitem = new reportExcelDTO();
@@ -171,7 +171,7 @@ namespace O2S_QuanLyHocVien.ChucNang
                 //reportitem.value = cboKhoaHoc.Text;
                 //thongTinThem.Add(reportitem);
 
-                //string fileTemplatePath = "BC03_ThongKeTheoDoiDiem.xlsx";
+                //string fileTemplatePath = "hfghfgh.xlsx";
                 //DataTable _databaocao = O2S_Common.DataTables.Convert.ListToDataTable(this.lstBangDiem);
                 //Utilities.Common.Excel.ExcelExport export = new Utilities.Common.Excel.ExcelExport();
                 //export.ExportExcelTemplate("", fileTemplatePath, thongTinThem, _databaocao);

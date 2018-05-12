@@ -39,10 +39,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             //GlobalSettings.NewDatacontexDatabase();
             try
             {
-                var query = (from p in GlobalSettings.Database.GIANGVIENs
-                             select p).AsEnumerable().Select((obj, index) => new GiangVien_PlusDTO
+                var query = (from obj in GlobalSettings.Database.GIANGVIENs
+                             select new GiangVien_PlusDTO
                              {
-                                 Stt = index + 1,
                                  GiangVienId = obj.GiangVienId,
                                  MaGiangVien = obj.MaGiangVien,
                                  TenGiangVien = obj.TenGiangVien,
@@ -51,12 +50,12 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  GioiTinh = obj.GioiTinh,
                                  Sdt = obj.Sdt,
                                  Email = obj.Email,
-                                 NgayBatDauLamViec=obj.NgayBatDauLamViec,
+                                 NgayBatDauLamViec = obj.NgayBatDauLamViec,
                                  TaiKhoanId = obj.TaiKhoanId,
                                  TenDangNhap = obj.TAIKHOAN.TenDangNhap,
                                  NgaySinh = obj.NgaySinh,
                                  DiaChi = obj.DiaChi,
-                                 GhiChu=obj.GhiChu,
+                                 GhiChu = obj.GhiChu,
                                  IsRemove = obj.IsRemove,
                                  CreatedDate = obj.CreatedDate,
                                  CreatedBy = obj.CreatedBy,
@@ -65,7 +64,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  ModifiedBy = obj.ModifiedBy,
                                  ModifiedLog = obj.ModifiedLog,
 
-                             });
+                             }).ToList();
                 if (_filter.GiangVienId != null && _filter.GiangVienId != 0)
                 {
                     query = query.Where(o => o.GiangVienId == _filter.GiangVienId).ToList();
@@ -180,15 +179,18 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
                     //Xoa PHANQUYENTAIKHOAN
                     List<PHANQUYENTAIKHOAN> _lstpqtk = PhanQuyenTaiKhoanLogic.SelectTheoTaiKhoan(temp.TaiKhoanId ?? 0);
-                    if (_lstpqtk != null)
+                    if (_lstpqtk != null && _lstpqtk.Count>0)
                     {
                         Database.PHANQUYENTAIKHOANs.DeleteAllOnSubmit(_lstpqtk);
                         Database.SubmitChanges();
                     }
                     TAIKHOAN _taikhoan = TaiKhoanLogic.SelectSingle(temp.TaiKhoanId ?? 0);
-                    Database.TAIKHOANs.DeleteOnSubmit(_taikhoan);
+                    if (_taikhoan != null)
+                    {
+                        Database.TAIKHOANs.DeleteOnSubmit(_taikhoan);
+                        Database.SubmitChanges();
+                    }
                     Database.SubmitChanges();
-
                     ts.Complete();
                     return true;
                 }

@@ -72,13 +72,13 @@ namespace O2S_QuanLyHocVien.Pages
                     //gridControlDSHocVien.Invoke((MethodInvoker)delegate
                     //{
                     gridControlDSHocVien.DataSource = _lstHocVien;
-                    lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức và {2} học viên tiềm năng)", _lstHocVien.Count, _lstHocVien.Where(o => o.LoaiHocVienId == KeySetting.LOAIHOCVIEN_CHINHTHUC).ToList().Count, _lstHocVien.Where(o => o.LoaiHocVienId == KeySetting.LOAIHOCVIEN_TIEMNANG).ToList().Count);
+                    lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức; {2} học viên tiềm năng; {3} học viên chờ lớp)", _lstHocVien.Count, _lstHocVien.Where(o => o.LoaiHocVienId == KeySetting.LOAIHOCVIEN_CHINHTHUC).ToList().Count, _lstHocVien.Where(o => o.LoaiHocVienId == KeySetting.LOAIHOCVIEN_TIEMNANG).ToList().Count, _lstHocVien.Where(o => o.LoaiHocVienId == KeySetting.LOAIHOCVIEN_CHOLOP).ToList().Count);
                     //});
                 }
                 else
                 {
                     gridControlDSHocVien.DataSource = null;
-                    lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức và {2} học viên tiềm năng)", 0, 0, 0);
+                    lblTongCong.Text = string.Format("Tổng cộng: {0} học viên ({1} học viên chính thức; {2} học viên tiềm năng; {3} học viên chờ lớp)", 0, 0, 0);
                 }
                 //});
 
@@ -145,6 +145,7 @@ namespace O2S_QuanLyHocVien.Pages
             LockAndUnlockPanelControl(true);
             isInsert = true;
             LoadPanelControl();
+            txtHoTen.Focus();
         }
 
         private void btnLuuThongTin_Click(object sender, EventArgs e)
@@ -164,7 +165,7 @@ namespace O2S_QuanLyHocVien.Pages
                     }, ref _hocvienId))
                     {
                         LoadDanhSachHocVien();
-                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THANH_CONG);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THEM_MOI_THANH_CONG);
                         frmthongbao.Show();
                         LockAndUnlockPanelControl(false);
                     }
@@ -178,7 +179,7 @@ namespace O2S_QuanLyHocVien.Pages
                     }))
                     {
                         LoadDanhSachHocVien();
-                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CAP_NHAT_THANH_CONG);
                         frmthongbao.Show();
                         LockAndUnlockPanelControl(false);
                     }
@@ -190,7 +191,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
+                O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
                 frmthongbao.Show();
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
@@ -235,14 +236,14 @@ namespace O2S_QuanLyHocVien.Pages
                 {
                     if (HocVienLogic.Delete(this.hocvienId_Select))
                     {
-                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.XOA_THANH_CONG);
                         frmthongbao.Show();
                         LoadDanhSachHocVien();
                         ResetPanelControl();
                     }
                     else
                     {
-                        O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THAO_TAC_THAT_BAI);
+                        O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.THAO_TAC_THAT_BAI);
                         frmthongbao.Show();
                     }
                 }
@@ -253,7 +254,7 @@ namespace O2S_QuanLyHocVien.Pages
             }
             catch (Exception ex)
             {
-                O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
+                O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.CO_LOI_XAY_RA);
                 frmthongbao.Show();
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
@@ -367,7 +368,7 @@ namespace O2S_QuanLyHocVien.Pages
         #region Custom
         private void cboLoaiHV_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cboLoaiHV.SelectedValue.ToString() == KeySetting.LOAIHOCVIEN_TIEMNANG.ToString())//tiem nang
+            if (cboLoaiHV.SelectedValue.ToString() == KeySetting.LOAIHOCVIEN_TIEMNANG.ToString() || cboLoaiHV.SelectedValue.ToString() == KeySetting.LOAIHOCVIEN_CHOLOP.ToString())//tiem nang
             {
                 txtTenDangNhap.Text = string.Empty;
                 txtMatKhau.Text = string.Empty;
