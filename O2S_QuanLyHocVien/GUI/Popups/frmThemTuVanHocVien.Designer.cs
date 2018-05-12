@@ -305,7 +305,7 @@
             this.Name = "frmThemTuVanHocVien";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Thêm lớp học";
+            this.Text = "Thêm tư vấn";
             this.Load += new System.EventHandler(this.frmThemTuVanHocVien_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
