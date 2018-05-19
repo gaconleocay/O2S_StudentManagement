@@ -54,7 +54,6 @@ namespace O2S_QuanLyHocVien.Popups
             try
             {
                 GlobalSettings.LoadCenterInformation();
-                GlobalSettings.LoadQuyDinh();
                 //ten may
                 GlobalSettings.SessionMachineName = Environment.MachineName;
                 // Địa chỉ Ip

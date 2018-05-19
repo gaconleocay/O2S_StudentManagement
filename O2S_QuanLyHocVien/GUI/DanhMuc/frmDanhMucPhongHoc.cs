@@ -130,6 +130,7 @@ namespace O2S_QuanLyHocVien.Pages
             LockAndUnLookPanelControl(true);
             ResetPanelControl();
             isInsert = true;
+            txtTenPhongHoc.Focus();
         }
         private void gridViewPhongHoc_DoubleClick(object sender, EventArgs e)
         {

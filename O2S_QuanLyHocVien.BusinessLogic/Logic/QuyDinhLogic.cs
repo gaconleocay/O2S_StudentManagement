@@ -9,20 +9,32 @@ using System.Linq;
 using System.Text;
 using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using O2S_QuanLyHocVien.DataAccess;
+using System.Transactions;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
     public static class QuyDinhLogic
     {
-        /// <summary>
-        /// Chọn tất cả các quy định
-        /// </summary>
-        /// <returns></returns>
         public static List<QUYDINH> SelectAll()
         {
             try
             {
                 return (from p in Database.QUYDINHs
+                        where p.IsRemove == 0
+                        select p).ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
+        public static List<QUYDINH> SelectTheoCoSo()
+        {
+            try
+            {
+                return (from p in Database.QUYDINHs
+                        where p.IsRemove == 0 && (p.CoSoId == 0 || p.CoSoId == GlobalSettings.CoSoId)
                         select p).ToList();
             }
             catch (System.Exception ex)
@@ -32,11 +44,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
-        /// <summary>
-        /// Chọn một quy định
-        /// </summary>
-        /// <param name="maQD">Mã quy định</param>
-        /// <returns></returns>
         public static QUYDINH Select(string _MaQuyDinh)
         {
             try
@@ -51,11 +58,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
-
-        /// <summary>
-        /// Cập nhật một quy định
-        /// </summary>
-        /// <param name="qd">Quy định cần cập nhật</param>
         public static void Update(QUYDINH qd)
         {
             try
@@ -70,5 +72,34 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
+
+        public static bool UpdateAll(List<QUYDINH> lstQuyDinh)
+        {
+            try
+            {
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    foreach (var item in lstQuyDinh)
+                    {
+                        QUYDINH _quydinh = Select(item.MaQuyDinh);
+                        if (_quydinh.GiaTri != item.GiaTri)
+                        {
+                            _quydinh.GiaTri = item.GiaTri;
+                            Database.SubmitChanges();
+                        }
+                    }
+                    Database.SubmitChanges();
+                    ts.Complete();
+                    return true;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+
     }
 }

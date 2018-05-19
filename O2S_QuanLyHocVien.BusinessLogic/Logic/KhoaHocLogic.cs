@@ -36,7 +36,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         {
             try
             {
-                //List<KhoaHoc_PlusDTO> _result = null;
                 var query = (from p in GlobalSettings.Database.KHOAHOCs
                              select p).AsEnumerable().Select((obj, index) => new KhoaHoc_PlusDTO
                              {
@@ -48,6 +47,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  TenKhoaHoc = obj.TenKhoaHoc,
                                  HocPhi = obj.HocPhi,
                                  SoTietHoc = obj.SoTietHoc,
+                                 HocPhi1TietHoc = obj.SoTietHoc!=0?((obj.HocPhi ?? 0) / (obj.SoTietHoc ?? 0)):0,
                                  IsLock = obj.IsLock,
                                  IsRemove = obj.IsRemove,
                                  TrangThai_Ten = obj.IsRemove == 1 ? "Đã khóa" : "",
@@ -105,7 +105,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
-        public static bool Update(KHOAHOC _hocVien, TAIKHOAN taiKhoan = null)
+        public static bool Update(KHOAHOC _hocVien)
         {
             try
             {
@@ -113,6 +113,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
                 hocVienCu.TenKhoaHoc = _hocVien.TenKhoaHoc;
                 hocVienCu.HocPhi = _hocVien.HocPhi;
+                hocVienCu.SoTietHoc = _hocVien.SoTietHoc;
                 hocVienCu.IsLock = _hocVien.IsLock;
                 hocVienCu.IsRemove = _hocVien.IsRemove;
                 hocVienCu.ModifiedDate = DateTime.Now;

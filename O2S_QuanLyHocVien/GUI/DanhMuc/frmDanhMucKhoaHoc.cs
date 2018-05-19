@@ -103,8 +103,10 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 txtMaKhoaHoc.Text = kh.MaKhoaHoc;
                 txtTenKhoaHoc.Text = kh.TenKhoaHoc;
-                numHocPhi.Value = (decimal)kh.HocPhi;
-                numSoTietHoc.Value = kh.SoTietHoc != null ? (decimal)kh.SoTietHoc : 0;
+                numHocPhi.Text = O2S_Common.Number.Convert.NumberToString(kh.HocPhi ?? 0, 0);
+                numSoTietHoc.Text = O2S_Common.Number.Convert.NumberToString(kh.SoTietHoc ?? 0, 0);
+                decimal _hocphi1buoi = kh.SoTietHoc != 0 ? (kh.HocPhi / kh.SoTietHoc) ?? 0 : 0;
+                numHocPhi1Buoi.Text = O2S_Common.Number.Convert.NumberToString(_hocphi1buoi, 0);
                 chkDaKhoa.Checked = kh.IsLock ?? false;
                 //Load mon hoc cua Khoa hoc
                 List<KhoaHocMonHocDTO> _lstKHMH = this.lstKHMH;
@@ -148,9 +150,9 @@ namespace O2S_QuanLyHocVien.Pages
             {
                 KhoaHocId = this.khoaHocSelect != null ? this.khoaHocSelect.KhoaHocId : 0,
                 TenKhoaHoc = txtTenKhoaHoc.Text,
-                HocPhi = numHocPhi.Value,
+                HocPhi = O2S_Common.TypeConvert.Parse.ToDecimal(numHocPhi.Text),
                 CoSoId = GlobalSettings.CoSoId,
-                SoTietHoc = numSoTietHoc.Value,
+                SoTietHoc = O2S_Common.TypeConvert.Parse.ToDecimal(numSoTietHoc.Text),
                 IsLock = chkDaKhoa.Checked ? true : false,
             };
         }
@@ -158,8 +160,9 @@ namespace O2S_QuanLyHocVien.Pages
         {
             txtMaKhoaHoc.Text = string.Empty;
             txtTenKhoaHoc.Text = string.Empty;
-            numHocPhi.Value = 0;
-            numSoTietHoc.Value = 0;
+            numHocPhi.Text = "0";
+            numSoTietHoc.Text = "0";
+            numHocPhi1Buoi.Text = "0";
             chkDaKhoa.Checked = false;
         }
         private void ValidateXoaKhoaHoc(int _KhoaHocId)
@@ -316,7 +319,7 @@ namespace O2S_QuanLyHocVien.Pages
                         frmthongbao.Show();
                     }
                 }
-                else
+                else //update
                 {
                     if (KhoaHocLogic.Update(LoadKhoaHoc()))
                     {
@@ -381,6 +384,45 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
 
+        private void numNopThem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void numNopThem_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal _hocphi = O2S_Common.TypeConvert.Parse.ToDecimal(numHocPhi.Text);
+                decimal _buoihoc = O2S_Common.TypeConvert.Parse.ToDecimal(numSoTietHoc.Text);
+                numHocPhi.Text = O2S_Common.Number.Convert.NumberToString(_hocphi, 0);
+                //
+                numHocPhi1Buoi.Text = O2S_Common.Number.Convert.NumberToString(_hocphi / _buoihoc, 0);
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        private void numSoTietHoc_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal _hocphi = O2S_Common.TypeConvert.Parse.ToDecimal(numHocPhi.Text);
+                decimal _buoihoc = O2S_Common.TypeConvert.Parse.ToDecimal(numSoTietHoc.Text);
+                numSoTietHoc.Text = O2S_Common.Number.Convert.NumberToString(_buoihoc, 0);
+                //
+                numHocPhi1Buoi.Text = O2S_Common.Number.Convert.NumberToString(_hocphi / _buoihoc, 0);
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
 
         #endregion
 

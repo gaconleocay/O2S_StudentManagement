@@ -46,7 +46,7 @@
             this.btnDmLopHoc = new DevExpress.XtraBars.BarButtonItem();
             this.btnDmMonHoc = new DevExpress.XtraBars.BarButtonItem();
             this.btnQuanLyTaiKhoan = new DevExpress.XtraBars.BarButtonItem();
-            this.btnThayDoiQuyDinh = new DevExpress.XtraBars.BarButtonItem();
+            this.btnQLCauHinh = new DevExpress.XtraBars.BarButtonItem();
             this.btnDoiMatKhau = new DevExpress.XtraBars.BarButtonItem();
             this.btnKetNoiCoSoDuLieu = new DevExpress.XtraBars.BarButtonItem();
             this.btnThongTinTrungTam = new DevExpress.XtraBars.BarButtonItem();
@@ -79,6 +79,7 @@
             this.btnDMPhongHoc = new DevExpress.XtraBars.BarButtonItem();
             this.btnQuanLyHocVien_ChoLop = new DevExpress.XtraBars.BarButtonItem();
             this.btnQLCauHinhEmail = new DevExpress.XtraBars.BarButtonItem();
+            this.btnUpdateSQL = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage_TrangChu = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage_TrangChu_CN = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -101,6 +102,7 @@
             this.ribbonPage_HeThong = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPage_HeThong_QLHT = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage_HeThong_DKBQ = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroupUpdateSQL = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -134,7 +136,7 @@
             this.btnDmLopHoc,
             this.btnDmMonHoc,
             this.btnQuanLyTaiKhoan,
-            this.btnThayDoiQuyDinh,
+            this.btnQLCauHinh,
             this.btnDoiMatKhau,
             this.btnKetNoiCoSoDuLieu,
             this.btnThongTinTrungTam,
@@ -166,10 +168,11 @@
             this.btnQuanLyThuChi,
             this.btnDMPhongHoc,
             this.btnQuanLyHocVien_ChoLop,
-            this.btnQLCauHinhEmail});
+            this.btnQLCauHinhEmail,
+            this.btnUpdateSQL});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
             this.ribbon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ribbon.MaxItemId = 15;
+            this.ribbon.MaxItemId = 16;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageHeaderItemLinks.Add(this.btnKhoiDongLai);
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -311,13 +314,13 @@
             this.btnQuanLyTaiKhoan.Name = "btnQuanLyTaiKhoan";
             this.btnQuanLyTaiKhoan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnQuanLyTaiKhoan_ItemClick);
             // 
-            // btnThayDoiQuyDinh
+            // btnQLCauHinh
             // 
-            this.btnThayDoiQuyDinh.Caption = "Thay đổi quy định";
-            this.btnThayDoiQuyDinh.Id = 19;
-            this.btnThayDoiQuyDinh.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnThayDoiQuyDinh.LargeGlyph")));
-            this.btnThayDoiQuyDinh.Name = "btnThayDoiQuyDinh";
-            this.btnThayDoiQuyDinh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThayDoiQuyDinh_ItemClick);
+            this.btnQLCauHinh.Caption = "Quản lý cấu hình";
+            this.btnQLCauHinh.Id = 19;
+            this.btnQLCauHinh.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnQLCauHinh.LargeGlyph")));
+            this.btnQLCauHinh.Name = "btnQLCauHinh";
+            this.btnQLCauHinh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThayDoiQuyDinh_ItemClick);
             // 
             // btnDoiMatKhau
             // 
@@ -573,6 +576,14 @@
             this.btnQLCauHinhEmail.Name = "btnQLCauHinhEmail";
             this.btnQLCauHinhEmail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnQLCauHinhEmail_ItemClick);
             // 
+            // btnUpdateSQL
+            // 
+            this.btnUpdateSQL.Caption = "Update SQL";
+            this.btnUpdateSQL.Id = 15;
+            this.btnUpdateSQL.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnUpdateSQL.LargeGlyph")));
+            this.btnUpdateSQL.Name = "btnUpdateSQL";
+            this.btnUpdateSQL.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUpdateSQL_ItemClick);
+            // 
             // ribbonPage_TrangChu
             // 
             this.ribbonPage_TrangChu.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -597,6 +608,7 @@
             this.ribbonPage_TrangChu_CN.ItemLinks.Add(this.btnCacLopDaHoc);
             this.ribbonPage_TrangChu_CN.Name = "ribbonPage_TrangChu_CN";
             this.ribbonPage_TrangChu_CN.Text = "Trang cá nhân";
+            this.ribbonPage_TrangChu_CN.Visible = false;
             // 
             // ribbonPage_TrangChu_TTCN
             // 
@@ -734,7 +746,8 @@
             // 
             this.ribbonPage_HeThong.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPage_HeThong_QLHT,
-            this.ribbonPage_HeThong_DKBQ});
+            this.ribbonPage_HeThong_DKBQ,
+            this.ribbonPageGroupUpdateSQL});
             this.ribbonPage_HeThong.Name = "ribbonPage_HeThong";
             this.ribbonPage_HeThong.Text = "HỆ THỐNG";
             // 
@@ -742,7 +755,7 @@
             // 
             this.ribbonPage_HeThong_QLHT.AllowTextClipping = false;
             this.ribbonPage_HeThong_QLHT.ItemLinks.Add(this.btnQuanLyTaiKhoan);
-            this.ribbonPage_HeThong_QLHT.ItemLinks.Add(this.btnThayDoiQuyDinh);
+            this.ribbonPage_HeThong_QLHT.ItemLinks.Add(this.btnQLCauHinh);
             this.ribbonPage_HeThong_QLHT.ItemLinks.Add(this.btnKetNoiCoSoDuLieu);
             this.ribbonPage_HeThong_QLHT.ItemLinks.Add(this.btnThongTinTrungTam);
             this.ribbonPage_HeThong_QLHT.ItemLinks.Add(this.btnQuanLyCoSoTrungTam);
@@ -756,6 +769,13 @@
             this.ribbonPage_HeThong_DKBQ.ItemLinks.Add(this.btnDangKyBanQuyen);
             this.ribbonPage_HeThong_DKBQ.Name = "ribbonPage_HeThong_DKBQ";
             this.ribbonPage_HeThong_DKBQ.Text = "Bản quyền phần mềm";
+            // 
+            // ribbonPageGroupUpdateSQL
+            // 
+            this.ribbonPageGroupUpdateSQL.ItemLinks.Add(this.btnUpdateSQL);
+            this.ribbonPageGroupUpdateSQL.Name = "ribbonPageGroupUpdateSQL";
+            this.ribbonPageGroupUpdateSQL.Text = "Update SQL";
+            this.ribbonPageGroupUpdateSQL.Visible = false;
             // 
             // ribbonPage4
             // 
@@ -891,7 +911,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPage_HeThong_QLHT;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
         private DevExpress.XtraBars.BarButtonItem btnQuanLyTaiKhoan;
-        private DevExpress.XtraBars.BarButtonItem btnThayDoiQuyDinh;
+        private DevExpress.XtraBars.BarButtonItem btnQLCauHinh;
         private DevExpress.XtraBars.BarButtonItem btnDoiMatKhau;
         private DevExpress.XtraBars.BarButtonItem btnKetNoiCoSoDuLieu;
         private DevExpress.XtraBars.BarButtonItem btnThongTinTrungTam;
@@ -939,5 +959,7 @@
         private DevExpress.XtraBars.BarButtonItem btnDMPhongHoc;
         private DevExpress.XtraBars.BarButtonItem btnQuanLyHocVien_ChoLop;
         private DevExpress.XtraBars.BarButtonItem btnQLCauHinhEmail;
+        private DevExpress.XtraBars.BarButtonItem btnUpdateSQL;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupUpdateSQL;
     }
 }

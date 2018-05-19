@@ -146,21 +146,6 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
 
-        private void gridViewDSHocVien_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
-        {
-            try
-            {
-                if (e.Column == clm_PhieuGhiDanh_Stt)
-                {
-                    e.DisplayText = Convert.ToString(e.RowHandle + 1);
-                }
-            }
-            catch (Exception ex)
-            {
-                O2S_Common.Logging.LogSystem.Warn(ex);
-            }
-        }
-
         #endregion
 
     }

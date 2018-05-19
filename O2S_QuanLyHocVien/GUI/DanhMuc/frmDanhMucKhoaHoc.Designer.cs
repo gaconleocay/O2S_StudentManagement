@@ -44,8 +44,11 @@
             this.btnLuuThongTin = new System.Windows.Forms.Button();
             this.btnHuyBo = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.numHocPhi1Buoi = new DevExpress.XtraEditors.TextEdit();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numSoTietHoc = new DevExpress.XtraEditors.TextEdit();
+            this.numHocPhi = new DevExpress.XtraEditors.TextEdit();
             this.label5 = new System.Windows.Forms.Label();
-            this.numSoTietHoc = new System.Windows.Forms.NumericUpDown();
             this.date_DenNgay = new DevExpress.XtraEditors.DateEdit();
             this.date_TuNgay = new DevExpress.XtraEditors.DateEdit();
             this.btnTimKiem = new System.Windows.Forms.Button();
@@ -58,17 +61,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtTenKhoaHoc = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.numHocPhi = new System.Windows.Forms.NumericUpDown();
             this.gridControlKhoaHoc = new DevExpress.XtraGrid.GridControl();
             this.gridViewKhoaHoc = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.clmKH_stt = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -88,13 +91,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSoTietHoc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHocPhi1Buoi.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSoTietHoc.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHocPhi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.date_DenNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.date_DenNgay.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.date_TuNgay.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.date_TuNgay.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDaKhoa.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHocPhi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlKhoaHoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewKhoaHoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).BeginInit();
@@ -321,8 +325,11 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.label5);
+            this.panel4.Controls.Add(this.numHocPhi1Buoi);
+            this.panel4.Controls.Add(this.label9);
             this.panel4.Controls.Add(this.numSoTietHoc);
+            this.panel4.Controls.Add(this.numHocPhi);
+            this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.date_DenNgay);
             this.panel4.Controls.Add(this.date_TuNgay);
             this.panel4.Controls.Add(this.btnTimKiem);
@@ -335,38 +342,76 @@
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.txtTenKhoaHoc);
             this.panel4.Controls.Add(this.label4);
-            this.panel4.Controls.Add(this.numHocPhi);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(501, 231);
             this.panel4.TabIndex = 26;
             // 
+            // numHocPhi1Buoi
+            // 
+            this.numHocPhi1Buoi.EnterMoveNextControl = true;
+            this.numHocPhi1Buoi.Location = new System.Drawing.Point(116, 171);
+            this.numHocPhi1Buoi.Name = "numHocPhi1Buoi";
+            this.numHocPhi1Buoi.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numHocPhi1Buoi.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.numHocPhi1Buoi.Properties.Appearance.Options.UseFont = true;
+            this.numHocPhi1Buoi.Properties.Appearance.Options.UseForeColor = true;
+            this.numHocPhi1Buoi.Properties.Appearance.Options.UseTextOptions = true;
+            this.numHocPhi1Buoi.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.numHocPhi1Buoi.Properties.ReadOnly = true;
+            this.numHocPhi1Buoi.Size = new System.Drawing.Size(209, 22);
+            this.numHocPhi1Buoi.TabIndex = 94;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(19, 175);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(88, 15);
+            this.label9.TabIndex = 93;
+            this.label9.Text = "Học phí 1 buổi:";
+            // 
+            // numSoTietHoc
+            // 
+            this.numSoTietHoc.EnterMoveNextControl = true;
+            this.numSoTietHoc.Location = new System.Drawing.Point(116, 143);
+            this.numSoTietHoc.Name = "numSoTietHoc";
+            this.numSoTietHoc.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numSoTietHoc.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.numSoTietHoc.Properties.Appearance.Options.UseFont = true;
+            this.numSoTietHoc.Properties.Appearance.Options.UseForeColor = true;
+            this.numSoTietHoc.Properties.Appearance.Options.UseTextOptions = true;
+            this.numSoTietHoc.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.numSoTietHoc.Size = new System.Drawing.Size(209, 22);
+            this.numSoTietHoc.TabIndex = 92;
+            this.numSoTietHoc.EditValueChanged += new System.EventHandler(this.numSoTietHoc_EditValueChanged);
+            this.numSoTietHoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numNopThem_KeyPress);
+            // 
+            // numHocPhi
+            // 
+            this.numHocPhi.EnterMoveNextControl = true;
+            this.numHocPhi.Location = new System.Drawing.Point(116, 115);
+            this.numHocPhi.Name = "numHocPhi";
+            this.numHocPhi.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numHocPhi.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.numHocPhi.Properties.Appearance.Options.UseFont = true;
+            this.numHocPhi.Properties.Appearance.Options.UseForeColor = true;
+            this.numHocPhi.Properties.Appearance.Options.UseTextOptions = true;
+            this.numHocPhi.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.numHocPhi.Size = new System.Drawing.Size(209, 22);
+            this.numHocPhi.TabIndex = 91;
+            this.numHocPhi.EditValueChanged += new System.EventHandler(this.numNopThem_EditValueChanged);
+            this.numHocPhi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numNopThem_KeyPress);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 161);
+            this.label5.Location = new System.Drawing.Point(12, 147);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(95, 15);
             this.label5.TabIndex = 49;
             this.label5.Text = "Số tiết/buổi học:";
-            // 
-            // numSoTietHoc
-            // 
-            this.numSoTietHoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numSoTietHoc.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.numSoTietHoc.ForeColor = System.Drawing.Color.Blue;
-            this.numSoTietHoc.Location = new System.Drawing.Point(116, 157);
-            this.numSoTietHoc.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.numSoTietHoc.Name = "numSoTietHoc";
-            this.numSoTietHoc.Size = new System.Drawing.Size(209, 25);
-            this.numSoTietHoc.TabIndex = 5;
-            this.numSoTietHoc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // date_DenNgay
             // 
@@ -469,16 +514,16 @@
             // 
             this.txtMaKhoaHoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMaKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtMaKhoaHoc.Location = new System.Drawing.Point(116, 63);
+            this.txtMaKhoaHoc.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaKhoaHoc.Location = new System.Drawing.Point(116, 55);
             this.txtMaKhoaHoc.Name = "txtMaKhoaHoc";
             this.txtMaKhoaHoc.ReadOnly = true;
-            this.txtMaKhoaHoc.Size = new System.Drawing.Size(209, 25);
+            this.txtMaKhoaHoc.Size = new System.Drawing.Size(209, 23);
             this.txtMaKhoaHoc.TabIndex = 1;
             // 
             // chkDaKhoa
             // 
-            this.chkDaKhoa.Location = new System.Drawing.Point(411, 128);
+            this.chkDaKhoa.Location = new System.Drawing.Point(345, 173);
             this.chkDaKhoa.Name = "chkDaKhoa";
             this.chkDaKhoa.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDaKhoa.Properties.Appearance.Options.UseFont = true;
@@ -489,7 +534,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 68);
+            this.label2.Location = new System.Drawing.Point(28, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 15);
             this.label2.TabIndex = 0;
@@ -498,7 +543,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 99);
+            this.label3.Location = new System.Drawing.Point(25, 91);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 15);
             this.label3.TabIndex = 2;
@@ -508,37 +553,20 @@
             // 
             this.txtTenKhoaHoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTenKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtTenKhoaHoc.Location = new System.Drawing.Point(116, 94);
+            this.txtTenKhoaHoc.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTenKhoaHoc.Location = new System.Drawing.Point(116, 86);
             this.txtTenKhoaHoc.Name = "txtTenKhoaHoc";
-            this.txtTenKhoaHoc.Size = new System.Drawing.Size(370, 25);
+            this.txtTenKhoaHoc.Size = new System.Drawing.Size(370, 23);
             this.txtTenKhoaHoc.TabIndex = 3;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(55, 130);
+            this.label4.Location = new System.Drawing.Point(55, 119);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 15);
             this.label4.TabIndex = 19;
             this.label4.Text = "Học phí:";
-            // 
-            // numHocPhi
-            // 
-            this.numHocPhi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numHocPhi.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.numHocPhi.ForeColor = System.Drawing.Color.Blue;
-            this.numHocPhi.Location = new System.Drawing.Point(116, 126);
-            this.numHocPhi.Maximum = new decimal(new int[] {
-            -1981284353,
-            -1966660860,
-            0,
-            0});
-            this.numHocPhi.Name = "numHocPhi";
-            this.numHocPhi.Size = new System.Drawing.Size(209, 25);
-            this.numHocPhi.TabIndex = 4;
-            this.numHocPhi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // gridControlKhoaHoc
             // 
@@ -560,11 +588,12 @@
             this.clmKH_stt,
             this.gridColumn7,
             this.gridColumn8,
-            this.gridColumn9,
             this.gridColumn10,
             this.gridColumn11,
             this.gridColumn12,
+            this.gridColumn9,
             this.gridColumn13,
+            this.gridColumn14,
             this.gridColumn6});
             this.gridViewKhoaHoc.GridControl = this.gridControlKhoaHoc;
             this.gridViewKhoaHoc.Name = "gridViewKhoaHoc";
@@ -641,28 +670,6 @@
             this.gridColumn8.VisibleIndex = 2;
             this.gridColumn8.Width = 233;
             // 
-            // gridColumn9
-            // 
-            this.gridColumn9.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.gridColumn9.AppearanceCell.Options.UseFont = true;
-            this.gridColumn9.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn9.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.gridColumn9.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.gridColumn9.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.gridColumn9.AppearanceHeader.Options.UseFont = true;
-            this.gridColumn9.AppearanceHeader.Options.UseForeColor = true;
-            this.gridColumn9.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn9.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn9.Caption = "Học phí";
-            this.gridColumn9.DisplayFormat.FormatString = "#,##0";
-            this.gridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.gridColumn9.FieldName = "HocPhi";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.OptionsColumn.AllowEdit = false;
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 3;
-            this.gridColumn9.Width = 125;
-            // 
             // gridColumn10
             // 
             this.gridColumn10.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
@@ -704,8 +711,30 @@
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.OptionsColumn.AllowEdit = false;
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 4;
+            this.gridColumn12.VisibleIndex = 3;
             this.gridColumn12.Width = 125;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn9.AppearanceCell.Options.UseFont = true;
+            this.gridColumn9.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn9.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.gridColumn9.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn9.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn9.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn9.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn9.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn9.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn9.Caption = "Học phí";
+            this.gridColumn9.DisplayFormat.FormatString = "#,##0";
+            this.gridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.gridColumn9.FieldName = "HocPhi";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.OptionsColumn.AllowEdit = false;
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 4;
+            this.gridColumn9.Width = 130;
             // 
             // gridColumn13
             // 
@@ -719,7 +748,7 @@
             this.gridColumn13.AppearanceHeader.Options.UseForeColor = true;
             this.gridColumn13.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn13.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn13.Caption = "Số tiết học";
+            this.gridColumn13.Caption = "Số buổi học";
             this.gridColumn13.DisplayFormat.FormatString = "#,##0";
             this.gridColumn13.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.gridColumn13.FieldName = "SoTietHoc";
@@ -728,6 +757,28 @@
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 5;
             this.gridColumn13.Width = 90;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn14.AppearanceCell.Options.UseFont = true;
+            this.gridColumn14.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn14.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.gridColumn14.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn14.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn14.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn14.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn14.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn14.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn14.Caption = "Học phí/buổi học";
+            this.gridColumn14.DisplayFormat.FormatString = "#,##0";
+            this.gridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.gridColumn14.FieldName = "HocPhi1TietHoc";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.OptionsColumn.AllowEdit = false;
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 6;
+            this.gridColumn14.Width = 130;
             // 
             // gridColumn6
             // 
@@ -745,7 +796,7 @@
             this.gridColumn6.OptionsColumn.AllowEdit = false;
             this.gridColumn6.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 6;
+            this.gridColumn6.VisibleIndex = 7;
             this.gridColumn6.Width = 150;
             // 
             // repositoryItemCheckEdit2
@@ -864,13 +915,14 @@
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSoTietHoc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHocPhi1Buoi.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSoTietHoc.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHocPhi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.date_DenNgay.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.date_DenNgay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.date_TuNgay.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.date_TuNgay.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDaKhoa.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHocPhi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlKhoaHoc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewKhoaHoc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).EndInit();
@@ -886,7 +938,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.NumericUpDown numHocPhi;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnHuyBo;
         private System.Windows.Forms.Button btnLuuThongTin;
@@ -930,7 +981,11 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown numSoTietHoc;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private System.Windows.Forms.Label label9;
+        public DevExpress.XtraEditors.TextEdit numSoTietHoc;
+        public DevExpress.XtraEditors.TextEdit numHocPhi;
+        public DevExpress.XtraEditors.TextEdit numHocPhi1Buoi;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
     }
 }

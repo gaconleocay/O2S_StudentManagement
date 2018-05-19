@@ -41,6 +41,7 @@ namespace O2S_QuanLyHocVien.PhieuGhiDanh
 
         private void frmXoaPhieuGhiDanh_Load(object sender, EventArgs e)
         {
+            btnLuuThongTin.Enabled = false;
         }
         #endregion
 
@@ -71,5 +72,24 @@ namespace O2S_QuanLyHocVien.PhieuGhiDanh
         }
 
         #endregion
+
+        private void txtLyDoXoa_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtLyDoXoa.Text))
+                {
+                    btnLuuThongTin.Enabled = true;
+                }
+                else
+                {
+                    btnLuuThongTin.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
     }
 }

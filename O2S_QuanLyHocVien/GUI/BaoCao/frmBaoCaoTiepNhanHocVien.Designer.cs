@@ -129,6 +129,7 @@
             this.gridViewDSHocVien.OptionsFind.AlwaysVisible = true;
             this.gridViewDSHocVien.OptionsFind.FindNullPrompt = "Từ khóa tìm kiếm...";
             this.gridViewDSHocVien.OptionsView.ColumnAutoWidth = false;
+            this.gridViewDSHocVien.OptionsView.EnableAppearanceEvenRow = true;
             this.gridViewDSHocVien.OptionsView.ShowGroupPanel = false;
             this.gridViewDSHocVien.OptionsView.ShowIndicator = false;
             this.gridViewDSHocVien.RowHeight = 25;
@@ -522,7 +523,6 @@
             // 
             // btnTimKiem
             // 
-            this.btnTimKiem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTimKiem.BackColor = System.Drawing.Color.Silver;
             this.btnTimKiem.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnTimKiem.FlatAppearance.BorderSize = 0;
@@ -531,7 +531,7 @@
             this.btnTimKiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTimKiem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnTimKiem.Image = global::O2S_QuanLyHocVien.Properties.Resources.zoom_16x16;
-            this.btnTimKiem.Location = new System.Drawing.Point(510, 20);
+            this.btnTimKiem.Location = new System.Drawing.Point(397, 20);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(108, 29);
             this.btnTimKiem.TabIndex = 65;

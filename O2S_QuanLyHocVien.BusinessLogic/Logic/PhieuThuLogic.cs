@@ -106,10 +106,11 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 _phieuthu.CreatedBy = GlobalSettings.UserCode;
                 _phieuthu.CreatedLog = GlobalSettings.SessionMyIP;
                 _phieuthu.IsRemove = 0;
+                _phieuthu.CoSoId = GlobalSettings.CoSoId;
                 Database.PHIEUTHUs.InsertOnSubmit(_phieuthu);
                 Database.SubmitChanges();
                 _phieuthuId = _phieuthu.PhieuThuId;
-                _phieuthu.MaPhieuThu = string.Format("{0}{1:D5}", "PT", _phieuthuId);
+                _phieuthu.MaPhieuThu = string.Format("{0}{1:D7}", "PT", _phieuthuId);
                 Database.SubmitChanges();
                 return true;
             }
@@ -211,7 +212,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             try
             {
                 var query = (from p in GlobalSettings.Database.PHIEUTHUs
-                             where (p.ThoiGianThu >= _filter.ThoiGianThu_Tu && p.ThoiGianThu <= _filter.ThoiGianThu_Den) && p.HOCVIEN.CoSoId == _filter.CoSoId
+                             where (p.ThoiGianThu >= _filter.ThoiGianThu_Tu && p.ThoiGianThu <= _filter.ThoiGianThu_Den) && p.CoSoId == _filter.CoSoId
                              select p).AsEnumerable().Select((obj, index) => new BaoCaoThuTien_ChiTietDTO
                              {
                                  Stt = index + 1,
@@ -257,6 +258,28 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             {
                 return null;
                 O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
+        public static bool UpdateMaPhieuThu7So()
+        {
+            try
+            {
+                List<PHIEUTHU> _lstHocvien = (from p in GlobalSettings.Database.PHIEUTHUs
+                                              select p).ToList();
+
+                foreach (var item in _lstHocvien)
+                {
+                    PHIEUTHU _hocvien = SelectSingle(item.PhieuThuId);
+                    _hocvien.MaPhieuThu = string.Format("{0}{1:D7}", "PT", item.PhieuThuId);
+                    Database.SubmitChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 

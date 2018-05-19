@@ -350,6 +350,22 @@ namespace O2S_QuanLyHocVien.ChucNang
             //btnSua_Click(sender, e);
         }
 
+
+        private void repositoryItemButton_Print_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var rowHandle = gridViewDSHoaDonThuChi.FocusedRowHandle;
+            int _HoaDonThuChiId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewDSHoaDonThuChi.GetRowCellValue(rowHandle, "HoaDonThuChiId").ToString());
+                HOADONTHUCHI _hdThuChi = HoaDonThuChiLogic.SelectSingle(_HoaDonThuChiId);
+               // LoadPanelControl(_hdThuChi);
+                //LockAndUnlockPanelControl(false);
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
         #endregion
 
         #region Custom
@@ -583,8 +599,9 @@ namespace O2S_QuanLyHocVien.ChucNang
         }
 
 
-        #endregion
 
+
+        #endregion
 
 
     }

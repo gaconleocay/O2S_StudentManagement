@@ -20,6 +20,7 @@ using System.Data;
 using O2S_QuanLyHocVien.Popups;
 using System.Linq;
 using O2S_Common.DataObjects;
+using System.IO;
 
 namespace O2S_QuanLyHocVien.Pages
 {
@@ -55,6 +56,7 @@ namespace O2S_QuanLyHocVien.Pages
             try
             {
                 PhieuGhiDanhFilter _filter = new PhieuGhiDanhFilter();
+                _filter.CoSoId = GlobalSettings.CoSoId;
                 _filter.NgayGhiDanh_Tu = date_TuNgay.DateTime;
                 _filter.NgayGhiDanh_Den = date_DenNgay.DateTime;
                 List<QLHocPhi_PlusDTO> _lstQLHocPhi = PhieuGhiDanhLogic.SelectQLHocPhi(_filter);
@@ -162,6 +164,7 @@ namespace O2S_QuanLyHocVien.Pages
                 //Insert Phieu Thu
                 var rowHandle = gridViewDSHocVien.FocusedRowHandle;
                 PHIEUTHU _phieuthu = new PHIEUTHU();
+                _phieuthu.CoSoId = GlobalSettings.CoSoId;
                 _phieuthu.PhieuGhiDanhId = this.PhieuGhiDanhId_Select;
                 _phieuthu.HocVienId = this.HocVienId_Select;
                 _phieuthu.ThoiGianThu = DateTime.Now;
@@ -169,7 +172,7 @@ namespace O2S_QuanLyHocVien.Pages
                 _phieuthu.GhiChu = "";//gridViewDSHocVien.GetRowCellValue(rowHandle, "TenKhoaHoc").ToString();
                 if (PhieuGhiDanhLogic.InsertQLHocPhi(_phieughidanh, _phieuthu, ref this.PhieuThu_Insert))
                 {
-                    O2S_Common. Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common. Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.LUU_THANH_CONG);
+                    O2S_Common.Utilities.ThongBao.frmThongBao frmthongbao = new O2S_Common.Utilities.ThongBao.frmThongBao(Base.ThongBaoLable.LUU_THANH_CONG);
                     frmthongbao.Show();
                     //
                     LoadDanhSachHocVien();
@@ -386,8 +389,6 @@ namespace O2S_QuanLyHocVien.Pages
                 thongTinThem.Add(item_sotienchu);
 
                 //
-                string fileTemplatePath = "BienLaiThuTien_NopTien_ThuThem.xlsx";
-
                 DataTable dataExport = new DataTable();
                 dataExport.Columns.Add("STT", typeof(string));
                 dataExport.Columns.Add("KHOANTHU", typeof(string));
@@ -401,7 +402,6 @@ namespace O2S_QuanLyHocVien.Pages
                 List<HocPhiHocVien_PlusDTO> _lsthocPhiHV = HocPhiHocVienLogic.Select(_filter);
                 if (_lsthocPhiHV != null && _lsthocPhiHV.Count > 0)
                 {
-                    fileTemplatePath = "BienLaiThuTien_NopTien.xlsx";
                     _lsthocPhiHV.OrderBy(o => o.Stt).ToList();
                     for (int i = 0; i < _lsthocPhiHV.Count; i++)
                     {
@@ -413,17 +413,8 @@ namespace O2S_QuanLyHocVien.Pages
                         dataExport.Rows.Add(newRow_khac);
                     }
                 }
-                else // thu them
-                {
-                    //DataRow newRow = dataExport.NewRow();
-                    //newRow["STT"] = "1";
-                    //newRow["KHOANTHU"] = _phieuthu.PHIEUGHIDANH.KHOAHOC.TenKhoaHoc;
-                    ////gridViewDSHocVien.GetRowCellValue(rowHandle, "TenKhoaHoc").ToString();
-                    //newRow["SOTIEN"] = O2S_Common.Number.Convert.NumberToString(_phieuthu.SoTien ?? 0, 0);
-                    ////O2S_Common.Number.Convert.NumberToString(O2S_Common.TypeConvert.Parse.ToDecimal(numNopThem.Text), 0);
-                    //newRow["GHICHU"] = "Thu thêm tiền còn nợ"; //_phieuthu.GhiChu;
-                    //dataExport.Rows.Add(newRow);
-                }
+
+                string fileTemplatePath = LuaChonTemplateInBienLai(_lsthocPhiHV);
 
                 Utilities.Prints.PrintPreview.ShowPrintPreview_UsingExcelTemplate(fileTemplatePath, thongTinThem, dataExport);
             }
@@ -434,7 +425,32 @@ namespace O2S_QuanLyHocVien.Pages
             SplashScreenManager.CloseForm();
         }
 
-
+        private string LuaChonTemplateInBienLai(List<HocPhiHocVien_PlusDTO> _lsthocPhiHV)
+        {
+            string result = "BienLaiThuTien_NopTien_ThuThem.xlsx";
+            try
+            {
+                if (_lsthocPhiHV != null && _lsthocPhiHV.Count == 1)
+                {
+                    result = "BienLaiThuTien_NopTien.xlsx";
+                }
+                else if (_lsthocPhiHV != null && _lsthocPhiHV.Count > 1)
+                {
+                    result = "BienLaiThuTien_NopTien_" + _lsthocPhiHV.Count + ".xlsx";
+                }
+                //kiem tra ton tai template
+                string fileTemplatePath = Environment.CurrentDirectory + "\\Templates\\" + result;
+                if (!File.Exists(fileTemplatePath))//khong ton tai
+                {
+                    result = "BienLaiThuTien_NopTien_ThuThem.xlsx";
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+            return result;
+        }
 
 
 

@@ -208,6 +208,18 @@
     <Compile Include="GUI\BaoCao\frmBCThongKeTheoDoiDiem.Designer.cs">
       <DependentUpon>frmBCThongKeTheoDoiDiem.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\CauHinh\frmQuyDinh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CauHinh\frmQuyDinh.Designer.cs">
+      <DependentUpon>frmQuyDinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\CauHinh\frmUpdateSQL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CauHinh\frmUpdateSQL.Designer.cs">
+      <DependentUpon>frmUpdateSQL.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ChucNang\frmBangDiemCaNhan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -412,12 +424,6 @@
     <Compile Include="GUI\Popups\frmThemTuVanHocVien.Designer.cs">
       <DependentUpon>frmThemTuVanHocVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Popups\frmQuyDinh.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Popups\frmQuyDinh.Designer.cs">
-      <DependentUpon>frmQuyDinh.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Popups\frmThayDoiThongTinHocVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -503,6 +509,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\BaoCao\frmBCThongKeTheoDoiDiem.resx">
       <DependentUpon>frmBCThongKeTheoDoiDiem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CauHinh\frmQuyDinh.resx">
+      <DependentUpon>frmQuyDinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CauHinh\frmUpdateSQL.resx">
+      <DependentUpon>frmUpdateSQL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ChucNang\frmBangDiemCaNhan.resx">
       <DependentUpon>frmBangDiemCaNhan.cs</DependentUpon>
@@ -605,9 +617,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Popups\frmThemTuVanHocVien.resx">
       <DependentUpon>frmThemTuVanHocVien.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Popups\frmQuyDinh.resx">
-      <DependentUpon>frmQuyDinh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Popups\frmThayDoiThongTinHocVien.resx">
       <DependentUpon>frmThayDoiThongTinHocVien.cs</DependentUpon>

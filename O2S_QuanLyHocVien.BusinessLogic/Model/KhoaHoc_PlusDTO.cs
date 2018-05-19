@@ -12,5 +12,6 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Model
         public int Stt { get; set; }
         public string TenCoSoTrungTam { get; set; }
         public string TrangThai_Ten { get; set; }
+        public decimal? HocPhi1TietHoc { get; set; }
     }
 }

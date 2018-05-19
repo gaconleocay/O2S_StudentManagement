@@ -250,7 +250,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
 
                 _hocVien.TAIKHOAN = TaiKhoanLogic.SelectSingle(taiKhoan.TaiKhoanId);
                 _hocVienId = _hocVien.HocVienId;
-                _hocVien.MaHocVien = string.Format("{0}{1:D5}", "HV", _hocVienId); //add ma hoc vien
+                _hocVien.MaHocVien = string.Format("{0}{1:D7}", "HV", _hocVienId); //add ma hoc vien
                 Database.SubmitChanges();
 
                 TAIKHOAN _tkUpdate = TaiKhoanLogic.SelectSingle(taiKhoan.TaiKhoanId);
@@ -358,6 +358,32 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
+
+
+        public static bool UpdateMaHocVien7So()
+        {
+            try
+            {
+                List<HOCVIEN> _lstHocvien = (from p in GlobalSettings.Database.HOCVIENs
+                                             select p).ToList();
+
+                foreach (var item in _lstHocvien)
+                {
+                    HOCVIEN _hocvien = SelectSingle(item.HocVienId);
+                    _hocvien.MaHocVien = string.Format("{0}{1:D7}", "HV", item.HocVienId);
+                    Database.SubmitChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
+
 
     }
 }

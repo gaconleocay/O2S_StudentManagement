@@ -62,8 +62,8 @@ namespace O2S_QuanLyHocVien.BaoCao
 	                FORMAT(ThoiGianThu,'dd/MM/yyyy') as ThoiGianThu,
 	                CreatedBy as TenNguoiThu,
 	                sum(SoTien) as SoTien
-                FROM PHIEUTHU
-                WHERE ThoiGianThu between '" + datetungay + "' and '" + datedenngay + "' GROUP BY FORMAT(ThoiGianThu, 'dd/MM/yyyy'),CreatedBy;";
+                FROM PHIEUTHU 
+                WHERE CoSoId='" + GlobalSettings.CoSoId + "' and ThoiGianThu between '" + datetungay + "' and '" + datedenngay + "' GROUP BY FORMAT(ThoiGianThu, 'dd/MM/yyyy'),CreatedBy; ";
                 this.dataPhieuThuTH = condb.GetDataTable(_SQLselect);
                 if (this.dataPhieuThuTH != null && this.dataPhieuThuTH.Rows.Count > 0)
                 {

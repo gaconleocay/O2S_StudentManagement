@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -88,6 +92,8 @@
             this.dropDownPrint = new DevExpress.XtraEditors.DropDownButton();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemButton_Print = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -107,6 +113,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewDSHoaDonThuChi)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_Print)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -526,6 +533,8 @@
             this.gridControlDSHoaDonThuChi.Location = new System.Drawing.Point(0, 37);
             this.gridControlDSHoaDonThuChi.MainView = this.gridViewDSHoaDonThuChi;
             this.gridControlDSHoaDonThuChi.Name = "gridControlDSHoaDonThuChi";
+            this.gridControlDSHoaDonThuChi.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemButton_Print});
             this.gridControlDSHoaDonThuChi.Size = new System.Drawing.Size(682, 491);
             this.gridControlDSHoaDonThuChi.TabIndex = 44;
             this.gridControlDSHoaDonThuChi.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -539,6 +548,7 @@
             this.gridViewDSHoaDonThuChi.Appearance.FooterPanel.Options.UseForeColor = true;
             this.gridViewDSHoaDonThuChi.ColumnPanelRowHeight = 25;
             this.gridViewDSHoaDonThuChi.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn10,
             this.clm_HoaDonThuChi_Stt,
             this.gridColumn12,
             this.gridColumn8,
@@ -592,7 +602,7 @@
             this.clm_HoaDonThuChi_Stt.OptionsColumn.AllowEdit = false;
             this.clm_HoaDonThuChi_Stt.OptionsColumn.ReadOnly = true;
             this.clm_HoaDonThuChi_Stt.Visible = true;
-            this.clm_HoaDonThuChi_Stt.VisibleIndex = 0;
+            this.clm_HoaDonThuChi_Stt.VisibleIndex = 1;
             this.clm_HoaDonThuChi_Stt.Width = 45;
             // 
             // gridColumn12
@@ -616,7 +626,7 @@
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.OptionsColumn.ReadOnly = true;
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 1;
+            this.gridColumn8.VisibleIndex = 2;
             this.gridColumn8.Width = 100;
             // 
             // gridColumn9
@@ -635,7 +645,7 @@
             this.gridColumn9.OptionsColumn.AllowEdit = false;
             this.gridColumn9.OptionsColumn.ReadOnly = true;
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 2;
+            this.gridColumn9.VisibleIndex = 3;
             this.gridColumn9.Width = 150;
             // 
             // gridColumn4
@@ -657,7 +667,7 @@
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.OptionsColumn.AllowEdit = false;
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.VisibleIndex = 4;
             this.gridColumn4.Width = 136;
             // 
             // gridColumn11
@@ -676,7 +686,7 @@
             this.gridColumn11.OptionsColumn.AllowEdit = false;
             this.gridColumn11.OptionsColumn.ReadOnly = true;
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 4;
+            this.gridColumn11.VisibleIndex = 5;
             this.gridColumn11.Width = 204;
             // 
             // gridColumn2
@@ -700,7 +710,7 @@
             this.gridColumn2.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SoTien", "{0:#,##0}")});
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 5;
+            this.gridColumn2.VisibleIndex = 6;
             this.gridColumn2.Width = 150;
             // 
             // gridColumn1
@@ -718,7 +728,7 @@
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 6;
+            this.gridColumn1.VisibleIndex = 7;
             this.gridColumn1.Width = 342;
             // 
             // gridColumn16
@@ -736,7 +746,7 @@
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.OptionsColumn.AllowEdit = false;
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 7;
+            this.gridColumn16.VisibleIndex = 8;
             this.gridColumn16.Width = 250;
             // 
             // gridColumn3
@@ -980,6 +990,29 @@
             this.btnThem.UseVisualStyleBackColor = false;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "In hoa don";
+            this.gridColumn10.ColumnEdit = this.repositoryItemButton_Print;
+            this.gridColumn10.FieldName = "gridColumn10";
+            this.gridColumn10.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.OptionsColumn.FixedWidth = true;
+            this.gridColumn10.OptionsColumn.ShowCaption = false;
+            this.gridColumn10.UnboundType = DevExpress.Data.UnboundColumnType.Object;
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 0;
+            this.gridColumn10.Width = 35;
+            // 
+            // repositoryItemButton_Print
+            // 
+            this.repositoryItemButton_Print.AutoHeight = false;
+            this.repositoryItemButton_Print.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::O2S_QuanLyHocVien.Properties.Resources.printer_16, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "In phiếu", null, null, true)});
+            this.repositoryItemButton_Print.Name = "repositoryItemButton_Print";
+            this.repositoryItemButton_Print.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.repositoryItemButton_Print.Click += new System.EventHandler(this.repositoryItemButton_Print_Click);
+            // 
             // frmQuanLyThuChi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1019,6 +1052,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButton_Print)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1085,5 +1119,7 @@
         public DevExpress.XtraEditors.TextEdit numSoTien;
         private DevExpress.XtraEditors.DropDownButton dropDownExport;
         private DevExpress.XtraEditors.DropDownButton dropDownPrint;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButton_Print;
     }
 }

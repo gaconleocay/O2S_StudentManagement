@@ -41,7 +41,7 @@ namespace O2S_QuanLyHocVien
                     if (_lstChucNang_TrangChu != null && _lstChucNang_TrangChu.Count > 0)
                     {
                         ribbonPage_TrangChu.Visible = true;
-                        ribbonPage_TrangChu_CN.Visible = true;
+                        //ribbonPage_TrangChu_CN.Visible = true; tạm thời ẩn
                         ribbonPage_TrangChu_TTCN.Visible = true;
                         //Nut chuc nang
                         btnBangDiemCaNhan.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("FUNC_09");
@@ -107,7 +107,7 @@ namespace O2S_QuanLyHocVien
                         //ribbonPage_HeThong_DKBQ.Visible = true;
                         //
                         btnQuanLyTaiKhoan.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_02");
-                        btnThayDoiQuyDinh.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_03");
+                        btnQLCauHinh.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_03");
                         btnKetNoiCoSoDuLieu.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_01");
                         btnThongTinTrungTam.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_06");
                         btnQuanLyCoSoTrungTam.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("SYS_04");
@@ -129,6 +129,9 @@ namespace O2S_QuanLyHocVien
                         btnBC_ThuTienTongHop.Visibility = KiemTraPhanQuyen.KiemTraChucNang_Form("REPORT_06");
                     }
                 }
+
+
+
             }
             catch (Exception ex)
             {

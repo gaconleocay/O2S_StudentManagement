@@ -121,6 +121,7 @@
             this.gridViewDSPhieuGhiDanh.OptionsFind.AlwaysVisible = true;
             this.gridViewDSPhieuGhiDanh.OptionsFind.FindNullPrompt = "Từ khóa tìm kiếm...";
             this.gridViewDSPhieuGhiDanh.OptionsView.ColumnAutoWidth = false;
+            this.gridViewDSPhieuGhiDanh.OptionsView.EnableAppearanceEvenRow = true;
             this.gridViewDSPhieuGhiDanh.OptionsView.ShowFooter = true;
             this.gridViewDSPhieuGhiDanh.OptionsView.ShowGroupPanel = false;
             this.gridViewDSPhieuGhiDanh.OptionsView.ShowIndicator = false;
@@ -168,7 +169,7 @@
             this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.OptionsColumn.ReadOnly = true;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.VisibleIndex = 1;
             this.gridColumn3.Width = 125;
             // 
             // gridColumn4
@@ -193,7 +194,7 @@
             this.gridColumn4.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SoTien", "{0:#,##0}")});
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.VisibleIndex = 2;
             this.gridColumn4.Width = 171;
             // 
             // gridColumn5
@@ -212,7 +213,7 @@
             this.gridColumn5.OptionsColumn.AllowEdit = false;
             this.gridColumn5.OptionsColumn.ReadOnly = true;
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 3;
             this.gridColumn5.Width = 200;
             // 
             // gridColumn12
@@ -404,7 +405,6 @@
             // 
             // btnTimKiem
             // 
-            this.btnTimKiem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTimKiem.BackColor = System.Drawing.Color.Silver;
             this.btnTimKiem.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnTimKiem.FlatAppearance.BorderSize = 0;
@@ -413,7 +413,7 @@
             this.btnTimKiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTimKiem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnTimKiem.Image = global::O2S_QuanLyHocVien.Properties.Resources.zoom_16x16;
-            this.btnTimKiem.Location = new System.Drawing.Point(510, 20);
+            this.btnTimKiem.Location = new System.Drawing.Point(397, 20);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(108, 29);
             this.btnTimKiem.TabIndex = 65;

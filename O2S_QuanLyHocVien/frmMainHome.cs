@@ -36,6 +36,8 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
+                GlobalSettings.LoadQuyDinh();
+
                 timerClock.Start();
                 timerKiemTraLicense.Interval = KeyTrongPhanMem.ThoiGianKiemTraLicense;
                 timerKiemTraLicense.Start();
@@ -71,7 +73,13 @@ namespace O2S_QuanLyHocVien
                         KiemTraPhanQuyen_TabMenu();
                     }
                 }
+                else
+                {
+                    //cho Admin
+                    ribbonPageGroupUpdateSQL.Visible = true;
+                }
             }
+
             catch (Exception ex)
             {
                 O2S_Common.Logging.LogSystem.Warn(ex);
@@ -249,6 +257,7 @@ namespace O2S_QuanLyHocVien
                 O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
+
 
 
 

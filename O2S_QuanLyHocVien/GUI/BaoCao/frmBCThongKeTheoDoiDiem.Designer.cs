@@ -136,6 +136,7 @@
             this.gridViewDSPhieuGhiDanh.OptionsFind.AlwaysVisible = true;
             this.gridViewDSPhieuGhiDanh.OptionsFind.FindNullPrompt = "Từ khóa tìm kiếm...";
             this.gridViewDSPhieuGhiDanh.OptionsView.ColumnAutoWidth = false;
+            this.gridViewDSPhieuGhiDanh.OptionsView.EnableAppearanceEvenRow = true;
             this.gridViewDSPhieuGhiDanh.OptionsView.ShowGroupPanel = false;
             this.gridViewDSPhieuGhiDanh.OptionsView.ShowIndicator = false;
             this.gridViewDSPhieuGhiDanh.RowHeight = 25;
@@ -577,7 +578,6 @@
             // 
             // btnTimKiem
             // 
-            this.btnTimKiem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTimKiem.BackColor = System.Drawing.Color.Silver;
             this.btnTimKiem.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnTimKiem.FlatAppearance.BorderSize = 0;

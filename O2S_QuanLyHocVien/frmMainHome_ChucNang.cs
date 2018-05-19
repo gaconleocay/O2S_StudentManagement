@@ -422,8 +422,9 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-                frmQuyDinh _frm = new frmQuyDinh();
-                _frm.ShowDialog();
+                frmQuyDinh frmControlActive = new frmQuyDinh() { Dock = DockStyle.Fill, TopLevel = false };
+                TabControlProcess.TabCreating(xtraTabControl_Home, "frmQuyDinh", "Quản lý cấu hình", "Quản lý cấu hình", frmControlActive);
+                frmControlActive.Show();
             }
             catch (Exception ex)
             {
@@ -489,6 +490,19 @@ namespace O2S_QuanLyHocVien
                 frmCauHinhEmail frmControlActive = new frmCauHinhEmail() { Dock = DockStyle.Fill, TopLevel = false };
                 TabControlProcess.TabCreating(xtraTabControl_Home, "frmCauHinhEmail", "Cấu hình email", "Cấu hình email", frmControlActive);
                 frmControlActive.Show();
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Warn(ex);
+            }
+        }
+
+        private void btnUpdateSQL_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                frmUpdateSQL _frm = new frmUpdateSQL();
+                _frm.ShowDialog();
             }
             catch (Exception ex)
             {

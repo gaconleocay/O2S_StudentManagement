@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPopUpXoaPhieuGhiDanh));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnLuuThongTin = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.txtLyDoXoa = new DevExpress.XtraEditors.MemoEdit();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnLuuThongTin = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtLyDoXoa.Properties)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -48,6 +48,27 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(523, 184);
             this.panel1.TabIndex = 29;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(25, 16);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(93, 15);
+            this.label21.TabIndex = 66;
+            this.label21.Text = "Lý do xóa phiếu:";
+            // 
+            // txtLyDoXoa
+            // 
+            this.txtLyDoXoa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLyDoXoa.Location = new System.Drawing.Point(28, 36);
+            this.txtLyDoXoa.Name = "txtLyDoXoa";
+            this.txtLyDoXoa.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLyDoXoa.Properties.Appearance.Options.UseFont = true;
+            this.txtLyDoXoa.Size = new System.Drawing.Size(483, 132);
+            this.txtLyDoXoa.TabIndex = 65;
+            this.txtLyDoXoa.TextChanged += new System.EventHandler(this.txtLyDoXoa_TextChanged);
             // 
             // panel2
             // 
@@ -76,27 +97,7 @@
             this.btnLuuThongTin.UseVisualStyleBackColor = false;
             this.btnLuuThongTin.Click += new System.EventHandler(this.btnLuuThongTin_Click);
             // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(25, 16);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(93, 15);
-            this.label21.TabIndex = 66;
-            this.label21.Text = "Lý do xóa phiếu:";
-            // 
-            // txtLyDoXoa
-            // 
-            this.txtLyDoXoa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLyDoXoa.Location = new System.Drawing.Point(28, 36);
-            this.txtLyDoXoa.Name = "txtLyDoXoa";
-            this.txtLyDoXoa.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLyDoXoa.Properties.Appearance.Options.UseFont = true;
-            this.txtLyDoXoa.Size = new System.Drawing.Size(483, 132);
-            this.txtLyDoXoa.TabIndex = 65;
-            // 
-            // frmXoaPhieuGhiDanh
+            // frmPopUpXoaPhieuGhiDanh
             // 
             this.AcceptButton = this.btnLuuThongTin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -109,14 +110,14 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmXoaPhieuGhiDanh";
+            this.Name = "frmPopUpXoaPhieuGhiDanh";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lý do xóa";
             this.Load += new System.EventHandler(this.frmXoaPhieuGhiDanh_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtLyDoXoa.Properties)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

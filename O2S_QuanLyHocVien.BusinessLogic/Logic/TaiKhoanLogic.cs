@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
 using O2S_QuanLyHocVien.BusinessLogic.Logic;
+using System;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
@@ -332,7 +333,32 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
+        public static bool UpdateMaDangNhap7So()
+        {
+            try
+            {
+                List<TAIKHOAN> _lstTaiKhoan = (from p in GlobalSettings.Database.TAIKHOANs
+                                              where p.LoaiTaiKhoanId==2
+                                              select p).ToList();
 
+                foreach (var item in _lstTaiKhoan)
+                {
+                    HOCVIEN _hocvien = (from p in GlobalSettings.Database.HOCVIENs
+                                        where p.TaiKhoanId == item.TaiKhoanId
+                                        select p).Single();
+
+                    TAIKHOAN _taikhoan = SelectSingle(item.TaiKhoanId);
+                    _taikhoan.TenDangNhap = string.Format("{0}{1:D7}", "HV", _hocvien.HocVienId);
+                    Database.SubmitChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
 
     }

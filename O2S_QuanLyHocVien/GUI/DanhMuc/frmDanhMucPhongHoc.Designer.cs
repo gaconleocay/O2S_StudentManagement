@@ -139,7 +139,7 @@
             this.txtGhiChu.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGhiChu.Properties.Appearance.Options.UseFont = true;
             this.txtGhiChu.Size = new System.Drawing.Size(227, 38);
-            this.txtGhiChu.TabIndex = 65;
+            this.txtGhiChu.TabIndex = 4;
             // 
             // chkIsLock
             // 
@@ -184,7 +184,7 @@
             this.btnLuuThongTin.Location = new System.Drawing.Point(94, 348);
             this.btnLuuThongTin.Name = "btnLuuThongTin";
             this.btnLuuThongTin.Size = new System.Drawing.Size(121, 34);
-            this.btnLuuThongTin.TabIndex = 17;
+            this.btnLuuThongTin.TabIndex = 5;
             this.btnLuuThongTin.Text = "Lưu thông tin";
             this.btnLuuThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLuuThongTin.UseVisualStyleBackColor = false;

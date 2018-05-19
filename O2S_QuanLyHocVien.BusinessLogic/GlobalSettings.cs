@@ -48,7 +48,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         public static string CoSo_Sdt { get; set; }
         public static string CoSo_Email { get; set; }
         public static System.Drawing.Image CoSo_LogoCoSo { get; set; }
-        public static Dictionary<string, int> QuyDinh { get; set; }// Đại diện cho danh sách quy định
+        public static Dictionary<string, string> lstQuyDinh { get; set; }// Đại diện cho danh sách quy định
 
         //
 
@@ -181,12 +181,21 @@ namespace O2S_QuanLyHocVien.BusinessLogic
         /// </summary>
         public static void LoadQuyDinh()
         {
-            QuyDinh = new Dictionary<string, int>();
+            try
+            {
+                lstQuyDinh = new Dictionary<string, string>();
 
-            var f = BusinessLogic.QuyDinhLogic.SelectAll();
+                var QuyDinh = BusinessLogic.QuyDinhLogic.SelectTheoCoSo();
 
-            foreach (var i in f)
-                QuyDinh.Add(i.MaQuyDinh, (int)i.GiaTri);
+                foreach (var i in QuyDinh)
+                {
+                    lstQuyDinh.Add(i.MaQuyDinh, i.GiaTri);
+                }
+            }
+            catch (Exception ex)
+            {
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
         }
 
 
