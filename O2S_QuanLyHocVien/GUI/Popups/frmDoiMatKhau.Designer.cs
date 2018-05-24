@@ -229,7 +229,7 @@
             this.btnHuyBo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnHuyBo.Location = new System.Drawing.Point(309, 12);
             this.btnHuyBo.Name = "btnHuyBo";
-            this.btnHuyBo.Size = new System.Drawing.Size(107, 37);
+            this.btnHuyBo.Size = new System.Drawing.Size(107, 34);
             this.btnHuyBo.TabIndex = 3;
             this.btnHuyBo.Text = "Hủy bỏ";
             this.btnHuyBo.UseVisualStyleBackColor = false;
@@ -245,7 +245,7 @@
             this.btnLuuThongTin.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLuuThongTin.Location = new System.Drawing.Point(173, 12);
             this.btnLuuThongTin.Name = "btnLuuThongTin";
-            this.btnLuuThongTin.Size = new System.Drawing.Size(130, 37);
+            this.btnLuuThongTin.Size = new System.Drawing.Size(130, 34);
             this.btnLuuThongTin.TabIndex = 2;
             this.btnLuuThongTin.Text = "Đổi mật khẩu";
             this.btnLuuThongTin.UseVisualStyleBackColor = false;

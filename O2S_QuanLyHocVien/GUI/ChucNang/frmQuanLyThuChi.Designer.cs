@@ -480,7 +480,7 @@
             // date_DenNgay
             // 
             this.date_DenNgay.EditValue = null;
-            this.date_DenNgay.Location = new System.Drawing.Point(95, 35);
+            this.date_DenNgay.Location = new System.Drawing.Point(95, 34);
             this.date_DenNgay.Name = "date_DenNgay";
             this.date_DenNgay.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_DenNgay.Properties.Appearance.Options.UseFont = true;

@@ -90,7 +90,7 @@
             this.btnLuuThongTin.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLuuThongTin.Location = new System.Drawing.Point(186, 12);
             this.btnLuuThongTin.Name = "btnLuuThongTin";
-            this.btnLuuThongTin.Size = new System.Drawing.Size(130, 37);
+            this.btnLuuThongTin.Size = new System.Drawing.Size(130, 34);
             this.btnLuuThongTin.TabIndex = 2;
             this.btnLuuThongTin.Text = "OK";
             this.btnLuuThongTin.UseVisualStyleBackColor = false;

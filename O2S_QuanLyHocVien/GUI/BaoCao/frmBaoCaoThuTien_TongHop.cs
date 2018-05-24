@@ -53,17 +53,16 @@ namespace O2S_QuanLyHocVien.BaoCao
             SplashScreenManager.ShowForm(typeof(O2S_Common.Utilities.ThongBao.WaitForm_Wait));
             try
             {
-
                 string datetungay = DateTime.ParseExact(date_TuNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
                 string datedenngay = DateTime.ParseExact(date_DenNgay.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
 
                 string _SQLselect = @"SELECT 
-	                row_number () over (order by FORMAT(ThoiGianThu,'dd/MM/yyyy')) as stt,
-	                FORMAT(ThoiGianThu,'dd/MM/yyyy') as ThoiGianThu,
-	                CreatedBy as TenNguoiThu,
-	                sum(SoTien) as SoTien
-                FROM PHIEUTHU 
-                WHERE CoSoId='" + GlobalSettings.CoSoId + "' and ThoiGianThu between '" + datetungay + "' and '" + datedenngay + "' GROUP BY FORMAT(ThoiGianThu, 'dd/MM/yyyy'),CreatedBy; ";
+	 row_number () over (order by FORMAT(pt.ThoiGianThu,'dd/MM/yyyy')) as stt,
+	 FORMAT(pt.ThoiGianThu,'dd/MM/yyyy') as ThoiGianThu,
+	 nv.TenNhanVien as TenNguoiThu,
+	 sum(pt.SoTien) as SoTien
+FROM 
+	(select * from PHIEUTHU where CoSoId='" + GlobalSettings.CoSoId + "' and ThoiGianThu between '" + datetungay + "' and '" + datedenngay + "' ) pt inner join (select TenDangNhap,TaiKhoanId from TAIKHOAN) tk on tk.TenDangNhap = pt.CreatedBy inner join (select TaiKhoanId, TenNhanVien from NHANVIEN) nv on nv.TaiKhoanId = tk.TaiKhoanId GROUP BY FORMAT(pt.ThoiGianThu, 'dd/MM/yyyy'), nv.TenNhanVien; ";
                 this.dataPhieuThuTH = condb.GetDataTable(_SQLselect);
                 if (this.dataPhieuThuTH != null && this.dataPhieuThuTH.Rows.Count > 0)
                 {

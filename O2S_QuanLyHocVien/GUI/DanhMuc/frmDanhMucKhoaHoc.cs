@@ -424,8 +424,8 @@ namespace O2S_QuanLyHocVien.Pages
             }
         }
 
-        #endregion
 
+        #endregion
 
     }
 }

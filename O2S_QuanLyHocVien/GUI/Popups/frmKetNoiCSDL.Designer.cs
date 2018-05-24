@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmKetNoiCSDL));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnKiemTra = new System.Windows.Forms.Button();
             this.txtMatKhau = new System.Windows.Forms.TextBox();
@@ -48,7 +49,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHuyBo = new System.Windows.Forms.Button();
             this.btnLuuThongTin = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -78,6 +78,16 @@
             this.panel2.Size = new System.Drawing.Size(500, 393);
             this.panel2.TabIndex = 3;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label9.Location = new System.Drawing.Point(140, 364);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(311, 15);
+            this.label9.TabIndex = 42;
+            this.label9.Text = "Chọn sai Database có thể khiến phần mềm hoạt động sai!";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -99,7 +109,7 @@
             this.btnKiemTra.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnKiemTra.Location = new System.Drawing.Point(355, 283);
             this.btnKiemTra.Name = "btnKiemTra";
-            this.btnKiemTra.Size = new System.Drawing.Size(100, 35);
+            this.btnKiemTra.Size = new System.Drawing.Size(100, 34);
             this.btnKiemTra.TabIndex = 4;
             this.btnKiemTra.Text = "Kết nối";
             this.btnKiemTra.UseVisualStyleBackColor = false;
@@ -138,7 +148,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(140, 202);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 15);
+            this.label5.Size = new System.Drawing.Size(90, 15);
             this.label5.TabIndex = 29;
             this.label5.Text = "Tên đăng nhập:";
             // 
@@ -194,7 +204,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(34, 116);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 15);
+            this.label4.Size = new System.Drawing.Size(64, 15);
             this.label4.TabIndex = 19;
             this.label4.Text = "Tên server:";
             // 
@@ -213,7 +223,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(110, 52);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(267, 30);
+            this.label2.Size = new System.Drawing.Size(268, 30);
             this.label2.TabIndex = 17;
             this.label2.Text = "Nhập Tên server và Kiểu xác thực rồi bấm Kết nối.\r\nSau đó chọn database rồi Lưu t" +
     "hông tin.";
@@ -252,7 +262,7 @@
             this.btnHuyBo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnHuyBo.Location = new System.Drawing.Point(378, 12);
             this.btnHuyBo.Name = "btnHuyBo";
-            this.btnHuyBo.Size = new System.Drawing.Size(107, 37);
+            this.btnHuyBo.Size = new System.Drawing.Size(107, 34);
             this.btnHuyBo.TabIndex = 3;
             this.btnHuyBo.Text = "Hủy bỏ";
             this.btnHuyBo.UseVisualStyleBackColor = false;
@@ -270,21 +280,11 @@
             this.btnLuuThongTin.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLuuThongTin.Location = new System.Drawing.Point(265, 12);
             this.btnLuuThongTin.Name = "btnLuuThongTin";
-            this.btnLuuThongTin.Size = new System.Drawing.Size(107, 37);
+            this.btnLuuThongTin.Size = new System.Drawing.Size(107, 34);
             this.btnLuuThongTin.TabIndex = 2;
             this.btnLuuThongTin.Text = "Lưu thông tin";
             this.btnLuuThongTin.UseVisualStyleBackColor = false;
             this.btnLuuThongTin.Click += new System.EventHandler(this.btnLuuThongTin_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label9.Location = new System.Drawing.Point(140, 364);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(311, 15);
-            this.label9.TabIndex = 42;
-            this.label9.Text = "Chọn sai Database có thể khiến phần mềm hoạt động sai!";
             // 
             // frmKetNoiCSDL
             // 

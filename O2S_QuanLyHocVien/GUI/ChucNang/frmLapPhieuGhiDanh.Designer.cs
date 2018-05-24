@@ -758,7 +758,7 @@
             this.numSoBuoiHVDangKy.Size = new System.Drawing.Size(73, 23);
             this.numSoBuoiHVDangKy.TabIndex = 4;
             this.numSoBuoiHVDangKy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numSoBuoiHVDangKy.TextChanged += new System.EventHandler(this.txtSoBuoiHVDangKy_TextChanged);
+            this.numSoBuoiHVDangKy.TextChanged += new System.EventHandler(this.numSoBuoiHVDangKy_TextChanged);
             this.numSoBuoiHVDangKy.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numDaDong_KeyPress);
             // 
             // label11

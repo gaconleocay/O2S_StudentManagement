@@ -623,6 +623,7 @@ namespace O2S_QuanLyHocVien.Pages
                 {
                     numHocPhi.Text = O2S_Common.Number.Convert.NumberToString((_khoahoc.HocPhi ?? 0), 0);
                     numSoTietHoc.Text = O2S_Common.Number.Convert.NumberToString((_khoahoc.SoTietHoc ?? 0), 0);
+
                     numSoBuoiHVDangKy.Text = O2S_Common.Number.Convert.NumberToString((_khoahoc.SoTietHoc ?? 0), 0);
                     //
                     decimal _sotiethoc = O2S_Common.TypeConvert.Parse.ToDecimal(numSoTietHoc.Text);
@@ -777,10 +778,18 @@ namespace O2S_QuanLyHocVien.Pages
                 O2S_Common.Logging.LogSystem.Warn(ex);
             }
         }
-        private void txtSoBuoiHVDangKy_TextChanged(object sender, EventArgs e)
+        private void numSoBuoiHVDangKy_TextChanged(object sender, EventArgs e)
         {
             try
             {
+                //max value
+                int _numSoTietHoc = O2S_Common.TypeConvert.Parse.ToInt32(numSoTietHoc.Text);
+                int _numSoBuoiHVDangKy = O2S_Common.TypeConvert.Parse.ToInt32(numSoBuoiHVDangKy.Text);
+                if (_numSoBuoiHVDangKy > _numSoTietHoc)
+                {
+                    numSoBuoiHVDangKy.Text = numSoTietHoc.Text;
+                }
+
                 decimal _thanhtien = 0;
                 if (O2S_Common.TypeConvert.Parse.ToDecimal(numSoTietHoc.Text) != 0)
                 {

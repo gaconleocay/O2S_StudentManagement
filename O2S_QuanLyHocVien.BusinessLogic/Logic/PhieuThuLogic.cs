@@ -207,6 +207,30 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
+
+        public static bool UpdateMaPhieuThu7So()
+        {
+            try
+            {
+                List<PHIEUTHU> _lstHocvien = (from p in GlobalSettings.Database.PHIEUTHUs
+                                              select p).ToList();
+
+                foreach (var item in _lstHocvien)
+                {
+                    PHIEUTHU _hocvien = SelectSingle(item.PhieuThuId);
+                    _hocvien.MaPhieuThu = string.Format("{0}{1:D7}", "PT", item.PhieuThuId);
+                    Database.SubmitChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        #region Bao cao
         public static List<BaoCaoThuTien_ChiTietDTO> SelectBaoCaoThuTienChiTiet(PhieuThuFilter _filter)
         {
             try
@@ -219,7 +243,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  MaPhieuThu = obj.MaPhieuThu,
                                  ThoiGianThu = obj.ThoiGianThu,
                                  SoTien = obj.SoTien,
-                                 TenNguoiThu = obj.CreatedBy,
+                                 TenNguoiThu = (from tk in Database.TAIKHOANs
+                                                join nv in Database.NHANVIENs on tk.TaiKhoanId equals nv.TaiKhoanId
+                                                where tk.TenDangNhap==obj.CreatedBy
+                                                select nv.TenNhanVien).FirstOrDefault(),
                                  MaPhieuGhiDanh = obj.PHIEUGHIDANH.MaPhieuGhiDanh,
                                  MaHocVien = obj.HOCVIEN.MaHocVien,
                                  TenHocVien = obj.HOCVIEN.TenHocVien,
@@ -249,7 +276,10 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                              select new BaoCaoThuTien_TongHopDTO
                              {
                                  ThoiGianThu = phieuthu.Key.ThoiGianThu,
-                                 TenNguoiThu = phieuthu.Key.CreatedBy,
+                                 TenNguoiThu = (from tk in Database.TAIKHOANs
+                                                join nv in Database.NHANVIENs on tk.TaiKhoanId equals nv.TaiKhoanId
+                                                where tk.TenDangNhap == phieuthu.Key.CreatedBy
+                                                select nv.TenNhanVien).FirstOrDefault(),
                                  SoTien = phieuthu.Sum(o => o.SoTien),
                              });
                 return query.ToList();
@@ -261,27 +291,8 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
-        public static bool UpdateMaPhieuThu7So()
-        {
-            try
-            {
-                List<PHIEUTHU> _lstHocvien = (from p in GlobalSettings.Database.PHIEUTHUs
-                                              select p).ToList();
 
-                foreach (var item in _lstHocvien)
-                {
-                    PHIEUTHU _hocvien = SelectSingle(item.PhieuThuId);
-                    _hocvien.MaPhieuThu = string.Format("{0}{1:D7}", "PT", item.PhieuThuId);
-                    Database.SubmitChanges();
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
+        #endregion
 
 
 

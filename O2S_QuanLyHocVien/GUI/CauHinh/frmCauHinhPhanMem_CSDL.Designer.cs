@@ -142,7 +142,7 @@
             this.btnKiemTra.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnKiemTra.Location = new System.Drawing.Point(351, 270);
             this.btnKiemTra.Name = "btnKiemTra";
-            this.btnKiemTra.Size = new System.Drawing.Size(100, 35);
+            this.btnKiemTra.Size = new System.Drawing.Size(100, 34);
             this.btnKiemTra.TabIndex = 4;
             this.btnKiemTra.Text = "Kết nối";
             this.btnKiemTra.UseVisualStyleBackColor = false;
@@ -161,7 +161,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(140, 235);
+            this.label6.Location = new System.Drawing.Point(140, 234);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 15);
             this.label6.TabIndex = 31;

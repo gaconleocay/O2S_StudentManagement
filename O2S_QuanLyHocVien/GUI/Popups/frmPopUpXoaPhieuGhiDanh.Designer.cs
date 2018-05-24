@@ -89,17 +89,18 @@
             this.btnLuuThongTin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnLuuThongTin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLuuThongTin.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnLuuThongTin.Location = new System.Drawing.Point(186, 12);
+            this.btnLuuThongTin.Image = global::O2S_QuanLyHocVien.Properties.Resources.save_16x16;
+            this.btnLuuThongTin.Location = new System.Drawing.Point(187, 14);
             this.btnLuuThongTin.Name = "btnLuuThongTin";
-            this.btnLuuThongTin.Size = new System.Drawing.Size(130, 37);
-            this.btnLuuThongTin.TabIndex = 2;
+            this.btnLuuThongTin.Size = new System.Drawing.Size(121, 34);
+            this.btnLuuThongTin.TabIndex = 9;
             this.btnLuuThongTin.Text = "OK";
+            this.btnLuuThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLuuThongTin.UseVisualStyleBackColor = false;
             this.btnLuuThongTin.Click += new System.EventHandler(this.btnLuuThongTin_Click);
             // 
             // frmPopUpXoaPhieuGhiDanh
             // 
-            this.AcceptButton = this.btnLuuThongTin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
@@ -126,8 +127,8 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnLuuThongTin;
         private System.Windows.Forms.Label label21;
         private DevExpress.XtraEditors.MemoEdit txtLyDoXoa;
+        private System.Windows.Forms.Button btnLuuThongTin;
     }
 }
