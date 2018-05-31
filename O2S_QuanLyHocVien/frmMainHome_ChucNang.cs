@@ -129,9 +129,19 @@ namespace O2S_QuanLyHocVien
         {
             try
             {
-                frmLapPhieuGhiDanh frmControlActive = new frmLapPhieuGhiDanh() { Dock = DockStyle.Fill, TopLevel = false };
-                TabControlProcess.TabCreating(xtraTabControl_Home, "frmLapPhieuGhiDanh", "Lập phiếu ghi danh", "Lập phiếu ghi danh", frmControlActive);
-                frmControlActive.Show();
+                //option Phieu ghi danh
+                if (GlobalSettings.lstQuyDinh["QD0003"] == "1")
+                {
+                    frmLapPhieuGhiDanh_Option1 frmControlActive = new frmLapPhieuGhiDanh_Option1() { Dock = DockStyle.Fill, TopLevel = false };
+                    TabControlProcess.TabCreating(xtraTabControl_Home, "frmLapPhieuGhiDanh_Option1", "Lập phiếu ghi danh", "Lập phiếu ghi danh", frmControlActive);
+                    frmControlActive.Show();
+                }
+                else
+                {
+                    frmLapPhieuGhiDanh frmControlActive = new frmLapPhieuGhiDanh() { Dock = DockStyle.Fill, TopLevel = false };
+                    TabControlProcess.TabCreating(xtraTabControl_Home, "frmLapPhieuGhiDanh", "Lập phiếu ghi danh", "Lập phiếu ghi danh", frmControlActive);
+                    frmControlActive.Show();
+                }
             }
             catch (Exception ex)
             {
@@ -303,10 +313,19 @@ namespace O2S_QuanLyHocVien
         private void btnQuanLyHocPhi_ItemClick(object sender, ItemClickEventArgs e)
         {
             try
-            {
-                frmQuanLyHocPhi frmControlActive = new frmQuanLyHocPhi() { Dock = DockStyle.Fill, TopLevel = false };
-                TabControlProcess.TabCreating(xtraTabControl_Home, "frmQuanLyHocPhi", "Quản lý học phí", "Quản lý học phí", frmControlActive);
-                frmControlActive.Show();
+            {   //option Phieu ghi danh
+                if (GlobalSettings.lstQuyDinh["QD0003"] == "1")
+                {
+                    frmQuanLyHocPhi_Option1 frmControlActive = new frmQuanLyHocPhi_Option1() { Dock = DockStyle.Fill, TopLevel = false };
+                    TabControlProcess.TabCreating(xtraTabControl_Home, "frmQuanLyHocPhi_Option1", "Quản lý học phí", "Quản lý học phí", frmControlActive);
+                    frmControlActive.Show();
+                }
+                else
+                {
+                    frmQuanLyHocPhi frmControlActive = new frmQuanLyHocPhi() { Dock = DockStyle.Fill, TopLevel = false };
+                    TabControlProcess.TabCreating(xtraTabControl_Home, "frmQuanLyHocPhi", "Quản lý học phí", "Quản lý học phí", frmControlActive);
+                    frmControlActive.Show();
+                }
             }
             catch (Exception ex)
             {
@@ -347,10 +366,19 @@ namespace O2S_QuanLyHocVien
         private void btnDmLopHoc_ItemClick(object sender, ItemClickEventArgs e)
         {
             try
-            {
-                frmDanhMucLopHoc frmControlActive = new frmDanhMucLopHoc() { Dock = DockStyle.Fill, TopLevel = false };
-                TabControlProcess.TabCreating(xtraTabControl_Home, "frmDanhMucLopHoc", "Danh mục lớp học", "Danh mục lớp học", frmControlActive);
-                frmControlActive.Show();
+            {   //option Phieu ghi danh
+                if (GlobalSettings.lstQuyDinh["QD0003"] == "1")
+                {
+                    frmDanhMucLopHoc_Option1 frmControlActive = new frmDanhMucLopHoc_Option1() { Dock = DockStyle.Fill, TopLevel = false };
+                    TabControlProcess.TabCreating(xtraTabControl_Home, "frmDanhMucLopHoc_Option1", "Danh mục lớp học", "Danh mục lớp học", frmControlActive);
+                    frmControlActive.Show();
+                }
+                else
+                {
+                    frmDanhMucLopHoc frmControlActive = new frmDanhMucLopHoc() { Dock = DockStyle.Fill, TopLevel = false };
+                    TabControlProcess.TabCreating(xtraTabControl_Home, "frmDanhMucLopHoc", "Danh mục lớp học", "Danh mục lớp học", frmControlActive);
+                    frmControlActive.Show();
+                }
             }
             catch (Exception ex)
             {
