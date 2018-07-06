@@ -16,6 +16,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Model
         public DateTime? NgaySinh { get; set; }
         public string GioiTinh { get; set; }
         public string TenKhoaHoc { get; set; }
-
+        public string TenLopHoc { get; set; }
+        public int? SoLuongDotHoc { get; set; }
     }
 }

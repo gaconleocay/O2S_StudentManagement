@@ -55,14 +55,14 @@
   <ItemGroup>
     <Reference Include="Aspose.Cells, Version=7.0.3.0, Culture=neutral, PublicKeyToken=12d8fa3d810c48da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Aspose.Cells.dll</HintPath>
+      <HintPath>..\..\..\1_Library\Lib_Debug\Aspose.Cells.dll</HintPath>
     </Reference>
     <Reference Include="Aspose.Words, Version=9.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Aspose.Words.dll</HintPath>
+      <HintPath>..\..\..\1_Library\Lib_Debug\Aspose.Words.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper">
-      <HintPath>..\Library\AutoMapper.dll</HintPath>
+      <HintPath>..\..\..\1_Library\Lib_Debug\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.BonusSkins.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -81,7 +81,7 @@
     <Reference Include="DevExpress.XtraRichEdit.v15.2.Extensions, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraSpreadsheet.v15.2, Version=15.2.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="log4net">
-      <HintPath>..\Library\log4net.dll</HintPath>
+      <HintPath>..\..\..\1_Library\Lib_Debug\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -110,11 +110,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="O2S_Common">
-      <HintPath>..\..\..\..\1_Library\Lib_Debug\O2S_Common.dll</HintPath>
+      <HintPath>..\..\..\1_Library\Lib_Debug\O2S_Common.dll</HintPath>
     </Reference>
-    <Reference Include="O2S_License, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\1_Library\Lib_Debug\O2S_License.dll</HintPath>
+    <Reference Include="O2S_License">
+      <HintPath>..\..\..\1_Library\Lib_Debug\O2S_License.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>
@@ -764,9 +763,6 @@
       <Project>{31127f93-2cd8-4dd4-9653-bc4ae82bc8ea}</Project>
       <Name>O2S_QuanLyHocVien.DataAccess</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Templates\BienLaiThuTien_NopTien.xlsx">

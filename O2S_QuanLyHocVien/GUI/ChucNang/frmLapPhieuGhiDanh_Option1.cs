@@ -199,9 +199,11 @@ namespace O2S_QuanLyHocVien.Pages
                 _phieughidanh.KhoaHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
                 _phieughidanh.LopHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
                 _phieughidanh.NgayGhiDanh = DateTime.ParseExact(dateNgayGhiDanh.Text, "HH:mm:ss dd/MM/yyyy", CultureInfo.InvariantCulture);
-                //
-                _phieughidanh.HocPhiKH = _dotHoc != null ? _dotHoc.HocPhi : 0;
-                _phieughidanh.SoTietKH = _dotHoc != null ? _dotHoc.SoBuoiHoc : 0;
+                //tong tien cua lop hoc den thoi diem hien tai
+                List<DOTHOC> _lstDotHoc = DotHocLogic.SelectTheoLopHoc(_phieughidanh.LopHocId ?? 0);
+                _phieughidanh.HocPhiKH = _lstDotHoc != null ? _lstDotHoc.Sum(o => o.HocPhi) : 0;
+                _phieughidanh.SoTietKH = _lstDotHoc != null ? _lstDotHoc.Sum(o => o.SoBuoiHoc) : 0;
+
                 _phieughidanh.HocPhiHocVienKH = O2S_Common.TypeConvert.Parse.ToDecimal(lblThanhTienKhoaHoc.Text.Replace(",", ""));
                 _phieughidanh.SoTietHocVienKH = O2S_Common.TypeConvert.Parse.ToDecimal(numSoBuoiHVDangKy.Text);
                 _phieughidanh.ThuKhoanKhac = TinhTongTien_ThuThem();
@@ -226,24 +228,30 @@ namespace O2S_QuanLyHocVien.Pages
                     _phieuthu.HocVienId = this.HocVienId_Select;
                     _phieuthu.ThoiGianThu = DateTime.Now;
                     _phieuthu.SoTien = O2S_Common.TypeConvert.Parse.ToDecimal(numDaDong.Text.Replace(",", ""));
-                    _phieuthu.GhiChu = "";
-                    //Tien Khoa Hoc
-                    HOCPHIHOCVIEN _hphv_kh = new HOCPHIHOCVIEN()
+                    _phieuthu.NoiDung = cboDotHoc.Text;
+                    _phieuthu.GhiChu = "Thu tiền đợt học: " + cboDotHoc.Text;
+                    //Tien Dot Hoc
+                    if (cboDotHoc.SelectedValue != null)
                     {
-                        Stt = 1,
-                        HocVienId = this.HocVienId_Select,
-                        DmDichVuId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString()),
-                        TenDichVu = cboKhoaHoc.Text,
-                        SoTien = O2S_Common.TypeConvert.Parse.ToDecimal(numHocPhi.Text),
-                        SoLuong = 1,
-                        //PhieuThuId = _phieuthuId,
-                        GhiChu = "",
-                    };
-                    _lsthphv.Add(_hphv_kh);
-
+                        HOCPHIHOCVIEN _hphv_kh = new HOCPHIHOCVIEN()
+                        {
+                            Stt = 1,
+                            HocVienId = this.HocVienId_Select,
+                            DmDichVuId = O2S_Common.TypeConvert.Parse.ToInt32(cboDotHoc.SelectedValue.ToString()),
+                            TenDichVu = cboDotHoc.Text,
+                            SoTien = O2S_Common.TypeConvert.Parse.ToDecimal(lblThanhTienKhoaHoc.Text.Replace(",", "")),
+                            SoLuong = O2S_Common.TypeConvert.Parse.ToDecimal(numSoBuoiHVDangKy.Text.Replace(",", "")),
+                            DonGia = O2S_Common.TypeConvert.Parse.ToDecimal(numHocPhi.Text) / O2S_Common.TypeConvert.Parse.ToDecimal(numSoTietHoc.Text),
+                            //PhieuThuId = _phieuthuId,
+                            GhiChu = "",
+                        };
+                        _lsthphv.Add(_hphv_kh);
+                    }
                     //tien khoan Khac
                     if (gridViewKhoanKhac.RowCount > 0)
                     {
+                        _phieuthu.NoiDung += " và khoản khác";
+                        _phieuthu.GhiChu += " và khoản khác";
                         int _stt_thuthem = 2;
                         for (int i = 0; i < gridViewKhoanKhac.RowCount; i++)
                         {
@@ -258,6 +266,7 @@ namespace O2S_QuanLyHocVien.Pages
                                     TenDichVu = gridViewKhoanKhac.GetRowCellValue(i, "noidung") == null ? "" : gridViewKhoanKhac.GetRowCellValue(i, "noidung").ToString(),
                                     SoTien = O2S_Common.TypeConvert.Parse.ToDecimal(gridViewKhoanKhac.GetRowCellValue(i, "sotien").ToString()),
                                     SoLuong = 1,
+                                    DonGia = O2S_Common.TypeConvert.Parse.ToDecimal(gridViewKhoanKhac.GetRowCellValue(i, "sotien").ToString()),
                                     //PhieuThuId = _phieuthuId,
                                     GhiChu = gridViewKhoanKhac.GetRowCellValue(i, "ghichu") == null ? "" : gridViewKhoanKhac.GetRowCellValue(i, "ghichu").ToString(),
                                 };
@@ -267,8 +276,15 @@ namespace O2S_QuanLyHocVien.Pages
                         }
                     }
                 }
+                //bang diem
+                BANGDIEM _bangdiem = new BANGDIEM();
+                _bangdiem.HocVienId = this.HocVienId_Select;
+                _bangdiem.LopHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboLopHoc.SelectedValue.ToString());
+                // _bangdiem.PhieuGhiDanhId = item.PhieuGhiDanhId ?? 0;
+                _bangdiem.KhoaHocId = O2S_Common.TypeConvert.Parse.ToInt32(cboKhoaHoc.SelectedValue.ToString());
+                _bangdiem.TrangThai = 0;//=0: xep lop; =1: dang hoc; =3: co diem; =99:ket thu
 
-                if (PhieuGhiDanhLogic.InsertPGDFull(_phieughidanh, _phieuthu, _lsthphv, ref this.PhieuGhiDanhId, ref this.PhieuThuId))
+                if (PhieuGhiDanhLogic.InsertPGDFull_XepLop(_phieughidanh, _phieuthu, _lsthphv, _bangdiem, ref this.PhieuGhiDanhId, ref this.PhieuThuId))
                 {
                     HOCVIEN _hv = HocVienLogic.SelectSingle(this.HocVienId_Select);
                     MessageBox.Show(string.Format("Học viên {0} đã được chuyển thành học viên chính thức với tài khoản:{1}Tên đăng nhập: {2}{3}Mật khẩu: {4}",
@@ -505,8 +521,8 @@ namespace O2S_QuanLyHocVien.Pages
                 {
                     var rowHandle = gridViewDSPhieuGhiDanh.FocusedRowHandle;
                     int _PhieuGhiDanhId = O2S_Common.TypeConvert.Parse.ToInt32(gridViewDSPhieuGhiDanh.GetRowCellValue(rowHandle, "PhieuGhiDanhId").ToString());
-                    //validate xoa:da xep lop thi khong the xoa duoc
-                    ValidateXoaPhieuGhiDanh(_PhieuGhiDanhId);
+                    //validate xoa:da xep lop thi khong the xoa duoc//Bỏ validate đối với option này
+                    //ValidateXoaPhieuGhiDanh(_PhieuGhiDanhId);
                     frmPopUpXoaPhieuGhiDanh _frmXoa = new frmPopUpXoaPhieuGhiDanh(_PhieuGhiDanhId);
                     _frmXoa.ShowDialog();
                     LoadPhieuGhiDanh();

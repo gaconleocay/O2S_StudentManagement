@@ -17,6 +17,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Model
         public string DiaChi { get; set; }
         public string TenKhoaHoc { get; set; }
         public string TenLopHoc { get; set; }
+        public int? SoLuongDotHoc { get; set; }
 
     }
 }

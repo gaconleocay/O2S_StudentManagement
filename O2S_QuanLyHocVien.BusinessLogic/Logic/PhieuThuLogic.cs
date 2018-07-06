@@ -51,6 +51,7 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                                  LoaiPhieuThuId = obj.LoaiPhieuThuId,
                                  SoTien = obj.SoTien,
                                  ThoiGianThu = obj.ThoiGianThu,
+                                 NoiDung=obj.NoiDung,
                                  GhiChu = obj.GhiChu,
                                  IsRemove = obj.IsRemove ?? 0,
                                  LyDoHuy = obj.LyDoHuy,

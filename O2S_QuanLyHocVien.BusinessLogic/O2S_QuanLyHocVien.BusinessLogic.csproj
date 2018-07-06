@@ -36,9 +36,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\log4net.dll</HintPath>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\1_Library\Lib_Debug\log4net.dll</HintPath>
     </Reference>
     <Reference Include="O2S_Common">
       <HintPath>..\..\..\..\1_Library\Lib_Debug\O2S_Common.dll</HintPath>

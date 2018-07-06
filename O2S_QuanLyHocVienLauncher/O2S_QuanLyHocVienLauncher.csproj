@@ -54,15 +54,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\Library\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
-      <HintPath>..\Library\log4net.dll</HintPath>
+      <HintPath>..\..\..\1_Library\Lib_Debug\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="O2S_License, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\1_Library\Lib_Debug\O2S_License.dll</HintPath>
+    <Reference Include="O2S_License">
+      <HintPath>..\..\..\1_Library\Lib_Debug\O2S_License.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

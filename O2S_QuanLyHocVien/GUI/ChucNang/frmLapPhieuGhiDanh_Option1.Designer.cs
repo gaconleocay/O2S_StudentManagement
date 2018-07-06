@@ -130,8 +130,10 @@
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -141,8 +143,6 @@
             this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn28 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel15 = new System.Windows.Forms.Panel();
@@ -1448,6 +1448,24 @@
             this.gridColumn19.VisibleIndex = 8;
             this.gridColumn19.Width = 250;
             // 
+            // gridColumn34
+            // 
+            this.gridColumn34.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn34.AppearanceCell.Options.UseFont = true;
+            this.gridColumn34.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn34.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn34.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn34.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn34.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn34.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn34.Caption = "Tên lớp học";
+            this.gridColumn34.FieldName = "TenLopHoc";
+            this.gridColumn34.Name = "gridColumn34";
+            this.gridColumn34.OptionsColumn.AllowEdit = false;
+            this.gridColumn34.Visible = true;
+            this.gridColumn34.VisibleIndex = 9;
+            this.gridColumn34.Width = 200;
+            // 
             // gridColumn29
             // 
             this.gridColumn29.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
@@ -1460,7 +1478,7 @@
             this.gridColumn29.AppearanceHeader.Options.UseForeColor = true;
             this.gridColumn29.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn29.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn29.Caption = "Tổng số buổi học toàn khóa học";
+            this.gridColumn29.Caption = "Tổng số buổi học của lớp học";
             this.gridColumn29.DisplayFormat.FormatString = "#,##0";
             this.gridColumn29.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.gridColumn29.FieldName = "SoTietKH";
@@ -1482,7 +1500,7 @@
             this.gridColumn30.AppearanceHeader.Options.UseForeColor = true;
             this.gridColumn30.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn30.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn30.Caption = "Tổng tiền của toàn khóa học";
+            this.gridColumn30.Caption = "Tổng tiền của lớp học";
             this.gridColumn30.DisplayFormat.FormatString = "#,##0";
             this.gridColumn30.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.gridColumn30.FieldName = "HocPhiKH";
@@ -1491,6 +1509,24 @@
             this.gridColumn30.Visible = true;
             this.gridColumn30.VisibleIndex = 11;
             this.gridColumn30.Width = 175;
+            // 
+            // gridColumn25
+            // 
+            this.gridColumn25.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn25.AppearanceCell.Options.UseFont = true;
+            this.gridColumn25.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.gridColumn25.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.gridColumn25.AppearanceHeader.Options.UseFont = true;
+            this.gridColumn25.AppearanceHeader.Options.UseForeColor = true;
+            this.gridColumn25.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn25.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn25.Caption = "Số lượng đợt học";
+            this.gridColumn25.FieldName = "SoLuongDotHoc";
+            this.gridColumn25.Name = "gridColumn25";
+            this.gridColumn25.OptionsColumn.AllowEdit = false;
+            this.gridColumn25.Visible = true;
+            this.gridColumn25.VisibleIndex = 12;
+            this.gridColumn25.Width = 119;
             // 
             // gridColumn31
             // 
@@ -1526,7 +1562,7 @@
             this.gridColumn32.AppearanceHeader.Options.UseForeColor = true;
             this.gridColumn32.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn32.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn32.Caption = "Tiền học viên theo khóa";
+            this.gridColumn32.Caption = "Tiền học viên theo lớp";
             this.gridColumn32.DisplayFormat.FormatString = "#,##0";
             this.gridColumn32.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.gridColumn32.FieldName = "HocPhiHocVienKH";
@@ -1695,42 +1731,6 @@
             this.gridColumn28.Visible = true;
             this.gridColumn28.VisibleIndex = 21;
             this.gridColumn28.Width = 228;
-            // 
-            // gridColumn25
-            // 
-            this.gridColumn25.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.gridColumn25.AppearanceCell.Options.UseFont = true;
-            this.gridColumn25.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.gridColumn25.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.gridColumn25.AppearanceHeader.Options.UseFont = true;
-            this.gridColumn25.AppearanceHeader.Options.UseForeColor = true;
-            this.gridColumn25.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn25.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn25.Caption = "Số lượng đợt học";
-            this.gridColumn25.FieldName = "SoLuongDotHoc";
-            this.gridColumn25.Name = "gridColumn25";
-            this.gridColumn25.OptionsColumn.AllowEdit = false;
-            this.gridColumn25.Visible = true;
-            this.gridColumn25.VisibleIndex = 12;
-            this.gridColumn25.Width = 119;
-            // 
-            // gridColumn34
-            // 
-            this.gridColumn34.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.gridColumn34.AppearanceCell.Options.UseFont = true;
-            this.gridColumn34.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9.75F);
-            this.gridColumn34.AppearanceHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.gridColumn34.AppearanceHeader.Options.UseFont = true;
-            this.gridColumn34.AppearanceHeader.Options.UseForeColor = true;
-            this.gridColumn34.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn34.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn34.Caption = "Tên lớp học";
-            this.gridColumn34.FieldName = "TenLopHoc";
-            this.gridColumn34.Name = "gridColumn34";
-            this.gridColumn34.OptionsColumn.AllowEdit = false;
-            this.gridColumn34.Visible = true;
-            this.gridColumn34.VisibleIndex = 9;
-            this.gridColumn34.Width = 200;
             // 
             // gridColumn35
             // 

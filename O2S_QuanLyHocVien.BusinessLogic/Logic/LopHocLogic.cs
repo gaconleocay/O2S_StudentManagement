@@ -12,6 +12,7 @@ using static O2S_QuanLyHocVien.BusinessLogic.GlobalSettings;
 using O2S_QuanLyHocVien.BusinessLogic.Filter;
 using O2S_QuanLyHocVien.BusinessLogic.Model;
 using O2S_QuanLyHocVien.BusinessLogic;
+using System.Transactions;
 
 namespace O2S_QuanLyHocVien.BusinessLogic
 {
@@ -86,6 +87,69 @@ namespace O2S_QuanLyHocVien.BusinessLogic
                 O2S_Common.Logging.LogSystem.Error(ex);
             }
         }
+        public static List<LopHoc_PlusDTO> SelectOption1(LopHocFilter _filter)
+        {
+            try
+            {
+                var query = (from p in GlobalSettings.Database.LOPHOCs
+                             select p).AsEnumerable().Select((obj, index) => new LopHoc_PlusDTO
+                             {
+                                 Stt = index + 1,
+                                 LopHocId = obj.LopHocId,
+                                 MaLopHoc = obj.MaLopHoc,
+                                 TenLopHoc = obj.TenLopHoc,
+                                 NgayBatDau = obj.NgayBatDau,
+                                 NgayKetThuc = obj.NgayKetThuc,
+                                 SiSoToiDa = obj.SiSoToiDa,
+                                 SiSo = obj.SiSo,
+                                 KhoaHocId = obj.KhoaHocId,
+                                 TenKhoaHoc = obj.KHOAHOC.TenKhoaHoc,
+                                 CoSoId = obj.CoSoId,
+                                 TenCoSoTrungTam = obj.COSOTRUNGTAM.TenCoSo,
+                                 TongHocPhi = (from dt in Database.DOTHOCs
+                                               where dt.LopHocId == obj.LopHocId
+                                               select dt).Sum(o => o.HocPhi),
+                                 TongSoBuoiHoc = (from dt in Database.DOTHOCs
+                                                  where dt.LopHocId == obj.LopHocId
+                                                  select dt).Sum(o => o.SoBuoiHoc),
+                                 SoDotHoc = (from dt in Database.DOTHOCs
+                                             where dt.LopHocId == obj.LopHocId
+                                             select dt).Count(),
+                                 IsLock = obj.IsLock,
+                                 IsRemove = obj.IsRemove,
+                                 CreatedDate = obj.CreatedDate,
+                                 CreatedBy = obj.CreatedBy,
+                                 CreatedLog = obj.CreatedLog,
+                                 ModifiedDate = obj.ModifiedDate,
+                                 ModifiedBy = obj.ModifiedBy,
+                                 ModifiedLog = obj.ModifiedLog,
+
+                             });
+                if (_filter.LopHocId != null && _filter.LopHocId != 0)
+                {
+                    query = query.Where(o => o.LopHocId == _filter.LopHocId).ToList();
+                }
+                if (_filter.CoSoId != null && _filter.CoSoId != 0)
+                {
+                    query = query.Where(o => o.CoSoId == _filter.CoSoId).ToList();
+                }
+                if (_filter.KhoaHocId != null && _filter.KhoaHocId != 0)
+                {
+                    query = query.Where(o => o.KhoaHocId == _filter.KhoaHocId).ToList();
+                }
+                if (_filter.IsLock != null)
+                {
+                    query = query.Where(o => o.IsLock == _filter.IsLock).ToList();
+                }
+                return query.ToList();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+                O2S_Common.Logging.LogSystem.Error(ex);
+            }
+        }
+
         public static List<LopHoc_PlusDTO> SelectGroupTheoLopHoc(LopHocFilter _filter)
         {
             try
@@ -155,14 +219,25 @@ namespace O2S_QuanLyHocVien.BusinessLogic
             }
         }
 
-        public static bool Delete(int _khoahocId)
+        public static bool Delete(int _lopHoc)
         {
             try
             {
-                var temp = SelectSingle(_khoahocId);
-                Database.LOPHOCs.DeleteOnSubmit(temp);
-                Database.SubmitChanges();
-                return true;
+                using (TransactionScope ts = new TransactionScope())
+                {
+                    //Xoa dot hoc
+                    List<DOTHOC> _lstdothoc = DotHocLogic.SelectTheoLopHoc(_lopHoc);
+                    if (_lstdothoc != null && _lstdothoc.Count > 0)
+                    {
+                        Database.DOTHOCs.DeleteAllOnSubmit(_lstdothoc);
+                        Database.SubmitChanges();
+                    }
+                    var temp = SelectSingle(_lopHoc);
+                    Database.LOPHOCs.DeleteOnSubmit(temp);
+                    Database.SubmitChanges();
+                    ts.Complete();
+                    return true;
+                }
             }
             catch (Exception ex)
             {

@@ -12,6 +12,9 @@ namespace O2S_QuanLyHocVien.BusinessLogic.Model
         public int Stt { get; set; }
         public string TenCoSoTrungTam { get; set; }
         public string TenKhoaHoc { get; set; }
+        public decimal? TongHocPhi { get; set; }
+        public decimal? TongSoBuoiHoc { get; set; }
+        public int? SoDotHoc { get; set; }
 
     }
 }

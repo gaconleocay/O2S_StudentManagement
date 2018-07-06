@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Security.AccessControl;
-using System.Security.Principal;
-using System.Threading;
-using System.IO.Compression;
-using ICSharpCode.SharpZipLib.Zip;
 using System.Windows.Forms;
-using O2S_QuanLyHocVien.BusinessLogic;
 
 namespace O2S_QuanLyHocVienLauncher
 {
